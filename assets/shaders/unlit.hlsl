@@ -1,4 +1,4 @@
-cbuffer pixel_per_object : register(b2) {
+cbuffer pixel_per_material : register(b2) {
 	float3 color;
 };
 

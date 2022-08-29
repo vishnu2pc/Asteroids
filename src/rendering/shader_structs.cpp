@@ -1,6 +1,11 @@
 #define _A16 __declspec(align(16))
 
 struct DiffusePC {
-	_A16 Vec3 light_position;
-	_A16 float ambience;
+	Vec3 light_position;
+	float ambience;
+};
+
+struct DiffusePM {
+	Vec3 color;
+	float diffuse_factor;
 };

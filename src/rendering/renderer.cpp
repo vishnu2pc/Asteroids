@@ -8,7 +8,6 @@
 
 #include "renderer_structs.cpp"
 #include "shader_structs.cpp"
-#include "renderer_shapes.cpp"
 
 //-------------------------------------------------------------------------
 static void MakeD3DInputElementDesc(BufferLayout* bl, D3D11_INPUT_ELEMENT_DESC* d3d_il_desc, u8 count) {
@@ -71,14 +70,11 @@ static PixelShader UploadPixelShader(PixelShaderDesc desc, ID3D11Device* device)
 	hr = device->CreatePixelShader(blob->GetBufferPointer(), blob->GetBufferSize(), nullptr, &ps.ps);
 	assertHR(hr);
 
+	// TODO: Remove constantsbuffer desc
 	for (u8 i = 0; i < desc.cb_desc_count; i++) {
 		ConstantsBufferDesc current_desc = desc.cb_desc[i];
 		ps.cb[current_desc.slot].buffer = UploadConstantsBuffer(current_desc.size_in_bytes, device);
 		ps.cb[current_desc.slot].size_in_bytes = current_desc.size_in_bytes;
-		if(current_desc.default_data) {
-			ps.cb[current_desc.slot].default_data = PushMaster(u8, current_desc.size_in_bytes);
-			memcpy(ps.cb[current_desc.slot].default_data, current_desc.default_data, current_desc.size_in_bytes);
-		}
 	}
 	ps.ss_count = 1;
 
@@ -117,10 +113,6 @@ static VertexShader UploadVertexShader(VertexShaderDesc desc, ID3D11Device* devi
 		ConstantsBufferDesc current_desc = desc.cb_desc[i];
 		vs.cb[current_desc.slot].buffer = UploadConstantsBuffer(current_desc.size_in_bytes, device);
 		vs.cb[current_desc.slot].size_in_bytes = current_desc.size_in_bytes;
-		if(current_desc.default_data) {
-			vs.cb[current_desc.slot].default_data = PushMaster(u8, current_desc.size_in_bytes);
-			memcpy(vs.cb[current_desc.slot].default_data, current_desc.default_data, current_desc.size_in_bytes);
-		}
 	}
 	PopScratch(D3D11_INPUT_ELEMENT_DESC, desc.bl_count);
 	return vs;
@@ -392,9 +384,8 @@ static Renderer InitRendering(HWND handle, WindowDimensions wd) {
 		vs_desc.shader = { L"../assets/shaders/diffuse.hlsl", "vs_main" };
 		BufferLayout bl[] = { { VBT_POSITION, BF_VEC3, CT_FLOAT },
 													{ VBT_NORMAL, BF_VEC3, CT_FLOAT	} };
-		Mat4 matrix = M4I();
-		ConstantsBufferDesc vcb_desc[] = { { CS_PER_CAMERA, sizeof(Mat4), nullptr },
-																			 { CS_PER_MESH, sizeof(Mat4), &matrix } };
+		ConstantsBufferDesc vcb_desc[] = { { CS_PER_CAMERA, sizeof(Mat4) },
+																			 { CS_PER_OBJECT, sizeof(Mat4) } };
 		vs_desc.bl = bl;
 		vs_desc.bl_count = ARRAY_LENGTH(bl);
 		vs_desc.cb_desc = vcb_desc;
@@ -408,8 +399,7 @@ static Renderer InitRendering(HWND handle, WindowDimensions wd) {
 		{
 			PixelShaderDesc unlit_desc = {};
 			unlit_desc.shader = { L"../assets/shaders/unlit.hlsl", "ps_main" };
-			Vec3 default_color = BLACK;
-			ConstantsBufferDesc unlit_cb_desc[] = { { CS_PER_MESH, sizeof(Vec3), nullptr } };
+			ConstantsBufferDesc unlit_cb_desc[] = { { CS_PER_MESH_MATERIAL, sizeof(Vec3) } };
 			unlit_desc.cb_desc = unlit_cb_desc;
 			unlit_desc.cb_desc_count = ARRAY_LENGTH(unlit_cb_desc);
 			renderer.ps[PS_UNLIT] = UploadPixelShader(unlit_desc, renderer.device);
@@ -418,26 +408,28 @@ static Renderer InitRendering(HWND handle, WindowDimensions wd) {
 		{
 			PixelShaderDesc diffuse_desc = {};
 			diffuse_desc.shader = { L"../assets/shaders/diffuse.hlsl", "ps_main" }; 
-			Vec3 default_color = GREY;
-			ConstantsBufferDesc diffuse_cb_desc[] = { { CS_PER_CAMERA, sizeof(DiffusePC), nullptr },
-			{ CS_PER_MESH, sizeof(Vec3), &default_color } };
+			ConstantsBufferDesc diffuse_cb_desc[] = { { CS_PER_CAMERA, sizeof(DiffusePC) },
+																								{ CS_PER_MESH_MATERIAL, sizeof(DiffusePM) } };
 			diffuse_desc.cb_desc = diffuse_cb_desc;
 			diffuse_desc.cb_desc_count = ARRAY_LENGTH(diffuse_cb_desc);
 			renderer.ps[PS_DIFFUSE] = UploadPixelShader(diffuse_desc, renderer.device);
 		}
 	}
 	//------------------------------------------------------------------------
-	{ 
+	{ // Default materials
 		// Unlit material
 		{
 			Material mat = {};
 			mat.ps = PS_UNLIT;
+			mat.unlit_params.color = WHITE;
 			renderer.mat[MAT_UNLIT] = mat;
 		}
 		// Diffuse material
 		{
 			Material mat = {};
 			mat.ps = PS_DIFFUSE;
+			mat.diffuse_params.diffuse_factor = 1.0f;
+			mat.diffuse_params.color = ORANGE;
 			renderer.mat[MAT_DIFFUSE] = mat;
 		}
 	}
@@ -460,6 +452,19 @@ static Renderer InitRendering(HWND handle, WindowDimensions wd) {
 	}
 	//------------------------------------------------------------------------
 	return renderer;
+}
+
+// Move init stuff into separate files
+static void PushConstantsData(void* data, ConstantsBuffer cb, ID3D11DeviceContext* context) {
+	assert(data);
+
+	D3D11_MAPPED_SUBRESOURCE msr = {};
+
+	context->Map(cb.buffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &msr);
+	memcpy(msr.pData, data, cb.size_in_bytes);
+	context->Unmap(cb.buffer, 0);
+
+	data = nullptr;
 }
 
 //------------------------------------------------------------------------
@@ -509,44 +514,31 @@ static void ExecuteRenderPipeline(RenderPipeline rp, Renderer renderer) {
 		renderer.context->PSSetShader(ps.ps, nullptr, 0);
 
 		ConstantsBuffer cb;
-		D3D11_MAPPED_SUBRESOURCE msr = {};
-		//TODO: Rethink this
-		//TODO: Extract into a function
-		for(u8 i=0; i<CS_PER_MESH; i++) {
+		for(u8 i=0; i<CS_PER_MESH_MATERIAL; i++) {
 			cb = ps.cb[i];
 			if(cb.buffer) {
 				renderer.context->PSSetConstantBuffers(i, 1, &cb.buffer);
-				if(ps.cb_data[i]) {
-					renderer.context->Map(cb.buffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &msr);
-					memcpy(msr.pData, ps.cb_data[i], cb.size_in_bytes);
-					renderer.context->Unmap(cb.buffer, 0);
-				} 
-				else if(cb.default_data) {
-					renderer.context->Map(cb.buffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &msr);
-					memcpy(msr.pData, cb.default_data, cb.size_in_bytes);
-					renderer.context->Unmap(cb.buffer, 0);
-				}
+				PushConstantsData(ps.cb_data[i], cb, renderer.context);
 			}
 		}
 
-		cb = ps.cb[CS_PER_MESH];
+		cb = ps.cb[CS_PER_MESH_MATERIAL];
 		if(cb.buffer) {
-			renderer.context->PSSetConstantBuffers(CS_PER_MESH, 1, &cb.buffer);
-			if(rp.psc_per_mesh_data) {
-				renderer.context->Map(cb.buffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &msr);
-				memcpy(msr.pData, rp.psc_per_mesh_data, cb.size_in_bytes);
-				renderer.context->Unmap(cb.buffer, 0);
-			}
-			else if(cb.default_data) {
-				renderer.context->Map(cb.buffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &msr);
-				memcpy(msr.pData, cb.default_data, cb.size_in_bytes);
-				renderer.context->Unmap(cb.buffer, 0);
+			renderer.context->PSSetConstantBuffers(CS_PER_MESH_MATERIAL, 1, &cb.buffer);
+
+			switch(mat.ps) {
+				case PS_DIFFUSE: {
+					DiffusePM dpm = { mat.diffuse_params.color, mat.diffuse_params.diffuse_factor };
+					PushConstantsData(&dpm, cb, renderer.context);
+				} break;
 			}
 		}
-	}
-	//------------------------------------------------------------------------
-	{
-		// Handle textures
+
+		cb = ps.cb[CS_PER_OBJECT];
+		if(cb.buffer) {
+			renderer.context->PSSetConstantBuffers(CS_PER_OBJECT, 1, &cb.buffer);
+			PushConstantsData(rp.psc_per_object_data, cb, renderer.context);
+		}
 	}
 	//------------------------------------------------------------------------
 	Mesh mesh = renderer.mesh[rp.mesh_id];
@@ -556,37 +548,20 @@ static void ExecuteRenderPipeline(RenderPipeline rp, Renderer renderer) {
 		renderer.context->IASetInputLayout(vs.il);
 
 		ConstantsBuffer cb = {};
-		D3D11_MAPPED_SUBRESOURCE msr = {};
-		for(u8 i=0; i<CS_PER_MESH; i++) {
+		for(u8 i=0; i<CS_PER_MESH_MATERIAL; i++) {
 			cb = vs.cb[i];
 			if(cb.buffer) {
 				renderer.context->VSSetConstantBuffers(i, 1, &cb.buffer);
-				if(vs.cb_data[i]) {
-					renderer.context->Map(cb.buffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &msr);
-					memcpy(msr.pData, vs.cb_data[i], cb.size_in_bytes);
-					renderer.context->Unmap(cb.buffer, 0);
-				}
-				else if(cb.default_data) {
-					renderer.context->Map(cb.buffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &msr);
-					memcpy(msr.pData, cb.default_data, cb.size_in_bytes);
-					renderer.context->Unmap(cb.buffer, 0);
-				}
+				PushConstantsData(vs.cb_data[i], cb, renderer.context);
 			}
 		}
 
-		cb = vs.cb[CS_PER_MESH];
+		// Handle cs_per_mesh
+
+		cb = vs.cb[CS_PER_OBJECT];
 		if(cb.buffer) {
-			renderer.context->VSSetConstantBuffers(CS_PER_MESH, 1, &cb.buffer);
-			if(rp.vsc_per_mesh_data) {
-				renderer.context->Map(cb.buffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &msr);
-				memcpy(msr.pData, rp.vsc_per_mesh_data, cb.size_in_bytes);
-				renderer.context->Unmap(cb.buffer, 0);
-			}
-			else if(cb.default_data) {
-				renderer.context->Map(cb.buffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &msr);
-				memcpy(msr.pData, cb.default_data, cb.size_in_bytes);
-				renderer.context->Unmap(cb.buffer, 0);
-			}
+			renderer.context->VSSetConstantBuffers(CS_PER_OBJECT, 1, &cb.buffer);
+			PushConstantsData(rp.vsc_per_object_data, cb, renderer.context);
 		}
 	}
 	//------------------------------------------------------------------------

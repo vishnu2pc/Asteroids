@@ -1,3 +1,5 @@
+#define _pad float _ignore;
+
 struct vs_in {
 	float3 position : POSITION;
 	float3 normal : NORMAL;
@@ -5,7 +7,7 @@ struct vs_in {
 cbuffer vertex_per_camera : register(b1) {
 	float4x4 view_proj;
 };
-cbuffer vertex_per_object : register(b2) {
+cbuffer vertex_per_object : register(b3) {
 	float4x4 model;
 };
 // -----------------------------------------------
@@ -15,11 +17,12 @@ struct ps_in {
 	float3 normal : NORMAL;
 };
 cbuffer pixel_per_camera : register(b1) {
-	float4 light_pos;
+	float3 light_pos; 
 	float ambience;
 };
-cbuffer pixel_per_object : register(b2) {
-	float3 col;
+cbuffer pixel_per_material : register(b2) {
+	float3 col; 
+	float diffuse_factor;
 };
 // -----------------------------------------------
 ps_in vs_main(vs_in input) {
@@ -39,7 +42,7 @@ float4 ps_main(ps_in input) : SV_TARGET {
 	float cos = max(0.0, dot(light_dir, input.normal));
 
 	float3 ambient_color = ambience * col;
-	float3 diffuse_color = cos * col;
+	float3 diffuse_color = cos * col * diffuse_factor;
 
 	final_color = diffuse_color + ambient_color;
 	return float4(final_color, 1.0f);

@@ -16,7 +16,7 @@
 
 #define OLIVE V3(0.5f, 0.5f, 0.0f)
 #define YELLOW V3(1.0f, 1.0f, 0.0f)
-#define ORANGE V#(1.0f, 0.6f, 0.0f)
+#define ORANGE V3(1.0f, 0.6f, 0.0f)
 
 #define MAGENTA V3(1.0f, 0.0f, 1.0f)
 #define PURPLE V3(0.5f, 0.0f, 0.5f)
@@ -81,7 +81,8 @@ enum MATERIAL {
 enum CONSTANTS_SLOT {
 	CS_PER_FRAME,
 	CS_PER_CAMERA,  // per viewport?
-	CS_PER_MESH,
+	CS_PER_MESH_MATERIAL,
+	CS_PER_OBJECT,
 	CS_TOTAL
 };
 
@@ -94,7 +95,6 @@ enum MESH {
 struct ConstantsBufferDesc {
 	CONSTANTS_SLOT slot;
 	u32 size_in_bytes;
-	void* default_data;
 };
 
 struct ShaderDesc {
@@ -149,7 +149,6 @@ struct ModelDesc {
 struct ConstantsBuffer {
 	ID3D11Buffer* buffer;
 	u32 size_in_bytes;
-	void* default_data;
 };
 
 struct VertexShader {
@@ -159,7 +158,7 @@ struct VertexShader {
 	ConstantsBuffer cb[CS_TOTAL];
 	u8 bl_count;
 
-	void* cb_data[CS_TOTAL];
+	void* cb_data[CS_PER_MESH_MATERIAL];
 };
 
 struct PixelShader {
@@ -174,6 +173,15 @@ struct PixelShader {
 
 struct Material {
 	PIXEL_SHADER ps;
+	union {
+		struct {
+			Vec3 color;
+		} unlit_params;
+		struct {
+			Vec3 color;
+			float diffuse_factor;
+		} diffuse_params;
+	};
 };
 
 struct Mesh {
@@ -226,6 +234,6 @@ struct RenderPipeline {
 	RenderState rs;
 	u8 mat_id;
 	u8 mesh_id;
-	void* vsc_per_mesh_data;
-	void* psc_per_mesh_data;
+	void* vsc_per_object_data;
+	void* psc_per_object_data;
 };

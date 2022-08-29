@@ -147,17 +147,8 @@ int main(int argc, char* argv[]) {
 	Mat4 vp = MakeViewPerspective(camera);
 	renderer.vs[VS_DIFFUSE].cb_data[CS_PER_CAMERA] = &vp;
 
-	Vec3 cube_color = V3(0.8f, 0.3f, 0.1f);
-	cube.rp.psc_per_mesh_data = &cube_color;
-
-	Vec3 light_color = V3I();
-	light.rp.psc_per_mesh_data = &light_color;
-
 	float ambience = 0.5f;
 
-	SDL_Log("Camera position: %f, %f, %f", camera.position.x, camera.position.y, camera.position.z);
-	SDL_Log("Cube position: %f, %f, %f", cube.transform.position.x, cube.transform.position.y, cube.transform.position.z);
-	
 	while (RUNNING) {
 		if(HINPUT.up.pressed) renderer.state_overrides.rs = renderer.state_overrides.rs ? RS_NONE : RS_WIREFRAME; 
 		HandleSDLevents(&RUNNING);
@@ -165,7 +156,7 @@ int main(int argc, char* argv[]) {
 
 		cube.transform.rotation = QuatFromAxisAngle(V3(1.0f, 2.0f, 3.0f), 10 * sin((float)SDL_GetTicks() * 0.0001));
 		Mat4 cube_matrix = MakeTransformMatrix(cube.transform);
-		cube.rp.vsc_per_mesh_data = &cube_matrix;
+		cube.rp.vsc_per_object_data = &cube_matrix;
 
 		float x = 3.0f * cosf(SDL_GetTicks() * 0.001);
 		float y = 0.0f;
@@ -176,14 +167,10 @@ int main(int argc, char* argv[]) {
 
 		light.transform.position = V3(x, y, z);
 		Mat4 light_matrix = MakeTransformMatrix(light.transform);
-		light.rp.vsc_per_mesh_data = &light_matrix;
+		light.rp.vsc_per_object_data = &light_matrix;
 
 		DiffusePC dpc = { light.transform.position, ambience };
 		renderer.ps[PS_DIFFUSE].cb_data[CS_PER_CAMERA] = &dpc;
-
-		//SDL_Log("pos: %f, %f, %f", light.transform.position.x,
-			//light.transform.position.y,
-			//light.transform.position.z);
 
 		ExecuteRenderPipeline(cube.rp, renderer);
 		ExecuteRenderPipeline(light.rp, renderer);
