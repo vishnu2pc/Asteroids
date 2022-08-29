@@ -316,10 +316,12 @@ static ModelData LoadModelDataGLTF(char* path, char* name) {
 			strcpy(mesh_data.name, cmesh.name);
 			model_data.mesh_data[j] = mesh_data;
 
-			char* mat_name = cmesh.primitives[j].material->name;
-			for (int k = 0; k < data->materials_count; k++) 
-				if (strcmp(mat_name, model_data.material_data[k].name)) 
-					model_data.mat_id[j] = k;
+			if(cmesh.primitives[j].material) {
+				char* mat_name = cmesh.primitives[j].material->name;
+				for (int k = 0; k < data->materials_count; k++) 
+					if (strcmp(mat_name, model_data.material_data[k].name)) 
+						model_data.mat_id[j] = k;
+			}
 		}
 	}
 	cgltf_free(data);

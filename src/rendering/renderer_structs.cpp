@@ -1,3 +1,26 @@
+#define BLACK V3(0.0f, 0.0f, 0.0f)
+#define WHITE V3(1.0f, 1.0f, 1.0f)
+#define GREY V3(0.5f, 0.5f, 0.5f)
+#define SILVER V3(0.75f, 0.75f, 0.75f)
+
+#define BLUE V3(0.0f, 0.0f, 1.0f)
+#define CYAN V3(0.0f, 1.0f, 1.0f)
+#define TEAL V3(0.0f, 0.5f, 0.5f)
+
+#define RED V3(1.0f, 0.0f, 0.0f)
+#define MAROON V3(0.5f, 0.0f, 0.0f)
+#define CRIMSON V3(0.8f, 0.1f, 0.2f)
+
+#define LIME V3(0.0f, 1.0f, 0.0f)
+#define GREEN V3(0.0f, 0.5f, 0.0f)
+
+#define OLIVE V3(0.5f, 0.5f, 0.0f)
+#define YELLOW V3(1.0f, 1.0f, 0.0f)
+#define ORANGE V#(1.0f, 0.6f, 0.0f)
+
+#define MAGENTA V3(1.0f, 0.0f, 1.0f)
+#define PURPLE V3(0.5f, 0.0f, 0.5f)
+
 typedef u32 SemanticNameIndex;
 
 static char* SemanticName[] = {
@@ -10,43 +33,47 @@ static char* SemanticName[] = {
 "TANGENT_BASIS"
 };
 
-#define BLACK V3(0.0f, 0.0f, 0.0f)
-#define WHITE V3(1.0f, 1.0f, 1.0f)
-
-
 enum DEPTH_STENCIL_STATE {
+	DSS_NONE,
 	DSS_DEFAULT,
 	DSS_TOTAL
 };
 
 enum BLEND_STATE {
+	BS_NONE,
 	BS_DEFAULT,
 	BS_TOTAL
 };
 
 enum RASTERIZER_STATE {
+	RS_NONE,
 	RS_DEFAULT,
+	RS_WIREFRAME,
 	RS_TOTAL
 };
 
 enum VIEWPORT {
+	VP_NONE,
 	VP_DEFAULT,
 	VP_TOTAL
 };
 
 enum VERTEX_SHADER {
+	VS_NONE,
 	VS_DIFFUSE,
 	VS_TOTAL
 };
 
 enum PIXEL_SHADER {
-	PS_CAMERA_LIT_DIFFUSE,
+	PS_NONE,
+	PS_UNLIT,
 	PS_DIFFUSE,
 	PS_TOTAL
 };
 
 enum MATERIAL {
-	MAT_CAMERA_LIT_DIFFUSE,
+	MAT_NONE,
+	MAT_UNLIT,
 	MAT_DIFFUSE,
 	MAT_TOTAL
 };
@@ -60,6 +87,7 @@ enum CONSTANTS_SLOT {
 
 enum MESH {
 	MESH_CUBE,
+	MESH_SPHERE,
 	MESH_TOTAL
 };
 
@@ -70,7 +98,6 @@ struct ConstantsBufferDesc {
 };
 
 struct ShaderDesc {
-	char* version;
 	wchar_t* path;
 	char* entry;
 };
@@ -158,6 +185,13 @@ struct Mesh {
 	u32 indices_count;
 };
 
+struct RenderState {
+	DEPTH_STENCIL_STATE dss;
+	BLEND_STATE bs;
+	RASTERIZER_STATE rs;
+	VIEWPORT vp;
+};
+
 struct Renderer {
 	ID3D11Device* device;
 	ID3D11DeviceContext* context; // This changes when we start using deferred contexts
@@ -183,14 +217,10 @@ struct Renderer {
 	
 	Material mat[MAT_TOTAL];	
 	Mesh mesh[MESH_TOTAL];
+
+	RenderState state_overrides;
 };
 
-struct RenderState {
-	DEPTH_STENCIL_STATE dss;
-	BLEND_STATE bs;
-	RASTERIZER_STATE rs;
-	VIEWPORT vp;
-};
 
 struct RenderPipeline {
 	RenderState rs;

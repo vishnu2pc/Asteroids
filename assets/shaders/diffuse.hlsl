@@ -10,16 +10,16 @@ cbuffer vertex_per_object : register(b2) {
 };
 // -----------------------------------------------
 struct ps_in {
-	float4 pixel_position : SV_POSITION;
-	float3 vertex_position : POSITION;
+	float4 pixel_coord : SV_POSITION;
+	float3 vertex_pos : POSITION;
 	float3 normal : NORMAL;
 };
 cbuffer pixel_per_camera : register(b1) {
-	float3 light_position;
-	float3 ambience;
+	float4 light_pos;
+	float ambience;
 };
 cbuffer pixel_per_object : register(b2) {
-	float3 color;
+	float3 col;
 };
 // -----------------------------------------------
 ps_in vs_main(vs_in input) {
@@ -27,18 +27,20 @@ ps_in vs_main(vs_in input) {
 
 	float4x4 mvp = mul(view_proj, model);
 
-	output.pixel_position = mul(mvp, float4(input.position, 1.0f));
+	output.vertex_pos = mul(model, float4(input.position, 1.0f)).xyz;
+	output.pixel_coord = mul(mvp, float4(input.position, 1.0f));
 	output.normal = normalize(mul(model, float4(input.normal, 0.0f)).xyz);
-	output.vertex_position = mul(mvp, float4(input.position, 1.0f)).xyz;
-
 	return output;
 }
 //------------------------------------------------------------------------
 float4 ps_main(ps_in input) : SV_TARGET {
-	float3 camera_direction = normalize(light_position - input.vertex_position);
+	float3 final_color;
+	float3 light_dir = normalize(light_pos.xyz - input.vertex_pos);
+	float cos = max(0.0, dot(light_dir, input.normal));
 
-	float cos = max(0.0f, dot(light_position, input.normal));
+	float3 ambient_color = ambience * col;
+	float3 diffuse_color = cos * col;
 
-	float3 final_color = ambience * color * cos;
-	return float4(final_color, 1.0);
+	final_color = diffuse_color + ambient_color;
+	return float4(final_color, 1.0f);
 }

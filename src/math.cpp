@@ -499,7 +499,7 @@ static Vec3 GetForwardVector(Quat quat) {	return V3Norm(RotateVecByQuat(V3Forwar
 static Vec3 GetRightVector(Quat quat) {	return V3Norm(RotateVecByQuat(V3Right(), quat)); } 
 static Vec3 GetUpVector(Quat quat) {	return V3Norm(RotateVecByQuat(V3Up(), quat)); } 
 
-static Mat4 GenerateTranformMatrix(Transform transform) {
+static Mat4 MakeTransformMatrix(Transform transform) {
 	Mat4 result = M4I();
 	Mat4 translation = M4Translate(transform.position);
 	Mat4 rotation = M4FromQuat(transform.rotation);

@@ -62,7 +62,7 @@ static PixelShader UploadPixelShader(PixelShaderDesc desc, ID3D11Device* device)
 	ps.tl_count = desc.tl_count;
 	memcpy(ps.tl, desc.tl, sizeof(TextureLayout) * desc.tl_count);
 
-	hr = D3DCompileFromFile(desc.shader.path, nullptr, nullptr, desc.shader.entry, desc.shader.version,
+	hr = D3DCompileFromFile(desc.shader.path, nullptr, nullptr, desc.shader.entry, "ps_5_0",
 																			0, 0, &blob, &error);
 	if (hr) {
 		char* msg = (char*)error->GetBufferPointer();
@@ -94,7 +94,7 @@ static VertexShader UploadVertexShader(VertexShaderDesc desc, ID3D11Device* devi
 	ID3DBlob* blob;
 	ID3DBlob* error;
 
-	hr = D3DCompileFromFile(desc.shader.path, nullptr, nullptr, desc.shader.entry, desc.shader.version,
+	hr = D3DCompileFromFile(desc.shader.path, nullptr, nullptr, desc.shader.entry, "vs_5_0",
 																			0, 0, &blob, &error);
 	if (hr) {
 		char* msg = (char*)error->GetBufferPointer();
@@ -188,6 +188,7 @@ static ID3D11Buffer* UploadVertexBuffer(VertexBuffer vb, u32 num_vertices, ID3D1
 static Mesh UploadMesh(MeshData mesh_data, VERTEX_SHADER vst, Renderer renderer) {
 	Mesh mesh = {};
 
+	mesh.vs = vst;
 	VertexShader vs = renderer.vs[vst];
 	mesh.vertex_buffers = PushMaster(ID3D11Buffer*, vs.bl_count);
 	assert(mesh_data.vb_count >= vs.bl_count);
@@ -357,7 +358,8 @@ static Renderer InitRendering(HWND handle, WindowDimensions wd) {
 		assertHR(hr);
 	}
 	//------------------------------------------------------------------------
-	{
+	{ 
+		// Default Rasterizer
 		ID3D11RasterizerState* rs;
 		D3D11_RASTERIZER_DESC rs_desc;
 		rs_desc.FillMode = D3D11_FILL_SOLID;
@@ -366,9 +368,15 @@ static Renderer InitRendering(HWND handle, WindowDimensions wd) {
 		hr = renderer.device->CreateRasterizerState(&rs_desc, &rs);
 		renderer.rs[RS_DEFAULT] = rs;
 		assertHR(hr);
+
+		// Wireframe
+		rs_desc.FillMode = D3D11_FILL_WIREFRAME;
+		hr = renderer.device->CreateRasterizerState(&rs_desc, &rs);
+		renderer.rs[RS_WIREFRAME] = rs;
+		assertHR(hr);
 	}
 	//------------------------------------------------------------------------
-	{
+	{	
 		D3D11_VIEWPORT vp = {};
 		vp.TopLeftX = 0.0f;
 		vp.TopLeftY = 0.0f;
@@ -381,7 +389,7 @@ static Renderer InitRendering(HWND handle, WindowDimensions wd) {
 	//------------------------------------------------------------------------
 	{	
 		VertexShaderDesc vs_desc = {};
-		vs_desc.shader = { "vs_5_0", L"../assets/shaders/diffuse.hlsl", "vs_main" };
+		vs_desc.shader = { L"../assets/shaders/diffuse.hlsl", "vs_main" };
 		BufferLayout bl[] = { { VBT_POSITION, BF_VEC3, CT_FLOAT },
 													{ VBT_NORMAL, BF_VEC3, CT_FLOAT	} };
 		Mat4 matrix = M4I();
@@ -396,27 +404,59 @@ static Renderer InitRendering(HWND handle, WindowDimensions wd) {
 	}
 	//------------------------------------------------------------------------
 	{	
-		PixelShaderDesc ps_desc = {};
-		ps_desc.shader = { "ps_5_0", L"../assets/shaders/camera_lit_diffuse.hlsl", "ps_main" }; 
-		Vec3 default_color = WHITE;
-		ConstantsBufferDesc pcb_desc[] = { { CS_PER_CAMERA, sizeof(CameraLitDiffusePC), nullptr },
-									 										 { CS_PER_MESH, sizeof(Vec3), &default_color } };
-		ps_desc.cb_desc = pcb_desc;
-		ps_desc.cb_desc_count = ARRAY_LENGTH(pcb_desc);
-
-		renderer.ps[PS_CAMERA_LIT_DIFFUSE] = UploadPixelShader(ps_desc, renderer.device);
-	}
-	//------------------------------------------------------------------------
-	{
-		Material mat = {};
-		mat.ps = PS_CAMERA_LIT_DIFFUSE;
-		renderer.mat[MAT_CAMERA_LIT_DIFFUSE] = mat;
+		// Unlit shader
+		{
+			PixelShaderDesc unlit_desc = {};
+			unlit_desc.shader = { L"../assets/shaders/unlit.hlsl", "ps_main" };
+			Vec3 default_color = BLACK;
+			ConstantsBufferDesc unlit_cb_desc[] = { { CS_PER_MESH, sizeof(Vec3), nullptr } };
+			unlit_desc.cb_desc = unlit_cb_desc;
+			unlit_desc.cb_desc_count = ARRAY_LENGTH(unlit_cb_desc);
+			renderer.ps[PS_UNLIT] = UploadPixelShader(unlit_desc, renderer.device);
+		}
+		// Diffuse shader
+		{
+			PixelShaderDesc diffuse_desc = {};
+			diffuse_desc.shader = { L"../assets/shaders/diffuse.hlsl", "ps_main" }; 
+			Vec3 default_color = GREY;
+			ConstantsBufferDesc diffuse_cb_desc[] = { { CS_PER_CAMERA, sizeof(DiffusePC), nullptr },
+			{ CS_PER_MESH, sizeof(Vec3), &default_color } };
+			diffuse_desc.cb_desc = diffuse_cb_desc;
+			diffuse_desc.cb_desc_count = ARRAY_LENGTH(diffuse_cb_desc);
+			renderer.ps[PS_DIFFUSE] = UploadPixelShader(diffuse_desc, renderer.device);
+		}
 	}
 	//------------------------------------------------------------------------
 	{ 
-		ModelData model_data = LoadModelDataGLTF("../assets/models/cube/cube.gltf", "cube");
-		MeshData cubemesh_data = model_data.mesh_data[0];
-		renderer.mesh[MESH_CUBE] = UploadMesh(cubemesh_data, VS_DIFFUSE, renderer);
+		// Unlit material
+		{
+			Material mat = {};
+			mat.ps = PS_UNLIT;
+			renderer.mat[MAT_UNLIT] = mat;
+		}
+		// Diffuse material
+		{
+			Material mat = {};
+			mat.ps = PS_DIFFUSE;
+			renderer.mat[MAT_DIFFUSE] = mat;
+		}
+	}
+	//------------------------------------------------------------------------
+	{ 
+		ModelData model_data = {};
+		MeshData mesh_data = {};
+		// Cube mesh
+		{
+			model_data = LoadModelDataGLTF("../assets/models/cube/cube.gltf", "cube");
+			mesh_data = model_data.mesh_data[0];
+			renderer.mesh[MESH_CUBE] = UploadMesh(mesh_data, VS_DIFFUSE, renderer);
+		}
+		// Sphere mesh
+		{
+			model_data = LoadModelDataGLTF("../assets/models/sphere/sphere.gltf", "sphere");
+			mesh_data = model_data.mesh_data[0];
+			renderer.mesh[MESH_SPHERE] = UploadMesh(mesh_data, VS_DIFFUSE, renderer);
+		}
 	}
 	//------------------------------------------------------------------------
 	return renderer;
@@ -432,24 +472,29 @@ static void BeginRendering(Renderer renderer) {
 
 //------------------------------------------------------------------------
 static void ExecuteRenderPipeline(RenderPipeline rp, Renderer renderer) {
+	DEPTH_STENCIL_STATE dss_t = renderer.state_overrides.dss ? renderer.state_overrides.dss : rp.rs.dss;
+	BLEND_STATE bs_t = renderer.state_overrides.bs ? renderer.state_overrides.bs : rp.rs.bs;
+	RASTERIZER_STATE rs_t = renderer.state_overrides.rs ? renderer.state_overrides.rs : rp.rs.rs;
+	VIEWPORT vp_t = renderer.state_overrides.vp ? renderer.state_overrides.vp : rp.rs.vp;
+
 	{
-		ID3D11DepthStencilState* dss = renderer.dss[rp.rs.dss];
+		ID3D11DepthStencilState* dss = renderer.dss[dss_t];
 		renderer.context->OMSetDepthStencilState(dss, 0);
 	}
 	//------------------------------------------------------------------------0
 	{
-		ID3D11BlendState* bs = renderer.bs[rp.rs.bs];
+		ID3D11BlendState* bs = renderer.bs[bs_t];
 		float val[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
 		renderer.context->OMSetBlendState(bs, val, 0xFFFFFFFF);
 	}
 	//------------------------------------------------------------------------
 	{
-		ID3D11RasterizerState* rs = renderer.rs[rp.rs.rs];
+		ID3D11RasterizerState* rs = renderer.rs[rs_t];
 		renderer.context->RSSetState(rs);
 	}
 	//------------------------------------------------------------------------
 	{
-		D3D11_VIEWPORT vp = renderer.vp[rp.rs.vp];
+		D3D11_VIEWPORT vp = renderer.vp[vp_t];
 		renderer.context->RSSetViewports(1, &vp);
 		D3D11_RECT rect = {};
 		rect.right = vp.Width;
