@@ -494,6 +494,9 @@ static Vec3 RotateVecByQuat(Vec3 vec, Quat quat) {
 	return result;
 }
 
+//static Quat QuatLookAt(Vec3 position, Vec3 target) {
+//}
+
 // High Level API
 static Vec3 GetForwardVector(Quat quat) {	return V3Norm(RotateVecByQuat(V3Forward(), quat)); } 
 static Vec3 GetRightVector(Quat quat) {	return V3Norm(RotateVecByQuat(V3Right(), quat)); } 

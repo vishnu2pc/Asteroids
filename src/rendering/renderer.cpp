@@ -366,6 +366,14 @@ static Renderer InitRendering(HWND handle, WindowDimensions wd) {
 		hr = renderer.device->CreateRasterizerState(&rs_desc, &rs);
 		renderer.rs[RS_WIREFRAME] = rs;
 		assertHR(hr);
+
+		rs_desc = {};
+		rs_desc.FillMode = D3D11_FILL_SOLID;
+		rs_desc.CullMode = D3D11_CULL_NONE;
+		rs_desc.FrontCounterClockwise = true;
+		hr = renderer.device->CreateRasterizerState(&rs_desc, &rs);
+		renderer.rs[RS_DOUBLE_SIDED] = rs;
+		assertHR(hr);
 	}
 	//------------------------------------------------------------------------
 	{	
@@ -439,15 +447,33 @@ static Renderer InitRendering(HWND handle, WindowDimensions wd) {
 		MeshData mesh_data = {};
 		// Cube mesh
 		{
-			model_data = LoadModelDataGLTF("../assets/models/cube/cube.gltf", "cube");
+			model_data = LoadModelDataGLTF("../assets/models/shapes/cube.gltf", "cube");
 			mesh_data = model_data.mesh_data[0];
 			renderer.mesh[MESH_CUBE] = UploadMesh(mesh_data, VS_DIFFUSE, renderer);
 		}
 		// Sphere mesh
 		{
-			model_data = LoadModelDataGLTF("../assets/models/sphere/sphere.gltf", "sphere");
+			model_data = LoadModelDataGLTF("../assets/models/shapes/sphere.gltf", "sphere");
 			mesh_data = model_data.mesh_data[0];
 			renderer.mesh[MESH_SPHERE] = UploadMesh(mesh_data, VS_DIFFUSE, renderer);
+		}
+		// Cone mesh
+		{
+			model_data = LoadModelDataGLTF("../assets/models/shapes/cone.gltf", "cone");
+			mesh_data = model_data.mesh_data[0];
+			renderer.mesh[MESH_CONE] = UploadMesh(mesh_data, VS_DIFFUSE, renderer);
+		}
+		// Plane mesh
+		{
+			model_data = LoadModelDataGLTF("../assets/models/shapes/plane.gltf", "plane");
+			mesh_data = model_data.mesh_data[0];
+			renderer.mesh[MESH_PLANE] = UploadMesh(mesh_data, VS_DIFFUSE, renderer);
+		}
+		// Torus mesh
+		{
+			model_data = LoadModelDataGLTF("../assets/models/shapes/torus.gltf", "torus");
+			mesh_data = model_data.mesh_data[0];
+			renderer.mesh[MESH_TORUS] = UploadMesh(mesh_data, VS_DIFFUSE, renderer);
 		}
 	}
 	//------------------------------------------------------------------------

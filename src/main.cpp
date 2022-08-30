@@ -37,6 +37,7 @@ struct WindowDimensions {	u32 width; u32 height; };
 
 #include "cgltf_loader.cpp"
 #include "rendering/renderer.cpp"
+#include "editor.cpp"
 
 #define Kilobytes(value) (1024LL*(value))
 #define Megabytes(value) (Kilobytes(1024)*(value))
@@ -72,27 +73,6 @@ static HWND GetWindowHandleSDL(SDL_Window* window) {
 	return hwnd;
 }
 
-struct Camera {
-	Vec3 position;
-	Vec3 target;
-	float fov;
-	float near_clip;
-	float far_clip;
-	float aspect_ratio;
-};
-
-static RenderState RenderStateDefaults() {
-	return RenderState { DSS_DEFAULT, BS_DEFAULT, RS_DEFAULT, VP_DEFAULT };
-}
-
-static Mat4 MakeViewPerspective(Camera camera) {
-	Mat4 result = M4I();
-	Mat4 view = M4LookAt(camera.position, camera.target, V3Up());
-	Mat4 perspective = M4Perspective(camera.fov, camera.aspect_ratio, camera.near_clip, camera.far_clip);
-	result = M4Mul(perspective, view);
-	return result;
-}
-
 struct Entity {
 	Transform transform;
 	RenderPipeline rp;
@@ -117,23 +97,60 @@ int main(int argc, char* argv[]) {
 	Renderer renderer = {};
 	renderer = InitRendering(handle, wd);
 
-	Camera camera = {};
-	camera.position = V3(1.0f, 1.0f, 5.0f);
-	camera.fov = 45.0f;
+	CameraInfo camera = {};
+	camera.position = V3(-3.0f, -3.0f, 15.0f);
+	camera.rotation = QuatFromAxisAngle(V3(0.1f, -0.1f, 0.0f), 0.3f);
+	camera.fov = 75.0f;
 	camera.near_clip = 0.1f;
 	camera.far_clip = 100.0f;
 	camera.aspect_ratio = (float)wd.width/(float)wd.height;
 
-	Entity cube = {} ;
+	
+	Entity plane = {};
 	{
 		RenderPipeline rp = {};
 		rp.rs = RenderStateDefaults();
-		rp.mat_id = MAT_DIFFUSE;
-		rp.mesh_id = MESH_SPHERE;
-		cube = { V3(0.0f, 3.0f, 10.0f), QuatI(), V3I(), rp };
-	}  
+		rp.rs.rs = RS_DOUBLE_SIDED;
+		rp.mat_id = PushMaterial(MakeDiffuseMaterial(PURPLE, 1.0f), &renderer);
+		rp.mesh_id = MESH_PLANE;
+		plane = { V3(0.0f, 0.0f, 0.0f), QuatI(), V3(5.0f, 5.0f, 5.0f), rp };
+	}
 
-	camera.target = cube.transform.position;
+	Entity cube = {};
+	{
+		RenderPipeline rp = {};
+		rp.rs = RenderStateDefaults();
+		rp.mat_id = PushMaterial(MakeDiffuseMaterial(WHITE, 1.0f), &renderer);
+		rp.mesh_id = MESH_CONE;
+		cube = { V3(0.0f, 0.0f, 0.0f), QuatI(), V3(1.0f, 1.0f, 1.0f), rp };
+	}
+
+	Entity right = {} ;
+	{
+		RenderPipeline rp = {};
+		rp.rs = RenderStateDefaults();
+		rp.mat_id = PushMaterial(MakeDiffuseMaterial(RED, 1.0f), &renderer);
+		rp.mesh_id = MESH_CUBE;
+		right = { V3(5.0f, 0.0f, 0.0f), QuatI(), V3(5.0f, 0.2f, 0.2f), rp };
+	}
+
+	Entity up = {} ;
+	{
+		RenderPipeline rp = {};
+		rp.rs = RenderStateDefaults();
+		rp.mat_id = PushMaterial(MakeDiffuseMaterial(YELLOW, 1.0f), &renderer);
+		rp.mesh_id = MESH_CUBE;
+		up = { V3(0.0f, 5.0f, 0.0f), QuatI(), V3(0.2f, 5.0f, 0.2f), rp };
+	}
+
+	Entity forward = {} ;
+	{
+		RenderPipeline rp = {};
+		rp.rs = RenderStateDefaults();
+		rp.mat_id = PushMaterial(MakeDiffuseMaterial(BLUE, 1.0f), &renderer);
+		rp.mesh_id = MESH_CUBE;
+		forward = { V3(0.0f, 0.0f, 5.0f), QuatI(), V3(0.2f, 0.2f, 5.0f), rp };
+	}
 
 	Entity light = {};
 	{
@@ -150,11 +167,32 @@ int main(int argc, char* argv[]) {
 	float ambience = 0.5f;
 
 	while (RUNNING) {
-		if(HINPUT.up.pressed) renderer.state_overrides.rs = renderer.state_overrides.rs ? RS_NONE : RS_WIREFRAME; 
+		//if(HINPUT.up.pressed) renderer.state_overrides.rs = renderer.state_overrides.rs ? RS_NONE : RS_WIREFRAME; 
 		HandleSDLevents(&RUNNING);
 		BeginRendering(renderer);
 
-		cube.transform.rotation = QuatFromAxisAngle(V3(1.0f, 2.0f, 3.0f), 10 * sin((float)SDL_GetTicks() * 0.0001));
+		if(HINPUT.up.pressed) cube.transform.position = V3Add(cube.transform.position, V3MulF(GetForwardVector(cube.transform.rotation), 1.0f));
+		if(HINPUT.down.pressed) cube.transform.position = V3Sub(cube.transform.position, V3MulF(GetForwardVector(cube.transform.rotation), 1.0f));
+		
+		if(HINPUT.right.pressed) cube.transform.position = V3Add(cube.transform.position, V3MulF(GetRightVector(cube.transform.rotation), 1.0f));
+		if(HINPUT.left.pressed) cube.transform.position = V3Sub(cube.transform.position, V3MulF(GetRightVector(cube.transform.rotation), 1.0f));
+		
+		if(HINPUT.w.pressed) cube.transform.position = V3Add(cube.transform.position, V3MulF(GetUpVector(cube.transform.rotation), 1.0f));
+		if(HINPUT.s.pressed) cube.transform.position = V3Sub(cube.transform.position, V3MulF(GetUpVector(cube.transform.rotation), 1.0f));
+
+		
+		Mat4 plane_matrix = MakeTransformMatrix(plane.transform);
+		plane.rp.vsc_per_object_data = &plane_matrix;
+
+		Mat4 right_matrix = MakeTransformMatrix(right.transform);
+		right.rp.vsc_per_object_data = &right_matrix;
+
+		Mat4 up_matrix = MakeTransformMatrix(up.transform);
+		up.rp.vsc_per_object_data = &up_matrix;
+		
+		Mat4 forward_matrix = MakeTransformMatrix(forward.transform);
+		forward.rp.vsc_per_object_data = &forward_matrix;
+
 		Mat4 cube_matrix = MakeTransformMatrix(cube.transform);
 		cube.rp.vsc_per_object_data = &cube_matrix;
 
@@ -172,7 +210,12 @@ int main(int argc, char* argv[]) {
 		DiffusePC dpc = { light.transform.position, ambience };
 		renderer.ps[PS_DIFFUSE].cb_data[CS_PER_CAMERA] = &dpc;
 
+		ExecuteRenderPipeline(right.rp, renderer);
+		ExecuteRenderPipeline(up.rp, renderer);
+		ExecuteRenderPipeline(forward.rp, renderer);
 		ExecuteRenderPipeline(cube.rp, renderer);
+		ExecuteRenderPipeline(plane.rp, renderer);
+
 		ExecuteRenderPipeline(light.rp, renderer);
 
 		EndRendering(renderer);

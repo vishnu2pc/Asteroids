@@ -49,6 +49,7 @@ enum RASTERIZER_STATE {
 	RS_NONE,
 	RS_DEFAULT,
 	RS_WIREFRAME,
+	RS_DOUBLE_SIDED,
 	RS_TOTAL
 };
 
@@ -75,7 +76,8 @@ enum MATERIAL {
 	MAT_NONE,
 	MAT_UNLIT,
 	MAT_DIFFUSE,
-	MAT_TOTAL
+	MAT_END,
+	MAT_TOTAL = 8
 };
 
 enum CONSTANTS_SLOT {
@@ -89,7 +91,10 @@ enum CONSTANTS_SLOT {
 enum MESH {
 	MESH_CUBE,
 	MESH_SPHERE,
-	MESH_TOTAL
+	MESH_CONE,
+	MESH_TORUS,
+	MESH_PLANE,
+	MESH_TOTAL = 8
 };
 
 struct ConstantsBufferDesc {
@@ -227,8 +232,17 @@ struct Renderer {
 	Mesh mesh[MESH_TOTAL];
 
 	RenderState state_overrides;
+
+	u8 mat_id = MAT_END;
 };
 
+static u8 PushMaterial(Material material, Renderer* renderer) {
+	u8 id = renderer->mat_id;
+	assert(id  < MAT_TOTAL);
+	renderer->mat[id] = material;
+	renderer->mat_id++;
+	return id;
+};
 
 struct RenderPipeline {
 	RenderState rs;
@@ -237,3 +251,15 @@ struct RenderPipeline {
 	void* vsc_per_object_data;
 	void* psc_per_object_data;
 };
+
+static RenderState RenderStateDefaults() {
+	return RenderState { DSS_DEFAULT, BS_DEFAULT, RS_DEFAULT, VP_DEFAULT };
+}
+
+static Material MakeDiffuseMaterial(Vec3 color, float diffuse_factor) {
+	Material mat = {};
+	mat.ps = PS_DIFFUSE;
+	mat.diffuse_params.color = color;
+	mat.diffuse_params.diffuse_factor = diffuse_factor;
+	return mat;
+}

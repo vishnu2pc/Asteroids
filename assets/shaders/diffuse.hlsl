@@ -36,10 +36,15 @@ ps_in vs_main(vs_in input) {
 	return output;
 }
 //------------------------------------------------------------------------
-float4 ps_main(ps_in input) : SV_TARGET {
+float4 ps_main(ps_in input, bool front_facing: SV_IsFrontFace) : SV_TARGET {
 	float3 final_color;
 	float3 light_dir = normalize(light_pos.xyz - input.vertex_pos);
-	float cos = max(0.0, dot(light_dir, input.normal));
+	float3 face_sided_normal;
+
+	if(front_facing) face_sided_normal = input.normal;
+	else face_sided_normal = -input.normal;
+
+	float cos = max(0.0, dot(light_dir, face_sided_normal));
 
 	float3 ambient_color = ambience * col;
 	float3 diffuse_color = cos * col * diffuse_factor;
