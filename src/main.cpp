@@ -32,8 +32,9 @@ typedef uint64_t u64;
 struct WindowDimensions {	u32 width; u32 height; };
 
 #include "memory_management.cpp"
-#include "input.cpp"
 #include "math.cpp"
+#include "input.cpp"
+#include "app_state.cpp"
 
 #include "cgltf_loader.cpp"
 #include "rendering/renderer.cpp"
@@ -42,36 +43,6 @@ struct WindowDimensions {	u32 width; u32 height; };
 #define Kilobytes(value) (1024LL*(value))
 #define Megabytes(value) (Kilobytes(1024)*(value))
 #define Gigabytes(value) (Megabytes(1024)*(value))
-
-
-static void HandleSDLevents(bool* RUNNING) {
-	SDL_Event event;
-	SDL_PollEvent(&event);
-	HINPUT = {};
-	switch (event.type) {
-		case SDL_QUIT: {
-			*RUNNING = false;
-		} break;
-		case SDL_KEYUP: 
-		case SDL_KEYDOWN: { 
-			HandleKeyboardEvents(event);
-		} break;
-		case SDL_MOUSEMOTION:
-		case SDL_MOUSEBUTTONUP:
-		case SDL_MOUSEBUTTONDOWN:
-		case SDL_MOUSEWHEEL: {
-			HandleMouseEvents(event);
-		} break;
-	}
-}
-
-static HWND GetWindowHandleSDL(SDL_Window* window) {
-	SDL_SysWMinfo wmInfo;
-	SDL_VERSION(&wmInfo.version);
-	SDL_GetWindowWMInfo(window, &wmInfo);
-	HWND hwnd = wmInfo.info.win.window;
-	return hwnd;
-}
 
 struct Entity {
 	Transform transform;
@@ -83,27 +54,29 @@ int main(int argc, char* argv[]) {
 	AllocateScratchMemory(Kilobytes(200));
 	stbi_set_flip_vertically_on_load(false);
 
-	bool RUNNING = true;
-	WindowDimensions wd = { 1600, 900 };
+	AppState app_state = {};
+	app_state.running = true;
+	app_state.wd = { 1600, 900 };
 
 	SDL_Init(SDL_INIT_EVERYTHING);
 	SDL_Window* window = SDL_CreateWindow("Asteroids", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-		wd.width, wd.height, 0);
+		app_state.wd.width, app_state.wd.height, 0);
 	HWND handle = GetWindowHandleSDL(window);
 
-	SDL_WarpMouseInWindow(window, wd.width/2, wd.height/2);
+	SDL_WarpMouseInWindow(window, app_state.wd.width/2, app_state.wd.height/2);
 	SDL_FlushEvents(SDL_MOUSEMOTION, SDL_MOUSEWHEEL);
 
 	Renderer renderer = {};
-	renderer = InitRendering(handle, wd);
+	renderer = InitRendering(handle, app_state.wd);
 
 	CameraInfo camera = {};
-	camera.position = V3(-3.0f, -3.0f, 15.0f);
-	camera.rotation = QuatFromAxisAngle(V3(0.1f, -0.1f, 0.0f), 0.3f);
+	camera.position = V3(-3.0f, -3.0f, -15.0f);
+	//camera.rotation = QuatFromAxisAngle(V3(0.1f, -0.1f, 0.0f), 0.3f);
+	camera.rotation = QuatI();
 	camera.fov = 75.0f;
 	camera.near_clip = 0.1f;
 	camera.far_clip = 100.0f;
-	camera.aspect_ratio = (float)wd.width/(float)wd.height;
+	camera.aspect_ratio = (float)app_state.wd.width/(float)app_state.wd.height;
 
 	
 	Entity plane = {};
@@ -166,21 +139,12 @@ int main(int argc, char* argv[]) {
 
 	float ambience = 0.5f;
 
-	while (RUNNING) {
-		//if(HINPUT.up.pressed) renderer.state_overrides.rs = renderer.state_overrides.rs ? RS_NONE : RS_WIREFRAME; 
-		HandleSDLevents(&RUNNING);
+	while (app_state.running) {
+		PreProcessInput(&app_state.input);
+		HandleSDLevents(&app_state);
 		BeginRendering(renderer);
+		if(app_state.input.kb[KBK_F1].pressed) renderer.state_overrides.rs = renderer.state_overrides.rs ? RS_NONE : RS_WIREFRAME; 
 
-		if(HINPUT.up.pressed) cube.transform.position = V3Add(cube.transform.position, V3MulF(GetForwardVector(cube.transform.rotation), 1.0f));
-		if(HINPUT.down.pressed) cube.transform.position = V3Sub(cube.transform.position, V3MulF(GetForwardVector(cube.transform.rotation), 1.0f));
-		
-		if(HINPUT.right.pressed) cube.transform.position = V3Add(cube.transform.position, V3MulF(GetRightVector(cube.transform.rotation), 1.0f));
-		if(HINPUT.left.pressed) cube.transform.position = V3Sub(cube.transform.position, V3MulF(GetRightVector(cube.transform.rotation), 1.0f));
-		
-		if(HINPUT.w.pressed) cube.transform.position = V3Add(cube.transform.position, V3MulF(GetUpVector(cube.transform.rotation), 1.0f));
-		if(HINPUT.s.pressed) cube.transform.position = V3Sub(cube.transform.position, V3MulF(GetUpVector(cube.transform.rotation), 1.0f));
-
-		
 		Mat4 plane_matrix = MakeTransformMatrix(plane.transform);
 		plane.rp.vsc_per_object_data = &plane_matrix;
 

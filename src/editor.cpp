@@ -26,6 +26,7 @@ static Mat4 MakeViewPerspective(CameraInfo camera) {
 	return result;
 }
 
+/*
 static Transform FirstPersonControl(Transform transform, FPControlInfo control_info) {
 	Transform final = {};
 	final = transform;
@@ -76,3 +77,4 @@ static Transform FirstPersonControl(Transform transform, FPControlInfo control_i
 
 	return final;
 }
+	*/
