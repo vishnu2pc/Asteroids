@@ -1,9 +1,9 @@
 enum TEXTURE_TYPE {
-	TT_NOT_SET,
-	TT_BASE_COLOR,
-	TT_DIFFUSE_COLOR,
-	TT_METALLIC_ROUGHNESS,
-	TT_NORMAL,
+	TEXTURE_NOT_SET,
+	TEXTURE_ALBEDO,
+	//TEXTURE_DIFFUSE_COLOR,
+	//TEXTURE_METALLIC_ROUGHNESS,
+	TEXTURE_NORMAL,
 };
 
 enum VERTEX_BUFFER_TYPE {	
@@ -28,21 +28,17 @@ enum BUFFER_FORMAT {
 	BF_VEC4
 };
 
-enum MATERIAL_DATA_TYPE {
-	MDT_DIFFUSE,
-};
-
 //TODO: Move index buffers in here
 
-struct VertexBuffer {
+struct VertexBufferData {
 	float* data;
 	u8 num_components;
 	VERTEX_BUFFER_TYPE type;
 };
 
 struct MeshData {
-	VertexBuffer* vertex_buffers; 
-	u32 vb_count;
+	VertexBufferData* vb_data; 
+	u32 vb_data_count;
 		
 	u32* indices;
 	u32 vertices_count;
@@ -51,7 +47,7 @@ struct MeshData {
 	char* name;
 };
 
-struct Texture {
+struct TextureData {
 	TEXTURE_TYPE type;
 	void* data;
 	u32 width;
@@ -60,7 +56,8 @@ struct Texture {
 };
 
 struct MaterialData {
-	MATERIAL_DATA_TYPE type;
+	TextureData* texture_data;
+	u8 count;
 	char* name;
 };
 
@@ -80,17 +77,17 @@ struct ModelData {
 static MeshData GetMeshDataFromCGLTF(cgltf_primitive primitive) {
 	MeshData mesh_data = {};
 
-	u32 vb_count = 0;
+	u32 vb_data_count = 0;
 	for (u8 a = 0; a < primitive.attributes_count; a++) {
 		if((primitive.attributes[a].type == cgltf_attribute_type_normal) ||
 			 (primitive.attributes[a].type == cgltf_attribute_type_position) ||
 			 (primitive.attributes[a].type == cgltf_attribute_type_color) ||
 			 (primitive.attributes[a].type == cgltf_attribute_type_tangent) ||
 			 (primitive.attributes[a].type == cgltf_attribute_type_texcoord))
-			vb_count++;
+			vb_data_count++;
 	}
-	mesh_data.vertex_buffers = PushMaster(VertexBuffer, vb_count);
-	mesh_data.vb_count = vb_count;
+	mesh_data.vb_data = PushMaster(VertexBufferData, vb_data_count);
+	mesh_data.vb_data_count = vb_data_count;
 
 	u32 vb_counter = 0;
 	for (int a = 0; a < primitive.attributes_count; a++) {
@@ -108,11 +105,11 @@ static MeshData GetMeshDataFromCGLTF(cgltf_primitive primitive) {
 				assert(acc->component_type == cgltf_component_type_r_32f);
 				assert(acc->type == cgltf_type_vec3);
 
-				mesh_data.vertex_buffers[vb_counter].type = VBT_POSITION;
-				mesh_data.vertex_buffers[vb_counter].num_components = 3;
+				mesh_data.vb_data[vb_counter].type = VBT_POSITION;
+				mesh_data.vb_data[vb_counter].num_components = 3;
 				float* data = PushMaster(float, float_count);
 				cgltf_accessor_unpack_floats(acc, data, float_count);
-				mesh_data.vertex_buffers[vb_counter].data = data;
+				mesh_data.vb_data[vb_counter].data = data;
 				vb_counter++;
 			} break;
 
@@ -120,11 +117,11 @@ static MeshData GetMeshDataFromCGLTF(cgltf_primitive primitive) {
 				assert(acc->component_type == cgltf_component_type_r_32f);
 				assert(acc->type == cgltf_type_vec3);
 
-				mesh_data.vertex_buffers[vb_counter].type = VBT_NORMAL;
-				mesh_data.vertex_buffers[vb_counter].num_components = 3;
+				mesh_data.vb_data[vb_counter].type = VBT_NORMAL;
+				mesh_data.vb_data[vb_counter].num_components = 3;
 				float* data = PushMaster(float, float_count);
 				cgltf_accessor_unpack_floats(acc, data, float_count);
-				mesh_data.vertex_buffers[vb_counter].data = data;
+				mesh_data.vb_data[vb_counter].data = data;
 				vb_counter++;
 			} break;
 
@@ -132,11 +129,11 @@ static MeshData GetMeshDataFromCGLTF(cgltf_primitive primitive) {
 				assert(acc->component_type == cgltf_component_type_r_32f);
 				assert(acc->type == cgltf_type_vec2);
 
-				mesh_data.vertex_buffers[vb_counter].type = VBT_TEXCOORD;
-				mesh_data.vertex_buffers[vb_counter].num_components = 2;
+				mesh_data.vb_data[vb_counter].type = VBT_TEXCOORD;
+				mesh_data.vb_data[vb_counter].num_components = 2;
 				float* data = PushMaster(float, float_count);
 				cgltf_accessor_unpack_floats(acc, data, float_count);
-				mesh_data.vertex_buffers[vb_counter].data = data;
+				mesh_data.vb_data[vb_counter].data = data;
 				vb_counter++;
 			} break;
 			
@@ -144,12 +141,12 @@ static MeshData GetMeshDataFromCGLTF(cgltf_primitive primitive) {
 				assert(acc->component_type == cgltf_component_type_r_32f);
 				assert(acc->type == cgltf_type_vec3);
 
-				mesh_data.vertex_buffers[vb_counter].type = VBT_COLOR;
-				mesh_data.vertex_buffers[vb_counter].num_components = 3;
+				mesh_data.vb_data[vb_counter].type = VBT_COLOR;
+				mesh_data.vb_data[vb_counter].num_components = 3;
 				float* data = PushMaster(float, float_count);
 				data = PushMaster(float, float_count);
 				cgltf_accessor_unpack_floats(acc, data, float_count);
-				mesh_data.vertex_buffers[vb_counter].data = data;
+				mesh_data.vb_data[vb_counter].data = data;
 				vb_counter++;
 			} break;
 
@@ -157,12 +154,12 @@ static MeshData GetMeshDataFromCGLTF(cgltf_primitive primitive) {
 				assert(acc->component_type == cgltf_component_type_r_32f);
 				assert(acc->type == cgltf_type_vec4);
 				
-				mesh_data.vertex_buffers[vb_counter].type = VBT_TANGENT;
-				mesh_data.vertex_buffers[vb_counter].num_components = 4;
+				mesh_data.vb_data[vb_counter].type = VBT_TANGENT;
+				mesh_data.vb_data[vb_counter].num_components = 4;
 				float* data = PushMaster(float, float_count);
 				data = PushMaster(float, float_count);
 				cgltf_accessor_unpack_floats(acc, data, float_count);
-				mesh_data.vertex_buffers[vb_counter].data = data;
+				mesh_data.vb_data[vb_counter].data = data;
 				vb_counter++;
 			} break;
 		}
@@ -188,10 +185,10 @@ static char* GetImagePathFromTexture(char* uri, char* path) {
 	return new_path;
 };
 
-static Texture GetTextureFromCGLTF(cgltf_texture texture, char* path) {
-	Texture result = {};
-	assert(texture.image->uri);
-	char* imagepath = GetImagePathFromTexture(texture.image->uri, path);
+static TextureData GetTextureFromCGLTF(cgltf_texture texture_data, char* path) {
+	TextureData result = {};
+	assert(texture_data.image->uri);
+	char* imagepath = GetImagePathFromTexture(texture_data.image->uri, path);
 	int x, y, n;
 	unsigned char* data = stbi_load(imagepath, &x, &y, &n, 4);
 	assert(data);
@@ -211,19 +208,19 @@ static MaterialData GetMaterialFromCGLTF(cgltf_material cmat, char* path) {
 
 	/*
 	// TODO: Handle specular glossiness
-	if (cmat.normal_texture.texture) mat.count++;
-	if (cmat.pbr_metallic_roughness.base_color_texture.texture) mat.count++;
-	if (cmat.pbr_metallic_roughness.metallic_roughness_texture.texture) mat.count++;
-	if (cmat.pbr_specular_glossiness.diffuse_texture.texture) mat.count++;
-	if (cmat.pbr_specular_glossiness.specular_glossiness_texture.texture) mat.count++;
+	if (cmat.normal_texture.texture_data) mat.count++;
+	if (cmat.pbr_metallic_roughness.base_color_texture.texture_data) mat.count++;
+	if (cmat.pbr_metallic_roughness.metallic_roughness_texture.texture_data) mat.count++;
+	if (cmat.pbr_specular_glossiness.diffuse_texture.texture_data) mat.count++;
+	if (cmat.pbr_specular_glossiness.specular_glossiness_texture.texture_data) mat.count++;
 
-	mat.textures = PushMaster(Texture, mat.count);
+	mat.textures = PushMaster(TextureData, mat.count);
 	u8 texture_counter = 0;
 	// This might be the wrong null check
 	// TODO: Read up on sampler importing
-	if (cmat.normal_texture.texture) {
-		mat.textures[texture_counter] = GetTextureFromCGLTF(*cmat.normal_texture.texture, path);
-		mat.textures[texture_counter].type = TT_NORMAL;
+	if (cmat.normal_texture.texture_data) {
+		mat.textures[texture_counter] = GetTextureFromCGLTF(*cmat.normal_texture.texture_data, path);
+		mat.textures[texture_counter].type = TEXTURE_NORMAL;
 		texture_counter++;
 	}
 
@@ -234,15 +231,15 @@ static MaterialData GetMaterialFromCGLTF(cgltf_material cmat, char* path) {
 		mat.mr_constants.metallic_factor = pbr.metallic_factor;
 		mat.mr_constants.roughness_factor = pbr.roughness_factor;
 
-		if (pbr.base_color_texture.texture) {
-			mat.textures[texture_counter] = GetTextureFromCGLTF(*pbr.base_color_texture.texture, path);
-			mat.textures[texture_counter].type = TT_BASE_COLOR;
+		if (pbr.base_color_texture.texture_data) {
+			mat.textures[texture_counter] = GetTextureFromCGLTF(*pbr.base_color_texture.texture_data, path);
+			mat.textures[texture_counter].type = TEXTURE_BASE_COLOR;
 			texture_counter++;
 		}
-		if (pbr.metallic_roughness_texture.texture) {
+		if (pbr.metallic_roughness_texture.texture_data) {
 			// Will the num_components need to be manually set?
-			mat.textures[texture_counter] = GetTextureFromCGLTF(*pbr.metallic_roughness_texture.texture, path);
-			mat.textures[texture_counter].type = TT_METALLIC_ROUGHNESS;
+			mat.textures[texture_counter] = GetTextureFromCGLTF(*pbr.metallic_roughness_texture.texture_data, path);
+			mat.textures[texture_counter].type = TEXTURE_METALLIC_ROUGHNESS;
 			texture_counter++;
 		}
 	}
@@ -254,7 +251,7 @@ static MaterialData GetMaterialFromCGLTF(cgltf_material cmat, char* path) {
 		memcpy(mat.sg_constants.specular_factor, pbr.specular_factor, sizeof(float) * 3);
 		mat.sg_constants.glossiness_factor = pbr.glossiness_factor;
 
-		if (cmat.pbr_specular_glossiness.diffuse_texture.texture) {
+		if (cmat.pbr_specular_glossiness.diffuse_texture.texture_data) {
 		
 		}
 	}
@@ -265,16 +262,16 @@ static MaterialData GetMaterialFromCGLTF(cgltf_material cmat, char* path) {
 }
 
 // use this function while loading models
-static Texture LoadTexture(char* path) {
-	Texture texture = {};
+static TextureData LoadTexture(char* path) {
+	TextureData texture_data = {};
 	int x, y, n;
 	void* data = stbi_load(path, &x, &y, &n, 4);
 	assert(data);
-	texture.data = data;
-	texture.width = x;
-	texture.height = y;
-	texture.num_components = 4;
-	return texture;
+	texture_data.data = data;
+	texture_data.width = x;
+	texture_data.height = y;
+	texture_data.num_components = 4;
+	return texture_data;
 }
 // TODO: Handle unnamed mesh_data and material_data
 static ModelData LoadModelDataGLTF(char* path, char* name) {

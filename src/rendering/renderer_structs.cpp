@@ -28,9 +28,8 @@ static char* SemanticName[] = {
 "POSITION",
 "NORMAL",
 "TANGENT",
-"TEXCOORD",
 "COLOR",
-"TANGENT_BASIS"
+"TEXCOORD",
 };
 
 enum DEPTH_STENCIL_STATE {
@@ -61,23 +60,40 @@ enum VIEWPORT {
 
 enum VERTEX_SHADER {
 	VS_NONE,
-	VS_DIFFUSE,
+	VS_POS_NOR,
+	VS_POS_TEX,
 	VS_TOTAL
 };
 
 enum PIXEL_SHADER {
 	PS_NONE,
 	PS_UNLIT,
+	PS_UNLIT_TEXTURED,
 	PS_DIFFUSE,
 	PS_TOTAL
+};
+
+enum SAMPLER_STATE {
+	SS_NONE,
+	SS_DEFAULT,
+	SS_TILE,
+	SS_TOTAL
 };
 
 enum MATERIAL {
 	MAT_NONE,
 	MAT_UNLIT,
 	MAT_DIFFUSE,
+	MAT_GRID,
 	MAT_END,
-	MAT_TOTAL = 8
+	MAT_TOTAL = 255
+};
+
+enum MATERIAL_TYPE {
+	MT_NOT_SET,
+	MT_UNLIT,
+	MT_DIFFUSE,
+	MT_TEXTURED
 };
 
 enum CONSTANTS_SLOT {
@@ -89,17 +105,19 @@ enum CONSTANTS_SLOT {
 };
 
 enum MESH {
+	MESH_NONE,
 	MESH_CUBE,
 	MESH_SPHERE,
 	MESH_CONE,
 	MESH_TORUS,
 	MESH_PLANE,
-	MESH_TOTAL = 8
+	MESH_END,
+	MESH_TOTAL = 255
 };
 
 struct ConstantsBufferDesc {
 	CONSTANTS_SLOT slot;
-	u32 size_in_bytes;
+	u32 size;
 };
 
 struct ShaderDesc {
@@ -108,7 +126,7 @@ struct ShaderDesc {
 };
 
 struct BufferLayout {
-	VERTEX_BUFFER_TYPE vertex_buffer_type;
+	VERTEX_BUFFER_TYPE vb_type;
 	BUFFER_FORMAT buffer_format;
 	COMPONENT_TYPE component_type;
 };
@@ -129,13 +147,13 @@ struct TextureLayout {
 
 struct PixelShaderDesc {
 	ShaderDesc shader;
-	TextureLayout* tl;
+	TEXTURE_TYPE* texture_type;
 	ConstantsBufferDesc* cb_desc;
 	//SamplerDesc* sampler_desc;
 
-	u8 tl_count;
+	u8 texture_count;
 	u8 cb_desc_count;
-	//u8 sampler_count;
+	u8 ss_count;
 };
 
 struct MatDesc {
@@ -151,50 +169,73 @@ struct ModelDesc {
 	PIXEL_SHADER ps_default;
 };
 
+struct ConstantsData {
+	CONSTANTS_SLOT slot;
+	void* data;
+};
+
 struct ConstantsBuffer {
+	CONSTANTS_SLOT slot;
 	ID3D11Buffer* buffer;
-	u32 size_in_bytes;
+	u32 size;
 };
 
 struct VertexShader {
-	ID3D11VertexShader* vs;
+	ID3D11VertexShader* shader;
 	ID3D11InputLayout* il;
-	BufferLayout* bl;
-	ConstantsBuffer cb[CS_TOTAL];
-	u8 bl_count;
+	VERTEX_BUFFER_TYPE* vb_type;	
+	u8 vb_count;
 
-	void* cb_data[CS_PER_MESH_MATERIAL];
+	ConstantsBuffer* cb;
+	u8 cb_count;
 };
 
 struct PixelShader {
-	ID3D11PixelShader* ps;
-	TextureLayout* tl;
-	ConstantsBuffer cb[CS_TOTAL];
-	u8 ss_count;
-	u8 tl_count;
+	ID3D11PixelShader* shader;
 
-	void* cb_data[CS_TOTAL];
+	TEXTURE_TYPE* texture_type;
+	u8 texture_count;
+
+	ConstantsBuffer* cb;
+	u8 cb_count;
+
+	u8 ss_count;
+};
+
+struct Texture {
+	TEXTURE_TYPE type;
+	ID3D11ShaderResourceView* srv;
 };
 
 struct Material {
-	PIXEL_SHADER ps;
+	MATERIAL_TYPE type;
+	Texture* texture;
+	u8 texture_count;
+	u8* sampler_id;
+
 	union {
 		struct {
 			Vec3 color;
-		} unlit_params;
+		} params_unlit;
+
 		struct {
 			Vec3 color;
 			float diffuse_factor;
-		} diffuse_params;
-	};
+		} params_diffuse;
+
+	} constants_data;
+};
+
+struct VertexBuffer {
+	VERTEX_BUFFER_TYPE type;
+	ID3D11Buffer* buffer;
+	u32 stride;
 };
 
 struct Mesh {
-	VERTEX_SHADER vs;
-	ID3D11Buffer** vertex_buffers;
-	ID3D11Buffer* index_buffer;
-	u32* strides;
-	u32 vertices_count;
+	VertexBuffer* vb;
+	u8 vb_count;
+	ID3D11Buffer* ib;
 	u32 indices_count;
 };
 
@@ -205,12 +246,12 @@ struct RenderState {
 	VIEWPORT vp;
 };
 
+// Push this on the heap
 struct Renderer {
 	ID3D11Device* device;
 	ID3D11DeviceContext* context; // This changes when we start using deferred contexts
 	IDXGISwapChain1* swapchain;
 
-	// TODO: go on a renaming spree
 #ifdef DEBUG_RENDERER
 	ID3D11Debug* d3d_debug;
 	IDXGIDebug* dxgi_debug;
@@ -223,33 +264,48 @@ struct Renderer {
 	ID3D11BlendState* bs[BS_TOTAL];
 
 	ID3D11RasterizerState* rs[RS_TOTAL];
-	D3D11_VIEWPORT vp[VP_TOTAL];		// Scissor rect
+	D3D11_VIEWPORT vp[VP_TOTAL];	// Scissor rect
 
 	VertexShader vs[VS_TOTAL];
 	PixelShader ps[PS_TOTAL];
+
+	ID3D11SamplerState* ss[SS_TOTAL];
 	
-	Material mat[MAT_TOTAL];	
+	Material mat[MAT_TOTAL];
 	Mesh mesh[MESH_TOTAL];
 
 	RenderState state_overrides;
 
-	u8 mat_id = MAT_END;
+	u8 mat_id;
+	u8 mesh_id;
+};
+
+struct RenderPipeline {
+	// Render target
+	RenderState rs;
+	VERTEX_SHADER vs;
+	PIXEL_SHADER ps;
+	u8 mesh_id;
+	u8 mat_id;
+	ConstantsData cd_vertex;
+	ConstantsData cd_pixel;
+};
+
+
+static u8 PushMesh(Mesh mesh, Renderer* renderer) {
+	u8 id = renderer->mesh_id + (u8)MESH_END;
+	assert(id  < MESH_TOTAL);
+	renderer->mesh[id] = mesh;
+	renderer->mesh_id++;
+	return id;
 };
 
 static u8 PushMaterial(Material material, Renderer* renderer) {
-	u8 id = renderer->mat_id;
+	u8 id = renderer->mat_id + (u8)MAT_END;
 	assert(id  < MAT_TOTAL);
 	renderer->mat[id] = material;
 	renderer->mat_id++;
 	return id;
-};
-
-struct RenderPipeline {
-	RenderState rs;
-	u8 mat_id;
-	u8 mesh_id;
-	void* vsc_per_object_data;
-	void* psc_per_object_data;
 };
 
 static RenderState RenderStateDefaults() {
@@ -258,8 +314,9 @@ static RenderState RenderStateDefaults() {
 
 static Material MakeDiffuseMaterial(Vec3 color, float diffuse_factor) {
 	Material mat = {};
-	mat.ps = PS_DIFFUSE;
-	mat.diffuse_params.color = color;
-	mat.diffuse_params.diffuse_factor = diffuse_factor;
+	mat.type = MT_DIFFUSE;
+	mat.constants_data.params_diffuse.color = color;
+	mat.constants_data.params_diffuse.diffuse_factor = diffuse_factor;
+
 	return mat;
 }

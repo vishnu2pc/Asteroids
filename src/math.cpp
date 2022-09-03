@@ -74,7 +74,7 @@ static Vec3 V3I() { return Vec3 { 1.0f, 1.0f, 1.0f }; }
 static Vec3 V3Z() { return Vec3 { 0.0f, 0.0f, 0.0f }; }
 static Vec3 V3Up() { return Vec3 { 0.0f, 1.0f, 0.0f }; }
 static Vec3 V3Right() { return Vec3 { 1.0f, 0.0f, 0.0f }; }
-static Vec3 V3Forward() { return Vec3 { 0.0f, 0.0f, 1.0f }; }
+static Vec3 V3Forward() { return Vec3 { 0.0f, 0.0f, -1.0f }; }
 
 static Vec4 V4(float x, float y, float z, float w) { return Vec4 { x, y, z, w }; }
 static Vec4 V4I() { return Vec4 { 1.0f, 1.0f, 1.0f, 1.0f }; }
@@ -507,6 +507,10 @@ static Mat4 MakeTransformMatrix(Transform transform) {
 	Mat4 translation = M4Translate(transform.position);
 	Mat4 rotation = M4FromQuat(transform.rotation);
 	Mat4 scale = M4Scale(transform.scale);
-	result = M4Mul(translation, M4Mul(rotation, scale));
+
+	// Checked
+	//result = M4Mul(M4Mul(translation, rotation), scale);
+	result = M4Mul(M4Mul(scale, rotation), translation);
+
 	return result;
 }

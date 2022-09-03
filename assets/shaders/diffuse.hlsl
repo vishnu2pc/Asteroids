@@ -28,11 +28,12 @@ cbuffer pixel_per_material : register(b2) {
 ps_in vs_main(vs_in input) {
 	ps_in output;
 
-	float4x4 mvp = mul(view_proj, model);
+	float4 pos = float4(input.position, 1.0f);
+	float4 world_pos = mul(model, pos);
+	output.vertex_pos = world_pos.xyz;
+	output.pixel_coord = mul(view_proj, world_pos);
+	output.normal = normalize(mul(float4(input.normal, 0.0f), model).xyz);
 
-	output.vertex_pos = mul(model, float4(input.position, 1.0f)).xyz;
-	output.pixel_coord = mul(mvp, float4(input.position, 1.0f));
-	output.normal = normalize(mul(model, float4(input.normal, 0.0f)).xyz);
 	return output;
 }
 //------------------------------------------------------------------------
