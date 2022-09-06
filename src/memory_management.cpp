@@ -8,11 +8,11 @@ static GlobalMemory GM;
 static GlobalMemory SM;
 
 #define AllocateMasterMemory(size) AllocateGlobalMemory(&GM, size)
-#define PushMaster(type, count) (type*)GetMemory(&GM, sizeof(type)*count)
+#define PushMaster(type, count) (type*)GetMemory(&GM, sizeof(type)*(count))
 #define PopMaster(type, count) FreeMemory(&GM, sizeof(type)*count)
 
 #define AllocateScratchMemory(size) AllocateGlobalMemory(&SM, size)
-#define PushScratch(type, count) (type*)GetMemory(&SM, sizeof(type)*count)
+#define PushScratch(type, count) (type*)GetMemory(&SM, sizeof(type)*(count))
 #define PopScratch(type, count) FreeMemory(&SM, sizeof(type)*count)
 
 static void AllocateGlobalMemory(GlobalMemory* gm, u32 size) {

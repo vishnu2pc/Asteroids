@@ -81,8 +81,10 @@ int main(int argc, char* argv[]) {
 	{
 		RenderPipeline rp = {};
 		rp.rs = RenderStateDefaults();
-		rp.mat_id = PushMaterial(MakeDiffuseMaterial(WHITE, 1.0f), renderer);
-		rp.mesh_id = MESH_CUBE;
+		rp.vs = VERTEX_SHADER_POS_NOR;
+		rp.ps = PIXEL_SHADER_DIFFUSE;
+		rp.vrbg = RENDER_BUFFER_GROUP_CUBE;
+		rp.dc.type = DRAW_CALL_DEFAULT;
 		cube = { V3(0.0f, 0.0f, 0.0f), QuatI(), V3(2.0f, 2.0f, 2.0f), rp };
 	}
 
@@ -90,11 +92,11 @@ int main(int argc, char* argv[]) {
 	{
 		RenderPipeline rp = {};
 		rp.rs = RenderStateDefaults();
-		rp.rs.rs = RS_DOUBLE_SIDED;
-		rp.vs = VS_POS_NOR;
-		rp.ps = PS_DIFFUSE;
-		rp.mat_id = PushMaterial(MakeDiffuseMaterial(PURPLE, 1.0f), renderer);
-		rp.mesh_id = MESH_PLANE;
+		rp.rs.rs = RASTERIZER_STATE_DOUBLE_SIDED;
+		rp.vs = VERTEX_SHADER_POS_NOR;
+		rp.ps = PIXEL_SHADER_DIFFUSE;
+		rp.vrbg = RENDER_BUFFER_GROUP_PLANE;
+		rp.dc.type = DRAW_CALL_DEFAULT;
 		plane = { V3(0.0f, 0.0f, 0.0f), QuatI(), V3(1000.0f, 1000.0f, 1000.0f), rp };
 	}
 
@@ -102,10 +104,10 @@ int main(int argc, char* argv[]) {
 	{
 		RenderPipeline rp = {};
 		rp.rs = RenderStateDefaults();
-		rp.vs = VS_POS_NOR;
-		rp.ps = PS_DIFFUSE;
-		rp.mat_id = PushMaterial(MakeDiffuseMaterial(RED, 1.0f), renderer);
-		rp.mesh_id = MESH_CUBE;
+		rp.vs = VERTEX_SHADER_POS_NOR;
+		rp.ps = PIXEL_SHADER_DIFFUSE;
+		rp.vrbg = RENDER_BUFFER_GROUP_CUBE;
+		rp.dc.type = DRAW_CALL_DEFAULT;
 		right = { V3(1.0f, 0.0f, 0.0f), QuatI(), V3(5.0f, 0.2f, 0.2f), rp };
 	}
 
@@ -113,10 +115,10 @@ int main(int argc, char* argv[]) {
 	{
 		RenderPipeline rp = {};
 		rp.rs = RenderStateDefaults();
-		rp.vs = VS_POS_NOR;
-		rp.ps = PS_DIFFUSE;
-		rp.mat_id = PushMaterial(MakeDiffuseMaterial(YELLOW, 2.0f), renderer);
-		rp.mesh_id = MESH_CUBE;
+		rp.vs = VERTEX_SHADER_POS_NOR;
+		rp.ps = PIXEL_SHADER_DIFFUSE;
+		rp.vrbg = RENDER_BUFFER_GROUP_CUBE;
+		rp.dc.type = DRAW_CALL_DEFAULT;
 		up = { V3(0.0f, 1.0f, 0.0f), QuatI(), V3(0.2f, 5.0f, 0.2f), rp };
 	}
 
@@ -124,10 +126,10 @@ int main(int argc, char* argv[]) {
 	{
 		RenderPipeline rp = {};
 		rp.rs = RenderStateDefaults();
-		rp.vs = VS_POS_NOR;
-		rp.ps = PS_DIFFUSE;
-		rp.mat_id = PushMaterial(MakeDiffuseMaterial(BLUE, 2.0f), renderer);
-		rp.mesh_id = MESH_CUBE;
+		rp.vs = VERTEX_SHADER_POS_NOR;
+		rp.ps = PIXEL_SHADER_DIFFUSE;
+		rp.vrbg = RENDER_BUFFER_GROUP_CUBE;
+		rp.dc.type = DRAW_CALL_DEFAULT;
 		forward = { V3(0.0f, 0.0f, 1.0f), QuatI(), V3(0.2f, 0.2f, 5.0f), rp };
 	}
 
@@ -135,10 +137,10 @@ int main(int argc, char* argv[]) {
 	{
 		RenderPipeline rp = {};
 		rp.rs = RenderStateDefaults();
-		rp.vs = VS_POS_NOR;
-		rp.ps = PS_UNLIT;
-		rp.mat_id = MAT_UNLIT;
-		rp.mesh_id = MESH_CUBE;
+		rp.vs = VERTEX_SHADER_POS_NOR;
+		rp.ps = PIXEL_SHADER_UNLIT;
+		rp.vrbg = RENDER_BUFFER_GROUP_CUBE;
+		rp.dc.type = DRAW_CALL_DEFAULT;
 		light = { V3Z(), QuatI(), V3MulF(V3I(), 0.1f), rp };
 	}
 	
@@ -150,38 +152,87 @@ int main(int argc, char* argv[]) {
 		PreProcessInput(&app_state.input);
 		HandleSDLevents(&app_state);
 		BeginRendering(renderer);
-		if(app_state.input.kb[KB_F1].pressed) renderer->state_overrides.rs = renderer->state_overrides.rs ? RS_NONE : RS_WIREFRAME; 
+		if(app_state.input.kb[KB_F1].pressed) renderer->state_overrides.rs = renderer->state_overrides.rs ? RASTERIZER_STATE_NONE : RASTERIZER_STATE_WIREFRAME; 
 
 		Mat4 plane_matrix = MakeTransformMatrix(plane.transform);
-		plane.rp.cd_vertex.slot = CS_PER_OBJECT;
-		plane.rp.cd_vertex.data = &plane_matrix;
+		DiffusePM plane_dpm = { PURPLE, 0.5f };
+		plane.rp.vrbd = PushScratch(RenderBufferData, 1);
+		plane.rp.prbd = PushScratch(RenderBufferData, 1);
+		plane.rp.vrbd_count = 1;
+		plane.rp.prbd_count = 1;
+		plane.rp.vrbd[0].type = RENDER_BUFFER_TYPE_CONSTANTS;
+		plane.rp.vrbd[0].constants.slot = CONSTANTS_BINDING_SLOT_INSTANCE;
+		plane.rp.vrbd[0].constants.data = &plane_matrix;
+		plane.rp.prbd[0].type = RENDER_BUFFER_TYPE_CONSTANTS;
+		plane.rp.prbd[0].constants.slot = CONSTANTS_BINDING_SLOT_OBJECT;
+		plane.rp.prbd[0].constants.data = &plane_dpm;
 
 		Mat4 right_matrix = MakeTransformMatrix(right.transform);
-		right.rp.cd_vertex.slot = CS_PER_OBJECT;
-		right.rp.cd_vertex.data = &right_matrix;
+		DiffusePM right_dpm = { RED, 1.0f };
+		right.rp.vrbd = PushScratch(RenderBufferData, 1);
+		right.rp.prbd = PushScratch(RenderBufferData, 1);
+		right.rp.vrbd_count = 1;
+		right.rp.prbd_count = 1;
+		right.rp.vrbd[0].type = RENDER_BUFFER_TYPE_CONSTANTS;
+		right.rp.vrbd[0].constants.slot = CONSTANTS_BINDING_SLOT_INSTANCE;
+		right.rp.vrbd[0].constants.data = &right_matrix;
+		right.rp.prbd[0].type = RENDER_BUFFER_TYPE_CONSTANTS;
+		right.rp.prbd[0].constants.slot = CONSTANTS_BINDING_SLOT_OBJECT;
+		right.rp.prbd[0].constants.data = &right_dpm;
 
 		Mat4 up_matrix = MakeTransformMatrix(up.transform);
-		up.rp.cd_vertex.slot = CS_PER_OBJECT;
-		up.rp.cd_vertex.data = &up_matrix;
+		DiffusePM up_dpm = { YELLOW, 1.0f };
+		up.rp.vrbd = PushScratch(RenderBufferData, 1);
+		up.rp.prbd = PushScratch(RenderBufferData, 1);
+		up.rp.vrbd_count = 1;
+		up.rp.prbd_count = 1;
+		up.rp.vrbd[0].type = RENDER_BUFFER_TYPE_CONSTANTS;
+		up.rp.vrbd[0].constants.slot = CONSTANTS_BINDING_SLOT_INSTANCE;
+		up.rp.vrbd[0].constants.data = &up_matrix;
+		up.rp.prbd[0].type = RENDER_BUFFER_TYPE_CONSTANTS;
+		up.rp.prbd[0].constants.slot = CONSTANTS_BINDING_SLOT_OBJECT;
+		up.rp.prbd[0].constants.data = &up_dpm;
 
 		Mat4 forward_matrix = MakeTransformMatrix(forward.transform);
-		forward.rp.cd_vertex.slot = CS_PER_OBJECT;
-		forward.rp.cd_vertex.data = &forward_matrix;
+		DiffusePM forward_dpm = { BLUE, 1.0f };
+		forward.rp.vrbd = PushScratch(RenderBufferData, 1);
+		forward.rp.prbd = PushScratch(RenderBufferData, 1);
+		forward.rp.vrbd_count = 1;
+		forward.rp.prbd_count = 1;
+		forward.rp.vrbd[0].type = RENDER_BUFFER_TYPE_CONSTANTS;
+		forward.rp.vrbd[0].constants.slot = CONSTANTS_BINDING_SLOT_INSTANCE;
+		forward.rp.vrbd[0].constants.data = &forward_matrix;
+		forward.rp.prbd[0].type = RENDER_BUFFER_TYPE_CONSTANTS;
+		forward.rp.prbd[0].constants.slot = CONSTANTS_BINDING_SLOT_OBJECT;
+		forward.rp.prbd[0].constants.data = &forward_dpm;
 
 		Mat4 cube_matrix = MakeTransformMatrix(cube.transform);
-		cube.rp.cd_vertex.slot = CS_PER_OBJECT;
-		cube.rp.cd_vertex.data = &cube_matrix;
+		DiffusePM cube_dpm = { WHITE, 1.0f };
+		cube.rp.vrbd = PushScratch(RenderBufferData, 1);
+		cube.rp.prbd = PushScratch(RenderBufferData, 1);
+		cube.rp.vrbd_count = 1;
+		cube.rp.prbd_count = 1;
+		cube.rp.vrbd[0].type = RENDER_BUFFER_TYPE_CONSTANTS;
+		cube.rp.vrbd[0].constants.slot = CONSTANTS_BINDING_SLOT_INSTANCE;
+		cube.rp.vrbd[0].constants.data = &cube_matrix;
+		cube.rp.prbd[0].type = RENDER_BUFFER_TYPE_CONSTANTS;
+		cube.rp.prbd[0].constants.slot = CONSTANTS_BINDING_SLOT_OBJECT;
+		cube.rp.prbd[0].constants.data = &cube_dpm;
 
 		//FirstPersonControl(&cube.transform.position, &cube.transform.rotation, fpci, app_state.input);
-		FirstPersonControl(&camera.position, &camera.rotation, fpci, app_state.input);
+		//if(app_state.input.mk[MK_RIGHT].held) 
+			FirstPersonControl(&camera.position, &camera.rotation, fpci, app_state.input);
 
 		SDL_Log("cam pos:%f, %f, %f", camera.position.x, camera.position.y, camera.position.z);
 		Mat4 vp = MakeViewPerspective(camera);
 
 		RenderPipeline vs_rp = {};
-		vs_rp.vs = VS_POS_NOR;
-		vs_rp.cd_vertex.slot = CS_PER_CAMERA;
-		vs_rp.cd_vertex.data = &vp;
+		vs_rp.vs = VERTEX_SHADER_POS_NOR;
+		vs_rp.vrbd_count = 1;
+		vs_rp.vrbd = PushScratch(RenderBufferData, 1);
+		vs_rp.vrbd[0].type = RENDER_BUFFER_TYPE_CONSTANTS;
+		vs_rp.vrbd[0].constants.slot = CONSTANTS_BINDING_SLOT_CAMERA;
+		vs_rp.vrbd[0].constants.data = &vp;
 
 		float x = 3.0f * cosf(SDL_GetTicks() * 0.001);
 		float y = 0.0f;
@@ -192,14 +243,20 @@ int main(int argc, char* argv[]) {
 
 		light.transform.position = V3(x, y, z);
 		Mat4 light_matrix = MakeTransformMatrix(light.transform);
-		light.rp.cd_vertex.slot = CS_PER_OBJECT;
-		light.rp.cd_vertex.data = &light_matrix;
+		light.rp.vrbd = PushScratch(RenderBufferData, 1);
+		light.rp.vrbd_count = 1;
+		light.rp.vrbd[0].type = RENDER_BUFFER_TYPE_CONSTANTS;
+		light.rp.vrbd[0].constants.slot = CONSTANTS_BINDING_SLOT_INSTANCE;
+		light.rp.vrbd[0].constants.data = &light_matrix;
 
 		DiffusePC dpc = { light.transform.position, ambience };
 		RenderPipeline ps_rp = {};
-		ps_rp.ps = PS_DIFFUSE;
-		ps_rp.cd_pixel.slot = CS_PER_CAMERA;
-		ps_rp.cd_pixel.data = &dpc;
+		ps_rp.ps = PIXEL_SHADER_DIFFUSE;
+		ps_rp.prbd = PushScratch(RenderBufferData, 1);
+		ps_rp.prbd_count = 1;
+		ps_rp.prbd[0].type = RENDER_BUFFER_TYPE_CONSTANTS;
+		ps_rp.prbd[0].constants.slot = CONSTANTS_BINDING_SLOT_CAMERA;
+		ps_rp.prbd[0].constants.data = &dpc;
 
 		ExecuteRenderPipeline(vs_rp, renderer);
 		ExecuteRenderPipeline(ps_rp, renderer);
@@ -213,6 +270,8 @@ int main(int argc, char* argv[]) {
 		ExecuteRenderPipeline(light.rp, renderer);
 
 		EndRendering(renderer);
+
+		PopScratch(RenderBufferData, 13);
 	}
 	return 0;
 }

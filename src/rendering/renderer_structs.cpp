@@ -21,103 +21,97 @@
 #define MAGENTA V3(1.0f, 0.0f, 1.0f)
 #define PURPLE V3(0.5f, 0.0f, 0.5f)
 
-typedef u32 SemanticNameIndex;
-
-static char* SemanticName[] = {
-"NOT SET",
-"POSITION",
-"NORMAL",
-"TANGENT",
-"COLOR",
-"TEXCOORD",
-};
 
 enum DEPTH_STENCIL_STATE {
-	DSS_NONE,
-	DSS_DEFAULT,
-	DSS_TOTAL
+	DEPTH_STENCIL_STATE_NONE,
+	DEPTH_STENCIL_STATE_DEFAULT,
+	DEPTH_STENCIL_STATE_TOTAL
 };
 
 enum BLEND_STATE {
-	BS_NONE,
-	BS_DEFAULT,
-	BS_TOTAL
+	BLEND_STATE_NONE,
+	BLEND_STATE_DEFAULT,
+	BLEND_STATE_TOTAL
 };
 
 enum RASTERIZER_STATE {
-	RS_NONE,
-	RS_DEFAULT,
-	RS_WIREFRAME,
-	RS_DOUBLE_SIDED,
-	RS_TOTAL
+	RASTERIZER_STATE_NONE,
+	RASTERIZER_STATE_DEFAULT,
+	RASTERIZER_STATE_WIREFRAME,
+	RASTERIZER_STATE_DOUBLE_SIDED,
+	RASTERIZER_STATE_TOTAL
 };
 
 enum VIEWPORT {
-	VP_NONE,
-	VP_DEFAULT,
-	VP_TOTAL
+	VIEWPORT_NONE,
+	VIEWPORT_DEFAULT,
+	VIEWPORT_TOTAL
 };
 
 enum VERTEX_SHADER {
-	VS_NONE,
-	VS_POS_NOR,
-	VS_POS_TEX,
-	VS_TOTAL
+	VERTEX_SHADER_NONE,
+	VERTEX_SHADER_POS_NOR,
+	VERTEX_SHADER_POS_TEX,
+	VERTEX_SHADER_TOTAL
 };
 
 enum PIXEL_SHADER {
-	PS_NONE,
-	PS_UNLIT,
-	PS_UNLIT_TEXTURED,
-	PS_DIFFUSE,
-	PS_TOTAL
+	PIXEL_SHADER_NONE,
+	PIXEL_SHADER_UNLIT,
+	PIXEL_SHADER_UNLIT_TEXTURED,
+	PIXEL_SHADER_DIFFUSE,
+	PIXEL_SHADER_TOTAL
 };
 
 enum SAMPLER_STATE {
-	SS_NONE,
-	SS_DEFAULT,
-	SS_TILE,
-	SS_TOTAL
+	SAMPLER_STATE_NONE,
+	SAMPLER_STATE_DEFAULT,
+	SAMPLER_STATE_TILE,
+	SAMPLER_STATE_TOTAL
 };
 
-enum MATERIAL {
-	MAT_NONE,
-	MAT_UNLIT,
-	MAT_DIFFUSE,
-	MAT_GRID,
-	MAT_END,
-	MAT_TOTAL = 255
+enum RENDER_BUFFER_GROUP {
+	RENDER_BUFFER_GROUP_NONE,
+	RENDER_BUFFER_GROUP_CUBE,
+	RENDER_BUFFER_GROUP_SPHERE,
+	RENDER_BUFFER_GROUP_CONE,
+	RENDER_BUFFER_GROUP_TORUS,
+	RENDER_BUFFER_GROUP_PLANE,
+	RENDER_BUFFER_GROUP_FONT,
+	RENDER_BUFFER_GROUP_END,
+	RENDER_BUFFER_GROUP_TOTAL = 255
 };
 
-enum MATERIAL_TYPE {
-	MT_NOT_SET,
-	MT_UNLIT,
-	MT_DIFFUSE,
-	MT_TEXTURED
+enum CONSTANTS_BINDING_SLOT {
+	CONSTANTS_BINDING_SLOT_FRAME,
+	CONSTANTS_BINDING_SLOT_CAMERA,  // per viewport?
+	CONSTANTS_BINDING_SLOT_OBJECT,
+	CONSTANTS_BINDING_SLOT_INSTANCE,
+	CONSTANTS_BINDING_SLOT_TOTAL
 };
 
-enum CONSTANTS_SLOT {
-	CS_PER_FRAME,
-	CS_PER_CAMERA,  // per viewport?
-	CS_PER_MESH_MATERIAL,
-	CS_PER_OBJECT,
-	CS_TOTAL
+enum TEXTURE_BINDING_SLOT {
+	TEXTURE_BINDING_SLOT_ALBEDO,
+	TEXTURE_BINDING_SLOT_NORMAL
 };
 
-enum MESH {
-	MESH_NONE,
-	MESH_CUBE,
-	MESH_SPHERE,
-	MESH_CONE,
-	MESH_TORUS,
-	MESH_PLANE,
-	MESH_END,
-	MESH_TOTAL = 255
+enum RENDER_BUFFER_TYPE {
+	RENDER_BUFFER_TYPE_VERTEX,
+	RENDER_BUFFER_TYPE_INDEX,
+	RENDER_BUFFER_TYPE_CONSTANTS,
+	RENDER_BUFFER_TYPE_STRUCTURED,
+	RENDER_BUFFER_TYPE_TEXTURE,
 };
 
-struct ConstantsBufferDesc {
-	CONSTANTS_SLOT slot;
-	u32 size;
+enum STRUCTURED_BINDING_SLOT {
+	// TODO: For future use
+};
+
+enum DRAW_CALL {
+	DRAW_CALL_NONE,
+	DRAW_CALL_DEFAULT,
+	DRAW_CALL_INDEXED,
+	DRAW_CALL_VERTICES,
 };
 
 struct ShaderDesc {
@@ -125,105 +119,32 @@ struct ShaderDesc {
 	char* entry;
 };
 
-struct BufferLayout {
-	VERTEX_BUFFER_TYPE vb_type;
-	BUFFER_FORMAT buffer_format;
-	COMPONENT_TYPE component_type;
+struct ConstantsBufferDesc {
+	CONSTANTS_BINDING_SLOT slot;
+	u32 size;
 };
 
 struct VertexShaderDesc {
 	ShaderDesc shader;
-	BufferLayout* bl;
 	ConstantsBufferDesc* cb_desc;
+	//StructuredBufferDesc* sb_desc;
+	VERTEX_BUFFER_TYPE* vb_type;
 
-	u8 bl_count;
-	u8 cb_desc_count;
-};
-
-struct TextureLayout {
-	TEXTURE_TYPE type;
-	u8 index;
+	u8 cb_count, sb_count, vb_count;
 };
 
 struct PixelShaderDesc {
 	ShaderDesc shader;
-	TEXTURE_TYPE* texture_type;
 	ConstantsBufferDesc* cb_desc;
-	//SamplerDesc* sampler_desc;
+	//StructuredBufferDesc* sb_desc;
+	TEXTURE_SLOT* texture_slot;
 
-	u8 texture_count;
-	u8 cb_desc_count;
-	u8 ss_count;
+	u8 texture_count, cb_count;
 };
 
-struct MatDesc {
-	char* mat_name;
-	PIXEL_SHADER ps;
-};
-
-struct ModelDesc {
-	MatDesc* mat_desc;
-	u8 count;
-
-	VERTEX_SHADER vs_default;
-	PIXEL_SHADER ps_default;
-};
-
-struct ConstantsData {
-	CONSTANTS_SLOT slot;
-	void* data;
-};
-
-struct ConstantsBuffer {
-	CONSTANTS_SLOT slot;
+struct IndexBuffer {
 	ID3D11Buffer* buffer;
-	u32 size;
-};
-
-struct VertexShader {
-	ID3D11VertexShader* shader;
-	ID3D11InputLayout* il;
-	VERTEX_BUFFER_TYPE* vb_type;	
-	u8 vb_count;
-
-	ConstantsBuffer* cb;
-	u8 cb_count;
-};
-
-struct PixelShader {
-	ID3D11PixelShader* shader;
-
-	TEXTURE_TYPE* texture_type;
-	u8 texture_count;
-
-	ConstantsBuffer* cb;
-	u8 cb_count;
-
-	u8 ss_count;
-};
-
-struct Texture {
-	TEXTURE_TYPE type;
-	ID3D11ShaderResourceView* srv;
-};
-
-struct Material {
-	MATERIAL_TYPE type;
-	Texture* texture;
-	u8 texture_count;
-	u8* sampler_id;
-
-	union {
-		struct {
-			Vec3 color;
-		} params_unlit;
-
-		struct {
-			Vec3 color;
-			float diffuse_factor;
-		} params_diffuse;
-
-	} constants_data;
+	u32 num_indices;
 };
 
 struct VertexBuffer {
@@ -232,11 +153,86 @@ struct VertexBuffer {
 	u32 stride;
 };
 
-struct Mesh {
-	VertexBuffer* vb;
-	u8 vb_count;
-	ID3D11Buffer* ib;
-	u32 indices_count;
+struct StructuredBuffer {
+	ID3D11Buffer* buffer;
+	ID3D11ShaderResourceView* view;
+};
+
+struct TextureBuffer {
+	TEXTURE_SLOT slot;
+	ID3D11Texture2D* buffer;
+	ID3D11ShaderResourceView* view;
+};
+
+struct ConstantsBuffer {
+	CONSTANTS_BINDING_SLOT slot;
+	ID3D11Buffer* buffer;
+	u32 size;
+};
+
+struct RenderBuffer {
+	RENDER_BUFFER_TYPE type;
+	union {
+		VertexBuffer vertex;
+		IndexBuffer index;
+		ConstantsBuffer constants;
+		StructuredBuffer structured;
+		TextureBuffer texture;
+	};
+};
+
+struct RenderBufferGroup {
+	RenderBuffer* rb;
+	u8 count;
+	u32 vertices;
+};
+
+struct VertexShader {
+	ID3D11VertexShader* shader;
+	ID3D11InputLayout* il;
+	VERTEX_BUFFER_TYPE* vb_type;
+	RenderBuffer* rb;
+	u8 vb_count, rb_count;
+};
+
+struct PixelShader {
+	ID3D11PixelShader* shader;
+	TEXTURE_SLOT* texture_slot;
+	RenderBuffer* rb;
+
+	u8 texture_count, rb_count;
+};
+
+struct ConstantsBufferData {
+	CONSTANTS_BINDING_SLOT slot;
+	void* data;
+};
+
+struct StructuredBufferData {
+	STRUCTURED_BINDING_SLOT slot;
+	void* data;
+};
+
+struct TextureBufferData {
+	TEXTURE_SLOT slot;
+	void* data;
+};
+
+struct RenderBufferData {
+	RENDER_BUFFER_TYPE type;
+	union {
+		ConstantsBufferData constants;
+		StructuredBufferData structured;
+		TextureBufferData texture;
+	};
+};
+
+struct DrawCall {
+	DRAW_CALL type;
+	union {
+		u32 indices_count;
+		u32 vertices_count;
+	};
 };
 
 struct RenderState {
@@ -260,24 +256,20 @@ struct Renderer {
 	ID3D11RenderTargetView* rtv;
 	ID3D11DepthStencilView* dsv;
 
-	ID3D11DepthStencilState* dss[DSS_TOTAL];
-	ID3D11BlendState* bs[BS_TOTAL];
+	ID3D11DepthStencilState* dss[DEPTH_STENCIL_STATE_TOTAL];
+	ID3D11BlendState* bs[BLEND_STATE_TOTAL];
 
-	ID3D11RasterizerState* rs[RS_TOTAL];
-	D3D11_VIEWPORT vp[VP_TOTAL];	// Scissor rect
+	ID3D11RasterizerState* rs[RASTERIZER_STATE_TOTAL];
+	D3D11_VIEWPORT vp[VIEWPORT_TOTAL];	// Scissor rect
 
-	VertexShader vs[VS_TOTAL];
-	PixelShader ps[PS_TOTAL];
+	VertexShader vs[VERTEX_SHADER_TOTAL];
+	PixelShader ps[PIXEL_SHADER_TOTAL];
 
-	ID3D11SamplerState* ss[SS_TOTAL];
+	ID3D11SamplerState* ss[SAMPLER_STATE_TOTAL];
 	
-	Material mat[MAT_TOTAL];
-	Mesh mesh[MESH_TOTAL];
+	RenderBufferGroup rbg[RENDER_BUFFER_GROUP_TOTAL];
 
 	RenderState state_overrides;
-
-	u8 mat_id;
-	u8 mesh_id;
 };
 
 struct RenderPipeline {
@@ -285,13 +277,15 @@ struct RenderPipeline {
 	RenderState rs;
 	VERTEX_SHADER vs;
 	PIXEL_SHADER ps;
-	u8 mesh_id;
-	u8 mat_id;
-	ConstantsData cd_vertex;
-	ConstantsData cd_pixel;
+	RENDER_BUFFER_GROUP vrbg, prbg;
+	DrawCall dc;
+	RenderBufferData* vrbd;
+	RenderBufferData* prbd;
+
+	u8 vrbd_count, prbd_count;
 };
 
-
+/*
 static u8 PushMesh(Mesh mesh, Renderer* renderer) {
 	u8 id = renderer->mesh_id + (u8)MESH_END;
 	assert(id  < MESH_TOTAL);
@@ -301,22 +295,25 @@ static u8 PushMesh(Mesh mesh, Renderer* renderer) {
 };
 
 static u8 PushMaterial(Material material, Renderer* renderer) {
-	u8 id = renderer->mat_id + (u8)MAT_END;
-	assert(id  < MAT_TOTAL);
+	u8 id = renderer->mat_id + (u8)MATERIAL_END;
+	assert(id  < MATERIAL_TOTAL);
 	renderer->mat[id] = material;
 	renderer->mat_id++;
 	return id;
 };
+*/
 
 static RenderState RenderStateDefaults() {
-	return RenderState { DSS_DEFAULT, BS_DEFAULT, RS_DEFAULT, VP_DEFAULT };
+	return RenderState { DEPTH_STENCIL_STATE_DEFAULT, BLEND_STATE_DEFAULT, RASTERIZER_STATE_DEFAULT, VIEWPORT_DEFAULT };
 }
 
+/*
 static Material MakeDiffuseMaterial(Vec3 color, float diffuse_factor) {
 	Material mat = {};
-	mat.type = MT_DIFFUSE;
+	mat.type = MATERIAL_TYPE_DIFFUSE;
 	mat.constants_data.params_diffuse.color = color;
 	mat.constants_data.params_diffuse.diffuse_factor = diffuse_factor;
 
 	return mat;
 }
+	*/

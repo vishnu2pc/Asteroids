@@ -1,38 +1,24 @@
-enum TEXTURE_TYPE {
-	TEXTURE_NOT_SET,
-	TEXTURE_ALBEDO,
+enum TEXTURE_SLOT {
+	TEXTURE_SLOT_NOT_SET,
+	TEXTURE_SLOT_ALBEDO,
 	//TEXTURE_DIFFUSE_COLOR,
 	//TEXTURE_METALLIC_ROUGHNESS,
-	TEXTURE_NORMAL,
+	TEXTURE_SLOT_NORMAL,
 };
 
 enum VERTEX_BUFFER_TYPE {	
-	VBT_NOT_SET,
-	VBT_POSITION, 
-	VBT_NORMAL, 
-	VBT_TANGENT,
-	VBT_COLOR, 
-	VBT_TEXCOORD, 
-};
-
-enum COMPONENT_TYPE {
-	CT_NOT_SET,
-	CT_FLOAT,
-	CT_U32
-};
-
-enum BUFFER_FORMAT {
-	BF_NOT_SET,
-	BF_VEC2,
-	BF_VEC3,
-	BF_VEC4
+	VERTEX_BUFFER_TYPE_NOT_SET,
+	VERTEX_BUFFER_TYPE_POSITION, 
+	VERTEX_BUFFER_TYPE_NORMAL, 
+	VERTEX_BUFFER_TYPE_TANGENT,
+	VERTEX_BUFFER_TYPE_COLOR, 
+	VERTEX_BUFFER_TYPE_TEXCOORD, 
 };
 
 //TODO: Move index buffers in here
 
 struct VertexBufferData {
 	float* data;
-	u8 num_components;
 	VERTEX_BUFFER_TYPE type;
 };
 
@@ -48,7 +34,7 @@ struct MeshData {
 };
 
 struct TextureData {
-	TEXTURE_TYPE type;
+	TEXTURE_SLOT type;
 	void* data;
 	u32 width;
 	u32 height;
@@ -105,8 +91,7 @@ static MeshData GetMeshDataFromCGLTF(cgltf_primitive primitive) {
 				assert(acc->component_type == cgltf_component_type_r_32f);
 				assert(acc->type == cgltf_type_vec3);
 
-				mesh_data.vb_data[vb_counter].type = VBT_POSITION;
-				mesh_data.vb_data[vb_counter].num_components = 3;
+				mesh_data.vb_data[vb_counter].type = VERTEX_BUFFER_TYPE_POSITION;
 				float* data = PushMaster(float, float_count);
 				cgltf_accessor_unpack_floats(acc, data, float_count);
 				mesh_data.vb_data[vb_counter].data = data;
@@ -117,8 +102,7 @@ static MeshData GetMeshDataFromCGLTF(cgltf_primitive primitive) {
 				assert(acc->component_type == cgltf_component_type_r_32f);
 				assert(acc->type == cgltf_type_vec3);
 
-				mesh_data.vb_data[vb_counter].type = VBT_NORMAL;
-				mesh_data.vb_data[vb_counter].num_components = 3;
+				mesh_data.vb_data[vb_counter].type = VERTEX_BUFFER_TYPE_NORMAL;
 				float* data = PushMaster(float, float_count);
 				cgltf_accessor_unpack_floats(acc, data, float_count);
 				mesh_data.vb_data[vb_counter].data = data;
@@ -129,8 +113,7 @@ static MeshData GetMeshDataFromCGLTF(cgltf_primitive primitive) {
 				assert(acc->component_type == cgltf_component_type_r_32f);
 				assert(acc->type == cgltf_type_vec2);
 
-				mesh_data.vb_data[vb_counter].type = VBT_TEXCOORD;
-				mesh_data.vb_data[vb_counter].num_components = 2;
+				mesh_data.vb_data[vb_counter].type = VERTEX_BUFFER_TYPE_TEXCOORD;
 				float* data = PushMaster(float, float_count);
 				cgltf_accessor_unpack_floats(acc, data, float_count);
 				mesh_data.vb_data[vb_counter].data = data;
@@ -141,8 +124,7 @@ static MeshData GetMeshDataFromCGLTF(cgltf_primitive primitive) {
 				assert(acc->component_type == cgltf_component_type_r_32f);
 				assert(acc->type == cgltf_type_vec3);
 
-				mesh_data.vb_data[vb_counter].type = VBT_COLOR;
-				mesh_data.vb_data[vb_counter].num_components = 3;
+				mesh_data.vb_data[vb_counter].type = VERTEX_BUFFER_TYPE_COLOR;
 				float* data = PushMaster(float, float_count);
 				data = PushMaster(float, float_count);
 				cgltf_accessor_unpack_floats(acc, data, float_count);
@@ -154,8 +136,7 @@ static MeshData GetMeshDataFromCGLTF(cgltf_primitive primitive) {
 				assert(acc->component_type == cgltf_component_type_r_32f);
 				assert(acc->type == cgltf_type_vec4);
 				
-				mesh_data.vb_data[vb_counter].type = VBT_TANGENT;
-				mesh_data.vb_data[vb_counter].num_components = 4;
+				mesh_data.vb_data[vb_counter].type = VERTEX_BUFFER_TYPE_TANGENT;
 				float* data = PushMaster(float, float_count);
 				data = PushMaster(float, float_count);
 				cgltf_accessor_unpack_floats(acc, data, float_count);
@@ -220,7 +201,7 @@ static MaterialData GetMaterialFromCGLTF(cgltf_material cmat, char* path) {
 	// TODO: Read up on sampler importing
 	if (cmat.normal_texture.texture_data) {
 		mat.textures[texture_counter] = GetTextureFromCGLTF(*cmat.normal_texture.texture_data, path);
-		mat.textures[texture_counter].type = TEXTURE_NORMAL;
+		mat.textures[texture_counter].type = TEXTURE_SLOT_NORMAL;
 		texture_counter++;
 	}
 
@@ -287,8 +268,8 @@ static ModelData LoadModelDataGLTF(char* path, char* name) {
 	assert(cgltf_load_buffers(&opt, data, path) == cgltf_result_success);
 
 	// TODO: do assert checks for counts
-	model_data.name = PushMaster(char, strlen(name) + 1);
-	strcpy(model_data.name, name);
+	//model_data.name = PushMaster(char, strlen(name) + 1);
+	//strcpy(model_data.name, name);
 
 	model_data.mesh_data = PushMaster(MeshData, data->meshes_count);
 	model_data.mesh_count = data->meshes_count;

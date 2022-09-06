@@ -943,7 +943,7 @@ typedef void (GL_APIENTRYP GLDEBUGPROCKHR)(GLenum source,GLenum type,GLuint id,G
 #define GL_TEXTURE_DEPTH_QCOM                                   0x8BD4
 #define GL_TEXTURE_INTERNAL_FORMAT_QCOM                         0x8BD5
 #define GL_TEXTURE_FORMAT_QCOM                                  0x8BD6
-#define GL_TEXTURE_TYPE_QCOM                                    0x8BD7
+#define GL_TEXTURE_SLOT_QCOM                                    0x8BD7
 #define GL_TEXTURE_IMAGE_VALID_QCOM                             0x8BD8
 #define GL_TEXTURE_NUM_LEVELS_QCOM                              0x8BD9
 #define GL_TEXTURE_TARGET_QCOM                                  0x8BDA
