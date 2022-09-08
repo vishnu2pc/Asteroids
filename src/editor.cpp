@@ -15,7 +15,7 @@ struct FPControlInfo {
 
 static Mat4 MakeViewPerspective(CameraInfo camera) {
 	Mat4 result = M4I();
-	Mat4 translation = M4Translate(V3MulF(camera.position, -1.0f));
+	Mat4 translation = M4Translate(V3Neg(camera.position));
 	/*
 	Vec3 direction = V3(0.0f, 0.0f, -1.0f);
 	Vec3 rotated_dir = RotateVecByQuat(direction, camera.rotation);
@@ -53,7 +53,8 @@ static void FirstPersonControl(Vec3* position, Quat* rotation, FPControlInfo con
 	Vec3 pos = *position;
 	Quat rot = *rotation;
 
-	Vec3 fv = GetForwardVector(rot);
+	// We move in the conjugate of the forward vector because camera
+	Vec3 fv = V3Neg(GetForwardVector(rot));
 	Vec3 fdisp = V3MulF(fv, tdel);
 
 	Vec3 rv = GetRightVector(rot);

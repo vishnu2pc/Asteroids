@@ -27,7 +27,7 @@ static void MakeD3DInputElementDesc(VERTEX_BUFFER_TYPE* vb_type, D3D11_INPUT_ELE
 		if (vb_type[i] == VERTEX_BUFFER_TYPE_POSITION) { id = 1; format = DXGI_FORMAT_R32G32B32_FLOAT; }
 		else if (vb_type[i] == VERTEX_BUFFER_TYPE_NORMAL) { id = 2; format = DXGI_FORMAT_R32G32B32_FLOAT; }
 		//else if (vb_type[i] == VERTEX_BUFFER_TYPE_TANGENT) { id = 3; format = DXGI_FORMAT_R32G32B32_FLOAT; }
-		else if (vb_type[i] == VERTEX_BUFFER_TYPE_TEXCOORD) { id = 4; format = DXGI_FORMAT_R32G32_FLOAT; }
+		else if (vb_type[i] == VERTEX_BUFFER_TYPE_TEXCOORD) { id = 5; format = DXGI_FORMAT_R32G32_FLOAT; }
 		else assert(false);
 
 		d3d_il_desc[i] = { SemanticName[id], 0, format, i, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 };
@@ -57,7 +57,43 @@ static ConstantsBuffer UploadConstantsBuffer(ConstantsBufferDesc desc, ID3D11Dev
 }
 
 //------------------------------------------------------------------------
-static PixelShader UploadPixelShader(PixelShaderDesc desc, ID3D11Device* device) {
+static StructuredBuffer UploadStructuredBuffer(StructuredBufferDesc desc, ID3D11Device* device) {
+	HRESULT hr = {};
+	StructuredBuffer sb = {};
+
+	ID3D11Buffer* buffer = 0;
+	ID3D11ShaderResourceView* view = 0;
+
+	D3D11_BUFFER_DESC buffer_desc = {};
+	buffer_desc.ByteWidth = desc.struct_size_in_bytes * desc.count;
+	buffer_desc.Usage = D3D11_USAGE_DYNAMIC;
+	buffer_desc.BindFlags = D3D11_BIND_SHADER_RESOURCE;
+	buffer_desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+	buffer_desc.MiscFlags = D3D11_RESOURCE_MISC_BUFFER_STRUCTURED;
+	buffer_desc.StructureByteStride = desc.struct_size_in_bytes;
+
+	hr = device->CreateBuffer(&buffer_desc, NULL, &buffer);
+	assertHR(hr);
+
+	D3D11_SHADER_RESOURCE_VIEW_DESC view_desc = {};
+	view_desc.Format = DXGI_FORMAT_UNKNOWN;
+	view_desc.ViewDimension = D3D11_SRV_DIMENSION_BUFFER;
+	view_desc.Buffer.ElementOffset = 0;
+	view_desc.Buffer.ElementWidth = desc.count;
+
+	hr = device->CreateShaderResourceView(buffer, &view_desc, &view);
+	assertHR(hr);
+
+	sb.slot = desc.slot;
+	sb.buffer = buffer;
+	sb.view = view; 
+	sb.size = desc.struct_size_in_bytes * desc.count;
+
+	return sb;
+};
+
+//------------------------------------------------------------------------
+static PixelShader UploadPixelShader(PixelShaderDesc desc, Renderer* renderer) {
 	HRESULT hr = {};
 
 	PixelShader ps = {};
@@ -67,7 +103,7 @@ static PixelShader UploadPixelShader(PixelShaderDesc desc, ID3D11Device* device)
 	TEXTURE_SLOT* texture_slot = nullptr;
 
 	u8 rb_count = desc.cb_count;
-	RenderBuffer* rb = PushMaster(RenderBuffer, rb_count);
+	RenderBuffer* rb = PushRenderBuffer(rb_count, renderer);
 
 	hr = D3DCompileFromFile(desc.shader.path, nullptr, nullptr, desc.shader.entry, "ps_5_0",
 																			0, 0, &blob, &error);
@@ -75,12 +111,12 @@ static PixelShader UploadPixelShader(PixelShaderDesc desc, ID3D11Device* device)
 		char* msg = (char*)error->GetBufferPointer();
 		if (hr) SDL_Log(msg);
 	}
-	hr = device->CreatePixelShader(blob->GetBufferPointer(), blob->GetBufferSize(), nullptr, &shader);
+	hr = renderer->device->CreatePixelShader(blob->GetBufferPointer(), blob->GetBufferSize(), nullptr, &shader);
 	assertHR(hr);
 
 	for(u8 i=0; i<desc.cb_count; i++) {
 		rb[i].type = RENDER_BUFFER_TYPE_CONSTANTS;
-		rb[i].constants = UploadConstantsBuffer(desc.cb_desc[i], device);
+		rb[i].constants = UploadConstantsBuffer(desc.cb_desc[i], renderer->device);
 	}
 
 	if(desc.texture_count) {
@@ -98,7 +134,7 @@ static PixelShader UploadPixelShader(PixelShaderDesc desc, ID3D11Device* device)
 }
 
 //------------------------------------------------------------------------
-static VertexShader UploadVertexShader(VertexShaderDesc desc, ID3D11Device* device) {
+static VertexShader UploadVertexShader(VertexShaderDesc desc, Renderer* renderer) {
 	HRESULT hr = {};
 	VertexShader vs = {};
 
@@ -109,8 +145,7 @@ static VertexShader UploadVertexShader(VertexShaderDesc desc, ID3D11Device* devi
 	VERTEX_BUFFER_TYPE* vb_type = 0;
 
 	u8 rb_count = desc.cb_count + desc.sb_count;
-	RenderBuffer* rb = PushMaster(RenderBuffer, rb_count);
-	u8 rb_counter = 0;
+	RenderBuffer* rb = PushRenderBuffer(rb_count, renderer);
 
 	hr = D3DCompileFromFile(desc.shader.path, nullptr, nullptr, desc.shader.entry, "vs_5_0",
 																			0, 0, &blob, &error);
@@ -118,14 +153,14 @@ static VertexShader UploadVertexShader(VertexShaderDesc desc, ID3D11Device* devi
 		char* msg = (char*)error->GetBufferPointer();
 		SDL_Log(msg);
 	}
-	hr = device->CreateVertexShader(blob->GetBufferPointer(), blob->GetBufferSize(), nullptr, &shader);
+	hr = renderer->device->CreateVertexShader(blob->GetBufferPointer(), blob->GetBufferSize(), nullptr, &shader);
 	assertHR(hr);
 
 	if(desc.vb_count) {
 		D3D11_INPUT_ELEMENT_DESC* ie_desc = PushScratch(D3D11_INPUT_ELEMENT_DESC, desc.vb_count);
 		MakeD3DInputElementDesc(desc.vb_type, ie_desc, desc.vb_count);
 
-		hr = device->CreateInputLayout(ie_desc, desc.vb_count, blob->GetBufferPointer(), blob->GetBufferSize(), &il);
+		hr = renderer->device->CreateInputLayout(ie_desc, desc.vb_count, blob->GetBufferPointer(), blob->GetBufferSize(), &il);
 
 		vb_type = PushMaster(VERTEX_BUFFER_TYPE, desc.vb_count);
 		memcpy(vb_type, desc.vb_type, sizeof(VERTEX_BUFFER_TYPE)*desc.vb_count);
@@ -133,9 +168,15 @@ static VertexShader UploadVertexShader(VertexShaderDesc desc, ID3D11Device* devi
 		PopScratch(D3D11_INPUT_ELEMENT_DESC, desc.vb_count);
 	}
 
-	for(u8 i=0; i<desc.cb_count; i++) {
+	u8 i=0;
+	for(i=0; i<desc.cb_count; i++) {
 		rb[i].type = RENDER_BUFFER_TYPE_CONSTANTS;
-		rb[i].constants = UploadConstantsBuffer(desc.cb_desc[i], device);
+		rb[i].constants = UploadConstantsBuffer(desc.cb_desc[i], renderer->device);
+	}
+
+	for(u8 j=0; j<desc.sb_count; j++) {
+		rb[i+j].type = RENDER_BUFFER_TYPE_STRUCTURED;
+		rb[i+j].structured = UploadStructuredBuffer(desc.sb_desc[i], renderer->device);
 	}
 
 	//TODO: Handle structured buffer handling
@@ -148,20 +189,24 @@ static VertexShader UploadVertexShader(VertexShaderDesc desc, ID3D11Device* devi
 
 	return vs;
 }
+
 //------------------------------------------------------------------------
 static TextureBuffer UploadTexture(TextureData texture_data, ID3D11Device* device) {
 	TextureBuffer texture = {};
 
 	HRESULT hr = {};
-	ID3D11ShaderResourceView* srv;
+	ID3D11ShaderResourceView* view;
 
 	D3D11_TEXTURE2D_DESC desc = {};
 	desc.Width = texture_data.width;
 	desc.Height = texture_data.height;
 	desc.MipLevels = 1;
 	desc.ArraySize = 1;
-	desc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+	DXGI_FORMAT format;
 
+	if(texture_data.type == TEXTURE_SLOT_ALBEDO) format = DXGI_FORMAT_R8G8B8A8_UNORM;
+
+	desc.Format = format;
 	desc.SampleDesc.Count = 1;
 	desc.Usage = D3D11_USAGE_IMMUTABLE;
 	desc.BindFlags = D3D11_BIND_SHADER_RESOURCE;
@@ -170,23 +215,22 @@ static TextureBuffer UploadTexture(TextureData texture_data, ID3D11Device* devic
 	sr.pSysMem = texture_data.data;
 	sr.SysMemPitch = texture_data.width * texture_data.num_components;
 
-	// RESEARCH: Would we need to carry arount tex2D
-	ID3D11Texture2D* tex;
-	hr = device->CreateTexture2D(&desc, &sr, &tex);
+	ID3D11Texture2D* buffer;
+	hr = device->CreateTexture2D(&desc, &sr, &buffer);
 
-	// RESEARCH: srv examples
-	D3D11_SHADER_RESOURCE_VIEW_DESC srvDesc = {};
-	srvDesc.Format = desc.Format;
-	srvDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
-	srvDesc.Texture2D.MostDetailedMip = 0;
-	srvDesc.Texture2D.MipLevels = -1;
+	// RESEARCH: view examples
+	D3D11_SHADER_RESOURCE_VIEW_DESC view_desc = {};
+	view_desc.Format = desc.Format;
+	view_desc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
+	view_desc.Texture2D.MostDetailedMip = 0;
+	view_desc.Texture2D.MipLevels = -1;
 	
-	hr = device->CreateShaderResourceView(tex, &srvDesc, &srv);
-	tex->Release();
+	hr = device->CreateShaderResourceView(buffer, &view_desc, &view);
 	assertHR(hr);
 
 	texture.slot = texture_data.type;
-	texture.view = srv;
+	texture.buffer = buffer;
+	texture.view = view;
 	return texture;
 }
 
@@ -223,15 +267,15 @@ static VertexBuffer UploadVertexBuffer(VertexBufferData vb_data, u32 num_vertice
 }
 
 //------------------------------------------------------------------------
-static RenderBufferGroup UploadMesh(MeshData mesh_data, ID3D11Device* device) {
+static RenderBufferGroup UploadMesh(MeshData mesh_data, Renderer* renderer) {
 	RenderBufferGroup rbg = {};
 
-	RenderBuffer* rb = PushMaster(RenderBuffer, mesh_data.vb_data_count + 1);
+	RenderBuffer* rb = PushRenderBuffer(mesh_data.vb_data_count+1, renderer);
 
 	u8 i=0;
 	for(i=0; i<mesh_data.vb_data_count; i++) {
 		rb[i].type = RENDER_BUFFER_TYPE_VERTEX;
-		rb[i].vertex = UploadVertexBuffer(mesh_data.vb_data[i], mesh_data.vertices_count, device);
+		rb[i].vertex = UploadVertexBuffer(mesh_data.vb_data[i], mesh_data.vertices_count, renderer->device);
 	}
 
 	ID3D11Buffer* index_buffer;
@@ -241,14 +285,13 @@ static RenderBufferGroup UploadMesh(MeshData mesh_data, ID3D11Device* device) {
 	desc.BindFlags = D3D11_BIND_INDEX_BUFFER;
 	D3D11_SUBRESOURCE_DATA sr = {};
 	sr.pSysMem = mesh_data.indices;
-	device->CreateBuffer(&desc, &sr, &index_buffer);
+	renderer->device->CreateBuffer(&desc, &sr, &index_buffer);
 
 	rb[i].type = RENDER_BUFFER_TYPE_INDEX;
 	rb[i].index.buffer = index_buffer; 
 	rb[i].index.num_indices = mesh_data.indices_count;
 
 	rbg.rb = rb;
-	rbg.vertices = mesh_data.vertices_count;
 	rbg.count = mesh_data.vb_data_count + 1;
 	return rbg;
 }
@@ -325,7 +368,7 @@ static void InitRendering(Renderer* renderer, HWND handle, WindowDimensions wd) 
 		hr = dxgi_factory->CreateSwapChainForHwnd((IUnknown*)renderer->device, handle, &swapchain_desc, NULL, NULL, &renderer->swapchain);
 
 		assertHR(hr);
-		dxgi_factory->Release();
+		//dxgi_factory->Release();
 
 		hr = renderer->swapchain->QueryInterface(IID_PPV_ARGS(&renderer->swapchain));
 		assertHR(hr);
@@ -355,7 +398,6 @@ static void InitRendering(Renderer* renderer, HWND handle, WindowDimensions wd) 
 		dsv_tex_desc.SampleDesc.Count = 1;
 
 		hr = renderer->device->CreateTexture2D(&dsv_tex_desc, NULL, &dsv_tex);
-		rtv_tex->Release();
 		assertHR(hr);
 
 		D3D11_DEPTH_STENCIL_VIEW_DESC dsv_desc = {};
@@ -363,7 +405,6 @@ static void InitRendering(Renderer* renderer, HWND handle, WindowDimensions wd) 
 		dsv_desc.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
 		hr = renderer->device->CreateDepthStencilView((ID3D11Resource*)dsv_tex, &dsv_desc, &renderer->dsv);
 		assertHR(hr);
-		dsv_tex->Release();
 	}
 	//---------------------------Blend state---------------------------------------------
 	{
@@ -454,7 +495,7 @@ static void InitRendering(Renderer* renderer, HWND handle, WindowDimensions wd) 
 	//---------------------------Vertex Shaders---------------------------------------------
 	{	// 
 		VertexShaderDesc vs_desc = {};
-		vs_desc.shader = { L"../assets/shaders/diffuse.hlsl", "vs_main" };
+		vs_desc.shader = { L"../assets/shaders/diffuse.hlsl", "vsf" };
 
 		ConstantsBufferDesc cb_desc[] = { { CONSTANTS_BINDING_SLOT_CAMERA, sizeof(Mat4) },
 														 { CONSTANTS_BINDING_SLOT_INSTANCE, sizeof(Mat4) } };
@@ -465,24 +506,34 @@ static void InitRendering(Renderer* renderer, HWND handle, WindowDimensions wd) 
 		vs_desc.vb_count = ARRAY_LENGTH(vb_type);
 		vs_desc.cb_count = ARRAY_LENGTH(cb_desc);
 
-		renderer->vs[VERTEX_SHADER_POS_NOR] = UploadVertexShader(vs_desc, renderer->device);
+		renderer->vs[VERTEX_SHADER_POS_NOR] = UploadVertexShader(vs_desc, renderer);
 	}
-	/*
 	{	 // 
 		VertexShaderDesc vs_desc = {};
-		vs_desc.shader = { L"../assets/shaders/unlit.hlsl", "vs_textured" };
-		BufferLayout bl[] = { { VERTEX_BUFFER_TYPE_POSITION, BF_VEC3, CT_FLOAT },
-		{ VERTEX_BUFFER_TYPE_TEXCOORD, BF_VEC2, CT_FLOAT	} };
+		vs_desc.shader = { L"../assets/shaders/diffuse.hlsl", "vsf_tex" };
 		ConstantsBufferDesc cb_desc[] = { { CONSTANTS_BINDING_SLOT_CAMERA, sizeof(Mat4) },
-		{ CONSTANTS_BINDING_SLOT_INSTANCE, sizeof(Mat4) } };
-		vs_desc.bl = bl;
-		vs_desc.bl_count = ARRAY_LENGTH(bl);
-		vs_desc.cb_desc = cb_desc;
-		vs_desc.cb_desc_count = ARRAY_LENGTH(cb_desc);
+																			{ CONSTANTS_BINDING_SLOT_INSTANCE, sizeof(Mat4) } };
 
-		renderer->vs[VERTEX_SHADER_POS_TEX] = UploadVertexShader(vs_desc, renderer->device);
+		VERTEX_BUFFER_TYPE vb_type[] = { VERTEX_BUFFER_TYPE_POSITION, VERTEX_BUFFER_TYPE_NORMAL, 
+																		 VERTEX_BUFFER_TYPE_TEXCOORD };
+
+		vs_desc.vb_type = vb_type;
+		vs_desc.cb_desc = cb_desc;
+		vs_desc.vb_count = ARRAY_LENGTH(vb_type);
+		vs_desc.cb_count = ARRAY_LENGTH(cb_desc);
+
+		renderer->vs[VERTEX_SHADER_POS_NOR_TEX] = UploadVertexShader(vs_desc, renderer);
 	}
-	*/
+	{
+		VertexShaderDesc vs_desc = {};
+		vs_desc.shader = { L"../assets/shaders/text.hlsl", "vsf" };
+
+		StructuredBufferDesc sb_desc[] = { { STRUCTURED_BINDING_SLOT_FRAME, sizeof(Glyph), MAX_GLYPHS_ON_SCREEN } };
+		vs_desc.sb_desc = sb_desc;
+		vs_desc.sb_count = 1;
+
+		renderer->vs[VERTEX_SHADER_TEXT] = UploadVertexShader(vs_desc, renderer);
+	}
 	//-------------------------Pixel Shaders-----------------------------------------------
 	{	
 		{	// Unlit shader
@@ -494,7 +545,7 @@ static void InitRendering(Renderer* renderer, HWND handle, WindowDimensions wd) 
 			ps_desc.cb_desc = cb_desc;
 			ps_desc.cb_count = ARRAY_LENGTH(cb_desc);
 
-			renderer->ps[PIXEL_SHADER_UNLIT] = UploadPixelShader(ps_desc, renderer->device);
+			renderer->ps[PIXEL_SHADER_UNLIT] = UploadPixelShader(ps_desc, renderer);
 		}
 		/*
 		{	// Unlit textured
@@ -507,31 +558,35 @@ static void InitRendering(Renderer* renderer, HWND handle, WindowDimensions wd) 
 		{	// Diffuse shader
 			PixelShaderDesc ps_desc = {};
 
-			ps_desc.shader = { L"../assets/shaders/diffuse.hlsl", "ps_main" }; 
+			ps_desc.shader = { L"../assets/shaders/diffuse.hlsl", "psf" }; 
 			ConstantsBufferDesc cb_desc[] = { { CONSTANTS_BINDING_SLOT_CAMERA, sizeof(DiffusePC) },
-																								{ CONSTANTS_BINDING_SLOT_OBJECT, sizeof(DiffusePM) } };
+																				{ CONSTANTS_BINDING_SLOT_OBJECT, sizeof(DiffusePM) } };
 			ps_desc.cb_desc = cb_desc;
 			ps_desc.cb_count = ARRAY_LENGTH(cb_desc);
 
-			renderer->ps[PIXEL_SHADER_DIFFUSE] = UploadPixelShader(ps_desc, renderer->device);
+			renderer->ps[PIXEL_SHADER_DIFFUSE] = UploadPixelShader(ps_desc, renderer);
 		}
-	}
-	{
-		// Font
-		/*
-		int x, y, n;
-		void* data = stbi_load("../assets/fonts/JetBrainsMono/jetbrains_mono_light_atlas.png", &x, &y, &n, 4);
-		assert(data);
-		TextureData texture_data = { TEXTURE_SLOT_ALBEDO, data, (u32)x, (u32)y, 4 };
-		Texture texture = UploadTexture(texture_data, renderer->device);
+		{	// Diffuse textured shader
+			PixelShaderDesc ps_desc = {};
+			ps_desc.shader = { L"../assets/shaders/diffuse.hlsl", "psf_tex" };
 
-		Material mat = {};
-		mat.texture = PushMaster(Texture, 1);
-		mat.texture_count = 1;
-		mat.texture[0] = texture;
+			ConstantsBufferDesc cb_desc[] = { { CONSTANTS_BINDING_SLOT_CAMERA, sizeof(DiffusePC) },
+																				{ CONSTANTS_BINDING_SLOT_OBJECT, sizeof(DiffusePM) } };
 
-		renderer->rbg[RENDER_BUFFER_GROUP_FONT]
-		*/
+			TEXTURE_SLOT texture_slot[] = { TEXTURE_SLOT_ALBEDO };
+
+			ps_desc.texture_slot = texture_slot;
+			ps_desc.cb_desc = cb_desc;
+			ps_desc.texture_count = ARRAY_LENGTH(texture_slot);
+			ps_desc.cb_count = ARRAY_LENGTH(cb_desc);
+
+			renderer->ps[PIXEL_SHADER_DIFFUSE_TEXTURED] = UploadPixelShader(ps_desc, renderer);
+		}
+		{	// Text shader
+			PixelShaderDesc ps_desc = {};
+			ps_desc.shader = { L"../assets/shaders/text.hlsl", "psf" };
+			renderer->ps[PIXEL_SHADER_TEXT] = UploadPixelShader(ps_desc, renderer);
+		}
 	}
 	//----------------------------Meshes--------------------------------------------
 	{ 
@@ -541,31 +596,31 @@ static void InitRendering(Renderer* renderer, HWND handle, WindowDimensions wd) 
 		{
 			model_data = LoadModelDataGLTF("../assets/models/shapes/cube.gltf", "cube");
 			mesh_data = model_data.mesh_data[0];
-			renderer->rbg[RENDER_BUFFER_GROUP_CUBE] = UploadMesh(mesh_data, renderer->device);
+			renderer->rbg[RENDER_BUFFER_GROUP_CUBE] = UploadMesh(mesh_data, renderer);
 		}
 		// Sphere mesh
 		{
 			model_data = LoadModelDataGLTF("../assets/models/shapes/sphere.gltf", "sphere");
 			mesh_data = model_data.mesh_data[0];
-			renderer->rbg[RENDER_BUFFER_GROUP_SPHERE] = UploadMesh(mesh_data, renderer->device);
+			renderer->rbg[RENDER_BUFFER_GROUP_SPHERE] = UploadMesh(mesh_data, renderer);
 		}
 		// Cone mesh
 		{
 			model_data = LoadModelDataGLTF("../assets/models/shapes/cone.gltf", "cone");
 			mesh_data = model_data.mesh_data[0];
-			renderer->rbg[RENDER_BUFFER_GROUP_CONE] = UploadMesh(mesh_data, renderer->device);
+			renderer->rbg[RENDER_BUFFER_GROUP_CONE] = UploadMesh(mesh_data, renderer);
 		}
 		// Plane mesh
 		{
 			model_data = LoadModelDataGLTF("../assets/models/shapes/plane.gltf", "plane");
 			mesh_data = model_data.mesh_data[0];
-			renderer->rbg[RENDER_BUFFER_GROUP_PLANE] = UploadMesh(mesh_data, renderer->device);
+			renderer->rbg[RENDER_BUFFER_GROUP_PLANE] = UploadMesh(mesh_data, renderer);
 		}
 		// Torus mesh
 		{
 			model_data = LoadModelDataGLTF("../assets/models/shapes/torus.gltf", "torus");
 			mesh_data = model_data.mesh_data[0];
-			renderer->rbg[RENDER_BUFFER_GROUP_TORUS] = UploadMesh(mesh_data, renderer->device);
+			renderer->rbg[RENDER_BUFFER_GROUP_TORUS] = UploadMesh(mesh_data, renderer);
 		}
 	}
 }
@@ -585,9 +640,22 @@ static void PushConstantsData(void* data, ConstantsBuffer cb, ID3D11DeviceContex
 	data = nullptr;
 }
 
+static void PushStructuredData(void* data, StructuredBuffer sb, ID3D11DeviceContext* context) {
+	assert(data);
+	assert(sb.buffer);
+
+	D3D11_MAPPED_SUBRESOURCE msr = {};
+
+	context->Map(sb.buffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &msr);
+	memcpy(msr.pData, data, sb.size);
+	context->Unmap(sb.buffer, 0);
+
+	data = nullptr;
+}
+
 //------------------------------------------------------------------------
 static void BeginRendering(Renderer* renderer) {
-	float color[4] = { 0.2f, 0.3f, 0.3f, 1.0f };
+	float color[4] = { 0.392f, 0.584f, 0.929f, 1.0f };
 	renderer->context->ClearRenderTargetView(renderer->rtv, color);
 	renderer->context->ClearDepthStencilView(renderer->dsv, D3D11_CLEAR_DEPTH, 1.0f, 0);
 	renderer->context->OMSetRenderTargets(1, &renderer->rtv, renderer->dsv);
@@ -641,9 +709,18 @@ static void ExecuteRenderPipeline(RenderPipeline rp, Renderer* renderer) {
 							PushConstantsData(rp.prbd[i].constants.data, ps.rb[j].constants, renderer->context);
 
 		RenderBufferGroup rbg = renderer->rbg[rp.prbg];
-		for(u8 i=0; i<rbg.count; i++) 
-			if(rbg.rb[i].type == RENDER_BUFFER_TYPE_TEXTURE)
-				renderer->context->PSSetShaderResources(rbg.rb[i].texture.slot, 1, &rbg.rb[i].texture.view);
+		if(rbg.count) {
+			for(u8 i=0; i<ps.texture_count; i++) {
+				bool found = false;
+				for(u8 j=0; j<rbg.count; j++) {
+					if(ps.texture_slot[i] == rbg.rb[i].texture.slot) {
+						found = true;
+						renderer->context->PSSetShaderResources(rbg.rb[i].texture.slot, 1, &rbg.rb[i].texture.view);
+					}
+				}
+				assert(found);
+			}
+		}
 	}
 	//------------------------------------------------------------------------
 	if(rp.vs) {
@@ -651,15 +728,28 @@ static void ExecuteRenderPipeline(RenderPipeline rp, Renderer* renderer) {
 		renderer->context->VSSetShader(vs.shader, nullptr, 0);
 		if(vs.il) renderer->context->IASetInputLayout(vs.il);
 
-		for(u8 i=0; i<vs.rb_count; i++)
+		for(u8 i=0; i<vs.rb_count; i++) {
 			if(vs.rb[i].type == RENDER_BUFFER_TYPE_CONSTANTS) 
 				renderer->context->VSSetConstantBuffers(vs.rb[i].constants.slot, 1, &vs.rb[i].constants.buffer);
+			if(vs.rb[i].type == RENDER_BUFFER_TYPE_STRUCTURED) 
+				renderer->context->VSSetShaderResources(vs.rb[i].structured.slot, 1, &vs.rb[i].structured.view);
+		}
 
-		for(u8 i=0; i<rp.vrbd_count; i++) 
-			if(rp.vrbd[i].type == RENDER_BUFFER_TYPE_CONSTANTS)
-				for(u8 j=0; j<vs.rb_count; j++)
-					if(rp.vrbd[i].constants.slot == vs.rb[j].constants.slot)
-						PushConstantsData(rp.vrbd[i].constants.data, vs.rb[j].constants, renderer->context);
+		for(u8 i=0; i<rp.vrbd_count; i++) {
+			if(rp.vrbd[i].type == RENDER_BUFFER_TYPE_CONSTANTS) {
+				for(u8 j=0; j<vs.rb_count; j++) 
+					if(vs.rb[j].type == RENDER_BUFFER_TYPE_CONSTANTS) 
+						if(rp.vrbd[i].constants.slot == vs.rb[j].constants.slot)
+							PushConstantsData(rp.vrbd[i].constants.data, vs.rb[j].constants, renderer->context);
+			}
+			if(rp.vrbd[i].type == RENDER_BUFFER_TYPE_STRUCTURED) {
+				for(u8 j=0; j<vs.rb_count; j++) {
+					if(vs.rb[j].type = RENDER_BUFFER_TYPE_STRUCTURED) 
+						if(rp.vrbd[i].structured.slot == vs.rb[j].structured.slot)
+							PushStructuredData(rp.vrbd[i].structured.data, vs.rb[j].structured, renderer->context);
+				}
+			}
+		}
 
 		if(rp.vrbg) {
 			RenderBufferGroup rbg = renderer->rbg[rp.vrbg];
@@ -685,6 +775,8 @@ static void ExecuteRenderPipeline(RenderPipeline rp, Renderer* renderer) {
 	{
 		if(rp.dc.type == DRAW_CALL_INDEXED)
 			renderer->context->DrawIndexed(rp.dc.indices_count, 0, 0);
+		if(rp.dc.type == DRAW_CALL_VERTICES)
+			renderer->context->Draw(rp.dc.vertices_count, 0);
 	}
 }
 

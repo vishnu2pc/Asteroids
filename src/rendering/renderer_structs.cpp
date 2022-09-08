@@ -21,6 +21,10 @@
 #define MAGENTA V3(1.0f, 0.0f, 1.0f)
 #define PURPLE V3(0.5f, 0.0f, 0.5f)
 
+enum RENDERER_MISC_FLAGS {
+	RENDER_BUFFER_TOTAL = 255,
+	RENDER_BUFFER_TOTA = 255
+};
 
 enum DEPTH_STENCIL_STATE {
 	DEPTH_STENCIL_STATE_NONE,
@@ -51,15 +55,17 @@ enum VIEWPORT {
 enum VERTEX_SHADER {
 	VERTEX_SHADER_NONE,
 	VERTEX_SHADER_POS_NOR,
-	VERTEX_SHADER_POS_TEX,
+	VERTEX_SHADER_POS_NOR_TEX,
+	VERTEX_SHADER_TEXT,
 	VERTEX_SHADER_TOTAL
 };
 
 enum PIXEL_SHADER {
 	PIXEL_SHADER_NONE,
 	PIXEL_SHADER_UNLIT,
-	PIXEL_SHADER_UNLIT_TEXTURED,
 	PIXEL_SHADER_DIFFUSE,
+	PIXEL_SHADER_DIFFUSE_TEXTURED,
+	PIXEL_SHADER_TEXT,
 	PIXEL_SHADER_TOTAL
 };
 
@@ -82,12 +88,15 @@ enum RENDER_BUFFER_GROUP {
 	RENDER_BUFFER_GROUP_TOTAL = 255
 };
 
+enum STRUCTURED_BINDING_SLOT {
+	STRUCTURED_BINDING_SLOT_FRAME
+};
+
 enum CONSTANTS_BINDING_SLOT {
 	CONSTANTS_BINDING_SLOT_FRAME,
 	CONSTANTS_BINDING_SLOT_CAMERA,  // per viewport?
 	CONSTANTS_BINDING_SLOT_OBJECT,
 	CONSTANTS_BINDING_SLOT_INSTANCE,
-	CONSTANTS_BINDING_SLOT_TOTAL
 };
 
 enum TEXTURE_BINDING_SLOT {
@@ -101,10 +110,6 @@ enum RENDER_BUFFER_TYPE {
 	RENDER_BUFFER_TYPE_CONSTANTS,
 	RENDER_BUFFER_TYPE_STRUCTURED,
 	RENDER_BUFFER_TYPE_TEXTURE,
-};
-
-enum STRUCTURED_BINDING_SLOT {
-	// TODO: For future use
 };
 
 enum DRAW_CALL {
@@ -124,13 +129,24 @@ struct ConstantsBufferDesc {
 	u32 size;
 };
 
+struct StructuredBufferDesc {
+	STRUCTURED_BINDING_SLOT slot;
+	u32 struct_size_in_bytes;
+	u32 count;
+};
+
 struct VertexShaderDesc {
 	ShaderDesc shader;
+	StructuredBufferDesc* sb_desc;
 	ConstantsBufferDesc* cb_desc;
-	//StructuredBufferDesc* sb_desc;
 	VERTEX_BUFFER_TYPE* vb_type;
 
-	u8 cb_count, sb_count, vb_count;
+	u8 cb_count, vb_count, sb_count;
+};
+
+struct TextureDesc {
+	TEXTURE_SLOT slot;
+	u8 num_channels;
 };
 
 struct PixelShaderDesc {
@@ -154,8 +170,10 @@ struct VertexBuffer {
 };
 
 struct StructuredBuffer {
+	STRUCTURED_BINDING_SLOT slot;
 	ID3D11Buffer* buffer;
 	ID3D11ShaderResourceView* view;
+	u32 size;
 };
 
 struct TextureBuffer {
@@ -184,7 +202,6 @@ struct RenderBuffer {
 struct RenderBufferGroup {
 	RenderBuffer* rb;
 	u8 count;
-	u32 vertices;
 };
 
 struct VertexShader {
@@ -267,7 +284,10 @@ struct Renderer {
 
 	ID3D11SamplerState* ss[SAMPLER_STATE_TOTAL];
 	
+	RenderBuffer rb[RENDER_BUFFER_TOTAL];
 	RenderBufferGroup rbg[RENDER_BUFFER_GROUP_TOTAL];
+	u8 rbg_id;
+	u8 rb_id;
 
 	RenderState state_overrides;
 };
@@ -285,35 +305,29 @@ struct RenderPipeline {
 	u8 vrbd_count, prbd_count;
 };
 
-/*
-static u8 PushMesh(Mesh mesh, Renderer* renderer) {
-	u8 id = renderer->mesh_id + (u8)MESH_END;
-	assert(id  < MESH_TOTAL);
-	renderer->mesh[id] = mesh;
-	renderer->mesh_id++;
-	return id;
-};
+static RenderBuffer* PushRenderBuffer(u8 count, Renderer* renderer) {
+	RenderBuffer* ptr;
+	u8 id = renderer->rb_id;
+	ptr = &renderer->rb[id];
 
-static u8 PushMaterial(Material material, Renderer* renderer) {
-	u8 id = renderer->mat_id + (u8)MATERIAL_END;
-	assert(id  < MATERIAL_TOTAL);
-	renderer->mat[id] = material;
-	renderer->mat_id++;
-	return id;
+	assert(id + count < RENDER_BUFFER_TOTAL);
+	renderer->rb_id += count;
+
+	return ptr;
+}
+
+static u8 PushRenderBufferGroup(RENDER_BUFFER_GROUP index, RenderBufferGroup rbg, Renderer* renderer) {
+	if(index == RENDER_BUFFER_GROUP_NONE) {
+		u8 id = renderer->rbg_id + (u8)RENDER_BUFFER_GROUP_END;
+		assert(id  < RENDER_BUFFER_GROUP_TOTAL);
+		renderer->rbg[id] = rbg;
+		renderer->rbg_id++;
+		return id;
+	}
+	renderer->rbg[index] = rbg;
+	return index;
 };
-*/
 
 static RenderState RenderStateDefaults() {
 	return RenderState { DEPTH_STENCIL_STATE_DEFAULT, BLEND_STATE_DEFAULT, RASTERIZER_STATE_DEFAULT, VIEWPORT_DEFAULT };
 }
-
-/*
-static Material MakeDiffuseMaterial(Vec3 color, float diffuse_factor) {
-	Material mat = {};
-	mat.type = MATERIAL_TYPE_DIFFUSE;
-	mat.constants_data.params_diffuse.color = color;
-	mat.constants_data.params_diffuse.diffuse_factor = diffuse_factor;
-
-	return mat;
-}
-	*/

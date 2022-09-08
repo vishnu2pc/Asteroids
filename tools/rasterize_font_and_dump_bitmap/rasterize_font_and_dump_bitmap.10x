@@ -11,6 +11,7 @@
 		<RebuildCommand></RebuildCommand>
 		<BuildFileCommand></BuildFileCommand>
 		<CleanCommand></CleanCommand>
+		<BuildWorkingDirectory></BuildWorkingDirectory>
 		<RunCommand></RunCommand>
 		<DebugCommand>remedybg bin/main.exe</DebugCommand>
 		<ExePathCommand></ExePathCommand>

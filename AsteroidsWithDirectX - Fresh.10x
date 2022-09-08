@@ -11,6 +11,7 @@
 		<RebuildCommand>build.bat</RebuildCommand>
 		<BuildFileCommand>build.bat</BuildFileCommand>
 		<CleanCommand></CleanCommand>
+		<BuildWorkingDirectory></BuildWorkingDirectory>
 		<RunCommand>bin/main.exe</RunCommand>
 		<DebugCommand>remedybg bin/main.exe</DebugCommand>
 		<ExePathCommand></ExePathCommand>

@@ -37,7 +37,9 @@ struct WindowDimensions {	u32 width; u32 height; };
 #include "app_state.cpp"
 
 #include "cgltf_loader.cpp"
+#include "font_handling_structs.cpp"
 #include "rendering/renderer.cpp"
+#include "font_handling.cpp"
 #include "editor.cpp"
 
 #define Kilobytes(value) (1024LL*(value))
@@ -69,6 +71,10 @@ int main(int argc, char* argv[]) {
 	Renderer* renderer = PushMaster(Renderer, 1);
 	InitRendering(renderer, handle, app_state.wd);
 
+	FontInfo* fi;
+	LoadFont("../assets/fonts/JetBrainsMono/jetbrains_mono_light.fi",
+		"../assets/fonts/JetBrainsMono/jetbrains_mono_light.png", fi, renderer);
+
 	CameraInfo camera = {};
 	camera.position = V3(0.0f, 0.0f, -5.0f);
 	camera.rotation = QuatI();
@@ -93,9 +99,10 @@ int main(int argc, char* argv[]) {
 		RenderPipeline rp = {};
 		rp.rs = RenderStateDefaults();
 		rp.rs.rs = RASTERIZER_STATE_DOUBLE_SIDED;
-		rp.vs = VERTEX_SHADER_POS_NOR;
-		rp.ps = PIXEL_SHADER_DIFFUSE;
+		rp.vs = VERTEX_SHADER_POS_NOR_TEX;
+		rp.ps = PIXEL_SHADER_DIFFUSE_TEXTURED;
 		rp.vrbg = RENDER_BUFFER_GROUP_PLANE;
+		rp.prbg = RENDER_BUFFER_GROUP_FONT;
 		rp.dc.type = DRAW_CALL_DEFAULT;
 		plane = { V3(0.0f, 0.0f, 0.0f), QuatI(), V3(1000.0f, 1000.0f, 1000.0f), rp };
 	}
@@ -143,7 +150,39 @@ int main(int argc, char* argv[]) {
 		rp.dc.type = DRAW_CALL_DEFAULT;
 		light = { V3Z(), QuatI(), V3MulF(V3I(), 0.1f), rp };
 	}
+
+	float posx_on_screen = 0.0f;
+	float posy_on_screen = 0.0f;
 	
+	float offx_on_screen = 800.0f;
+	float offy_on_screen = 450.0f;
+
+	float normx = posx_on_screen/1600.0f;
+	float normy = posy_on_screen/900.0f;
+
+	float norm_offx = offx_on_screen/1600.0f;
+	float norm_offy = offy_on_screen/900.0f;
+
+	Glyph glyph = {};
+	glyph.posx = normx;
+	glyph.posy = normy;
+	glyph.bb_size_x = norm_offx;
+	glyph.bb_size_y = norm_offy;
+	glyph.color = PURPLE;
+
+	RenderPipeline quad = {};
+	quad.rs = RenderStateDefaults();
+	quad.rs.rs = RASTERIZER_STATE_DOUBLE_SIDED;
+	quad.vs = VERTEX_SHADER_TEXT;
+	quad.ps = PIXEL_SHADER_TEXT;
+	quad.dc.type = DRAW_CALL_VERTICES;
+	quad.dc.vertices_count = 6;
+	quad.vrbd = PushMaster(RenderBufferData, 1);
+	quad.vrbd_count = 1;
+	quad.vrbd[0].type = RENDER_BUFFER_TYPE_STRUCTURED;
+	quad.vrbd[0].structured.slot = STRUCTURED_BINDING_SLOT_FRAME;
+	quad.vrbd[0].structured.data = &glyph;
+
 	float ambience = 0.5f;
 
 	FPControlInfo fpci = { 1.0f, 1.0f, 1.0f };
@@ -221,7 +260,7 @@ int main(int argc, char* argv[]) {
 
 		//FirstPersonControl(&cube.transform.position, &cube.transform.rotation, fpci, app_state.input);
 		//if(app_state.input.mk[MK_RIGHT].held) 
-			FirstPersonControl(&camera.position, &camera.rotation, fpci, app_state.input);
+		FirstPersonControl(&camera.position, &camera.rotation, fpci, app_state.input);
 
 		SDL_Log("cam pos:%f, %f, %f", camera.position.x, camera.position.y, camera.position.z);
 		Mat4 vp = MakeViewPerspective(camera);
@@ -233,6 +272,14 @@ int main(int argc, char* argv[]) {
 		vs_rp.vrbd[0].type = RENDER_BUFFER_TYPE_CONSTANTS;
 		vs_rp.vrbd[0].constants.slot = CONSTANTS_BINDING_SLOT_CAMERA;
 		vs_rp.vrbd[0].constants.data = &vp;
+
+		RenderPipeline vs_rp_2 = {};
+		vs_rp_2.vs = VERTEX_SHADER_POS_NOR_TEX;
+		vs_rp_2.vrbd_count = 1;
+		vs_rp_2.vrbd = PushScratch(RenderBufferData, 1);
+		vs_rp_2.vrbd[0].type = RENDER_BUFFER_TYPE_CONSTANTS;
+		vs_rp_2.vrbd[0].constants.slot = CONSTANTS_BINDING_SLOT_CAMERA;
+		vs_rp_2.vrbd[0].constants.data = &vp;
 
 		float x = 3.0f * cosf(SDL_GetTicks() * 0.001);
 		float y = 0.0f;
@@ -258,8 +305,21 @@ int main(int argc, char* argv[]) {
 		ps_rp.prbd[0].constants.slot = CONSTANTS_BINDING_SLOT_CAMERA;
 		ps_rp.prbd[0].constants.data = &dpc;
 
+		RenderPipeline ps_rp_2 = {};
+		ps_rp_2.ps = PIXEL_SHADER_DIFFUSE_TEXTURED;
+		ps_rp_2.prbd = PushScratch(RenderBufferData, 1);
+		ps_rp_2.prbd_count = 1;
+		ps_rp_2.prbd[0].type = RENDER_BUFFER_TYPE_CONSTANTS;
+		ps_rp_2.prbd[0].constants.slot = CONSTANTS_BINDING_SLOT_CAMERA;
+		ps_rp_2.prbd[0].constants.data = &dpc;
+
+		renderer->context->PSSetSamplers(0, 1, &renderer->ss[SAMPLER_STATE_DEFAULT]);
+
+
 		ExecuteRenderPipeline(vs_rp, renderer);
+		ExecuteRenderPipeline(vs_rp_2, renderer);
 		ExecuteRenderPipeline(ps_rp, renderer);
+		ExecuteRenderPipeline(ps_rp_2, renderer);
 
 		ExecuteRenderPipeline(right.rp, renderer);
 		ExecuteRenderPipeline(up.rp, renderer);
@@ -269,9 +329,11 @@ int main(int argc, char* argv[]) {
 
 		ExecuteRenderPipeline(light.rp, renderer);
 
+		renderer->context->ClearDepthStencilView(renderer->dsv, D3D11_CLEAR_DEPTH, 1.0f, 0);
+		ExecuteRenderPipeline(quad, renderer);
 		EndRendering(renderer);
 
-		PopScratch(RenderBufferData, 13);
+		PopScratch(RenderBufferData, 15);
 	}
 	return 0;
 }
