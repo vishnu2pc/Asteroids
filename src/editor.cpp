@@ -1,11 +1,3 @@
-struct CameraInfo {
-	Vec3 position;
-	Quat rotation;
-	float fov;
-	float near_clip;
-	float far_clip;
-	float aspect_ratio;
-};
 
 struct FPControlInfo {
 	float base_sens;

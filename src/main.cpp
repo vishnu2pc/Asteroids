@@ -40,6 +40,7 @@ struct WindowDimensions {	u32 width; u32 height; };
 #include "font_handling_structs.cpp"
 #include "rendering/renderer.cpp"
 #include "font_handling.cpp"
+#include "camera.cpp"
 #include "editor.cpp"
 
 #define Kilobytes(value) (1024LL*(value))
@@ -71,16 +72,16 @@ int main(int argc, char* argv[]) {
 	Renderer* renderer = PushMaster(Renderer, 1);
 	InitRendering(renderer, handle, app_state.wd);
 
-	FontInfo* fi;
+	DebugText* dt = PushMaster(DebugText, 1);
 	LoadFont("../assets/fonts/JetBrainsMono/jetbrains_mono_light.fi",
-		"../assets/fonts/JetBrainsMono/jetbrains_mono_light.png", fi, renderer);
+		"../assets/fonts/JetBrainsMono/jetbrains_mono_light.png", dt, renderer);
 
 	CameraInfo camera = {};
 	camera.position = V3(0.0f, 0.0f, -5.0f);
 	camera.rotation = QuatI();
 	camera.fov = 75.0f;
 	camera.near_clip = 0.1f;
-	camera.far_clip = 1000.0f;
+	camera.far_clip = 10000.0f;
 	camera.aspect_ratio = (float)app_state.wd.width/(float)app_state.wd.height;
 	
 	Entity cube = {};
@@ -98,7 +99,6 @@ int main(int argc, char* argv[]) {
 	{
 		RenderPipeline rp = {};
 		rp.rs = RenderStateDefaults();
-		rp.rs.rs = RASTERIZER_STATE_DOUBLE_SIDED;
 		rp.vs = VERTEX_SHADER_POS_NOR_TEX;
 		rp.ps = PIXEL_SHADER_DIFFUSE_TEXTURED;
 		rp.vrbg = RENDER_BUFFER_GROUP_PLANE;
@@ -151,38 +151,6 @@ int main(int argc, char* argv[]) {
 		light = { V3Z(), QuatI(), V3MulF(V3I(), 0.1f), rp };
 	}
 
-	float posx_on_screen = 0.0f;
-	float posy_on_screen = 0.0f;
-	
-	float offx_on_screen = 800.0f;
-	float offy_on_screen = 450.0f;
-
-	float normx = posx_on_screen/1600.0f;
-	float normy = posy_on_screen/900.0f;
-
-	float norm_offx = offx_on_screen/1600.0f;
-	float norm_offy = offy_on_screen/900.0f;
-
-	Glyph glyph = {};
-	glyph.posx = normx;
-	glyph.posy = normy;
-	glyph.bb_size_x = norm_offx;
-	glyph.bb_size_y = norm_offy;
-	glyph.color = PURPLE;
-
-	RenderPipeline quad = {};
-	quad.rs = RenderStateDefaults();
-	quad.rs.rs = RASTERIZER_STATE_DOUBLE_SIDED;
-	quad.vs = VERTEX_SHADER_TEXT;
-	quad.ps = PIXEL_SHADER_TEXT;
-	quad.dc.type = DRAW_CALL_VERTICES;
-	quad.dc.vertices_count = 6;
-	quad.vrbd = PushMaster(RenderBufferData, 1);
-	quad.vrbd_count = 1;
-	quad.vrbd[0].type = RENDER_BUFFER_TYPE_STRUCTURED;
-	quad.vrbd[0].structured.slot = STRUCTURED_BINDING_SLOT_FRAME;
-	quad.vrbd[0].structured.data = &glyph;
-
 	float ambience = 0.5f;
 
 	FPControlInfo fpci = { 1.0f, 1.0f, 1.0f };
@@ -190,6 +158,7 @@ int main(int argc, char* argv[]) {
 	while (app_state.running) {
 		PreProcessInput(&app_state.input);
 		HandleSDLevents(&app_state);
+		BeginDebugText(dt, app_state.wd);
 		BeginRendering(renderer);
 		if(app_state.input.kb[KB_F1].pressed) renderer->state_overrides.rs = renderer->state_overrides.rs ? RASTERIZER_STATE_NONE : RASTERIZER_STATE_WIREFRAME; 
 
@@ -313,8 +282,22 @@ int main(int argc, char* argv[]) {
 		ps_rp_2.prbd[0].constants.slot = CONSTANTS_BINDING_SLOT_CAMERA;
 		ps_rp_2.prbd[0].constants.data = &dpc;
 
-		renderer->context->PSSetSamplers(0, 1, &renderer->ss[SAMPLER_STATE_DEFAULT]);
+		CameraDrawDebugText(&camera, dt);
+		RenderPipeline debug_text = {};
+		debug_text.rs = RenderStateDefaults();
+		debug_text.rs.rs = RASTERIZER_STATE_DOUBLE_SIDED;
+		debug_text.vs = VERTEX_SHADER_TEXT;
+		debug_text.ps = PIXEL_SHADER_TEXT;
+		debug_text.dc.type = DRAW_CALL_VERTICES;
+		debug_text.dc.vertices_count = 6 * dt->glyph_counter;
+		debug_text.vrbd = PushMaster(RenderBufferData, 1);
+		debug_text.vrbd_count = 1;
+		debug_text.vrbd[0].type = RENDER_BUFFER_TYPE_STRUCTURED;
+		debug_text.vrbd[0].structured.slot = STRUCTURED_BINDING_SLOT_FRAME;
+		debug_text.vrbd[0].structured.data = dt->quads;
+		debug_text.vrbd[0].structured.count = dt->glyph_counter;
 
+		renderer->context->PSSetSamplers(0, 1, &renderer->ss[SAMPLER_STATE_DEFAULT]);
 
 		ExecuteRenderPipeline(vs_rp, renderer);
 		ExecuteRenderPipeline(vs_rp_2, renderer);
@@ -329,8 +312,9 @@ int main(int argc, char* argv[]) {
 
 		ExecuteRenderPipeline(light.rp, renderer);
 
+		// TODO: RenderPipeline to clear states
 		renderer->context->ClearDepthStencilView(renderer->dsv, D3D11_CLEAR_DEPTH, 1.0f, 0);
-		ExecuteRenderPipeline(quad, renderer);
+		ExecuteRenderPipeline(debug_text, renderer);
 		EndRendering(renderer);
 
 		PopScratch(RenderBufferData, 15);

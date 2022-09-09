@@ -87,7 +87,8 @@ static StructuredBuffer UploadStructuredBuffer(StructuredBufferDesc desc, ID3D11
 	sb.slot = desc.slot;
 	sb.buffer = buffer;
 	sb.view = view; 
-	sb.size = desc.struct_size_in_bytes * desc.count;
+	sb.struct_size = desc.struct_size_in_bytes;
+	sb.count = desc.count;
 
 	return sb;
 };
@@ -408,10 +409,21 @@ static void InitRendering(Renderer* renderer, HWND handle, WindowDimensions wd) 
 	}
 	//---------------------------Blend state---------------------------------------------
 	{
-		D3D11_BLEND_DESC bs_desc = {};
-		bs_desc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
-		hr = renderer->device->CreateBlendState(&bs_desc, &renderer->bs[0]);
-		assertHR(hr);
+		{	// No blend
+			D3D11_BLEND_DESC bs_desc = {};
+			bs_desc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
+			bs_desc.RenderTarget[0].BlendEnable = false;
+
+			hr = renderer->device->CreateBlendState(&bs_desc, &renderer->bs[BLEND_STATE_NO_BLEND]);
+			assertHR(hr);
+		}
+		{ // Enabled
+			D3D11_BLEND_DESC bs_desc = {};
+			bs_desc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
+			bs_desc.RenderTarget[0].BlendEnable = true;
+			bs_desc.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_COLOR;
+			bs_desc.RenderTarget[0].DestBlend = D3D11_BLEND_ONE;
+		}
 	}
 	//---------------------------Depth Stencil State---------------------------------------------
 	{
@@ -528,7 +540,7 @@ static void InitRendering(Renderer* renderer, HWND handle, WindowDimensions wd) 
 		VertexShaderDesc vs_desc = {};
 		vs_desc.shader = { L"../assets/shaders/text.hlsl", "vsf" };
 
-		StructuredBufferDesc sb_desc[] = { { STRUCTURED_BINDING_SLOT_FRAME, sizeof(Glyph), MAX_GLYPHS_ON_SCREEN } };
+		StructuredBufferDesc sb_desc[] = { { STRUCTURED_BINDING_SLOT_FRAME, sizeof(GlyphQuad), MAX_DEBUG_TEXT_GLYPHS } };
 		vs_desc.sb_desc = sb_desc;
 		vs_desc.sb_count = 1;
 
@@ -585,6 +597,11 @@ static void InitRendering(Renderer* renderer, HWND handle, WindowDimensions wd) 
 		{	// Text shader
 			PixelShaderDesc ps_desc = {};
 			ps_desc.shader = { L"../assets/shaders/text.hlsl", "psf" };
+
+			TEXTURE_SLOT texture_slot[] = { TEXTURE_SLOT_ALBEDO };
+			ps_desc.texture_slot = texture_slot;
+			ps_desc.texture_count = ARRAY_LENGTH(texture_slot);;
+
 			renderer->ps[PIXEL_SHADER_TEXT] = UploadPixelShader(ps_desc, renderer);
 		}
 	}
@@ -640,17 +657,17 @@ static void PushConstantsData(void* data, ConstantsBuffer cb, ID3D11DeviceContex
 	data = nullptr;
 }
 
-static void PushStructuredData(void* data, StructuredBuffer sb, ID3D11DeviceContext* context) {
-	assert(data);
+static void PushStructuredData(StructuredBufferData sb_data, StructuredBuffer sb, ID3D11DeviceContext* context) {
+	assert(sb_data.data);
 	assert(sb.buffer);
 
 	D3D11_MAPPED_SUBRESOURCE msr = {};
 
 	context->Map(sb.buffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &msr);
-	memcpy(msr.pData, data, sb.size);
+	memcpy(msr.pData, sb_data.data, sb.struct_size*sb_data.count);
 	context->Unmap(sb.buffer, 0);
 
-	data = nullptr;
+	sb_data.data = nullptr;
 }
 
 //------------------------------------------------------------------------
@@ -746,7 +763,7 @@ static void ExecuteRenderPipeline(RenderPipeline rp, Renderer* renderer) {
 				for(u8 j=0; j<vs.rb_count; j++) {
 					if(vs.rb[j].type = RENDER_BUFFER_TYPE_STRUCTURED) 
 						if(rp.vrbd[i].structured.slot == vs.rb[j].structured.slot)
-							PushStructuredData(rp.vrbd[i].structured.data, vs.rb[j].structured, renderer->context);
+							PushStructuredData(rp.vrbd[i].structured, vs.rb[j].structured, renderer->context);
 				}
 			}
 		}

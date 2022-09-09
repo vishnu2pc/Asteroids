@@ -34,7 +34,8 @@ enum DEPTH_STENCIL_STATE {
 
 enum BLEND_STATE {
 	BLEND_STATE_NONE,
-	BLEND_STATE_DEFAULT,
+	BLEND_STATE_NO_BLEND,
+	BLEND_STATE_ENABLED,
 	BLEND_STATE_TOTAL
 };
 
@@ -173,7 +174,8 @@ struct StructuredBuffer {
 	STRUCTURED_BINDING_SLOT slot;
 	ID3D11Buffer* buffer;
 	ID3D11ShaderResourceView* view;
-	u32 size;
+	u32 struct_size;
+	u32 count;
 };
 
 struct TextureBuffer {
@@ -227,6 +229,7 @@ struct ConstantsBufferData {
 
 struct StructuredBufferData {
 	STRUCTURED_BINDING_SLOT slot;
+	u32 count;
 	void* data;
 };
 
@@ -329,5 +332,5 @@ static u8 PushRenderBufferGroup(RENDER_BUFFER_GROUP index, RenderBufferGroup rbg
 };
 
 static RenderState RenderStateDefaults() {
-	return RenderState { DEPTH_STENCIL_STATE_DEFAULT, BLEND_STATE_DEFAULT, RASTERIZER_STATE_DEFAULT, VIEWPORT_DEFAULT };
+	return RenderState { DEPTH_STENCIL_STATE_DEFAULT, BLEND_STATE_NO_BLEND, RASTERIZER_STATE_DEFAULT, VIEWPORT_DEFAULT };
 }
