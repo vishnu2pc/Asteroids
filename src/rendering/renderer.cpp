@@ -408,7 +408,7 @@ static void InitRendering(Renderer* renderer, HWND handle, WindowDimensions wd) 
 		assertHR(hr);
 	}
 	//---------------------------Blend state---------------------------------------------
-	{
+	{ // final.xyz = (src.xyz * src_blend) (BlendOp) (dest.rgb * dest_blend)
 		{	// No blend
 			D3D11_BLEND_DESC bs_desc = {};
 			bs_desc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
@@ -672,6 +672,8 @@ static void PushStructuredData(StructuredBufferData sb_data, StructuredBuffer sb
 
 //------------------------------------------------------------------------
 static void BeginRendering(Renderer* renderer) {
+	renderer->rq_id = 0;
+
 	float color[4] = { 0.392f, 0.584f, 0.929f, 1.0f };
 	renderer->context->ClearRenderTargetView(renderer->rtv, color);
 	renderer->context->ClearDepthStencilView(renderer->dsv, D3D11_CLEAR_DEPTH, 1.0f, 0);
@@ -798,6 +800,12 @@ static void ExecuteRenderPipeline(RenderPipeline rp, Renderer* renderer) {
 }
 
 //------------------------------------------------------------------------
+static void Render(Renderer* renderer) {
+	for(u32 i=0; i<renderer->rq_id; i++) ExecuteRenderPipeline(renderer->rq[i], renderer);
+}
+
+//------------------------------------------------------------------------
+
 static void EndRendering(Renderer* renderer) {
 	renderer->swapchain->Present(0, 0);
 }

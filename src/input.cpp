@@ -99,7 +99,7 @@ static void HandleKeyboardEvents(SDL_KeyboardEvent event, Input* input) {
 		case SDLK_a: { ProcessKeyboardButton(&input->kb[KB_A], event); } break;
 		case SDLK_s: { ProcessKeyboardButton(&input->kb[KB_S], event); } break;
 		case SDLK_d: { ProcessKeyboardButton(&input->kb[KB_D], event); } break;
-		case SDLK_q: { ProcessKeyboardButton(&input->kb[KB_E], event); } break;
+		case SDLK_q: { ProcessKeyboardButton(&input->kb[KB_Q], event); } break;
 		case SDLK_e: { ProcessKeyboardButton(&input->kb[KB_E], event); } break;
 
 		case SDLK_LSHIFT: { ProcessKeyboardButton(&input->kb[KB_SHIFT], event); } break;

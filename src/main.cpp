@@ -77,7 +77,7 @@ int main(int argc, char* argv[]) {
 		"../assets/fonts/JetBrainsMono/jetbrains_mono_light.png", dt, renderer);
 
 	CameraInfo camera = {};
-	camera.position = V3(0.0f, 0.0f, -5.0f);
+	camera.position = V3(0.0f, 0.0f, 5.0f);
 	camera.rotation = QuatI();
 	camera.fov = 75.0f;
 	camera.near_clip = 0.1f;
@@ -153,9 +153,10 @@ int main(int argc, char* argv[]) {
 
 	float ambience = 0.5f;
 
-	FPControlInfo fpci = { 1.0f, 1.0f, 1.0f };
+	FPControlInfo fpci = { 1.0f, 1.0f, 1.0f, 10.0f };
 
 	while (app_state.running) {
+		BeginMemoryCheck();
 		PreProcessInput(&app_state.input);
 		HandleSDLevents(&app_state);
 		BeginDebugText(dt, app_state.wd);
@@ -227,11 +228,19 @@ int main(int argc, char* argv[]) {
 		cube.rp.prbd[0].constants.slot = CONSTANTS_BINDING_SLOT_OBJECT;
 		cube.rp.prbd[0].constants.data = &cube_dpm;
 
-		//FirstPersonControl(&cube.transform.position, &cube.transform.rotation, fpci, app_state.input);
-		//if(app_state.input.mk[MK_RIGHT].held) 
-		FirstPersonControl(&camera.position, &camera.rotation, fpci, app_state.input);
+		if(app_state.input.mk[MK_RIGHT].held) {
+			if(app_state.input.kb[KB_SHIFT].held) {
+				fpci.block_pitch = true;
+				fpci.snap_yaw = true;
+			}	else { 
+				fpci.block_pitch = false;
+				fpci.snap_yaw = false;
+			}
+			if(app_state.input.kb[KB_CTRL].held) fpci.block_yaw = true; 
+			else fpci.block_yaw = false;
+			FirstPersonCameraControl(&camera, fpci, app_state.input);
+		}
 
-		SDL_Log("cam pos:%f, %f, %f", camera.position.x, camera.position.y, camera.position.z);
 		Mat4 vp = MakeViewPerspective(camera);
 
 		RenderPipeline vs_rp = {};
@@ -283,20 +292,8 @@ int main(int argc, char* argv[]) {
 		ps_rp_2.prbd[0].constants.data = &dpc;
 
 		CameraDrawDebugText(&camera, dt);
-		RenderPipeline debug_text = {};
-		debug_text.rs = RenderStateDefaults();
-		debug_text.rs.rs = RASTERIZER_STATE_DOUBLE_SIDED;
-		debug_text.vs = VERTEX_SHADER_TEXT;
-		debug_text.ps = PIXEL_SHADER_TEXT;
-		debug_text.dc.type = DRAW_CALL_VERTICES;
-		debug_text.dc.vertices_count = 6 * dt->glyph_counter;
-		debug_text.vrbd = PushMaster(RenderBufferData, 1);
-		debug_text.vrbd_count = 1;
-		debug_text.vrbd[0].type = RENDER_BUFFER_TYPE_STRUCTURED;
-		debug_text.vrbd[0].structured.slot = STRUCTURED_BINDING_SLOT_FRAME;
-		debug_text.vrbd[0].structured.data = dt->quads;
-		debug_text.vrbd[0].structured.count = dt->glyph_counter;
 
+		SubmitDebugTextDrawCall(dt, renderer);
 		renderer->context->PSSetSamplers(0, 1, &renderer->ss[SAMPLER_STATE_DEFAULT]);
 
 		ExecuteRenderPipeline(vs_rp, renderer);
@@ -311,13 +308,15 @@ int main(int argc, char* argv[]) {
 		ExecuteRenderPipeline(cube.rp, renderer);
 
 		ExecuteRenderPipeline(light.rp, renderer);
-
-		// TODO: RenderPipeline to clear states
 		renderer->context->ClearDepthStencilView(renderer->dsv, D3D11_CLEAR_DEPTH, 1.0f, 0);
-		ExecuteRenderPipeline(debug_text, renderer);
+		Render(renderer);
+		//ExecuteRenderPipeline(debug_text, renderer);
+
+
 		EndRendering(renderer);
 
 		PopScratch(RenderBufferData, 15);
+		EndMemoryCheck();
 	}
 	return 0;
 }

@@ -1,8 +1,14 @@
 #define Abs(a) ((a) > 0 ? (a) : -(a))
 #define Mod(a, m) (((a) % (m)) >= 0 ? ((a) % (m)) : (((a) % (m)) + (m)))
 
-static float DegreesToRadians(float degrees) { return degrees * (M_PI/180.0f); }
+static float DegToRad(float degrees) { return degrees * (M_PI/180.0f); }
+static float RadToDeg(float radians) { return radians * (180/M_PI); }
+static float InRange(float val, float min, float max) { return (val > min) && (val < max); }
+static float InRangeMinInc(float val, float min, float max) { return (val >= min) && (val < max); }
+static float InRangeMaxInc(float val, float min, float max) { return (val > min) && (val <= max); }
+static float InRangeMinMaxInc(float val, float min, float max) { return (val >= min) && (val <= max); }
 
+//------------------------------------------------------------------------
 struct Vec2 {
 	union {
 		struct {
@@ -64,7 +70,7 @@ struct Transform {
 	Vec3 scale;
 };
 
-
+//------------------------------------------------------------------------
 static Vec2 V2(float x, float y) { return Vec2 { x, y }; }
 static Vec2 V2I() { return Vec2 { 1.0f, 1.0f }; }
 static Vec2 V2Z() { return Vec2 { 0.0f, 0.0f }; }
@@ -253,8 +259,8 @@ static Mat4 M4Translate(Vec3 translation) {
 static Mat4 M4Rotate(Vec3 axis, float angle) {
 	Mat4 result = M4I();
 	axis = V3Norm(axis);
-	float sin = sinf(DegreesToRadians(angle));
-	float cos = cosf(DegreesToRadians(angle));
+	float sin = sinf(DegToRad(angle));
+	float cos = cosf(DegToRad(angle));
 	float one_minus_cos = 1.0f - cos;
 
 	result.elem[0][0] = (axis.x*axis.x*one_minus_cos) + cos;
@@ -435,7 +441,7 @@ static Vec3 EulerFromQuat(Quat quat) {
 static void AxisAngleFromQuat(Quat q, Vec3* outAxis, float* outAngle) {
 	if (fabs(q.w) > 1.0f)
 	{
-		// QuaternionNormalize(q);
+		QuatNorm(q);
 		float length = sqrtf(q.x*q.x + q.y*q.y + q.z*q.z + q.w*q.w);
 		if (length == 0.0f) length = 1.0f;
 		float ilength = 1.0f/length;
@@ -472,7 +478,7 @@ static Quat QuatFromDirectionChange(Vec3 from, Vec3 to) {
 	Quat result = {};
 	float cos = V3Dot(from, to);
 	if (Abs(cos - (-1.0f)) < 0.000001f) {
-		result = QuatFromAxisAngle(V3(0.0f, 1.0f, 0.0f), DegreesToRadians(180.0f));
+		result = QuatFromAxisAngle(V3(0.0f, 1.0f, 0.0f), DegToRad(180.0f));
 	}
 	if (Abs(cos - (1.0f)) < 0.00001f) {
 		result = QuatI();

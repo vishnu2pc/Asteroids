@@ -3,6 +3,12 @@ struct FPControlInfo {
 	float base_sens;
 	float trans_sens;
 	float rot_sens;
+	float snap_angle_range;
+
+	bool block_yaw;
+	bool block_pitch;
+	bool snap_yaw;
+	bool snap_pitch;
 };
 
 static Mat4 MakeViewPerspective(CameraInfo camera) {
@@ -24,10 +30,10 @@ static Mat4 MakeViewPerspective(CameraInfo camera) {
 	return result;
 }
 
-static void FirstPersonControl(Vec3* position, Quat* rotation, FPControlInfo control_info, Input input) {
-	float base_sens = control_info.base_sens;
-	float trans_sens = control_info.trans_sens;
-	float rot_sens = control_info.rot_sens;
+static void FirstPersonCameraControl(CameraInfo* cam, FPControlInfo ci, Input input) {
+	float base_sens = ci.base_sens;
+	float trans_sens = ci.trans_sens;
+	float rot_sens = ci.rot_sens;
 
 	float tdel = base_sens * trans_sens * 0.00001f;
 	float rdel = base_sens * rot_sens * 0.005f;
@@ -36,16 +42,16 @@ static void FirstPersonControl(Vec3* position, Quat* rotation, FPControlInfo con
 	bool b = input.kb[KB_S].held;
 	bool l = input.kb[KB_A].held;
 	bool r = input.kb[KB_D].held;
-	bool u = input.kb[KB_UP].held;
-	bool d = input.kb[KB_DOWN].held;
+	bool u = input.kb[KB_Q].held;
+	bool d = input.kb[KB_E].held;
 
-	float y = input.mouse.del.x;
-	float p = input.mouse.del.y;
+	float y = input.mouse.del.x * !ci.block_yaw;
+	float p = input.mouse.del.y * !ci.block_pitch;
 
-	Vec3 pos = *position;
-	Quat rot = *rotation;
+	Vec3 pos = cam->position;
+	Quat rot = cam->rotation;
 
-	// We move in the conjugate of the forward vector because camera
+	// We move in the negative of the forward vector because camera
 	Vec3 fv = V3Neg(GetForwardVector(rot));
 	Vec3 fdisp = V3MulF(fv, tdel);
 
@@ -64,11 +70,27 @@ static void FirstPersonControl(Vec3* position, Quat* rotation, FPControlInfo con
 	pos = V3Add(pos, V3MulF(V3Add(uv, rdisp), u));
 	pos = V3Sub(pos, V3MulF(V3Add(uv, rdisp), d));
 
-	Quat yrot = y ? QuatFromAxisAngle(V3Up(), y * rdel) : QuatI();
-	Quat xrot = p ? QuatFromAxisAngle(rv, p * rdel) : QuatI();
+	Quat yrot = y ? QuatFromAxisAngle(V3Up(), -y * rdel) : QuatI();
+	Quat xrot = p ? QuatFromAxisAngle(rv, -p * rdel) : QuatI();
 
 	rot = QuatMul(QuatMul(yrot, xrot), rot);
 
-	*position = pos;
-	*rotation = rot;
+	Vec3 euler;
+	euler = EulerFromQuat(rot);
+	euler = V3(RadToDeg(euler.x), RadToDeg(euler.y), RadToDeg(euler.z));
+	
+	float snap_min = 90.0f - ci.snap_angle_range;
+	float snap_max = 90.0f + ci.snap_angle_range;
+
+	if(ci.snap_yaw) {
+		if(InRangeMinMaxInc(euler.y, -snap_min, -snap_max)) euler.y = -90.0f;
+		if(InRangeMinMaxInc(euler.y, snap_min, snap_max)) euler.y = 90.0f;
+		if(InRangeMinMaxInc(euler.y, -ci.snap_angle_range, ci.snap_angle_range)) euler.y = 0.0f;
+
+		rot = QuatFromEuler(euler.x, euler.y, euler.z);
+	}
+
+
+	cam->position = pos;
+	cam->rotation = rot;
 }

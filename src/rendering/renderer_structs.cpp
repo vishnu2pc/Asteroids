@@ -22,8 +22,8 @@
 #define PURPLE V3(0.5f, 0.0f, 0.5f)
 
 enum RENDERER_MISC_FLAGS {
-	RENDER_BUFFER_TOTAL = 255,
-	RENDER_BUFFER_TOTA = 255
+	RENDER_BUFFER_MAX = 255,
+	RENDER_QUEUE_MAX = 255
 };
 
 enum DEPTH_STENCIL_STATE {
@@ -262,6 +262,19 @@ struct RenderState {
 	VIEWPORT vp;
 };
 
+struct RenderPipeline {
+	// Render target
+	RenderState rs;
+	VERTEX_SHADER vs;
+	PIXEL_SHADER ps;
+	RENDER_BUFFER_GROUP vrbg, prbg;
+	DrawCall dc;
+	RenderBufferData* vrbd;
+	RenderBufferData* prbd;
+
+	u8 vrbd_count, prbd_count;
+};
+
 // Push this on the heap
 struct Renderer {
 	ID3D11Device* device;
@@ -287,33 +300,28 @@ struct Renderer {
 
 	ID3D11SamplerState* ss[SAMPLER_STATE_TOTAL];
 	
-	RenderBuffer rb[RENDER_BUFFER_TOTAL];
+	RenderBuffer rb[RENDER_BUFFER_MAX];
 	RenderBufferGroup rbg[RENDER_BUFFER_GROUP_TOTAL];
 	u8 rbg_id;
 	u8 rb_id;
 
+	RenderPipeline rq[RENDER_QUEUE_MAX];
+	u8 rq_id;
+
 	RenderState state_overrides;
 };
 
-struct RenderPipeline {
-	// Render target
-	RenderState rs;
-	VERTEX_SHADER vs;
-	PIXEL_SHADER ps;
-	RENDER_BUFFER_GROUP vrbg, prbg;
-	DrawCall dc;
-	RenderBufferData* vrbd;
-	RenderBufferData* prbd;
-
-	u8 vrbd_count, prbd_count;
-};
+static void PushRenderPipeline(RenderPipeline rp , Renderer* renderer) {
+	assert(renderer->rq_id < RENDER_QUEUE_MAX);
+	renderer->rq[renderer->rq_id++] = rp;
+}
 
 static RenderBuffer* PushRenderBuffer(u8 count, Renderer* renderer) {
 	RenderBuffer* ptr;
 	u8 id = renderer->rb_id;
 	ptr = &renderer->rb[id];
 
-	assert(id + count < RENDER_BUFFER_TOTAL);
+	assert(id + count < RENDER_BUFFER_MAX);
 	renderer->rb_id += count;
 
 	return ptr;

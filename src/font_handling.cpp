@@ -88,3 +88,21 @@ static void DrawDebugText(char* text, Vec3 color, float scale, QUADRANT quad, De
 	}
 	dt->line_count[quad]++;
 };
+
+void SubmitDebugTextDrawCall(DebugText* dt, Renderer* renderer) {
+	RenderPipeline debug_text = {};
+
+	debug_text.rs = RenderStateDefaults();
+	debug_text.vs = VERTEX_SHADER_TEXT;
+	debug_text.ps = PIXEL_SHADER_TEXT;
+	debug_text.dc.type = DRAW_CALL_VERTICES;
+	debug_text.dc.vertices_count = 6 * dt->glyph_counter;
+	debug_text.vrbd = PushMaster(RenderBufferData, 1);
+	debug_text.vrbd_count = 1;
+	debug_text.vrbd[0].type = RENDER_BUFFER_TYPE_STRUCTURED;
+	debug_text.vrbd[0].structured.slot = STRUCTURED_BINDING_SLOT_FRAME;
+	debug_text.vrbd[0].structured.data = dt->quads;
+	debug_text.vrbd[0].structured.count = dt->glyph_counter;
+
+	PushRenderPipeline(debug_text, renderer);
+}
