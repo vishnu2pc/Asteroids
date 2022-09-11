@@ -352,6 +352,7 @@ static Quat QuatNorm(Quat quat) {
 	result = QuatDivF(quat, mag);
 	return result;
 }
+
 static Mat4 M4FromQuat(Quat quat) {
 	Mat4 result = M4I();
 	Quat quat_norm = QuatNorm(quat);

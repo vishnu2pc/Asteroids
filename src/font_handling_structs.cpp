@@ -38,6 +38,7 @@ struct DebugText {
 	u32 glyph_counter;
 	u32 w, h; // Screen res
 	u8 line_count[QUADRANT_TOTAL];
+	//float font_size;
 };
 
 static void PushGlyph(GlyphQuad gq, DebugText* dt) {

@@ -57,32 +57,32 @@ int main(int argc, char* argv[]) {
 	AllocateScratchMemory(Kilobytes(200));
 	stbi_set_flip_vertically_on_load(false);
 
-	AppState app_state = {};
-	app_state.running = true;
-	app_state.wd = { 1600, 900 };
+	AppState* app_state = PushMaster(AppState, 1);
+	app_state->running = true;
+	app_state->wd = { 1600, 900 };
 
 	SDL_Init(SDL_INIT_EVERYTHING);
 	SDL_Window* window = SDL_CreateWindow("Asteroids", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-		app_state.wd.width, app_state.wd.height, 0);
+		app_state->wd.width, app_state->wd.height, 0);
 	HWND handle = GetWindowHandleSDL(window);
 
-	SDL_WarpMouseInWindow(window, app_state.wd.width/2, app_state.wd.height/2);
+	SDL_WarpMouseInWindow(window, app_state->wd.width/2, app_state->wd.height/2);
 	SDL_FlushEvents(SDL_MOUSEMOTION, SDL_MOUSEWHEEL);
 
 	Renderer* renderer = PushMaster(Renderer, 1);
-	InitRendering(renderer, handle, app_state.wd);
+	InitRendering(renderer, handle, app_state->wd);
 
 	DebugText* dt = PushMaster(DebugText, 1);
 	LoadFont("../assets/fonts/JetBrainsMono/jetbrains_mono_light.fi",
 		"../assets/fonts/JetBrainsMono/jetbrains_mono_light.png", dt, renderer);
 
 	CameraInfo camera = {};
-	camera.position = V3(0.0f, 0.0f, 5.0f);
+	camera.position = V3(0.0f, 0.0f, 700.0f);
 	camera.rotation = QuatI();
 	camera.fov = 75.0f;
 	camera.near_clip = 0.1f;
 	camera.far_clip = 10000.0f;
-	camera.aspect_ratio = (float)app_state.wd.width/(float)app_state.wd.height;
+	camera.aspect_ratio = (float)app_state->wd.width/(float)app_state->wd.height;
 	
 	Entity cube = {};
 	{
@@ -101,12 +101,16 @@ int main(int argc, char* argv[]) {
 		rp.rs = RenderStateDefaults();
 		rp.vs = VERTEX_SHADER_POS_NOR_TEX;
 		rp.ps = PIXEL_SHADER_DIFFUSE_TEXTURED;
+		rp.rs.rs = RASTERIZER_STATE_DOUBLE_SIDED;
 		rp.vrbg = RENDER_BUFFER_GROUP_PLANE;
-		rp.prbg = RENDER_BUFFER_GROUP_FONT;
+		rp.prbg = RENDER_BUFFER_GROUP_SPACE_BACKGROUND;
 		rp.dc.type = DRAW_CALL_DEFAULT;
 		plane = { V3(0.0f, 0.0f, 0.0f), QuatI(), V3(1000.0f, 1000.0f, 1000.0f), rp };
+		//plane.transform.rotation = QuatFromEuler(90.0f, 0.0f, 0.0f);
+		plane.transform.rotation = QuatFromAxisAngle(V3Right(), 89.5f);
 	}
 
+	float angle = 0.0f;
 	Entity right = {} ;
 	{
 		RenderPipeline rp = {};
@@ -153,15 +157,14 @@ int main(int argc, char* argv[]) {
 
 	float ambience = 0.5f;
 
-	FPControlInfo fpci = { 1.0f, 1.0f, 1.0f, 10.0f };
+	FPControlInfo fpci = { 1.0f, 1.0f, 1.0f, };
 
-	while (app_state.running) {
+	while (app_state->running) {
 		BeginMemoryCheck();
-		PreProcessInput(&app_state.input);
-		HandleSDLevents(&app_state);
-		BeginDebugText(dt, app_state.wd);
+		BeginAppState(app_state);
+		BeginDebugText(dt, app_state->wd);
 		BeginRendering(renderer);
-		if(app_state.input.kb[KB_F1].pressed) renderer->state_overrides.rs = renderer->state_overrides.rs ? RASTERIZER_STATE_NONE : RASTERIZER_STATE_WIREFRAME; 
+		if(app_state->input.kb[KB_F1].pressed) renderer->state_overrides.rs = renderer->state_overrides.rs ? RASTERIZER_STATE_NONE : RASTERIZER_STATE_WIREFRAME; 
 
 		Mat4 plane_matrix = MakeTransformMatrix(plane.transform);
 		DiffusePM plane_dpm = { PURPLE, 0.5f };
@@ -228,17 +231,11 @@ int main(int argc, char* argv[]) {
 		cube.rp.prbd[0].constants.slot = CONSTANTS_BINDING_SLOT_OBJECT;
 		cube.rp.prbd[0].constants.data = &cube_dpm;
 
-		if(app_state.input.mk[MK_RIGHT].held) {
-			if(app_state.input.kb[KB_SHIFT].held) {
-				fpci.block_pitch = true;
-				fpci.snap_yaw = true;
-			}	else { 
-				fpci.block_pitch = false;
-				fpci.snap_yaw = false;
-			}
-			if(app_state.input.kb[KB_CTRL].held) fpci.block_yaw = true; 
-			else fpci.block_yaw = false;
-			FirstPersonCameraControl(&camera, fpci, app_state.input);
+		if(app_state->input.mk[MK_RIGHT].held) {
+			if(app_state->input.kb[KB_SHIFT].held) fpci.block_pitch = true; else fpci.block_pitch = false;
+			if(app_state->input.kb[KB_CTRL].held) fpci.block_yaw = true; else fpci.block_yaw = false;
+
+			FirstPersonCameraControl(&camera, fpci, app_state->input);
 		}
 
 		Mat4 vp = MakeViewPerspective(camera);
@@ -291,8 +288,19 @@ int main(int argc, char* argv[]) {
 		ps_rp_2.prbd[0].constants.slot = CONSTANTS_BINDING_SLOT_CAMERA;
 		ps_rp_2.prbd[0].constants.data = &dpc;
 
-		CameraDrawDebugText(&camera, dt);
+		DrawDebugText("Does this work?", TEAL, QUADRANT_TOP_RIGHT, dt);
+		DrawDebugText("Think it does", TEAL, QUADRANT_TOP_RIGHT, dt);
 
+		char* ms = PushScratch(char, 100);
+		sprintf(ms, "ms - %u", SDL_GetTicks());
+		DrawDebugText(ms, GREEN, QUADRANT_TOP_LEFT, dt);
+		DrawDebugText("ONE", YELLOW, QUADRANT_BOTTOM_LEFT, dt);
+		DrawDebugText("TWO", YELLOW, QUADRANT_BOTTOM_LEFT, dt);
+		DrawDebugText("Yea", CYAN, QUADRANT_BOTTOM_RIGHT, dt);
+		DrawDebugText("NO", CYAN, QUADRANT_BOTTOM_RIGHT, dt);
+
+		PopScratch(char, 100);
+		CameraDrawDebugText(&camera, dt);
 		SubmitDebugTextDrawCall(dt, renderer);
 		renderer->context->PSSetSamplers(0, 1, &renderer->ss[SAMPLER_STATE_DEFAULT]);
 
@@ -309,13 +317,14 @@ int main(int argc, char* argv[]) {
 
 		ExecuteRenderPipeline(light.rp, renderer);
 		renderer->context->ClearDepthStencilView(renderer->dsv, D3D11_CLEAR_DEPTH, 1.0f, 0);
-		Render(renderer);
 		//ExecuteRenderPipeline(debug_text, renderer);
-
-
+		
+		Render(renderer);
 		EndRendering(renderer);
 
 		PopScratch(RenderBufferData, 15);
+		EndAppState(app_state);
+
 		EndMemoryCheck();
 	}
 	return 0;

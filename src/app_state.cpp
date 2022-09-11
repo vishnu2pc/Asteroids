@@ -2,6 +2,8 @@ struct AppState {
 	bool running;
 	WindowDimensions wd;
 	Input input;
+	u32 frame_time_begin;
+	u32 frame_time_end;
 };
 
 static HWND GetWindowHandleSDL(SDL_Window* window) {
@@ -30,4 +32,14 @@ static void HandleSDLevents(AppState* app_state) {
 			HandleMouseEvents(event, &app_state->input);
 		} break;
 	}
+}
+//------------------------------------------------------------------------
+static void BeginAppState(AppState* app_state) {
+	app_state->frame_time_begin = SDL_GetTicks();
+	PreProcessInput(&app_state->input);
+	HandleSDLevents(app_state);
+}
+static void EndAppState(AppState* app_state) {
+	app_state->frame_time_end = SDL_GetTicks();
+
 }

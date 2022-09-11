@@ -236,6 +236,22 @@ static TextureBuffer UploadTexture(TextureData texture_data, ID3D11Device* devic
 }
 
 //------------------------------------------------------------------------
+static void UploadTextureFromFile(char* filepath, TEXTURE_SLOT slot, RENDER_BUFFER_GROUP id, Renderer* renderer) {
+	int x, y, n;
+	void* png = stbi_load(filepath, &x, &y, &n, 4);
+	assert(png);
+
+	TextureData texture_data = { TEXTURE_SLOT_ALBEDO, png, (u32)x, (u32)y, 4 };
+
+	RenderBuffer* rb = PushRenderBuffer(1, renderer);
+	rb->type = RENDER_BUFFER_TYPE_TEXTURE;
+	rb->texture = UploadTexture(texture_data, renderer->device);
+	RenderBufferGroup rbg = { rb, 1 };
+	PushRenderBufferGroup(id, rbg, renderer);
+	STBI_FREE(png);
+}
+
+//------------------------------------------------------------------------
 static VertexBuffer UploadVertexBuffer(VertexBufferData vb_data, u32 num_vertices, ID3D11Device* device) {
 	HRESULT hr;
 	VertexBuffer vb = {};
@@ -604,6 +620,11 @@ static void InitRendering(Renderer* renderer, HWND handle, WindowDimensions wd) 
 
 			renderer->ps[PIXEL_SHADER_TEXT] = UploadPixelShader(ps_desc, renderer);
 		}
+	}
+	//------------------------------------------------------------------------=
+	{
+		UploadTextureFromFile("../assets/textures/space/Nebula Aqua-Pink.png", TEXTURE_SLOT_ALBEDO, 
+			RENDER_BUFFER_GROUP_SPACE_BACKGROUND, renderer);
 	}
 	//----------------------------Meshes--------------------------------------------
 	{ 

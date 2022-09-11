@@ -1,14 +1,10 @@
-
 struct FPControlInfo {
 	float base_sens;
 	float trans_sens;
 	float rot_sens;
-	float snap_angle_range;
 
 	bool block_yaw;
 	bool block_pitch;
-	bool snap_yaw;
-	bool snap_pitch;
 };
 
 static Mat4 MakeViewPerspective(CameraInfo camera) {
@@ -74,22 +70,6 @@ static void FirstPersonCameraControl(CameraInfo* cam, FPControlInfo ci, Input in
 	Quat xrot = p ? QuatFromAxisAngle(rv, -p * rdel) : QuatI();
 
 	rot = QuatMul(QuatMul(yrot, xrot), rot);
-
-	Vec3 euler;
-	euler = EulerFromQuat(rot);
-	euler = V3(RadToDeg(euler.x), RadToDeg(euler.y), RadToDeg(euler.z));
-	
-	float snap_min = 90.0f - ci.snap_angle_range;
-	float snap_max = 90.0f + ci.snap_angle_range;
-
-	if(ci.snap_yaw) {
-		if(InRangeMinMaxInc(euler.y, -snap_min, -snap_max)) euler.y = -90.0f;
-		if(InRangeMinMaxInc(euler.y, snap_min, snap_max)) euler.y = 90.0f;
-		if(InRangeMinMaxInc(euler.y, -ci.snap_angle_range, ci.snap_angle_range)) euler.y = 0.0f;
-
-		rot = QuatFromEuler(euler.x, euler.y, euler.z);
-	}
-
 
 	cam->position = pos;
 	cam->rotation = rot;

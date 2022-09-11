@@ -1,25 +1,10 @@
-
 //Font info allocated here
 static void LoadFont(char* info_path, char* image_path, DebugText* dt, Renderer* renderer) { 
 	FILE* file = fopen(info_path, "rb");
 
 	fread(&dt->info, sizeof(FontInfo), 1, file); 
-
-	int x, y, n;
-	void* png = stbi_load(image_path, &x, &y, &n, 4);
-	assert(png);
-
-	TextureData texture_data = { TEXTURE_SLOT_ALBEDO, png, 
-															 1000, 1000, 4 };
-
-	RenderBuffer* rb = PushRenderBuffer(1, renderer);
-	rb->type = RENDER_BUFFER_TYPE_TEXTURE;
-	rb->texture = UploadTexture(texture_data, renderer->device);
-	RenderBufferGroup rbg = { rb, 1 };
-	PushRenderBufferGroup(RENDER_BUFFER_GROUP_FONT, rbg, renderer);
-
+	UploadTextureFromFile(image_path, TEXTURE_SLOT_ALBEDO, RENDER_BUFFER_GROUP_FONT, renderer);
 	fclose(file);
-	STBI_FREE(png);
 }
 
 // from stb_tt
@@ -63,40 +48,105 @@ static void BeginDebugText(DebugText* dt, WindowDimensions wd) {
 	dt->line_count[QUADRANT_BOTTOM_RIGHT] = 0;
 };
 
-static void DrawDebugText(char* text, Vec3 color, float scale, QUADRANT quad, DebugText* dt) {
-	assert(text);
-	float x, y;
-	x = 0.0f;
-	int line_width = dt->info.ascent - dt->info.descent + dt->info.line_gap;
-	if(quad == QUADRANT_TOP_LEFT) y = (dt->line_count[QUADRANT_TOP_LEFT] + 1) * line_width;  
-	y *= 0.8f*scale;
-
-	for(u8 i=0; text[i] != 0; i++) {
+static void GenerateGlyphsTopLeft(char* text, int len, Vec3 color, GlyphQuad* gq, float* x, float* y, DebugText* dt) {
+	for(int i=0; i<=len; i++) {
 		u8 glyph_index = text[i] - 0x20;
 		PackedChar pc = dt->info.pc[glyph_index];
 
-		GlyphQuad gq = MakeGlyphQuad(&pc, dt->info.bitmap_w, dt->info.bitmap_h, &x, &y);
+		gq[i] = MakeGlyphQuad(&pc, dt->info.bitmap_w, dt->info.bitmap_h, x, y);
 
-		gq.x0 = (gq.x0 * 0.25f * scale)/dt->w;
-		gq.y0 = (gq.y0 * 0.25f * scale)/dt->h;
-		gq.x1 = (gq.x1 * 0.25f * scale)/dt->w;
-		gq.y1 = (gq.y1 * 0.25f * scale)/dt->h;
+		gq[i].x0 = (gq[i].x0 * 0.20f);
+		gq[i].y0 = (gq[i].y0 * 0.20f);
+		gq[i].x1 = (gq[i].x1 * 0.20f);
+		gq[i].y1 = (gq[i].y1 * 0.20f);
 
-		gq.color = color;
-
-		PushGlyph(gq, dt);
+		gq[i].color = color;
 	}
+}
+
+// Extremely hacky but it will do
+static void DrawDebugText(char* text, Vec3 color, QUADRANT quad, DebugText* dt) {
+	assert(text);
+	int len = strlen(text);
+	float x, y;
+	x = 0.0f;
+	int font_line_width = dt->info.ascent - dt->info.descent + dt->info.line_gap;
+	GlyphQuad* gq = PushScratch(GlyphQuad, len);
+	float line_width = (dt->line_count[quad] + 1) * font_line_width * 0.8f;
+
+	switch(quad) {
+		case QUADRANT_TOP_LEFT: {
+			y = line_width;
+			GenerateGlyphsTopLeft(text, len, color, gq, &x, &y, dt);
+			for(u8 i=0; i<=len; i++) {
+				gq[i].x0 /= dt->w;
+				gq[i].y0 /= dt->h;
+				gq[i].x1 /= dt->w;
+				gq[i].y1 /= dt->h;
+
+				PushGlyph(gq[i], dt);
+			}
+		} break;
+
+		case QUADRANT_TOP_RIGHT: {
+			y = line_width;
+			GenerateGlyphsTopLeft(text, len, color, gq, &x, &y, dt);
+			float xpos = dt->w - gq[len].x1;
+
+			for(int i=0; i<=len; i++) {
+				gq[i].x0 = (gq[i].x0 + xpos)/dt->w;
+				gq[i].x1 = (gq[i].x1 + xpos)/dt->w;
+				gq[i].y0 = gq[i].y0/dt->h;
+				gq[i].y1 = gq[i].y1/dt->h;
+
+				PushGlyph(gq[i], dt);
+			}
+		} break;
+
+		case QUADRANT_BOTTOM_LEFT: {
+			y = line_width;
+			GenerateGlyphsTopLeft(text, len, color, gq, &x, &y, dt);
+			float ypos = dt->h - gq[len].y1*(dt->line_count[quad]+1);
+			for(u8 i=0; i<=len; i++) {
+				gq[i].x0 /= dt->w;
+				gq[i].x1 /= dt->w;
+				gq[i].y0 = (gq[i].y0 + ypos)/dt->h;
+				gq[i].y1 = (gq[i].y1 + ypos)/dt->h;
+
+				PushGlyph(gq[i], dt);
+			}
+		} break;
+
+		case QUADRANT_BOTTOM_RIGHT: {
+			y = line_width;
+			GenerateGlyphsTopLeft(text, len, color, gq, &x, &y, dt);
+			float xpos = dt->w - gq[len].x1;
+			float ypos = dt->h - gq[len].y1*(dt->line_count[quad]+1);
+			for(u8 i=0; i<=len; i++) {
+				gq[i].x0 = (gq[i].x0 + xpos)/dt->w;
+				gq[i].x1 = (gq[i].x1 + xpos)/dt->w;
+				gq[i].y0 = (gq[i].y0 + ypos)/dt->h;
+				gq[i].y1 = (gq[i].y1 + ypos)/dt->h;
+
+				PushGlyph(gq[i], dt);
+			}
+		} break;
+	}
+	
 	dt->line_count[quad]++;
+	PopScratch(GlyphQuad, len);
 };
 
 void SubmitDebugTextDrawCall(DebugText* dt, Renderer* renderer) {
 	RenderPipeline debug_text = {};
 
 	debug_text.rs = RenderStateDefaults();
+	debug_text.rs.rs = RASTERIZER_STATE_DOUBLE_SIDED;
 	debug_text.vs = VERTEX_SHADER_TEXT;
 	debug_text.ps = PIXEL_SHADER_TEXT;
 	debug_text.dc.type = DRAW_CALL_VERTICES;
 	debug_text.dc.vertices_count = 6 * dt->glyph_counter;
+	debug_text.prbg = RENDER_BUFFER_GROUP_FONT;
 	debug_text.vrbd = PushMaster(RenderBufferData, 1);
 	debug_text.vrbd_count = 1;
 	debug_text.vrbd[0].type = RENDER_BUFFER_TYPE_STRUCTURED;
