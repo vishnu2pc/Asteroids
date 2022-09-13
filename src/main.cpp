@@ -77,11 +77,11 @@ int main(int argc, char* argv[]) {
 		"../assets/fonts/JetBrainsMono/jetbrains_mono_light.png", dt, renderer);
 
 	CameraInfo camera = {};
-	camera.position = V3(0.0f, 0.0f, 700.0f);
+	camera.position = V3(0.0f, 0.0f, 70.0f);
 	camera.rotation = QuatI();
 	camera.fov = 75.0f;
 	camera.near_clip = 0.1f;
-	camera.far_clip = 10000.0f;
+	camera.far_clip = 1000.0f;
 	camera.aspect_ratio = (float)app_state->wd.width/(float)app_state->wd.height;
 	
 	Entity cube = {};
@@ -105,7 +105,7 @@ int main(int argc, char* argv[]) {
 		rp.vrbg = RENDER_BUFFER_GROUP_PLANE;
 		rp.prbg = RENDER_BUFFER_GROUP_SPACE_BACKGROUND;
 		rp.dc.type = DRAW_CALL_DEFAULT;
-		plane = { V3(0.0f, 0.0f, 0.0f), QuatI(), V3(1000.0f, 1000.0f, 1000.0f), rp };
+		plane = { V3(0.0f, 0.0f, 0.0f), QuatI(), V3(100.0f, 100.0f, 100.0f), rp };
 		//plane.transform.rotation = QuatFromEuler(90.0f, 0.0f, 0.0f);
 		plane.transform.rotation = QuatFromAxisAngle(V3Right(), 89.5f);
 	}
