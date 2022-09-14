@@ -86,6 +86,7 @@ enum RENDER_BUFFER_GROUP {
 	RENDER_BUFFER_GROUP_PLANE,
 	RENDER_BUFFER_GROUP_FONT,
 	RENDER_BUFFER_GROUP_SPACE_BACKGROUND,
+	RENDER_BUFFER_GROUP_SPACE_RED,
 	RENDER_BUFFER_GROUP_END,
 	RENDER_BUFFER_GROUP_TOTAL = 255
 };
@@ -141,7 +142,7 @@ struct VertexShaderDesc {
 	ShaderDesc shader;
 	StructuredBufferDesc* sb_desc;
 	ConstantsBufferDesc* cb_desc;
-	VERTEX_BUFFER_TYPE* vb_type;
+	VERTEX_BUFFER* vb_type;
 
 	u8 cb_count, vb_count, sb_count;
 };
@@ -166,7 +167,7 @@ struct IndexBuffer {
 };
 
 struct VertexBuffer {
-	VERTEX_BUFFER_TYPE type;
+	VERTEX_BUFFER type;
 	ID3D11Buffer* buffer;
 	u32 stride;
 };
@@ -210,7 +211,7 @@ struct RenderBufferGroup {
 struct VertexShader {
 	ID3D11VertexShader* shader;
 	ID3D11InputLayout* il;
-	VERTEX_BUFFER_TYPE* vb_type;
+	VERTEX_BUFFER* vb_type;
 	RenderBuffer* rb;
 	u8 vb_count, rb_count;
 };

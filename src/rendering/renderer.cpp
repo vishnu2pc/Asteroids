@@ -10,27 +10,16 @@
 #include "shader_structs.cpp"
 
 //-------------------------------------------------------------------------
-static void MakeD3DInputElementDesc(VERTEX_BUFFER_TYPE* vb_type, D3D11_INPUT_ELEMENT_DESC* d3d_il_desc, u8 count) {
-	char* SemanticName[] = {
-	  "NOT SET",
-		"POSITION",
-		"NORMAL",
-		"TANGENT",
-		"COLOR",
-		"TEXCOORD"
-	};
-
+static void MakeD3DInputElementDesc(VERTEX_BUFFER* vb_type, D3D11_INPUT_ELEMENT_DESC* d3d_il_desc, u8 count) {
 	for (u32 i = 0; i < count; i++) {
-
-		u8 id = 0;
 		DXGI_FORMAT format;
-		if (vb_type[i] == VERTEX_BUFFER_TYPE_POSITION) { id = 1; format = DXGI_FORMAT_R32G32B32_FLOAT; }
-		else if (vb_type[i] == VERTEX_BUFFER_TYPE_NORMAL) { id = 2; format = DXGI_FORMAT_R32G32B32_FLOAT; }
-		//else if (vb_type[i] == VERTEX_BUFFER_TYPE_TANGENT) { id = 3; format = DXGI_FORMAT_R32G32B32_FLOAT; }
-		else if (vb_type[i] == VERTEX_BUFFER_TYPE_TEXCOORD) { id = 5; format = DXGI_FORMAT_R32G32_FLOAT; }
+		if (vb_type[i] == VERTEX_BUFFER_POSITION) format = DXGI_FORMAT_R32G32B32_FLOAT;
+		else if (vb_type[i] == VERTEX_BUFFER_NORMAL) format = DXGI_FORMAT_R32G32B32_FLOAT;
+		//else if (vb_type[i] == VERTEX_BUFFER_TANGENT) format = DXGI_FORMAT_R32G32B32_FLOAT;
+		else if (vb_type[i] == VERTEX_BUFFER_TEXCOORD) format = DXGI_FORMAT_R32G32_FLOAT;
 		else assert(false);
 
-		d3d_il_desc[i] = { SemanticName[id], 0, format, i, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 };
+		d3d_il_desc[i] = { vertex_buffer_names[vb_type[i]], 0, format, i, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 };
 	}	
 }
 
@@ -143,7 +132,7 @@ static VertexShader UploadVertexShader(VertexShaderDesc desc, Renderer* renderer
 	ID3DBlob* error;
 	ID3D11VertexShader* shader = 0;
 	ID3D11InputLayout* il = 0;
-	VERTEX_BUFFER_TYPE* vb_type = 0;
+	VERTEX_BUFFER* vb_type = 0;
 
 	u8 rb_count = desc.cb_count + desc.sb_count;
 	RenderBuffer* rb = PushRenderBuffer(rb_count, renderer);
@@ -163,8 +152,8 @@ static VertexShader UploadVertexShader(VertexShaderDesc desc, Renderer* renderer
 
 		hr = renderer->device->CreateInputLayout(ie_desc, desc.vb_count, blob->GetBufferPointer(), blob->GetBufferSize(), &il);
 
-		vb_type = PushMaster(VERTEX_BUFFER_TYPE, desc.vb_count);
-		memcpy(vb_type, desc.vb_type, sizeof(VERTEX_BUFFER_TYPE)*desc.vb_count);
+		vb_type = PushMaster(VERTEX_BUFFER, desc.vb_count);
+		memcpy(vb_type, desc.vb_type, sizeof(VERTEX_BUFFER)*desc.vb_count);
 		assertHR(hr);
 		PopScratch(D3D11_INPUT_ELEMENT_DESC, desc.vb_count);
 	}
@@ -259,10 +248,10 @@ static VertexBuffer UploadVertexBuffer(VertexBufferData vb_data, u32 num_vertice
 	ID3D11Buffer* buffer;
 	D3D11_BUFFER_DESC desc = {};
 	u32 num_components = 0;
-	if(vb_data.type == VERTEX_BUFFER_TYPE_POSITION) num_components = 3;
-	else if(vb_data.type == VERTEX_BUFFER_TYPE_NORMAL) num_components = 3;
-	else if(vb_data.type == VERTEX_BUFFER_TYPE_TEXCOORD) num_components = 2;
-	else if(vb_data.type == VERTEX_BUFFER_TYPE_TANGENT) num_components = 4;
+	if(vb_data.type == VERTEX_BUFFER_POSITION) num_components = 3;
+	else if(vb_data.type == VERTEX_BUFFER_NORMAL) num_components = 3;
+	else if(vb_data.type == VERTEX_BUFFER_TEXCOORD) num_components = 2;
+	else if(vb_data.type == VERTEX_BUFFER_TANGENT) num_components = 4;
 	else assert(false);
 
 	u32 component_width = sizeof(float);
@@ -314,7 +303,7 @@ static RenderBufferGroup UploadMesh(MeshData mesh_data, Renderer* renderer) {
 }
 
 //------------------------------------------------------------------------
-static void InitRendering(Renderer* renderer, HWND handle, WindowDimensions wd) {
+static void InitRendering(Renderer* renderer, HWND handle, WindowDimensions wd, GameAssets* ga) {
 	HRESULT hr;
 	//-------------------------Init-----------------------------------------------
 	{
@@ -527,7 +516,7 @@ static void InitRendering(Renderer* renderer, HWND handle, WindowDimensions wd) 
 
 		ConstantsBufferDesc cb_desc[] = { { CONSTANTS_BINDING_SLOT_CAMERA, sizeof(Mat4) },
 														 { CONSTANTS_BINDING_SLOT_INSTANCE, sizeof(Mat4) } };
-		VERTEX_BUFFER_TYPE vb_type[] = { VERTEX_BUFFER_TYPE_POSITION, VERTEX_BUFFER_TYPE_NORMAL };
+		VERTEX_BUFFER vb_type[] = { VERTEX_BUFFER_POSITION, VERTEX_BUFFER_NORMAL };
 
 		vs_desc.vb_type = vb_type;
 		vs_desc.cb_desc = cb_desc;
@@ -542,8 +531,8 @@ static void InitRendering(Renderer* renderer, HWND handle, WindowDimensions wd) 
 		ConstantsBufferDesc cb_desc[] = { { CONSTANTS_BINDING_SLOT_CAMERA, sizeof(Mat4) },
 																			{ CONSTANTS_BINDING_SLOT_INSTANCE, sizeof(Mat4) } };
 
-		VERTEX_BUFFER_TYPE vb_type[] = { VERTEX_BUFFER_TYPE_POSITION, VERTEX_BUFFER_TYPE_NORMAL, 
-																		 VERTEX_BUFFER_TYPE_TEXCOORD };
+		VERTEX_BUFFER vb_type[] = { VERTEX_BUFFER_POSITION, VERTEX_BUFFER_NORMAL, 
+																		 VERTEX_BUFFER_TEXCOORD };
 
 		vs_desc.vb_type = vb_type;
 		vs_desc.cb_desc = cb_desc;
@@ -625,39 +614,30 @@ static void InitRendering(Renderer* renderer, HWND handle, WindowDimensions wd) 
 	{
 		UploadTextureFromFile("../assets/textures/space/Nebula Aqua-Pink.png", TEXTURE_SLOT_ALBEDO, 
 			RENDER_BUFFER_GROUP_SPACE_BACKGROUND, renderer);
+		UploadTextureFromFile("../assets/textures/space/Nebula Red.png", TEXTURE_SLOT_ALBEDO,
+		  RENDER_BUFFER_GROUP_SPACE_RED, renderer);
 	}
-	//----------------------------Meshes--------------------------------------------
+	//----------------------------LoadedMeshes--------------------------------------------
 	{ 
-		ModelData model_data = {};
 		MeshData mesh_data = {};
-		// Cube mesh
-		{
-			model_data = LoadModelDataGLTF("../assets/models/shapes/cube.gltf", "cube");
-			mesh_data = model_data.mesh_data[0];
+		{ // Cube 
+			mesh_data = LoadMeshDataFromAssets("Cube", ga);
 			renderer->rbg[RENDER_BUFFER_GROUP_CUBE] = UploadMesh(mesh_data, renderer);
 		}
-		// Sphere mesh
-		{
-			model_data = LoadModelDataGLTF("../assets/models/shapes/sphere.gltf", "sphere");
-			mesh_data = model_data.mesh_data[0];
+		{ // Sphere 
+			mesh_data = LoadMeshDataFromAssets("Sphere.001", ga);
 			renderer->rbg[RENDER_BUFFER_GROUP_SPHERE] = UploadMesh(mesh_data, renderer);
 		}
-		// Cone mesh
-		{
-			model_data = LoadModelDataGLTF("../assets/models/shapes/cone.gltf", "cone");
-			mesh_data = model_data.mesh_data[0];
+		{ // Cone
+			mesh_data = LoadMeshDataFromAssets("Cone", ga);
 			renderer->rbg[RENDER_BUFFER_GROUP_CONE] = UploadMesh(mesh_data, renderer);
 		}
-		// Plane mesh
-		{
-			model_data = LoadModelDataGLTF("../assets/models/shapes/plane.gltf", "plane");
-			mesh_data = model_data.mesh_data[0];
+		{ // Plane
+			mesh_data = LoadMeshDataFromAssets("Plane", ga);
 			renderer->rbg[RENDER_BUFFER_GROUP_PLANE] = UploadMesh(mesh_data, renderer);
 		}
-		// Torus mesh
-		{
-			model_data = LoadModelDataGLTF("../assets/models/shapes/torus.gltf", "torus");
-			mesh_data = model_data.mesh_data[0];
+		{ // Torus
+			mesh_data = LoadMeshDataFromAssets("Torus", ga);
 			renderer->rbg[RENDER_BUFFER_GROUP_TORUS] = UploadMesh(mesh_data, renderer);
 		}
 	}

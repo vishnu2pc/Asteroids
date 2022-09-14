@@ -1,7 +1,3 @@
-// TODO LIST:
-// Toggle wireframe mode
-// Switch asserts to debugbreak
-
 #define DEBUG
 #define DEBUG_RENDERER
 
@@ -36,7 +32,7 @@ struct WindowDimensions {	u32 width; u32 height; };
 #include "input.cpp"
 #include "app_state.cpp"
 
-#include "cgltf_loader.cpp"
+#include "asset_loading.cpp"
 #include "font_handling_structs.cpp"
 #include "rendering/renderer.cpp"
 #include "font_handling.cpp"
@@ -56,6 +52,7 @@ int main(int argc, char* argv[]) {
 	AllocateMasterMemory(Megabytes(200));
 	AllocateScratchMemory(Kilobytes(200));
 	stbi_set_flip_vertically_on_load(false);
+	GameAssets ga = LoadAssetFile();
 
 	AppState* app_state = PushMaster(AppState, 1);
 	app_state->running = true;
@@ -70,7 +67,7 @@ int main(int argc, char* argv[]) {
 	SDL_FlushEvents(SDL_MOUSEMOTION, SDL_MOUSEWHEEL);
 
 	Renderer* renderer = PushMaster(Renderer, 1);
-	InitRendering(renderer, handle, app_state->wd);
+	InitRendering(renderer, handle, app_state->wd, &ga);
 
 	DebugText* dt = PushMaster(DebugText, 1);
 	LoadFont("../assets/fonts/JetBrainsMono/jetbrains_mono_light.fi",

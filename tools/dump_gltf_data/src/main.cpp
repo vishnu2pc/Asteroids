@@ -1,6 +1,4 @@
 #include <stdint.h>
-#include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 
 #define WIN32_LEAN_AND_MEAN
@@ -18,8 +16,43 @@ typedef uint64_t u64;
 #define assert(cond) do { if (!(cond)) __debugbreak(); } while (0)
 
 #include "buffers.cpp"
-#include "asset_formats.cpp"
+#include "../../../src/asset_formats.cpp"
+#include "../../../src/file_formats.cpp"
 
+enum ASSET_TYPE {
+	ASSET_TYPE_MODEL,
+	ASSET_TYPE_TOTAL
+};
+
+char* asset_path_dir[ASSET_TYPE_TOTAL] = { 
+                                         "../../assets/models"
+};
+
+char* asset_file_format[ASSET_TYPE_TOTAL] = {
+                                            "gltf"
+};
+
+enum FORMAT {
+	FORMAT_GAME_ASSET_FILE,
+	FORMAT_DIRECTORY,
+	FORMAT_MESHES_BLOB,
+	FORMAT_MESH,
+	FORMAT_VERTEX_BUFFER,
+	FORMAT_VERTEX_BUFFER_FLOAT,
+	FORMAT_INDEX_BUFFER_U32,
+
+	FORMAT_TOTAL
+};
+
+u32 format_elem_sizes[FORMAT_TOTAL] {
+	sizeof(GameAssetFile),
+		sizeof(Directory),
+		sizeof(MeshesBlob),
+		sizeof(MeshFormat),
+		sizeof(VertexBufferFormat),
+		sizeof(float),
+		sizeof(u32),
+};
 
 char* StrPrepend(char* string, char* prepend) {
 	u8 string_len = strlen(string);
@@ -38,7 +71,6 @@ bool StrHasStrEnd(char* left, char* right) {
 	u8 i = left_n-right_n;
 	return strcmp(left+i, right) == 0;
 }
-
 
 char* MakeFullPath(char* dir, char* name, char* format) {
 	char* result = 0;
@@ -137,173 +169,192 @@ static FolderInfo LoadFolder(char* dir, char* file_format) {
 
 int main(int argc, char** argv) {
 
-	GenericBuffer file_buffer = {};
-	GameAssetFileFormat gaff = {};
+	StructBuffer struct_buffer[FORMAT_TOTAL] = {};
+	for(u8 i=0; i<FORMAT_TOTAL; i++) struct_buffer[i] = MakeStructBuffer(format_elem_sizes[i]);
+
 	{
+		StructBuffer* gaff_buffer = &struct_buffer[FORMAT_GAME_ASSET_FILE];
+		GameAssetFile gaff = {};
 		strcpy(gaff.identification, "gaff");
-		gaff.number_of_blobs = BLOB_TOTAL;
-		//gaff.offset_to_blob_directories
+		gaff.number_of_blobs = ASSET_BLOB_TOTAL;
+		PushStructBuffer(&gaff, 1, gaff_buffer);
 	}
-	file_buffer.total_size += sizeof(GameAssetFileFormat);
-
-	Directory directory[BLOB_TOTAL] = {};
 	{
-		//directory[BLOB_MESHES].offset_to_blob
-		//directory[BLOB_MESHES].size_of_blob
-		strcpy(directory[BLOB_MESHES].name_of_blob, blob_names[BLOB_MESHES]);
+		StructBuffer* ab_directory = &struct_buffer[FORMAT_DIRECTORY];
+		for(u8 i=0; i<ASSET_BLOB_TOTAL; i++) {
+			Directory dir = {};
+			strcpy(dir.name_of_blob, blob_names[i]);
+			PushStructBuffer(&dir, 1, ab_directory);
+		}
 	}
-	file_buffer.total_size += sizeof(directory);
-
-	GenericBuffer vb_float_buf = MakeGenericBuffer(float);
-	GenericBuffer ib_u32_buf = MakeGenericBuffer(u32);
-	GenericBuffer mf_buf = MakeGenericBuffer(MeshFormat);
-	GenericBuffer vb_buf = MakeGenericBuffer(VertexBufferFormat);
 
 	{	// Loading Models
-		u32 total_meshes = 0;
-		u32 total_models = 0;
-		u32 total_vertex_buffers = 0;
+		StructBuffer* ab_meshes_blob = &struct_buffer[FORMAT_MESHES_BLOB];
+		StructBuffer* ab_mesh = &struct_buffer[FORMAT_MESH];
+		StructBuffer* ab_vertex_buffer = &struct_buffer[FORMAT_VERTEX_BUFFER];
+		StructBuffer* ab_vertex_buffer_float = &struct_buffer[FORMAT_VERTEX_BUFFER_FLOAT];
+		StructBuffer* ab_index_buffer_u32 = &struct_buffer[FORMAT_INDEX_BUFFER_U32];
+
+		MeshesBlob meshes_blob = {};
+
 		char* dir = asset_path_dir[ASSET_TYPE_MODEL];
 		char* file_format = asset_file_format[ASSET_TYPE_MODEL];
 		FolderInfo folder = LoadFolder(dir, file_format);
-		total_models = folder.file_count;
-
-		cgltf_data** cgltf_data_a = (cgltf_data**)calloc(folder.file_count, sizeof(cgltf_data));
 
 		// Loading cgltf data
 		for(u8 i=0; i<folder.file_count; i++) {
 			FileInfo file = folder.files[i];
 			char* path = MakeFullPath(folder.dir, file.name, file.format);
 
+			cgltf_data* data;
 			cgltf_options opt = {};
-			assert(cgltf_parse_file(&opt, path, &cgltf_data_a[i]) == cgltf_result_success);
-			assert(cgltf_validate(cgltf_data_a[i]) == cgltf_result_success);
-			assert(cgltf_load_buffers(&opt, cgltf_data_a[i], path) == cgltf_result_success);
+			assert(cgltf_parse_file(&opt, path, &data) == cgltf_result_success);
+			assert(cgltf_validate(data) == cgltf_result_success);
+			assert(cgltf_load_buffers(&opt, data, path) == cgltf_result_success);
 
-			cgltf_data* data = cgltf_data_a[i];
-
-			// Finding out total no of meshes, vertices, indices
-			total_meshes += data->meshes_count;
+			meshes_blob.meshes_count += data->meshes_count;
 			for(u8 j=0; j<data->meshes_count; j++) {
+				MeshFormat mesh_format = {};
 				cgltf_mesh* mesh = data->meshes + j;
+				assert(mesh->name);
+				strcpy(mesh_format.mesh_name, mesh->name);
+
 				assert(data->meshes[j].primitives_count == 1);
-				cgltf_primitive*  prim = mesh->primitives;
+				cgltf_primitive* prim = mesh->primitives;
 				assert(prim->type == cgltf_primitive_type_triangles);
+
+				assert(prim->indices);
+				mesh_format.indices_count = prim->indices->count;
+				mesh_format.offset_to_indices = GetOffsetStructBuffer(ab_index_buffer_u32);
+				mesh_format.offset_to_vertex_buffers = GetOffsetStructBuffer(ab_vertex_buffer);
+
+				ReserveMemoryStructBuffer(prim->indices->count, ab_index_buffer_u32);
+				for(u32 i=0; i<prim->indices->count; i++) {
+					u32 index = (u32)cgltf_accessor_read_index(prim->indices, i);
+					PushStructBuffer(&index, 1, ab_index_buffer_u32);
+				}
 
 				for(u8 k=0; k<prim->attributes_count; k++) {
 					cgltf_attribute* att = prim->attributes + k;
 					cgltf_accessor* acc = att->data;
-
-					cgltf_size float_count = cgltf_accessor_unpack_floats(acc, NULL, 0);
-					switch(att->type) {
-						case cgltf_attribute_type_position:
-						case cgltf_attribute_type_normal:
-						case cgltf_attribute_type_texcoord:
-							vb_float_buf.total_size += float_count;
-							total_vertex_buffers++;
-					}
-					assert(prim->indices);
-					ib_u32_buf.total_size += prim->indices->count;
-				}
-			}
-		}
-		MeshFormat* mesh_format_a = (MeshFormat*)calloc(total_meshes, sizeof(MeshFormat));
-		VertexBufferFormat* vertex_buffer_format_a = (VertexBufferFormat*)calloc(total_vertex_buffers, sizeof(VertexBufferFormat));
-
-		// Filling in mesh format and loading vertices and indices
-		file_buffer.total_size += sizeof(MeshFormat)*total_meshes; 
-		u32 offset_to_vertex_buffer_a = file_buffer.total_size;
-		file_buffer.total_size += sizeof(VertexBufferFormat)*total_vertex_buffers;
-		u32 offset_to_vertex_buffers_float = file_buffer.total_size;
-		file_buffer.total_size += sizeof(float)*vb_float_buf.total_size;
-		u32 offset_to_index_buffers_u32 = file_buffer.total_size;
-
-		float* vertex_buffers_float = (float*)calloc(vb_float_buf.total_size, sizeof(float));
-		u32* index_buffers_u32 = (u32*)calloc(ib_u32_buf.total_size, sizeof(u32));
-		u32 mesh_format_counter = 0;
-		u32 vertex_buffer_counter = 0;
-
-		for(u8 i=0; i<total_models; i++) {
-			cgltf_data* data = cgltf_data_a[i];
-
-			for(u8 j=0; j<data->meshes_count; j++) {
-				cgltf_mesh* mesh = data->meshes + j;
-				MeshFormat* mesh_format = mesh_format_a + mesh_format_counter++;
-				assert(mesh->name);
-				assert(strlen(mesh->name) < STRING_LENGTH_MESH);
-				strcpy(mesh_format->mesh_name, mesh->name);
-				mesh_format->offset_to_vertex_buffers = offset_to_vertex_buffer_a + sizeof(VertexBufferFormat)*vertex_buffer_counter;
-
-				for(u8 k=0; k<mesh->primitives[0].attributes_count; k++) {
-					cgltf_attribute* att = mesh->primitives[0].attributes + k;
-					cgltf_accessor* acc = att->data;
-					mesh_format->vertices_count = acc->count;
-					mesh_format->indices_count = mesh->primitives[0].indices->count;
-
-					mesh_format->offset_to_indices = offset_to_index_buffers_u32;
-					offset_to_index_buffers_u32 += mesh_format->indices_count;
-
-					u32* u32_ptr = index_buffers_u32 + index_buffers_u32_counter;
-					index_buffers_u32_counter += mesh_format->indices_count;
+					mesh_format.vertices_count = acc->count;
 
 					cgltf_size float_count = cgltf_accessor_unpack_floats(acc, NULL, 0);
 					switch(att->type) {
 						case cgltf_attribute_type_position: {
-							assert(att->data->component_type == cgltf_component_type_r_32f);
+							assert(acc->component_type == cgltf_component_type_r_32f);
 							assert(acc->type == cgltf_type_vec3);
-							VertexBufferFormat* vbf = vertex_buffer_format_a + vertex_buffer_counter++;
-							strcpy(vbf->type, "POSITION");
-							vbf->offset_to_data = offset_to_vertex_buffer_float;
 
-							float* float_ptr = vertex_buffers_float + vertex_buffers_float_counter;
-							cgltf_accessor_unpack_floats(acc, float_ptr, float_count);
-							vertex_buffers_float_counter += float_count;
-							offset_to_vertex_buffer_float += float_count;
+							mesh_format.vertex_buffer_count++;
+							VertexBufferFormat vbf = {};
+							strcpy(vbf.type, vertex_buffer_names[VERTEX_BUFFER_POSITION]);
+							vbf.offset_to_data = GetOffsetStructBuffer(ab_vertex_buffer_float);
 
-							mesh_format->vertex_buffer_count++;
+							ReserveMemoryStructBuffer(float_count, ab_vertex_buffer_float);
+							cgltf_accessor_unpack_floats(acc, (float*)GetCursorStructBuffer(ab_vertex_buffer_float), float_count);
+							ab_vertex_buffer_float->filled_count += float_count;
+
+							PushStructBuffer(&vbf, 1, ab_vertex_buffer);
 						} break;
-
 						case cgltf_attribute_type_normal: {
-							assert(att->data->component_type == cgltf_component_type_r_32f);
+							assert(acc->component_type == cgltf_component_type_r_32f);
 							assert(acc->type == cgltf_type_vec3);
-							VertexBufferFormat* vbf = vertex_buffer_format_a + vertex_buffer_counter++;
-							strcpy(vbf->type, "NORMAL");
-							vbf->offset_to_data = offset_to_vertex_buffer_float;
 
-							float* float_ptr = vertex_buffers_float + vertex_buffers_float_counter;
-							cgltf_accessor_unpack_floats(acc, float_ptr, float_count);
-							vertex_buffers_float_counter += float_count;
-							offset_to_vertex_buffer_float += float_count;
+							mesh_format.vertex_buffer_count++;
+							VertexBufferFormat vbf = {};
+							strcpy(vbf.type, vertex_buffer_names[VERTEX_BUFFER_NORMAL]);
+							vbf.offset_to_data = GetOffsetStructBuffer(ab_vertex_buffer_float);
 
-							mesh_format->vertex_buffer_count++;
+							ReserveMemoryStructBuffer(float_count, ab_vertex_buffer_float);
+							cgltf_accessor_unpack_floats(acc, (float*)GetCursorStructBuffer(ab_vertex_buffer_float), float_count);
+							ab_vertex_buffer_float->filled_count += float_count;
+
+							PushStructBuffer(&vbf, 1, ab_vertex_buffer);
 						} break;
-
 						case cgltf_attribute_type_texcoord: {
-							assert(att->data->component_type == cgltf_component_type_r_32f);
+							assert(acc->component_type == cgltf_component_type_r_32f);
 							assert(acc->type == cgltf_type_vec2);
-							VertexBufferFormat* vbf = vertex_buffer_format_a + vertex_buffer_counter++;
-							strcpy(vbf->type, "TEXCOORD");
 
-							vbf->offset_to_data = offset_to_vertex_buffer_float;
-							
-							float* float_ptr = vertex_buffers_float + vertex_buffers_float_counter;
-							cgltf_accessor_unpack_floats(acc, float_ptr, float_count);
-							vertex_buffers_float_counter += float_count;
-							offset_to_vertex_buffer_float += float_count;
+							mesh_format.vertex_buffer_count++;
+							VertexBufferFormat vbf = {};
+							strcpy(vbf.type, vertex_buffer_names[VERTEX_BUFFER_TEXCOORD]);
+							vbf.offset_to_data = GetOffsetStructBuffer(ab_vertex_buffer_float);
 
-							mesh_format->vertex_buffer_count++;
+							ReserveMemoryStructBuffer(float_count, ab_vertex_buffer_float);
+							cgltf_accessor_unpack_floats(acc, (float*)GetCursorStructBuffer(ab_vertex_buffer_float), float_count);
+							ab_vertex_buffer_float->filled_count += float_count;
+
+							PushStructBuffer(&vbf, 1, ab_vertex_buffer);
 						} break;
 					}
 				}
+				PushStructBuffer(&mesh_format, 1, ab_mesh);
 			}
 		}
+		PushStructBuffer(&meshes_blob, 1, ab_meshes_blob);
 	}
-	file_buffer.total_size = sizeof(float)*vb_float_buf.total_size + sizeof(u32)*ib_u32_buf.total_size;
+	//------------------------------------------------------------------------
+	GenericBuffer gb_file = {};
+	{
+		// Stitching up all buffers
+		u32 offset = 0;
+		for(u8 i=0; i<FORMAT_TOTAL; i++) gb_file.total_size += struct_buffer[i].elem_size * struct_buffer[i].filled_count;
+		gb_file.data = calloc(gb_file.total_size, sizeof(u8));
 
+		offset = GetOffsetStructBuffer(&struct_buffer[FORMAT_GAME_ASSET_FILE]);
+		for(u32 i=0; i<struct_buffer[FORMAT_GAME_ASSET_FILE].filled_count; i++) {
+			GameAssetFile* gaf = (GameAssetFile*)GetElementStructBuffer(&struct_buffer[FORMAT_GAME_ASSET_FILE], i);
+			gaf->offset_to_blob_directories += offset;
+		}
+		WriteStructBufferToGenericBuffer(&gb_file, &struct_buffer[FORMAT_GAME_ASSET_FILE]);
 
+		offset += GetOffsetStructBuffer(&struct_buffer[FORMAT_DIRECTORY]);
+		for(u32 i=0; i<struct_buffer[FORMAT_DIRECTORY].filled_count; i++) {
+			Directory* dir = (Directory*)GetElementStructBuffer(&struct_buffer[FORMAT_DIRECTORY], i);
+			dir->offset_to_blob += offset;
+		}
+		WriteStructBufferToGenericBuffer(&gb_file, &struct_buffer[FORMAT_DIRECTORY]);
+
+		offset += GetOffsetStructBuffer(&struct_buffer[FORMAT_MESHES_BLOB]);
+		for(u32 i=0; i<struct_buffer[FORMAT_DIRECTORY].filled_count; i++) {
+			MeshesBlob* mb = (MeshesBlob*)GetElementStructBuffer(&struct_buffer[FORMAT_MESHES_BLOB], i);
+			mb->offset_to_mesh_formats += offset;
+		}
+		WriteStructBufferToGenericBuffer(&gb_file, &struct_buffer[FORMAT_MESHES_BLOB]);
+
+		offset += GetOffsetStructBuffer(&struct_buffer[FORMAT_MESH]);
+		for(u32 i=0; i<struct_buffer[FORMAT_MESH].filled_count; i++) {
+			MeshFormat* mf = (MeshFormat*)GetElementStructBuffer(&struct_buffer[FORMAT_MESH], i);
+			mf->offset_to_vertex_buffers += offset;
+			u32 offset_vb = GetOffsetStructBuffer(&struct_buffer[FORMAT_VERTEX_BUFFER]);
+			u32 offset_vb_float = GetOffsetStructBuffer(&struct_buffer[FORMAT_VERTEX_BUFFER_FLOAT]);
+			mf->offset_to_indices += offset + offset_vb + offset_vb_float;
+		}
+		WriteStructBufferToGenericBuffer(&gb_file, &struct_buffer[FORMAT_MESH]);
+
+		offset += GetOffsetStructBuffer(&struct_buffer[FORMAT_VERTEX_BUFFER]);
+		for(u32 i=0; i<struct_buffer[FORMAT_VERTEX_BUFFER].filled_count; i++) {
+			VertexBufferFormat* vbf = (VertexBufferFormat*)GetElementStructBuffer(&struct_buffer[FORMAT_VERTEX_BUFFER], i);
+			vbf->offset_to_data += offset;
+		}
+		WriteStructBufferToGenericBuffer(&gb_file, &struct_buffer[FORMAT_VERTEX_BUFFER]);
+
+		offset += GetOffsetStructBuffer(&struct_buffer[FORMAT_VERTEX_BUFFER_FLOAT]);
+		WriteStructBufferToGenericBuffer(&gb_file, &struct_buffer[FORMAT_VERTEX_BUFFER_FLOAT]);
+
+		offset += GetOffsetStructBuffer(&struct_buffer[FORMAT_INDEX_BUFFER_U32]);
+		WriteStructBufferToGenericBuffer(&gb_file, &struct_buffer[FORMAT_INDEX_BUFFER_U32]);
+
+	}
+	//------------------------------------------------------------------------
+	{ // Writing to File
+		HANDLE h = CreateFileA("data.gaf", GENERIC_WRITE, 0, 0, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, 0);
+		assert(h != INVALID_HANDLE_VALUE);
+
+		DWORD bytes_written = 0;
+		assert(WriteFile(h, gb_file.data, gb_file.filled_size, &bytes_written, 0));
+		assert(bytes_written == gb_file.filled_size);
+
+	}
 	return 1;
 }
-
-
-
-// TODO: Split structs into seprate files
