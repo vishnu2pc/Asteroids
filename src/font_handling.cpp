@@ -1,3 +1,20 @@
+// Stack no alloc
+struct DebugText {
+	FontInfo info;
+	GlyphQuad quads[MAX_DEBUG_TEXT_GLYPHS];
+	u32 glyph_counter;
+	u32 w, h; // Screen res
+	u8 line_count[QUADRANT_TOTAL];
+	//float font_size;
+	RenderBufferData rbd;
+};
+
+static void PushGlyph(GlyphQuad gq, DebugText* dt) {
+	assert(dt->glyph_counter < MAX_DEBUG_TEXT_GLYPHS);
+	dt->quads[dt->glyph_counter] = gq;
+	dt->glyph_counter++;
+};
+
 //Font info allocated here
 static void LoadFont(char* info_path, char* image_path, DebugText* dt, Renderer* renderer) { 
 	FILE* file = fopen(info_path, "rb");
@@ -147,12 +164,12 @@ void SubmitDebugTextDrawCall(DebugText* dt, Renderer* renderer) {
 	debug_text.dc.type = DRAW_CALL_VERTICES;
 	debug_text.dc.vertices_count = 6 * dt->glyph_counter;
 	debug_text.prbg = RENDER_BUFFER_GROUP_FONT;
-	debug_text.vrbd = PushMaster(RenderBufferData, 1);
 	debug_text.vrbd_count = 1;
-	debug_text.vrbd[0].type = RENDER_BUFFER_TYPE_STRUCTURED;
-	debug_text.vrbd[0].structured.slot = STRUCTURED_BINDING_SLOT_FRAME;
-	debug_text.vrbd[0].structured.data = dt->quads;
-	debug_text.vrbd[0].structured.count = dt->glyph_counter;
+	debug_text.vrbd = &dt->rbd;
+	dt->rbd.type = RENDER_BUFFER_TYPE_STRUCTURED;
+	dt->rbd.structured.slot = STRUCTURED_BINDING_SLOT_FRAME;
+	dt->rbd.structured.data = dt->quads;
+	dt->rbd.structured.count = dt->glyph_counter;
 
 	PushRenderPipeline(debug_text, renderer);
 }

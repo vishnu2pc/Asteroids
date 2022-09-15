@@ -7,7 +7,9 @@
 #include <dxgidebug.h>
 
 #include "renderer_structs.cpp"
+#include "renderer_shapes_structs.cpp"
 #include "shader_structs.cpp"
+
 
 //-------------------------------------------------------------------------
 static void MakeD3DInputElementDesc(VERTEX_BUFFER* vb_type, D3D11_INPUT_ELEMENT_DESC* d3d_il_desc, u8 count) {
@@ -166,7 +168,7 @@ static VertexShader UploadVertexShader(VertexShaderDesc desc, Renderer* renderer
 
 	for(u8 j=0; j<desc.sb_count; j++) {
 		rb[i+j].type = RENDER_BUFFER_TYPE_STRUCTURED;
-		rb[i+j].structured = UploadStructuredBuffer(desc.sb_desc[i], renderer->device);
+		rb[i+j].structured = UploadStructuredBuffer(desc.sb_desc[j], renderer->device);
 	}
 
 	//TODO: Handle structured buffer handling
@@ -322,7 +324,7 @@ static void InitRendering(Renderer* renderer, HWND handle, WindowDimensions wd, 
 		IDXGIAdapter1* adapters[4] = { NULL };
 		u32 adapter_count = 0;
 
-		while ((adapter_count < ARRAYSIZE(adapters) -1) &&
+		while ((adapter_count < ARRAY_COUNT(adapters) -1) &&
 			(dxgi_factory->EnumAdapters1(adapter_count, &adapters[adapter_count])
 				!= DXGI_ERROR_NOT_FOUND)) adapter_count++;
 
@@ -346,7 +348,7 @@ static void InitRendering(Renderer* renderer, HWND handle, WindowDimensions wd, 
 		D3D_FEATURE_LEVEL out_feature_levels = D3D_FEATURE_LEVEL_9_1;
 
 		hr = D3D11CreateDevice((IDXGIAdapter*)adapters[adapter_to_use], D3D_DRIVER_TYPE_UNKNOWN, NULL,
-			flags, target_feature_levels, ARRAYSIZE(target_feature_levels), D3D11_SDK_VERSION,
+			flags, target_feature_levels, ARRAY_COUNT(target_feature_levels), D3D11_SDK_VERSION,
 			&renderer->device, &out_feature_levels, &renderer->context);
 
 		assertHR(hr);
@@ -510,7 +512,7 @@ static void InitRendering(Renderer* renderer, HWND handle, WindowDimensions wd, 
 		}
 	}
 	//---------------------------Vertex Shaders---------------------------------------------
-	{	// 
+	{	// Diffuse
 		VertexShaderDesc vs_desc = {};
 		vs_desc.shader = { L"../assets/shaders/diffuse.hlsl", "vsf" };
 
@@ -520,12 +522,12 @@ static void InitRendering(Renderer* renderer, HWND handle, WindowDimensions wd, 
 
 		vs_desc.vb_type = vb_type;
 		vs_desc.cb_desc = cb_desc;
-		vs_desc.vb_count = ARRAY_LENGTH(vb_type);
-		vs_desc.cb_count = ARRAY_LENGTH(cb_desc);
+		vs_desc.vb_count = ARRAY_COUNT(vb_type);
+		vs_desc.cb_count = ARRAY_COUNT(cb_desc);
 
 		renderer->vs[VERTEX_SHADER_POS_NOR] = UploadVertexShader(vs_desc, renderer);
 	}
-	{	 // 
+	{	 // Diffuse textured
 		VertexShaderDesc vs_desc = {};
 		vs_desc.shader = { L"../assets/shaders/diffuse.hlsl", "vsf_tex" };
 		ConstantsBufferDesc cb_desc[] = { { CONSTANTS_BINDING_SLOT_CAMERA, sizeof(Mat4) },
@@ -536,12 +538,12 @@ static void InitRendering(Renderer* renderer, HWND handle, WindowDimensions wd, 
 
 		vs_desc.vb_type = vb_type;
 		vs_desc.cb_desc = cb_desc;
-		vs_desc.vb_count = ARRAY_LENGTH(vb_type);
-		vs_desc.cb_count = ARRAY_LENGTH(cb_desc);
+		vs_desc.vb_count = ARRAY_COUNT(vb_type);
+		vs_desc.cb_count = ARRAY_COUNT(cb_desc);
 
 		renderer->vs[VERTEX_SHADER_POS_NOR_TEX] = UploadVertexShader(vs_desc, renderer);
 	}
-	{
+	{ // Text
 		VertexShaderDesc vs_desc = {};
 		vs_desc.shader = { L"../assets/shaders/text.hlsl", "vsf" };
 
@@ -550,6 +552,20 @@ static void InitRendering(Renderer* renderer, HWND handle, WindowDimensions wd, 
 		vs_desc.sb_count = 1;
 
 		renderer->vs[VERTEX_SHADER_TEXT] = UploadVertexShader(vs_desc, renderer);
+	}
+	{ // Line
+		VertexShaderDesc vs_desc = {};
+		vs_desc.shader = { L"../assets/shaders/line.hlsl", "vsf" };
+
+		ConstantsBufferDesc cb_desc[] = { { CONSTANTS_BINDING_SLOT_CAMERA, sizeof(Mat4) } };
+		StructuredBufferDesc sb_desc[] = { { STRUCTURED_BINDING_SLOT_FRAME, sizeof(LineInfo), MAX_DEBUG_LINES } };
+
+		vs_desc.sb_desc = sb_desc;
+		vs_desc.sb_count = ARRAYSIZE(sb_desc);
+		vs_desc.cb_desc = cb_desc;
+		vs_desc.cb_count = ARRAY_COUNT(cb_desc);
+
+		renderer->vs[VERTEX_SHADER_LINE] = UploadVertexShader(vs_desc, renderer);
 	}
 	//-------------------------Pixel Shaders-----------------------------------------------
 	{	
@@ -560,7 +576,7 @@ static void InitRendering(Renderer* renderer, HWND handle, WindowDimensions wd, 
 			ConstantsBufferDesc cb_desc[] = { { CONSTANTS_BINDING_SLOT_OBJECT, sizeof(Vec3) } };
 
 			ps_desc.cb_desc = cb_desc;
-			ps_desc.cb_count = ARRAY_LENGTH(cb_desc);
+			ps_desc.cb_count = ARRAY_COUNT(cb_desc);
 
 			renderer->ps[PIXEL_SHADER_UNLIT] = UploadPixelShader(ps_desc, renderer);
 		}
@@ -579,7 +595,7 @@ static void InitRendering(Renderer* renderer, HWND handle, WindowDimensions wd, 
 			ConstantsBufferDesc cb_desc[] = { { CONSTANTS_BINDING_SLOT_CAMERA, sizeof(DiffusePC) },
 																				{ CONSTANTS_BINDING_SLOT_OBJECT, sizeof(DiffusePM) } };
 			ps_desc.cb_desc = cb_desc;
-			ps_desc.cb_count = ARRAY_LENGTH(cb_desc);
+			ps_desc.cb_count = ARRAY_COUNT(cb_desc);
 
 			renderer->ps[PIXEL_SHADER_DIFFUSE] = UploadPixelShader(ps_desc, renderer);
 		}
@@ -594,8 +610,8 @@ static void InitRendering(Renderer* renderer, HWND handle, WindowDimensions wd, 
 
 			ps_desc.texture_slot = texture_slot;
 			ps_desc.cb_desc = cb_desc;
-			ps_desc.texture_count = ARRAY_LENGTH(texture_slot);
-			ps_desc.cb_count = ARRAY_LENGTH(cb_desc);
+			ps_desc.texture_count = ARRAY_COUNT(texture_slot);
+			ps_desc.cb_count = ARRAY_COUNT(cb_desc);
 
 			renderer->ps[PIXEL_SHADER_DIFFUSE_TEXTURED] = UploadPixelShader(ps_desc, renderer);
 		}
@@ -605,9 +621,14 @@ static void InitRendering(Renderer* renderer, HWND handle, WindowDimensions wd, 
 
 			TEXTURE_SLOT texture_slot[] = { TEXTURE_SLOT_ALBEDO };
 			ps_desc.texture_slot = texture_slot;
-			ps_desc.texture_count = ARRAY_LENGTH(texture_slot);;
+			ps_desc.texture_count = ARRAY_COUNT(texture_slot);;
 
 			renderer->ps[PIXEL_SHADER_TEXT] = UploadPixelShader(ps_desc, renderer);
+		}
+		{ // Line shader
+			PixelShaderDesc ps_desc = {};
+			ps_desc.shader = { L"../assets/shaders/line.hlsl", "psf" };
+			renderer->ps[PIXEL_SHADER_LINE] = UploadPixelShader(ps_desc, renderer);
 		}
 	}
 	//------------------------------------------------------------------------=
@@ -711,8 +732,8 @@ static void ExecuteRenderPipeline(RenderPipeline rp, Renderer* renderer) {
 		rect.right = vp.Width;
 		rect.bottom = vp.Height;
 		renderer->context->RSSetScissorRects(1, &rect);
-		renderer->context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	}
+	renderer->context->IASetPrimitiveTopology(rp.rs.topology);
 	//------------------------------------------------------------------------
 	if(rp.ps) {
 		PixelShader ps = renderer->ps[rp.ps];
@@ -764,7 +785,7 @@ static void ExecuteRenderPipeline(RenderPipeline rp, Renderer* renderer) {
 			}
 			if(rp.vrbd[i].type == RENDER_BUFFER_TYPE_STRUCTURED) {
 				for(u8 j=0; j<vs.rb_count; j++) {
-					if(vs.rb[j].type = RENDER_BUFFER_TYPE_STRUCTURED) 
+					if(vs.rb[j].type == RENDER_BUFFER_TYPE_STRUCTURED) 
 						if(rp.vrbd[i].structured.slot == vs.rb[j].structured.slot)
 							PushStructuredData(rp.vrbd[i].structured, vs.rb[j].structured, renderer->context);
 				}

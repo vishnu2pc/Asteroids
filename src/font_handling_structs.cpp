@@ -30,19 +30,3 @@ struct GlyphQuad {
 	float u1, v1;
 	Vec3 color;
 };
-
-// Stack no alloc
-struct DebugText {
-	FontInfo info;
-	GlyphQuad quads[MAX_DEBUG_TEXT_GLYPHS];
-	u32 glyph_counter;
-	u32 w, h; // Screen res
-	u8 line_count[QUADRANT_TOTAL];
-	//float font_size;
-};
-
-static void PushGlyph(GlyphQuad gq, DebugText* dt) {
-	assert(dt->glyph_counter < MAX_DEBUG_TEXT_GLYPHS);
-	dt->quads[dt->glyph_counter] = gq;
-	dt->glyph_counter++;
-};

@@ -23,7 +23,7 @@ typedef uint64_t u64;
 
 #define assertHR(result) assert(SUCCEEDED(result))
 
-#define ARRAY_LENGTH(array) (sizeof(array)/sizeof(*(array)))
+#define ARRAY_COUNT(array) (sizeof(array)/sizeof(*(array)))
 
 struct WindowDimensions {	u32 width; u32 height; };
 
@@ -35,6 +35,7 @@ struct WindowDimensions {	u32 width; u32 height; };
 #include "asset_loading.cpp"
 #include "font_handling_structs.cpp"
 #include "rendering/renderer.cpp"
+#include "rendering/renderer_shapes.cpp"
 #include "font_handling.cpp"
 #include "camera.cpp"
 #include "editor.cpp"
@@ -236,6 +237,25 @@ int main(int argc, char* argv[]) {
 		}
 
 		Mat4 vp = MakeViewPerspective(camera);
+	
+		LineInfo li = { V3(30.0f, 2000.0f, 30.0f), V3(0.0f, 0.0f, 0.0f) , RED };
+		RenderPipeline rp = {};
+		rp.rs = RenderStateDefaults();
+		rp.rs.topology = D3D11_PRIMITIVE_TOPOLOGY_LINELIST;
+		rp.vs = VERTEX_SHADER_LINE;
+		rp.ps = PIXEL_SHADER_LINE;
+		rp.dc.type = DRAW_CALL_VERTICES;
+		rp.dc.vertices_count = 2 * 1;
+		rp.vrbd_count = 2;
+		rp.vrbd = PushMaster(RenderBufferData, 2);
+		rp.vrbd[0].type = RENDER_BUFFER_TYPE_STRUCTURED;
+		rp.vrbd[0].structured.slot = STRUCTURED_BINDING_SLOT_FRAME;
+		rp.vrbd[0].structured.count = 1;
+		rp.vrbd[0].structured.data = &li;
+		rp.vrbd[1].type = RENDER_BUFFER_TYPE_CONSTANTS;
+		rp.vrbd[1].constants.slot = CONSTANTS_BINDING_SLOT_CAMERA;
+		rp.vrbd[1].constants.data = &vp;
+		PushRenderPipeline(rp, renderer);
 
 		RenderPipeline vs_rp = {};
 		vs_rp.vs = VERTEX_SHADER_POS_NOR;
