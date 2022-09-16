@@ -1,41 +1,43 @@
-struct GlobalMemory {
-	void* bp;
-	u64 total_size;
-	u64 allocated_size;
+struct Memory {
+	u8* bp;
+	u32 size;
 };
 
-static GlobalMemory GM;
-static GlobalMemory SM;
+struct MemoryArena {
+	Memory mem;
+	u32 filled;
+};
 
-#define AllocateMasterMemory(size) AllocateGlobalMemory(&GM, size)
-#define PushMaster(type, count) (type*)GetMemory(&GM, sizeof(type)*(count))
-#define PopMaster(type, count) FreeMemory(&GM, sizeof(type)*count)
+#define PushStruct(ptr_arena, type) (type*)GetMemory((ptr_arena), sizeof(type))
+#define PushArray(ptr_arena, type, count) (type*)GetMemory((ptr_arena), sizeof(type)*(count))
 
-#define AllocateScratchMemory(size) AllocateGlobalMemory(&SM, size)
-#define PushScratch(type, count) (type*)GetMemory(&SM, sizeof(type)*(count))
-#define PopScratch(type, count) FreeMemory(&SM, sizeof(type)*count)
+#define PopStruct(ptr_arena, type) (type*)FreeMemory((ptr_arena), sizeof(type))
+#define PopArray(ptr_arena, type, count) FreeMemory((ptr_arena), sizeof(type)*(count))
 
-#define PushStruct(ptr_global_memory, type) (type*)GetMemory((ptr_global_memory), sizeof(type))
-#define PushArray(ptr_global_memory, type, count) (type*)GetMemory((ptr_global_memory), sizeof(type)*(count))
-
-#define PopStruct(ptr_global_memory, type) (type*)FreeMemory((ptr_global_memory), sizeof(type))
-#define PopArray(ptr_global_memory, type, count) FreeMemory((ptr_global_memory), sizeof(type)*(count))
-
-static void AllocateGlobalMemory(GlobalMemory* gm, u32 size) {
-	gm->bp = calloc(1, size);
-	gm->total_size = size;
+static Memory AllocateMemory(u32 size) {
+	Memory mem = {};
+	mem.bp = (u8*)calloc(1, size);
+	mem.size = size;
+	return mem;
 }
 
-static void* GetMemory(GlobalMemory* gm, u32 size) {
-	void* ptr = (void*)((char*)gm->bp + gm->allocated_size);
+static u8* GetMemory(MemoryArena* arena, u32 size) {
+	u8* ptr = arena->mem.bp + arena->filled;
 	u32 byte_aligned_size = ((size + 7) >> 3) << 3;											// Bitwise op to get next rounded multiple of 8
-	gm->allocated_size += byte_aligned_size;
-	assert(gm->allocated_size + byte_aligned_size < gm->total_size);
+	arena->filled += byte_aligned_size;
+	assert(arena->filled + byte_aligned_size < arena->mem.size);
 	return ptr;
 }
 
-static void FreeMemory(GlobalMemory* gm, u32 size) {
+static void FreeMemory(MemoryArena* mem, u32 size) {
 	u32 byte_aligned_size = ((size + 7) >> 3) << 3;											
-	assert(gm->allocated_size - size >= 0);
-	gm->allocated_size -= byte_aligned_size;
+	assert(mem->filled - size >= 0);
+	mem->filled -= byte_aligned_size;
+}
+
+static MemoryArena ExtractMemoryArena(MemoryArena* arena, u32 size) {
+	MemoryArena result = {};
+	result.mem.bp = GetMemory(arena, size);
+	result.mem.size = size;
+	return result;
 }

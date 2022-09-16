@@ -81,13 +81,13 @@ static void GenerateGlyphsTopLeft(char* text, int len, Vec3 color, GlyphQuad* gq
 }
 
 // Extremely hacky but it will do
-static void DrawDebugText(char* text, Vec3 color, QUADRANT quad, DebugText* dt) {
+static void DrawDebugText(char* text, Vec3 color, QUADRANT quad, DebugText* dt, MemoryArena* arena) {
 	assert(text);
 	int len = strlen(text);
 	float x, y;
 	x = 0.0f;
 	int font_line_width = dt->info.ascent - dt->info.descent + dt->info.line_gap;
-	GlyphQuad* gq = PushScratch(GlyphQuad, len);
+	GlyphQuad* gq = PushArray(arena, GlyphQuad, len);
 	float line_width = (dt->line_count[quad] + 1) * font_line_width * 0.8f;
 
 	switch(quad) {
@@ -150,7 +150,7 @@ static void DrawDebugText(char* text, Vec3 color, QUADRANT quad, DebugText* dt) 
 	}
 	
 	dt->line_count[quad]++;
-	PopScratch(GlyphQuad, len);
+	PopArray(arena, GlyphQuad, len);
 };
 
 void SubmitDebugTextDrawCall(DebugText* dt, Renderer* renderer) {
@@ -165,7 +165,7 @@ void SubmitDebugTextDrawCall(DebugText* dt, Renderer* renderer) {
 	debug_text.dc.vertices_count = 6 * dt->glyph_counter;
 	debug_text.prbg = RENDER_BUFFER_GROUP_FONT;
 	debug_text.vrbd_count = 1;
-	debug_text.vrbd = PushStruct(&renderer->sm, RenderBufferData);
+	debug_text.vrbd = PushStruct(&renderer->transient, RenderBufferData);
 	debug_text.vrbd->type = RENDER_BUFFER_TYPE_STRUCTURED;
 	debug_text.vrbd->structured.slot = STRUCTURED_BINDING_SLOT_FRAME;
 	debug_text.vrbd->structured.data = &dt->quads;

@@ -22,14 +22,14 @@ static void SubmitRendererShapesDrawCall(RendererShapes* rs, CameraInfo cam, Ren
 	rp.dc.type = DRAW_CALL_VERTICES;
 	rp.dc.vertices_count = 2 * rs->lines_count;
 	rp.vrbd_count = 2;
-	rp.vrbd = PushArray(&renderer->sm, RenderBufferData, 2);
+	rp.vrbd = PushArray(&renderer->transient, RenderBufferData, 2);
 	rp.vrbd[0].type = RENDER_BUFFER_TYPE_STRUCTURED;
 	rp.vrbd[0].structured.slot = STRUCTURED_BINDING_SLOT_FRAME;
 	rp.vrbd[0].structured.count = rs->lines_count;
 	rp.vrbd[0].structured.data = rs->lines;
 	rp.vrbd[1].type = RENDER_BUFFER_TYPE_CONSTANTS;
 	rp.vrbd[1].constants.slot = CONSTANTS_BINDING_SLOT_CAMERA;
-	Mat4* vp = PushStruct(&renderer->sm, Mat4);
+	Mat4* vp = PushStruct(&renderer->transient, Mat4);
 	*vp = MakeViewPerspective(cam);
 	rp.vrbd[1].constants.data = vp;
 	AddToRenderQueue(rp, renderer);

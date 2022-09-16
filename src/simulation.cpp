@@ -67,10 +67,10 @@ static void FirstPersonControl(Vec3* position, Quat* rotation, bool camera, FPCo
 
 static void SubmitDrawCallShip(Ship ship, Renderer* renderer) {
 	ship.rp.vrbd_count = 1;
-	ship.rp.vrbd = PushStruct(&renderer->sm, RenderBufferData);
+	ship.rp.vrbd = PushStruct(&renderer->transient, RenderBufferData);
 	ship.rp.vrbd->type = RENDER_BUFFER_TYPE_CONSTANTS;
 	ship.rp.vrbd->constants.slot = CONSTANTS_BINDING_SLOT_INSTANCE;
-	Mat4* model = PushStruct(&renderer->sm, Mat4);
+	Mat4* model = PushStruct(&renderer->transient, Mat4);
 	*model = MakeTransformMatrix(ship.transform);
 	ship.rp.vrbd->constants.data = model;
 	ship.rp.vrbd->type = RENDER_BUFFER_TYPE_CONSTANTS;

@@ -290,8 +290,8 @@ struct RenderPipeline {
 
 // Push this on the heap
 struct Renderer {
-	GlobalMemory gm;
-	GlobalMemory sm;
+	MemoryArena permanent;
+	MemoryArena transient;
 
 	ID3D11Device* device;
 	ID3D11DeviceContext* context; // This changes when we start using deferred contexts
