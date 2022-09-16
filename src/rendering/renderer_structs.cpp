@@ -259,7 +259,14 @@ struct DrawCall {
 	};
 };
 
+enum RENDER_COMMAND {
+	RENDER_COMMAND_NONE,
+	RENDER_COMMAND_CLEAR_DEPTH_STENCIL,
+	RENDER_COMMAND_CLEAR_RENDER_TARGET,
+};
+
 struct RenderState {
+	RENDER_COMMAND command;
 	DEPTH_STENCIL_STATE dss;
 	BLEND_STATE bs;
 	RASTERIZER_STATE rs;
@@ -277,6 +284,7 @@ struct RenderPipeline {
 	RenderBufferData* vrbd;
 	RenderBufferData* prbd;
 
+	// TODO: Merge vertex and pixel render buffer data
 	u8 vrbd_count, prbd_count;
 };
 
@@ -335,5 +343,5 @@ static u8 PushRenderBufferGroup(RENDER_BUFFER_GROUP index, RenderBufferGroup rbg
 };
 
 static RenderState RenderStateDefaults() {
-	return RenderState { DEPTH_STENCIL_STATE_DEFAULT, BLEND_STATE_NO_BLEND, RASTERIZER_STATE_DEFAULT, VIEWPORT_DEFAULT, D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST };
+	return RenderState { RENDER_COMMAND_NONE, DEPTH_STENCIL_STATE_DEFAULT, BLEND_STATE_NO_BLEND, RASTERIZER_STATE_DEFAULT, VIEWPORT_DEFAULT, D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST };
 }

@@ -518,8 +518,8 @@ static Mat4 MakeTransformMatrix(Transform transform) {
 	Mat4 scale = M4Scale(transform.scale);
 
 	// Checked
-	//result = M4Mul(M4Mul(translation, rotation), scale);
-	result = M4Mul(M4Mul(scale, rotation), translation);
+	result = M4Mul(M4Mul(translation, rotation), scale);
+	//result = M4Mul(M4Mul(scale, rotation), translation);
 
 	return result;
 }

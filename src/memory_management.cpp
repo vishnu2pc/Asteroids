@@ -2,7 +2,6 @@ struct GlobalMemory {
 	void* bp;
 	u64 total_size;
 	u64 allocated_size;
-	u64 frame_begin_size;
 };
 
 static GlobalMemory GM;
@@ -39,12 +38,4 @@ static void FreeMemory(GlobalMemory* gm, u32 size) {
 	u32 byte_aligned_size = ((size + 7) >> 3) << 3;											
 	assert(gm->allocated_size - size >= 0);
 	gm->allocated_size -= byte_aligned_size;
-}
-
-static void BeginMemoryCheck(GlobalMemory gm) {
-	gm.frame_begin_size = gm.allocated_size;
-}
-
-static void EndMemoryCheck(GlobalMemory gm) {
-	assert(gm.frame_begin_size == gm.allocated_size);
 }

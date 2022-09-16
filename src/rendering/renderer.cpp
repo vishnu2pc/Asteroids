@@ -646,31 +646,20 @@ static void InitRendering(Renderer* renderer, HWND handle, WindowDimensions wd, 
 	//----------------------------LoadedMeshes--------------------------------------------
 	{ 
 		MeshData mesh_data = {};
-		{ // Cube 
-			mesh_data = LoadMeshDataFromAssets("Cube", ga);
-			renderer->rbg[RENDER_BUFFER_GROUP_CUBE] = UploadMesh(mesh_data, renderer);
-		}
-		{ // Sphere 
-			mesh_data = LoadMeshDataFromAssets("Sphere.001", ga);
-			renderer->rbg[RENDER_BUFFER_GROUP_SPHERE] = UploadMesh(mesh_data, renderer);
-		}
-		{ // Cone
-			mesh_data = LoadMeshDataFromAssets("Cone", ga);
-			renderer->rbg[RENDER_BUFFER_GROUP_CONE] = UploadMesh(mesh_data, renderer);
-		}
-		{ // Plane
-			mesh_data = LoadMeshDataFromAssets("Plane", ga);
-			renderer->rbg[RENDER_BUFFER_GROUP_PLANE] = UploadMesh(mesh_data, renderer);
-		}
-		{ // Torus
-			mesh_data = LoadMeshDataFromAssets("Torus", ga);
-			renderer->rbg[RENDER_BUFFER_GROUP_TORUS] = UploadMesh(mesh_data, renderer);
-		}
+		mesh_data = LoadMeshDataFromAssets("Cube", ga);
+		renderer->rbg[RENDER_BUFFER_GROUP_CUBE] = UploadMesh(mesh_data, renderer);
+		mesh_data = LoadMeshDataFromAssets("Sphere.001", ga);
+		renderer->rbg[RENDER_BUFFER_GROUP_SPHERE] = UploadMesh(mesh_data, renderer);
+		mesh_data = LoadMeshDataFromAssets("Cone", ga);
+		renderer->rbg[RENDER_BUFFER_GROUP_CONE] = UploadMesh(mesh_data, renderer);
+		mesh_data = LoadMeshDataFromAssets("Plane", ga);
+		renderer->rbg[RENDER_BUFFER_GROUP_PLANE] = UploadMesh(mesh_data, renderer);
+		mesh_data = LoadMeshDataFromAssets("Torus", ga);
+		renderer->rbg[RENDER_BUFFER_GROUP_TORUS] = UploadMesh(mesh_data, renderer);
 	}
 }
 
 //------------------------------------------------------------------------
-// Move init stuff into separate files
 static void PushConstantsData(void* data, ConstantsBuffer cb, ID3D11DeviceContext* context) {
 	assert(data);
 	assert(cb.buffer);
@@ -706,10 +695,14 @@ static void BeginRendering(Renderer* renderer) {
 	renderer->context->ClearRenderTargetView(renderer->rtv, color);
 	renderer->context->ClearDepthStencilView(renderer->dsv, D3D11_CLEAR_DEPTH, 1.0f, 0);
 	renderer->context->OMSetRenderTargets(1, &renderer->rtv, renderer->dsv);
+	renderer->context->PSSetSamplers(0, 1, &renderer->ss[SAMPLER_STATE_DEFAULT]);
 }
 
 //------------------------------------------------------------------------
 static void ExecuteRenderPipeline(RenderPipeline rp, Renderer* renderer) {
+	if(rp.rs.command == RENDER_COMMAND_CLEAR_DEPTH_STENCIL)
+		renderer->context->ClearDepthStencilView(renderer->dsv, D3D11_CLEAR_DEPTH, 1.0f, 0);
+
 	DEPTH_STENCIL_STATE dss_t = renderer->state_overrides.dss ? renderer->state_overrides.dss : rp.rs.dss;
 	BLEND_STATE bs_t = renderer->state_overrides.bs ? renderer->state_overrides.bs : rp.rs.bs;
 	RASTERIZER_STATE rs_t = renderer->state_overrides.rs ? renderer->state_overrides.rs : rp.rs.rs;

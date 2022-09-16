@@ -7,6 +7,15 @@ struct CameraInfo {
 	float aspect_ratio;
 };
 
+struct FPControlInfo {
+	float base_sens;
+	float trans_sens;
+	float rot_sens;
+
+	bool block_yaw;
+	bool block_pitch;
+};
+
 void CameraDrawDebugText(CameraInfo* cam, DebugText* dt) {
 	DrawDebugText("CAMERA INFO", BLUE, QUADRANT_TOP_LEFT, dt);
 	{
@@ -42,6 +51,23 @@ void CameraDrawDebugText(CameraInfo* cam, DebugText* dt) {
 		DrawDebugText(char_string, MAROON, QUADRANT_TOP_LEFT, dt);
 		PopScratch(char, 100);
 	}
+}
 
+static Mat4 MakeViewPerspective(CameraInfo camera) {
+	Mat4 result = M4I();
+	Mat4 translation = M4Translate(V3Neg(camera.position));
+	/*
+		Vec3 direction = V3(0.0f, 0.0f, -1.0f);
+		Vec3 rotated_dir = RotateVecByQuat(direction, camera.rotation);
+		Vec3 target_disp = V3MulF(rotated_dir, 2.0f);
 
+		Vec3 target = V3Add(target_disp, camera.position);
+		Mat4 view = M4LookAt(camera.position, target, V3Up());
+		*/
+
+	Mat4 rot = M4FromQuat(camera.rotation);
+	Mat4 view = M4Mul(M4Transpose(rot), translation);
+	Mat4 perspective = M4Perspective(camera.fov, camera.aspect_ratio, camera.near_clip, camera.far_clip);
+	result = M4Mul(perspective, view);
+	return result;
 }

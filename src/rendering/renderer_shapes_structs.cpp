@@ -1,8 +1,8 @@
-#define MAX_DEBUG_LINES 100
+#define MAX_DEBUG_LINES 10
 
 struct LineInfo {
-	Vec3 pos0;
-	Vec3 pos1;
+	Vec3 start;
+	Vec3 end;
 	Vec3 color;
 };
 

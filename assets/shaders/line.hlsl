@@ -1,6 +1,6 @@
 struct LineInfo {
-	float3 pos0;
-	float3 pos1;
+	float3 start;
+	float3 end;
 	float3 color;
 };
 
@@ -23,7 +23,7 @@ ps vsf(in uint vert_id : SV_VertexID) {
 
 	LineInfo line_info = line_info_array[index];
 
-	float3 line_end_to_draw = lerp(line_info.pos0, line_info.pos1, vert_count);
+	float3 line_end_to_draw = lerp(line_info.start, line_info.end, vert_count);
 	output.pixel_coord = mul(view_proj, float4(line_end_to_draw, 1.0f));
 
 	output.color = line_info.color;

@@ -157,6 +157,7 @@ void SubmitDebugTextDrawCall(DebugText* dt, Renderer* renderer) {
 	RenderPipeline debug_text = {};
 
 	debug_text.rs = RenderStateDefaults();
+	debug_text.rs.command = RENDER_COMMAND_CLEAR_DEPTH_STENCIL;
 	debug_text.rs.rs = RASTERIZER_STATE_DOUBLE_SIDED;
 	debug_text.vs = VERTEX_SHADER_TEXT;
 	debug_text.ps = PIXEL_SHADER_TEXT;

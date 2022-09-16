@@ -38,10 +38,10 @@ struct WindowDimensions {	u32 width; u32 height; };
 #include "asset_loading.cpp"
 #include "font_handling_structs.cpp"
 #include "rendering/renderer.cpp"
-#include "rendering/renderer_shapes.cpp"
 #include "font_handling.cpp"
 #include "camera.cpp"
-#include "editor.cpp"
+#include "rendering/renderer_shapes.cpp"
+#include "simulation.cpp"
 
 struct Entity {
 	Transform transform;
@@ -69,6 +69,7 @@ int main(int argc, char* argv[]) {
 	Renderer* renderer = PushMaster(Renderer, 1);
 	InitRendering(renderer, handle, app_state->wd, &ga);
 
+	RendererShapes* rs = PushMaster(RendererShapes, 1);
 	DebugText* dt = PushMaster(DebugText, 1);
 	LoadFont("../assets/fonts/JetBrainsMono/jetbrains_mono_light.fi",
 		"../assets/fonts/JetBrainsMono/jetbrains_mono_light.png", dt, renderer);
@@ -155,11 +156,12 @@ int main(int argc, char* argv[]) {
 	float ambience = 0.5f;
 
 	FPControlInfo fpci = { 1.0f, 1.0f, 1.0f, };
+	Ship ship = MakeShip();
 
 	while (app_state->running) {
-		BeginMemoryCheck(SM);
 		BeginAppState(app_state);
 		BeginDebugText(dt, app_state->wd);
+		BeginRendererShapes(rs);
 		BeginRendering(renderer);
 		if(app_state->input.kb[KB_F1].pressed) renderer->state_overrides.rs = renderer->state_overrides.rs ? RASTERIZER_STATE_NONE : RASTERIZER_STATE_WIREFRAME; 
 
@@ -228,33 +230,31 @@ int main(int argc, char* argv[]) {
 		cube.rp.prbd[0].constants.slot = CONSTANTS_BINDING_SLOT_OBJECT;
 		cube.rp.prbd[0].constants.data = &cube_dpm;
 
+		FPControlInfo ship_fpci = {};
+		ship_fpci.base_sens = 1.0f;
+		ship_fpci.trans_sens = 1.0f;
+		ship_fpci.rot_sens = 1.0f;
+		ship_fpci.block_yaw = false;
+		ship_fpci.block_pitch = false;
+
 		if(app_state->input.mk[MK_RIGHT].held) {
 			if(app_state->input.kb[KB_SHIFT].held) fpci.block_pitch = true; else fpci.block_pitch = false;
 			if(app_state->input.kb[KB_CTRL].held) fpci.block_yaw = true; else fpci.block_yaw = false;
 
-			FirstPersonCameraControl(&camera, fpci, app_state->input);
+			FirstPersonControl(&camera.position, &camera.rotation, true, fpci, app_state->input);
+		} else {
+			FirstPersonControl(&ship.transform.position, &ship.transform.rotation, false, ship_fpci, app_state->input);
 		}
+		DrawDebugTransform(ship.transform, rs);
+		SubmitDrawCallShip(ship, renderer);
+		char* trans = PushScratch(char, 100);
+		sprintf(trans, "pos: %.2f, %.2f, %.2f", ship.transform.position.x, ship.transform.position.y,
+		        ship.transform.position.z);
+		DrawDebugText(trans, MAGENTA, QUADRANT_TOP_RIGHT, dt);
 
 		Mat4 vp = MakeViewPerspective(camera);
 	
-		LineInfo li = { V3(30.0f, 2000.0f, 30.0f), V3(0.0f, 0.0f, 0.0f) , RED };
-		RenderPipeline rp = {};
-		rp.rs = RenderStateDefaults();
-		rp.rs.topology = D3D11_PRIMITIVE_TOPOLOGY_LINELIST;
-		rp.vs = VERTEX_SHADER_LINE;
-		rp.ps = PIXEL_SHADER_LINE;
-		rp.dc.type = DRAW_CALL_VERTICES;
-		rp.dc.vertices_count = 2 * 1;
-		rp.vrbd_count = 2;
-		rp.vrbd = PushMaster(RenderBufferData, 2);
-		rp.vrbd[0].type = RENDER_BUFFER_TYPE_STRUCTURED;
-		rp.vrbd[0].structured.slot = STRUCTURED_BINDING_SLOT_FRAME;
-		rp.vrbd[0].structured.count = 1;
-		rp.vrbd[0].structured.data = &li;
-		rp.vrbd[1].type = RENDER_BUFFER_TYPE_CONSTANTS;
-		rp.vrbd[1].constants.slot = CONSTANTS_BINDING_SLOT_CAMERA;
-		rp.vrbd[1].constants.data = &vp;
-		AddToRenderQueue(rp, renderer);
+		SubmitRendererShapesDrawCall(rs, camera, renderer);
 
 		RenderPipeline vs_rp = {};
 		vs_rp.vs = VERTEX_SHADER_POS_NOR;
@@ -318,7 +318,6 @@ int main(int argc, char* argv[]) {
 		PopScratch(char, 100);
 		CameraDrawDebugText(&camera, dt);
 		SubmitDebugTextDrawCall(dt, renderer);
-		renderer->context->PSSetSamplers(0, 1, &renderer->ss[SAMPLER_STATE_DEFAULT]);
 
 		ExecuteRenderPipeline(vs_rp, renderer);
 		ExecuteRenderPipeline(vs_rp_2, renderer);
@@ -334,14 +333,26 @@ int main(int argc, char* argv[]) {
 		ExecuteRenderPipeline(light.rp, renderer);
 		//ExecuteRenderPipeline(debug_text, renderer);
 		
-		renderer->context->ClearDepthStencilView(renderer->dsv, D3D11_CLEAR_DEPTH, 1.0f, 0);
 		Render(renderer);
 		EndRendering(renderer);
 
-		PopScratch(RenderBufferData, 15);
 		EndAppState(app_state);
-
-		EndMemoryCheck(SM);
+		SM.allocated_size = 0;
 	}
 	return 0;
 }
+
+/* Rendering context implementation
+	Two viewports
+	Two separate worlds
+	Two separate simulations
+	Two separate camera constant buffers
+	Two separate camera
+	Two separate debug contexts
+	A "context" struct that carries details about vertex and pixel shaders in play
+	Entity sim list that conatins all renderable entities
+	Has camera
+	camera reads all vertex shaders in play and submits data?
+	auto add debug stuff
+	common data formats? 
+	*/
