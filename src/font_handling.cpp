@@ -6,7 +6,6 @@ struct DebugText {
 	u32 w, h; // Screen res
 	u8 line_count[QUADRANT_TOTAL];
 	//float font_size;
-	RenderBufferData rbd;
 };
 
 static void PushGlyph(GlyphQuad gq, DebugText* dt) {
@@ -165,11 +164,11 @@ void SubmitDebugTextDrawCall(DebugText* dt, Renderer* renderer) {
 	debug_text.dc.vertices_count = 6 * dt->glyph_counter;
 	debug_text.prbg = RENDER_BUFFER_GROUP_FONT;
 	debug_text.vrbd_count = 1;
-	debug_text.vrbd = &dt->rbd;
-	dt->rbd.type = RENDER_BUFFER_TYPE_STRUCTURED;
-	dt->rbd.structured.slot = STRUCTURED_BINDING_SLOT_FRAME;
-	dt->rbd.structured.data = dt->quads;
-	dt->rbd.structured.count = dt->glyph_counter;
+	debug_text.vrbd = PushStruct(&renderer->sm, RenderBufferData);
+	debug_text.vrbd->type = RENDER_BUFFER_TYPE_STRUCTURED;
+	debug_text.vrbd->structured.slot = STRUCTURED_BINDING_SLOT_FRAME;
+	debug_text.vrbd->structured.data = &dt->quads;
+	debug_text.vrbd->structured.count = dt->glyph_counter;
 
-	PushRenderPipeline(debug_text, renderer);
+	AddToRenderQueue(debug_text, renderer);
 }

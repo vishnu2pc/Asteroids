@@ -16,6 +16,12 @@ static GlobalMemory SM;
 #define PushScratch(type, count) (type*)GetMemory(&SM, sizeof(type)*(count))
 #define PopScratch(type, count) FreeMemory(&SM, sizeof(type)*count)
 
+#define PushStruct(ptr_global_memory, type) (type*)GetMemory((ptr_global_memory), sizeof(type))
+#define PushArray(ptr_global_memory, type, count) (type*)GetMemory((ptr_global_memory), sizeof(type)*(count))
+
+#define PopStruct(ptr_global_memory, type) (type*)FreeMemory((ptr_global_memory), sizeof(type))
+#define PopArray(ptr_global_memory, type, count) FreeMemory((ptr_global_memory), sizeof(type)*(count))
+
 static void AllocateGlobalMemory(GlobalMemory* gm, u32 size) {
 	gm->bp = calloc(1, size);
 	gm->total_size = size;
@@ -35,10 +41,10 @@ static void FreeMemory(GlobalMemory* gm, u32 size) {
 	gm->allocated_size -= byte_aligned_size;
 }
 
-static void BeginMemoryCheck() {
-	SM.frame_begin_size = SM.allocated_size;
+static void BeginMemoryCheck(GlobalMemory gm) {
+	gm.frame_begin_size = gm.allocated_size;
 }
 
-static void EndMemoryCheck() {
-	assert(SM.frame_begin_size == SM.allocated_size);
+static void EndMemoryCheck(GlobalMemory gm) {
+	assert(gm.frame_begin_size == gm.allocated_size);
 }

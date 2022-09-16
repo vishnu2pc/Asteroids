@@ -24,6 +24,9 @@ typedef uint64_t u64;
 #define assertHR(result) assert(SUCCEEDED(result))
 
 #define ARRAY_COUNT(array) (sizeof(array)/sizeof(*(array)))
+#define Kilobytes(value) (1024LL*(value))
+#define Megabytes(value) (Kilobytes(1024)*(value))
+#define Gigabytes(value) (Megabytes(1024)*(value))
 
 struct WindowDimensions {	u32 width; u32 height; };
 
@@ -39,10 +42,6 @@ struct WindowDimensions {	u32 width; u32 height; };
 #include "font_handling.cpp"
 #include "camera.cpp"
 #include "editor.cpp"
-
-#define Kilobytes(value) (1024LL*(value))
-#define Megabytes(value) (Kilobytes(1024)*(value))
-#define Gigabytes(value) (Megabytes(1024)*(value))
 
 struct Entity {
 	Transform transform;
@@ -158,7 +157,7 @@ int main(int argc, char* argv[]) {
 	FPControlInfo fpci = { 1.0f, 1.0f, 1.0f, };
 
 	while (app_state->running) {
-		BeginMemoryCheck();
+		BeginMemoryCheck(SM);
 		BeginAppState(app_state);
 		BeginDebugText(dt, app_state->wd);
 		BeginRendering(renderer);
@@ -255,7 +254,7 @@ int main(int argc, char* argv[]) {
 		rp.vrbd[1].type = RENDER_BUFFER_TYPE_CONSTANTS;
 		rp.vrbd[1].constants.slot = CONSTANTS_BINDING_SLOT_CAMERA;
 		rp.vrbd[1].constants.data = &vp;
-		PushRenderPipeline(rp, renderer);
+		AddToRenderQueue(rp, renderer);
 
 		RenderPipeline vs_rp = {};
 		vs_rp.vs = VERTEX_SHADER_POS_NOR;
@@ -333,16 +332,16 @@ int main(int argc, char* argv[]) {
 		ExecuteRenderPipeline(cube.rp, renderer);
 
 		ExecuteRenderPipeline(light.rp, renderer);
-		renderer->context->ClearDepthStencilView(renderer->dsv, D3D11_CLEAR_DEPTH, 1.0f, 0);
 		//ExecuteRenderPipeline(debug_text, renderer);
 		
+		renderer->context->ClearDepthStencilView(renderer->dsv, D3D11_CLEAR_DEPTH, 1.0f, 0);
 		Render(renderer);
 		EndRendering(renderer);
 
 		PopScratch(RenderBufferData, 15);
 		EndAppState(app_state);
 
-		EndMemoryCheck();
+		EndMemoryCheck(SM);
 	}
 	return 0;
 }

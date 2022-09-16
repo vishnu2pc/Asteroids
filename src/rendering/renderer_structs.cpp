@@ -282,6 +282,9 @@ struct RenderPipeline {
 
 // Push this on the heap
 struct Renderer {
+	GlobalMemory gm;
+	GlobalMemory sm;
+
 	ID3D11Device* device;
 	ID3D11DeviceContext* context; // This changes when we start using deferred contexts
 	IDXGISwapChain1* swapchain;
@@ -305,10 +308,8 @@ struct Renderer {
 
 	ID3D11SamplerState* ss[SAMPLER_STATE_TOTAL];
 	
-	RenderBuffer rb[RENDER_BUFFER_MAX];
 	RenderBufferGroup rbg[RENDER_BUFFER_GROUP_TOTAL];
 	u8 rbg_id;
-	u8 rb_id;
 
 	RenderPipeline rq[RENDER_QUEUE_MAX];
 	u8 rq_id;
@@ -316,20 +317,9 @@ struct Renderer {
 	RenderState state_overrides;
 };
 
-static void PushRenderPipeline(RenderPipeline rp , Renderer* renderer) {
+static void AddToRenderQueue(RenderPipeline rp, Renderer* renderer) {
 	assert(renderer->rq_id < RENDER_QUEUE_MAX);
 	renderer->rq[renderer->rq_id++] = rp;
-}
-
-static RenderBuffer* PushRenderBuffer(u8 count, Renderer* renderer) {
-	RenderBuffer* ptr;
-	u8 id = renderer->rb_id;
-	ptr = &renderer->rb[id];
-
-	assert(id + count < RENDER_BUFFER_MAX);
-	renderer->rb_id += count;
-
-	return ptr;
 }
 
 static u8 PushRenderBufferGroup(RENDER_BUFFER_GROUP index, RenderBufferGroup rbg, Renderer* renderer) {

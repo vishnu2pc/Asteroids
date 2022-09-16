@@ -95,7 +95,7 @@ static PixelShader UploadPixelShader(PixelShaderDesc desc, Renderer* renderer) {
 	TEXTURE_SLOT* texture_slot = nullptr;
 
 	u8 rb_count = desc.cb_count;
-	RenderBuffer* rb = PushRenderBuffer(rb_count, renderer);
+	RenderBuffer* rb = PushArray(&renderer->gm, RenderBuffer, rb_count);
 
 	hr = D3DCompileFromFile(desc.shader.path, nullptr, nullptr, desc.shader.entry, "ps_5_0",
 																			0, 0, &blob, &error);
@@ -112,7 +112,7 @@ static PixelShader UploadPixelShader(PixelShaderDesc desc, Renderer* renderer) {
 	}
 
 	if(desc.texture_count) {
-		texture_slot = PushMaster(TEXTURE_SLOT, desc.texture_count);
+		texture_slot = PushArray(&renderer->gm, TEXTURE_SLOT, desc.texture_count);
 		memcpy(texture_slot, desc.texture_slot, sizeof(TEXTURE_SLOT)*desc.texture_count);
 	}
 
@@ -137,7 +137,7 @@ static VertexShader UploadVertexShader(VertexShaderDesc desc, Renderer* renderer
 	VERTEX_BUFFER* vb_type = 0;
 
 	u8 rb_count = desc.cb_count + desc.sb_count;
-	RenderBuffer* rb = PushRenderBuffer(rb_count, renderer);
+	RenderBuffer* rb = PushArray(&renderer->gm, RenderBuffer, rb_count);
 
 	hr = D3DCompileFromFile(desc.shader.path, nullptr, nullptr, desc.shader.entry, "vs_5_0",
 																			0, 0, &blob, &error);
@@ -149,15 +149,15 @@ static VertexShader UploadVertexShader(VertexShaderDesc desc, Renderer* renderer
 	assertHR(hr);
 
 	if(desc.vb_count) {
-		D3D11_INPUT_ELEMENT_DESC* ie_desc = PushScratch(D3D11_INPUT_ELEMENT_DESC, desc.vb_count);
+		D3D11_INPUT_ELEMENT_DESC* ie_desc = PushArray(&renderer->sm, D3D11_INPUT_ELEMENT_DESC, desc.vb_count);
 		MakeD3DInputElementDesc(desc.vb_type, ie_desc, desc.vb_count);
 
 		hr = renderer->device->CreateInputLayout(ie_desc, desc.vb_count, blob->GetBufferPointer(), blob->GetBufferSize(), &il);
 
-		vb_type = PushMaster(VERTEX_BUFFER, desc.vb_count);
+		vb_type = PushArray(&renderer->gm, VERTEX_BUFFER, desc.vb_count);
 		memcpy(vb_type, desc.vb_type, sizeof(VERTEX_BUFFER)*desc.vb_count);
 		assertHR(hr);
-		PopScratch(D3D11_INPUT_ELEMENT_DESC, desc.vb_count);
+		PopArray(&renderer->sm, D3D11_INPUT_ELEMENT_DESC, desc.vb_count);
 	}
 
 	u8 i=0;
@@ -234,7 +234,7 @@ static void UploadTextureFromFile(char* filepath, TEXTURE_SLOT slot, RENDER_BUFF
 
 	TextureData texture_data = { TEXTURE_SLOT_ALBEDO, png, (u32)x, (u32)y, 4 };
 
-	RenderBuffer* rb = PushRenderBuffer(1, renderer);
+	RenderBuffer* rb = PushStruct(&renderer->gm, RenderBuffer);
 	rb->type = RENDER_BUFFER_TYPE_TEXTURE;
 	rb->texture = UploadTexture(texture_data, renderer->device);
 	RenderBufferGroup rbg = { rb, 1 };
@@ -278,7 +278,7 @@ static VertexBuffer UploadVertexBuffer(VertexBufferData vb_data, u32 num_vertice
 static RenderBufferGroup UploadMesh(MeshData mesh_data, Renderer* renderer) {
 	RenderBufferGroup rbg = {};
 
-	RenderBuffer* rb = PushRenderBuffer(mesh_data.vb_data_count+1, renderer);
+	RenderBuffer* rb = PushArray(&renderer->gm, RenderBuffer, mesh_data.vb_data_count+1);
 
 	u8 i=0;
 	for(i=0; i<mesh_data.vb_data_count; i++) {
@@ -307,6 +307,11 @@ static RenderBufferGroup UploadMesh(MeshData mesh_data, Renderer* renderer) {
 //------------------------------------------------------------------------
 static void InitRendering(Renderer* renderer, HWND handle, WindowDimensions wd, GameAssets* ga) {
 	HRESULT hr;
+	//------------------------------------------------------------------------
+	{
+		AllocateGlobalMemory(&renderer->gm, Megabytes(30));
+		AllocateGlobalMemory(&renderer->sm, Megabytes(3));
+	}
 	//-------------------------Init-----------------------------------------------
 	{
 		u32 flags = 0;
@@ -695,6 +700,7 @@ static void PushStructuredData(StructuredBufferData sb_data, StructuredBuffer sb
 //------------------------------------------------------------------------
 static void BeginRendering(Renderer* renderer) {
 	renderer->rq_id = 0;
+	renderer->sm.allocated_size = 0;
 
 	float color[4] = { 0.392f, 0.584f, 0.929f, 1.0f };
 	renderer->context->ClearRenderTargetView(renderer->rtv, color);
