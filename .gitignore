@@ -1,8 +1,8 @@
-*.exe
-*.pdb
-*.ilk
+*.png
 *.gltf
 *.ttf
-*.png
-*.jpg
-*.jpeg
+*.hlsl
+/build
+/docs
+/src/tools/rasterize_font_and_dump_bitmap/bin
+/*.10x

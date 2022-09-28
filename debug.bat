@@ -1,1 +1,0 @@
-remedybg bin/main.exe

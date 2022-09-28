@@ -1,0 +1,1516 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+ASSET_BLOB	.\file_formats.h	/^enum ASSET_BLOB {$/;"	g
+ASSET_BLOB_MESHES	.\file_formats.h	/^	ASSET_BLOB_MESHES,$/;"	e	enum:ASSET_BLOB
+ASSET_BLOB_TEXTURES	.\file_formats.h	/^	ASSET_BLOB_TEXTURES,$/;"	e	enum:ASSET_BLOB
+ASSET_BLOB_TOTAL	.\file_formats.h	/^	ASSET_BLOB_TOTAL$/;"	e	enum:ASSET_BLOB
+Abs	.\math.h	3;"	d
+AddToRenderQueue	.\renderer.h	/^AddToRenderQueue(RenderPipeline rp, Renderer* renderer) {$/;"	f
+ArrayCount	.\base_types.h	36;"	d
+Assert	.\base_types.h	39;"	d
+Assert	.\base_types.h	41;"	d
+AssertHR	.\game.cpp	6;"	d	file:
+AssetInfo	.\asset_info.h	/^struct AssetInfo {$/;"	s
+Axis	.\platform_api.h	/^struct Axis { int x, y; };$/;"	s
+AxisAngleFromQuat	.\math.h	/^static void AxisAngleFromQuat(Quat q, Vec3* outAxis, float* outAngle) {$/;"	f
+BLACK	.\math.h	107;"	d
+BLEND_STATE	.\renderer.h	/^enum BLEND_STATE {$/;"	g
+BLEND_STATE_ENABLED	.\renderer.h	/^	BLEND_STATE_ENABLED,$/;"	e	enum:BLEND_STATE
+BLEND_STATE_NONE	.\renderer.h	/^	BLEND_STATE_NONE,$/;"	e	enum:BLEND_STATE
+BLEND_STATE_NO_BLEND	.\renderer.h	/^	BLEND_STATE_NO_BLEND,$/;"	e	enum:BLEND_STATE
+BLEND_STATE_TOTAL	.\renderer.h	/^	BLEND_STATE_TOTAL$/;"	e	enum:BLEND_STATE
+BLUE	.\math.h	112;"	d
+BeginDebugText	.\font_handling.cpp	/^static void BeginDebugText(DebugText* dt, WindowDimensions wd) {$/;"	f	file:
+Button	.\platform_api.h	/^struct Button { bool pressed, held; };$/;"	s
+CONSTANTS_BINDING_SLOT	.\renderer.h	/^enum CONSTANTS_BINDING_SLOT {$/;"	g
+CONSTANTS_BINDING_SLOT_CAMERA	.\renderer.h	/^	CONSTANTS_BINDING_SLOT_CAMERA,  \/\/ per viewport?$/;"	e	enum:CONSTANTS_BINDING_SLOT
+CONSTANTS_BINDING_SLOT_FRAME	.\renderer.h	/^	CONSTANTS_BINDING_SLOT_FRAME,$/;"	e	enum:CONSTANTS_BINDING_SLOT
+CONSTANTS_BINDING_SLOT_OBJECT	.\renderer.h	/^	CONSTANTS_BINDING_SLOT_OBJECT,$/;"	e	enum:CONSTANTS_BINDING_SLOT
+CRIMSON	.\math.h	118;"	d
+CYAN	.\math.h	113;"	d
+Camera	.\camera.cpp	/^struct Camera {$/;"	s	file:
+CameraDrawDebugText	.\camera.cpp	/^CameraDrawDebugText(Camera* cam, DebugText* dt, MemoryArena* arena) {$/;"	f	file:
+CompareMem	.\memory_management.h	/^static bool CompareMem(void* left, void* right, u64 len) {$/;"	f
+CompileDebugTextShader	.\font_handling.cpp	/^CompileDebugTextShader(DebugText* debug_text, Renderer* renderer) {$/;"	f	file:
+CompileMeshShader	.\mesh_renderer.cpp	/^CompileMeshShader(MeshRenderer* mesh_renderer, Renderer* renderer) {$/;"	f	file:
+CompileQuadShader	.\quad_renderer.cpp	/^CompileQuadShader(QuadRenderer* quad_renderer, Renderer* renderer) {$/;"	f	file:
+CompileTexturedQuadShader	.\quad_renderer.cpp	/^CompileTexturedQuadShader(QuadRenderer* quad_renderer, Renderer* renderer) {$/;"	f	file:
+ConstantsBuffer	.\renderer.h	/^struct ConstantsBuffer {$/;"	s
+ConstantsBufferDesc	.\renderer.h	/^struct ConstantsBufferDesc {$/;"	s
+CopyMem	.\memory_management.h	/^static void CopyMem(void* to, void* from, u64 len) {$/;"	f
+DEPTH_STENCIL_STATE	.\renderer.h	/^enum DEPTH_STENCIL_STATE {$/;"	g
+DEPTH_STENCIL_STATE_DEFAULT	.\renderer.h	/^	DEPTH_STENCIL_STATE_DEFAULT,$/;"	e	enum:DEPTH_STENCIL_STATE
+DEPTH_STENCIL_STATE_NONE	.\renderer.h	/^	DEPTH_STENCIL_STATE_NONE,$/;"	e	enum:DEPTH_STENCIL_STATE
+DEPTH_STENCIL_STATE_TOTAL	.\renderer.h	/^	DEPTH_STENCIL_STATE_TOTAL$/;"	e	enum:DEPTH_STENCIL_STATE
+DRAW_CALL	.\renderer.h	/^enum DRAW_CALL {$/;"	g
+DRAW_CALL_DEFAULT	.\renderer.h	/^	DRAW_CALL_DEFAULT,$/;"	e	enum:DRAW_CALL
+DRAW_CALL_INDEXED	.\renderer.h	/^	DRAW_CALL_INDEXED,$/;"	e	enum:DRAW_CALL
+DRAW_CALL_INSTANCED	.\renderer.h	/^	DRAW_CALL_INSTANCED,$/;"	e	enum:DRAW_CALL
+DRAW_CALL_NONE	.\renderer.h	/^	DRAW_CALL_NONE,$/;"	e	enum:DRAW_CALL
+DRAW_CALL_VERTICES	.\renderer.h	/^	DRAW_CALL_VERTICES,$/;"	e	enum:DRAW_CALL
+DebugText	.\font_handling.h	/^struct DebugText {$/;"	s
+DefaultCamera	.\camera.cpp	/^DefaultCamera(WindowDimensions wd, MemoryArena* arena) {$/;"	f	file:
+DefaultFPControlInfo	.\camera.cpp	/^DefaultFPControlInfo() {$/;"	f	file:
+DegToRad	.\math.h	/^static float DegToRad(float degrees) { return degrees * (PI32\/180.0f); }$/;"	f
+Directory	.\file_formats.h	/^struct Directory {$/;"	s
+DrawCall	.\renderer.h	/^struct DrawCall {$/;"	s
+DrawDebugText	.\font_handling.cpp	/^static void DrawDebugText(char* text, Vec3 color, QUADRANT quad, DebugText* dt, MemoryArena* arena) {$/;"	f	file:
+EulerFromQuat	.\math.h	/^static Vec3 EulerFromQuat(Quat quat) {$/;"	f
+ExecuteRenderPipeline	.\renderer.cpp	/^static void ExecuteRenderPipeline(RenderPipeline rp, Renderer* renderer) {$/;"	f	file:
+ExtractMemoryArena	.\memory_management.h	/^static MemoryArena ExtractMemoryArena(MemoryArena* arena, u32 size) {$/;"	f
+F32Max	.\base_types.h	26;"	d
+F32Min	.\base_types.h	27;"	d
+FAST_BITS	.\include\stb_image.h	1916;"	d
+FONT_CHARS_TOTAL	.\font_handling.h	17;"	d
+FPControlInfo	.\simulation.h	/^struct FPControlInfo {$/;"	s
+FirstPersonCamera	.\camera.cpp	/^FirstPersonCamera(Camera* camera, FPControlInfo* fpci, Input* input) {$/;"	f	file:
+FirstPersonControl	.\simulation.cpp	/^FirstPersonControl(Vec3* position, Quat* rotation, bool camera, FPControlInfo* ci, Input* input) {$/;"	f	file:
+FontInfo	.\font_handling.h	/^struct FontInfo {$/;"	s
+FreeMemory	.\memory_management.h	/^static void FreeMemory(MemoryArena* memory, u32 size) {$/;"	f
+GAME_INIT	.\game.cpp	/^extern "C" GAME_INIT(game_init) {$/;"	f
+GAME_INIT	.\game_layer.h	7;"	d
+GAME_LOOP	.\game.cpp	/^extern "C" GAME_LOOP(game_loop) {$/;"	f
+GAME_LOOP	.\game_layer.h	10;"	d
+GREEN	.\math.h	121;"	d
+GREY	.\math.h	109;"	d
+Game	.\game.h	/^struct Game {$/;"	s
+GameAssetFile	.\file_formats.h	/^struct GameAssetFile {$/;"	s
+GameAssets	.\asset_loading.cpp	/^struct GameAssets {$/;"	s	file:
+GameBegin	.\game.cpp	/^GameBegin(Game* game, Win32Window* window) {$/;"	f	file:
+GameEnd	.\game.cpp	/^GameEnd(Game* game) {$/;"	f	file:
+GameInit	.\game_layer.h	/^typedef GAME_INIT(GameInit);$/;"	t
+GameLayer	.\game_layer.h	/^struct GameLayer {$/;"	s
+GameLoop	.\game_layer.h	/^typedef GAME_LOOP(GameLoop);$/;"	t
+GenerateGlyphsTopLeft	.\font_handling.cpp	/^static void GenerateGlyphsTopLeft(char* text, int len, Vec3 color, GlyphQuad* gq, float* x, float* y, DebugText* dt) {$/;"	f	file:
+GenerateTetrahedron	.\shapes.cpp	/^GenerateTetrahedron(Vec3* out_vertices) {$/;"	f	file:
+GetAllTextureFormats	.\asset_loading.cpp	/^GetAllTextureFormats(GameAssets* ga, u32* count) {$/;"	f	file:
+GetAssetBlob	.\asset_loading.cpp	/^GetAssetBlob(ASSET_BLOB blob, GameAssets* assets) {$/;"	f	file:
+GetForwardVector	.\math.h	/^static Vec3 GetForwardVector(Quat quat) {	return V3Norm(RotateVecByQuat(V3Forward(), quat)); } $/;"	f
+GetMemory	.\memory_management.h	/^static u8* GetMemory(MemoryArena* arena, u32 size) {$/;"	f
+GetRightVector	.\math.h	/^static Vec3 GetRightVector(Quat quat) {	return V3Norm(RotateVecByQuat(V3Right(), quat)); } $/;"	f
+GetTextureAssetInfo	.\asset_info.cpp	/^GetTextureAssetInfo(char* name, AssetInfo* info) {$/;"	f	file:
+GetTextureFormat	.\asset_loading.cpp	/^GetTextureFormat(char* name, GameAssets* ga) {$/;"	f	file:
+GetUpVector	.\math.h	/^static Vec3 GetUpVector(Quat quat) {	return V3Norm(RotateVecByQuat(V3Up(), quat)); } $/;"	f
+Gigabytes	.\base_types.h	33;"	d
+GlyphQuad	.\font_handling.h	/^struct GlyphQuad {$/;"	s
+I32Max	.\base_types.h	22;"	d
+I32Min	.\base_types.h	21;"	d
+InRange	.\math.h	/^static float InRange(float val, float min, float max) { return (val > min) && (val < max); }$/;"	f
+InRangeMaxInc	.\math.h	/^static float InRangeMaxInc(float val, float min, float max) { return (val > min) && (val <= max); }$/;"	f
+InRangeMinInc	.\math.h	/^static float InRangeMinInc(float val, float min, float max) { return (val >= min) && (val < max); }$/;"	f
+InRangeMinMaxInc	.\math.h	/^static float InRangeMinMaxInc(float val, float min, float max) { return (val >= min) && (val <= max); }$/;"	f
+IndexBuffer	.\renderer.h	/^struct IndexBuffer {$/;"	s
+InitAssetInfo	.\asset_info.cpp	/^InitAssetInfo(MemoryArena* arena) {$/;"	f	file:
+InitDebugText	.\font_handling.cpp	/^InitDebugText(PlatformAPI* platform_api, Renderer* renderer, MemoryArena* arena) { $/;"	f	file:
+InitGameAssets	.\asset_loading.cpp	/^InitGameAssets(PlatformAPI* platform_api, MemoryArena* arena) {$/;"	f	file:
+InitMeshRenderer	.\mesh_renderer.cpp	/^InitMeshRenderer(Renderer* renderer, MemoryArena* arena) {$/;"	f
+InitQuadRenderer	.\quad_renderer.cpp	/^InitQuadRenderer(Renderer* renderer, MemoryArena* arena) {$/;"	f	file:
+InitRenderer	.\renderer.cpp	/^static Renderer* InitRenderer(Win32Window* window, GameAssets* assets, MemoryArena* arena) {$/;"	f	file:
+InitTetra	.\tetra.cpp	/^InitTetra(MemoryArena* arena, Renderer* renderer) {$/;"	f	file:
+Input	.\platform_api.h	/^struct Input {$/;"	s
+Kilobytes	.\base_types.h	31;"	d
+LIME	.\math.h	120;"	d
+Line	.\shapes.cpp	/^struct Line {$/;"	s	file:
+LoadAllTextureAssets	.\asset_info.cpp	/^LoadAllTextureAssets(GameAssets* assets, AssetInfo* info) {$/;"	f	file:
+LoadMeshDataFromAssets	.\asset_loading.cpp	/^LoadMeshDataFromAssets(char* name, GameAssets* ga, MemoryArena* arena) {$/;"	f
+LoadTextureAsset	.\asset_info.cpp	/^LoadTextureAsset(char* name, GameAssets* assets, AssetInfo* asset_info) {$/;"	f	file:
+LoadTextureData	.\asset_info.cpp	/^LoadTextureData(TextureFormat* tf, GameAssets* assets, MemoryArena* arena) {$/;"	f	file:
+M4FromQuat	.\math.h	/^static Mat4 M4FromQuat(Quat quat) {$/;"	f
+M4I	.\math.h	/^static Mat4 M4I() {$/;"	f
+M4LookAt	.\math.h	/^static Mat4 M4LookAt(Vec3 pos, Vec3 target, Vec3 Up) {$/;"	f
+M4Mul	.\math.h	/^static Mat4 M4Mul(Mat4 left, Mat4 right) {$/;"	f
+M4MulF	.\math.h	/^static Mat4 M4MulF(Mat4 mat, float scalar) {$/;"	f
+M4MulV	.\math.h	/^static Vec4 M4MulV(Mat4 mat, Vec4 vec) {$/;"	f
+M4Orthographic	.\math.h	/^static Mat4 M4Orthographic(float left, float right, float bottom,$/;"	f
+M4Perspective	.\math.h	/^static Mat4 M4Perspective(float fov, float aspect_ratio, float Near, float Far) {$/;"	f
+M4Rotate	.\math.h	/^static Mat4 M4Rotate(Vec3 axis, float angle) {$/;"	f
+M4Scale	.\math.h	/^static Mat4 M4Scale(Vec3 scale) {$/;"	f
+M4Translate	.\math.h	/^static Mat4 M4Translate(Vec3 translation) {$/;"	f
+M4Transpose	.\math.h	/^static Mat4 M4Transpose(Mat4 mat) {$/;"	f
+MAGENTA	.\math.h	127;"	d
+MAROON	.\math.h	117;"	d
+MAX_DEBUG_TEXT_GLYPHS	.\font_handling.h	1;"	d
+MAX_MESH_PIPELINES	.\mesh_renderer.cpp	1;"	d	file:
+MAX_QUADS	.\quad_renderer.cpp	1;"	d	file:
+MAX_TETRA	.\tetra.cpp	1;"	d	file:
+MAX_TEXTURED_QUADS	.\quad_renderer.cpp	2;"	d	file:
+MAX_TEXTURES	.\asset_loading.cpp	4;"	d	file:
+MakeD3DInputElementDesc	.\renderer.cpp	/^MakeD3DInputElementDesc(VERTEX_BUFFER* vb_type, D3D11_INPUT_ELEMENT_DESC* d3d_il_desc, u8 count) {$/;"	f	file:
+MakeGlyphQuad	.\font_handling.cpp	/^GlyphQuad MakeGlyphQuad(PackedChar *pc, int pw, int ph, float *xpos, float *ypos)$/;"	f
+MakeMeshData	.\asset_loading.cpp	/^MakeMeshData(MeshFormat* mf, GameAssets* ga, MemoryArena* arena) {$/;"	f
+MakeQuadFromLine	.\shapes.cpp	/^MakeQuadFromLine(Line* line, float thickness, Vec3 normal) {$/;"	f	file:
+MakeQuat	.\math.h	/^static Quat MakeQuat(float x, float y, float z, float w) { return Quat { x, y, z, w}; }$/;"	f
+MakeQuatFromV3	.\math.h	/^static Quat MakeQuatFromV3(Vec3 vec) { return Quat { vec.x, vec.y, vec.z, 1 }; }$/;"	f
+MakeQuatFromV4	.\math.h	/^static Quat MakeQuatFromV4(Vec4 vec) { return Quat { vec.x, vec.y, vec.z, vec.w }; }$/;"	f
+MakeTransformMatrix	.\math.h	/^static Mat4 MakeTransformMatrix(Transform transform) {$/;"	f
+MakeVertexBufferData	.\asset_loading.cpp	/^MakeVertexBufferData(VertexBufferFormat* vbf, GameAssets* ga) {$/;"	f
+MakeViewPerspective	.\camera.cpp	/^MakeViewPerspective(Camera* camera) {$/;"	f	file:
+Mat4	.\math.h	/^struct Mat4 {$/;"	s
+MaterialData	.\asset_formats.h	/^struct MaterialData {$/;"	s
+Megabytes	.\base_types.h	32;"	d
+Memory	.\memory_management.h	/^struct Memory {$/;"	s
+MemoryArena	.\memory_management.h	/^struct MemoryArena {$/;"	s
+MeshData	.\asset_formats.h	/^struct MeshData {$/;"	s
+MeshDesc	.\renderer.h	/^struct MeshDesc {$/;"	s
+MeshFormat	.\file_formats.h	/^struct MeshFormat {$/;"	s
+MeshInfo	.\mesh_renderer.cpp	/^struct MeshInfo {$/;"	s	file:
+MeshPipeline	.\mesh_renderer.cpp	/^struct MeshPipeline {$/;"	s	file:
+MeshRenderer	.\mesh_renderer.cpp	/^struct MeshRenderer {$/;"	s	file:
+MeshRendererFrame	.\mesh_renderer.cpp	/^MeshRendererFrame(MeshRenderer* mesh_renderer, Camera* camera, Renderer* renderer) {$/;"	f	file:
+MeshesBlob	.\file_formats.h	/^struct MeshesBlob {$/;"	s
+Mod	.\math.h	4;"	d
+OLIVE	.\math.h	123;"	d
+ORANGE	.\math.h	125;"	d
+PI32	.\base_types.h	29;"	d
+PIXEL_SHADER	.\renderer.h	/^enum PIXEL_SHADER {$/;"	g
+PIXEL_SHADER_DIFFUSE	.\renderer.h	/^	PIXEL_SHADER_DIFFUSE,$/;"	e	enum:PIXEL_SHADER
+PIXEL_SHADER_DIFFUSE_TEXTURED	.\renderer.h	/^	PIXEL_SHADER_DIFFUSE_TEXTURED,$/;"	e	enum:PIXEL_SHADER
+PIXEL_SHADER_LINE	.\renderer.h	/^	PIXEL_SHADER_LINE,$/;"	e	enum:PIXEL_SHADER
+PIXEL_SHADER_NONE	.\renderer.h	/^	PIXEL_SHADER_NONE,$/;"	e	enum:PIXEL_SHADER
+PIXEL_SHADER_TEXT	.\renderer.h	/^	PIXEL_SHADER_TEXT,$/;"	e	enum:PIXEL_SHADER
+PIXEL_SHADER_TOTAL	.\renderer.h	/^	PIXEL_SHADER_TOTAL$/;"	e	enum:PIXEL_SHADER
+PIXEL_SHADER_UNLIT	.\renderer.h	/^	PIXEL_SHADER_UNLIT,$/;"	e	enum:PIXEL_SHADER
+PLATFORM_ALLOCATE_MEMORY	.\platform_api.h	118;"	d
+PLATFORM_ALLOCATE_MEMORY	.\win32.cpp	/^static PLATFORM_ALLOCATE_MEMORY(win32_allocate_memory) {$/;"	f	file:
+PLATFORM_CLOSE_FILE	.\platform_api.h	112;"	d
+PLATFORM_CLOSE_FILE	.\win32.cpp	/^static PLATFORM_CLOSE_FILE(win32_close_file) {$/;"	f	file:
+PLATFORM_OPEN_FILE	.\platform_api.h	109;"	d
+PLATFORM_OPEN_FILE	.\win32.cpp	/^static PLATFORM_OPEN_FILE(win32_open_file) {$/;"	f	file:
+PLATFORM_READ_FILE	.\platform_api.h	115;"	d
+PLATFORM_READ_FILE	.\win32.cpp	/^static PLATFORM_READ_FILE(win32_read_file) {$/;"	f	file:
+PURPLE	.\math.h	128;"	d
+PackedChar	.\font_handling.h	/^struct PackedChar {$/;"	s
+PixelShader	.\renderer.h	/^struct PixelShader {$/;"	s
+PixelShaderDesc	.\renderer.h	/^struct PixelShaderDesc {$/;"	s
+PlatformAPI	.\platform_api.h	/^struct PlatformAPI {$/;"	s
+PlatformAllocateMemory	.\platform_api.h	/^typedef PLATFORM_ALLOCATE_MEMORY(PlatformAllocateMemory);$/;"	t
+PlatformCloseFile	.\platform_api.h	/^typedef PLATFORM_CLOSE_FILE(PlatformCloseFile);$/;"	t
+PlatformFileHandle	.\platform_api.h	/^struct PlatformFileHandle {$/;"	s
+PlatformFileInfo	.\platform_api.h	/^struct PlatformFileInfo {$/;"	s
+PlatformMemoryBlock	.\platform_api.h	/^struct PlatformMemoryBlock {$/;"	s
+PlatformOpenFile	.\platform_api.h	/^typedef PLATFORM_OPEN_FILE(PlatformOpenFile);    $/;"	t
+PlatformReadFile	.\platform_api.h	/^typedef PLATFORM_READ_FILE(PlatformReadFile);$/;"	t
+PopArray	.\memory_management.h	26;"	d
+PopStruct	.\memory_management.h	25;"	d
+PushArray	.\memory_management.h	23;"	d
+PushConstantsBufferData	.\renderer.h	/^struct PushConstantsBufferData {$/;"	s
+PushConstantsData	.\renderer.cpp	/^PushConstantsData(void* data, ConstantsBuffer* cb, ID3D11DeviceContext* context) {$/;"	f	file:
+PushGlyph	.\font_handling.cpp	/^static void PushGlyph(GlyphQuad gq, DebugText* dt) {$/;"	f	file:
+PushIndexBufferData	.\renderer.h	/^struct PushIndexBufferData {$/;"	s
+PushIndexData	.\renderer.cpp	/^PushIndexData(PushIndexBufferData* data, IndexBuffer* ib, ID3D11DeviceContext* context) {$/;"	f	file:
+PushRenderBufferData	.\renderer.h	/^struct PushRenderBufferData {$/;"	s
+PushRenderLine	.\quad_renderer.cpp	/^PushRenderLine(Line* line, Vec4 color, float thickness, Camera* camera, QuadRenderer* quad_renderer) {$/;"	f	file:
+PushRenderQuad	.\quad_renderer.cpp	/^PushRenderQuad(Quad* quad, Vec4 color, QuadRenderer* quad_renderer) {$/;"	f	file:
+PushStruct	.\memory_management.h	22;"	d
+PushStructuredBufferData	.\renderer.h	/^struct PushStructuredBufferData {$/;"	s
+PushStructuredData	.\renderer.cpp	/^PushStructuredData(PushStructuredBufferData* sb_data, StructuredBuffer* sb, ID3D11DeviceContext* context) {$/;"	f	file:
+PushTextureAssetInfo	.\asset_info.h	/^PushTextureAssetInfo(AssetInfo* info) {$/;"	f
+PushTextureBufferData	.\renderer.h	/^struct PushTextureBufferData {$/;"	s
+PushTexturedQuad	.\quad_renderer.cpp	/^PushTexturedQuad(Quad* quad, RenderBuffer* texture_buffer, QuadRenderer* quad_renderer) {$/;"	f	file:
+PushVertexBufferData	.\renderer.h	/^struct PushVertexBufferData {$/;"	s
+PushVertexData	.\renderer.cpp	/^PushVertexData(PushVertexBufferData* data, VertexBuffer* vb, ID3D11DeviceContext* context) {$/;"	f	file:
+QUADRANT	.\font_handling.h	/^enum QUADRANT {$/;"	g
+QUADRANT_BOTTOM_LEFT	.\font_handling.h	/^	QUADRANT_BOTTOM_LEFT,$/;"	e	enum:QUADRANT
+QUADRANT_BOTTOM_RIGHT	.\font_handling.h	/^	QUADRANT_BOTTOM_RIGHT,$/;"	e	enum:QUADRANT
+QUADRANT_TOP_LEFT	.\font_handling.h	/^	QUADRANT_TOP_LEFT,$/;"	e	enum:QUADRANT
+QUADRANT_TOP_RIGHT	.\font_handling.h	/^	QUADRANT_TOP_RIGHT,$/;"	e	enum:QUADRANT
+QUADRANT_TOTAL	.\font_handling.h	/^	QUADRANT_TOTAL$/;"	e	enum:QUADRANT
+Quad	.\shapes.cpp	/^struct Quad {$/;"	s	file:
+QuadRenderer	.\quad_renderer.cpp	/^struct QuadRenderer {$/;"	s	file:
+QuadRendererFrame	.\quad_renderer.cpp	/^QuadRendererFrame(QuadRenderer* quad_renderer, Camera* cam, Renderer* renderer) {$/;"	f	file:
+Quat	.\math.h	/^struct Quat {$/;"	s
+QuatAdd	.\math.h	/^static Quat QuatAdd(Quat left, Quat right) {$/;"	f
+QuatDivF	.\math.h	/^static Quat QuatDivF(Quat quat, float scalar) {$/;"	f
+QuatDot	.\math.h	/^static float QuatDot(Quat left, Quat right) {$/;"	f
+QuatFromAxisAngle	.\math.h	/^static Quat QuatFromAxisAngle(Vec3 axis, float angle) {$/;"	f
+QuatFromDirectionChange	.\math.h	/^static Quat QuatFromDirectionChange(Vec3 from, Vec3 to) {$/;"	f
+QuatFromEuler	.\math.h	/^static Quat QuatFromEuler(float pitch , float yaw, float roll) {$/;"	f
+QuatI	.\math.h	/^static Quat QuatI() { return Quat { 0.0f, 0.0f, 0.0f, 1.0f }; }$/;"	f
+QuatInverse	.\math.h	/^static Quat QuatInverse(Quat quat) {$/;"	f
+QuatMul	.\math.h	/^static Quat QuatMul(Quat left, Quat right) { $/;"	f
+QuatMulF	.\math.h	/^static Quat QuatMulF(Quat quat, float scalar) {$/;"	f
+QuatNorm	.\math.h	/^static Quat QuatNorm(Quat quat) {$/;"	f
+QuatSub	.\math.h	/^static Quat QuatSub(Quat left, Quat right) {$/;"	f
+RASTERIZER_STATE	.\renderer.h	/^enum RASTERIZER_STATE {$/;"	g
+RASTERIZER_STATE_DEFAULT	.\renderer.h	/^	RASTERIZER_STATE_DEFAULT,$/;"	e	enum:RASTERIZER_STATE
+RASTERIZER_STATE_DOUBLE_SIDED	.\renderer.h	/^	RASTERIZER_STATE_DOUBLE_SIDED,$/;"	e	enum:RASTERIZER_STATE
+RASTERIZER_STATE_NONE	.\renderer.h	/^	RASTERIZER_STATE_NONE,$/;"	e	enum:RASTERIZER_STATE
+RASTERIZER_STATE_TOTAL	.\renderer.h	/^	RASTERIZER_STATE_TOTAL$/;"	e	enum:RASTERIZER_STATE
+RASTERIZER_STATE_WIREFRAME	.\renderer.h	/^	RASTERIZER_STATE_WIREFRAME,$/;"	e	enum:RASTERIZER_STATE
+RED	.\math.h	116;"	d
+RENDERER_MISC_FLAGS	.\renderer.h	/^enum RENDERER_MISC_FLAGS {$/;"	g
+RENDER_BUFFER_GROUP	.\renderer.h	/^enum RENDER_BUFFER_GROUP {$/;"	g
+RENDER_BUFFER_GROUP_CONE	.\renderer.h	/^	RENDER_BUFFER_GROUP_CONE,$/;"	e	enum:RENDER_BUFFER_GROUP
+RENDER_BUFFER_GROUP_CUBE	.\renderer.h	/^	RENDER_BUFFER_GROUP_CUBE,$/;"	e	enum:RENDER_BUFFER_GROUP
+RENDER_BUFFER_GROUP_END	.\renderer.h	/^	RENDER_BUFFER_GROUP_END,$/;"	e	enum:RENDER_BUFFER_GROUP
+RENDER_BUFFER_GROUP_FONT	.\renderer.h	/^	RENDER_BUFFER_GROUP_FONT,$/;"	e	enum:RENDER_BUFFER_GROUP
+RENDER_BUFFER_GROUP_NONE	.\renderer.h	/^	RENDER_BUFFER_GROUP_NONE,$/;"	e	enum:RENDER_BUFFER_GROUP
+RENDER_BUFFER_GROUP_PLANE	.\renderer.h	/^	RENDER_BUFFER_GROUP_PLANE,$/;"	e	enum:RENDER_BUFFER_GROUP
+RENDER_BUFFER_GROUP_SPACE_BACKGROUND	.\renderer.h	/^	RENDER_BUFFER_GROUP_SPACE_BACKGROUND,$/;"	e	enum:RENDER_BUFFER_GROUP
+RENDER_BUFFER_GROUP_SPACE_RED	.\renderer.h	/^	RENDER_BUFFER_GROUP_SPACE_RED,$/;"	e	enum:RENDER_BUFFER_GROUP
+RENDER_BUFFER_GROUP_SPHERE	.\renderer.h	/^	RENDER_BUFFER_GROUP_SPHERE,$/;"	e	enum:RENDER_BUFFER_GROUP
+RENDER_BUFFER_GROUP_TORUS	.\renderer.h	/^	RENDER_BUFFER_GROUP_TORUS,$/;"	e	enum:RENDER_BUFFER_GROUP
+RENDER_BUFFER_GROUP_TOTAL	.\renderer.h	/^	RENDER_BUFFER_GROUP_TOTAL = 255$/;"	e	enum:RENDER_BUFFER_GROUP
+RENDER_BUFFER_MAX	.\renderer.h	/^	RENDER_BUFFER_MAX = 255,$/;"	e	enum:RENDERER_MISC_FLAGS
+RENDER_BUFFER_TYPE	.\renderer.h	/^enum RENDER_BUFFER_TYPE {$/;"	g
+RENDER_BUFFER_TYPE_CONSTANTS	.\renderer.h	/^	RENDER_BUFFER_TYPE_CONSTANTS,$/;"	e	enum:RENDER_BUFFER_TYPE
+RENDER_BUFFER_TYPE_INDEX	.\renderer.h	/^	RENDER_BUFFER_TYPE_INDEX,$/;"	e	enum:RENDER_BUFFER_TYPE
+RENDER_BUFFER_TYPE_NOT_SET	.\renderer.h	/^	RENDER_BUFFER_TYPE_NOT_SET,$/;"	e	enum:RENDER_BUFFER_TYPE
+RENDER_BUFFER_TYPE_STRUCTURED	.\renderer.h	/^	RENDER_BUFFER_TYPE_STRUCTURED,$/;"	e	enum:RENDER_BUFFER_TYPE
+RENDER_BUFFER_TYPE_TEXTURE	.\renderer.h	/^	RENDER_BUFFER_TYPE_TEXTURE,$/;"	e	enum:RENDER_BUFFER_TYPE
+RENDER_BUFFER_TYPE_VERTEX	.\renderer.h	/^	RENDER_BUFFER_TYPE_VERTEX,$/;"	e	enum:RENDER_BUFFER_TYPE
+RENDER_COMMAND	.\renderer.h	/^enum RENDER_COMMAND {$/;"	g
+RENDER_COMMAND_CLEAR_DEPTH_STENCIL	.\renderer.h	/^	RENDER_COMMAND_CLEAR_DEPTH_STENCIL,$/;"	e	enum:RENDER_COMMAND
+RENDER_COMMAND_CLEAR_RENDER_TARGET	.\renderer.h	/^	RENDER_COMMAND_CLEAR_RENDER_TARGET,$/;"	e	enum:RENDER_COMMAND
+RENDER_COMMAND_NONE	.\renderer.h	/^	RENDER_COMMAND_NONE,$/;"	e	enum:RENDER_COMMAND
+RENDER_QUEUE_MAX	.\renderer.h	/^	RENDER_QUEUE_MAX = 255$/;"	e	enum:RENDERER_MISC_FLAGS
+RadToDeg	.\math.h	/^static float RadToDeg(float radians) { return radians * (180\/PI32); }$/;"	f
+RenderBuffer	.\renderer.h	/^struct RenderBuffer {$/;"	s
+RenderBufferGroup	.\renderer.h	/^struct RenderBufferGroup {$/;"	s
+RenderPipeline	.\renderer.h	/^struct RenderPipeline {$/;"	s
+RenderQuad	.\quad_renderer.cpp	/^struct RenderQuad {$/;"	s	file:
+RenderState	.\renderer.h	/^struct RenderState {$/;"	s
+RenderStateDefaults	.\renderer.h	/^RenderStateDefaults() {$/;"	f
+RenderTetra	.\tetra.cpp	/^RenderTetra(MeshRenderer* mesh_renderer) {$/;"	f	file:
+Renderer	.\renderer.h	/^struct Renderer {$/;"	s
+RendererBeginFrame	.\renderer.cpp	/^static void RendererBeginFrame(Renderer* renderer, WindowDimensions wd) {$/;"	f	file:
+RendererEndFrame	.\renderer.cpp	/^static void RendererEndFrame(Renderer* renderer) {$/;"	f	file:
+RendererFrame	.\renderer.cpp	/^static void RendererFrame(Renderer* renderer) {$/;"	f	file:
+RotateVecByQuat	.\math.h	/^static Vec3 RotateVecByQuat(Vec3 vec, Quat quat) {$/;"	f
+SAMPLER_STATE	.\renderer.h	/^enum SAMPLER_STATE {$/;"	g
+SAMPLER_STATE_DEFAULT	.\renderer.h	/^	SAMPLER_STATE_DEFAULT,$/;"	e	enum:SAMPLER_STATE
+SAMPLER_STATE_NONE	.\renderer.h	/^	SAMPLER_STATE_NONE,$/;"	e	enum:SAMPLER_STATE
+SAMPLER_STATE_TILE	.\renderer.h	/^	SAMPLER_STATE_TILE,$/;"	e	enum:SAMPLER_STATE
+SAMPLER_STATE_TOTAL	.\renderer.h	/^	SAMPLER_STATE_TOTAL$/;"	e	enum:SAMPLER_STATE
+SILVER	.\math.h	110;"	d
+STBIDEF	.\include\stb_image.h	393;"	d
+STBIDEF	.\include\stb_image.h	395;"	d
+STBI_ASSERT	.\include\stb_image.h	600;"	d
+STBI_EXTERN	.\include\stb_image.h	604;"	d
+STBI_EXTERN	.\include\stb_image.h	606;"	d
+STBI_FREE	.\include\stb_image.h	681;"	d
+STBI_HAS_LROTL	.\include\stb_image.h	661;"	d
+STBI_INCLUDE_STB_IMAGE_H	.\include\stb_image.h	127;"	d
+STBI_MALLOC	.\include\stb_image.h	679;"	d
+STBI_MAX_DIMENSIONS	.\include\stb_image.h	793;"	d
+STBI_NEON	.\include\stb_image.h	776;"	d
+STBI_NOTUSED	.\include\stb_image.h	655;"	d
+STBI_NOTUSED	.\include\stb_image.h	657;"	d
+STBI_NO_BMP	.\include\stb_image.h	557;"	d
+STBI_NO_GIF	.\include\stb_image.h	566;"	d
+STBI_NO_HDR	.\include\stb_image.h	569;"	d
+STBI_NO_JPEG	.\include\stb_image.h	551;"	d
+STBI_NO_PIC	.\include\stb_image.h	572;"	d
+STBI_NO_PNG	.\include\stb_image.h	554;"	d
+STBI_NO_PNM	.\include\stb_image.h	575;"	d
+STBI_NO_PSD	.\include\stb_image.h	560;"	d
+STBI_NO_SIMD	.\include\stb_image.h	703;"	d
+STBI_NO_SIMD	.\include\stb_image.h	718;"	d
+STBI_NO_TGA	.\include\stb_image.h	563;"	d
+STBI_NO_ZLIB	.\include\stb_image.h	580;"	d
+STBI_ORDER_BGR	.\include\stb_image.h	/^	STBI_ORDER_BGR$/;"	e	enum:__anon4
+STBI_ORDER_RGB	.\include\stb_image.h	/^	STBI_ORDER_RGB,$/;"	e	enum:__anon4
+STBI_REALLOC	.\include\stb_image.h	680;"	d
+STBI_REALLOC_SIZED	.\include\stb_image.h	685;"	d
+STBI_SIMD_ALIGN	.\include\stb_image.h	748;"	d
+STBI_SIMD_ALIGN	.\include\stb_image.h	759;"	d
+STBI_SIMD_ALIGN	.\include\stb_image.h	782;"	d
+STBI_SIMD_ALIGN	.\include\stb_image.h	784;"	d
+STBI_SIMD_ALIGN	.\include\stb_image.h	789;"	d
+STBI_SSE2	.\include\stb_image.h	722;"	d
+STBI_THREAD_LOCAL	.\include\stb_image.h	622;"	d
+STBI_THREAD_LOCAL	.\include\stb_image.h	624;"	d
+STBI_THREAD_LOCAL	.\include\stb_image.h	626;"	d
+STBI_THREAD_LOCAL	.\include\stb_image.h	628;"	d
+STBI_THREAD_LOCAL	.\include\stb_image.h	633;"	d
+STBI_VERSION	.\include\stb_image.h	371;"	d
+STBI__BYTECAST	.\include\stb_image.h	1710;"	d
+STBI__CASE	.\include\stb_image.h	1754;"	d
+STBI__CASE	.\include\stb_image.h	1772;"	d
+STBI__CASE	.\include\stb_image.h	1811;"	d
+STBI__CASE	.\include\stb_image.h	1829;"	d
+STBI__CASE	.\include\stb_image.h	4675;"	d
+STBI__CASE	.\include\stb_image.h	4688;"	d
+STBI__CASE	.\include\stb_image.h	4692;"	d
+STBI__CASE	.\include\stb_image.h	4705;"	d
+STBI__COMBO	.\include\stb_image.h	1753;"	d
+STBI__COMBO	.\include\stb_image.h	1810;"	d
+STBI__F_avg	.\include\stb_image.h	/^	STBI__F_avg=3,$/;"	e	enum:__anon15
+STBI__F_avg_first	.\include\stb_image.h	/^	STBI__F_avg_first,$/;"	e	enum:__anon15
+STBI__F_none	.\include\stb_image.h	/^	STBI__F_none=0,$/;"	e	enum:__anon15
+STBI__F_paeth	.\include\stb_image.h	/^	STBI__F_paeth=4,$/;"	e	enum:__anon15
+STBI__F_paeth_first	.\include\stb_image.h	/^	STBI__F_paeth_first$/;"	e	enum:__anon15
+STBI__F_sub	.\include\stb_image.h	/^	STBI__F_sub=1,$/;"	e	enum:__anon15
+STBI__F_up	.\include\stb_image.h	/^	STBI__F_up=2,$/;"	e	enum:__anon15
+STBI__HDR_BUFLEN	.\include\stb_image.h	7030;"	d
+STBI__IDCT_1D	.\include\stb_image.h	2396;"	d
+STBI__MARKER_none	.\include\stb_image.h	2881;"	d
+STBI__PNG_TYPE	.\include\stb_image.h	5021;"	d
+STBI__RESTART	.\include\stb_image.h	2898;"	d
+STBI__SCAN_header	.\include\stb_image.h	/^			STBI__SCAN_header$/;"	e	enum:__anon6
+STBI__SCAN_load	.\include\stb_image.h	/^			STBI__SCAN_load=0,$/;"	e	enum:__anon6
+STBI__SCAN_type	.\include\stb_image.h	/^			STBI__SCAN_type,$/;"	e	enum:__anon6
+STBI__X64_TARGET	.\include\stb_image.h	690;"	d
+STBI__X86_TARGET	.\include\stb_image.h	692;"	d
+STBI__ZFAST_BITS	.\include\stb_image.h	4034;"	d
+STBI__ZFAST_MASK	.\include\stb_image.h	4035;"	d
+STBI__ZNSYMS	.\include\stb_image.h	4036;"	d
+STBI_default	.\include\stb_image.h	/^	STBI_default = 0, \/\/ only used for desired_channels$/;"	e	enum:__anon1
+STBI_grey	.\include\stb_image.h	/^	STBI_grey       = 1,$/;"	e	enum:__anon1
+STBI_grey_alpha	.\include\stb_image.h	/^	STBI_grey_alpha = 2,$/;"	e	enum:__anon1
+STBI_rgb	.\include\stb_image.h	/^	STBI_rgb        = 3,$/;"	e	enum:__anon1
+STBI_rgb_alpha	.\include\stb_image.h	/^	STBI_rgb_alpha  = 4$/;"	e	enum:__anon1
+STBSP_SPRINTFCB	.\include\stb_sprintf.h	/^typedef char *STBSP_SPRINTFCB(const char *buf, void *user, int len);$/;"	t
+STBSP__ASAN	.\include\stb_sprintf.h	149;"	d
+STBSP__ASAN	.\include\stb_sprintf.h	151;"	d
+STBSP__ASAN	.\include\stb_sprintf.h	153;"	d
+STBSP__ASAN	.\include\stb_sprintf.h	159;"	d
+STBSP__ASAN	.\include\stb_sprintf.h	164;"	d
+STBSP__ATTRIBUTE_FORMAT	.\include\stb_sprintf.h	182;"	d
+STBSP__ATTRIBUTE_FORMAT	.\include\stb_sprintf.h	187;"	d
+STBSP__COPYFP	.\include\stb_sprintf.h	1483;"	d
+STBSP__COPYFP	.\include\stb_sprintf.h	1852;"	d
+STBSP__HALFWIDTH	.\include\stb_sprintf.h	289;"	d
+STBSP__INTMAX	.\include\stb_sprintf.h	1363;"	d
+STBSP__INTMAX	.\include\stb_sprintf.h	285;"	d
+STBSP__LEADINGPLUS	.\include\stb_sprintf.h	1359;"	d
+STBSP__LEADINGPLUS	.\include\stb_sprintf.h	281;"	d
+STBSP__LEADINGSPACE	.\include\stb_sprintf.h	1360;"	d
+STBSP__LEADINGSPACE	.\include\stb_sprintf.h	282;"	d
+STBSP__LEADINGZERO	.\include\stb_sprintf.h	1362;"	d
+STBSP__LEADINGZERO	.\include\stb_sprintf.h	284;"	d
+STBSP__LEADING_0X	.\include\stb_sprintf.h	1361;"	d
+STBSP__LEADING_0X	.\include\stb_sprintf.h	283;"	d
+STBSP__LEFTJUST	.\include\stb_sprintf.h	1358;"	d
+STBSP__LEFTJUST	.\include\stb_sprintf.h	280;"	d
+STBSP__METRIC_1024	.\include\stb_sprintf.h	291;"	d
+STBSP__METRIC_JEDEC	.\include\stb_sprintf.h	292;"	d
+STBSP__METRIC_NOSPACE	.\include\stb_sprintf.h	290;"	d
+STBSP__METRIC_SUFFIX	.\include\stb_sprintf.h	1366;"	d
+STBSP__METRIC_SUFFIX	.\include\stb_sprintf.h	288;"	d
+STBSP__NEGATIVE	.\include\stb_sprintf.h	1365;"	d
+STBSP__NEGATIVE	.\include\stb_sprintf.h	287;"	d
+STBSP__NOTUSED	.\include\stb_sprintf.h	191;"	d
+STBSP__NOTUSED	.\include\stb_sprintf.h	193;"	d
+STBSP__NUMSZ	.\include\stb_sprintf.h	1367;"	d
+STBSP__NUMSZ	.\include\stb_sprintf.h	573;"	d
+STBSP__PUBLICDEC	.\include\stb_sprintf.h	168;"	d
+STBSP__PUBLICDEC	.\include\stb_sprintf.h	172;"	d
+STBSP__PUBLICDEC	.\include\stb_sprintf.h	175;"	d
+STBSP__PUBLICDEF	.\include\stb_sprintf.h	169;"	d
+STBSP__PUBLICDEF	.\include\stb_sprintf.h	173;"	d
+STBSP__PUBLICDEF	.\include\stb_sprintf.h	176;"	d
+STBSP__SPECIAL	.\include\stb_sprintf.h	1851;"	d
+STBSP__SPECIAL	.\include\stb_sprintf.h	256;"	d
+STBSP__TRIPLET_COMMA	.\include\stb_sprintf.h	1364;"	d
+STBSP__TRIPLET_COMMA	.\include\stb_sprintf.h	286;"	d
+STBSP__UNALIGNED	.\include\stb_sprintf.h	1862;"	d
+STBSP__UNALIGNED	.\include\stb_sprintf.h	247;"	d
+STBSP__UNALIGNED	.\include\stb_sprintf.h	249;"	d
+STB_IMAGE_IMPLEMENTATION	.\game.cpp	14;"	d	file:
+STB_SPRINTF_DECORATE	.\include\stb_sprintf.h	205;"	d
+STB_SPRINTF_H_INCLUDE	.\include\stb_sprintf.h	30;"	d
+STB_SPRINTF_IMPLEMENTATION	.\game.cpp	13;"	d	file:
+STB_SPRINTF_IMPLEMENTATION	.\win32.cpp	11;"	d	file:
+STB_SPRINTF_MIN	.\include\stb_sprintf.h	200;"	d
+STB_SPRINTF_MSVC_MODE	.\include\stb_sprintf.h	242;"	d
+STRING_LENGTH	.\file_formats.h	/^enum STRING_LENGTH {$/;"	g
+STRING_LENGTH_BLOB	.\file_formats.h	/^	STRING_LENGTH_BLOB = 12,$/;"	e	enum:STRING_LENGTH
+STRING_LENGTH_MESH	.\file_formats.h	/^	STRING_LENGTH_MESH = 12,$/;"	e	enum:STRING_LENGTH
+STRING_LENGTH_TEXTURE	.\file_formats.h	/^	STRING_LENGTH_TEXTURE = 12,$/;"	e	enum:STRING_LENGTH
+STRING_LENGTH_TEXTURE_TYPE	.\file_formats.h	/^	STRING_LENGTH_TEXTURE_TYPE = 12,$/;"	e	enum:STRING_LENGTH
+STRING_LENGTH_VERTEX_BUFFER	.\file_formats.h	/^	STRING_LENGTH_VERTEX_BUFFER = 12,$/;"	e	enum:STRING_LENGTH
+STRUCTURED_BINDING_SLOT	.\renderer.h	/^enum STRUCTURED_BINDING_SLOT {$/;"	g
+STRUCTURED_BINDING_SLOT_FRAME	.\renderer.h	/^	STRUCTURED_BINDING_SLOT_FRAME$/;"	e	enum:STRUCTURED_BINDING_SLOT
+ShaderDesc	.\renderer.h	/^struct ShaderDesc {$/;"	s
+StringCompare	.\memory_management.h	/^bool StringCompare(char* left, char* right) {$/;"	f
+StringLength	.\memory_management.h	/^u32 StringLength(char* string) {$/;"	f
+StructuredBuffer	.\renderer.h	/^struct StructuredBuffer {$/;"	s
+StructuredBufferDesc	.\renderer.h	/^struct StructuredBufferDesc {$/;"	s
+SubmitDebugTextDrawCall	.\font_handling.cpp	/^void SubmitDebugTextDrawCall(DebugText* dt, Renderer* renderer) {$/;"	f
+TEAL	.\math.h	114;"	d
+TEXTURE_BINDING_SLOT	.\renderer.h	/^enum TEXTURE_BINDING_SLOT {$/;"	g
+TEXTURE_BINDING_SLOT_ALBEDO	.\renderer.h	/^	TEXTURE_BINDING_SLOT_ALBEDO,$/;"	e	enum:TEXTURE_BINDING_SLOT
+TEXTURE_BINDING_SLOT_NORMAL	.\renderer.h	/^	TEXTURE_BINDING_SLOT_NORMAL$/;"	e	enum:TEXTURE_BINDING_SLOT
+TEXTURE_SLOT	.\asset_formats.h	/^enum TEXTURE_SLOT {$/;"	g
+TEXTURE_SLOT_DIFFUSE	.\asset_formats.h	/^	TEXTURE_SLOT_DIFFUSE,$/;"	e	enum:TEXTURE_SLOT
+TEXTURE_SLOT_NORMAL	.\asset_formats.h	/^	TEXTURE_SLOT_NORMAL,$/;"	e	enum:TEXTURE_SLOT
+TEXTURE_SLOT_TOTAL	.\asset_formats.h	/^	TEXTURE_SLOT_TOTAL$/;"	e	enum:TEXTURE_SLOT
+Terabytes	.\base_types.h	34;"	d
+Tetra	.\tetra.cpp	/^struct Tetra {$/;"	s	file:
+TextureAssetInfo	.\asset_info.h	/^struct TextureAssetInfo {$/;"	s
+TextureBuffer	.\renderer.h	/^struct TextureBuffer {$/;"	s
+TextureData	.\asset_formats.h	/^struct TextureData {$/;"	s
+TextureDesc	.\renderer.h	/^struct TextureDesc {$/;"	s
+TextureFormat	.\file_formats.h	/^struct TextureFormat {$/;"	s
+TexturesBlob	.\file_formats.h	/^struct TexturesBlob {$/;"	s
+Transform	.\math.h	/^struct Transform {$/;"	s
+TransformI	.\math.h	/^static Transform TransformI() { return Transform { V3Z(), QuatI(), V3I() }; }$/;"	f
+U16Max	.\base_types.h	20;"	d
+U32Max	.\base_types.h	24;"	d
+U32Min	.\base_types.h	23;"	d
+U64Max	.\base_types.h	25;"	d
+U8Max	.\base_types.h	19;"	d
+UploadAllTextureAssets	.\asset_info.cpp	/^UploadAllTextureAssets(AssetInfo* info, Renderer* renderer) {$/;"	f	file:
+UploadConstantsBuffer	.\renderer.cpp	/^UploadConstantsBuffer(ConstantsBufferDesc desc, ID3D11Device* device) {$/;"	f	file:
+UploadMesh	.\renderer.cpp	/^UploadMesh(MeshData* mesh_data, MeshDesc* mesh_desc, Renderer* renderer) {$/;"	f	file:
+UploadPixelShader	.\renderer.cpp	/^UploadPixelShader(PixelShaderDesc desc, Renderer* renderer) {$/;"	f	file:
+UploadStructuredBuffer	.\renderer.cpp	/^UploadStructuredBuffer(StructuredBufferDesc desc, ID3D11Device* device) {$/;"	f	file:
+UploadTexture	.\renderer.cpp	/^UploadTexture(TextureData* texture_data, Renderer* renderer) {$/;"	f	file:
+UploadTextureFromFile	.\renderer.cpp	/^UploadTextureFromFile(char* filepath, TEXTURE_SLOT slot, Renderer* renderer) {$/;"	f	file:
+UploadVertexBuffer	.\renderer.cpp	/^UploadVertexBuffer(VertexBufferData vb_data, u32 num_vertices, bool dynamic, ID3D11Device* device) {$/;"	f	file:
+UploadVertexShader	.\renderer.cpp	/^UploadVertexShader(VertexShaderDesc desc, Renderer* renderer) {$/;"	f	file:
+V2	.\math.h	/^static Vec2 V2(float x, float y) { return Vec2 { x, y }; }$/;"	f
+V2Add	.\math.h	/^static Vec2 V2Add(Vec2 left, Vec2 right) {$/;"	f
+V2AddF	.\math.h	/^static Vec2 V2AddF(Vec2 left, float scalar) {$/;"	f
+V2Div	.\math.h	/^static Vec2 V2Div(Vec2 left, Vec2 right) {$/;"	f
+V2DivF	.\math.h	/^static Vec2 V2DivF(Vec2 left, float scalar) {$/;"	f
+V2Dot	.\math.h	/^static float V2Dot(Vec2 left, Vec2 right) {$/;"	f
+V2I	.\math.h	/^static Vec2 V2I() { return Vec2 { 1.0f, 1.0f }; }$/;"	f
+V2Mul	.\math.h	/^static Vec2 V2Mul(Vec2 left, Vec2 right) {$/;"	f
+V2MulF	.\math.h	/^static Vec2 V2MulF(Vec2 left, float scalar) {$/;"	f
+V2Sub	.\math.h	/^static Vec2 V2Sub(Vec2 left, Vec2 right) {$/;"	f
+V2SubF	.\math.h	/^static Vec2 V2SubF(Vec2 left, float scalar) {$/;"	f
+V2Z	.\math.h	/^static Vec2 V2Z() { return Vec2 { 0.0f, 0.0f }; }$/;"	f
+V3	.\math.h	/^static Vec3 V3(float x, float y, float z) { return Vec3 { x, y, z }; }$/;"	f
+V3Add	.\math.h	/^static Vec3 V3Add(Vec3 left, Vec3 right) { $/;"	f
+V3AddF	.\math.h	/^static Vec3 V3AddF(Vec3 left, float scalar) {$/;"	f
+V3Cross	.\math.h	/^static Vec3 V3Cross(Vec3 left, Vec3 right) {$/;"	f
+V3Div	.\math.h	/^static Vec3 V3Div(Vec3 left, Vec3 right) {$/;"	f
+V3DivF	.\math.h	/^static Vec3 V3DivF(Vec3 left, float scalar) {$/;"	f
+V3Dot	.\math.h	/^static float V3Dot(Vec3 left, Vec3 right) {$/;"	f
+V3Forward	.\math.h	/^static Vec3 V3Forward() { return Vec3 { 0.0f, 0.0f, 1.0f }; }$/;"	f
+V3I	.\math.h	/^static Vec3 V3I() { return Vec3 { 1.0f, 1.0f, 1.0f }; }$/;"	f
+V3Mag	.\math.h	/^static float V3Mag(Vec3 vec) {$/;"	f
+V3MagSquared	.\math.h	/^static float V3MagSquared(Vec3 vec) {$/;"	f
+V3Mul	.\math.h	/^static Vec3 V3Mul(Vec3 left, Vec3 right) {$/;"	f
+V3MulF	.\math.h	/^static Vec3 V3MulF(Vec3 left, float scalar) {$/;"	f
+V3Neg	.\math.h	/^static Vec3 V3Neg(Vec3 vec) { return V3Sub(V3Z(), vec); }$/;"	f
+V3Norm	.\math.h	/^static Vec3 V3Norm(Vec3 vec) {$/;"	f
+V3Right	.\math.h	/^static Vec3 V3Right() { return Vec3 { 1.0f, 0.0f, 0.0f }; }$/;"	f
+V3Sub	.\math.h	/^static Vec3 V3Sub(Vec3 left, Vec3 right) {$/;"	f
+V3SubF	.\math.h	/^static Vec3 V3SubF(Vec3 left, float scalar) {$/;"	f
+V3Up	.\math.h	/^static Vec3 V3Up() { return Vec3 { 0.0f, 1.0f, 0.0f }; }$/;"	f
+V3Z	.\math.h	/^static Vec3 V3Z() { return Vec3 { 0.0f, 0.0f, 0.0f }; }$/;"	f
+V4	.\math.h	/^static Vec4 V4(float x, float y, float z, float w) { return Vec4 { x, y, z, w }; }$/;"	f
+V4FromV3	.\math.h	/^static Vec4 V4FromV3(Vec3 xyz, float w) { return Vec4 { xyz.x, xyz.y, xyz.z, w }; }$/;"	f
+V4I	.\math.h	/^static Vec4 V4I() { return Vec4 { 1.0f, 1.0f, 1.0f, 1.0f }; }$/;"	f
+V4Z	.\math.h	/^static Vec4 V4Z() { return Vec4 { 0.0f, 0.0f, 0.0f, 0.0f }; }$/;"	f
+VERTEX_BUFFER	.\asset_formats.h	/^enum VERTEX_BUFFER {	$/;"	g
+VERTEX_BUFFER_COLOR	.\asset_formats.h	/^	VERTEX_BUFFER_COLOR, $/;"	e	enum:VERTEX_BUFFER
+VERTEX_BUFFER_NORMAL	.\asset_formats.h	/^	VERTEX_BUFFER_NORMAL, $/;"	e	enum:VERTEX_BUFFER
+VERTEX_BUFFER_NOT_SET	.\asset_formats.h	/^	VERTEX_BUFFER_NOT_SET,$/;"	e	enum:VERTEX_BUFFER
+VERTEX_BUFFER_POSITION	.\asset_formats.h	/^	VERTEX_BUFFER_POSITION, $/;"	e	enum:VERTEX_BUFFER
+VERTEX_BUFFER_TANGENT	.\asset_formats.h	/^	VERTEX_BUFFER_TANGENT,$/;"	e	enum:VERTEX_BUFFER
+VERTEX_BUFFER_TEXCOORD	.\asset_formats.h	/^	VERTEX_BUFFER_TEXCOORD, $/;"	e	enum:VERTEX_BUFFER
+VERTEX_BUFFER_TOTAL	.\asset_formats.h	/^	VERTEX_BUFFER_TOTAL$/;"	e	enum:VERTEX_BUFFER
+VERTEX_SHADER	.\renderer.h	/^enum VERTEX_SHADER {$/;"	g
+VERTEX_SHADER_LINE	.\renderer.h	/^	VERTEX_SHADER_LINE,$/;"	e	enum:VERTEX_SHADER
+VERTEX_SHADER_NONE	.\renderer.h	/^	VERTEX_SHADER_NONE,$/;"	e	enum:VERTEX_SHADER
+VERTEX_SHADER_POS_NOR	.\renderer.h	/^	VERTEX_SHADER_POS_NOR,$/;"	e	enum:VERTEX_SHADER
+VERTEX_SHADER_POS_NOR_TEX	.\renderer.h	/^	VERTEX_SHADER_POS_NOR_TEX,$/;"	e	enum:VERTEX_SHADER
+VERTEX_SHADER_TEXT	.\renderer.h	/^	VERTEX_SHADER_TEXT,$/;"	e	enum:VERTEX_SHADER
+VERTEX_SHADER_TOTAL	.\renderer.h	/^	VERTEX_SHADER_TOTAL$/;"	e	enum:VERTEX_SHADER
+VIEWPORT	.\renderer.h	/^enum VIEWPORT {$/;"	g
+VIEWPORT_DEFAULT	.\renderer.h	/^	VIEWPORT_DEFAULT,$/;"	e	enum:VIEWPORT
+VIEWPORT_NONE	.\renderer.h	/^	VIEWPORT_NONE,$/;"	e	enum:VIEWPORT
+VIEWPORT_TOTAL	.\renderer.h	/^	VIEWPORT_TOTAL$/;"	e	enum:VIEWPORT
+Vec2	.\math.h	/^struct Vec2 {$/;"	s
+Vec2u	.\math.h	/^struct Vec2u {$/;"	s
+Vec3	.\math.h	/^struct Vec3 {$/;"	s
+Vec3Equals	.\math.h	/^static bool Vec3Equals(Vec3 left, Vec3 right) {$/;"	f
+Vec4	.\math.h	/^struct Vec4 {$/;"	s
+VertexBuffer	.\renderer.h	/^struct VertexBuffer {$/;"	s
+VertexBufferData	.\asset_formats.h	/^struct VertexBufferData {$/;"	s
+VertexBufferDesc	.\renderer.h	/^struct VertexBufferDesc {$/;"	s
+VertexBufferFormat	.\file_formats.h	/^struct VertexBufferFormat {$/;"	s
+VertexShader	.\renderer.h	/^struct VertexShader {$/;"	s
+VertexShaderDesc	.\renderer.h	/^struct VertexShaderDesc {$/;"	s
+WHITE	.\math.h	108;"	d
+WIN32_AXIS	.\platform_api.h	/^enum WIN32_AXIS {$/;"	g
+WIN32_AXIS_MOUSE	.\platform_api.h	/^	WIN32_AXIS_MOUSE,$/;"	e	enum:WIN32_AXIS
+WIN32_AXIS_MOUSE_DEL	.\platform_api.h	/^	WIN32_AXIS_MOUSE_DEL,$/;"	e	enum:WIN32_AXIS
+WIN32_AXIS_TOTAL	.\platform_api.h	/^	WIN32_AXIS_TOTAL$/;"	e	enum:WIN32_AXIS
+WIN32_BUTTON	.\platform_api.h	/^enum WIN32_BUTTON {$/;"	g
+WIN32_BUTTON_0	.\platform_api.h	/^	WIN32_BUTTON_0,$/;"	e	enum:WIN32_BUTTON
+WIN32_BUTTON_1	.\platform_api.h	/^	WIN32_BUTTON_1,$/;"	e	enum:WIN32_BUTTON
+WIN32_BUTTON_2	.\platform_api.h	/^	WIN32_BUTTON_2,$/;"	e	enum:WIN32_BUTTON
+WIN32_BUTTON_3	.\platform_api.h	/^	WIN32_BUTTON_3,$/;"	e	enum:WIN32_BUTTON
+WIN32_BUTTON_4	.\platform_api.h	/^	WIN32_BUTTON_4,$/;"	e	enum:WIN32_BUTTON
+WIN32_BUTTON_5	.\platform_api.h	/^	WIN32_BUTTON_5,$/;"	e	enum:WIN32_BUTTON
+WIN32_BUTTON_6	.\platform_api.h	/^	WIN32_BUTTON_6,$/;"	e	enum:WIN32_BUTTON
+WIN32_BUTTON_7	.\platform_api.h	/^	WIN32_BUTTON_7,$/;"	e	enum:WIN32_BUTTON
+WIN32_BUTTON_8	.\platform_api.h	/^	WIN32_BUTTON_8,$/;"	e	enum:WIN32_BUTTON
+WIN32_BUTTON_9	.\platform_api.h	/^	WIN32_BUTTON_9,$/;"	e	enum:WIN32_BUTTON
+WIN32_BUTTON_A	.\platform_api.h	/^	WIN32_BUTTON_A,$/;"	e	enum:WIN32_BUTTON
+WIN32_BUTTON_ALT	.\platform_api.h	/^	WIN32_BUTTON_ALT,$/;"	e	enum:WIN32_BUTTON
+WIN32_BUTTON_B	.\platform_api.h	/^	WIN32_BUTTON_B,$/;"	e	enum:WIN32_BUTTON
+WIN32_BUTTON_C	.\platform_api.h	/^	WIN32_BUTTON_C,$/;"	e	enum:WIN32_BUTTON
+WIN32_BUTTON_CTRL	.\platform_api.h	/^	WIN32_BUTTON_CTRL,$/;"	e	enum:WIN32_BUTTON
+WIN32_BUTTON_D	.\platform_api.h	/^	WIN32_BUTTON_D,$/;"	e	enum:WIN32_BUTTON
+WIN32_BUTTON_DOWN	.\platform_api.h	/^	WIN32_BUTTON_DOWN,$/;"	e	enum:WIN32_BUTTON
+WIN32_BUTTON_E	.\platform_api.h	/^	WIN32_BUTTON_E,$/;"	e	enum:WIN32_BUTTON
+WIN32_BUTTON_ENTER	.\platform_api.h	/^	WIN32_BUTTON_ENTER,$/;"	e	enum:WIN32_BUTTON
+WIN32_BUTTON_ESC	.\platform_api.h	/^	WIN32_BUTTON_ESC,$/;"	e	enum:WIN32_BUTTON
+WIN32_BUTTON_F	.\platform_api.h	/^	WIN32_BUTTON_F,$/;"	e	enum:WIN32_BUTTON
+WIN32_BUTTON_F0	.\platform_api.h	/^	WIN32_BUTTON_F0,$/;"	e	enum:WIN32_BUTTON
+WIN32_BUTTON_F1	.\platform_api.h	/^	WIN32_BUTTON_F1,$/;"	e	enum:WIN32_BUTTON
+WIN32_BUTTON_F10	.\platform_api.h	/^	WIN32_BUTTON_F10,$/;"	e	enum:WIN32_BUTTON
+WIN32_BUTTON_F11	.\platform_api.h	/^	WIN32_BUTTON_F11,$/;"	e	enum:WIN32_BUTTON
+WIN32_BUTTON_F12	.\platform_api.h	/^	WIN32_BUTTON_F12,$/;"	e	enum:WIN32_BUTTON
+WIN32_BUTTON_F2	.\platform_api.h	/^	WIN32_BUTTON_F2,$/;"	e	enum:WIN32_BUTTON
+WIN32_BUTTON_F3	.\platform_api.h	/^	WIN32_BUTTON_F3,$/;"	e	enum:WIN32_BUTTON
+WIN32_BUTTON_F4	.\platform_api.h	/^	WIN32_BUTTON_F4,$/;"	e	enum:WIN32_BUTTON
+WIN32_BUTTON_F5	.\platform_api.h	/^	WIN32_BUTTON_F5,$/;"	e	enum:WIN32_BUTTON
+WIN32_BUTTON_F6	.\platform_api.h	/^	WIN32_BUTTON_F6,$/;"	e	enum:WIN32_BUTTON
+WIN32_BUTTON_F7	.\platform_api.h	/^	WIN32_BUTTON_F7,$/;"	e	enum:WIN32_BUTTON
+WIN32_BUTTON_F8	.\platform_api.h	/^	WIN32_BUTTON_F8,$/;"	e	enum:WIN32_BUTTON
+WIN32_BUTTON_F9	.\platform_api.h	/^	WIN32_BUTTON_F9,$/;"	e	enum:WIN32_BUTTON
+WIN32_BUTTON_G	.\platform_api.h	/^	WIN32_BUTTON_G,$/;"	e	enum:WIN32_BUTTON
+WIN32_BUTTON_H	.\platform_api.h	/^	WIN32_BUTTON_H,$/;"	e	enum:WIN32_BUTTON
+WIN32_BUTTON_I	.\platform_api.h	/^	WIN32_BUTTON_I,$/;"	e	enum:WIN32_BUTTON
+WIN32_BUTTON_J	.\platform_api.h	/^	WIN32_BUTTON_J,$/;"	e	enum:WIN32_BUTTON
+WIN32_BUTTON_L	.\platform_api.h	/^	WIN32_BUTTON_L,$/;"	e	enum:WIN32_BUTTON
+WIN32_BUTTON_LEFT	.\platform_api.h	/^	WIN32_BUTTON_LEFT,$/;"	e	enum:WIN32_BUTTON
+WIN32_BUTTON_LEFT_MOUSE	.\platform_api.h	/^	WIN32_BUTTON_LEFT_MOUSE,$/;"	e	enum:WIN32_BUTTON
+WIN32_BUTTON_M	.\platform_api.h	/^	WIN32_BUTTON_M,$/;"	e	enum:WIN32_BUTTON
+WIN32_BUTTON_MIDDLE_MOUSE	.\platform_api.h	/^	WIN32_BUTTON_MIDDLE_MOUSE,$/;"	e	enum:WIN32_BUTTON
+WIN32_BUTTON_N	.\platform_api.h	/^	WIN32_BUTTON_N,$/;"	e	enum:WIN32_BUTTON
+WIN32_BUTTON_O	.\platform_api.h	/^	WIN32_BUTTON_O,$/;"	e	enum:WIN32_BUTTON
+WIN32_BUTTON_P	.\platform_api.h	/^	WIN32_BUTTON_P,$/;"	e	enum:WIN32_BUTTON
+WIN32_BUTTON_Q	.\platform_api.h	/^	WIN32_BUTTON_Q,$/;"	e	enum:WIN32_BUTTON
+WIN32_BUTTON_R	.\platform_api.h	/^	WIN32_BUTTON_R,$/;"	e	enum:WIN32_BUTTON
+WIN32_BUTTON_RIGHT	.\platform_api.h	/^	WIN32_BUTTON_RIGHT,$/;"	e	enum:WIN32_BUTTON
+WIN32_BUTTON_RIGHT_MOUSE	.\platform_api.h	/^	WIN32_BUTTON_RIGHT_MOUSE,$/;"	e	enum:WIN32_BUTTON
+WIN32_BUTTON_S	.\platform_api.h	/^	WIN32_BUTTON_S,$/;"	e	enum:WIN32_BUTTON
+WIN32_BUTTON_SHIFT	.\platform_api.h	/^	WIN32_BUTTON_SHIFT,$/;"	e	enum:WIN32_BUTTON
+WIN32_BUTTON_SPACE	.\platform_api.h	/^	WIN32_BUTTON_SPACE,$/;"	e	enum:WIN32_BUTTON
+WIN32_BUTTON_T	.\platform_api.h	/^	WIN32_BUTTON_T,$/;"	e	enum:WIN32_BUTTON
+WIN32_BUTTON_TAB	.\platform_api.h	/^	WIN32_BUTTON_TAB,$/;"	e	enum:WIN32_BUTTON
+WIN32_BUTTON_TOTAL	.\platform_api.h	/^	WIN32_BUTTON_TOTAL$/;"	e	enum:WIN32_BUTTON
+WIN32_BUTTON_U	.\platform_api.h	/^	WIN32_BUTTON_U,$/;"	e	enum:WIN32_BUTTON
+WIN32_BUTTON_UP	.\platform_api.h	/^	WIN32_BUTTON_UP,$/;"	e	enum:WIN32_BUTTON
+WIN32_BUTTON_V	.\platform_api.h	/^	WIN32_BUTTON_V,$/;"	e	enum:WIN32_BUTTON
+WIN32_BUTTON_W	.\platform_api.h	/^	WIN32_BUTTON_W,$/;"	e	enum:WIN32_BUTTON
+WIN32_BUTTON_X	.\platform_api.h	/^	WIN32_BUTTON_X,$/;"	e	enum:WIN32_BUTTON
+WIN32_BUTTON_Y	.\platform_api.h	/^	WIN32_BUTTON_Y,$/;"	e	enum:WIN32_BUTTON
+WIN32_BUTTON_Z	.\platform_api.h	/^	WIN32_BUTTON_Z,$/;"	e	enum:WIN32_BUTTON
+Win32DLL	.\win32.h	/^struct Win32DLL { \/\/ InOut struct$/;"	s
+Win32GameFunctionTable	.\win32.h	/^struct Win32GameFunctionTable {$/;"	s
+Win32GetLastWriteTime	.\win32.cpp	/^Win32GetLastWriteTime(char* absfilepath) {$/;"	f	file:
+Win32GetWindowDimensions	.\win32.cpp	/^Win32GetWindowDimensions(HWND window) {$/;"	f	file:
+Win32HasDLLChanged	.\win32.cpp	/^Win32HasDLLChanged(Win32DLL* code) {$/;"	f	file:
+Win32LoadDLL	.\win32.cpp	/^Win32LoadDLL(Win32State* state, Win32DLL* code) {$/;"	f	file:
+Win32MainWindowCallback	.\win32.cpp	/^Win32MainWindowCallback(HWND window, UINT msg, WPARAM wparam, LPARAM lparam) {$/;"	f	file:
+Win32MakeTempDLLAbsFilePath	.\win32.cpp	/^Win32MakeTempDLLAbsFilePath(Win32State* state, Win32DLL* code, char* dst) {$/;"	f	file:
+Win32PreProcessButton	.\win32.cpp	/^Win32PreProcessButton(Button* button) {$/;"	f	file:
+Win32PreProcessMouseMove	.\win32.cpp	/^Win32PreProcessMouseMove(Input* input) {$/;"	f	file:
+Win32ProcessButton	.\win32.cpp	/^Win32ProcessButton(Button* button, bool is_down) {$/;"	f	file:
+Win32ProcessButtonInput	.\win32.cpp	/^Win32ProcessButtonInput(MSG msg, Input* input) {$/;"	f	file:
+Win32ProcessMouseMove	.\win32.cpp	/^Win32ProcessMouseMove(MSG msg, Input* input) {$/;"	f	file:
+Win32ReloadDLL	.\win32.cpp	/^Win32ReloadDLL(Win32State* state, Win32DLL* code) {$/;"	f	file:
+Win32State	.\win32.h	/^struct Win32State {$/;"	s
+Win32UnloadDLL	.\win32.cpp	/^Win32UnloadDLL(Win32DLL* code) {$/;"	f	file:
+Win32Window	.\platform_api.h	/^struct Win32Window {$/;"	s
+WinMain	.\win32.cpp	/^WinMain(HINSTANCE instance, HINSTANCE prev_instance, LPSTR cmdline, int show_code) {$/;"	f
+WindowDimensions	.\platform_api.h	/^struct WindowDimensions { u32 width; u32 height; };$/;"	s
+YCbCr_to_RGB_kernel	.\include\stb_image.h	/^			void (*YCbCr_to_RGB_kernel)(stbi_uc *out, const stbi_uc *y, const stbi_uc *pcb, const stbi_uc *pcr, int count, int step);$/;"	m	struct:__anon8
+YELLOW	.\math.h	124;"	d
+ZeroArray	.\memory_management.h	2;"	d
+ZeroMem	.\memory_management.h	/^static void ZeroMem(void* ptr, u64 size) {$/;"	f
+ZeroStruct	.\memory_management.h	1;"	d
+absfilepath	.\win32.h	/^	char* absfilepath;$/;"	m	struct:Win32DLL
+all_a	.\include\stb_image.h	/^			unsigned int mr,mg,mb,ma, all_a;$/;"	m	struct:__anon16
+allocate_memory	.\platform_api.h	/^	PlatformAllocateMemory* allocate_memory;$/;"	m	struct:PlatformAPI
+app14_color_transform	.\include\stb_image.h	/^			int            app14_color_transform; \/\/ Adobe APP14 tag$/;"	m	struct:__anon8
+ascent	.\font_handling.h	/^	int ascent, descent, line_gap, baseline;$/;"	m	struct:FontInfo
+aspect_ratio	.\camera.cpp	/^	float aspect_ratio;$/;"	m	struct:Camera	file:
+asset_info	.\game.h	/^	AssetInfo* asset_info;$/;"	m	struct:Game
+assets	.\game.h	/^	GameAssets* assets;$/;"	m	struct:Game
+axes	.\platform_api.h	/^	Axis axes[WIN32_AXIS_TOTAL];$/;"	m	struct:Input
+background	.\include\stb_image.h	/^			stbi_uc *background;          \/\/ The current "background" as far as a gif is concerned$/;"	m	struct:__anon19
+base_sens	.\simulation.h	/^	float base_sens;$/;"	m	struct:FPControlInfo
+baseline	.\font_handling.h	/^	int ascent, descent, line_gap, baseline;$/;"	m	struct:FontInfo
+bgindex	.\include\stb_image.h	/^			int flags, bgindex, ratio, transparent, eflags;$/;"	m	struct:__anon19
+bitmap_h	.\font_handling.h	/^	u16 bitmap_w, bitmap_h;$/;"	m	struct:FontInfo
+bitmap_w	.\font_handling.h	/^	u16 bitmap_w, bitmap_h;$/;"	m	struct:FontInfo
+bits_per_channel	.\include\stb_image.h	/^	int bits_per_channel;$/;"	m	struct:__anon5
+bl	.\shapes.cpp	/^	Vec3 bl;$/;"	m	struct:Quad	file:
+blob_names	.\file_formats.h	/^char* blob_names[ASSET_BLOB_TOTAL] = {$/;"	v
+block_pitch	.\simulation.h	/^	bool block_pitch;$/;"	m	struct:FPControlInfo
+block_yaw	.\simulation.h	/^	bool block_yaw;$/;"	m	struct:FPControlInfo
+bp	.\memory_management.h	/^	u8* bp;$/;"	m	struct:Memory
+bp	.\platform_api.h	/^	u8* bp;$/;"	m	struct:PlatformMemoryBlock
+bpp	.\include\stb_image.h	/^			int bpp, offset, hsz;$/;"	m	struct:__anon16
+br	.\shapes.cpp	/^	Vec3 br;$/;"	m	struct:Quad	file:
+bs	.\renderer.h	/^	BLEND_STATE bs;$/;"	m	struct:RenderState
+bs	.\renderer.h	/^	ID3D11BlendState* bs[BLEND_STATE_TOTAL];$/;"	m	struct:Renderer
+buf	.\include\stb_sprintf.h	/^   char *buf;$/;"	m	struct:stbsp__context
+buffer	.\renderer.h	/^	ID3D11Buffer* buffer;$/;"	m	struct:ConstantsBuffer
+buffer	.\renderer.h	/^	ID3D11Buffer* buffer;$/;"	m	struct:IndexBuffer
+buffer	.\renderer.h	/^	ID3D11Buffer* buffer;$/;"	m	struct:StructuredBuffer
+buffer	.\renderer.h	/^	ID3D11Buffer* buffer;$/;"	m	struct:VertexBuffer
+buffer	.\renderer.h	/^	ID3D11Texture2D* buffer;$/;"	m	struct:TextureBuffer
+buffer_start	.\include\stb_image.h	/^		stbi_uc buffer_start[128];$/;"	m	struct:__anon3
+buflen	.\include\stb_image.h	/^		int buflen;$/;"	m	struct:__anon3
+buttons	.\platform_api.h	/^	Button buttons[WIN32_BUTTON_TOTAL];$/;"	m	struct:Input
+callback_already_read	.\include\stb_image.h	/^		int callback_already_read;$/;"	m	struct:__anon3
+camera	.\game.h	/^	Camera* camera;$/;"	m	struct:Game
+cb_count	.\renderer.h	/^	u8 cb_count, vb_count, sb_count;$/;"	m	struct:VertexShaderDesc
+cb_count	.\renderer.h	/^	u8 texture_count, cb_count;$/;"	m	struct:PixelShaderDesc
+cb_desc	.\renderer.h	/^	ConstantsBufferDesc* cb_desc;$/;"	m	struct:PixelShaderDesc
+cb_desc	.\renderer.h	/^	ConstantsBufferDesc* cb_desc;$/;"	m	struct:VertexShaderDesc
+channel	.\include\stb_image.h	/^			stbi_uc size,type,channel;$/;"	m	struct:__anon17
+channel_order	.\include\stb_image.h	/^	int channel_order;$/;"	m	struct:__anon5
+close_file	.\platform_api.h	/^	PlatformCloseFile* close_file;$/;"	m	struct:PlatformAPI
+code	.\include\stb_image.h	/^			stbi__uint16 code[256];$/;"	m	struct:__anon7
+code	.\renderer.h	/^	char* code;$/;"	m	struct:ShaderDesc
+code_bits	.\include\stb_image.h	/^			int            code_bits;   \/\/ number of valid bits$/;"	m	struct:__anon8
+code_buffer	.\include\stb_image.h	/^			stbi__uint32   code_buffer; \/\/ jpeg entropy-coded buffer$/;"	m	struct:__anon8
+code_buffer	.\include\stb_image.h	/^		stbi__uint32 code_buffer;$/;"	m	struct:__anon12
+codes	.\include\stb_image.h	/^			stbi__gif_lzw codes[8192];$/;"	m	struct:__anon19
+coeff	.\include\stb_image.h	/^				short   *coeff;   \/\/ progressive only$/;"	m	struct:__anon8::__anon9
+coeff_h	.\include\stb_image.h	/^				int      coeff_w, coeff_h; \/\/ number of 8x8 coefficient blocks$/;"	m	struct:__anon8::__anon9
+coeff_w	.\include\stb_image.h	/^				int      coeff_w, coeff_h; \/\/ number of 8x8 coefficient blocks$/;"	m	struct:__anon8::__anon9
+color	.\font_handling.h	/^	Vec3 color;$/;"	m	struct:GlyphQuad
+color	.\mesh_renderer.cpp	/^	Vec3 color;$/;"	m	struct:MeshInfo	file:
+color	.\quad_renderer.cpp	/^	Vec4 color;$/;"	m	struct:RenderQuad	file:
+color	.\tetra.cpp	/^	Vec3 color[10];$/;"	m	struct:Tetra	file:
+color_table	.\include\stb_image.h	/^			stbi_uc *color_table;$/;"	m	struct:__anon19
+command	.\renderer.h	/^	RENDER_COMMAND command;$/;"	m	struct:RenderState
+constants	.\renderer.h	/^		ConstantsBuffer constants;$/;"	m	union:RenderBuffer::__anon33
+constants	.\renderer.h	/^		PushConstantsBufferData constants;$/;"	m	union:PushRenderBufferData::__anon34
+context	.\renderer.h	/^	ID3D11DeviceContext* context; \/\/ This changes when we start using deferred contexts$/;"	m	struct:Renderer
+count	.\asset_formats.h	/^	u8 count;$/;"	m	struct:MaterialData
+count	.\include\stb_sprintf.h	/^   int count;$/;"	m	struct:stbsp__context
+count	.\mesh_renderer.cpp	/^	u32 count;$/;"	m	struct:MeshRenderer	file:
+count	.\renderer.h	/^	u32 count;$/;"	m	struct:PushStructuredBufferData
+count	.\renderer.h	/^	u32 count;$/;"	m	struct:StructuredBuffer
+count	.\renderer.h	/^	u32 count;$/;"	m	struct:StructuredBufferDesc
+count	.\renderer.h	/^	u8 count;$/;"	m	struct:RenderBufferGroup
+cur_x	.\include\stb_image.h	/^			int cur_x, cur_y;$/;"	m	struct:__anon19
+cur_y	.\include\stb_image.h	/^			int cur_x, cur_y;$/;"	m	struct:__anon19
+data	.\asset_formats.h	/^	void* data;$/;"	m	struct:VertexBufferData
+data	.\asset_info.h	/^	TextureData* data;$/;"	m	struct:TextureAssetInfo
+data	.\asset_loading.cpp	/^	u8* data;$/;"	m	struct:GameAssets	file:
+data	.\include\stb_image.h	/^				stbi_uc *data;$/;"	m	struct:__anon8::__anon9
+data	.\renderer.h	/^	void* data;$/;"	m	struct:PushConstantsBufferData
+data	.\renderer.h	/^	void* data;$/;"	m	struct:PushIndexBufferData
+data	.\renderer.h	/^	void* data;$/;"	m	struct:PushStructuredBufferData
+data	.\renderer.h	/^	void* data;$/;"	m	struct:PushTextureBufferData
+data	.\renderer.h	/^	void* data;$/;"	m	struct:PushVertexBufferData
+dc	.\renderer.h	/^	DrawCall dc;$/;"	m	struct:RenderPipeline
+dc_pred	.\include\stb_image.h	/^				int dc_pred;$/;"	m	struct:__anon8::__anon9
+dct_bfly32o	.\include\stb_image.h	2531;"	d
+dct_bfly32o	.\include\stb_image.h	2665;"	d
+dct_bfly32o	.\include\stb_image.h	2717;"	d
+dct_bfly32o	.\include\stb_image.h	2875;"	d
+dct_const	.\include\stb_image.h	2503;"	d
+dct_const	.\include\stb_image.h	2660;"	d
+dct_interleave16	.\include\stb_image.h	2548;"	d
+dct_interleave16	.\include\stb_image.h	2667;"	d
+dct_interleave8	.\include\stb_image.h	2542;"	d
+dct_interleave8	.\include\stb_image.h	2666;"	d
+dct_long_mac	.\include\stb_image.h	2698;"	d
+dct_long_mac	.\include\stb_image.h	2871;"	d
+dct_long_mul	.\include\stb_image.h	2694;"	d
+dct_long_mul	.\include\stb_image.h	2870;"	d
+dct_pass	.\include\stb_image.h	2553;"	d
+dct_pass	.\include\stb_image.h	2668;"	d
+dct_pass	.\include\stb_image.h	2725;"	d
+dct_pass	.\include\stb_image.h	2876;"	d
+dct_rot	.\include\stb_image.h	2507;"	d
+dct_rot	.\include\stb_image.h	2661;"	d
+dct_trn16	.\include\stb_image.h	2785;"	d
+dct_trn16	.\include\stb_image.h	2807;"	d
+dct_trn32	.\include\stb_image.h	2786;"	d
+dct_trn32	.\include\stb_image.h	2808;"	d
+dct_trn64	.\include\stb_image.h	2787;"	d
+dct_trn64	.\include\stb_image.h	2809;"	d
+dct_trn8_16	.\include\stb_image.h	2831;"	d
+dct_trn8_16	.\include\stb_image.h	2866;"	d
+dct_trn8_32	.\include\stb_image.h	2832;"	d
+dct_trn8_32	.\include\stb_image.h	2867;"	d
+dct_trn8_8	.\include\stb_image.h	2830;"	d
+dct_trn8_8	.\include\stb_image.h	2865;"	d
+dct_wadd	.\include\stb_image.h	2521;"	d
+dct_wadd	.\include\stb_image.h	2663;"	d
+dct_wadd	.\include\stb_image.h	2707;"	d
+dct_wadd	.\include\stb_image.h	2873;"	d
+dct_widen	.\include\stb_image.h	2516;"	d
+dct_widen	.\include\stb_image.h	2662;"	d
+dct_widen	.\include\stb_image.h	2702;"	d
+dct_widen	.\include\stb_image.h	2872;"	d
+dct_wsub	.\include\stb_image.h	2526;"	d
+dct_wsub	.\include\stb_image.h	2664;"	d
+dct_wsub	.\include\stb_image.h	2712;"	d
+dct_wsub	.\include\stb_image.h	2874;"	d
+debug_text	.\game.h	/^	DebugText* debug_text;$/;"	m	struct:Game
+default_window_handle	.\win32.h	/^	HWND default_window_handle;$/;"	m	struct:Win32State
+delay	.\include\stb_image.h	/^			int delay;$/;"	m	struct:__anon19
+delta	.\include\stb_image.h	/^			int    delta[17];   \/\/ old 'firstsymbol' - old 'firstcode'$/;"	m	struct:__anon7
+depth	.\include\stb_image.h	/^	int depth;$/;"	m	struct:__anon14
+dequant	.\include\stb_image.h	/^			stbi__uint16 dequant[4][64];$/;"	m	struct:__anon8
+descent	.\font_handling.h	/^	int ascent, descent, line_gap, baseline;$/;"	m	struct:FontInfo
+device	.\renderer.h	/^	ID3D11Device* device;$/;"	m	struct:Renderer
+dim	.\platform_api.h	/^	WindowDimensions dim;$/;"	m	struct:Win32Window
+dll	.\win32.h	/^	HMODULE dll;$/;"	m	struct:Win32DLL
+dss	.\renderer.h	/^	DEPTH_STENCIL_STATE dss;$/;"	m	struct:RenderState
+dss	.\renderer.h	/^	ID3D11DepthStencilState* dss[DEPTH_STENCIL_STATE_TOTAL];$/;"	m	struct:Renderer
+dsv	.\renderer.h	/^	ID3D11DepthStencilView* dsv;$/;"	m	struct:Renderer
+dynamic	.\renderer.h	/^	bool dynamic;$/;"	m	struct:VertexBufferDesc
+dynamic_index_buffer	.\renderer.h	/^	bool dynamic_index_buffer;$/;"	m	struct:MeshDesc
+eflags	.\include\stb_image.h	/^			int flags, bgindex, ratio, transparent, eflags;$/;"	m	struct:__anon19
+elem	.\math.h	/^		float elem[2];$/;"	m	union:Vec2::__anon23
+elem	.\math.h	/^		float elem[3];$/;"	m	union:Vec3::__anon25
+elem	.\math.h	/^		float elem[4];$/;"	m	union:Quat::__anon30
+elem	.\math.h	/^		float elem[4];$/;"	m	union:Vec4::__anon27
+elem	.\math.h	/^		u32 elem[2];$/;"	m	union:Vec2u::__anon21
+elem	.\math.h	/^	float elem[4][4];$/;"	m	struct:Mat4
+end	.\shapes.cpp	/^	Vec3 end;$/;"	m	struct:Line	file:
+entry	.\renderer.h	/^	char* entry;$/;"	m	struct:ShaderDesc
+eob_run	.\include\stb_image.h	/^			int            eob_run;$/;"	m	struct:__anon8
+eof	.\include\stb_image.h	/^		int      (*eof)   (void *user);                       \/\/ returns nonzero if we are at end of file\/data$/;"	m	struct:__anon2
+exe_absfilepath	.\win32.h	/^	char exe_absfilepath[MAX_PATH];$/;"	m	struct:Win32State
+exe_absfolderpath	.\win32.h	/^	char exe_absfolderpath[MAX_PATH];$/;"	m	struct:Win32State
+expanded	.\include\stb_image.h	/^	stbi_uc *idata, *expanded, *out;$/;"	m	struct:__anon14
+extra_read	.\include\stb_image.h	/^			int extra_read;$/;"	m	struct:__anon16
+failed	.\platform_api.h	/^	bool failed;$/;"	m	struct:PlatformFileHandle
+far_clip	.\camera.cpp	/^	float far_clip;$/;"	m	struct:Camera	file:
+fast	.\include\stb_image.h	/^			stbi_uc  fast[1 << FAST_BITS];$/;"	m	struct:__anon7
+fast	.\include\stb_image.h	/^		stbi__uint16 fast[1 << STBI__ZFAST_BITS];$/;"	m	struct:__anon11
+fast_ac	.\include\stb_image.h	/^			stbi__int16 fast_ac[4][1 << FAST_BITS];$/;"	m	struct:__anon8
+first	.\include\stb_image.h	/^			stbi_uc first;$/;"	m	struct:__anon18
+first_row_filter	.\include\stb_image.h	/^static stbi_uc first_row_filter[5] =$/;"	v
+firstcode	.\include\stb_image.h	/^		stbi__uint16 firstcode[16];$/;"	m	struct:__anon11
+firstsymbol	.\include\stb_image.h	/^		stbi__uint16 firstsymbol[16];$/;"	m	struct:__anon11
+flags	.\include\stb_image.h	/^			int flags, bgindex, ratio, transparent, eflags;$/;"	m	struct:__anon19
+fov	.\camera.cpp	/^	float fov;$/;"	m	struct:Camera	file:
+function_count	.\win32.h	/^	u8 function_count;$/;"	m	struct:Win32DLL
+function_names	.\win32.h	/^	char** function_names;$/;"	m	struct:Win32DLL
+functions	.\win32.h	/^	void** functions;$/;"	m	struct:Win32DLL
+g_game_functions	.\win32.cpp	/^global Win32GameFunctionTable g_game_functions;$/;"	v
+g_running	.\win32.cpp	/^global bool g_running;$/;"	v
+g_win32_state	.\win32.cpp	/^global Win32State g_win32_state;$/;"	v
+g_win32_window	.\win32.cpp	/^global Win32Window g_win32_window;$/;"	v
+game	.\game_layer.h	/^	struct Game* game;$/;"	m	struct:GameLayer	typeref:struct:GameLayer::Game
+game_init	.\win32.h	/^	GameInit* game_init;$/;"	m	struct:Win32GameFunctionTable
+game_loop	.\win32.h	/^	GameLoop* game_loop;$/;"	m	struct:Win32GameFunctionTable
+global	.\base_types.h	7;"	d
+glyph_counter	.\font_handling.h	/^	u32 glyph_counter;$/;"	m	struct:DebugText
+glyphs	.\font_handling.h	/^	GlyphQuad glyphs[MAX_DEBUG_TEXT_GLYPHS]; $/;"	m	struct:DebugText
+h	.\font_handling.h	/^	u32 w, h; \/\/ Screen res$/;"	m	struct:DebugText
+h	.\include\stb_image.h	/^				int h,v;$/;"	m	struct:__anon8::__anon9
+h	.\include\stb_image.h	/^			int w,h;$/;"	m	struct:__anon19
+h2	.\include\stb_image.h	/^				int x,y,w2,h2;$/;"	m	struct:__anon8::__anon9
+ha	.\include\stb_image.h	/^				int hd,ha;$/;"	m	struct:__anon8::__anon9
+handle	.\platform_api.h	/^	HWND handle;$/;"	m	struct:Win32Window
+handle	.\platform_api.h	/^	void* handle;$/;"	m	struct:PlatformFileHandle
+hd	.\include\stb_image.h	/^				int hd,ha;$/;"	m	struct:__anon8::__anon9
+height	.\asset_formats.h	/^	u32 height;$/;"	m	struct:TextureData
+height	.\file_formats.h	/^	u32 height;$/;"	m	struct:TextureFormat
+height	.\platform_api.h	/^struct WindowDimensions { u32 width; u32 height; };$/;"	m	struct:WindowDimensions
+height_of_char_in_bitmap	.\font_handling.h	/^	u16 height_of_char_in_bitmap;$/;"	m	struct:FontInfo
+held	.\platform_api.h	/^struct Button { bool pressed, held; };$/;"	m	struct:Button
+history	.\include\stb_image.h	/^			stbi_uc *history;$/;"	m	struct:__anon19
+hs	.\include\stb_image.h	/^		int hs,vs;   \/\/ expansion factor in each axis$/;"	m	struct:__anon10
+hsz	.\include\stb_image.h	/^			int bpp, offset, hsz;$/;"	m	struct:__anon16
+huff_ac	.\include\stb_image.h	/^			stbi__huffman huff_ac[4];$/;"	m	struct:__anon8
+huff_dc	.\include\stb_image.h	/^			stbi__huffman huff_dc[4];$/;"	m	struct:__anon8
+i16	.\base_types.h	/^typedef int16_t i16;$/;"	t
+i32	.\base_types.h	/^typedef int32_t i32;$/;"	t
+i64	.\base_types.h	/^typedef int64_t i64;$/;"	t
+i8	.\base_types.h	/^typedef int8_t i8;$/;"	t
+id	.\include\stb_image.h	/^				int id;$/;"	m	struct:__anon8::__anon9
+idata	.\include\stb_image.h	/^	stbi_uc *idata, *expanded, *out;$/;"	m	struct:__anon14
+idct_block_kernel	.\include\stb_image.h	/^			void (*idct_block_kernel)(stbi_uc *out, int out_stride, short data[64]);$/;"	m	struct:__anon8
+identification	.\file_formats.h	/^	char identification[5];$/;"	m	struct:GameAssetFile
+il	.\renderer.h	/^	ID3D11InputLayout* il;$/;"	m	struct:VertexShader
+img_buffer	.\include\stb_image.h	/^		stbi_uc *img_buffer, *img_buffer_end;$/;"	m	struct:__anon3
+img_buffer_end	.\include\stb_image.h	/^		stbi_uc *img_buffer, *img_buffer_end;$/;"	m	struct:__anon3
+img_buffer_original	.\include\stb_image.h	/^		stbi_uc *img_buffer_original, *img_buffer_original_end;$/;"	m	struct:__anon3
+img_buffer_original_end	.\include\stb_image.h	/^		stbi_uc *img_buffer_original, *img_buffer_original_end;$/;"	m	struct:__anon3
+img_comp	.\include\stb_image.h	/^			} img_comp[4];$/;"	m	struct:__anon8	typeref:struct:__anon8::__anon9
+img_h_max	.\include\stb_image.h	/^			int img_h_max, img_v_max;$/;"	m	struct:__anon8
+img_mcu_h	.\include\stb_image.h	/^			int img_mcu_w, img_mcu_h;$/;"	m	struct:__anon8
+img_mcu_w	.\include\stb_image.h	/^			int img_mcu_w, img_mcu_h;$/;"	m	struct:__anon8
+img_mcu_x	.\include\stb_image.h	/^			int img_mcu_x, img_mcu_y;$/;"	m	struct:__anon8
+img_mcu_y	.\include\stb_image.h	/^			int img_mcu_x, img_mcu_y;$/;"	m	struct:__anon8
+img_n	.\include\stb_image.h	/^		int img_n, img_out_n;$/;"	m	struct:__anon3
+img_out_n	.\include\stb_image.h	/^		int img_n, img_out_n;$/;"	m	struct:__anon3
+img_v_max	.\include\stb_image.h	/^			int img_h_max, img_v_max;$/;"	m	struct:__anon8
+img_x	.\include\stb_image.h	/^		stbi__uint32 img_x, img_y;$/;"	m	struct:__anon3
+img_y	.\include\stb_image.h	/^		stbi__uint32 img_x, img_y;$/;"	m	struct:__anon3
+index	.\renderer.h	/^		IndexBuffer index;$/;"	m	union:RenderBuffer::__anon33
+index	.\renderer.h	/^		PushIndexBufferData index;$/;"	m	union:PushRenderBufferData::__anon34
+indices	.\asset_formats.h	/^	u32* indices;$/;"	m	struct:MeshData
+indices_count	.\asset_formats.h	/^	u32 indices_count;$/;"	m	struct:MeshData
+indices_count	.\file_formats.h	/^	u32 indices_count;$/;"	m	struct:MeshFormat
+indices_count	.\renderer.h	/^			u32 indices_count;$/;"	m	struct:DrawCall::__anon35::__anon37
+indices_count	.\renderer.h	/^	u32 indices_count;$/;"	m	struct:PushIndexBufferData
+info	.\font_handling.h	/^	FontInfo info;$/;"	m	struct:DebugText
+instance_count	.\mesh_renderer.cpp	/^	u32 instance_count;$/;"	m	struct:MeshPipeline	file:
+instance_count	.\renderer.h	/^			u32 instance_count;$/;"	m	struct:DrawCall::__anon35::__anon38
+instance_data	.\mesh_renderer.cpp	/^	void* instance_data;$/;"	m	struct:MeshPipeline	file:
+io	.\include\stb_image.h	/^		stbi_io_callbacks io;$/;"	m	struct:__anon3
+io_user_data	.\include\stb_image.h	/^		void *io_user_data;$/;"	m	struct:__anon3
+jfif	.\include\stb_image.h	/^			int            jfif;$/;"	m	struct:__anon8
+last_write_time	.\win32.h	/^	FILETIME last_write_time; $/;"	m	struct:Win32DLL
+length	.\include\stb_image.h	/^	stbi__uint32 length;$/;"	m	struct:__anon13
+length	.\include\stb_sprintf.h	/^   int length;$/;"	m	struct:stbsp__context
+lflags	.\include\stb_image.h	/^			int lflags;$/;"	m	struct:__anon19
+line0	.\include\stb_image.h	/^		stbi_uc *line0,*line1;$/;"	m	struct:__anon10
+line1	.\include\stb_image.h	/^		stbi_uc *line0,*line1;$/;"	m	struct:__anon10
+line_count	.\font_handling.h	/^	u8 line_count[QUADRANT_TOTAL];$/;"	m	struct:DebugText
+line_gap	.\font_handling.h	/^	int ascent, descent, line_gap, baseline;$/;"	m	struct:FontInfo
+line_size	.\include\stb_image.h	/^			int line_size;$/;"	m	struct:__anon19
+linebuf	.\include\stb_image.h	/^				stbi_uc *linebuf;$/;"	m	struct:__anon8::__anon9
+load_jpeg_image	.\include\stb_image.h	/^	static stbi_uc *load_jpeg_image(stbi__jpeg *z, int *out_x, int *out_y, int *comp, int req_comp)$/;"	f
+lock_absfilepath	.\win32.h	/^	char* lock_absfilepath;$/;"	m	struct:Win32DLL
+lpal	.\include\stb_image.h	/^			stbi_uc lpal[256][4];$/;"	m	struct:__anon19
+ma	.\include\stb_image.h	/^			unsigned int mr,mg,mb,ma, all_a;$/;"	m	struct:__anon16
+marker	.\include\stb_image.h	/^			unsigned char  marker;      \/\/ marker seen while filling entropy buffer$/;"	m	struct:__anon8
+max_x	.\include\stb_image.h	/^			int max_x, max_y;$/;"	m	struct:__anon19
+max_y	.\include\stb_image.h	/^			int max_x, max_y;$/;"	m	struct:__anon19
+maxcode	.\include\stb_image.h	/^			unsigned int maxcode[18];$/;"	m	struct:__anon7
+maxcode	.\include\stb_image.h	/^		int maxcode[17];$/;"	m	struct:__anon11
+mb	.\include\stb_image.h	/^			unsigned int mr,mg,mb,ma, all_a;$/;"	m	struct:__anon16
+memory	.\memory_management.h	/^	Memory memory;$/;"	m	struct:MemoryArena
+mesh_renderer	.\game.h	/^	MeshRenderer* mesh_renderer;$/;"	m	struct:Game
+meshes_count	.\file_formats.h	/^	u32 meshes_count;$/;"	m	struct:MeshesBlob
+mg	.\include\stb_image.h	/^			unsigned int mr,mg,mb,ma, all_a;$/;"	m	struct:__anon16
+model	.\mesh_renderer.cpp	/^	Mat4 model;$/;"	m	struct:MeshInfo	file:
+mr	.\include\stb_image.h	/^			unsigned int mr,mg,mb,ma, all_a;$/;"	m	struct:__anon16
+name	.\asset_formats.h	/^	char* name;$/;"	m	struct:MaterialData
+name	.\asset_info.h	/^	char* name;$/;"	m	struct:TextureAssetInfo
+name	.\file_formats.h	/^	char name[STRING_LENGTH_MESH];$/;"	m	struct:MeshFormat
+name	.\file_formats.h	/^	char name[STRING_LENGTH_TEXTURE];$/;"	m	struct:TextureFormat
+name	.\platform_api.h	/^	void* name;$/;"	m	struct:PlatformFileInfo
+name_of_blob	.\file_formats.h	/^	char name_of_blob[STRING_LENGTH_BLOB];$/;"	m	struct:Directory
+near_clip	.\camera.cpp	/^	float near_clip;$/;"	m	struct:Camera	file:
+nomore	.\include\stb_image.h	/^			int            nomore;      \/\/ flag if we saw a marker so must stop$/;"	m	struct:__anon8
+num_bits	.\include\stb_image.h	/^		int num_bits;$/;"	m	struct:__anon12
+num_channels	.\include\stb_image.h	/^	int num_channels;$/;"	m	struct:__anon5
+num_channels	.\renderer.h	/^	u8 num_channels;$/;"	m	struct:TextureDesc
+num_components	.\asset_formats.h	/^	u8 num_components;$/;"	m	struct:TextureData
+num_components	.\file_formats.h	/^	u32 num_components;$/;"	m	struct:TextureFormat
+num_indices	.\renderer.h	/^	u32 num_indices;$/;"	m	struct:IndexBuffer
+number_of_blobs	.\file_formats.h	/^	u8 number_of_blobs;$/;"	m	struct:GameAssetFile
+offset	.\include\stb_image.h	/^			int bpp, offset, hsz;$/;"	m	struct:__anon16
+offset	.\renderer.h	/^			u32 offset;$/;"	m	struct:DrawCall::__anon35::__anon36
+offset	.\renderer.h	/^			u32 offset;$/;"	m	struct:DrawCall::__anon35::__anon37
+offset_to_blob	.\file_formats.h	/^	u32 offset_to_blob;$/;"	m	struct:Directory
+offset_to_blob_directories	.\file_formats.h	/^	u32 offset_to_blob_directories;$/;"	m	struct:GameAssetFile
+offset_to_data	.\file_formats.h	/^	u32 offset_to_data;$/;"	m	struct:TextureFormat
+offset_to_data	.\file_formats.h	/^	u32 offset_to_data;$/;"	m	struct:VertexBufferFormat
+offset_to_indices	.\file_formats.h	/^	u32 offset_to_indices;$/;"	m	struct:MeshFormat
+offset_to_mesh_formats	.\file_formats.h	/^	u32 offset_to_mesh_formats;$/;"	m	struct:MeshesBlob
+offset_to_texture_formats	.\file_formats.h	/^	u32 offset_to_texture_formats;$/;"	m	struct:TexturesBlob
+offset_to_vertex_buffers	.\file_formats.h	/^	u32 offset_to_vertex_buffers;$/;"	m	struct:MeshFormat
+offsets	.\asset_loading.cpp	/^	u32 offsets[ASSET_BLOB_TOTAL];$/;"	m	struct:GameAssets	file:
+open_file	.\platform_api.h	/^	PlatformOpenFile* open_file;$/;"	m	struct:PlatformAPI
+order	.\include\stb_image.h	/^			int scan_n, order[4];$/;"	m	struct:__anon8
+out	.\include\stb_image.h	/^			stbi_uc *out;                 \/\/ output buffer (always 4 components)$/;"	m	struct:__anon19
+out	.\include\stb_image.h	/^	stbi_uc *idata, *expanded, *out;$/;"	m	struct:__anon14
+pair	.\include\stb_sprintf.h	/^   char pair[201];$/;"	m	struct:__anon20
+pal	.\include\stb_image.h	/^			stbi_uc  pal[256][4];$/;"	m	struct:__anon19
+parse	.\include\stb_image.h	/^			int parse, step;$/;"	m	struct:__anon19
+pc	.\font_handling.h	/^	PackedChar pc[FONT_CHARS_TOTAL];$/;"	m	struct:FontInfo
+permanent	.\asset_info.h	/^	MemoryArena permanent;$/;"	m	struct:AssetInfo
+permanent	.\asset_loading.cpp	/^	MemoryArena permanent;$/;"	m	struct:GameAssets	file:
+permanent	.\game.h	/^	MemoryArena permanent;$/;"	m	struct:Game
+permanent	.\renderer.h	/^	MemoryArena permanent;$/;"	m	struct:Renderer
+pipelines	.\mesh_renderer.cpp	/^	MeshPipeline pipelines[MAX_MESH_PIPELINES];$/;"	m	struct:MeshRenderer	file:
+pixel_shader	.\font_handling.h	/^	PixelShader* pixel_shader;$/;"	m	struct:DebugText
+pixels	.\asset_formats.h	/^	void* pixels;$/;"	m	struct:TextureData
+platform_api	.\game_layer.h	/^	PlatformAPI* platform_api;$/;"	m	struct:GameLayer
+position	.\camera.cpp	/^	Vec3 position;$/;"	m	struct:Camera	file:
+position	.\math.h	/^	Vec3 position;$/;"	m	struct:Transform
+positions	.\quad_renderer.cpp	/^	Vec3 positions[MAX_TEXTURED_QUADS*4*3];$/;"	m	struct:QuadRenderer	file:
+prbd	.\renderer.h	/^	PushRenderBufferData* prbd;$/;"	m	struct:RenderPipeline
+prbd_count	.\renderer.h	/^	u8 vrbd_count, prbd_count;$/;"	m	struct:RenderPipeline
+prbg	.\renderer.h	/^	RenderBufferGroup* prbg;$/;"	m	struct:RenderPipeline
+prefix	.\include\stb_image.h	/^			stbi__int16 prefix;$/;"	m	struct:__anon18
+pressed	.\platform_api.h	/^struct Button { bool pressed, held; };$/;"	m	struct:Button
+progressive	.\include\stb_image.h	/^			int            progressive;$/;"	m	struct:__anon8
+ps	.\mesh_renderer.cpp	/^	PixelShader* ps;$/;"	m	struct:MeshRenderer	file:
+ps	.\renderer.h	/^	PixelShader* ps;$/;"	m	struct:RenderPipeline
+quad	.\quad_renderer.cpp	/^	Quad quad;$/;"	m	struct:RenderQuad	file:
+quad_count	.\quad_renderer.cpp	/^	u32 quad_count;$/;"	m	struct:QuadRenderer	file:
+quad_ps	.\quad_renderer.cpp	/^	PixelShader* quad_ps;$/;"	m	struct:QuadRenderer	file:
+quad_renderer	.\game.h	/^	QuadRenderer* quad_renderer;$/;"	m	struct:Game
+quad_vs	.\quad_renderer.cpp	/^	VertexShader* quad_vs;$/;"	m	struct:QuadRenderer	file:
+quads	.\quad_renderer.cpp	/^	RenderQuad quads[MAX_QUADS]; \/\/ batches to issue one draw call$/;"	m	struct:QuadRenderer	file:
+quit_requested	.\game_layer.h	/^	bool quit_requested;$/;"	m	struct:GameLayer
+ratio	.\include\stb_image.h	/^			int flags, bgindex, ratio, transparent, eflags;$/;"	m	struct:__anon19
+raw_coeff	.\include\stb_image.h	/^				void *raw_data, *raw_coeff;$/;"	m	struct:__anon8::__anon9
+raw_data	.\include\stb_image.h	/^				void *raw_data, *raw_coeff;$/;"	m	struct:__anon8::__anon9
+rb	.\renderer.h	/^	RenderBuffer* rb;$/;"	m	struct:PixelShader
+rb	.\renderer.h	/^	RenderBuffer* rb;$/;"	m	struct:RenderBufferGroup
+rb	.\renderer.h	/^	RenderBuffer* rb;$/;"	m	struct:VertexShader
+rb_count	.\renderer.h	/^	u8 texture_count, rb_count;$/;"	m	struct:PixelShader
+rb_count	.\renderer.h	/^	u8 vb_count, rb_count;$/;"	m	struct:VertexShader
+read	.\include\stb_image.h	/^		int      (*read)  (void *user,char *data,int size);   \/\/ fill 'data' with 'size' bytes.  return number of bytes actually read$/;"	m	struct:__anon2
+read_file	.\platform_api.h	/^	PlatformReadFile* read_file;$/;"	m	struct:PlatformAPI
+read_from_callbacks	.\include\stb_image.h	/^		int read_from_callbacks;$/;"	m	struct:__anon3
+render_buffer	.\asset_info.h	/^	RenderBuffer* render_buffer;$/;"	m	struct:TextureAssetInfo
+renderer	.\game.h	/^	Renderer* renderer;$/;"	m	struct:Game
+resample	.\include\stb_image.h	/^		resample_row_func resample;$/;"	m	struct:__anon10
+resample_row_1	.\include\stb_image.h	/^	static stbi_uc *resample_row_1(stbi_uc *out, stbi_uc *in_near, stbi_uc *in_far, int w, int hs)$/;"	f
+resample_row_func	.\include\stb_image.h	/^	typedef stbi_uc *(*resample_row_func)(stbi_uc *out, stbi_uc *in0, stbi_uc *in1,$/;"	t
+resample_row_hv_2_kernel	.\include\stb_image.h	/^			stbi_uc *(*resample_row_hv_2_kernel)(stbi_uc *out, stbi_uc *in_near, stbi_uc *in_far, int w, int hs);$/;"	m	struct:__anon8
+restart_interval	.\include\stb_image.h	/^			int restart_interval, todo;$/;"	m	struct:__anon8
+rgb	.\include\stb_image.h	/^			int            rgb;$/;"	m	struct:__anon8
+rot_sens	.\simulation.h	/^	float rot_sens;$/;"	m	struct:FPControlInfo
+rotation	.\camera.cpp	/^	Quat rotation;$/;"	m	struct:Camera	file:
+rotation	.\math.h	/^	Quat rotation;$/;"	m	struct:Transform
+rq	.\renderer.h	/^	RenderPipeline rq[RENDER_QUEUE_MAX];$/;"	m	struct:Renderer
+rq_id	.\renderer.h	/^	u32 rq_id;$/;"	m	struct:Renderer
+rs	.\renderer.h	/^	ID3D11RasterizerState* rs[RASTERIZER_STATE_TOTAL];$/;"	m	struct:Renderer
+rs	.\renderer.h	/^	RASTERIZER_STATE rs;$/;"	m	struct:RenderState
+rs	.\renderer.h	/^	RenderState rs;$/;"	m	struct:RenderPipeline
+rtv	.\renderer.h	/^	ID3D11RenderTargetView* rtv;$/;"	m	struct:Renderer
+s	.\include\stb_image.h	/^			stbi__context *s;$/;"	m	struct:__anon8
+s	.\include\stb_image.h	/^	stbi__context *s;$/;"	m	struct:__anon14
+sb_count	.\renderer.h	/^	u8 cb_count, vb_count, sb_count;$/;"	m	struct:VertexShaderDesc
+sb_desc	.\renderer.h	/^	StructuredBufferDesc* sb_desc;$/;"	m	struct:VertexShaderDesc
+scale	.\math.h	/^	Vec3 scale;$/;"	m	struct:Transform
+scan_n	.\include\stb_image.h	/^			int scan_n, order[4];$/;"	m	struct:__anon8
+set_separators	.\include\stb_sprintf.h	/^STBSP__PUBLICDEF void STB_SPRINTF_DECORATE(set_separators)(char pcomma, char pperiod)$/;"	f
+shader	.\renderer.h	/^	ID3D11PixelShader* shader;$/;"	m	struct:PixelShader
+shader	.\renderer.h	/^	ID3D11VertexShader* shader;$/;"	m	struct:VertexShader
+shader	.\renderer.h	/^	ShaderDesc shader;$/;"	m	struct:PixelShaderDesc
+shader	.\renderer.h	/^	ShaderDesc shader;$/;"	m	struct:VertexShaderDesc
+size	.\include\stb_image.h	/^			stbi_uc  size[257];$/;"	m	struct:__anon7
+size	.\include\stb_image.h	/^			stbi_uc size,type,channel;$/;"	m	struct:__anon17
+size	.\include\stb_image.h	/^		stbi_uc  size[STBI__ZNSYMS];$/;"	m	struct:__anon11
+size	.\memory_management.h	/^	u32 size;$/;"	m	struct:Memory
+size	.\platform_api.h	/^	u64 size;$/;"	m	struct:PlatformFileInfo
+size	.\platform_api.h	/^	u64 size;$/;"	m	struct:PlatformMemoryBlock
+size	.\renderer.h	/^	u32 size;$/;"	m	struct:ConstantsBuffer
+size	.\renderer.h	/^	u32 size;$/;"	m	struct:ConstantsBufferDesc
+size	.\renderer.h	/^	u32 size;$/;"	m	struct:ShaderDesc
+skip	.\include\stb_image.h	/^		void     (*skip)  (void *user,int n);                 \/\/ skip the next 'n' bytes, or 'unget' the last -n bytes if negative$/;"	m	struct:__anon2
+slot	.\renderer.h	/^	CONSTANTS_BINDING_SLOT slot;$/;"	m	struct:ConstantsBuffer
+slot	.\renderer.h	/^	CONSTANTS_BINDING_SLOT slot;$/;"	m	struct:ConstantsBufferDesc
+slot	.\renderer.h	/^	CONSTANTS_BINDING_SLOT slot;$/;"	m	struct:PushConstantsBufferData
+slot	.\renderer.h	/^	STRUCTURED_BINDING_SLOT slot;$/;"	m	struct:PushStructuredBufferData
+slot	.\renderer.h	/^	STRUCTURED_BINDING_SLOT slot;$/;"	m	struct:StructuredBuffer
+slot	.\renderer.h	/^	STRUCTURED_BINDING_SLOT slot;$/;"	m	struct:StructuredBufferDesc
+slot	.\renderer.h	/^	TEXTURE_SLOT slot;$/;"	m	struct:PushTextureBufferData
+slot	.\renderer.h	/^	TEXTURE_SLOT slot;$/;"	m	struct:TextureBuffer
+slot	.\renderer.h	/^	TEXTURE_SLOT slot;$/;"	m	struct:TextureDesc
+snprintf	.\include\stb_sprintf.h	/^STBSP__PUBLICDEF int STB_SPRINTF_DECORATE(snprintf)(char *buf, int count, char const *fmt, ...)$/;"	f
+spec_end	.\include\stb_image.h	/^			int            spec_end;$/;"	m	struct:__anon8
+spec_start	.\include\stb_image.h	/^			int            spec_start;$/;"	m	struct:__anon8
+sprintf	.\include\stb_sprintf.h	/^STBSP__PUBLICDEF int STB_SPRINTF_DECORATE(sprintf)(char *buf, char const *fmt, ...)$/;"	f
+ss	.\renderer.h	/^	ID3D11SamplerState* ss[SAMPLER_STATE_TOTAL];$/;"	m	struct:Renderer
+ss	.\renderer.h	/^	SAMPLER_STATE ss;$/;"	m	struct:RenderState
+start	.\shapes.cpp	/^	Vec3 start;$/;"	m	struct:Line	file:
+start_x	.\include\stb_image.h	/^			int start_x, start_y;$/;"	m	struct:__anon19
+start_y	.\include\stb_image.h	/^			int start_x, start_y;$/;"	m	struct:__anon19
+state_overrides	.\renderer.h	/^	RenderState state_overrides;$/;"	m	struct:Renderer
+stbi__DNL	.\include\stb_image.h	3322;"	d
+stbi__EOI	.\include\stb_image.h	3324;"	d
+stbi__SOF	.\include\stb_image.h	3325;"	d
+stbi__SOF_progressive	.\include\stb_image.h	3328;"	d
+stbi__SOI	.\include\stb_image.h	3323;"	d
+stbi__SOS	.\include\stb_image.h	3326;"	d
+stbi__YCbCr_to_RGB_row	.\include\stb_image.h	/^	static void stbi__YCbCr_to_RGB_row(stbi_uc *out, const stbi_uc *y, const stbi_uc *pcb, const stbi_uc *pcr, int count, int step)$/;"	f
+stbi__YCbCr_to_RGB_simd	.\include\stb_image.h	/^	static void stbi__YCbCr_to_RGB_simd(stbi_uc *out, stbi_uc const *y, stbi_uc const *pcb, stbi_uc const *pcr, int count, int step)$/;"	f
+stbi__addsizes_valid	.\include\stb_image.h	/^static int stbi__addsizes_valid(int a, int b)$/;"	f
+stbi__at_eof	.\include\stb_image.h	/^		stbi_inline static int stbi__at_eof(stbi__context *s)$/;"	f
+stbi__bit_reverse	.\include\stb_image.h	/^	stbi_inline static int stbi__bit_reverse(int v, int bits)$/;"	f
+stbi__bitcount	.\include\stb_image.h	/^		static int stbi__bitcount(unsigned int a)$/;"	f
+stbi__bitreverse16	.\include\stb_image.h	/^	stbi_inline static int stbi__bitreverse16(int n)$/;"	f
+stbi__blinn_8x8	.\include\stb_image.h	/^	static stbi_uc stbi__blinn_8x8(stbi_uc x, stbi_uc y)$/;"	f
+stbi__bmask	.\include\stb_image.h	/^		static const stbi__uint32 stbi__bmask[17]={0,1,3,7,15,31,63,127,255,511,1023,2047,4095,8191,16383,32767,65535};$/;"	v
+stbi__bmp_data	.\include\stb_image.h	/^		} stbi__bmp_data;$/;"	t	typeref:struct:__anon16
+stbi__bmp_info	.\include\stb_image.h	/^		static int stbi__bmp_info(stbi__context *s, int *x, int *y, int *comp)$/;"	f
+stbi__bmp_load	.\include\stb_image.h	/^		static void *stbi__bmp_load(stbi__context *s, int *x, int *y, int *comp, int req_comp, stbi__result_info *ri)$/;"	f
+stbi__bmp_parse_header	.\include\stb_image.h	/^		static void *stbi__bmp_parse_header(stbi__context *s, stbi__bmp_data *info)$/;"	f
+stbi__bmp_set_mask_defaults	.\include\stb_image.h	/^		static int stbi__bmp_set_mask_defaults(stbi__bmp_data *info, int compress)$/;"	f
+stbi__bmp_test	.\include\stb_image.h	/^		static int stbi__bmp_test(stbi__context *s)$/;"	f
+stbi__bmp_test_raw	.\include\stb_image.h	/^		static int stbi__bmp_test_raw(stbi__context *s)$/;"	f
+stbi__build_fast_ac	.\include\stb_image.h	/^		static void stbi__build_fast_ac(stbi__int16 *fast_ac, stbi__huffman *h)$/;"	f
+stbi__build_huffman	.\include\stb_image.h	/^		static int stbi__build_huffman(stbi__huffman *h, int *count)$/;"	f
+stbi__check_png_header	.\include\stb_image.h	/^static int stbi__check_png_header(stbi__context *s)$/;"	f
+stbi__clamp	.\include\stb_image.h	/^stbi_inline static stbi_uc stbi__clamp(int x)$/;"	f
+stbi__cleanup_jpeg	.\include\stb_image.h	/^	static void stbi__cleanup_jpeg(stbi__jpeg *j)$/;"	f
+stbi__compute_huffman_codes	.\include\stb_image.h	/^static int stbi__compute_huffman_codes(stbi__zbuf *a)$/;"	f
+stbi__compute_transparency	.\include\stb_image.h	/^static int stbi__compute_transparency(stbi__png *z, stbi_uc tc[3], int out_n)$/;"	f
+stbi__compute_transparency16	.\include\stb_image.h	/^static int stbi__compute_transparency16(stbi__png *z, stbi__uint16 tc[3], int out_n)$/;"	f
+stbi__compute_y	.\include\stb_image.h	/^		static stbi_uc stbi__compute_y(int r, int g, int b)$/;"	f
+stbi__compute_y_16	.\include\stb_image.h	/^		static stbi__uint16 stbi__compute_y_16(int r, int g, int b)$/;"	f
+stbi__context	.\include\stb_image.h	/^	} stbi__context;$/;"	t	typeref:struct:__anon3
+stbi__convert_16_to_8	.\include\stb_image.h	/^		static stbi_uc *stbi__convert_16_to_8(stbi__uint16 *orig, int w, int h, int channels)$/;"	f
+stbi__convert_8_to_16	.\include\stb_image.h	/^		static stbi__uint16 *stbi__convert_8_to_16(stbi_uc *orig, int w, int h, int channels)$/;"	f
+stbi__convert_format	.\include\stb_image.h	/^		static unsigned char *stbi__convert_format(unsigned char *data, int img_n, int req_comp, unsigned int x, unsigned int y)$/;"	f
+stbi__convert_format16	.\include\stb_image.h	/^		static stbi__uint16 *stbi__convert_format16(stbi__uint16 *data, int img_n, int req_comp, unsigned int x, unsigned int y)$/;"	f
+stbi__copyval	.\include\stb_image.h	/^		static void stbi__copyval(int channel,stbi_uc *dest,const stbi_uc *src)$/;"	f
+stbi__cpuid3	.\include\stb_image.h	/^	static int stbi__cpuid3(void)$/;"	f
+stbi__create_png_image	.\include\stb_image.h	/^static int stbi__create_png_image(stbi__png *a, stbi_uc *image_data, stbi__uint32 image_data_len, int out_n, int depth, int color, int interlaced)$/;"	f
+stbi__create_png_image_raw	.\include\stb_image.h	/^static int stbi__create_png_image_raw(stbi__png *a, stbi_uc *raw, stbi__uint32 raw_len, int out_n, stbi__uint32 x, stbi__uint32 y, int depth, int color)$/;"	f
+stbi__de_iphone	.\include\stb_image.h	/^		static void stbi__de_iphone(stbi__png *z)$/;"	f
+stbi__de_iphone_flag	.\include\stb_image.h	4953;"	d
+stbi__de_iphone_flag	.\include\stb_image.h	4973;"	d
+stbi__de_iphone_flag_global	.\include\stb_image.h	/^static int stbi__de_iphone_flag_global = 0;$/;"	v
+stbi__de_iphone_flag_local	.\include\stb_image.h	/^static STBI_THREAD_LOCAL int stbi__de_iphone_flag_local, stbi__de_iphone_flag_set;$/;"	v
+stbi__de_iphone_flag_set	.\include\stb_image.h	/^static STBI_THREAD_LOCAL int stbi__de_iphone_flag_local, stbi__de_iphone_flag_set;$/;"	v
+stbi__decode_jpeg_header	.\include\stb_image.h	/^	static int stbi__decode_jpeg_header(stbi__jpeg *z, int scan)$/;"	f
+stbi__decode_jpeg_image	.\include\stb_image.h	/^	static int stbi__decode_jpeg_image(stbi__jpeg *j)$/;"	f
+stbi__depth_scale_table	.\include\stb_image.h	/^static const stbi_uc stbi__depth_scale_table[9] = { 0, 0xff, 0x55, 0, 0x11, 0,0,0, 0x01 };$/;"	v
+stbi__div16	.\include\stb_image.h	3449;"	d
+stbi__div4	.\include\stb_image.h	3400;"	d
+stbi__do_png	.\include\stb_image.h	/^		static void *stbi__do_png(stbi__png *p, int *x, int *y, int *n, int req_comp, stbi__result_info *ri)$/;"	f
+stbi__do_zlib	.\include\stb_image.h	/^static int stbi__do_zlib(stbi__zbuf *a, char *obuf, int olen, int exp, int parse_header)$/;"	f
+stbi__err	.\include\stb_image.h	/^static int stbi__err(const char *str)$/;"	f
+stbi__err	.\include\stb_image.h	1071;"	d
+stbi__err	.\include\stb_image.h	1073;"	d
+stbi__err	.\include\stb_image.h	1075;"	d
+stbi__errpf	.\include\stb_image.h	1078;"	d
+stbi__errpuc	.\include\stb_image.h	1079;"	d
+stbi__expand_png_palette	.\include\stb_image.h	/^static int stbi__expand_png_palette(stbi__png *a, stbi_uc *palette, int len, int pal_img_n)$/;"	f
+stbi__extend_receive	.\include\stb_image.h	/^		stbi_inline static int stbi__extend_receive(stbi__jpeg *j, int n)$/;"	f
+stbi__f2f	.\include\stb_image.h	2392;"	d
+stbi__fill_bits	.\include\stb_image.h	/^	static void stbi__fill_bits(stbi__zbuf *z)$/;"	f
+stbi__float2fixed	.\include\stb_image.h	3605;"	d
+stbi__float2int	.\include\stb_image.h	1863;"	d
+stbi__float_postprocess	.\include\stb_image.h	/^		static void stbi__float_postprocess(float *result, int *x, int *y, int *comp, int req_comp)$/;"	f
+stbi__fopen	.\include\stb_image.h	/^		static FILE *stbi__fopen(char const *filename, char const *mode)$/;"	f
+stbi__free_jpeg_components	.\include\stb_image.h	/^	static int stbi__free_jpeg_components(stbi__jpeg *z, int ncomp, int why)$/;"	f
+stbi__fsh	.\include\stb_image.h	2393;"	d
+stbi__g_failure_reason	.\include\stb_image.h	/^	const char *stbi__g_failure_reason;$/;"	v
+stbi__get16be	.\include\stb_image.h	/^		static int stbi__get16be(stbi__context *s)$/;"	f
+stbi__get16le	.\include\stb_image.h	/^		static int stbi__get16le(stbi__context *s)$/;"	f
+stbi__get32be	.\include\stb_image.h	/^		static stbi__uint32 stbi__get32be(stbi__context *s)$/;"	f
+stbi__get32le	.\include\stb_image.h	/^		static stbi__uint32 stbi__get32le(stbi__context *s)$/;"	f
+stbi__get8	.\include\stb_image.h	/^		stbi_inline static stbi_uc stbi__get8(stbi__context *s)$/;"	f
+stbi__get_chunk_header	.\include\stb_image.h	/^static stbi__pngchunk stbi__get_chunk_header(stbi__context *s)$/;"	f
+stbi__get_marker	.\include\stb_image.h	/^	static stbi_uc stbi__get_marker(stbi__jpeg *j)$/;"	f
+stbi__getn	.\include\stb_image.h	/^		static int stbi__getn(stbi__context *s, stbi_uc *buffer, int n)$/;"	f
+stbi__gif	.\include\stb_image.h	/^		} stbi__gif;$/;"	t	typeref:struct:__anon19
+stbi__gif_header	.\include\stb_image.h	/^		static int stbi__gif_header(stbi__context *s, stbi__gif *g, int *comp, int is_info)$/;"	f
+stbi__gif_info	.\include\stb_image.h	/^		static int stbi__gif_info(stbi__context *s, int *x, int *y, int *comp)$/;"	f
+stbi__gif_info_raw	.\include\stb_image.h	/^		static int stbi__gif_info_raw(stbi__context *s, int *x, int *y, int *comp)$/;"	f
+stbi__gif_load	.\include\stb_image.h	/^		static void *stbi__gif_load(stbi__context *s, int *x, int *y, int *comp, int req_comp, stbi__result_info *ri)$/;"	f
+stbi__gif_load_next	.\include\stb_image.h	/^		static stbi_uc *stbi__gif_load_next(stbi__context *s, stbi__gif *g, int *comp, int req_comp, stbi_uc *two_back)$/;"	f
+stbi__gif_lzw	.\include\stb_image.h	/^		} stbi__gif_lzw;$/;"	t	typeref:struct:__anon18
+stbi__gif_parse_colortable	.\include\stb_image.h	/^		static void stbi__gif_parse_colortable(stbi__context *s, stbi_uc pal[256][4], int num_entries, int transp)$/;"	f
+stbi__gif_test	.\include\stb_image.h	/^		static int stbi__gif_test(stbi__context *s)$/;"	f
+stbi__gif_test_raw	.\include\stb_image.h	/^		static int stbi__gif_test_raw(stbi__context *s)$/;"	f
+stbi__grow_buffer_unsafe	.\include\stb_image.h	/^		static void stbi__grow_buffer_unsafe(stbi__jpeg *j)$/;"	f
+stbi__h2l_gamma_i	.\include\stb_image.h	/^		static float stbi__h2l_gamma_i=1.0f\/2.2f, stbi__h2l_scale_i=1.0f;$/;"	v
+stbi__h2l_scale_i	.\include\stb_image.h	/^		static float stbi__h2l_gamma_i=1.0f\/2.2f, stbi__h2l_scale_i=1.0f;$/;"	v
+stbi__hdr_convert	.\include\stb_image.h	/^		static void stbi__hdr_convert(float *output, stbi_uc *input, int req_comp)$/;"	f
+stbi__hdr_gettoken	.\include\stb_image.h	/^		static char *stbi__hdr_gettoken(stbi__context *z, char *buffer)$/;"	f
+stbi__hdr_info	.\include\stb_image.h	/^		static int stbi__hdr_info(stbi__context *s, int *x, int *y, int *comp)$/;"	f
+stbi__hdr_load	.\include\stb_image.h	/^		static float *stbi__hdr_load(stbi__context *s, int *x, int *y, int *comp, int req_comp, stbi__result_info *ri)$/;"	f
+stbi__hdr_test	.\include\stb_image.h	/^		static int stbi__hdr_test(stbi__context* s)$/;"	f
+stbi__hdr_test_core	.\include\stb_image.h	/^		static int stbi__hdr_test_core(stbi__context *s, const char *signature)$/;"	f
+stbi__hdr_to_ldr	.\include\stb_image.h	/^		static stbi_uc *stbi__hdr_to_ldr(float   *data, int x, int y, int comp)$/;"	f
+stbi__high_bit	.\include\stb_image.h	/^		static int stbi__high_bit(unsigned int z)$/;"	f
+stbi__huffman	.\include\stb_image.h	/^		} stbi__huffman;$/;"	t	typeref:struct:__anon7
+stbi__idct_block	.\include\stb_image.h	/^	static void stbi__idct_block(stbi_uc *out, int out_stride, short data[64])$/;"	f
+stbi__idct_simd	.\include\stb_image.h	/^	static void stbi__idct_simd(stbi_uc *out, int out_stride, short data[64])$/;"	f
+stbi__info_main	.\include\stb_image.h	/^		static int stbi__info_main(stbi__context *s, int *x, int *y, int *comp)$/;"	f
+stbi__int16	.\include\stb_image.h	/^	typedef   signed short stbi__int16;$/;"	t
+stbi__int16	.\include\stb_image.h	/^	typedef int16_t  stbi__int16;$/;"	t
+stbi__int32	.\include\stb_image.h	/^	typedef   signed int   stbi__int32;$/;"	t
+stbi__int32	.\include\stb_image.h	/^	typedef int32_t  stbi__int32;$/;"	t
+stbi__is_16_main	.\include\stb_image.h	/^		static int stbi__is_16_main(stbi__context *s)$/;"	f
+stbi__jbias	.\include\stb_image.h	/^		static const int stbi__jbias[16] = {0,-1,-3,-7,-15,-31,-63,-127,-255,-511,-1023,-2047,-4095,-8191,-16383,-32767};$/;"	v
+stbi__jpeg	.\include\stb_image.h	/^		} stbi__jpeg;$/;"	t	typeref:struct:__anon8
+stbi__jpeg_decode_block	.\include\stb_image.h	/^static int stbi__jpeg_decode_block(stbi__jpeg *j, short data[64], stbi__huffman *hdc, stbi__huffman *hac, stbi__int16 *fac, int b, stbi__uint16 *dequant)$/;"	f
+stbi__jpeg_decode_block_prog_ac	.\include\stb_image.h	/^static int stbi__jpeg_decode_block_prog_ac(stbi__jpeg *j, short data[64], stbi__huffman *hac, stbi__int16 *fac)$/;"	f
+stbi__jpeg_decode_block_prog_dc	.\include\stb_image.h	/^static int stbi__jpeg_decode_block_prog_dc(stbi__jpeg *j, short data[64], stbi__huffman *hdc, int b)$/;"	f
+stbi__jpeg_dequantize	.\include\stb_image.h	/^	static void stbi__jpeg_dequantize(short *data, stbi__uint16 *dequant)$/;"	f
+stbi__jpeg_dezigzag	.\include\stb_image.h	/^		static const stbi_uc stbi__jpeg_dezigzag[64+15] =$/;"	v
+stbi__jpeg_finish	.\include\stb_image.h	/^	static void stbi__jpeg_finish(stbi__jpeg *z)$/;"	f
+stbi__jpeg_get_bit	.\include\stb_image.h	/^		stbi_inline static int stbi__jpeg_get_bit(stbi__jpeg *j)$/;"	f
+stbi__jpeg_get_bits	.\include\stb_image.h	/^		stbi_inline static int stbi__jpeg_get_bits(stbi__jpeg *j, int n)$/;"	f
+stbi__jpeg_huff_decode	.\include\stb_image.h	/^		stbi_inline static int stbi__jpeg_huff_decode(stbi__jpeg *j, stbi__huffman *h)$/;"	f
+stbi__jpeg_info	.\include\stb_image.h	/^	static int stbi__jpeg_info(stbi__context *s, int *x, int *y, int *comp)$/;"	f
+stbi__jpeg_info_raw	.\include\stb_image.h	/^	static int stbi__jpeg_info_raw(stbi__jpeg *j, int *x, int *y, int *comp)$/;"	f
+stbi__jpeg_load	.\include\stb_image.h	/^	static void *stbi__jpeg_load(stbi__context *s, int *x, int *y, int *comp, int req_comp, stbi__result_info *ri)$/;"	f
+stbi__jpeg_reset	.\include\stb_image.h	/^	static void stbi__jpeg_reset(stbi__jpeg *j)$/;"	f
+stbi__jpeg_test	.\include\stb_image.h	/^	static int stbi__jpeg_test(stbi__context *s)$/;"	f
+stbi__l2h_gamma	.\include\stb_image.h	/^		static float stbi__l2h_gamma=2.2f, stbi__l2h_scale=1.0f;$/;"	v
+stbi__l2h_scale	.\include\stb_image.h	/^		static float stbi__l2h_gamma=2.2f, stbi__l2h_scale=1.0f;$/;"	v
+stbi__ldr_to_hdr	.\include\stb_image.h	/^		static float   *stbi__ldr_to_hdr(stbi_uc *data, int x, int y, int comp)$/;"	f
+stbi__load_and_postprocess_16bit	.\include\stb_image.h	/^		static stbi__uint16 *stbi__load_and_postprocess_16bit(stbi__context *s, int *x, int *y, int *comp, int req_comp)$/;"	f
+stbi__load_and_postprocess_8bit	.\include\stb_image.h	/^		static unsigned char *stbi__load_and_postprocess_8bit(stbi__context *s, int *x, int *y, int *comp, int req_comp)$/;"	f
+stbi__load_gif_main	.\include\stb_image.h	/^		static void *stbi__load_gif_main(stbi__context *s, int **delays, int *x, int *y, int *z, int *comp, int req_comp)$/;"	f
+stbi__load_gif_main_outofmem	.\include\stb_image.h	/^		static void *stbi__load_gif_main_outofmem(stbi__gif *g, stbi_uc *out, int **delays)$/;"	f
+stbi__load_main	.\include\stb_image.h	/^		static void *stbi__load_main(stbi__context *s, int *x, int *y, int *comp, int req_comp, stbi__result_info *ri, int bpc)$/;"	f
+stbi__loadf_main	.\include\stb_image.h	/^		static float *stbi__loadf_main(stbi__context *s, int *x, int *y, int *comp, int req_comp)$/;"	f
+stbi__mad2sizes_valid	.\include\stb_image.h	/^static int stbi__mad2sizes_valid(int a, int b, int add)$/;"	f
+stbi__mad3sizes_valid	.\include\stb_image.h	/^static int stbi__mad3sizes_valid(int a, int b, int c, int add)$/;"	f
+stbi__mad4sizes_valid	.\include\stb_image.h	/^static int stbi__mad4sizes_valid(int a, int b, int c, int d, int add)$/;"	f
+stbi__malloc	.\include\stb_image.h	/^static void *stbi__malloc(size_t size)$/;"	f
+stbi__malloc_mad2	.\include\stb_image.h	/^static void *stbi__malloc_mad2(int a, int b, int add)$/;"	f
+stbi__malloc_mad3	.\include\stb_image.h	/^static void *stbi__malloc_mad3(int a, int b, int c, int add)$/;"	f
+stbi__malloc_mad4	.\include\stb_image.h	/^static void *stbi__malloc_mad4(int a, int b, int c, int d, int add)$/;"	f
+stbi__mul2sizes_valid	.\include\stb_image.h	/^static int stbi__mul2sizes_valid(int a, int b)$/;"	f
+stbi__out_gif_code	.\include\stb_image.h	/^		static void stbi__out_gif_code(stbi__gif *g, stbi__uint16 code)$/;"	f
+stbi__paeth	.\include\stb_image.h	/^static int stbi__paeth(int a, int b, int c)$/;"	f
+stbi__parse_entropy_coded_data	.\include\stb_image.h	/^	static int stbi__parse_entropy_coded_data(stbi__jpeg *z)$/;"	f
+stbi__parse_huffman_block	.\include\stb_image.h	/^static int stbi__parse_huffman_block(stbi__zbuf *a)$/;"	f
+stbi__parse_png_file	.\include\stb_image.h	/^		static int stbi__parse_png_file(stbi__png *z, int scan, int req_comp)$/;"	f
+stbi__parse_uncompressed_block	.\include\stb_image.h	/^static int stbi__parse_uncompressed_block(stbi__zbuf *a)$/;"	f
+stbi__parse_zlib	.\include\stb_image.h	/^static int stbi__parse_zlib(stbi__zbuf *a, int parse_header)$/;"	f
+stbi__parse_zlib_header	.\include\stb_image.h	/^static int stbi__parse_zlib_header(stbi__zbuf *a)$/;"	f
+stbi__pic_info	.\include\stb_image.h	/^		static int stbi__pic_info(stbi__context *s, int *x, int *y, int *comp)$/;"	f
+stbi__pic_is4	.\include\stb_image.h	/^		static int stbi__pic_is4(stbi__context *s,const char *str)$/;"	f
+stbi__pic_load	.\include\stb_image.h	/^		static void *stbi__pic_load(stbi__context *s,int *px,int *py,int *comp,int req_comp, stbi__result_info *ri)$/;"	f
+stbi__pic_load_core	.\include\stb_image.h	/^		static stbi_uc *stbi__pic_load_core(stbi__context *s,int width,int height,int *comp, stbi_uc *result)$/;"	f
+stbi__pic_packet	.\include\stb_image.h	/^		} stbi__pic_packet;$/;"	t	typeref:struct:__anon17
+stbi__pic_test	.\include\stb_image.h	/^		static int stbi__pic_test(stbi__context *s)$/;"	f
+stbi__pic_test_core	.\include\stb_image.h	/^		static int stbi__pic_test_core(stbi__context *s)$/;"	f
+stbi__png	.\include\stb_image.h	/^} stbi__png;$/;"	t	typeref:struct:__anon14
+stbi__png_info	.\include\stb_image.h	/^		static int stbi__png_info(stbi__context *s, int *x, int *y, int *comp)$/;"	f
+stbi__png_info_raw	.\include\stb_image.h	/^		static int stbi__png_info_raw(stbi__png *p, int *x, int *y, int *comp)$/;"	f
+stbi__png_is16	.\include\stb_image.h	/^		static int stbi__png_is16(stbi__context *s)$/;"	f
+stbi__png_load	.\include\stb_image.h	/^		static void *stbi__png_load(stbi__context *s, int *x, int *y, int *comp, int req_comp, stbi__result_info *ri)$/;"	f
+stbi__png_test	.\include\stb_image.h	/^		static int stbi__png_test(stbi__context *s)$/;"	f
+stbi__pngchunk	.\include\stb_image.h	/^} stbi__pngchunk;$/;"	t	typeref:struct:__anon13
+stbi__pnm_getinteger	.\include\stb_image.h	/^		static int      stbi__pnm_getinteger(stbi__context *s, char *c)$/;"	f
+stbi__pnm_info	.\include\stb_image.h	/^		static int      stbi__pnm_info(stbi__context *s, int *x, int *y, int *comp)$/;"	f
+stbi__pnm_is16	.\include\stb_image.h	/^		static int stbi__pnm_is16(stbi__context *s)$/;"	f
+stbi__pnm_isdigit	.\include\stb_image.h	/^		static int      stbi__pnm_isdigit(char c)$/;"	f
+stbi__pnm_isspace	.\include\stb_image.h	/^		static int      stbi__pnm_isspace(char c)$/;"	f
+stbi__pnm_load	.\include\stb_image.h	/^		static void *stbi__pnm_load(stbi__context *s, int *x, int *y, int *comp, int req_comp, stbi__result_info *ri)$/;"	f
+stbi__pnm_skip_whitespace	.\include\stb_image.h	/^		static void     stbi__pnm_skip_whitespace(stbi__context *s, char *c)$/;"	f
+stbi__pnm_test	.\include\stb_image.h	/^		static int      stbi__pnm_test(stbi__context *s)$/;"	f
+stbi__process_frame_header	.\include\stb_image.h	/^	static int stbi__process_frame_header(stbi__jpeg *z, int scan)$/;"	f
+stbi__process_gif_raster	.\include\stb_image.h	/^		static stbi_uc *stbi__process_gif_raster(stbi__context *s, stbi__gif *g)$/;"	f
+stbi__process_marker	.\include\stb_image.h	/^	static int stbi__process_marker(stbi__jpeg *z, int m)$/;"	f
+stbi__process_scan_header	.\include\stb_image.h	/^	static int stbi__process_scan_header(stbi__jpeg *z)$/;"	f
+stbi__psd_decode_rle	.\include\stb_image.h	/^		static int stbi__psd_decode_rle(stbi__context *s, stbi_uc *p, int pixelCount)$/;"	f
+stbi__psd_info	.\include\stb_image.h	/^		static int stbi__psd_info(stbi__context *s, int *x, int *y, int *comp)$/;"	f
+stbi__psd_is16	.\include\stb_image.h	/^		static int stbi__psd_is16(stbi__context *s)$/;"	f
+stbi__psd_load	.\include\stb_image.h	/^		static void *stbi__psd_load(stbi__context *s, int *x, int *y, int *comp, int req_comp, stbi__result_info *ri, int bpc)$/;"	f
+stbi__psd_test	.\include\stb_image.h	/^		static int stbi__psd_test(stbi__context *s)$/;"	f
+stbi__readval	.\include\stb_image.h	/^		static stbi_uc *stbi__readval(stbi__context *s, int channel, stbi_uc *dest)$/;"	f
+stbi__refill_buffer	.\include\stb_image.h	/^		static void stbi__refill_buffer(stbi__context *s)$/;"	f
+stbi__resample	.\include\stb_image.h	/^	} stbi__resample;$/;"	t	typeref:struct:__anon10
+stbi__resample_row_generic	.\include\stb_image.h	/^	static stbi_uc *stbi__resample_row_generic(stbi_uc *out, stbi_uc *in_near, stbi_uc *in_far, int w, int hs)$/;"	f
+stbi__resample_row_h_2	.\include\stb_image.h	/^	static stbi_uc*  stbi__resample_row_h_2(stbi_uc *out, stbi_uc *in_near, stbi_uc *in_far, int w, int hs)$/;"	f
+stbi__resample_row_hv_2	.\include\stb_image.h	/^	static stbi_uc *stbi__resample_row_hv_2(stbi_uc *out, stbi_uc *in_near, stbi_uc *in_far, int w, int hs)$/;"	f
+stbi__resample_row_hv_2_simd	.\include\stb_image.h	/^	static stbi_uc *stbi__resample_row_hv_2_simd(stbi_uc *out, stbi_uc *in_near, stbi_uc *in_far, int w, int hs)$/;"	f
+stbi__resample_row_v_2	.\include\stb_image.h	/^	static stbi_uc* stbi__resample_row_v_2(stbi_uc *out, stbi_uc *in_near, stbi_uc *in_far, int w, int hs)$/;"	f
+stbi__result_info	.\include\stb_image.h	/^} stbi__result_info;$/;"	t	typeref:struct:__anon5
+stbi__rewind	.\include\stb_image.h	/^static void stbi__rewind(stbi__context *s)$/;"	f
+stbi__setup_jpeg	.\include\stb_image.h	/^	static void stbi__setup_jpeg(stbi__jpeg *j)$/;"	f
+stbi__shiftsigned	.\include\stb_image.h	/^		static int stbi__shiftsigned(unsigned int v, int shift, int bits)$/;"	f
+stbi__skip	.\include\stb_image.h	/^		static void stbi__skip(stbi__context *s, int n)$/;"	f
+stbi__sse2_available	.\include\stb_image.h	/^	static int stbi__sse2_available(void)$/;"	f
+stbi__start_callbacks	.\include\stb_image.h	/^	static void stbi__start_callbacks(stbi__context *s, stbi_io_callbacks *c, void *user)$/;"	f
+stbi__start_file	.\include\stb_image.h	/^static void stbi__start_file(stbi__context *s, FILE *f)$/;"	f
+stbi__start_mem	.\include\stb_image.h	/^	static void stbi__start_mem(stbi__context *s, stbi_uc const *buffer, int len)$/;"	f
+stbi__stdio_callbacks	.\include\stb_image.h	/^	static stbi_io_callbacks stbi__stdio_callbacks =$/;"	v
+stbi__stdio_eof	.\include\stb_image.h	/^	static int stbi__stdio_eof(void *user)$/;"	f
+stbi__stdio_read	.\include\stb_image.h	/^	static int stbi__stdio_read(void *user, char *data, int size)$/;"	f
+stbi__stdio_skip	.\include\stb_image.h	/^	static void stbi__stdio_skip(void *user, int n)$/;"	f
+stbi__tga_get_comp	.\include\stb_image.h	/^		static int stbi__tga_get_comp(int bits_per_pixel, int is_grey, int* is_rgb16)$/;"	f
+stbi__tga_info	.\include\stb_image.h	/^		static int stbi__tga_info(stbi__context *s, int *x, int *y, int *comp)$/;"	f
+stbi__tga_load	.\include\stb_image.h	/^		static void *stbi__tga_load(stbi__context *s, int *x, int *y, int *comp, int req_comp, stbi__result_info *ri)$/;"	f
+stbi__tga_read_rgb16	.\include\stb_image.h	/^		static void stbi__tga_read_rgb16(stbi__context *s, stbi_uc* out)$/;"	f
+stbi__tga_test	.\include\stb_image.h	/^		static int stbi__tga_test(stbi__context *s)$/;"	f
+stbi__uint16	.\include\stb_image.h	/^	typedef uint16_t stbi__uint16;$/;"	t
+stbi__uint16	.\include\stb_image.h	/^	typedef unsigned short stbi__uint16;$/;"	t
+stbi__uint32	.\include\stb_image.h	/^	typedef uint32_t stbi__uint32;$/;"	t
+stbi__uint32	.\include\stb_image.h	/^	typedef unsigned int   stbi__uint32;$/;"	t
+stbi__unpremultiply_on_load	.\include\stb_image.h	4952;"	d
+stbi__unpremultiply_on_load	.\include\stb_image.h	4970;"	d
+stbi__unpremultiply_on_load_global	.\include\stb_image.h	/^static int stbi__unpremultiply_on_load_global = 0;$/;"	v
+stbi__unpremultiply_on_load_local	.\include\stb_image.h	/^static STBI_THREAD_LOCAL int stbi__unpremultiply_on_load_local, stbi__unpremultiply_on_load_set;$/;"	v
+stbi__unpremultiply_on_load_set	.\include\stb_image.h	/^static STBI_THREAD_LOCAL int stbi__unpremultiply_on_load_local, stbi__unpremultiply_on_load_set;$/;"	v
+stbi__unpremultiply_on_load_thread	.\include\stb_image.h	/^STBIDEF void stbi__unpremultiply_on_load_thread(int flag_true_if_should_unpremultiply)$/;"	f
+stbi__vertical_flip	.\include\stb_image.h	/^		static void stbi__vertical_flip(void *image, int w, int h, int bytes_per_pixel)$/;"	f
+stbi__vertical_flip_slices	.\include\stb_image.h	/^		static void stbi__vertical_flip_slices(void *image, int w, int h, int z, int bytes_per_pixel)$/;"	f
+stbi__vertically_flip_on_load	.\include\stb_image.h	1102;"	d
+stbi__vertically_flip_on_load	.\include\stb_image.h	1112;"	d
+stbi__vertically_flip_on_load_global	.\include\stb_image.h	/^static int stbi__vertically_flip_on_load_global = 0;$/;"	v
+stbi__vertically_flip_on_load_local	.\include\stb_image.h	/^static STBI_THREAD_LOCAL int stbi__vertically_flip_on_load_local, stbi__vertically_flip_on_load_set;$/;"	v
+stbi__vertically_flip_on_load_set	.\include\stb_image.h	/^static STBI_THREAD_LOCAL int stbi__vertically_flip_on_load_local, stbi__vertically_flip_on_load_set;$/;"	v
+stbi__zbuf	.\include\stb_image.h	/^	} stbi__zbuf;$/;"	t	typeref:struct:__anon12
+stbi__zbuild_huffman	.\include\stb_image.h	/^	static int stbi__zbuild_huffman(stbi__zhuffman *z, const stbi_uc *sizelist, int num)$/;"	f
+stbi__zdefault_distance	.\include\stb_image.h	/^static const stbi_uc stbi__zdefault_distance[32] =$/;"	v
+stbi__zdefault_length	.\include\stb_image.h	/^static const stbi_uc stbi__zdefault_length[STBI__ZNSYMS] =$/;"	v
+stbi__zdist_base	.\include\stb_image.h	/^static const int stbi__zdist_base[32] = { 1,2,3,4,5,7,9,13,17,25,33,49,65,97,129,193,$/;"	v
+stbi__zdist_extra	.\include\stb_image.h	/^static const int stbi__zdist_extra[32] =$/;"	v
+stbi__zeof	.\include\stb_image.h	/^	stbi_inline static int stbi__zeof(stbi__zbuf *z)$/;"	f
+stbi__zexpand	.\include\stb_image.h	/^	static int stbi__zexpand(stbi__zbuf *z, char *zout, int n)  \/\/ need to make room for n bytes$/;"	f
+stbi__zget8	.\include\stb_image.h	/^	stbi_inline static stbi_uc stbi__zget8(stbi__zbuf *z)$/;"	f
+stbi__zhuffman	.\include\stb_image.h	/^	} stbi__zhuffman;$/;"	t	typeref:struct:__anon11
+stbi__zhuffman_decode	.\include\stb_image.h	/^	stbi_inline static int stbi__zhuffman_decode(stbi__zbuf *a, stbi__zhuffman *z)$/;"	f
+stbi__zhuffman_decode_slowpath	.\include\stb_image.h	/^	static int stbi__zhuffman_decode_slowpath(stbi__zbuf *a, stbi__zhuffman *z)$/;"	f
+stbi__zlength_base	.\include\stb_image.h	/^	static const int stbi__zlength_base[31] = {$/;"	v
+stbi__zlength_extra	.\include\stb_image.h	/^	static const int stbi__zlength_extra[31]=$/;"	v
+stbi__zreceive	.\include\stb_image.h	/^	stbi_inline static unsigned int stbi__zreceive(stbi__zbuf *z, int n)$/;"	f
+stbi_convert_iphone_png_to_rgb	.\include\stb_image.h	/^STBIDEF void stbi_convert_iphone_png_to_rgb(int flag_true_if_should_convert)$/;"	f
+stbi_convert_iphone_png_to_rgb_thread	.\include\stb_image.h	/^STBIDEF void stbi_convert_iphone_png_to_rgb_thread(int flag_true_if_should_convert)$/;"	f
+stbi_convert_wchar_to_utf8	.\include\stb_image.h	/^		STBIDEF int stbi_convert_wchar_to_utf8(char *buffer, size_t bufferlen, const wchar_t* input)$/;"	f
+stbi_failure_reason	.\include\stb_image.h	/^STBIDEF const char *stbi_failure_reason(void)$/;"	f
+stbi_hdr_to_ldr_gamma	.\include\stb_image.h	/^		STBIDEF void   stbi_hdr_to_ldr_gamma(float gamma) { stbi__h2l_gamma_i = 1\/gamma; }$/;"	f
+stbi_hdr_to_ldr_scale	.\include\stb_image.h	/^		STBIDEF void   stbi_hdr_to_ldr_scale(float scale) { stbi__h2l_scale_i = 1\/scale; }$/;"	f
+stbi_image_free	.\include\stb_image.h	/^STBIDEF void stbi_image_free(void *retval_from_stbi_load)$/;"	f
+stbi_info	.\include\stb_image.h	/^		STBIDEF int stbi_info(char const *filename, int *x, int *y, int *comp)$/;"	f
+stbi_info_from_callbacks	.\include\stb_image.h	/^		STBIDEF int stbi_info_from_callbacks(stbi_io_callbacks const *c, void *user, int *x, int *y, int *comp)$/;"	f
+stbi_info_from_file	.\include\stb_image.h	/^		STBIDEF int stbi_info_from_file(FILE *f, int *x, int *y, int *comp)$/;"	f
+stbi_info_from_memory	.\include\stb_image.h	/^		STBIDEF int stbi_info_from_memory(stbi_uc const *buffer, int len, int *x, int *y, int *comp)$/;"	f
+stbi_inline	.\include\stb_image.h	612;"	d
+stbi_inline	.\include\stb_image.h	614;"	d
+stbi_inline	.\include\stb_image.h	617;"	d
+stbi_io_callbacks	.\include\stb_image.h	/^	} stbi_io_callbacks;$/;"	t	typeref:struct:__anon2
+stbi_is_16_bit	.\include\stb_image.h	/^		STBIDEF int stbi_is_16_bit(char const *filename)$/;"	f
+stbi_is_16_bit_from_callbacks	.\include\stb_image.h	/^		STBIDEF int stbi_is_16_bit_from_callbacks(stbi_io_callbacks const *c, void *user)$/;"	f
+stbi_is_16_bit_from_file	.\include\stb_image.h	/^		STBIDEF int stbi_is_16_bit_from_file(FILE *f)$/;"	f
+stbi_is_16_bit_from_memory	.\include\stb_image.h	/^		STBIDEF int stbi_is_16_bit_from_memory(stbi_uc const *buffer, int len)$/;"	f
+stbi_is_hdr	.\include\stb_image.h	/^		STBIDEF int      stbi_is_hdr          (char const *filename)$/;"	f
+stbi_is_hdr_from_callbacks	.\include\stb_image.h	/^		STBIDEF int      stbi_is_hdr_from_callbacks(stbi_io_callbacks const *clbk, void *user)$/;"	f
+stbi_is_hdr_from_file	.\include\stb_image.h	/^		STBIDEF int stbi_is_hdr_from_file(FILE *f)$/;"	f
+stbi_is_hdr_from_memory	.\include\stb_image.h	/^		STBIDEF int stbi_is_hdr_from_memory(stbi_uc const *buffer, int len)$/;"	f
+stbi_ldr_to_hdr_gamma	.\include\stb_image.h	/^		STBIDEF void   stbi_ldr_to_hdr_gamma(float gamma) { stbi__l2h_gamma = gamma; }$/;"	f
+stbi_ldr_to_hdr_scale	.\include\stb_image.h	/^		STBIDEF void   stbi_ldr_to_hdr_scale(float scale) { stbi__l2h_scale = scale; }$/;"	f
+stbi_load	.\include\stb_image.h	/^		STBIDEF stbi_uc *stbi_load(char const *filename, int *x, int *y, int *comp, int req_comp)$/;"	f
+stbi_load_16	.\include\stb_image.h	/^		STBIDEF stbi_us *stbi_load_16(char const *filename, int *x, int *y, int *comp, int req_comp)$/;"	f
+stbi_load_16_from_callbacks	.\include\stb_image.h	/^		STBIDEF stbi_us *stbi_load_16_from_callbacks(stbi_io_callbacks const *clbk, void *user, int *x, int *y, int *channels_in_file, int desired_channels)$/;"	f
+stbi_load_16_from_memory	.\include\stb_image.h	/^		STBIDEF stbi_us *stbi_load_16_from_memory(stbi_uc const *buffer, int len, int *x, int *y, int *channels_in_file, int desired_channels)$/;"	f
+stbi_load_from_callbacks	.\include\stb_image.h	/^		STBIDEF stbi_uc *stbi_load_from_callbacks(stbi_io_callbacks const *clbk, void *user, int *x, int *y, int *comp, int req_comp)$/;"	f
+stbi_load_from_file	.\include\stb_image.h	/^		STBIDEF stbi_uc *stbi_load_from_file(FILE *f, int *x, int *y, int *comp, int req_comp)$/;"	f
+stbi_load_from_file_16	.\include\stb_image.h	/^		STBIDEF stbi__uint16 *stbi_load_from_file_16(FILE *f, int *x, int *y, int *comp, int req_comp)$/;"	f
+stbi_load_from_memory	.\include\stb_image.h	/^		STBIDEF stbi_uc *stbi_load_from_memory(stbi_uc const *buffer, int len, int *x, int *y, int *comp, int req_comp)$/;"	f
+stbi_load_gif_from_memory	.\include\stb_image.h	/^		STBIDEF stbi_uc *stbi_load_gif_from_memory(stbi_uc const *buffer, int len, int **delays, int *x, int *y, int *z, int *comp, int req_comp)$/;"	f
+stbi_loadf	.\include\stb_image.h	/^		STBIDEF float *stbi_loadf(char const *filename, int *x, int *y, int *comp, int req_comp)$/;"	f
+stbi_loadf_from_callbacks	.\include\stb_image.h	/^		STBIDEF float *stbi_loadf_from_callbacks(stbi_io_callbacks const *clbk, void *user, int *x, int *y, int *comp, int req_comp)$/;"	f
+stbi_loadf_from_file	.\include\stb_image.h	/^		STBIDEF float *stbi_loadf_from_file(FILE *f, int *x, int *y, int *comp, int req_comp)$/;"	f
+stbi_loadf_from_memory	.\include\stb_image.h	/^		STBIDEF float *stbi_loadf_from_memory(stbi_uc const *buffer, int len, int *x, int *y, int *comp, int req_comp)$/;"	f
+stbi_lrot	.\include\stb_image.h	665;"	d
+stbi_lrot	.\include\stb_image.h	667;"	d
+stbi_set_flip_vertically_on_load	.\include\stb_image.h	/^STBIDEF void stbi_set_flip_vertically_on_load(int flag_true_if_should_flip)$/;"	f
+stbi_set_flip_vertically_on_load_thread	.\include\stb_image.h	/^STBIDEF void stbi_set_flip_vertically_on_load_thread(int flag_true_if_should_flip)$/;"	f
+stbi_set_unpremultiply_on_load	.\include\stb_image.h	/^STBIDEF void stbi_set_unpremultiply_on_load(int flag_true_if_should_unpremultiply)$/;"	f
+stbi_uc	.\include\stb_image.h	/^typedef unsigned char stbi_uc;$/;"	t
+stbi_us	.\include\stb_image.h	/^typedef unsigned short stbi_us;$/;"	t
+stbi_zlib_decode_buffer	.\include\stb_image.h	/^STBIDEF int stbi_zlib_decode_buffer(char *obuffer, int olen, char const *ibuffer, int ilen)$/;"	f
+stbi_zlib_decode_malloc	.\include\stb_image.h	/^STBIDEF char *stbi_zlib_decode_malloc(char const *buffer, int len, int *outlen)$/;"	f
+stbi_zlib_decode_malloc_guesssize	.\include\stb_image.h	/^STBIDEF char *stbi_zlib_decode_malloc_guesssize(const char *buffer, int len, int initial_size, int *outlen)$/;"	f
+stbi_zlib_decode_malloc_guesssize_headerflag	.\include\stb_image.h	/^STBIDEF char *stbi_zlib_decode_malloc_guesssize_headerflag(const char *buffer, int len, int initial_size, int *outlen, int parse_header)$/;"	f
+stbi_zlib_decode_noheader_buffer	.\include\stb_image.h	/^STBIDEF int stbi_zlib_decode_noheader_buffer(char *obuffer, int olen, const char *ibuffer, int ilen)$/;"	f
+stbi_zlib_decode_noheader_malloc	.\include\stb_image.h	/^STBIDEF char *stbi_zlib_decode_noheader_malloc(char const *buffer, int len, int *outlen)$/;"	f
+stbsp__bot	.\include\stb_sprintf.h	/^static double const stbsp__bot[23] = {$/;"	v
+stbsp__cb_buf_clamp	.\include\stb_sprintf.h	1371;"	d
+stbsp__cb_buf_clamp	.\include\stb_sprintf.h	383;"	d
+stbsp__chk_cb_buf	.\include\stb_sprintf.h	1369;"	d
+stbsp__chk_cb_buf	.\include\stb_sprintf.h	373;"	d
+stbsp__chk_cb_bufL	.\include\stb_sprintf.h	1368;"	d
+stbsp__chk_cb_bufL	.\include\stb_sprintf.h	364;"	d
+stbsp__clamp_callback	.\include\stb_sprintf.h	/^static char *stbsp__clamp_callback(const char *buf, void *user, int len)$/;"	f
+stbsp__comma	.\include\stb_sprintf.h	/^static char stbsp__comma = ',';$/;"	v
+stbsp__context	.\include\stb_sprintf.h	/^typedef struct stbsp__context {$/;"	s
+stbsp__context	.\include\stb_sprintf.h	/^} stbsp__context;$/;"	t	typeref:struct:stbsp__context
+stbsp__count_clamp_callback	.\include\stb_sprintf.h	/^static char * stbsp__count_clamp_callback( const char * buf, void * user, int len )$/;"	f
+stbsp__ddmulthi	.\include\stb_sprintf.h	1599;"	d
+stbsp__ddmulthi	.\include\stb_sprintf.h	1847;"	d
+stbsp__ddmultlo	.\include\stb_sprintf.h	1634;"	d
+stbsp__ddmultlo	.\include\stb_sprintf.h	1849;"	d
+stbsp__ddmultlos	.\include\stb_sprintf.h	1636;"	d
+stbsp__ddmultlos	.\include\stb_sprintf.h	1850;"	d
+stbsp__ddrenorm	.\include\stb_sprintf.h	1626;"	d
+stbsp__ddrenorm	.\include\stb_sprintf.h	1848;"	d
+stbsp__ddtoS64	.\include\stb_sprintf.h	1615;"	d
+stbsp__digitpair	.\include\stb_sprintf.h	/^} stbsp__digitpair =$/;"	v	typeref:struct:__anon20
+stbsp__flush_cb	.\include\stb_sprintf.h	1370;"	d
+stbsp__flush_cb	.\include\stb_sprintf.h	379;"	d
+stbsp__int32	.\include\stb_sprintf.h	1859;"	d
+stbsp__int32	.\include\stb_sprintf.h	221;"	d
+stbsp__int64	.\include\stb_sprintf.h	1861;"	d
+stbsp__int64	.\include\stb_sprintf.h	225;"	d
+stbsp__int64	.\include\stb_sprintf.h	228;"	d
+stbsp__lead_sign	.\include\stb_sprintf.h	/^static void stbsp__lead_sign(stbsp__uint32 fl, char *sign)$/;"	f
+stbsp__negbot	.\include\stb_sprintf.h	/^static double const stbsp__negbot[22] = {$/;"	v
+stbsp__negboterr	.\include\stb_sprintf.h	/^static double const stbsp__negboterr[22] = {$/;"	v
+stbsp__negtop	.\include\stb_sprintf.h	/^static double const stbsp__negtop[13] = {$/;"	v
+stbsp__negtoperr	.\include\stb_sprintf.h	/^static double const stbsp__negtoperr[13] = {$/;"	v
+stbsp__period	.\include\stb_sprintf.h	/^static char stbsp__period = '.';$/;"	v
+stbsp__powten	.\include\stb_sprintf.h	/^static stbsp__uint64 const stbsp__powten[20] = {$/;"	v
+stbsp__raise_to_power10	.\include\stb_sprintf.h	/^static void stbsp__raise_to_power10(double *ohi, double *olo, double d, stbsp__int32 power) \/\/ power can be -323 to +350$/;"	f
+stbsp__real_to_parts	.\include\stb_sprintf.h	/^static stbsp__int32 stbsp__real_to_parts(stbsp__int64 *bits, stbsp__int32 *expo, double value)$/;"	f
+stbsp__real_to_str	.\include\stb_sprintf.h	/^static stbsp__int32 stbsp__real_to_str(char const **start, stbsp__uint32 *len, char *out, stbsp__int32 *decimal_pos, double value, stbsp__uint32 frac_digits)$/;"	f
+stbsp__strlen_limited	.\include\stb_sprintf.h	/^static STBSP__ASAN stbsp__uint32 stbsp__strlen_limited(char const *s, stbsp__uint32 limit)$/;"	f
+stbsp__tento19th	.\include\stb_sprintf.h	1572;"	d
+stbsp__tento19th	.\include\stb_sprintf.h	1596;"	d
+stbsp__top	.\include\stb_sprintf.h	/^static double const stbsp__top[13] = {$/;"	v
+stbsp__toperr	.\include\stb_sprintf.h	/^static double const stbsp__toperr[13] = {$/;"	v
+stbsp__uint16	.\include\stb_sprintf.h	1857;"	d
+stbsp__uint16	.\include\stb_sprintf.h	230;"	d
+stbsp__uint32	.\include\stb_sprintf.h	1858;"	d
+stbsp__uint32	.\include\stb_sprintf.h	220;"	d
+stbsp__uint64	.\include\stb_sprintf.h	1860;"	d
+stbsp__uint64	.\include\stb_sprintf.h	224;"	d
+stbsp__uint64	.\include\stb_sprintf.h	227;"	d
+stbsp__uintptr	.\include\stb_sprintf.h	234;"	d
+stbsp__uintptr	.\include\stb_sprintf.h	236;"	d
+step	.\include\stb_image.h	/^			int parse, step;$/;"	m	struct:__anon19
+stride	.\renderer.h	/^	u32 stride;$/;"	m	struct:VertexBuffer
+struct_size	.\renderer.h	/^	u32 struct_size;$/;"	m	struct:StructuredBuffer
+struct_size_in_bytes	.\renderer.h	/^	u32 struct_size_in_bytes;$/;"	m	struct:StructuredBufferDesc
+structured	.\renderer.h	/^		PushStructuredBufferData structured;$/;"	m	union:PushRenderBufferData::__anon34
+structured	.\renderer.h	/^		StructuredBuffer structured;$/;"	m	union:RenderBuffer::__anon33
+succ_high	.\include\stb_image.h	/^			int            succ_high;$/;"	m	struct:__anon8
+succ_low	.\include\stb_image.h	/^			int            succ_low;$/;"	m	struct:__anon8
+suffix	.\include\stb_image.h	/^			stbi_uc suffix;$/;"	m	struct:__anon18
+swapchain	.\renderer.h	/^	IDXGISwapChain1* swapchain;$/;"	m	struct:Renderer
+temp	.\include\stb_sprintf.h	/^   short temp; \/\/ force next field to be 2-byte aligned$/;"	m	struct:__anon20
+texcoords	.\quad_renderer.cpp	/^	Vec2 texcoords[MAX_TEXTURED_QUADS*4*2];$/;"	m	struct:QuadRenderer	file:
+texture	.\renderer.h	/^		PushTextureBufferData texture;$/;"	m	union:PushRenderBufferData::__anon34
+texture	.\renderer.h	/^		TextureBuffer texture;$/;"	m	union:RenderBuffer::__anon33
+texture_atlas	.\font_handling.h	/^	RenderBufferGroup* texture_atlas;$/;"	m	struct:DebugText
+texture_count	.\renderer.h	/^	u8 texture_count, cb_count;$/;"	m	struct:PixelShaderDesc
+texture_count	.\renderer.h	/^	u8 texture_count, rb_count;$/;"	m	struct:PixelShader
+texture_counter	.\asset_info.h	/^	u32 texture_counter;$/;"	m	struct:AssetInfo
+texture_data	.\asset_formats.h	/^	TextureData* texture_data;$/;"	m	struct:MaterialData
+texture_slot	.\renderer.h	/^	TEXTURE_SLOT* texture_slot;$/;"	m	struct:PixelShader
+texture_slot	.\renderer.h	/^	TEXTURE_SLOT* texture_slot;$/;"	m	struct:PixelShaderDesc
+texture_type_names	.\file_formats.h	/^char* texture_type_names[TEXTURE_SLOT_TOTAL] = {$/;"	v
+textured_quad_count	.\quad_renderer.cpp	/^	u32 textured_quad_count;$/;"	m	struct:QuadRenderer	file:
+textured_quad_ps	.\quad_renderer.cpp	/^	PixelShader* textured_quad_ps;$/;"	m	struct:QuadRenderer	file:
+textured_quad_vs	.\quad_renderer.cpp	/^	VertexShader* textured_quad_vs;$/;"	m	struct:QuadRenderer	file:
+textures	.\asset_info.h	/^	TextureAssetInfo textures[MAX_TEXTURES];$/;"	m	struct:AssetInfo
+textures	.\quad_renderer.cpp	/^	RenderBuffer* textures[MAX_TEXTURED_QUADS];$/;"	m	struct:QuadRenderer	file:
+textures_count	.\file_formats.h	/^	u32 textures_count;$/;"	m	struct:TexturesBlob
+tl	.\shapes.cpp	/^	Vec3 tl;$/;"	m	struct:Quad	file:
+tmp	.\include\stb_sprintf.h	/^   char tmp[STB_SPRINTF_MIN];$/;"	m	struct:stbsp__context
+todo	.\include\stb_image.h	/^			int restart_interval, todo;$/;"	m	struct:__anon8
+topology	.\renderer.h	/^	D3D11_PRIMITIVE_TOPOLOGY topology;$/;"	m	struct:RenderState
+tq	.\include\stb_image.h	/^				int tq;$/;"	m	struct:__anon8::__anon9
+tr	.\shapes.cpp	/^	Vec3 tr;$/;"	m	struct:Quad	file:
+trans_sens	.\simulation.h	/^	float trans_sens;$/;"	m	struct:FPControlInfo
+transform	.\tetra.cpp	/^	Transform transform[10];$/;"	m	struct:Tetra	file:
+transient	.\game.h	/^	MemoryArena transient;$/;"	m	struct:Game
+transient	.\renderer.h	/^	MemoryArena transient;$/;"	m	struct:Renderer
+transient_dll_counter	.\win32.h	/^	u32 transient_dll_counter;$/;"	m	struct:Win32DLL
+transient_dll_name	.\win32.h	/^	char* transient_dll_name;$/;"	m	struct:Win32DLL
+transparent	.\include\stb_image.h	/^			int flags, bgindex, ratio, transparent, eflags;$/;"	m	struct:__anon19
+type	.\asset_formats.h	/^	TEXTURE_SLOT type;$/;"	m	struct:TextureData
+type	.\asset_formats.h	/^	VERTEX_BUFFER type;$/;"	m	struct:VertexBufferData
+type	.\file_formats.h	/^	char type[STRING_LENGTH_TEXTURE_TYPE];$/;"	m	struct:TextureFormat
+type	.\file_formats.h	/^	char type[STRING_LENGTH_VERTEX_BUFFER];$/;"	m	struct:VertexBufferFormat
+type	.\include\stb_image.h	/^			stbi_uc size,type,channel;$/;"	m	struct:__anon17
+type	.\include\stb_image.h	/^	stbi__uint32 type;$/;"	m	struct:__anon13
+type	.\renderer.h	/^	DRAW_CALL type;$/;"	m	struct:DrawCall
+type	.\renderer.h	/^	RENDER_BUFFER_TYPE type;$/;"	m	struct:PushRenderBufferData
+type	.\renderer.h	/^	RENDER_BUFFER_TYPE type;$/;"	m	struct:RenderBuffer
+type	.\renderer.h	/^	VERTEX_BUFFER type;$/;"	m	struct:PushVertexBufferData
+type	.\renderer.h	/^	VERTEX_BUFFER type;$/;"	m	struct:VertexBuffer
+type	.\renderer.h	/^	VERTEX_BUFFER type;$/;"	m	struct:VertexBufferDesc
+u0	.\font_handling.h	/^	float u0, v0;$/;"	m	struct:GlyphQuad
+u1	.\font_handling.h	/^	float u1, v1;$/;"	m	struct:GlyphQuad
+u16	.\base_types.h	/^typedef uint16_t u16;$/;"	t
+u32	.\base_types.h	/^typedef uint32_t u32;$/;"	t
+u64	.\base_types.h	/^typedef uint64_t u64;$/;"	t
+u8	.\base_types.h	/^typedef uint8_t u8;$/;"	t
+used	.\memory_management.h	/^	u32 used;$/;"	m	struct:MemoryArena
+v	.\include\stb_image.h	/^				int h,v;$/;"	m	struct:__anon8::__anon9
+v0	.\font_handling.h	/^	float u0, v0;$/;"	m	struct:GlyphQuad
+v1	.\font_handling.h	/^	float u1, v1;$/;"	m	struct:GlyphQuad
+valid	.\win32.h	/^	bool valid;$/;"	m	struct:Win32DLL
+validate_uint32	.\include\stb_image.h	/^	typedef unsigned char validate_uint32[sizeof(stbi__uint32)==4 ? 1 : -1];$/;"	t
+value	.\include\stb_image.h	/^		stbi__uint16 value[STBI__ZNSYMS];$/;"	m	struct:__anon11
+values	.\include\stb_image.h	/^			stbi_uc  values[256];$/;"	m	struct:__anon7
+vb_count	.\renderer.h	/^	u8 cb_count, vb_count, sb_count;$/;"	m	struct:VertexShaderDesc
+vb_count	.\renderer.h	/^	u8 vb_count, rb_count;$/;"	m	struct:VertexShader
+vb_count	.\renderer.h	/^	u8 vb_count;$/;"	m	struct:MeshDesc
+vb_data	.\asset_formats.h	/^	VertexBufferData* vb_data;$/;"	m	struct:MeshData
+vb_data_count	.\asset_formats.h	/^	u32 vb_data_count;$/;"	m	struct:MeshData
+vb_desc	.\renderer.h	/^	VertexBufferDesc* vb_desc;$/;"	m	struct:MeshDesc
+vb_type	.\renderer.h	/^	VERTEX_BUFFER* vb_type;$/;"	m	struct:VertexShader
+vb_type	.\renderer.h	/^	VERTEX_BUFFER* vb_type;$/;"	m	struct:VertexShaderDesc
+vertex	.\renderer.h	/^		PushVertexBufferData vertex;$/;"	m	union:PushRenderBufferData::__anon34
+vertex	.\renderer.h	/^		VertexBuffer vertex;$/;"	m	union:RenderBuffer::__anon33
+vertex_buffer_count	.\file_formats.h	/^	u8 vertex_buffer_count;$/;"	m	struct:MeshFormat
+vertex_buffer_names	.\file_formats.h	/^char* vertex_buffer_names[VERTEX_BUFFER_TOTAL] = {$/;"	v
+vertex_buffers	.\mesh_renderer.cpp	/^	RenderBufferGroup* vertex_buffers;$/;"	m	struct:MeshPipeline	file:
+vertex_buffers	.\quad_renderer.cpp	/^	RenderBufferGroup* vertex_buffers;$/;"	m	struct:QuadRenderer	file:
+vertex_buffers	.\tetra.cpp	/^	RenderBufferGroup* vertex_buffers;$/;"	m	struct:Tetra	file:
+vertex_shader	.\font_handling.h	/^	VertexShader* vertex_shader;$/;"	m	struct:DebugText
+vertices_count	.\asset_formats.h	/^	u32 vertices_count;$/;"	m	struct:MeshData
+vertices_count	.\file_formats.h	/^	u32 vertices_count;$/;"	m	struct:MeshFormat
+vertices_count	.\renderer.h	/^			u32 vertices_count;$/;"	m	struct:DrawCall::__anon35::__anon36
+vertices_count	.\renderer.h	/^			u32 vertices_count;$/;"	m	struct:DrawCall::__anon35::__anon38
+vertices_count	.\renderer.h	/^	u32 vertices_count;$/;"	m	struct:PushVertexBufferData
+vertices_count	.\renderer.h	/^	u32 vertices_count;$/;"	m	struct:VertexBuffer
+view	.\renderer.h	/^	ID3D11ShaderResourceView* view;$/;"	m	struct:StructuredBuffer
+view	.\renderer.h	/^	ID3D11ShaderResourceView* view;$/;"	m	struct:TextureBuffer
+vp	.\renderer.h	/^	D3D11_VIEWPORT vp[VIEWPORT_TOTAL];	$/;"	m	struct:Renderer
+vp	.\renderer.h	/^	VIEWPORT vp;$/;"	m	struct:RenderState
+vrbd	.\renderer.h	/^	PushRenderBufferData* vrbd;$/;"	m	struct:RenderPipeline
+vrbd_count	.\renderer.h	/^	u8 vrbd_count, prbd_count;$/;"	m	struct:RenderPipeline
+vrbg	.\renderer.h	/^	RenderBufferGroup* vrbg;$/;"	m	struct:RenderPipeline
+vs	.\include\stb_image.h	/^		int hs,vs;   \/\/ expansion factor in each axis$/;"	m	struct:__anon10
+vs	.\mesh_renderer.cpp	/^	VertexShader* vs;$/;"	m	struct:MeshRenderer	file:
+vs	.\renderer.h	/^	VertexShader* vs;$/;"	m	struct:RenderPipeline
+vsnprintf	.\include\stb_sprintf.h	/^STBSP__PUBLICDEF int STB_SPRINTF_DECORATE( vsnprintf )( char * buf, int count, char const * fmt, va_list va )$/;"	f
+vsprintf	.\include\stb_sprintf.h	/^STBSP__PUBLICDEF int STB_SPRINTF_DECORATE(vsprintf)(char *buf, char const *fmt, va_list va)$/;"	f
+vsprintfcb	.\include\stb_sprintf.h	/^STBSP__PUBLICDEF int STB_SPRINTF_DECORATE(vsprintfcb)(STBSP_SPRINTFCB *callback, void *user, char *buf, char const *fmt, va_list va)$/;"	f
+w	.\font_handling.h	/^	u32 w, h; \/\/ Screen res$/;"	m	struct:DebugText
+w	.\include\stb_image.h	/^			int w,h;$/;"	m	struct:__anon19
+w	.\math.h	/^			float w;$/;"	m	struct:Vec4::__anon27::__anon28
+w	.\math.h	/^			float x, y, z, w;$/;"	m	struct:Quat::__anon30::__anon31
+w2	.\include\stb_image.h	/^				int x,y,w2,h2;$/;"	m	struct:__anon8::__anon9
+w_lores	.\include\stb_image.h	/^		int w_lores; \/\/ horizontal pixels pre-expansion$/;"	m	struct:__anon10
+width	.\asset_formats.h	/^	u32 width;$/;"	m	struct:TextureData
+width	.\file_formats.h	/^	u32 width;$/;"	m	struct:TextureFormat
+width	.\platform_api.h	/^struct WindowDimensions { u32 width; u32 height; };$/;"	m	struct:WindowDimensions
+win32_api	.\win32.cpp	/^PlatformAPI win32_api;$/;"	v
+win32_game_function_names	.\win32.h	/^char* win32_game_function_names[] = {$/;"	v
+x	.\include\stb_image.h	/^				int x,y,w2,h2;$/;"	m	struct:__anon8::__anon9
+x	.\math.h	/^			float x, y, z, w;$/;"	m	struct:Quat::__anon30::__anon31
+x	.\math.h	/^			float x;$/;"	m	struct:Vec2::__anon23::__anon24
+x	.\math.h	/^			float x;$/;"	m	struct:Vec3::__anon25::__anon26
+x	.\math.h	/^			float x;$/;"	m	struct:Vec4::__anon27::__anon28
+x	.\math.h	/^			u32 x;$/;"	m	struct:Vec2u::__anon21::__anon22
+x	.\platform_api.h	/^struct Axis { int x, y; };$/;"	m	struct:Axis
+x0	.\font_handling.h	/^	float x0, y0;$/;"	m	struct:GlyphQuad
+x0	.\font_handling.h	/^	u16 x0, y0, x1, y1;$/;"	m	struct:PackedChar
+x1	.\font_handling.h	/^	float x1, y1;$/;"	m	struct:GlyphQuad
+x1	.\font_handling.h	/^	u16 x0, y0, x1, y1;$/;"	m	struct:PackedChar
+xadvance	.\font_handling.h	/^	float xoff, yoff, xadvance;$/;"	m	struct:PackedChar
+xoff	.\font_handling.h	/^	float xoff, yoff, xadvance;$/;"	m	struct:PackedChar
+xoff2	.\font_handling.h	/^	float xoff2, yoff2;$/;"	m	struct:PackedChar
+xyz	.\math.h	/^			Vec3 xyz;$/;"	m	struct:Quat::__anon30::__anon32
+xyz	.\math.h	/^			Vec3 xyz;$/;"	m	struct:Vec4::__anon27::__anon29
+y	.\include\stb_image.h	/^				int x,y,w2,h2;$/;"	m	struct:__anon8::__anon9
+y	.\math.h	/^			float x, y, z, w;$/;"	m	struct:Quat::__anon30::__anon31
+y	.\math.h	/^			float y;$/;"	m	struct:Vec2::__anon23::__anon24
+y	.\math.h	/^			float y;$/;"	m	struct:Vec3::__anon25::__anon26
+y	.\math.h	/^			float y;$/;"	m	struct:Vec4::__anon27::__anon28
+y	.\math.h	/^			u32 y;$/;"	m	struct:Vec2u::__anon21::__anon22
+y	.\platform_api.h	/^struct Axis { int x, y; };$/;"	m	struct:Axis
+y0	.\font_handling.h	/^	float x0, y0;$/;"	m	struct:GlyphQuad
+y0	.\font_handling.h	/^	u16 x0, y0, x1, y1;$/;"	m	struct:PackedChar
+y1	.\font_handling.h	/^	float x1, y1;$/;"	m	struct:GlyphQuad
+y1	.\font_handling.h	/^	u16 x0, y0, x1, y1;$/;"	m	struct:PackedChar
+yoff	.\font_handling.h	/^	float xoff, yoff, xadvance;$/;"	m	struct:PackedChar
+yoff2	.\font_handling.h	/^	float xoff2, yoff2;$/;"	m	struct:PackedChar
+ypos	.\include\stb_image.h	/^		int ypos;    \/\/ which pre-expansion row we're on$/;"	m	struct:__anon10
+ystep	.\include\stb_image.h	/^		int ystep;   \/\/ how far through vertical expansion we are$/;"	m	struct:__anon10
+z	.\math.h	/^			float x, y, z, w;$/;"	m	struct:Quat::__anon30::__anon31
+z	.\math.h	/^			float z;$/;"	m	struct:Quat::__anon30::__anon32
+z	.\math.h	/^			float z;$/;"	m	struct:Vec3::__anon25::__anon26
+z	.\math.h	/^			float z;$/;"	m	struct:Vec4::__anon27::__anon28
+z	.\math.h	/^			float z;$/;"	m	struct:Vec4::__anon27::__anon29
+z_distance	.\include\stb_image.h	/^		stbi__zhuffman z_length, z_distance;$/;"	m	struct:__anon12
+z_expandable	.\include\stb_image.h	/^		int   z_expandable;$/;"	m	struct:__anon12
+z_length	.\include\stb_image.h	/^		stbi__zhuffman z_length, z_distance;$/;"	m	struct:__anon12
+zbuffer	.\include\stb_image.h	/^		stbi_uc *zbuffer, *zbuffer_end;$/;"	m	struct:__anon12
+zbuffer_end	.\include\stb_image.h	/^		stbi_uc *zbuffer, *zbuffer_end;$/;"	m	struct:__anon12
+zout	.\include\stb_image.h	/^		char *zout;$/;"	m	struct:__anon12
+zout_end	.\include\stb_image.h	/^		char *zout_end;$/;"	m	struct:__anon12
+zout_start	.\include\stb_image.h	/^		char *zout_start;$/;"	m	struct:__anon12

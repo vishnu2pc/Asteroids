@@ -9,9 +9,9 @@ struct Glyph {
 };
 
 struct ps {
-	float4 pixel_pos : SV_POSITION;
-	float2 texcoord : TEXCOORD;
-	float3 color : COLOR;
+	float4 pixel_pos : sv_position;
+	float2 texcoord : texcoord;
+	float3 color : color;
 };
 
 StructuredBuffer<Glyph> glyph : register(t0);

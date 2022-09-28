@@ -1,0 +1,1382 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+ASSET_TYPE	.\asset_packer\main.cpp	/^enum ASSET_TYPE {$/;"	g	file:
+ASSET_TYPE_MODEL	.\asset_packer\main.cpp	/^	ASSET_TYPE_MODEL,$/;"	e	enum:ASSET_TYPE	file:
+ASSET_TYPE_TOTAL	.\asset_packer\main.cpp	/^	ASSET_TYPE_TOTAL$/;"	e	enum:ASSET_TYPE	file:
+BITMAP_H	.\rasterize_font_and_dump_bitmap\src\main.cpp	31;"	d	file:
+BITMAP_W	.\rasterize_font_and_dump_bitmap\src\main.cpp	32;"	d	file:
+CGLTF_ASSERT_IF	.\include\cgltf.h	1530;"	d
+CGLTF_ASSERT_IF	.\include\cgltf.h	1532;"	d
+CGLTF_ATOF	.\include\cgltf.h	944;"	d
+CGLTF_ATOI	.\include\cgltf.h	941;"	d
+CGLTF_ATOLL	.\include\cgltf.h	947;"	d
+CGLTF_CHECK_KEY	.\include\cgltf.h	2433;"	d
+CGLTF_CHECK_TOKTYPE	.\include\cgltf.h	2431;"	d
+CGLTF_CHECK_TOKTYPE_RETTYPE	.\include\cgltf.h	2432;"	d
+CGLTF_ERROR_JSON	.\include\cgltf.h	2427;"	d
+CGLTF_ERROR_LEGACY	.\include\cgltf.h	2429;"	d
+CGLTF_ERROR_NOMEM	.\include\cgltf.h	2428;"	d
+CGLTF_FREE	.\include\cgltf.h	938;"	d
+CGLTF_H_INCLUDED__	.\include\cgltf.h	93;"	d
+CGLTF_IMPLEMENTATION	.\asset_packer\main.cpp	7;"	d	file:
+CGLTF_IMPLEMENTATION	.\include\cgltf.h	861;"	d
+CGLTF_MALLOC	.\include\cgltf.h	935;"	d
+CGLTF_PTRFIXUP	.\include\cgltf.h	2436;"	d
+CGLTF_PTRFIXUP_REQ	.\include\cgltf.h	2437;"	d
+CGLTF_PTRINDEX	.\include\cgltf.h	2435;"	d
+CGLTF_VALIDATE_ENABLE_ASSERTS	.\include\cgltf.h	950;"	d
+CommonCompilerFlags	.\rasterize_font_and_dump_bitmap\build.bat	/^set CommonCompilerFlags=\/std:c++17 -nologo -WX -wd4700 -Zi \/FC $/;"	v
+CommonLinkerFlags	.\rasterize_font_and_dump_bitmap\build.bat	/^set CommonLinkerFlags= \/SUBSYSTEM:CONSOLE$/;"	v
+FONT_CHARS_TOTAL	.\rasterize_font_and_dump_bitmap\src\main.cpp	12;"	d	file:
+FORMAT	.\asset_packer\main.cpp	/^enum FORMAT {$/;"	g	file:
+FORMAT_DIRECTORY	.\asset_packer\main.cpp	/^	FORMAT_DIRECTORY,$/;"	e	enum:FORMAT	file:
+FORMAT_GAME_ASSET_FILE	.\asset_packer\main.cpp	/^	FORMAT_GAME_ASSET_FILE,$/;"	e	enum:FORMAT	file:
+FORMAT_INDEX_BUFFER_U32	.\asset_packer\main.cpp	/^	FORMAT_INDEX_BUFFER_U32,$/;"	e	enum:FORMAT	file:
+FORMAT_MESH	.\asset_packer\main.cpp	/^	FORMAT_MESH,$/;"	e	enum:FORMAT	file:
+FORMAT_MESHES_BLOB	.\asset_packer\main.cpp	/^	FORMAT_MESHES_BLOB,$/;"	e	enum:FORMAT	file:
+FORMAT_TEXTURE	.\asset_packer\main.cpp	/^	FORMAT_TEXTURE$/;"	e	enum:FORMAT	file:
+FORMAT_TOTAL	.\asset_packer\main.cpp	/^	FORMAT_TOTAL$/;"	e	enum:FORMAT	file:
+FORMAT_VERTEX_BUFFER	.\asset_packer\main.cpp	/^	FORMAT_VERTEX_BUFFER,$/;"	e	enum:FORMAT	file:
+FORMAT_VERTEX_BUFFER_FLOAT	.\asset_packer\main.cpp	/^	FORMAT_VERTEX_BUFFER_FLOAT,$/;"	e	enum:FORMAT	file:
+FileInfo	.\asset_packer\main.cpp	/^struct FileInfo {$/;"	s	file:
+FindNumberOfFilesInDir	.\asset_packer\main.cpp	/^static u32 FindNumberOfFilesInDir(char* full_folder_dir, char* dot_file_format) {$/;"	f	file:
+FolderInfo	.\asset_packer\main.cpp	/^struct FolderInfo {$/;"	s	file:
+FontInfo	.\rasterize_font_and_dump_bitmap\src\main.cpp	/^struct FontInfo {$/;"	s	file:
+GenericBuffer	.\asset_packer\buffers.cpp	/^struct GenericBuffer {$/;"	s	file:
+GetCursorGenericBuffer	.\asset_packer\buffers.cpp	/^static void* GetCursorGenericBuffer(GenericBuffer* gb) {$/;"	f	file:
+GetCursorStructBuffer	.\asset_packer\buffers.cpp	/^static void* GetCursorStructBuffer(StructBuffer* sb) {$/;"	f	file:
+GetElementStructBuffer	.\asset_packer\buffers.cpp	/^static void* GetElementStructBuffer(StructBuffer* sb, u32 index) {$/;"	f	file:
+GetFilledSizeStructBuffer	.\asset_packer\buffers.cpp	/^static u32 GetFilledSizeStructBuffer(StructBuffer* sb) {$/;"	f	file:
+GetOffsetStructBuffer	.\asset_packer\buffers.cpp	/^static u32 GetOffsetStructBuffer(StructBuffer* sb) {$/;"	f	file:
+GlbChunkHeaderSize	.\include\cgltf.h	/^static const cgltf_size GlbChunkHeaderSize = 8;$/;"	v
+GlbHeaderSize	.\include\cgltf.h	/^static const cgltf_size GlbHeaderSize = 12;$/;"	v
+GlbMagic	.\include\cgltf.h	/^static const uint32_t GlbMagic = 0x46546C67;$/;"	v
+GlbMagicBinChunk	.\include\cgltf.h	/^static const uint32_t GlbMagicBinChunk = 0x004E4942;$/;"	v
+GlbMagicJsonChunk	.\include\cgltf.h	/^static const uint32_t GlbMagicJsonChunk = 0x4E4F534A;$/;"	v
+GlbVersion	.\include\cgltf.h	/^static const uint32_t GlbVersion = 2;$/;"	v
+INCLUDE_STB_IMAGE_WRITE_H	.\include\stb_image_write.h	152;"	d
+JSMN_ARRAY	.\include\cgltf.h	/^	JSMN_ARRAY = 2,$/;"	e	enum:__anon2
+JSMN_ERROR_INVAL	.\include\cgltf.h	/^	JSMN_ERROR_INVAL = -2,$/;"	e	enum:jsmnerr
+JSMN_ERROR_NOMEM	.\include\cgltf.h	/^	JSMN_ERROR_NOMEM = -1,$/;"	e	enum:jsmnerr
+JSMN_ERROR_PART	.\include\cgltf.h	/^	JSMN_ERROR_PART = -3$/;"	e	enum:jsmnerr
+JSMN_OBJECT	.\include\cgltf.h	/^	JSMN_OBJECT = 1,$/;"	e	enum:__anon2
+JSMN_PARENT_LINKS	.\include\cgltf.h	881;"	d
+JSMN_PRIMITIVE	.\include\cgltf.h	/^	JSMN_PRIMITIVE = 4$/;"	e	enum:__anon2
+JSMN_STRICT	.\include\cgltf.h	884;"	d
+JSMN_STRING	.\include\cgltf.h	/^	JSMN_STRING = 3,$/;"	e	enum:__anon2
+JSMN_UNDEFINED	.\include\cgltf.h	/^	JSMN_UNDEFINED = 0,$/;"	e	enum:__anon2
+LoadFolder	.\asset_packer\main.cpp	/^static FolderInfo LoadFolder(char* dir, char* file_format) {$/;"	f	file:
+MakeFullPath	.\asset_packer\main.cpp	/^char* MakeFullPath(char* dir, char* name, char* format) {$/;"	f
+MakeStructBuffer	.\asset_packer\buffers.cpp	/^StructBuffer MakeStructBuffer(u32 elem_size) {$/;"	f
+PushGenericBuffer	.\asset_packer\buffers.cpp	/^static u32 PushGenericBuffer(void* data, u32 size, GenericBuffer* gb) {$/;"	f	file:
+PushStructBuffer	.\asset_packer\buffers.cpp	/^static u32 PushStructBuffer(void* element, u32 count, StructBuffer* sb) {$/;"	f	file:
+ReserveMemoryStructBuffer	.\asset_packer\buffers.cpp	/^static void ReserveMemoryStructBuffer(u32 count, StructBuffer* sb) {$/;"	f	file:
+STBIWDEF	.\include\stb_image_write.h	159;"	d
+STBIWDEF	.\include\stb_image_write.h	162;"	d
+STBIWDEF	.\include\stb_image_write.h	164;"	d
+STBIW_ASSERT	.\include\stb_image_write.h	245;"	d
+STBIW_EXTERN	.\include\stb_image_write.h	291;"	d
+STBIW_EXTERN	.\include\stb_image_write.h	293;"	d
+STBIW_FREE	.\include\stb_image_write.h	230;"	d
+STBIW_MALLOC	.\include\stb_image_write.h	228;"	d
+STBIW_MEMMOVE	.\include\stb_image_write.h	239;"	d
+STBIW_REALLOC	.\include\stb_image_write.h	229;"	d
+STBIW_REALLOC_SIZED	.\include\stb_image_write.h	234;"	d
+STBIW_UCHAR	.\include\stb_image_write.h	248;"	d
+STBRP_ASSERT	.\include\stb_rect_pack.h	213;"	d
+STBRP_DEF	.\include\stb_rect_pack.h	72;"	d
+STBRP_DEF	.\include\stb_rect_pack.h	74;"	d
+STBRP_HEURISTIC_Skyline_BF_sortHeight	.\include\stb_rect_pack.h	/^   STBRP_HEURISTIC_Skyline_BF_sortHeight$/;"	e	enum:__anon6
+STBRP_HEURISTIC_Skyline_BL_sortHeight	.\include\stb_rect_pack.h	/^   STBRP_HEURISTIC_Skyline_BL_sortHeight = STBRP_HEURISTIC_Skyline_default,$/;"	e	enum:__anon6
+STBRP_HEURISTIC_Skyline_default	.\include\stb_rect_pack.h	/^   STBRP_HEURISTIC_Skyline_default=0,$/;"	e	enum:__anon6
+STBRP_SORT	.\include\stb_rect_pack.h	208;"	d
+STBRP__CDECL	.\include\stb_rect_pack.h	218;"	d
+STBRP__CDECL	.\include\stb_rect_pack.h	221;"	d
+STBRP__INIT_skyline	.\include\stb_rect_pack.h	/^   STBRP__INIT_skyline = 1$/;"	e	enum:__anon7
+STBRP__MAXVAL	.\include\stb_rect_pack.h	87;"	d
+STBRP__NOTUSED	.\include\stb_rect_pack.h	217;"	d
+STBRP__NOTUSED	.\include\stb_rect_pack.h	220;"	d
+STBTT_DEF	.\include\stb_truetype.h	503;"	d
+STBTT_DEF	.\include\stb_truetype.h	505;"	d
+STBTT_FIX	.\include\stb_truetype.h	2832;"	d
+STBTT_FIXMASK	.\include\stb_truetype.h	2833;"	d
+STBTT_FIXSHIFT	.\include\stb_truetype.h	2831;"	d
+STBTT_GPOS_TODO_assert	.\include\stb_truetype.h	2494;"	d
+STBTT_MACSTYLE_BOLD	.\include\stb_truetype.h	1027;"	d
+STBTT_MACSTYLE_DONTCARE	.\include\stb_truetype.h	1026;"	d
+STBTT_MACSTYLE_ITALIC	.\include\stb_truetype.h	1028;"	d
+STBTT_MACSTYLE_NONE	.\include\stb_truetype.h	1030;"	d
+STBTT_MACSTYLE_UNDERSCORE	.\include\stb_truetype.h	1029;"	d
+STBTT_MAC_EID_ARABIC	.\include\stb_truetype.h	/^   STBTT_MAC_EID_ROMAN        =0,   STBTT_MAC_EID_ARABIC       =4,$/;"	e	enum:__anon20
+STBTT_MAC_EID_CHINESE_TRAD	.\include\stb_truetype.h	/^   STBTT_MAC_EID_CHINESE_TRAD =2,   STBTT_MAC_EID_GREEK        =6,$/;"	e	enum:__anon20
+STBTT_MAC_EID_GREEK	.\include\stb_truetype.h	/^   STBTT_MAC_EID_CHINESE_TRAD =2,   STBTT_MAC_EID_GREEK        =6,$/;"	e	enum:__anon20
+STBTT_MAC_EID_HEBREW	.\include\stb_truetype.h	/^   STBTT_MAC_EID_JAPANESE     =1,   STBTT_MAC_EID_HEBREW       =5,$/;"	e	enum:__anon20
+STBTT_MAC_EID_JAPANESE	.\include\stb_truetype.h	/^   STBTT_MAC_EID_JAPANESE     =1,   STBTT_MAC_EID_HEBREW       =5,$/;"	e	enum:__anon20
+STBTT_MAC_EID_KOREAN	.\include\stb_truetype.h	/^   STBTT_MAC_EID_KOREAN       =3,   STBTT_MAC_EID_RUSSIAN      =7$/;"	e	enum:__anon20
+STBTT_MAC_EID_ROMAN	.\include\stb_truetype.h	/^   STBTT_MAC_EID_ROMAN        =0,   STBTT_MAC_EID_ARABIC       =4,$/;"	e	enum:__anon20
+STBTT_MAC_EID_RUSSIAN	.\include\stb_truetype.h	/^   STBTT_MAC_EID_KOREAN       =3,   STBTT_MAC_EID_RUSSIAN      =7$/;"	e	enum:__anon20
+STBTT_MAC_LANG_ARABIC	.\include\stb_truetype.h	/^   STBTT_MAC_LANG_ARABIC       =12,   STBTT_MAC_LANG_KOREAN       =23,$/;"	e	enum:__anon22
+STBTT_MAC_LANG_CHINESE_SIMPLIFIED	.\include\stb_truetype.h	/^   STBTT_MAC_LANG_HEBREW       =10,   STBTT_MAC_LANG_CHINESE_SIMPLIFIED =33,$/;"	e	enum:__anon22
+STBTT_MAC_LANG_CHINESE_TRAD	.\include\stb_truetype.h	/^   STBTT_MAC_LANG_ITALIAN      =3 ,   STBTT_MAC_LANG_CHINESE_TRAD =19$/;"	e	enum:__anon22
+STBTT_MAC_LANG_DUTCH	.\include\stb_truetype.h	/^   STBTT_MAC_LANG_DUTCH        =4 ,   STBTT_MAC_LANG_RUSSIAN      =32,$/;"	e	enum:__anon22
+STBTT_MAC_LANG_ENGLISH	.\include\stb_truetype.h	/^   STBTT_MAC_LANG_ENGLISH      =0 ,   STBTT_MAC_LANG_JAPANESE     =11,$/;"	e	enum:__anon22
+STBTT_MAC_LANG_FRENCH	.\include\stb_truetype.h	/^   STBTT_MAC_LANG_FRENCH       =1 ,   STBTT_MAC_LANG_SPANISH      =6 ,$/;"	e	enum:__anon22
+STBTT_MAC_LANG_GERMAN	.\include\stb_truetype.h	/^   STBTT_MAC_LANG_GERMAN       =2 ,   STBTT_MAC_LANG_SWEDISH      =5 ,$/;"	e	enum:__anon22
+STBTT_MAC_LANG_HEBREW	.\include\stb_truetype.h	/^   STBTT_MAC_LANG_HEBREW       =10,   STBTT_MAC_LANG_CHINESE_SIMPLIFIED =33,$/;"	e	enum:__anon22
+STBTT_MAC_LANG_ITALIAN	.\include\stb_truetype.h	/^   STBTT_MAC_LANG_ITALIAN      =3 ,   STBTT_MAC_LANG_CHINESE_TRAD =19$/;"	e	enum:__anon22
+STBTT_MAC_LANG_JAPANESE	.\include\stb_truetype.h	/^   STBTT_MAC_LANG_ENGLISH      =0 ,   STBTT_MAC_LANG_JAPANESE     =11,$/;"	e	enum:__anon22
+STBTT_MAC_LANG_KOREAN	.\include\stb_truetype.h	/^   STBTT_MAC_LANG_ARABIC       =12,   STBTT_MAC_LANG_KOREAN       =23,$/;"	e	enum:__anon22
+STBTT_MAC_LANG_RUSSIAN	.\include\stb_truetype.h	/^   STBTT_MAC_LANG_DUTCH        =4 ,   STBTT_MAC_LANG_RUSSIAN      =32,$/;"	e	enum:__anon22
+STBTT_MAC_LANG_SPANISH	.\include\stb_truetype.h	/^   STBTT_MAC_LANG_FRENCH       =1 ,   STBTT_MAC_LANG_SPANISH      =6 ,$/;"	e	enum:__anon22
+STBTT_MAC_LANG_SWEDISH	.\include\stb_truetype.h	/^   STBTT_MAC_LANG_GERMAN       =2 ,   STBTT_MAC_LANG_SWEDISH      =5 ,$/;"	e	enum:__anon22
+STBTT_MAX_OVERSAMPLE	.\include\stb_truetype.h	1109;"	d
+STBTT_MS_EID_SHIFTJIS	.\include\stb_truetype.h	/^   STBTT_MS_EID_SHIFTJIS      =2,$/;"	e	enum:__anon19
+STBTT_MS_EID_SYMBOL	.\include\stb_truetype.h	/^   STBTT_MS_EID_SYMBOL        =0,$/;"	e	enum:__anon19
+STBTT_MS_EID_UNICODE_BMP	.\include\stb_truetype.h	/^   STBTT_MS_EID_UNICODE_BMP   =1,$/;"	e	enum:__anon19
+STBTT_MS_EID_UNICODE_FULL	.\include\stb_truetype.h	/^   STBTT_MS_EID_UNICODE_FULL  =10$/;"	e	enum:__anon19
+STBTT_MS_LANG_CHINESE	.\include\stb_truetype.h	/^   STBTT_MS_LANG_CHINESE     =0x0804,   STBTT_MS_LANG_JAPANESE    =0x0411,$/;"	e	enum:__anon21
+STBTT_MS_LANG_DUTCH	.\include\stb_truetype.h	/^   STBTT_MS_LANG_DUTCH       =0x0413,   STBTT_MS_LANG_KOREAN      =0x0412,$/;"	e	enum:__anon21
+STBTT_MS_LANG_ENGLISH	.\include\stb_truetype.h	/^   STBTT_MS_LANG_ENGLISH     =0x0409,   STBTT_MS_LANG_ITALIAN     =0x0410,$/;"	e	enum:__anon21
+STBTT_MS_LANG_FRENCH	.\include\stb_truetype.h	/^   STBTT_MS_LANG_FRENCH      =0x040c,   STBTT_MS_LANG_RUSSIAN     =0x0419,$/;"	e	enum:__anon21
+STBTT_MS_LANG_GERMAN	.\include\stb_truetype.h	/^   STBTT_MS_LANG_GERMAN      =0x0407,   STBTT_MS_LANG_SPANISH     =0x0409,$/;"	e	enum:__anon21
+STBTT_MS_LANG_HEBREW	.\include\stb_truetype.h	/^   STBTT_MS_LANG_HEBREW      =0x040d,   STBTT_MS_LANG_SWEDISH     =0x041D$/;"	e	enum:__anon21
+STBTT_MS_LANG_ITALIAN	.\include\stb_truetype.h	/^   STBTT_MS_LANG_ENGLISH     =0x0409,   STBTT_MS_LANG_ITALIAN     =0x0410,$/;"	e	enum:__anon21
+STBTT_MS_LANG_JAPANESE	.\include\stb_truetype.h	/^   STBTT_MS_LANG_CHINESE     =0x0804,   STBTT_MS_LANG_JAPANESE    =0x0411,$/;"	e	enum:__anon21
+STBTT_MS_LANG_KOREAN	.\include\stb_truetype.h	/^   STBTT_MS_LANG_DUTCH       =0x0413,   STBTT_MS_LANG_KOREAN      =0x0412,$/;"	e	enum:__anon21
+STBTT_MS_LANG_RUSSIAN	.\include\stb_truetype.h	/^   STBTT_MS_LANG_FRENCH      =0x040c,   STBTT_MS_LANG_RUSSIAN     =0x0419,$/;"	e	enum:__anon21
+STBTT_MS_LANG_SPANISH	.\include\stb_truetype.h	/^   STBTT_MS_LANG_GERMAN      =0x0407,   STBTT_MS_LANG_SPANISH     =0x0409,$/;"	e	enum:__anon21
+STBTT_MS_LANG_SWEDISH	.\include\stb_truetype.h	/^   STBTT_MS_LANG_HEBREW      =0x040d,   STBTT_MS_LANG_SWEDISH     =0x041D$/;"	e	enum:__anon21
+STBTT_PLATFORM_ID_ISO	.\include\stb_truetype.h	/^   STBTT_PLATFORM_ID_ISO       =2,$/;"	e	enum:__anon17
+STBTT_PLATFORM_ID_MAC	.\include\stb_truetype.h	/^   STBTT_PLATFORM_ID_MAC       =1,$/;"	e	enum:__anon17
+STBTT_PLATFORM_ID_MICROSOFT	.\include\stb_truetype.h	/^   STBTT_PLATFORM_ID_MICROSOFT =3$/;"	e	enum:__anon17
+STBTT_PLATFORM_ID_UNICODE	.\include\stb_truetype.h	/^   STBTT_PLATFORM_ID_UNICODE   =0,$/;"	e	enum:__anon17
+STBTT_POINT_SIZE	.\include\stb_truetype.h	602;"	d
+STBTT_RASTERIZER_VERSION	.\include\stb_truetype.h	1119;"	d
+STBTT_UNICODE_EID_ISO_10646	.\include\stb_truetype.h	/^   STBTT_UNICODE_EID_ISO_10646      =2,$/;"	e	enum:__anon18
+STBTT_UNICODE_EID_UNICODE_1_0	.\include\stb_truetype.h	/^   STBTT_UNICODE_EID_UNICODE_1_0    =0,$/;"	e	enum:__anon18
+STBTT_UNICODE_EID_UNICODE_1_1	.\include\stb_truetype.h	/^   STBTT_UNICODE_EID_UNICODE_1_1    =1,$/;"	e	enum:__anon18
+STBTT_UNICODE_EID_UNICODE_2_0_BMP	.\include\stb_truetype.h	/^   STBTT_UNICODE_EID_UNICODE_2_0_BMP=3,$/;"	e	enum:__anon18
+STBTT_UNICODE_EID_UNICODE_2_0_FULL	.\include\stb_truetype.h	/^   STBTT_UNICODE_EID_UNICODE_2_0_FULL=4$/;"	e	enum:__anon18
+STBTT__COMPARE	.\include\stb_truetype.h	3397;"	d
+STBTT__CSCTX_INIT	.\include\stb_truetype.h	1909;"	d
+STBTT__CSERR	.\include\stb_truetype.h	2018;"	d
+STBTT__CSERR	.\include\stb_truetype.h	2266;"	d
+STBTT__NOTUSED	.\include\stb_truetype.h	1123;"	d
+STBTT__NOTUSED	.\include\stb_truetype.h	1125;"	d
+STBTT__OVER_MASK	.\include\stb_truetype.h	4010;"	d
+STBTT_acos	.\include\stb_truetype.h	460;"	d
+STBTT_assert	.\include\stb_truetype.h	477;"	d
+STBTT_cos	.\include\stb_truetype.h	459;"	d
+STBTT_fabs	.\include\stb_truetype.h	465;"	d
+STBTT_fmod	.\include\stb_truetype.h	454;"	d
+STBTT_free	.\include\stb_truetype.h	472;"	d
+STBTT_iceil	.\include\stb_truetype.h	443;"	d
+STBTT_ifloor	.\include\stb_truetype.h	442;"	d
+STBTT_malloc	.\include\stb_truetype.h	471;"	d
+STBTT_max	.\include\stb_truetype.h	4396;"	d
+STBTT_memcpy	.\include\stb_truetype.h	487;"	d
+STBTT_memset	.\include\stb_truetype.h	488;"	d
+STBTT_min	.\include\stb_truetype.h	4395;"	d
+STBTT_pow	.\include\stb_truetype.h	449;"	d
+STBTT_sqrt	.\include\stb_truetype.h	448;"	d
+STBTT_strlen	.\include\stb_truetype.h	482;"	d
+STBTT_vcubic	.\include\stb_truetype.h	/^      STBTT_vcubic$/;"	e	enum:__anon14
+STBTT_vcurve	.\include\stb_truetype.h	/^      STBTT_vcurve,$/;"	e	enum:__anon14
+STBTT_vline	.\include\stb_truetype.h	/^      STBTT_vline,$/;"	e	enum:__anon14
+STBTT_vmove	.\include\stb_truetype.h	/^      STBTT_vmove=1,$/;"	e	enum:__anon14
+STB_IMAGE_WRITE_IMPLEMENTATION	.\rasterize_font_and_dump_bitmap\src\main.cpp	5;"	d	file:
+STB_INCLUDE_STB_RECT_PACK_H	.\include\stb_rect_pack.h	67;"	d
+STB_RECT_PACK_IMPLEMENTATION	.\rasterize_font_and_dump_bitmap\src\main.cpp	1;"	d	file:
+STB_RECT_PACK_VERSION	.\include\stb_rect_pack.h	69;"	d
+STB_TRUETYPE_IMPLEMENTATION	.\rasterize_font_and_dump_bitmap\src\main.cpp	3;"	d	file:
+StrHasStrEnd	.\asset_packer\main.cpp	/^bool StrHasStrEnd(char* left, char* right) {$/;"	f
+StrPrepend	.\asset_packer\main.cpp	/^char* StrPrepend(char* string, char* prepend) {$/;"	f
+StructBuffer	.\asset_packer\buffers.cpp	/^struct StructBuffer {$/;"	s	file:
+WIN32_LEAN_AND_MEAN	.\asset_packer\main.cpp	4;"	d	file:
+WriteStructBufferToGenericBuffer	.\asset_packer\buffers.cpp	/^static void WriteStructBufferToGenericBuffer(GenericBuffer* gb, StructBuffer* sb) {$/;"	f	file:
+_CRT_NONSTDC_NO_DEPRECATE	.\include\stb_image_write.h	206;"	d
+_CRT_SECURE_NO_WARNINGS	.\include\stb_image_write.h	203;"	d
+__STB_INCLUDE_STB_TRUETYPE_H__	.\include\stb_truetype.h	500;"	d
+accessors	.\include\cgltf.h	/^		cgltf_accessor* accessors;$/;"	m	struct:cgltf_data
+accessors_count	.\include\cgltf.h	/^		cgltf_size accessors_count;$/;"	m	struct:cgltf_data
+active_head	.\include\stb_rect_pack.h	/^   stbrp_node *active_head;$/;"	m	struct:stbrp_context
+advance	.\include\stb_truetype.h	/^   int advance;$/;"	m	struct:stbtt_kerningentry
+align	.\include\stb_rect_pack.h	/^   int align;$/;"	m	struct:stbrp_context
+alloc_func	.\include\cgltf.h	/^		void* (*alloc_func)(void* user, cgltf_size size);$/;"	m	struct:cgltf_memory_options
+alpha_cutoff	.\include\cgltf.h	/^		cgltf_float alpha_cutoff;$/;"	m	struct:cgltf_material
+alpha_mode	.\include\cgltf.h	/^		cgltf_alpha_mode alpha_mode;$/;"	m	struct:cgltf_material
+animations	.\include\cgltf.h	/^		cgltf_animation* animations;$/;"	m	struct:cgltf_data
+animations_count	.\include\cgltf.h	/^		cgltf_size animations_count;$/;"	m	struct:cgltf_data
+array_of_unicode_codepoints	.\include\stb_truetype.h	/^   int *array_of_unicode_codepoints;       \/\/ if non-zero, then this is an array of unicode codepoints$/;"	m	struct:__anon13
+ascent	.\rasterize_font_and_dump_bitmap\src\main.cpp	/^	int ascent, descent, line_gap, baseline;	\/\/ advance vertical position by (ascent - descent + line_gap)$/;"	m	struct:FontInfo	file:
+aspect_ratio	.\include\cgltf.h	/^		cgltf_float aspect_ratio;$/;"	m	struct:cgltf_camera_perspective
+assert	.\asset_packer\main.cpp	16;"	d	file:
+asset	.\include\cgltf.h	/^		cgltf_asset asset;$/;"	m	struct:cgltf_data
+asset_file_format	.\asset_packer\main.cpp	/^char* asset_file_format[ASSET_TYPE_TOTAL] = {$/;"	v
+asset_path_dir	.\asset_packer\main.cpp	/^char* asset_path_dir[ASSET_TYPE_TOTAL] = { $/;"	v
+attenuation_color	.\include\cgltf.h	/^		cgltf_float attenuation_color[3];$/;"	m	struct:cgltf_volume
+attenuation_distance	.\include\cgltf.h	/^		cgltf_float attenuation_distance;$/;"	m	struct:cgltf_volume
+attributes	.\include\cgltf.h	/^		cgltf_attribute* attributes;$/;"	m	struct:cgltf_draco_mesh_compression
+attributes	.\include\cgltf.h	/^		cgltf_attribute* attributes;$/;"	m	struct:cgltf_mesh_gpu_instancing
+attributes	.\include\cgltf.h	/^		cgltf_attribute* attributes;$/;"	m	struct:cgltf_morph_target
+attributes	.\include\cgltf.h	/^		cgltf_attribute* attributes;$/;"	m	struct:cgltf_primitive
+attributes_count	.\include\cgltf.h	/^		cgltf_size attributes_count;$/;"	m	struct:cgltf_draco_mesh_compression
+attributes_count	.\include\cgltf.h	/^		cgltf_size attributes_count;$/;"	m	struct:cgltf_mesh_gpu_instancing
+attributes_count	.\include\cgltf.h	/^		cgltf_size attributes_count;$/;"	m	struct:cgltf_morph_target
+attributes_count	.\include\cgltf.h	/^		cgltf_size attributes_count;$/;"	m	struct:cgltf_primitive
+base_color_factor	.\include\cgltf.h	/^		cgltf_float base_color_factor[4];$/;"	m	struct:cgltf_pbr_metallic_roughness
+base_color_texture	.\include\cgltf.h	/^		cgltf_texture_view base_color_texture;$/;"	m	struct:cgltf_pbr_metallic_roughness
+baseline	.\rasterize_font_and_dump_bitmap\src\main.cpp	/^	int ascent, descent, line_gap, baseline;	\/\/ advance vertical position by (ascent - descent + line_gap)$/;"	m	struct:FontInfo	file:
+basisu_image	.\include\cgltf.h	/^		cgltf_image* basisu_image;$/;"	m	struct:cgltf_texture
+bin	.\include\cgltf.h	/^		const void* bin;$/;"	m	struct:cgltf_data
+bin_size	.\include\cgltf.h	/^		cgltf_size bin_size;$/;"	m	struct:cgltf_data
+bitmap_h	.\rasterize_font_and_dump_bitmap\src\main.cpp	/^	unsigned short bitmap_w, bitmap_h;$/;"	m	struct:FontInfo	file:
+bitmap_w	.\rasterize_font_and_dump_bitmap\src\main.cpp	/^	unsigned short bitmap_w, bitmap_h;$/;"	m	struct:FontInfo	file:
+bottom_y	.\include\stb_truetype.h	/^   int x,y,bottom_y;$/;"	m	struct:__anon25
+bounds	.\include\stb_truetype.h	/^   int bounds;$/;"	m	struct:__anon23
+buf_used	.\include\stb_image_write.h	/^   int buf_used;$/;"	m	struct:__anon5
+buffer	.\include\cgltf.h	/^		cgltf_buffer* buffer;$/;"	m	struct:cgltf_buffer_view
+buffer	.\include\cgltf.h	/^		cgltf_buffer* buffer;$/;"	m	struct:cgltf_meshopt_compression
+buffer	.\include\stb_image_write.h	/^   unsigned char buffer[64];$/;"	m	struct:__anon5
+buffer_view	.\include\cgltf.h	/^		cgltf_buffer_view* buffer_view;$/;"	m	struct:cgltf_accessor
+buffer_view	.\include\cgltf.h	/^		cgltf_buffer_view* buffer_view;$/;"	m	struct:cgltf_draco_mesh_compression
+buffer_view	.\include\cgltf.h	/^		cgltf_buffer_view* buffer_view;$/;"	m	struct:cgltf_image
+buffer_view	.\include\cgltf.h	/^		cgltf_buffer_view* buffer_view;$/;"	m	struct:cgltf_mesh_gpu_instancing
+buffer_views	.\include\cgltf.h	/^		cgltf_buffer_view* buffer_views;$/;"	m	struct:cgltf_data
+buffer_views_count	.\include\cgltf.h	/^		cgltf_size buffer_views_count;$/;"	m	struct:cgltf_data
+buffers	.\include\cgltf.h	/^		cgltf_buffer* buffers;$/;"	m	struct:cgltf_data
+buffers_count	.\include\cgltf.h	/^		cgltf_size buffers_count;$/;"	m	struct:cgltf_data
+camera	.\include\cgltf.h	/^		cgltf_camera* camera;$/;"	m	struct:cgltf_node
+cameras	.\include\cgltf.h	/^		cgltf_camera* cameras;$/;"	m	struct:cgltf_data
+cameras_count	.\include\cgltf.h	/^		cgltf_size cameras_count;$/;"	m	struct:cgltf_data
+cdata	.\include\stb_truetype.h	/^stbtt_bakedchar cdata[96]; \/\/ ASCII 32..126 is 95 glyphs$/;"	v
+cff	.\include\stb_truetype.h	/^   stbtt__buf cff;                    \/\/ cff font data$/;"	m	struct:stbtt_fontinfo
+cgltf_accessor	.\include\cgltf.h	/^	typedef struct cgltf_accessor$/;"	s
+cgltf_accessor	.\include\cgltf.h	/^	} cgltf_accessor;$/;"	t	typeref:struct:cgltf_accessor
+cgltf_accessor_read_float	.\include\cgltf.h	/^cgltf_bool cgltf_accessor_read_float(const cgltf_accessor* accessor, cgltf_size index, cgltf_float* out, cgltf_size element_size)$/;"	f
+cgltf_accessor_read_index	.\include\cgltf.h	/^cgltf_size cgltf_accessor_read_index(const cgltf_accessor* accessor, cgltf_size index)$/;"	f
+cgltf_accessor_read_uint	.\include\cgltf.h	/^cgltf_bool cgltf_accessor_read_uint(const cgltf_accessor* accessor, cgltf_size index, cgltf_uint* out, cgltf_size element_size)$/;"	f
+cgltf_accessor_sparse	.\include\cgltf.h	/^	typedef struct cgltf_accessor_sparse$/;"	s
+cgltf_accessor_sparse	.\include\cgltf.h	/^	} cgltf_accessor_sparse;$/;"	t	typeref:struct:cgltf_accessor_sparse
+cgltf_accessor_unpack_floats	.\include\cgltf.h	/^cgltf_size cgltf_accessor_unpack_floats(const cgltf_accessor* accessor, cgltf_float* out, cgltf_size float_count)$/;"	f
+cgltf_alpha_mode	.\include\cgltf.h	/^	typedef enum cgltf_alpha_mode$/;"	g
+cgltf_alpha_mode	.\include\cgltf.h	/^	} cgltf_alpha_mode;$/;"	t	typeref:enum:cgltf_alpha_mode
+cgltf_alpha_mode_blend	.\include\cgltf.h	/^		cgltf_alpha_mode_blend,$/;"	e	enum:cgltf_alpha_mode
+cgltf_alpha_mode_mask	.\include\cgltf.h	/^		cgltf_alpha_mode_mask,$/;"	e	enum:cgltf_alpha_mode
+cgltf_alpha_mode_max_enum	.\include\cgltf.h	/^		cgltf_alpha_mode_max_enum$/;"	e	enum:cgltf_alpha_mode
+cgltf_alpha_mode_opaque	.\include\cgltf.h	/^		cgltf_alpha_mode_opaque,$/;"	e	enum:cgltf_alpha_mode
+cgltf_animation	.\include\cgltf.h	/^	typedef struct cgltf_animation {$/;"	s
+cgltf_animation	.\include\cgltf.h	/^	} cgltf_animation;$/;"	t	typeref:struct:cgltf_animation
+cgltf_animation_channel	.\include\cgltf.h	/^	typedef struct cgltf_animation_channel {$/;"	s
+cgltf_animation_channel	.\include\cgltf.h	/^	} cgltf_animation_channel;$/;"	t	typeref:struct:cgltf_animation_channel
+cgltf_animation_path_type	.\include\cgltf.h	/^	typedef enum cgltf_animation_path_type {$/;"	g
+cgltf_animation_path_type	.\include\cgltf.h	/^	} cgltf_animation_path_type;$/;"	t	typeref:enum:cgltf_animation_path_type
+cgltf_animation_path_type_invalid	.\include\cgltf.h	/^		cgltf_animation_path_type_invalid,$/;"	e	enum:cgltf_animation_path_type
+cgltf_animation_path_type_max_enum	.\include\cgltf.h	/^		cgltf_animation_path_type_max_enum$/;"	e	enum:cgltf_animation_path_type
+cgltf_animation_path_type_rotation	.\include\cgltf.h	/^		cgltf_animation_path_type_rotation,$/;"	e	enum:cgltf_animation_path_type
+cgltf_animation_path_type_scale	.\include\cgltf.h	/^		cgltf_animation_path_type_scale,$/;"	e	enum:cgltf_animation_path_type
+cgltf_animation_path_type_translation	.\include\cgltf.h	/^		cgltf_animation_path_type_translation,$/;"	e	enum:cgltf_animation_path_type
+cgltf_animation_path_type_weights	.\include\cgltf.h	/^		cgltf_animation_path_type_weights,$/;"	e	enum:cgltf_animation_path_type
+cgltf_animation_sampler	.\include\cgltf.h	/^	typedef struct cgltf_animation_sampler {$/;"	s
+cgltf_animation_sampler	.\include\cgltf.h	/^	} cgltf_animation_sampler;$/;"	t	typeref:struct:cgltf_animation_sampler
+cgltf_asset	.\include\cgltf.h	/^	typedef struct cgltf_asset {$/;"	s
+cgltf_asset	.\include\cgltf.h	/^	} cgltf_asset;$/;"	t	typeref:struct:cgltf_asset
+cgltf_attribute	.\include\cgltf.h	/^	typedef struct cgltf_attribute$/;"	s
+cgltf_attribute	.\include\cgltf.h	/^	} cgltf_attribute;$/;"	t	typeref:struct:cgltf_attribute
+cgltf_attribute_type	.\include\cgltf.h	/^	typedef enum cgltf_attribute_type$/;"	g
+cgltf_attribute_type	.\include\cgltf.h	/^	} cgltf_attribute_type;$/;"	t	typeref:enum:cgltf_attribute_type
+cgltf_attribute_type_color	.\include\cgltf.h	/^		cgltf_attribute_type_color,$/;"	e	enum:cgltf_attribute_type
+cgltf_attribute_type_custom	.\include\cgltf.h	/^		cgltf_attribute_type_custom,$/;"	e	enum:cgltf_attribute_type
+cgltf_attribute_type_invalid	.\include\cgltf.h	/^		cgltf_attribute_type_invalid,$/;"	e	enum:cgltf_attribute_type
+cgltf_attribute_type_joints	.\include\cgltf.h	/^		cgltf_attribute_type_joints,$/;"	e	enum:cgltf_attribute_type
+cgltf_attribute_type_max_enum	.\include\cgltf.h	/^		cgltf_attribute_type_max_enum$/;"	e	enum:cgltf_attribute_type
+cgltf_attribute_type_normal	.\include\cgltf.h	/^		cgltf_attribute_type_normal,$/;"	e	enum:cgltf_attribute_type
+cgltf_attribute_type_position	.\include\cgltf.h	/^		cgltf_attribute_type_position,$/;"	e	enum:cgltf_attribute_type
+cgltf_attribute_type_tangent	.\include\cgltf.h	/^		cgltf_attribute_type_tangent,$/;"	e	enum:cgltf_attribute_type
+cgltf_attribute_type_texcoord	.\include\cgltf.h	/^		cgltf_attribute_type_texcoord,$/;"	e	enum:cgltf_attribute_type
+cgltf_attribute_type_weights	.\include\cgltf.h	/^		cgltf_attribute_type_weights,$/;"	e	enum:cgltf_attribute_type
+cgltf_bool	.\include\cgltf.h	/^	typedef int cgltf_bool;$/;"	t
+cgltf_buffer	.\include\cgltf.h	/^	typedef struct cgltf_buffer$/;"	s
+cgltf_buffer	.\include\cgltf.h	/^	} cgltf_buffer;$/;"	t	typeref:struct:cgltf_buffer
+cgltf_buffer_view	.\include\cgltf.h	/^	typedef struct cgltf_buffer_view$/;"	s
+cgltf_buffer_view	.\include\cgltf.h	/^	} cgltf_buffer_view;$/;"	t	typeref:struct:cgltf_buffer_view
+cgltf_buffer_view_data	.\include\cgltf.h	/^const uint8_t* cgltf_buffer_view_data(const cgltf_buffer_view* view)$/;"	f
+cgltf_buffer_view_type	.\include\cgltf.h	/^	typedef enum cgltf_buffer_view_type$/;"	g
+cgltf_buffer_view_type	.\include\cgltf.h	/^	} cgltf_buffer_view_type;$/;"	t	typeref:enum:cgltf_buffer_view_type
+cgltf_buffer_view_type_indices	.\include\cgltf.h	/^		cgltf_buffer_view_type_indices,$/;"	e	enum:cgltf_buffer_view_type
+cgltf_buffer_view_type_invalid	.\include\cgltf.h	/^		cgltf_buffer_view_type_invalid,$/;"	e	enum:cgltf_buffer_view_type
+cgltf_buffer_view_type_max_enum	.\include\cgltf.h	/^		cgltf_buffer_view_type_max_enum$/;"	e	enum:cgltf_buffer_view_type
+cgltf_buffer_view_type_vertices	.\include\cgltf.h	/^		cgltf_buffer_view_type_vertices,$/;"	e	enum:cgltf_buffer_view_type
+cgltf_calc_index_bound	.\include\cgltf.h	/^static cgltf_size cgltf_calc_index_bound(cgltf_buffer_view* buffer_view, cgltf_size offset, cgltf_component_type component_type, cgltf_size count)$/;"	f
+cgltf_calc_size	.\include\cgltf.h	/^static cgltf_size cgltf_calc_size(cgltf_type type, cgltf_component_type component_type)$/;"	f
+cgltf_calloc	.\include\cgltf.h	/^static void* cgltf_calloc(cgltf_options* options, size_t element_size, cgltf_size count)$/;"	f
+cgltf_camera	.\include\cgltf.h	/^	typedef struct cgltf_camera {$/;"	s
+cgltf_camera	.\include\cgltf.h	/^	} cgltf_camera;$/;"	t	typeref:struct:cgltf_camera
+cgltf_camera_orthographic	.\include\cgltf.h	/^	typedef struct cgltf_camera_orthographic {$/;"	s
+cgltf_camera_orthographic	.\include\cgltf.h	/^	} cgltf_camera_orthographic;$/;"	t	typeref:struct:cgltf_camera_orthographic
+cgltf_camera_perspective	.\include\cgltf.h	/^	typedef struct cgltf_camera_perspective {$/;"	s
+cgltf_camera_perspective	.\include\cgltf.h	/^	} cgltf_camera_perspective;$/;"	t	typeref:struct:cgltf_camera_perspective
+cgltf_camera_type	.\include\cgltf.h	/^	typedef enum cgltf_camera_type {$/;"	g
+cgltf_camera_type	.\include\cgltf.h	/^	} cgltf_camera_type;$/;"	t	typeref:enum:cgltf_camera_type
+cgltf_camera_type_invalid	.\include\cgltf.h	/^		cgltf_camera_type_invalid,$/;"	e	enum:cgltf_camera_type
+cgltf_camera_type_max_enum	.\include\cgltf.h	/^		cgltf_camera_type_max_enum$/;"	e	enum:cgltf_camera_type
+cgltf_camera_type_orthographic	.\include\cgltf.h	/^		cgltf_camera_type_orthographic,$/;"	e	enum:cgltf_camera_type
+cgltf_camera_type_perspective	.\include\cgltf.h	/^		cgltf_camera_type_perspective,$/;"	e	enum:cgltf_camera_type
+cgltf_clearcoat	.\include\cgltf.h	/^	typedef struct cgltf_clearcoat$/;"	s
+cgltf_clearcoat	.\include\cgltf.h	/^	} cgltf_clearcoat;$/;"	t	typeref:struct:cgltf_clearcoat
+cgltf_combine_paths	.\include\cgltf.h	/^static void cgltf_combine_paths(char* path, const char* base, const char* uri)$/;"	f
+cgltf_component_read_float	.\include\cgltf.h	/^static cgltf_float cgltf_component_read_float(const void* in, cgltf_component_type component_type, cgltf_bool normalized)$/;"	f
+cgltf_component_read_index	.\include\cgltf.h	/^static cgltf_size cgltf_component_read_index(const void* in, cgltf_component_type component_type)$/;"	f
+cgltf_component_read_integer	.\include\cgltf.h	/^static cgltf_ssize cgltf_component_read_integer(const void* in, cgltf_component_type component_type)$/;"	f
+cgltf_component_read_uint	.\include\cgltf.h	/^static cgltf_uint cgltf_component_read_uint(const void* in, cgltf_component_type component_type)$/;"	f
+cgltf_component_size	.\include\cgltf.h	/^static cgltf_size cgltf_component_size(cgltf_component_type component_type) {$/;"	f
+cgltf_component_type	.\include\cgltf.h	/^	typedef enum cgltf_component_type$/;"	g
+cgltf_component_type	.\include\cgltf.h	/^	} cgltf_component_type;$/;"	t	typeref:enum:cgltf_component_type
+cgltf_component_type_invalid	.\include\cgltf.h	/^		cgltf_component_type_invalid,$/;"	e	enum:cgltf_component_type
+cgltf_component_type_max_enum	.\include\cgltf.h	/^		cgltf_component_type_max_enum$/;"	e	enum:cgltf_component_type
+cgltf_component_type_r_16	.\include\cgltf.h	/^		cgltf_component_type_r_16, \/* SHORT *\/$/;"	e	enum:cgltf_component_type
+cgltf_component_type_r_16u	.\include\cgltf.h	/^		cgltf_component_type_r_16u, \/* UNSIGNED_SHORT *\/$/;"	e	enum:cgltf_component_type
+cgltf_component_type_r_32f	.\include\cgltf.h	/^		cgltf_component_type_r_32f, \/* FLOAT *\/$/;"	e	enum:cgltf_component_type
+cgltf_component_type_r_32u	.\include\cgltf.h	/^		cgltf_component_type_r_32u, \/* UNSIGNED_INT *\/$/;"	e	enum:cgltf_component_type
+cgltf_component_type_r_8	.\include\cgltf.h	/^		cgltf_component_type_r_8, \/* BYTE *\/$/;"	e	enum:cgltf_component_type
+cgltf_component_type_r_8u	.\include\cgltf.h	/^		cgltf_component_type_r_8u, \/* UNSIGNED_BYTE *\/$/;"	e	enum:cgltf_component_type
+cgltf_copy_extras_json	.\include\cgltf.h	/^cgltf_result cgltf_copy_extras_json(const cgltf_data* data, const cgltf_extras* extras, char* dest, cgltf_size* dest_size)$/;"	f
+cgltf_data	.\include\cgltf.h	/^	typedef struct cgltf_data$/;"	s
+cgltf_data	.\include\cgltf.h	/^	} cgltf_data;$/;"	t	typeref:struct:cgltf_data
+cgltf_data_free_method	.\include\cgltf.h	/^	typedef enum cgltf_data_free_method {$/;"	g
+cgltf_data_free_method	.\include\cgltf.h	/^	} cgltf_data_free_method;$/;"	t	typeref:enum:cgltf_data_free_method
+cgltf_data_free_method_file_release	.\include\cgltf.h	/^		cgltf_data_free_method_file_release,$/;"	e	enum:cgltf_data_free_method
+cgltf_data_free_method_max_enum	.\include\cgltf.h	/^		cgltf_data_free_method_max_enum$/;"	e	enum:cgltf_data_free_method
+cgltf_data_free_method_memory_free	.\include\cgltf.h	/^		cgltf_data_free_method_memory_free,$/;"	e	enum:cgltf_data_free_method
+cgltf_data_free_method_none	.\include\cgltf.h	/^		cgltf_data_free_method_none,$/;"	e	enum:cgltf_data_free_method
+cgltf_decode_string	.\include\cgltf.h	/^cgltf_size cgltf_decode_string(char* string)$/;"	f
+cgltf_decode_uri	.\include\cgltf.h	/^cgltf_size cgltf_decode_uri(char* uri)$/;"	f
+cgltf_default_alloc	.\include\cgltf.h	/^static void* cgltf_default_alloc(void* user, cgltf_size size)$/;"	f
+cgltf_default_file_read	.\include\cgltf.h	/^static cgltf_result cgltf_default_file_read(const struct cgltf_memory_options* memory_options, const struct cgltf_file_options* file_options, const char* path, cgltf_size* size, void** data)$/;"	f
+cgltf_default_file_release	.\include\cgltf.h	/^static void cgltf_default_file_release(const struct cgltf_memory_options* memory_options, const struct cgltf_file_options* file_options, void* data)$/;"	f
+cgltf_default_free	.\include\cgltf.h	/^static void cgltf_default_free(void* user, void* ptr)$/;"	f
+cgltf_draco_mesh_compression	.\include\cgltf.h	/^	typedef struct cgltf_draco_mesh_compression {$/;"	s
+cgltf_draco_mesh_compression	.\include\cgltf.h	/^	} cgltf_draco_mesh_compression;$/;"	t	typeref:struct:cgltf_draco_mesh_compression
+cgltf_element_read_float	.\include\cgltf.h	/^static cgltf_bool cgltf_element_read_float(const uint8_t* element, cgltf_type type, cgltf_component_type component_type, cgltf_bool normalized, cgltf_float* out, cgltf_size element_size)$/;"	f
+cgltf_element_read_uint	.\include\cgltf.h	/^static cgltf_bool cgltf_element_read_uint(const uint8_t* element, cgltf_type type, cgltf_component_type component_type, cgltf_uint* out, cgltf_size element_size)$/;"	f
+cgltf_emissive_strength	.\include\cgltf.h	/^	typedef struct cgltf_emissive_strength$/;"	s
+cgltf_emissive_strength	.\include\cgltf.h	/^	} cgltf_emissive_strength;$/;"	t	typeref:struct:cgltf_emissive_strength
+cgltf_extension	.\include\cgltf.h	/^	typedef struct cgltf_extension {$/;"	s
+cgltf_extension	.\include\cgltf.h	/^	} cgltf_extension;$/;"	t	typeref:struct:cgltf_extension
+cgltf_extras	.\include\cgltf.h	/^	typedef struct cgltf_extras {$/;"	s
+cgltf_extras	.\include\cgltf.h	/^	} cgltf_extras;$/;"	t	typeref:struct:cgltf_extras
+cgltf_file_options	.\include\cgltf.h	/^	typedef struct cgltf_file_options$/;"	s
+cgltf_file_options	.\include\cgltf.h	/^	} cgltf_file_options;$/;"	t	typeref:struct:cgltf_file_options
+cgltf_file_type	.\include\cgltf.h	/^	typedef enum cgltf_file_type$/;"	g
+cgltf_file_type	.\include\cgltf.h	/^	} cgltf_file_type;$/;"	t	typeref:enum:cgltf_file_type
+cgltf_file_type_glb	.\include\cgltf.h	/^		cgltf_file_type_glb,$/;"	e	enum:cgltf_file_type
+cgltf_file_type_gltf	.\include\cgltf.h	/^		cgltf_file_type_gltf,$/;"	e	enum:cgltf_file_type
+cgltf_file_type_invalid	.\include\cgltf.h	/^		cgltf_file_type_invalid,$/;"	e	enum:cgltf_file_type
+cgltf_file_type_max_enum	.\include\cgltf.h	/^		cgltf_file_type_max_enum$/;"	e	enum:cgltf_file_type
+cgltf_fill_float_array	.\include\cgltf.h	/^static void cgltf_fill_float_array(float* out_array, int size, float value)$/;"	f
+cgltf_fixup_pointers	.\include\cgltf.h	/^static int cgltf_fixup_pointers(cgltf_data* data)$/;"	f
+cgltf_float	.\include\cgltf.h	/^	typedef float cgltf_float;$/;"	t
+cgltf_free	.\include\cgltf.h	/^void cgltf_free(cgltf_data* data)$/;"	f
+cgltf_free_extensions	.\include\cgltf.h	/^void cgltf_free_extensions(cgltf_data* data, cgltf_extension* extensions, cgltf_size extensions_count)$/;"	f
+cgltf_image	.\include\cgltf.h	/^	typedef struct cgltf_image$/;"	s
+cgltf_image	.\include\cgltf.h	/^	} cgltf_image;$/;"	t	typeref:struct:cgltf_image
+cgltf_int	.\include\cgltf.h	/^	typedef int cgltf_int;$/;"	t
+cgltf_interpolation_type	.\include\cgltf.h	/^	typedef enum cgltf_interpolation_type {$/;"	g
+cgltf_interpolation_type	.\include\cgltf.h	/^	} cgltf_interpolation_type;$/;"	t	typeref:enum:cgltf_interpolation_type
+cgltf_interpolation_type_cubic_spline	.\include\cgltf.h	/^		cgltf_interpolation_type_cubic_spline,$/;"	e	enum:cgltf_interpolation_type
+cgltf_interpolation_type_linear	.\include\cgltf.h	/^		cgltf_interpolation_type_linear,$/;"	e	enum:cgltf_interpolation_type
+cgltf_interpolation_type_max_enum	.\include\cgltf.h	/^		cgltf_interpolation_type_max_enum$/;"	e	enum:cgltf_interpolation_type
+cgltf_interpolation_type_step	.\include\cgltf.h	/^		cgltf_interpolation_type_step,$/;"	e	enum:cgltf_interpolation_type
+cgltf_ior	.\include\cgltf.h	/^	typedef struct cgltf_ior$/;"	s
+cgltf_ior	.\include\cgltf.h	/^	} cgltf_ior;$/;"	t	typeref:struct:cgltf_ior
+cgltf_iridescence	.\include\cgltf.h	/^	typedef struct cgltf_iridescence$/;"	s
+cgltf_iridescence	.\include\cgltf.h	/^	} cgltf_iridescence;$/;"	t	typeref:struct:cgltf_iridescence
+cgltf_json_strcmp	.\include\cgltf.h	/^static int cgltf_json_strcmp(jsmntok_t const* tok, const uint8_t* json_chunk, const char* str)$/;"	f
+cgltf_json_to_bool	.\include\cgltf.h	/^static cgltf_bool cgltf_json_to_bool(jsmntok_t const* tok, const uint8_t* json_chunk)$/;"	f
+cgltf_json_to_component_type	.\include\cgltf.h	/^static cgltf_component_type cgltf_json_to_component_type(jsmntok_t const* tok, const uint8_t* json_chunk)$/;"	f
+cgltf_json_to_float	.\include\cgltf.h	/^static cgltf_float cgltf_json_to_float(jsmntok_t const* tok, const uint8_t* json_chunk)$/;"	f
+cgltf_json_to_int	.\include\cgltf.h	/^static int cgltf_json_to_int(jsmntok_t const* tok, const uint8_t* json_chunk)$/;"	f
+cgltf_json_to_size	.\include\cgltf.h	/^static cgltf_size cgltf_json_to_size(jsmntok_t const* tok, const uint8_t* json_chunk)$/;"	f
+cgltf_light	.\include\cgltf.h	/^	typedef struct cgltf_light {$/;"	s
+cgltf_light	.\include\cgltf.h	/^	} cgltf_light;$/;"	t	typeref:struct:cgltf_light
+cgltf_light_type	.\include\cgltf.h	/^	typedef enum cgltf_light_type {$/;"	g
+cgltf_light_type	.\include\cgltf.h	/^	} cgltf_light_type;$/;"	t	typeref:enum:cgltf_light_type
+cgltf_light_type_directional	.\include\cgltf.h	/^		cgltf_light_type_directional,$/;"	e	enum:cgltf_light_type
+cgltf_light_type_invalid	.\include\cgltf.h	/^		cgltf_light_type_invalid,$/;"	e	enum:cgltf_light_type
+cgltf_light_type_max_enum	.\include\cgltf.h	/^		cgltf_light_type_max_enum$/;"	e	enum:cgltf_light_type
+cgltf_light_type_point	.\include\cgltf.h	/^		cgltf_light_type_point,$/;"	e	enum:cgltf_light_type
+cgltf_light_type_spot	.\include\cgltf.h	/^		cgltf_light_type_spot,$/;"	e	enum:cgltf_light_type
+cgltf_load_buffer_base64	.\include\cgltf.h	/^cgltf_result cgltf_load_buffer_base64(const cgltf_options* options, cgltf_size size, const char* base64, void** out_data)$/;"	f
+cgltf_load_buffer_file	.\include\cgltf.h	/^static cgltf_result cgltf_load_buffer_file(const cgltf_options* options, cgltf_size size, const char* uri, const char* gltf_path, void** out_data)$/;"	f
+cgltf_load_buffers	.\include\cgltf.h	/^cgltf_result cgltf_load_buffers(const cgltf_options* options, cgltf_data* data, const char* gltf_path)$/;"	f
+cgltf_material	.\include\cgltf.h	/^	typedef struct cgltf_material$/;"	s
+cgltf_material	.\include\cgltf.h	/^	} cgltf_material;$/;"	t	typeref:struct:cgltf_material
+cgltf_material_mapping	.\include\cgltf.h	/^	typedef struct cgltf_material_mapping$/;"	s
+cgltf_material_mapping	.\include\cgltf.h	/^	} cgltf_material_mapping;$/;"	t	typeref:struct:cgltf_material_mapping
+cgltf_material_variant	.\include\cgltf.h	/^	typedef struct cgltf_material_variant$/;"	s
+cgltf_material_variant	.\include\cgltf.h	/^	} cgltf_material_variant;$/;"	t	typeref:struct:cgltf_material_variant
+cgltf_memory_options	.\include\cgltf.h	/^	typedef struct cgltf_memory_options$/;"	s
+cgltf_memory_options	.\include\cgltf.h	/^	} cgltf_memory_options;$/;"	t	typeref:struct:cgltf_memory_options
+cgltf_mesh	.\include\cgltf.h	/^	typedef struct cgltf_mesh {$/;"	s
+cgltf_mesh	.\include\cgltf.h	/^	} cgltf_mesh;$/;"	t	typeref:struct:cgltf_mesh
+cgltf_mesh_gpu_instancing	.\include\cgltf.h	/^	typedef struct cgltf_mesh_gpu_instancing {$/;"	s
+cgltf_mesh_gpu_instancing	.\include\cgltf.h	/^	} cgltf_mesh_gpu_instancing;$/;"	t	typeref:struct:cgltf_mesh_gpu_instancing
+cgltf_meshopt_compression	.\include\cgltf.h	/^	typedef struct cgltf_meshopt_compression$/;"	s
+cgltf_meshopt_compression	.\include\cgltf.h	/^	} cgltf_meshopt_compression;$/;"	t	typeref:struct:cgltf_meshopt_compression
+cgltf_meshopt_compression_filter	.\include\cgltf.h	/^	typedef enum cgltf_meshopt_compression_filter {$/;"	g
+cgltf_meshopt_compression_filter	.\include\cgltf.h	/^	} cgltf_meshopt_compression_filter;$/;"	t	typeref:enum:cgltf_meshopt_compression_filter
+cgltf_meshopt_compression_filter_exponential	.\include\cgltf.h	/^		cgltf_meshopt_compression_filter_exponential,$/;"	e	enum:cgltf_meshopt_compression_filter
+cgltf_meshopt_compression_filter_max_enum	.\include\cgltf.h	/^		cgltf_meshopt_compression_filter_max_enum$/;"	e	enum:cgltf_meshopt_compression_filter
+cgltf_meshopt_compression_filter_none	.\include\cgltf.h	/^		cgltf_meshopt_compression_filter_none,$/;"	e	enum:cgltf_meshopt_compression_filter
+cgltf_meshopt_compression_filter_octahedral	.\include\cgltf.h	/^		cgltf_meshopt_compression_filter_octahedral,$/;"	e	enum:cgltf_meshopt_compression_filter
+cgltf_meshopt_compression_filter_quaternion	.\include\cgltf.h	/^		cgltf_meshopt_compression_filter_quaternion,$/;"	e	enum:cgltf_meshopt_compression_filter
+cgltf_meshopt_compression_mode	.\include\cgltf.h	/^	typedef enum cgltf_meshopt_compression_mode {$/;"	g
+cgltf_meshopt_compression_mode	.\include\cgltf.h	/^	} cgltf_meshopt_compression_mode;$/;"	t	typeref:enum:cgltf_meshopt_compression_mode
+cgltf_meshopt_compression_mode_attributes	.\include\cgltf.h	/^		cgltf_meshopt_compression_mode_attributes,$/;"	e	enum:cgltf_meshopt_compression_mode
+cgltf_meshopt_compression_mode_indices	.\include\cgltf.h	/^		cgltf_meshopt_compression_mode_indices,$/;"	e	enum:cgltf_meshopt_compression_mode
+cgltf_meshopt_compression_mode_invalid	.\include\cgltf.h	/^		cgltf_meshopt_compression_mode_invalid,$/;"	e	enum:cgltf_meshopt_compression_mode
+cgltf_meshopt_compression_mode_max_enum	.\include\cgltf.h	/^		cgltf_meshopt_compression_mode_max_enum$/;"	e	enum:cgltf_meshopt_compression_mode
+cgltf_meshopt_compression_mode_triangles	.\include\cgltf.h	/^		cgltf_meshopt_compression_mode_triangles,$/;"	e	enum:cgltf_meshopt_compression_mode
+cgltf_morph_target	.\include\cgltf.h	/^	typedef struct cgltf_morph_target {$/;"	s
+cgltf_morph_target	.\include\cgltf.h	/^	} cgltf_morph_target;$/;"	t	typeref:struct:cgltf_morph_target
+cgltf_node	.\include\cgltf.h	/^	struct cgltf_node {$/;"	s
+cgltf_node	.\include\cgltf.h	/^	typedef struct cgltf_node cgltf_node;$/;"	t	typeref:struct:cgltf_node
+cgltf_node_transform_local	.\include\cgltf.h	/^void cgltf_node_transform_local(const cgltf_node* node, cgltf_float* out_matrix)$/;"	f
+cgltf_node_transform_world	.\include\cgltf.h	/^void cgltf_node_transform_world(const cgltf_node* node, cgltf_float* out_matrix)$/;"	f
+cgltf_num_components	.\include\cgltf.h	/^cgltf_size cgltf_num_components(cgltf_type type) {$/;"	f
+cgltf_options	.\include\cgltf.h	/^	typedef struct cgltf_options$/;"	s
+cgltf_options	.\include\cgltf.h	/^	} cgltf_options;$/;"	t	typeref:struct:cgltf_options
+cgltf_parse	.\include\cgltf.h	/^cgltf_result cgltf_parse(const cgltf_options* options, const void* data, cgltf_size size, cgltf_data** out_data)$/;"	f
+cgltf_parse_attribute_type	.\include\cgltf.h	/^static void cgltf_parse_attribute_type(const char* name, cgltf_attribute_type* out_type, int* out_index)$/;"	f
+cgltf_parse_file	.\include\cgltf.h	/^cgltf_result cgltf_parse_file(const cgltf_options* options, const char* path, cgltf_data** out_data)$/;"	f
+cgltf_parse_json	.\include\cgltf.h	/^cgltf_result cgltf_parse_json(cgltf_options* options, const uint8_t* json_chunk, cgltf_size size, cgltf_data** out_data)$/;"	f
+cgltf_parse_json_accessor	.\include\cgltf.h	/^static int cgltf_parse_json_accessor(cgltf_options* options, jsmntok_t const* tokens, int i, const uint8_t* json_chunk, cgltf_accessor* out_accessor)$/;"	f
+cgltf_parse_json_accessor_sparse	.\include\cgltf.h	/^static int cgltf_parse_json_accessor_sparse(cgltf_options* options, jsmntok_t const* tokens, int i, const uint8_t* json_chunk, cgltf_accessor_sparse* out_sparse)$/;"	f
+cgltf_parse_json_accessors	.\include\cgltf.h	/^static int cgltf_parse_json_accessors(cgltf_options* options, jsmntok_t const* tokens, int i, const uint8_t* json_chunk, cgltf_data* out_data)$/;"	f
+cgltf_parse_json_animation	.\include\cgltf.h	/^static int cgltf_parse_json_animation(cgltf_options* options, jsmntok_t const* tokens, int i, const uint8_t* json_chunk, cgltf_animation* out_animation)$/;"	f
+cgltf_parse_json_animation_channel	.\include\cgltf.h	/^static int cgltf_parse_json_animation_channel(cgltf_options* options, jsmntok_t const* tokens, int i, const uint8_t* json_chunk, cgltf_animation_channel* out_channel)$/;"	f
+cgltf_parse_json_animation_sampler	.\include\cgltf.h	/^static int cgltf_parse_json_animation_sampler(cgltf_options* options, jsmntok_t const* tokens, int i, const uint8_t* json_chunk, cgltf_animation_sampler* out_sampler)$/;"	f
+cgltf_parse_json_animations	.\include\cgltf.h	/^static int cgltf_parse_json_animations(cgltf_options* options, jsmntok_t const* tokens, int i, const uint8_t* json_chunk, cgltf_data* out_data)$/;"	f
+cgltf_parse_json_array	.\include\cgltf.h	/^static int cgltf_parse_json_array(cgltf_options* options, jsmntok_t const* tokens, int i, const uint8_t* json_chunk, size_t element_size, void** out_array, cgltf_size* out_size)$/;"	f
+cgltf_parse_json_asset	.\include\cgltf.h	/^static int cgltf_parse_json_asset(cgltf_options* options, jsmntok_t const* tokens, int i, const uint8_t* json_chunk, cgltf_asset* out_asset)$/;"	f
+cgltf_parse_json_attribute_list	.\include\cgltf.h	/^static int cgltf_parse_json_attribute_list(cgltf_options* options, jsmntok_t const* tokens, int i, const uint8_t* json_chunk, cgltf_attribute** out_attributes, cgltf_size* out_attributes_count)$/;"	f
+cgltf_parse_json_buffer	.\include\cgltf.h	/^static int cgltf_parse_json_buffer(cgltf_options* options, jsmntok_t const* tokens, int i, const uint8_t* json_chunk, cgltf_buffer* out_buffer)$/;"	f
+cgltf_parse_json_buffer_view	.\include\cgltf.h	/^static int cgltf_parse_json_buffer_view(cgltf_options* options, jsmntok_t const* tokens, int i, const uint8_t* json_chunk, cgltf_buffer_view* out_buffer_view)$/;"	f
+cgltf_parse_json_buffer_views	.\include\cgltf.h	/^static int cgltf_parse_json_buffer_views(cgltf_options* options, jsmntok_t const* tokens, int i, const uint8_t* json_chunk, cgltf_data* out_data)$/;"	f
+cgltf_parse_json_buffers	.\include\cgltf.h	/^static int cgltf_parse_json_buffers(cgltf_options* options, jsmntok_t const* tokens, int i, const uint8_t* json_chunk, cgltf_data* out_data)$/;"	f
+cgltf_parse_json_camera	.\include\cgltf.h	/^static int cgltf_parse_json_camera(cgltf_options* options, jsmntok_t const* tokens, int i, const uint8_t* json_chunk, cgltf_camera* out_camera)$/;"	f
+cgltf_parse_json_cameras	.\include\cgltf.h	/^static int cgltf_parse_json_cameras(cgltf_options* options, jsmntok_t const* tokens, int i, const uint8_t* json_chunk, cgltf_data* out_data)$/;"	f
+cgltf_parse_json_clearcoat	.\include\cgltf.h	/^static int cgltf_parse_json_clearcoat(cgltf_options* options, jsmntok_t const* tokens, int i, const uint8_t* json_chunk, cgltf_clearcoat* out_clearcoat)$/;"	f
+cgltf_parse_json_draco_mesh_compression	.\include\cgltf.h	/^static int cgltf_parse_json_draco_mesh_compression(cgltf_options* options, jsmntok_t const* tokens, int i, const uint8_t* json_chunk, cgltf_draco_mesh_compression* out_draco_mesh_compression)$/;"	f
+cgltf_parse_json_emissive_strength	.\include\cgltf.h	/^static int cgltf_parse_json_emissive_strength(jsmntok_t const* tokens, int i, const uint8_t* json_chunk, cgltf_emissive_strength* out_emissive_strength)$/;"	f
+cgltf_parse_json_extras	.\include\cgltf.h	/^static int cgltf_parse_json_extras(jsmntok_t const* tokens, int i, const uint8_t* json_chunk, cgltf_extras* out_extras)$/;"	f
+cgltf_parse_json_float_array	.\include\cgltf.h	/^static int cgltf_parse_json_float_array(jsmntok_t const* tokens, int i, const uint8_t* json_chunk, float* out_array, int size)$/;"	f
+cgltf_parse_json_image	.\include\cgltf.h	/^static int cgltf_parse_json_image(cgltf_options* options, jsmntok_t const* tokens, int i, const uint8_t* json_chunk, cgltf_image* out_image)$/;"	f
+cgltf_parse_json_images	.\include\cgltf.h	/^static int cgltf_parse_json_images(cgltf_options* options, jsmntok_t const* tokens, int i, const uint8_t* json_chunk, cgltf_data* out_data)$/;"	f
+cgltf_parse_json_ior	.\include\cgltf.h	/^static int cgltf_parse_json_ior(jsmntok_t const* tokens, int i, const uint8_t* json_chunk, cgltf_ior* out_ior)$/;"	f
+cgltf_parse_json_iridescence	.\include\cgltf.h	/^static int cgltf_parse_json_iridescence(cgltf_options* options, jsmntok_t const* tokens, int i, const uint8_t* json_chunk, cgltf_iridescence* out_iridescence)$/;"	f
+cgltf_parse_json_light	.\include\cgltf.h	/^static int cgltf_parse_json_light(cgltf_options* options, jsmntok_t const* tokens, int i, const uint8_t* json_chunk, cgltf_light* out_light)$/;"	f
+cgltf_parse_json_lights	.\include\cgltf.h	/^static int cgltf_parse_json_lights(cgltf_options* options, jsmntok_t const* tokens, int i, const uint8_t* json_chunk, cgltf_data* out_data)$/;"	f
+cgltf_parse_json_material	.\include\cgltf.h	/^static int cgltf_parse_json_material(cgltf_options* options, jsmntok_t const* tokens, int i, const uint8_t* json_chunk, cgltf_material* out_material)$/;"	f
+cgltf_parse_json_material_mapping_data	.\include\cgltf.h	/^static int cgltf_parse_json_material_mapping_data(cgltf_options* options, jsmntok_t const* tokens, int i, const uint8_t* json_chunk, cgltf_material_mapping* out_mappings, cgltf_size* offset)$/;"	f
+cgltf_parse_json_material_mappings	.\include\cgltf.h	/^static int cgltf_parse_json_material_mappings(cgltf_options* options, jsmntok_t const* tokens, int i, const uint8_t* json_chunk, cgltf_primitive* out_prim)$/;"	f
+cgltf_parse_json_materials	.\include\cgltf.h	/^static int cgltf_parse_json_materials(cgltf_options* options, jsmntok_t const* tokens, int i, const uint8_t* json_chunk, cgltf_data* out_data)$/;"	f
+cgltf_parse_json_mesh	.\include\cgltf.h	/^static int cgltf_parse_json_mesh(cgltf_options* options, jsmntok_t const* tokens, int i, const uint8_t* json_chunk, cgltf_mesh* out_mesh)$/;"	f
+cgltf_parse_json_mesh_gpu_instancing	.\include\cgltf.h	/^static int cgltf_parse_json_mesh_gpu_instancing(cgltf_options* options, jsmntok_t const* tokens, int i, const uint8_t* json_chunk, cgltf_mesh_gpu_instancing* out_mesh_gpu_instancing)$/;"	f
+cgltf_parse_json_meshes	.\include\cgltf.h	/^static int cgltf_parse_json_meshes(cgltf_options* options, jsmntok_t const* tokens, int i, const uint8_t* json_chunk, cgltf_data* out_data)$/;"	f
+cgltf_parse_json_meshopt_compression	.\include\cgltf.h	/^static int cgltf_parse_json_meshopt_compression(cgltf_options* options, jsmntok_t const* tokens, int i, const uint8_t* json_chunk, cgltf_meshopt_compression* out_meshopt_compression)$/;"	f
+cgltf_parse_json_node	.\include\cgltf.h	/^static int cgltf_parse_json_node(cgltf_options* options, jsmntok_t const* tokens, int i, const uint8_t* json_chunk, cgltf_node* out_node)$/;"	f
+cgltf_parse_json_nodes	.\include\cgltf.h	/^static int cgltf_parse_json_nodes(cgltf_options* options, jsmntok_t const* tokens, int i, const uint8_t* json_chunk, cgltf_data* out_data)$/;"	f
+cgltf_parse_json_pbr_metallic_roughness	.\include\cgltf.h	/^static int cgltf_parse_json_pbr_metallic_roughness(cgltf_options* options, jsmntok_t const* tokens, int i, const uint8_t* json_chunk, cgltf_pbr_metallic_roughness* out_pbr)$/;"	f
+cgltf_parse_json_pbr_specular_glossiness	.\include\cgltf.h	/^static int cgltf_parse_json_pbr_specular_glossiness(cgltf_options* options, jsmntok_t const* tokens, int i, const uint8_t* json_chunk, cgltf_pbr_specular_glossiness* out_pbr)$/;"	f
+cgltf_parse_json_primitive	.\include\cgltf.h	/^static int cgltf_parse_json_primitive(cgltf_options* options, jsmntok_t const* tokens, int i, const uint8_t* json_chunk, cgltf_primitive* out_prim)$/;"	f
+cgltf_parse_json_root	.\include\cgltf.h	/^static int cgltf_parse_json_root(cgltf_options* options, jsmntok_t const* tokens, int i, const uint8_t* json_chunk, cgltf_data* out_data)$/;"	f
+cgltf_parse_json_sampler	.\include\cgltf.h	/^static int cgltf_parse_json_sampler(cgltf_options* options, jsmntok_t const* tokens, int i, const uint8_t* json_chunk, cgltf_sampler* out_sampler)$/;"	f
+cgltf_parse_json_samplers	.\include\cgltf.h	/^static int cgltf_parse_json_samplers(cgltf_options* options, jsmntok_t const* tokens, int i, const uint8_t* json_chunk, cgltf_data* out_data)$/;"	f
+cgltf_parse_json_scene	.\include\cgltf.h	/^static int cgltf_parse_json_scene(cgltf_options* options, jsmntok_t const* tokens, int i, const uint8_t* json_chunk, cgltf_scene* out_scene)$/;"	f
+cgltf_parse_json_scenes	.\include\cgltf.h	/^static int cgltf_parse_json_scenes(cgltf_options* options, jsmntok_t const* tokens, int i, const uint8_t* json_chunk, cgltf_data* out_data)$/;"	f
+cgltf_parse_json_sheen	.\include\cgltf.h	/^static int cgltf_parse_json_sheen(cgltf_options* options, jsmntok_t const* tokens, int i, const uint8_t* json_chunk, cgltf_sheen* out_sheen)$/;"	f
+cgltf_parse_json_skin	.\include\cgltf.h	/^static int cgltf_parse_json_skin(cgltf_options* options, jsmntok_t const* tokens, int i, const uint8_t* json_chunk, cgltf_skin* out_skin)$/;"	f
+cgltf_parse_json_skins	.\include\cgltf.h	/^static int cgltf_parse_json_skins(cgltf_options* options, jsmntok_t const* tokens, int i, const uint8_t* json_chunk, cgltf_data* out_data)$/;"	f
+cgltf_parse_json_specular	.\include\cgltf.h	/^static int cgltf_parse_json_specular(cgltf_options* options, jsmntok_t const* tokens, int i, const uint8_t* json_chunk, cgltf_specular* out_specular)$/;"	f
+cgltf_parse_json_string	.\include\cgltf.h	/^static int cgltf_parse_json_string(cgltf_options* options, jsmntok_t const* tokens, int i, const uint8_t* json_chunk, char** out_string)$/;"	f
+cgltf_parse_json_string_array	.\include\cgltf.h	/^static int cgltf_parse_json_string_array(cgltf_options* options, jsmntok_t const* tokens, int i, const uint8_t* json_chunk, char*** out_array, cgltf_size* out_size)$/;"	f
+cgltf_parse_json_texture	.\include\cgltf.h	/^static int cgltf_parse_json_texture(cgltf_options* options, jsmntok_t const* tokens, int i, const uint8_t* json_chunk, cgltf_texture* out_texture)$/;"	f
+cgltf_parse_json_texture_transform	.\include\cgltf.h	/^static int cgltf_parse_json_texture_transform(jsmntok_t const* tokens, int i, const uint8_t* json_chunk, cgltf_texture_transform* out_texture_transform)$/;"	f
+cgltf_parse_json_texture_view	.\include\cgltf.h	/^static int cgltf_parse_json_texture_view(cgltf_options* options, jsmntok_t const* tokens, int i, const uint8_t* json_chunk, cgltf_texture_view* out_texture_view)$/;"	f
+cgltf_parse_json_textures	.\include\cgltf.h	/^static int cgltf_parse_json_textures(cgltf_options* options, jsmntok_t const* tokens, int i, const uint8_t* json_chunk, cgltf_data* out_data)$/;"	f
+cgltf_parse_json_transmission	.\include\cgltf.h	/^static int cgltf_parse_json_transmission(cgltf_options* options, jsmntok_t const* tokens, int i, const uint8_t* json_chunk, cgltf_transmission* out_transmission)$/;"	f
+cgltf_parse_json_unprocessed_extension	.\include\cgltf.h	/^static int cgltf_parse_json_unprocessed_extension(cgltf_options* options, jsmntok_t const* tokens, int i, const uint8_t* json_chunk, cgltf_extension* out_extension)$/;"	f
+cgltf_parse_json_unprocessed_extensions	.\include\cgltf.h	/^static int cgltf_parse_json_unprocessed_extensions(cgltf_options* options, jsmntok_t const* tokens, int i, const uint8_t* json_chunk, cgltf_size* out_extensions_count, cgltf_extension** out_extensions)$/;"	f
+cgltf_parse_json_variant	.\include\cgltf.h	/^static int cgltf_parse_json_variant(cgltf_options* options, jsmntok_t const* tokens, int i, const uint8_t* json_chunk, cgltf_material_variant* out_variant)$/;"	f
+cgltf_parse_json_variants	.\include\cgltf.h	/^static int cgltf_parse_json_variants(cgltf_options* options, jsmntok_t const* tokens, int i, const uint8_t* json_chunk, cgltf_data* out_data)$/;"	f
+cgltf_parse_json_volume	.\include\cgltf.h	/^static int cgltf_parse_json_volume(cgltf_options* options, jsmntok_t const* tokens, int i, const uint8_t* json_chunk, cgltf_volume* out_volume)$/;"	f
+cgltf_pbr_metallic_roughness	.\include\cgltf.h	/^	typedef struct cgltf_pbr_metallic_roughness$/;"	s
+cgltf_pbr_metallic_roughness	.\include\cgltf.h	/^	} cgltf_pbr_metallic_roughness;$/;"	t	typeref:struct:cgltf_pbr_metallic_roughness
+cgltf_pbr_specular_glossiness	.\include\cgltf.h	/^	typedef struct cgltf_pbr_specular_glossiness$/;"	s
+cgltf_pbr_specular_glossiness	.\include\cgltf.h	/^	} cgltf_pbr_specular_glossiness;$/;"	t	typeref:struct:cgltf_pbr_specular_glossiness
+cgltf_primitive	.\include\cgltf.h	/^	typedef struct cgltf_primitive {$/;"	s
+cgltf_primitive	.\include\cgltf.h	/^	} cgltf_primitive;$/;"	t	typeref:struct:cgltf_primitive
+cgltf_primitive_type	.\include\cgltf.h	/^	typedef enum cgltf_primitive_type$/;"	g
+cgltf_primitive_type	.\include\cgltf.h	/^	} cgltf_primitive_type;$/;"	t	typeref:enum:cgltf_primitive_type
+cgltf_primitive_type_line_loop	.\include\cgltf.h	/^		cgltf_primitive_type_line_loop,$/;"	e	enum:cgltf_primitive_type
+cgltf_primitive_type_line_strip	.\include\cgltf.h	/^		cgltf_primitive_type_line_strip,$/;"	e	enum:cgltf_primitive_type
+cgltf_primitive_type_lines	.\include\cgltf.h	/^		cgltf_primitive_type_lines,$/;"	e	enum:cgltf_primitive_type
+cgltf_primitive_type_max_enum	.\include\cgltf.h	/^		cgltf_primitive_type_max_enum$/;"	e	enum:cgltf_primitive_type
+cgltf_primitive_type_points	.\include\cgltf.h	/^		cgltf_primitive_type_points,$/;"	e	enum:cgltf_primitive_type
+cgltf_primitive_type_triangle_fan	.\include\cgltf.h	/^		cgltf_primitive_type_triangle_fan,$/;"	e	enum:cgltf_primitive_type
+cgltf_primitive_type_triangle_strip	.\include\cgltf.h	/^		cgltf_primitive_type_triangle_strip,$/;"	e	enum:cgltf_primitive_type
+cgltf_primitive_type_triangles	.\include\cgltf.h	/^		cgltf_primitive_type_triangles,$/;"	e	enum:cgltf_primitive_type
+cgltf_result	.\include\cgltf.h	/^	typedef enum cgltf_result$/;"	g
+cgltf_result	.\include\cgltf.h	/^	} cgltf_result;$/;"	t	typeref:enum:cgltf_result
+cgltf_result_data_too_short	.\include\cgltf.h	/^		cgltf_result_data_too_short,$/;"	e	enum:cgltf_result
+cgltf_result_file_not_found	.\include\cgltf.h	/^		cgltf_result_file_not_found,$/;"	e	enum:cgltf_result
+cgltf_result_invalid_gltf	.\include\cgltf.h	/^		cgltf_result_invalid_gltf,$/;"	e	enum:cgltf_result
+cgltf_result_invalid_json	.\include\cgltf.h	/^		cgltf_result_invalid_json,$/;"	e	enum:cgltf_result
+cgltf_result_invalid_options	.\include\cgltf.h	/^		cgltf_result_invalid_options,$/;"	e	enum:cgltf_result
+cgltf_result_io_error	.\include\cgltf.h	/^		cgltf_result_io_error,$/;"	e	enum:cgltf_result
+cgltf_result_legacy_gltf	.\include\cgltf.h	/^		cgltf_result_legacy_gltf,$/;"	e	enum:cgltf_result
+cgltf_result_max_enum	.\include\cgltf.h	/^		cgltf_result_max_enum$/;"	e	enum:cgltf_result
+cgltf_result_out_of_memory	.\include\cgltf.h	/^		cgltf_result_out_of_memory,$/;"	e	enum:cgltf_result
+cgltf_result_success	.\include\cgltf.h	/^		cgltf_result_success,$/;"	e	enum:cgltf_result
+cgltf_result_unknown_format	.\include\cgltf.h	/^		cgltf_result_unknown_format,$/;"	e	enum:cgltf_result
+cgltf_sampler	.\include\cgltf.h	/^	typedef struct cgltf_sampler$/;"	s
+cgltf_sampler	.\include\cgltf.h	/^	} cgltf_sampler;$/;"	t	typeref:struct:cgltf_sampler
+cgltf_scene	.\include\cgltf.h	/^	typedef struct cgltf_scene {$/;"	s
+cgltf_scene	.\include\cgltf.h	/^	} cgltf_scene;$/;"	t	typeref:struct:cgltf_scene
+cgltf_sheen	.\include\cgltf.h	/^	typedef struct cgltf_sheen$/;"	s
+cgltf_sheen	.\include\cgltf.h	/^	} cgltf_sheen;$/;"	t	typeref:struct:cgltf_sheen
+cgltf_size	.\include\cgltf.h	/^	typedef size_t cgltf_size;$/;"	t
+cgltf_skin	.\include\cgltf.h	/^	typedef struct cgltf_skin {$/;"	s
+cgltf_skin	.\include\cgltf.h	/^	} cgltf_skin;$/;"	t	typeref:struct:cgltf_skin
+cgltf_skip_json	.\include\cgltf.h	/^static int cgltf_skip_json(jsmntok_t const* tokens, int i)$/;"	f
+cgltf_specular	.\include\cgltf.h	/^	typedef struct cgltf_specular$/;"	s
+cgltf_specular	.\include\cgltf.h	/^	} cgltf_specular;$/;"	t	typeref:struct:cgltf_specular
+cgltf_ssize	.\include\cgltf.h	/^	typedef long long int cgltf_ssize;$/;"	t
+cgltf_texture	.\include\cgltf.h	/^	typedef struct cgltf_texture$/;"	s
+cgltf_texture	.\include\cgltf.h	/^	} cgltf_texture;$/;"	t	typeref:struct:cgltf_texture
+cgltf_texture_transform	.\include\cgltf.h	/^	typedef struct cgltf_texture_transform$/;"	s
+cgltf_texture_transform	.\include\cgltf.h	/^	} cgltf_texture_transform;$/;"	t	typeref:struct:cgltf_texture_transform
+cgltf_texture_view	.\include\cgltf.h	/^	typedef struct cgltf_texture_view$/;"	s
+cgltf_texture_view	.\include\cgltf.h	/^	} cgltf_texture_view;$/;"	t	typeref:struct:cgltf_texture_view
+cgltf_transmission	.\include\cgltf.h	/^	typedef struct cgltf_transmission$/;"	s
+cgltf_transmission	.\include\cgltf.h	/^	} cgltf_transmission;$/;"	t	typeref:struct:cgltf_transmission
+cgltf_type	.\include\cgltf.h	/^	typedef enum cgltf_type$/;"	g
+cgltf_type	.\include\cgltf.h	/^	} cgltf_type;$/;"	t	typeref:enum:cgltf_type
+cgltf_type_invalid	.\include\cgltf.h	/^		cgltf_type_invalid,$/;"	e	enum:cgltf_type
+cgltf_type_mat2	.\include\cgltf.h	/^		cgltf_type_mat2,$/;"	e	enum:cgltf_type
+cgltf_type_mat3	.\include\cgltf.h	/^		cgltf_type_mat3,$/;"	e	enum:cgltf_type
+cgltf_type_mat4	.\include\cgltf.h	/^		cgltf_type_mat4,$/;"	e	enum:cgltf_type
+cgltf_type_max_enum	.\include\cgltf.h	/^		cgltf_type_max_enum$/;"	e	enum:cgltf_type
+cgltf_type_scalar	.\include\cgltf.h	/^		cgltf_type_scalar,$/;"	e	enum:cgltf_type
+cgltf_type_vec2	.\include\cgltf.h	/^		cgltf_type_vec2,$/;"	e	enum:cgltf_type
+cgltf_type_vec3	.\include\cgltf.h	/^		cgltf_type_vec3,$/;"	e	enum:cgltf_type
+cgltf_type_vec4	.\include\cgltf.h	/^		cgltf_type_vec4,$/;"	e	enum:cgltf_type
+cgltf_uint	.\include\cgltf.h	/^	typedef unsigned int cgltf_uint;$/;"	t
+cgltf_unhex	.\include\cgltf.h	/^static int cgltf_unhex(char ch)$/;"	f
+cgltf_validate	.\include\cgltf.h	/^cgltf_result cgltf_validate(cgltf_data* data)$/;"	f
+cgltf_volume	.\include\cgltf.h	/^	typedef struct cgltf_volume$/;"	s
+cgltf_volume	.\include\cgltf.h	/^	} cgltf_volume;$/;"	t	typeref:struct:cgltf_volume
+channels	.\include\cgltf.h	/^		cgltf_animation_channel* channels;$/;"	m	struct:cgltf_animation
+channels_count	.\include\cgltf.h	/^		cgltf_size channels_count;$/;"	m	struct:cgltf_animation
+chardata_for_range	.\include\stb_truetype.h	/^   stbtt_packedchar *chardata_for_range; \/\/ output$/;"	m	struct:__anon13
+charstrings	.\include\stb_truetype.h	/^   stbtt__buf charstrings;            \/\/ the charstring index$/;"	m	struct:stbtt_fontinfo
+children	.\include\cgltf.h	/^		cgltf_node** children;$/;"	m	struct:cgltf_node
+children_count	.\include\cgltf.h	/^		cgltf_size children_count;$/;"	m	struct:cgltf_node
+clearcoat	.\include\cgltf.h	/^		cgltf_clearcoat clearcoat;$/;"	m	struct:cgltf_material
+clearcoat_factor	.\include\cgltf.h	/^		cgltf_float clearcoat_factor;$/;"	m	struct:cgltf_clearcoat
+clearcoat_normal_texture	.\include\cgltf.h	/^		cgltf_texture_view clearcoat_normal_texture;$/;"	m	struct:cgltf_clearcoat
+clearcoat_roughness_factor	.\include\cgltf.h	/^		cgltf_float clearcoat_roughness_factor;$/;"	m	struct:cgltf_clearcoat
+clearcoat_roughness_texture	.\include\cgltf.h	/^		cgltf_texture_view clearcoat_roughness_texture;$/;"	m	struct:cgltf_clearcoat
+clearcoat_texture	.\include\cgltf.h	/^		cgltf_texture_view clearcoat_texture;$/;"	m	struct:cgltf_clearcoat
+color	.\include\cgltf.h	/^		cgltf_float color[3];$/;"	m	struct:cgltf_light
+component_type	.\include\cgltf.h	/^		cgltf_component_type component_type;$/;"	m	struct:cgltf_accessor
+context	.\include\stb_image_write.h	/^   void *context;$/;"	m	struct:__anon5
+copyright	.\include\cgltf.h	/^		char* copyright;$/;"	m	struct:cgltf_asset
+count	.\include\cgltf.h	/^		cgltf_size count;$/;"	m	struct:cgltf_accessor
+count	.\include\cgltf.h	/^		cgltf_size count;$/;"	m	struct:cgltf_accessor_sparse
+count	.\include\cgltf.h	/^		cgltf_size count;$/;"	m	struct:cgltf_meshopt_compression
+cursor	.\include\stb_truetype.h	/^   int cursor;$/;"	m	struct:__anon9
+cx	.\include\stb_truetype.h	/^      stbtt_vertex_type x,y,cx,cy,cx1,cy1;$/;"	m	struct:__anon15
+cx1	.\include\stb_truetype.h	/^      stbtt_vertex_type x,y,cx,cy,cx1,cy1;$/;"	m	struct:__anon15
+cy	.\include\stb_truetype.h	/^      stbtt_vertex_type x,y,cx,cy,cx1,cy1;$/;"	m	struct:__anon15
+cy1	.\include\stb_truetype.h	/^      stbtt_vertex_type x,y,cx,cy,cx1,cy1;$/;"	m	struct:__anon15
+data	.\asset_packer\buffers.cpp	/^	void* data;$/;"	m	struct:GenericBuffer	file:
+data	.\asset_packer\buffers.cpp	/^	void* data;$/;"	m	struct:StructBuffer	file:
+data	.\include\cgltf.h	/^		cgltf_accessor* data;$/;"	m	struct:cgltf_attribute
+data	.\include\cgltf.h	/^		char* data;$/;"	m	struct:cgltf_extension
+data	.\include\cgltf.h	/^		void* data; \/* loaded by cgltf_load_buffers *\/$/;"	m	struct:cgltf_buffer
+data	.\include\cgltf.h	/^		void* data; \/* overrides buffer->data if present, filled by extensions *\/$/;"	m	struct:cgltf_buffer_view
+data	.\include\cgltf.h	/^		} data;$/;"	m	struct:cgltf_camera	typeref:union:cgltf_camera::__anon1
+data	.\include\stb_truetype.h	/^   unsigned char  * data;              \/\/ pointer to .ttf file$/;"	m	struct:stbtt_fontinfo
+data	.\include\stb_truetype.h	/^   unsigned char *data;$/;"	m	struct:__anon9
+data_extensions	.\include\cgltf.h	/^		cgltf_extension* data_extensions;$/;"	m	struct:cgltf_data
+data_extensions_count	.\include\cgltf.h	/^		cgltf_size data_extensions_count;$/;"	m	struct:cgltf_data
+data_free_method	.\include\cgltf.h	/^		cgltf_data_free_method data_free_method;$/;"	m	struct:cgltf_buffer
+descent	.\rasterize_font_and_dump_bitmap\src\main.cpp	/^	int ascent, descent, line_gap, baseline;	\/\/ advance vertical position by (ascent - descent + line_gap)$/;"	m	struct:FontInfo	file:
+diffuse_factor	.\include\cgltf.h	/^		cgltf_float diffuse_factor[4];$/;"	m	struct:cgltf_pbr_specular_glossiness
+diffuse_texture	.\include\cgltf.h	/^		cgltf_texture_view diffuse_texture;$/;"	m	struct:cgltf_pbr_specular_glossiness
+dir	.\asset_packer\main.cpp	/^	char* dir;$/;"	m	struct:FolderInfo	file:
+direction	.\include\stb_truetype.h	/^   float direction;$/;"	m	struct:stbtt__active_edge
+direction	.\include\stb_truetype.h	/^   int direction;$/;"	m	struct:stbtt__active_edge
+double_sided	.\include\cgltf.h	/^		cgltf_bool double_sided;$/;"	m	struct:cgltf_material
+draco_mesh_compression	.\include\cgltf.h	/^		cgltf_draco_mesh_compression draco_mesh_compression;$/;"	m	struct:cgltf_primitive
+dx	.\include\stb_truetype.h	/^   int x,dx;$/;"	m	struct:stbtt__active_edge
+elem_size	.\asset_packer\buffers.cpp	/^	u32 elem_size;$/;"	m	struct:StructBuffer	file:
+emissive_factor	.\include\cgltf.h	/^		cgltf_float emissive_factor[3];$/;"	m	struct:cgltf_material
+emissive_strength	.\include\cgltf.h	/^		cgltf_emissive_strength emissive_strength;$/;"	m	struct:cgltf_material
+emissive_strength	.\include\cgltf.h	/^		cgltf_float emissive_strength;$/;"	m	struct:cgltf_emissive_strength
+emissive_texture	.\include\cgltf.h	/^		cgltf_texture_view emissive_texture;$/;"	m	struct:cgltf_material
+end	.\include\cgltf.h	/^	int end;$/;"	m	struct:__anon3
+end_offset	.\include\cgltf.h	/^		cgltf_size end_offset;$/;"	m	struct:cgltf_extras
+equal	.\include\stb_truetype.h	/^static int equal(float *a, float *b)$/;"	f
+extensions	.\include\cgltf.h	/^		cgltf_extension* extensions;$/;"	m	struct:cgltf_accessor
+extensions	.\include\cgltf.h	/^		cgltf_extension* extensions;$/;"	m	struct:cgltf_accessor_sparse
+extensions	.\include\cgltf.h	/^		cgltf_extension* extensions;$/;"	m	struct:cgltf_animation
+extensions	.\include\cgltf.h	/^		cgltf_extension* extensions;$/;"	m	struct:cgltf_animation_channel
+extensions	.\include\cgltf.h	/^		cgltf_extension* extensions;$/;"	m	struct:cgltf_animation_sampler
+extensions	.\include\cgltf.h	/^		cgltf_extension* extensions;$/;"	m	struct:cgltf_asset
+extensions	.\include\cgltf.h	/^		cgltf_extension* extensions;$/;"	m	struct:cgltf_buffer
+extensions	.\include\cgltf.h	/^		cgltf_extension* extensions;$/;"	m	struct:cgltf_buffer_view
+extensions	.\include\cgltf.h	/^		cgltf_extension* extensions;$/;"	m	struct:cgltf_camera
+extensions	.\include\cgltf.h	/^		cgltf_extension* extensions;$/;"	m	struct:cgltf_image
+extensions	.\include\cgltf.h	/^		cgltf_extension* extensions;$/;"	m	struct:cgltf_material
+extensions	.\include\cgltf.h	/^		cgltf_extension* extensions;$/;"	m	struct:cgltf_mesh
+extensions	.\include\cgltf.h	/^		cgltf_extension* extensions;$/;"	m	struct:cgltf_node
+extensions	.\include\cgltf.h	/^		cgltf_extension* extensions;$/;"	m	struct:cgltf_primitive
+extensions	.\include\cgltf.h	/^		cgltf_extension* extensions;$/;"	m	struct:cgltf_sampler
+extensions	.\include\cgltf.h	/^		cgltf_extension* extensions;$/;"	m	struct:cgltf_scene
+extensions	.\include\cgltf.h	/^		cgltf_extension* extensions;$/;"	m	struct:cgltf_skin
+extensions	.\include\cgltf.h	/^		cgltf_extension* extensions;$/;"	m	struct:cgltf_texture
+extensions	.\include\cgltf.h	/^		cgltf_extension* extensions;$/;"	m	struct:cgltf_texture_view
+extensions_count	.\include\cgltf.h	/^		cgltf_size extensions_count;$/;"	m	struct:cgltf_accessor
+extensions_count	.\include\cgltf.h	/^		cgltf_size extensions_count;$/;"	m	struct:cgltf_accessor_sparse
+extensions_count	.\include\cgltf.h	/^		cgltf_size extensions_count;$/;"	m	struct:cgltf_animation
+extensions_count	.\include\cgltf.h	/^		cgltf_size extensions_count;$/;"	m	struct:cgltf_animation_channel
+extensions_count	.\include\cgltf.h	/^		cgltf_size extensions_count;$/;"	m	struct:cgltf_animation_sampler
+extensions_count	.\include\cgltf.h	/^		cgltf_size extensions_count;$/;"	m	struct:cgltf_asset
+extensions_count	.\include\cgltf.h	/^		cgltf_size extensions_count;$/;"	m	struct:cgltf_buffer
+extensions_count	.\include\cgltf.h	/^		cgltf_size extensions_count;$/;"	m	struct:cgltf_buffer_view
+extensions_count	.\include\cgltf.h	/^		cgltf_size extensions_count;$/;"	m	struct:cgltf_camera
+extensions_count	.\include\cgltf.h	/^		cgltf_size extensions_count;$/;"	m	struct:cgltf_image
+extensions_count	.\include\cgltf.h	/^		cgltf_size extensions_count;$/;"	m	struct:cgltf_material
+extensions_count	.\include\cgltf.h	/^		cgltf_size extensions_count;$/;"	m	struct:cgltf_mesh
+extensions_count	.\include\cgltf.h	/^		cgltf_size extensions_count;$/;"	m	struct:cgltf_node
+extensions_count	.\include\cgltf.h	/^		cgltf_size extensions_count;$/;"	m	struct:cgltf_primitive
+extensions_count	.\include\cgltf.h	/^		cgltf_size extensions_count;$/;"	m	struct:cgltf_sampler
+extensions_count	.\include\cgltf.h	/^		cgltf_size extensions_count;$/;"	m	struct:cgltf_scene
+extensions_count	.\include\cgltf.h	/^		cgltf_size extensions_count;$/;"	m	struct:cgltf_skin
+extensions_count	.\include\cgltf.h	/^		cgltf_size extensions_count;$/;"	m	struct:cgltf_texture
+extensions_count	.\include\cgltf.h	/^		cgltf_size extensions_count;$/;"	m	struct:cgltf_texture_view
+extensions_required	.\include\cgltf.h	/^		char** extensions_required;$/;"	m	struct:cgltf_data
+extensions_required_count	.\include\cgltf.h	/^		cgltf_size extensions_required_count;$/;"	m	struct:cgltf_data
+extensions_used	.\include\cgltf.h	/^		char** extensions_used;$/;"	m	struct:cgltf_data
+extensions_used_count	.\include\cgltf.h	/^		cgltf_size extensions_used_count;$/;"	m	struct:cgltf_data
+extra	.\include\stb_rect_pack.h	/^   stbrp_node extra[2]; \/\/ we allocate two extra nodes so optimal user-node-count is 'width' not 'width+2'$/;"	m	struct:stbrp_context
+extras	.\include\cgltf.h	/^		cgltf_extras extras;$/;"	m	struct:cgltf_accessor
+extras	.\include\cgltf.h	/^		cgltf_extras extras;$/;"	m	struct:cgltf_accessor_sparse
+extras	.\include\cgltf.h	/^		cgltf_extras extras;$/;"	m	struct:cgltf_animation
+extras	.\include\cgltf.h	/^		cgltf_extras extras;$/;"	m	struct:cgltf_animation_channel
+extras	.\include\cgltf.h	/^		cgltf_extras extras;$/;"	m	struct:cgltf_animation_sampler
+extras	.\include\cgltf.h	/^		cgltf_extras extras;$/;"	m	struct:cgltf_asset
+extras	.\include\cgltf.h	/^		cgltf_extras extras;$/;"	m	struct:cgltf_buffer
+extras	.\include\cgltf.h	/^		cgltf_extras extras;$/;"	m	struct:cgltf_buffer_view
+extras	.\include\cgltf.h	/^		cgltf_extras extras;$/;"	m	struct:cgltf_camera
+extras	.\include\cgltf.h	/^		cgltf_extras extras;$/;"	m	struct:cgltf_camera_orthographic
+extras	.\include\cgltf.h	/^		cgltf_extras extras;$/;"	m	struct:cgltf_camera_perspective
+extras	.\include\cgltf.h	/^		cgltf_extras extras;$/;"	m	struct:cgltf_data
+extras	.\include\cgltf.h	/^		cgltf_extras extras;$/;"	m	struct:cgltf_image
+extras	.\include\cgltf.h	/^		cgltf_extras extras;$/;"	m	struct:cgltf_light
+extras	.\include\cgltf.h	/^		cgltf_extras extras;$/;"	m	struct:cgltf_material
+extras	.\include\cgltf.h	/^		cgltf_extras extras;$/;"	m	struct:cgltf_material_mapping
+extras	.\include\cgltf.h	/^		cgltf_extras extras;$/;"	m	struct:cgltf_material_variant
+extras	.\include\cgltf.h	/^		cgltf_extras extras;$/;"	m	struct:cgltf_mesh
+extras	.\include\cgltf.h	/^		cgltf_extras extras;$/;"	m	struct:cgltf_node
+extras	.\include\cgltf.h	/^		cgltf_extras extras;$/;"	m	struct:cgltf_pbr_metallic_roughness
+extras	.\include\cgltf.h	/^		cgltf_extras extras;$/;"	m	struct:cgltf_primitive
+extras	.\include\cgltf.h	/^		cgltf_extras extras;$/;"	m	struct:cgltf_sampler
+extras	.\include\cgltf.h	/^		cgltf_extras extras;$/;"	m	struct:cgltf_scene
+extras	.\include\cgltf.h	/^		cgltf_extras extras;$/;"	m	struct:cgltf_skin
+extras	.\include\cgltf.h	/^		cgltf_extras extras;$/;"	m	struct:cgltf_texture
+extras	.\include\cgltf.h	/^		cgltf_extras extras;$/;"	m	struct:cgltf_texture_view
+ey	.\include\stb_truetype.h	/^   float ey;$/;"	m	struct:stbtt__active_edge
+fdselect	.\include\stb_truetype.h	/^   stbtt__buf fdselect;               \/\/ map from glyph to fontdict$/;"	m	struct:stbtt_fontinfo
+fdx	.\include\stb_truetype.h	/^   float fx,fdx,fdy;$/;"	m	struct:stbtt__active_edge
+fdy	.\include\stb_truetype.h	/^   float fx,fdx,fdy;$/;"	m	struct:stbtt__active_edge
+file	.\include\cgltf.h	/^		cgltf_file_options file;$/;"	m	struct:cgltf_data
+file	.\include\cgltf.h	/^		cgltf_file_options file;$/;"	m	struct:cgltf_options
+file_count	.\asset_packer\main.cpp	/^	u32 file_count;$/;"	m	struct:FolderInfo	file:
+file_data	.\include\cgltf.h	/^		void* file_data;$/;"	m	struct:cgltf_data
+file_type	.\include\cgltf.h	/^		cgltf_file_type file_type;$/;"	m	struct:cgltf_data
+files	.\asset_packer\main.cpp	/^	FileInfo* files;$/;"	m	struct:FolderInfo	file:
+filled_count	.\asset_packer\buffers.cpp	/^	u32 filled_count;$/;"	m	struct:StructBuffer	file:
+filled_size	.\asset_packer\buffers.cpp	/^	u32 filled_size;$/;"	m	struct:GenericBuffer	file:
+filter	.\include\cgltf.h	/^		cgltf_meshopt_compression_filter filter;$/;"	m	struct:cgltf_meshopt_compression
+first_free	.\include\stb_truetype.h	/^   void   *first_free;$/;"	m	struct:stbtt__hheap
+first_unicode_codepoint_in_range	.\include\stb_truetype.h	/^   int first_unicode_codepoint_in_range;  \/\/ if non-zero, then the chars are continuous, and this is the first codepoint$/;"	m	struct:__anon13
+first_x	.\include\stb_truetype.h	/^   float first_x, first_y;$/;"	m	struct:__anon23
+first_y	.\include\stb_truetype.h	/^   float first_x, first_y;$/;"	m	struct:__anon23
+font_size	.\include\stb_truetype.h	/^   float font_size;$/;"	m	struct:__anon13
+fontdicts	.\include\stb_truetype.h	/^   stbtt__buf fontdicts;              \/\/ array of font dicts$/;"	m	struct:stbtt_fontinfo
+fontstart	.\include\stb_truetype.h	/^   int              fontstart;         \/\/ offset of start of font$/;"	m	struct:stbtt_fontinfo
+format	.\asset_packer\main.cpp	/^	char* format; \/\/ format prepended with .$/;"	m	struct:FileInfo	file:
+free_func	.\include\cgltf.h	/^		void (*free_func) (void* user, void* ptr);$/;"	m	struct:cgltf_memory_options
+free_head	.\include\stb_rect_pack.h	/^   stbrp_node *free_head;$/;"	m	struct:stbrp_context
+ftex	.\include\stb_truetype.h	/^GLuint ftex;$/;"	v
+func	.\include\stb_image_write.h	/^   stbi_write_func *func;$/;"	m	struct:__anon5
+fx	.\include\stb_truetype.h	/^   float fx,fdx,fdy;$/;"	m	struct:stbtt__active_edge
+generator	.\include\cgltf.h	/^		char* generator;$/;"	m	struct:cgltf_asset
+glossiness_factor	.\include\cgltf.h	/^		cgltf_float glossiness_factor;$/;"	m	struct:cgltf_pbr_specular_glossiness
+glyf	.\include\stb_truetype.h	/^   int loca,head,glyf,hhea,hmtx,kern,gpos,svg; \/\/ table locations as offset from start of .ttf$/;"	m	struct:stbtt_fontinfo
+glyph1	.\include\stb_truetype.h	/^   int glyph1; \/\/ use stbtt_FindGlyphIndex$/;"	m	struct:stbtt_kerningentry
+glyph2	.\include\stb_truetype.h	/^   int glyph2;$/;"	m	struct:stbtt_kerningentry
+gpos	.\include\stb_truetype.h	/^   int loca,head,glyf,hhea,hmtx,kern,gpos,svg; \/\/ table locations as offset from start of .ttf$/;"	m	struct:stbtt_fontinfo
+gsubrs	.\include\stb_truetype.h	/^   stbtt__buf gsubrs;                 \/\/ global charstring subroutines index$/;"	m	struct:stbtt_fontinfo
+h	.\include\stb_rect_pack.h	/^   stbrp_coord    w, h;$/;"	m	struct:stbrp_rect
+h	.\include\stb_truetype.h	/^   int id,w,h,was_packed;$/;"	m	struct:stbrp_rect
+h	.\include\stb_truetype.h	/^   int w,h,stride;$/;"	m	struct:__anon16
+h_oversample	.\include\stb_truetype.h	/^   unsigned char h_oversample, v_oversample; \/\/ don't set these, they're used internally$/;"	m	struct:__anon13
+h_oversample	.\include\stb_truetype.h	/^   unsigned int   h_oversample, v_oversample;$/;"	m	struct:stbtt_pack_context
+has_aspect_ratio	.\include\cgltf.h	/^		cgltf_bool has_aspect_ratio;$/;"	m	struct:cgltf_camera_perspective
+has_basisu	.\include\cgltf.h	/^		cgltf_bool has_basisu;$/;"	m	struct:cgltf_texture
+has_clearcoat	.\include\cgltf.h	/^		cgltf_bool has_clearcoat;$/;"	m	struct:cgltf_material
+has_draco_mesh_compression	.\include\cgltf.h	/^		cgltf_bool has_draco_mesh_compression;$/;"	m	struct:cgltf_primitive
+has_emissive_strength	.\include\cgltf.h	/^		cgltf_bool has_emissive_strength;$/;"	m	struct:cgltf_material
+has_ior	.\include\cgltf.h	/^		cgltf_bool has_ior;$/;"	m	struct:cgltf_material
+has_iridescence	.\include\cgltf.h	/^		cgltf_bool has_iridescence;$/;"	m	struct:cgltf_material
+has_matrix	.\include\cgltf.h	/^		cgltf_bool has_matrix;$/;"	m	struct:cgltf_node
+has_max	.\include\cgltf.h	/^		cgltf_bool has_max;$/;"	m	struct:cgltf_accessor
+has_mesh_gpu_instancing	.\include\cgltf.h	/^		cgltf_bool has_mesh_gpu_instancing;$/;"	m	struct:cgltf_node
+has_meshopt_compression	.\include\cgltf.h	/^		cgltf_bool has_meshopt_compression;$/;"	m	struct:cgltf_buffer_view
+has_min	.\include\cgltf.h	/^		cgltf_bool has_min;$/;"	m	struct:cgltf_accessor
+has_pbr_metallic_roughness	.\include\cgltf.h	/^		cgltf_bool has_pbr_metallic_roughness;$/;"	m	struct:cgltf_material
+has_pbr_specular_glossiness	.\include\cgltf.h	/^		cgltf_bool has_pbr_specular_glossiness;$/;"	m	struct:cgltf_material
+has_rotation	.\include\cgltf.h	/^		cgltf_bool has_rotation;$/;"	m	struct:cgltf_node
+has_scale	.\include\cgltf.h	/^		cgltf_bool has_scale;$/;"	m	struct:cgltf_node
+has_sheen	.\include\cgltf.h	/^		cgltf_bool has_sheen;$/;"	m	struct:cgltf_material
+has_specular	.\include\cgltf.h	/^		cgltf_bool has_specular;$/;"	m	struct:cgltf_material
+has_texcoord	.\include\cgltf.h	/^		cgltf_bool has_texcoord;$/;"	m	struct:cgltf_texture_transform
+has_transform	.\include\cgltf.h	/^		cgltf_bool has_transform;$/;"	m	struct:cgltf_texture_view
+has_translation	.\include\cgltf.h	/^		cgltf_bool has_translation;$/;"	m	struct:cgltf_node
+has_transmission	.\include\cgltf.h	/^		cgltf_bool has_transmission;$/;"	m	struct:cgltf_material
+has_volume	.\include\cgltf.h	/^		cgltf_bool has_volume;$/;"	m	struct:cgltf_material
+has_zfar	.\include\cgltf.h	/^		cgltf_bool has_zfar;$/;"	m	struct:cgltf_camera_perspective
+head	.\include\stb_truetype.h	/^   int loca,head,glyf,hhea,hmtx,kern,gpos,svg; \/\/ table locations as offset from start of .ttf$/;"	m	struct:stbtt_fontinfo
+head	.\include\stb_truetype.h	/^   struct stbtt__hheap_chunk *head;$/;"	m	struct:stbtt__hheap	typeref:struct:stbtt__hheap::stbtt__hheap_chunk
+height	.\include\stb_rect_pack.h	/^   int height;$/;"	m	struct:stbrp_context
+height	.\include\stb_truetype.h	/^   int   height;$/;"	m	struct:stbtt_pack_context
+height	.\include\stb_truetype.h	/^   int width,height;$/;"	m	struct:__anon25
+height_of_char_in_bitmap	.\rasterize_font_and_dump_bitmap\src\main.cpp	/^	unsigned short height_of_char_in_bitmap;	$/;"	m	struct:FontInfo	file:
+heuristic	.\include\stb_rect_pack.h	/^   int heuristic;$/;"	m	struct:stbrp_context
+hhea	.\include\stb_truetype.h	/^   int loca,head,glyf,hhea,hmtx,kern,gpos,svg; \/\/ table locations as offset from start of .ttf$/;"	m	struct:stbtt_fontinfo
+hmtx	.\include\stb_truetype.h	/^   int loca,head,glyf,hhea,hmtx,kern,gpos,svg; \/\/ table locations as offset from start of .ttf$/;"	m	struct:stbtt_fontinfo
+id	.\include\stb_rect_pack.h	/^   int            id;$/;"	m	struct:stbrp_rect
+id	.\include\stb_truetype.h	/^   int id,w,h,was_packed;$/;"	m	struct:stbrp_rect
+image	.\include\cgltf.h	/^		cgltf_image* image;$/;"	m	struct:cgltf_texture
+images	.\include\cgltf.h	/^		cgltf_image* images;$/;"	m	struct:cgltf_data
+images_count	.\include\cgltf.h	/^		cgltf_size images_count;$/;"	m	struct:cgltf_data
+index	.\include\cgltf.h	/^		cgltf_int index;$/;"	m	struct:cgltf_attribute
+indexToLocFormat	.\include\stb_truetype.h	/^   int indexToLocFormat;              \/\/ format needed to map from glyph index to glyph$/;"	m	struct:stbtt_fontinfo
+index_map	.\include\stb_truetype.h	/^   int index_map;                     \/\/ a cmap mapping for our chosen character encoding$/;"	m	struct:stbtt_fontinfo
+indices	.\include\cgltf.h	/^		cgltf_accessor* indices;$/;"	m	struct:cgltf_primitive
+indices_buffer_view	.\include\cgltf.h	/^		cgltf_buffer_view* indices_buffer_view;$/;"	m	struct:cgltf_accessor_sparse
+indices_byte_offset	.\include\cgltf.h	/^		cgltf_size indices_byte_offset;$/;"	m	struct:cgltf_accessor_sparse
+indices_component_type	.\include\cgltf.h	/^		cgltf_component_type indices_component_type;$/;"	m	struct:cgltf_accessor_sparse
+indices_extensions	.\include\cgltf.h	/^		cgltf_extension* indices_extensions;$/;"	m	struct:cgltf_accessor_sparse
+indices_extensions_count	.\include\cgltf.h	/^		cgltf_size indices_extensions_count;$/;"	m	struct:cgltf_accessor_sparse
+indices_extras	.\include\cgltf.h	/^		cgltf_extras indices_extras;$/;"	m	struct:cgltf_accessor_sparse
+init_mode	.\include\stb_rect_pack.h	/^   int init_mode;$/;"	m	struct:stbrp_context
+input	.\include\cgltf.h	/^		cgltf_accessor* input;$/;"	m	struct:cgltf_animation_sampler
+intensity	.\include\cgltf.h	/^		cgltf_float intensity;$/;"	m	struct:cgltf_light
+interpolation	.\include\cgltf.h	/^		cgltf_interpolation_type interpolation;$/;"	m	struct:cgltf_animation_sampler
+inverse_bind_matrices	.\include\cgltf.h	/^		cgltf_accessor* inverse_bind_matrices;$/;"	m	struct:cgltf_skin
+invert	.\include\stb_truetype.h	/^   int invert;$/;"	m	struct:stbtt__edge
+ior	.\include\cgltf.h	/^		cgltf_float ior;$/;"	m	struct:cgltf_ior
+ior	.\include\cgltf.h	/^		cgltf_ior ior;$/;"	m	struct:cgltf_material
+iridescence	.\include\cgltf.h	/^		cgltf_iridescence iridescence;$/;"	m	struct:cgltf_material
+iridescence_factor	.\include\cgltf.h	/^		cgltf_float iridescence_factor;$/;"	m	struct:cgltf_iridescence
+iridescence_ior	.\include\cgltf.h	/^		cgltf_float iridescence_ior;$/;"	m	struct:cgltf_iridescence
+iridescence_texture	.\include\cgltf.h	/^		cgltf_texture_view iridescence_texture;$/;"	m	struct:cgltf_iridescence
+iridescence_thickness_max	.\include\cgltf.h	/^		cgltf_float iridescence_thickness_max;$/;"	m	struct:cgltf_iridescence
+iridescence_thickness_min	.\include\cgltf.h	/^		cgltf_float iridescence_thickness_min;$/;"	m	struct:cgltf_iridescence
+iridescence_thickness_texture	.\include\cgltf.h	/^		cgltf_texture_view iridescence_thickness_texture;$/;"	m	struct:cgltf_iridescence
+is_sparse	.\include\cgltf.h	/^		cgltf_bool is_sparse;$/;"	m	struct:cgltf_accessor
+joints	.\include\cgltf.h	/^		cgltf_node** joints;$/;"	m	struct:cgltf_skin
+joints_count	.\include\cgltf.h	/^		cgltf_size joints_count;$/;"	m	struct:cgltf_skin
+jsmn_alloc_token	.\include\cgltf.h	/^static jsmntok_t *jsmn_alloc_token(jsmn_parser *parser,$/;"	f
+jsmn_fill_token	.\include\cgltf.h	/^static void jsmn_fill_token(jsmntok_t *token, jsmntype_t type,$/;"	f
+jsmn_init	.\include\cgltf.h	/^static void jsmn_init(jsmn_parser *parser) {$/;"	f
+jsmn_parse	.\include\cgltf.h	/^static int jsmn_parse(jsmn_parser *parser, const char *js, size_t len,$/;"	f
+jsmn_parse_primitive	.\include\cgltf.h	/^static int jsmn_parse_primitive(jsmn_parser *parser, const char *js,$/;"	f
+jsmn_parse_string	.\include\cgltf.h	/^static int jsmn_parse_string(jsmn_parser *parser, const char *js,$/;"	f
+jsmn_parser	.\include\cgltf.h	/^} jsmn_parser;$/;"	t	typeref:struct:__anon4
+jsmnerr	.\include\cgltf.h	/^enum jsmnerr {$/;"	g
+jsmntok_t	.\include\cgltf.h	/^} jsmntok_t;$/;"	t	typeref:struct:__anon3
+jsmntype_t	.\include\cgltf.h	/^} jsmntype_t;$/;"	t	typeref:enum:__anon2
+json	.\include\cgltf.h	/^		const char* json;$/;"	m	struct:cgltf_data
+json_size	.\include\cgltf.h	/^		cgltf_size json_size;$/;"	m	struct:cgltf_data
+json_token_count	.\include\cgltf.h	/^		cgltf_size json_token_count; \/* 0 == auto *\/$/;"	m	struct:cgltf_options
+kern	.\include\stb_truetype.h	/^   int loca,head,glyf,hhea,hmtx,kern,gpos,svg; \/\/ table locations as offset from start of .ttf$/;"	m	struct:stbtt_fontinfo
+light	.\include\cgltf.h	/^		cgltf_light* light;$/;"	m	struct:cgltf_node
+lights	.\include\cgltf.h	/^		cgltf_light* lights;$/;"	m	struct:cgltf_data
+lights_count	.\include\cgltf.h	/^		cgltf_size lights_count;$/;"	m	struct:cgltf_data
+line_gap	.\rasterize_font_and_dump_bitmap\src\main.cpp	/^	int ascent, descent, line_gap, baseline;	\/\/ advance vertical position by (ascent - descent + line_gap)$/;"	m	struct:FontInfo	file:
+loca	.\include\stb_truetype.h	/^   int loca,head,glyf,hhea,hmtx,kern,gpos,svg; \/\/ table locations as offset from start of .ttf$/;"	m	struct:stbtt_fontinfo
+mag_filter	.\include\cgltf.h	/^		cgltf_int mag_filter;$/;"	m	struct:cgltf_sampler
+main	.\asset_packer\main.cpp	/^int main(int argc, char** argv) {$/;"	f
+main	.\include\stb_truetype.h	/^int main(int argc, char **argv)$/;"	f
+main	.\rasterize_font_and_dump_bitmap\src\main.cpp	/^int main(int argc, char** argv) {$/;"	f
+mappings	.\include\cgltf.h	/^		cgltf_material_mapping* mappings;$/;"	m	struct:cgltf_primitive
+mappings_count	.\include\cgltf.h	/^		cgltf_size mappings_count;$/;"	m	struct:cgltf_primitive
+material	.\include\cgltf.h	/^		cgltf_material* material;$/;"	m	struct:cgltf_material_mapping
+material	.\include\cgltf.h	/^		cgltf_material* material;$/;"	m	struct:cgltf_primitive
+materials	.\include\cgltf.h	/^		cgltf_material* materials;$/;"	m	struct:cgltf_data
+materials_count	.\include\cgltf.h	/^		cgltf_size materials_count;$/;"	m	struct:cgltf_data
+matrix	.\include\cgltf.h	/^		cgltf_float matrix[16];$/;"	m	struct:cgltf_node
+max	.\include\cgltf.h	/^		cgltf_float max[16];$/;"	m	struct:cgltf_accessor
+max_x	.\include\stb_truetype.h	/^   stbtt_int32 min_x, max_x, min_y, max_y;$/;"	m	struct:__anon23
+max_y	.\include\stb_truetype.h	/^   stbtt_int32 min_x, max_x, min_y, max_y;$/;"	m	struct:__anon23
+memory	.\include\cgltf.h	/^		cgltf_memory_options memory;$/;"	m	struct:cgltf_data
+memory	.\include\cgltf.h	/^		cgltf_memory_options memory;$/;"	m	struct:cgltf_options
+mesh	.\include\cgltf.h	/^		cgltf_mesh* mesh;$/;"	m	struct:cgltf_node
+mesh_gpu_instancing	.\include\cgltf.h	/^		cgltf_mesh_gpu_instancing mesh_gpu_instancing;$/;"	m	struct:cgltf_node
+meshes	.\include\cgltf.h	/^		cgltf_mesh* meshes;$/;"	m	struct:cgltf_data
+meshes_count	.\include\cgltf.h	/^		cgltf_size meshes_count;$/;"	m	struct:cgltf_data
+meshopt_compression	.\include\cgltf.h	/^		cgltf_meshopt_compression meshopt_compression;$/;"	m	struct:cgltf_buffer_view
+metallic_factor	.\include\cgltf.h	/^		cgltf_float metallic_factor;$/;"	m	struct:cgltf_pbr_metallic_roughness
+metallic_roughness_texture	.\include\cgltf.h	/^		cgltf_texture_view metallic_roughness_texture;$/;"	m	struct:cgltf_pbr_metallic_roughness
+mime_type	.\include\cgltf.h	/^		char* mime_type;$/;"	m	struct:cgltf_image
+min	.\include\cgltf.h	/^		cgltf_float min[16];$/;"	m	struct:cgltf_accessor
+min_filter	.\include\cgltf.h	/^		cgltf_int min_filter;$/;"	m	struct:cgltf_sampler
+min_version	.\include\cgltf.h	/^		char* min_version;$/;"	m	struct:cgltf_asset
+min_x	.\include\stb_truetype.h	/^   stbtt_int32 min_x, max_x, min_y, max_y;$/;"	m	struct:__anon23
+min_y	.\include\stb_truetype.h	/^   stbtt_int32 min_x, max_x, min_y, max_y;$/;"	m	struct:__anon23
+mode	.\include\cgltf.h	/^		cgltf_meshopt_compression_mode mode;$/;"	m	struct:cgltf_meshopt_compression
+my_stbtt_initfont	.\include\stb_truetype.h	/^void my_stbtt_initfont(void)$/;"	f
+my_stbtt_print	.\include\stb_truetype.h	/^void my_stbtt_print(float x, float y, char *text)$/;"	f
+name	.\asset_packer\main.cpp	/^	char* name;  \/\/ filename without format$/;"	m	struct:FileInfo	file:
+name	.\include\cgltf.h	/^		char *name;$/;"	m	struct:cgltf_buffer_view
+name	.\include\cgltf.h	/^		char* name;$/;"	m	struct:cgltf_accessor
+name	.\include\cgltf.h	/^		char* name;$/;"	m	struct:cgltf_animation
+name	.\include\cgltf.h	/^		char* name;$/;"	m	struct:cgltf_attribute
+name	.\include\cgltf.h	/^		char* name;$/;"	m	struct:cgltf_buffer
+name	.\include\cgltf.h	/^		char* name;$/;"	m	struct:cgltf_camera
+name	.\include\cgltf.h	/^		char* name;$/;"	m	struct:cgltf_extension
+name	.\include\cgltf.h	/^		char* name;$/;"	m	struct:cgltf_image
+name	.\include\cgltf.h	/^		char* name;$/;"	m	struct:cgltf_light
+name	.\include\cgltf.h	/^		char* name;$/;"	m	struct:cgltf_material
+name	.\include\cgltf.h	/^		char* name;$/;"	m	struct:cgltf_material_variant
+name	.\include\cgltf.h	/^		char* name;$/;"	m	struct:cgltf_mesh
+name	.\include\cgltf.h	/^		char* name;$/;"	m	struct:cgltf_node
+name	.\include\cgltf.h	/^		char* name;$/;"	m	struct:cgltf_sampler
+name	.\include\cgltf.h	/^		char* name;$/;"	m	struct:cgltf_scene
+name	.\include\cgltf.h	/^		char* name;$/;"	m	struct:cgltf_skin
+name	.\include\cgltf.h	/^		char* name;$/;"	m	struct:cgltf_texture
+next	.\include\stb_rect_pack.h	/^   stbrp_node  *next;$/;"	m	struct:stbrp_node
+next	.\include\stb_truetype.h	/^   struct stbtt__active_edge *next;$/;"	m	struct:stbtt__active_edge	typeref:struct:stbtt__active_edge::stbtt__active_edge
+next	.\include\stb_truetype.h	/^   struct stbtt__hheap_chunk *next;$/;"	m	struct:stbtt__hheap_chunk	typeref:struct:stbtt__hheap_chunk::stbtt__hheap_chunk
+nodes	.\include\cgltf.h	/^		cgltf_node* nodes;$/;"	m	struct:cgltf_data
+nodes	.\include\cgltf.h	/^		cgltf_node** nodes;$/;"	m	struct:cgltf_scene
+nodes	.\include\stb_truetype.h	/^   void  *nodes;$/;"	m	struct:stbtt_pack_context
+nodes_count	.\include\cgltf.h	/^		cgltf_size nodes_count;$/;"	m	struct:cgltf_data
+nodes_count	.\include\cgltf.h	/^		cgltf_size nodes_count;$/;"	m	struct:cgltf_scene
+normal_texture	.\include\cgltf.h	/^		cgltf_texture_view normal_texture;$/;"	m	struct:cgltf_material
+normalized	.\include\cgltf.h	/^		cgltf_bool normalized;$/;"	m	struct:cgltf_accessor
+numGlyphs	.\include\stb_truetype.h	/^   int numGlyphs;                     \/\/ number of glyphs, needed for range checking$/;"	m	struct:stbtt_fontinfo
+num_chars	.\include\stb_truetype.h	/^   int num_chars;$/;"	m	struct:__anon13
+num_nodes	.\include\stb_rect_pack.h	/^   int num_nodes;$/;"	m	struct:stbrp_context
+num_remaining_in_head_chunk	.\include\stb_truetype.h	/^   int    num_remaining_in_head_chunk;$/;"	m	struct:stbtt__hheap
+num_vertices	.\include\stb_truetype.h	/^   int num_vertices;$/;"	m	struct:__anon23
+occlusion_texture	.\include\cgltf.h	/^		cgltf_texture_view occlusion_texture;$/;"	m	struct:cgltf_material
+offset	.\include\cgltf.h	/^		cgltf_float offset[2];$/;"	m	struct:cgltf_texture_transform
+offset	.\include\cgltf.h	/^		cgltf_size offset;$/;"	m	struct:cgltf_accessor
+offset	.\include\cgltf.h	/^		cgltf_size offset;$/;"	m	struct:cgltf_buffer_view
+offset	.\include\cgltf.h	/^		cgltf_size offset;$/;"	m	struct:cgltf_meshopt_compression
+orthographic	.\include\cgltf.h	/^			cgltf_camera_orthographic orthographic;$/;"	m	union:cgltf_camera::__anon1
+output	.\include\cgltf.h	/^		cgltf_accessor* output;$/;"	m	struct:cgltf_animation_sampler
+pack_info	.\include\stb_truetype.h	/^   void *pack_info;$/;"	m	struct:stbtt_pack_context
+packed_chars	.\rasterize_font_and_dump_bitmap\src\main.cpp	/^	stbtt_packedchar packed_chars[FONT_CHARS_TOTAL];$/;"	m	struct:FontInfo	file:
+padding	.\include\stb_truetype.h	/^      unsigned char type,padding;$/;"	m	struct:__anon15
+padding	.\include\stb_truetype.h	/^   int   padding;$/;"	m	struct:stbtt_pack_context
+parent	.\include\cgltf.h	/^		cgltf_node* parent;$/;"	m	struct:cgltf_node
+parent	.\include\cgltf.h	/^	int parent;$/;"	m	struct:__anon3
+pbr_metallic_roughness	.\include\cgltf.h	/^		cgltf_pbr_metallic_roughness pbr_metallic_roughness;$/;"	m	struct:cgltf_material
+pbr_specular_glossiness	.\include\cgltf.h	/^		cgltf_pbr_specular_glossiness pbr_specular_glossiness;$/;"	m	struct:cgltf_material
+perspective	.\include\cgltf.h	/^			cgltf_camera_perspective perspective;$/;"	m	union:cgltf_camera::__anon1
+pixels	.\include\stb_truetype.h	/^   unsigned char *pixels;$/;"	m	struct:__anon16
+pixels	.\include\stb_truetype.h	/^   unsigned char *pixels;$/;"	m	struct:stbtt_pack_context
+pos	.\include\cgltf.h	/^	unsigned int pos; \/* offset in the JSON string *\/$/;"	m	struct:__anon4
+prev_link	.\include\stb_rect_pack.h	/^   stbrp_node **prev_link;$/;"	m	struct:__anon8
+primitives	.\include\cgltf.h	/^		cgltf_primitive* primitives;$/;"	m	struct:cgltf_mesh
+primitives_count	.\include\cgltf.h	/^		cgltf_size primitives_count;$/;"	m	struct:cgltf_mesh
+pvertices	.\include\stb_truetype.h	/^   stbtt_vertex *pvertices;$/;"	m	struct:__anon23
+range	.\include\cgltf.h	/^		cgltf_float range;$/;"	m	struct:cgltf_light
+read	.\include\cgltf.h	/^		cgltf_result(*read)(const struct cgltf_memory_options* memory_options, const struct cgltf_file_options* file_options, const char* path, cgltf_size* size, void** data);$/;"	m	struct:cgltf_file_options
+rect_height_compare	.\include\stb_rect_pack.h	/^static int STBRP__CDECL rect_height_compare(const void *a, const void *b)$/;"	f
+rect_original_order	.\include\stb_rect_pack.h	/^static int STBRP__CDECL rect_original_order(const void *a, const void *b)$/;"	f
+release	.\include\cgltf.h	/^		void (*release)(const struct cgltf_memory_options* memory_options, const struct cgltf_file_options* file_options, void* data);$/;"	m	struct:cgltf_file_options
+rotation	.\include\cgltf.h	/^		cgltf_float rotation;$/;"	m	struct:cgltf_texture_transform
+rotation	.\include\cgltf.h	/^		cgltf_float rotation[4];$/;"	m	struct:cgltf_node
+roughness_factor	.\include\cgltf.h	/^		cgltf_float roughness_factor;$/;"	m	struct:cgltf_pbr_metallic_roughness
+s0	.\include\stb_truetype.h	/^   float x0,y0,s0,t0; \/\/ top-left$/;"	m	struct:__anon11
+s1	.\include\stb_truetype.h	/^   float x1,y1,s1,t1; \/\/ bottom-right$/;"	m	struct:__anon11
+sampler	.\include\cgltf.h	/^		cgltf_animation_sampler* sampler;$/;"	m	struct:cgltf_animation_channel
+sampler	.\include\cgltf.h	/^		cgltf_sampler* sampler;$/;"	m	struct:cgltf_texture
+samplers	.\include\cgltf.h	/^		cgltf_animation_sampler* samplers;$/;"	m	struct:cgltf_animation
+samplers	.\include\cgltf.h	/^		cgltf_sampler* samplers;$/;"	m	struct:cgltf_data
+samplers_count	.\include\cgltf.h	/^		cgltf_size samplers_count;$/;"	m	struct:cgltf_animation
+samplers_count	.\include\cgltf.h	/^		cgltf_size samplers_count;$/;"	m	struct:cgltf_data
+scale	.\include\cgltf.h	/^		cgltf_float scale; \/* equivalent to strength for occlusion_texture *\/$/;"	m	struct:cgltf_texture_view
+scale	.\include\cgltf.h	/^		cgltf_float scale[2];$/;"	m	struct:cgltf_texture_transform
+scale	.\include\cgltf.h	/^		cgltf_float scale[3];$/;"	m	struct:cgltf_node
+scene	.\include\cgltf.h	/^		cgltf_scene* scene;$/;"	m	struct:cgltf_data
+scenes	.\include\cgltf.h	/^		cgltf_scene* scenes;$/;"	m	struct:cgltf_data
+scenes_count	.\include\cgltf.h	/^		cgltf_size scenes_count;$/;"	m	struct:cgltf_data
+sheen	.\include\cgltf.h	/^		cgltf_sheen sheen;$/;"	m	struct:cgltf_material
+sheen_color_factor	.\include\cgltf.h	/^		cgltf_float sheen_color_factor[3];$/;"	m	struct:cgltf_sheen
+sheen_color_texture	.\include\cgltf.h	/^		cgltf_texture_view sheen_color_texture;$/;"	m	struct:cgltf_sheen
+sheen_roughness_factor	.\include\cgltf.h	/^		cgltf_float sheen_roughness_factor;$/;"	m	struct:cgltf_sheen
+sheen_roughness_texture	.\include\cgltf.h	/^		cgltf_texture_view sheen_roughness_texture;$/;"	m	struct:cgltf_sheen
+size	.\asset_packer\main.cpp	/^	u64 size;$/;"	m	struct:FileInfo	file:
+size	.\include\cgltf.h	/^		cgltf_size size;$/;"	m	struct:cgltf_buffer
+size	.\include\cgltf.h	/^		cgltf_size size;$/;"	m	struct:cgltf_buffer_view
+size	.\include\cgltf.h	/^		cgltf_size size;$/;"	m	struct:cgltf_meshopt_compression
+size	.\include\cgltf.h	/^	int size;$/;"	m	struct:__anon3
+size	.\include\stb_truetype.h	/^   int size;$/;"	m	struct:__anon9
+skeleton	.\include\cgltf.h	/^		cgltf_node* skeleton;$/;"	m	struct:cgltf_skin
+skin	.\include\cgltf.h	/^		cgltf_skin* skin;$/;"	m	struct:cgltf_node
+skins	.\include\cgltf.h	/^		cgltf_skin* skins;$/;"	m	struct:cgltf_data
+skins_count	.\include\cgltf.h	/^		cgltf_size skins_count;$/;"	m	struct:cgltf_data
+skip_missing	.\include\stb_truetype.h	/^   int   skip_missing;$/;"	m	struct:stbtt_pack_context
+sparse	.\include\cgltf.h	/^		cgltf_accessor_sparse sparse;$/;"	m	struct:cgltf_accessor
+specular	.\include\cgltf.h	/^		cgltf_specular specular;$/;"	m	struct:cgltf_material
+specular_color_factor	.\include\cgltf.h	/^		cgltf_float specular_color_factor[3];$/;"	m	struct:cgltf_specular
+specular_color_texture	.\include\cgltf.h	/^		cgltf_texture_view specular_color_texture;$/;"	m	struct:cgltf_specular
+specular_factor	.\include\cgltf.h	/^		cgltf_float specular_factor;$/;"	m	struct:cgltf_specular
+specular_factor	.\include\cgltf.h	/^		cgltf_float specular_factor[3];$/;"	m	struct:cgltf_pbr_specular_glossiness
+specular_glossiness_texture	.\include\cgltf.h	/^		cgltf_texture_view specular_glossiness_texture;$/;"	m	struct:cgltf_pbr_specular_glossiness
+specular_texture	.\include\cgltf.h	/^		cgltf_texture_view specular_texture;$/;"	m	struct:cgltf_specular
+spot_inner_cone_angle	.\include\cgltf.h	/^		cgltf_float spot_inner_cone_angle;$/;"	m	struct:cgltf_light
+spot_outer_cone_angle	.\include\cgltf.h	/^		cgltf_float spot_outer_cone_angle;$/;"	m	struct:cgltf_light
+start	.\include\cgltf.h	/^	int start;$/;"	m	struct:__anon3
+start_offset	.\include\cgltf.h	/^		cgltf_size start_offset;$/;"	m	struct:cgltf_extras
+started	.\include\stb_truetype.h	/^   int started;$/;"	m	struct:__anon23
+stb_image_write_test	.\include\stb_image_write.h	/^typedef int stb_image_write_test[sizeof(stbiw_uint32)==4 ? 1 : -1];$/;"	t
+stbi__end_write_file	.\include\stb_image_write.h	/^static void stbi__end_write_file(stbi__write_context *s)$/;"	f
+stbi__flip_vertically_on_write	.\include\stb_image_write.h	/^static int stbi__flip_vertically_on_write = 0;$/;"	v
+stbi__start_write_callbacks	.\include\stb_image_write.h	/^static void stbi__start_write_callbacks(stbi__write_context *s, stbi_write_func *c, void *context)$/;"	f
+stbi__start_write_file	.\include\stb_image_write.h	/^static int stbi__start_write_file(stbi__write_context *s, const char *filename)$/;"	f
+stbi__stdio_write	.\include\stb_image_write.h	/^static void stbi__stdio_write(void *context, void *data, int size)$/;"	f
+stbi__write_context	.\include\stb_image_write.h	/^} stbi__write_context;$/;"	t	typeref:struct:__anon5
+stbi_flip_vertically_on_write	.\include\stb_image_write.h	/^STBIWDEF void stbi_flip_vertically_on_write(int flag)$/;"	f
+stbi_write_bmp	.\include\stb_image_write.h	/^STBIWDEF int stbi_write_bmp(char const *filename, int x, int y, int comp, const void *data)$/;"	f
+stbi_write_bmp_core	.\include\stb_image_write.h	/^static int stbi_write_bmp_core(stbi__write_context *s, int x, int y, int comp, const void *data)$/;"	f
+stbi_write_bmp_to_func	.\include\stb_image_write.h	/^STBIWDEF int stbi_write_bmp_to_func(stbi_write_func *func, void *context, int x, int y, int comp, const void *data)$/;"	f
+stbi_write_force_png_filter	.\include\stb_image_write.h	/^STBIWDEF int stbi_write_force_png_filter;$/;"	v
+stbi_write_force_png_filter	.\include\stb_image_write.h	/^int stbi_write_force_png_filter = -1;$/;"	v
+stbi_write_force_png_filter	.\include\stb_image_write.h	/^static int stbi_write_force_png_filter = -1;$/;"	v
+stbi_write_func	.\include\stb_image_write.h	/^typedef void stbi_write_func(void *context, void *data, int size);$/;"	t
+stbi_write_hdr	.\include\stb_image_write.h	/^STBIWDEF int stbi_write_hdr(char const *filename, int x, int y, int comp, const float *data)$/;"	f
+stbi_write_hdr_core	.\include\stb_image_write.h	/^static int stbi_write_hdr_core(stbi__write_context *s, int x, int y, int comp, float *data)$/;"	f
+stbi_write_hdr_to_func	.\include\stb_image_write.h	/^STBIWDEF int stbi_write_hdr_to_func(stbi_write_func *func, void *context, int x, int y, int comp, const float *data)$/;"	f
+stbi_write_jpg	.\include\stb_image_write.h	/^STBIWDEF int stbi_write_jpg(char const *filename, int x, int y, int comp, const void *data, int quality)$/;"	f
+stbi_write_jpg_core	.\include\stb_image_write.h	/^static int stbi_write_jpg_core(stbi__write_context *s, int width, int height, int comp, const void* data, int quality) {$/;"	f
+stbi_write_jpg_to_func	.\include\stb_image_write.h	/^STBIWDEF int stbi_write_jpg_to_func(stbi_write_func *func, void *context, int x, int y, int comp, const void *data, int quality)$/;"	f
+stbi_write_png	.\include\stb_image_write.h	/^STBIWDEF int stbi_write_png(char const *filename, int x, int y, int comp, const void *data, int stride_bytes)$/;"	f
+stbi_write_png_compression_level	.\include\stb_image_write.h	/^STBIWDEF int stbi_write_png_compression_level;$/;"	v
+stbi_write_png_compression_level	.\include\stb_image_write.h	/^int stbi_write_png_compression_level = 8;$/;"	v
+stbi_write_png_compression_level	.\include\stb_image_write.h	/^static int stbi_write_png_compression_level = 8;$/;"	v
+stbi_write_png_to_func	.\include\stb_image_write.h	/^STBIWDEF int stbi_write_png_to_func(stbi_write_func *func, void *context, int x, int y, int comp, const void *data, int stride_bytes)$/;"	f
+stbi_write_png_to_mem	.\include\stb_image_write.h	/^STBIWDEF unsigned char *stbi_write_png_to_mem(const unsigned char *pixels, int stride_bytes, int x, int y, int n, int *out_len)$/;"	f
+stbi_write_tga	.\include\stb_image_write.h	/^STBIWDEF int stbi_write_tga(char const *filename, int x, int y, int comp, const void *data)$/;"	f
+stbi_write_tga_core	.\include\stb_image_write.h	/^static int stbi_write_tga_core(stbi__write_context *s, int x, int y, int comp, void *data)$/;"	f
+stbi_write_tga_to_func	.\include\stb_image_write.h	/^STBIWDEF int stbi_write_tga_to_func(stbi_write_func *func, void *context, int x, int y, int comp, const void *data)$/;"	f
+stbi_write_tga_with_rle	.\include\stb_image_write.h	/^STBIWDEF int stbi_write_tga_with_rle;$/;"	v
+stbi_write_tga_with_rle	.\include\stb_image_write.h	/^int stbi_write_tga_with_rle = 1;$/;"	v
+stbi_write_tga_with_rle	.\include\stb_image_write.h	/^static int stbi_write_tga_with_rle = 1;$/;"	v
+stbi_zlib_compress	.\include\stb_image_write.h	/^STBIWDEF unsigned char * stbi_zlib_compress(unsigned char *data, int data_len, int *out_len, int quality)$/;"	f
+stbiw__ZHASH	.\include\stb_image_write.h	891;"	d
+stbiw__crc32	.\include\stb_image_write.h	/^static unsigned int stbiw__crc32(unsigned char *buffer, int len)$/;"	f
+stbiw__encode_png_line	.\include\stb_image_write.h	/^static void stbiw__encode_png_line(unsigned char *pixels, int stride_bytes, int width, int height, int y, int n, int filter_type, signed char *line_buffer)$/;"	f
+stbiw__fopen	.\include\stb_image_write.h	/^static FILE *stbiw__fopen(char const *filename, char const *mode)$/;"	f
+stbiw__jpg_DCT	.\include\stb_image_write.h	/^static void stbiw__jpg_DCT(float *d0p, float *d1p, float *d2p, float *d3p, float *d4p, float *d5p, float *d6p, float *d7p) {$/;"	f
+stbiw__jpg_ZigZag	.\include\stb_image_write.h	/^static const unsigned char stbiw__jpg_ZigZag[] = { 0,1,5,6,14,15,27,28,2,4,7,13,16,26,29,42,3,8,12,17,25,30,41,43,9,11,18,$/;"	v
+stbiw__jpg_calcBits	.\include\stb_image_write.h	/^static void stbiw__jpg_calcBits(int val, unsigned short bits[2]) {$/;"	f
+stbiw__jpg_processDU	.\include\stb_image_write.h	/^static int stbiw__jpg_processDU(stbi__write_context *s, int *bitBuf, int *bitCnt, float *CDU, int du_stride, float *fdtbl, int DC, const unsigned short HTDC[256][2], const unsigned short HTAC[256][2]) {$/;"	f
+stbiw__jpg_writeBits	.\include\stb_image_write.h	/^static void stbiw__jpg_writeBits(stbi__write_context *s, int *bitBufP, int *bitCntP, const unsigned short *bs) {$/;"	f
+stbiw__linear_to_rgbe	.\include\stb_image_write.h	/^static void stbiw__linear_to_rgbe(unsigned char *rgbe, float *linear)$/;"	f
+stbiw__max	.\include\stb_image_write.h	635;"	d
+stbiw__outfile	.\include\stb_image_write.h	/^static int stbiw__outfile(stbi__write_context *s, int rgb_dir, int vdir, int x, int y, int comp, int expand_mono, void *data, int alpha, int pad, const char *fmt, ...)$/;"	f
+stbiw__paeth	.\include\stb_image_write.h	/^static unsigned char stbiw__paeth(int a, int b, int c)$/;"	f
+stbiw__putc	.\include\stb_image_write.h	/^static void stbiw__putc(stbi__write_context *s, unsigned char c)$/;"	f
+stbiw__sbcount	.\include\stb_image_write.h	823;"	d
+stbiw__sbfree	.\include\stb_image_write.h	824;"	d
+stbiw__sbgrow	.\include\stb_image_write.h	820;"	d
+stbiw__sbgrowf	.\include\stb_image_write.h	/^static void *stbiw__sbgrowf(void **arr, int increment, int itemsize)$/;"	f
+stbiw__sbm	.\include\stb_image_write.h	815;"	d
+stbiw__sbmaybegrow	.\include\stb_image_write.h	819;"	d
+stbiw__sbn	.\include\stb_image_write.h	816;"	d
+stbiw__sbneedgrow	.\include\stb_image_write.h	818;"	d
+stbiw__sbpush	.\include\stb_image_write.h	822;"	d
+stbiw__sbraw	.\include\stb_image_write.h	814;"	d
+stbiw__wp32	.\include\stb_image_write.h	1074;"	d
+stbiw__wpcrc	.\include\stb_image_write.h	/^static void stbiw__wpcrc(unsigned char **data, int len)$/;"	f
+stbiw__wpng4	.\include\stb_image_write.h	1073;"	d
+stbiw__wptag	.\include\stb_image_write.h	1075;"	d
+stbiw__write1	.\include\stb_image_write.h	/^static void stbiw__write1(stbi__write_context *s, unsigned char a)$/;"	f
+stbiw__write3	.\include\stb_image_write.h	/^static void stbiw__write3(stbi__write_context *s, unsigned char a, unsigned char b, unsigned char c)$/;"	f
+stbiw__write_dump_data	.\include\stb_image_write.h	/^static void stbiw__write_dump_data(stbi__write_context *s, int length, unsigned char *data)$/;"	f
+stbiw__write_flush	.\include\stb_image_write.h	/^static void stbiw__write_flush(stbi__write_context *s)$/;"	f
+stbiw__write_hdr_scanline	.\include\stb_image_write.h	/^static void stbiw__write_hdr_scanline(stbi__write_context *s, int width, int ncomp, unsigned char *scratch, float *scanline)$/;"	f
+stbiw__write_pixel	.\include\stb_image_write.h	/^static void stbiw__write_pixel(stbi__write_context *s, int rgb_dir, int comp, int write_alpha, int expand_mono, unsigned char *d)$/;"	f
+stbiw__write_pixels	.\include\stb_image_write.h	/^static void stbiw__write_pixels(stbi__write_context *s, int rgb_dir, int vdir, int x, int y, int comp, void *data, int write_alpha, int scanline_pad, int expand_mono)$/;"	f
+stbiw__write_run_data	.\include\stb_image_write.h	/^static void stbiw__write_run_data(stbi__write_context *s, int length, unsigned char databyte)$/;"	f
+stbiw__writef	.\include\stb_image_write.h	/^static void stbiw__writef(stbi__write_context *s, const char *fmt, ...)$/;"	f
+stbiw__writefv	.\include\stb_image_write.h	/^static void stbiw__writefv(stbi__write_context *s, const char *fmt, va_list v)$/;"	f
+stbiw__zhash	.\include\stb_image_write.h	/^static unsigned int stbiw__zhash(unsigned char *data)$/;"	f
+stbiw__zlib_add	.\include\stb_image_write.h	880;"	d
+stbiw__zlib_bitrev	.\include\stb_image_write.h	/^static int stbiw__zlib_bitrev(int code, int codebits)$/;"	f
+stbiw__zlib_countm	.\include\stb_image_write.h	/^static unsigned int stbiw__zlib_countm(unsigned char *a, unsigned char *b, int limit)$/;"	f
+stbiw__zlib_flush	.\include\stb_image_write.h	879;"	d
+stbiw__zlib_flushf	.\include\stb_image_write.h	/^static unsigned char *stbiw__zlib_flushf(unsigned char *data, unsigned int *bitbuffer, int *bitcount)$/;"	f
+stbiw__zlib_huff	.\include\stb_image_write.h	888;"	d
+stbiw__zlib_huff1	.\include\stb_image_write.h	884;"	d
+stbiw__zlib_huff2	.\include\stb_image_write.h	885;"	d
+stbiw__zlib_huff3	.\include\stb_image_write.h	886;"	d
+stbiw__zlib_huff4	.\include\stb_image_write.h	887;"	d
+stbiw__zlib_huffa	.\include\stb_image_write.h	882;"	d
+stbiw__zlib_huffb	.\include\stb_image_write.h	889;"	d
+stbiw_convert_wchar_to_utf8	.\include\stb_image_write.h	/^STBIWDEF int stbiw_convert_wchar_to_utf8(char *buffer, size_t bufferlen, const wchar_t* input)$/;"	f
+stbiw_uint32	.\include\stb_image_write.h	/^typedef unsigned int stbiw_uint32;$/;"	t
+stbrp__findresult	.\include\stb_rect_pack.h	/^} stbrp__findresult;$/;"	t	typeref:struct:__anon8
+stbrp__skyline_find_best_pos	.\include\stb_rect_pack.h	/^static stbrp__findresult stbrp__skyline_find_best_pos(stbrp_context *c, int width, int height)$/;"	f
+stbrp__skyline_find_min_y	.\include\stb_rect_pack.h	/^static int stbrp__skyline_find_min_y(stbrp_context *c, stbrp_node *first, int x0, int width, int *pwaste)$/;"	f
+stbrp__skyline_pack_rectangle	.\include\stb_rect_pack.h	/^static stbrp__findresult stbrp__skyline_pack_rectangle(stbrp_context *context, int width, int height)$/;"	f
+stbrp_context	.\include\stb_rect_pack.h	/^struct stbrp_context$/;"	s
+stbrp_context	.\include\stb_rect_pack.h	/^typedef struct stbrp_context stbrp_context;$/;"	t	typeref:struct:stbrp_context
+stbrp_context	.\include\stb_truetype.h	/^} stbrp_context;$/;"	t	typeref:struct:__anon25
+stbrp_coord	.\include\stb_rect_pack.h	/^typedef int            stbrp_coord;$/;"	t
+stbrp_coord	.\include\stb_truetype.h	/^typedef int stbrp_coord;$/;"	t
+stbrp_init_target	.\include\stb_rect_pack.h	/^STBRP_DEF void stbrp_init_target(stbrp_context *context, int width, int height, stbrp_node *nodes, int num_nodes)$/;"	f
+stbrp_init_target	.\include\stb_truetype.h	/^static void stbrp_init_target(stbrp_context *con, int pw, int ph, stbrp_node *nodes, int num_nodes)$/;"	f
+stbrp_node	.\include\stb_rect_pack.h	/^struct stbrp_node$/;"	s
+stbrp_node	.\include\stb_rect_pack.h	/^typedef struct stbrp_node    stbrp_node;$/;"	t	typeref:struct:stbrp_node
+stbrp_node	.\include\stb_truetype.h	/^} stbrp_node;$/;"	t	typeref:struct:__anon26
+stbrp_pack_rects	.\include\stb_rect_pack.h	/^STBRP_DEF int stbrp_pack_rects(stbrp_context *context, stbrp_rect *rects, int num_rects)$/;"	f
+stbrp_pack_rects	.\include\stb_truetype.h	/^static void stbrp_pack_rects(stbrp_context *con, stbrp_rect *rects, int num_rects)$/;"	f
+stbrp_rect	.\include\stb_rect_pack.h	/^struct stbrp_rect$/;"	s
+stbrp_rect	.\include\stb_rect_pack.h	/^typedef struct stbrp_rect    stbrp_rect;$/;"	t	typeref:struct:stbrp_rect
+stbrp_rect	.\include\stb_truetype.h	/^struct stbrp_rect$/;"	s
+stbrp_rect	.\include\stb_truetype.h	/^typedef struct stbrp_rect stbrp_rect;$/;"	t	typeref:struct:stbrp_rect
+stbrp_setup_allow_out_of_mem	.\include\stb_rect_pack.h	/^STBRP_DEF void stbrp_setup_allow_out_of_mem(stbrp_context *context, int allow_out_of_mem)$/;"	f
+stbrp_setup_heuristic	.\include\stb_rect_pack.h	/^STBRP_DEF void stbrp_setup_heuristic(stbrp_context *context, int heuristic)$/;"	f
+stbtt_BakeFontBitmap	.\include\stb_truetype.h	/^STBTT_DEF int stbtt_BakeFontBitmap(const unsigned char *data, int offset,$/;"	f
+stbtt_BakeFontBitmap_internal	.\include\stb_truetype.h	/^static int stbtt_BakeFontBitmap_internal(unsigned char *data, int offset,  \/\/ font location (use offset=0 for plain .ttf)$/;"	f
+stbtt_CompareUTF8toUTF16_bigendian	.\include\stb_truetype.h	/^STBTT_DEF int stbtt_CompareUTF8toUTF16_bigendian(const char *s1, int len1, const char *s2, int len2)$/;"	f
+stbtt_CompareUTF8toUTF16_bigendian_internal	.\include\stb_truetype.h	/^static int stbtt_CompareUTF8toUTF16_bigendian_internal(char *s1, int len1, char *s2, int len2)$/;"	f
+stbtt_FindGlyphIndex	.\include\stb_truetype.h	/^STBTT_DEF int stbtt_FindGlyphIndex(const stbtt_fontinfo *info, int unicode_codepoint)$/;"	f
+stbtt_FindMatchingFont	.\include\stb_truetype.h	/^STBTT_DEF int stbtt_FindMatchingFont(const unsigned char *fontdata, const char *name, int flags)$/;"	f
+stbtt_FindMatchingFont_internal	.\include\stb_truetype.h	/^static int stbtt_FindMatchingFont_internal(unsigned char *font_collection, char *name_utf8, stbtt_int32 flags)$/;"	f
+stbtt_FindSVGDoc	.\include\stb_truetype.h	/^STBTT_DEF stbtt_uint8 *stbtt_FindSVGDoc(const stbtt_fontinfo *info, int gl)$/;"	f
+stbtt_FlattenCurves	.\include\stb_truetype.h	/^static stbtt__point *stbtt_FlattenCurves(stbtt_vertex *vertices, int num_verts, float objspace_flatness, int **contour_lengths, int *num_contours, void *userdata)$/;"	f
+stbtt_FreeBitmap	.\include\stb_truetype.h	/^STBTT_DEF void stbtt_FreeBitmap(unsigned char *bitmap, void *userdata)$/;"	f
+stbtt_FreeSDF	.\include\stb_truetype.h	/^STBTT_DEF void stbtt_FreeSDF(unsigned char *bitmap, void *userdata)$/;"	f
+stbtt_FreeShape	.\include\stb_truetype.h	/^STBTT_DEF void stbtt_FreeShape(const stbtt_fontinfo *info, stbtt_vertex *v)$/;"	f
+stbtt_GetBakedQuad	.\include\stb_truetype.h	/^STBTT_DEF void stbtt_GetBakedQuad(const stbtt_bakedchar *chardata, int pw, int ph, int char_index, float *xpos, float *ypos, stbtt_aligned_quad *q, int opengl_fillrule)$/;"	f
+stbtt_GetCodepointBitmap	.\include\stb_truetype.h	/^STBTT_DEF unsigned char *stbtt_GetCodepointBitmap(const stbtt_fontinfo *info, float scale_x, float scale_y, int codepoint, int *width, int *height, int *xoff, int *yoff)$/;"	f
+stbtt_GetCodepointBitmapBox	.\include\stb_truetype.h	/^STBTT_DEF void stbtt_GetCodepointBitmapBox(const stbtt_fontinfo *font, int codepoint, float scale_x, float scale_y, int *ix0, int *iy0, int *ix1, int *iy1)$/;"	f
+stbtt_GetCodepointBitmapBoxSubpixel	.\include\stb_truetype.h	/^STBTT_DEF void stbtt_GetCodepointBitmapBoxSubpixel(const stbtt_fontinfo *font, int codepoint, float scale_x, float scale_y, float shift_x, float shift_y, int *ix0, int *iy0, int *ix1, int *iy1)$/;"	f
+stbtt_GetCodepointBitmapSubpixel	.\include\stb_truetype.h	/^STBTT_DEF unsigned char *stbtt_GetCodepointBitmapSubpixel(const stbtt_fontinfo *info, float scale_x, float scale_y, float shift_x, float shift_y, int codepoint, int *width, int *height, int *xoff, int *yoff)$/;"	f
+stbtt_GetCodepointBox	.\include\stb_truetype.h	/^STBTT_DEF int stbtt_GetCodepointBox(const stbtt_fontinfo *info, int codepoint, int *x0, int *y0, int *x1, int *y1)$/;"	f
+stbtt_GetCodepointHMetrics	.\include\stb_truetype.h	/^STBTT_DEF void stbtt_GetCodepointHMetrics(const stbtt_fontinfo *info, int codepoint, int *advanceWidth, int *leftSideBearing)$/;"	f
+stbtt_GetCodepointKernAdvance	.\include\stb_truetype.h	/^STBTT_DEF int  stbtt_GetCodepointKernAdvance(const stbtt_fontinfo *info, int ch1, int ch2)$/;"	f
+stbtt_GetCodepointSDF	.\include\stb_truetype.h	/^STBTT_DEF unsigned char * stbtt_GetCodepointSDF(const stbtt_fontinfo *info, float scale, int codepoint, int padding, unsigned char onedge_value, float pixel_dist_scale, int *width, int *height, int *xoff, int *yoff)$/;"	f
+stbtt_GetCodepointSVG	.\include\stb_truetype.h	/^STBTT_DEF int stbtt_GetCodepointSVG(const stbtt_fontinfo *info, int unicode_codepoint, const char **svg)$/;"	f
+stbtt_GetCodepointShape	.\include\stb_truetype.h	/^STBTT_DEF int stbtt_GetCodepointShape(const stbtt_fontinfo *info, int unicode_codepoint, stbtt_vertex **vertices)$/;"	f
+stbtt_GetFontBoundingBox	.\include\stb_truetype.h	/^STBTT_DEF void stbtt_GetFontBoundingBox(const stbtt_fontinfo *info, int *x0, int *y0, int *x1, int *y1)$/;"	f
+stbtt_GetFontNameString	.\include\stb_truetype.h	/^STBTT_DEF const char *stbtt_GetFontNameString(const stbtt_fontinfo *font, int *length, int platformID, int encodingID, int languageID, int nameID)$/;"	f
+stbtt_GetFontOffsetForIndex	.\include\stb_truetype.h	/^STBTT_DEF int stbtt_GetFontOffsetForIndex(const unsigned char *data, int index)$/;"	f
+stbtt_GetFontOffsetForIndex_internal	.\include\stb_truetype.h	/^static int stbtt_GetFontOffsetForIndex_internal(unsigned char *font_collection, int index)$/;"	f
+stbtt_GetFontVMetrics	.\include\stb_truetype.h	/^STBTT_DEF void stbtt_GetFontVMetrics(const stbtt_fontinfo *info, int *ascent, int *descent, int *lineGap)$/;"	f
+stbtt_GetFontVMetricsOS2	.\include\stb_truetype.h	/^STBTT_DEF int  stbtt_GetFontVMetricsOS2(const stbtt_fontinfo *info, int *typoAscent, int *typoDescent, int *typoLineGap)$/;"	f
+stbtt_GetGlyphBitmap	.\include\stb_truetype.h	/^STBTT_DEF unsigned char *stbtt_GetGlyphBitmap(const stbtt_fontinfo *info, float scale_x, float scale_y, int glyph, int *width, int *height, int *xoff, int *yoff)$/;"	f
+stbtt_GetGlyphBitmapBox	.\include\stb_truetype.h	/^STBTT_DEF void stbtt_GetGlyphBitmapBox(const stbtt_fontinfo *font, int glyph, float scale_x, float scale_y, int *ix0, int *iy0, int *ix1, int *iy1)$/;"	f
+stbtt_GetGlyphBitmapBoxSubpixel	.\include\stb_truetype.h	/^STBTT_DEF void stbtt_GetGlyphBitmapBoxSubpixel(const stbtt_fontinfo *font, int glyph, float scale_x, float scale_y,float shift_x, float shift_y, int *ix0, int *iy0, int *ix1, int *iy1)$/;"	f
+stbtt_GetGlyphBitmapSubpixel	.\include\stb_truetype.h	/^STBTT_DEF unsigned char *stbtt_GetGlyphBitmapSubpixel(const stbtt_fontinfo *info, float scale_x, float scale_y, float shift_x, float shift_y, int glyph, int *width, int *height, int *xoff, int *yoff)$/;"	f
+stbtt_GetGlyphBox	.\include\stb_truetype.h	/^STBTT_DEF int stbtt_GetGlyphBox(const stbtt_fontinfo *info, int glyph_index, int *x0, int *y0, int *x1, int *y1)$/;"	f
+stbtt_GetGlyphHMetrics	.\include\stb_truetype.h	/^STBTT_DEF void stbtt_GetGlyphHMetrics(const stbtt_fontinfo *info, int glyph_index, int *advanceWidth, int *leftSideBearing)$/;"	f
+stbtt_GetGlyphKernAdvance	.\include\stb_truetype.h	/^STBTT_DEF int  stbtt_GetGlyphKernAdvance(const stbtt_fontinfo *info, int g1, int g2)$/;"	f
+stbtt_GetGlyphSDF	.\include\stb_truetype.h	/^STBTT_DEF unsigned char * stbtt_GetGlyphSDF(const stbtt_fontinfo *info, float scale, int glyph, int padding, unsigned char onedge_value, float pixel_dist_scale, int *width, int *height, int *xoff, int *yoff)$/;"	f
+stbtt_GetGlyphSVG	.\include\stb_truetype.h	/^STBTT_DEF int stbtt_GetGlyphSVG(const stbtt_fontinfo *info, int gl, const char **svg)$/;"	f
+stbtt_GetGlyphShape	.\include\stb_truetype.h	/^STBTT_DEF int stbtt_GetGlyphShape(const stbtt_fontinfo *info, int glyph_index, stbtt_vertex **pvertices)$/;"	f
+stbtt_GetKerningTable	.\include\stb_truetype.h	/^STBTT_DEF int stbtt_GetKerningTable(const stbtt_fontinfo *info, stbtt_kerningentry* table, int table_length)$/;"	f
+stbtt_GetKerningTableLength	.\include\stb_truetype.h	/^STBTT_DEF int  stbtt_GetKerningTableLength(const stbtt_fontinfo *info)$/;"	f
+stbtt_GetNumberOfFonts	.\include\stb_truetype.h	/^STBTT_DEF int stbtt_GetNumberOfFonts(const unsigned char *data)$/;"	f
+stbtt_GetNumberOfFonts_internal	.\include\stb_truetype.h	/^static int stbtt_GetNumberOfFonts_internal(unsigned char *font_collection)$/;"	f
+stbtt_GetPackedQuad	.\include\stb_truetype.h	/^STBTT_DEF void stbtt_GetPackedQuad(const stbtt_packedchar *chardata, int pw, int ph, int char_index, float *xpos, float *ypos, stbtt_aligned_quad *q, int align_to_integer)$/;"	f
+stbtt_GetScaledFontVMetrics	.\include\stb_truetype.h	/^STBTT_DEF void stbtt_GetScaledFontVMetrics(const unsigned char *fontdata, int index, float size, float *ascent, float *descent, float *lineGap)$/;"	f
+stbtt_InitFont	.\include\stb_truetype.h	/^STBTT_DEF int stbtt_InitFont(stbtt_fontinfo *info, const unsigned char *data, int offset)$/;"	f
+stbtt_InitFont_internal	.\include\stb_truetype.h	/^static int stbtt_InitFont_internal(stbtt_fontinfo *info, unsigned char *data, int fontstart)$/;"	f
+stbtt_IsGlyphEmpty	.\include\stb_truetype.h	/^STBTT_DEF int stbtt_IsGlyphEmpty(const stbtt_fontinfo *info, int glyph_index)$/;"	f
+stbtt_MakeCodepointBitmap	.\include\stb_truetype.h	/^STBTT_DEF void stbtt_MakeCodepointBitmap(const stbtt_fontinfo *info, unsigned char *output, int out_w, int out_h, int out_stride, float scale_x, float scale_y, int codepoint)$/;"	f
+stbtt_MakeCodepointBitmapSubpixel	.\include\stb_truetype.h	/^STBTT_DEF void stbtt_MakeCodepointBitmapSubpixel(const stbtt_fontinfo *info, unsigned char *output, int out_w, int out_h, int out_stride, float scale_x, float scale_y, float shift_x, float shift_y, int codepoint)$/;"	f
+stbtt_MakeCodepointBitmapSubpixelPrefilter	.\include\stb_truetype.h	/^STBTT_DEF void stbtt_MakeCodepointBitmapSubpixelPrefilter(const stbtt_fontinfo *info, unsigned char *output, int out_w, int out_h, int out_stride, float scale_x, float scale_y, float shift_x, float shift_y, int oversample_x, int oversample_y, float *sub_x, float *sub_y, int codepoint)$/;"	f
+stbtt_MakeGlyphBitmap	.\include\stb_truetype.h	/^STBTT_DEF void stbtt_MakeGlyphBitmap(const stbtt_fontinfo *info, unsigned char *output, int out_w, int out_h, int out_stride, float scale_x, float scale_y, int glyph)$/;"	f
+stbtt_MakeGlyphBitmapSubpixel	.\include\stb_truetype.h	/^STBTT_DEF void stbtt_MakeGlyphBitmapSubpixel(const stbtt_fontinfo *info, unsigned char *output, int out_w, int out_h, int out_stride, float scale_x, float scale_y, float shift_x, float shift_y, int glyph)$/;"	f
+stbtt_MakeGlyphBitmapSubpixelPrefilter	.\include\stb_truetype.h	/^STBTT_DEF void stbtt_MakeGlyphBitmapSubpixelPrefilter(const stbtt_fontinfo *info, unsigned char *output, int out_w, int out_h, int out_stride, float scale_x, float scale_y, float shift_x, float shift_y, int prefilter_x, int prefilter_y, float *sub_x, float *sub_y, int glyph)$/;"	f
+stbtt_PackBegin	.\include\stb_truetype.h	/^STBTT_DEF int stbtt_PackBegin(stbtt_pack_context *spc, unsigned char *pixels, int pw, int ph, int stride_in_bytes, int padding, void *alloc_context)$/;"	f
+stbtt_PackEnd	.\include\stb_truetype.h	/^STBTT_DEF void stbtt_PackEnd  (stbtt_pack_context *spc)$/;"	f
+stbtt_PackFontRange	.\include\stb_truetype.h	/^STBTT_DEF int stbtt_PackFontRange(stbtt_pack_context *spc, const unsigned char *fontdata, int font_index, float font_size,$/;"	f
+stbtt_PackFontRanges	.\include\stb_truetype.h	/^STBTT_DEF int stbtt_PackFontRanges(stbtt_pack_context *spc, const unsigned char *fontdata, int font_index, stbtt_pack_range *ranges, int num_ranges)$/;"	f
+stbtt_PackFontRangesGatherRects	.\include\stb_truetype.h	/^STBTT_DEF int stbtt_PackFontRangesGatherRects(stbtt_pack_context *spc, const stbtt_fontinfo *info, stbtt_pack_range *ranges, int num_ranges, stbrp_rect *rects)$/;"	f
+stbtt_PackFontRangesPackRects	.\include\stb_truetype.h	/^STBTT_DEF void stbtt_PackFontRangesPackRects(stbtt_pack_context *spc, stbrp_rect *rects, int num_rects)$/;"	f
+stbtt_PackFontRangesRenderIntoRects	.\include\stb_truetype.h	/^STBTT_DEF int stbtt_PackFontRangesRenderIntoRects(stbtt_pack_context *spc, const stbtt_fontinfo *info, stbtt_pack_range *ranges, int num_ranges, stbrp_rect *rects)$/;"	f
+stbtt_PackSetOversampling	.\include\stb_truetype.h	/^STBTT_DEF void stbtt_PackSetOversampling(stbtt_pack_context *spc, unsigned int h_oversample, unsigned int v_oversample)$/;"	f
+stbtt_PackSetSkipMissingCodepoints	.\include\stb_truetype.h	/^STBTT_DEF void stbtt_PackSetSkipMissingCodepoints(stbtt_pack_context *spc, int skip)$/;"	f
+stbtt_Rasterize	.\include\stb_truetype.h	/^STBTT_DEF void stbtt_Rasterize(stbtt__bitmap *result, float flatness_in_pixels, stbtt_vertex *vertices, int num_verts, float scale_x, float scale_y, float shift_x, float shift_y, int x_off, int y_off, int invert, void *userdata)$/;"	f
+stbtt_ScaleForMappingEmToPixels	.\include\stb_truetype.h	/^STBTT_DEF float stbtt_ScaleForMappingEmToPixels(const stbtt_fontinfo *info, float pixels)$/;"	f
+stbtt_ScaleForPixelHeight	.\include\stb_truetype.h	/^STBTT_DEF float stbtt_ScaleForPixelHeight(const stbtt_fontinfo *info, float height)$/;"	f
+stbtt__CompareUTF8toUTF16_bigendian_prefix	.\include\stb_truetype.h	/^static stbtt_int32 stbtt__CompareUTF8toUTF16_bigendian_prefix(stbtt_uint8 *s1, stbtt_int32 len1, stbtt_uint8 *s2, stbtt_int32 len2)$/;"	f
+stbtt__GetCoverageIndex	.\include\stb_truetype.h	/^static stbtt_int32 stbtt__GetCoverageIndex(stbtt_uint8 *coverageTable, int glyph)$/;"	f
+stbtt__GetGlyfOffset	.\include\stb_truetype.h	/^static int stbtt__GetGlyfOffset(const stbtt_fontinfo *info, int glyph_index)$/;"	f
+stbtt__GetGlyphClass	.\include\stb_truetype.h	/^static stbtt_int32  stbtt__GetGlyphClass(stbtt_uint8 *classDefTable, int glyph)$/;"	f
+stbtt__GetGlyphGPOSInfoAdvance	.\include\stb_truetype.h	/^static stbtt_int32 stbtt__GetGlyphGPOSInfoAdvance(const stbtt_fontinfo *info, int glyph1, int glyph2)$/;"	f
+stbtt__GetGlyphInfoT2	.\include\stb_truetype.h	/^static int stbtt__GetGlyphInfoT2(const stbtt_fontinfo *info, int glyph_index, int *x0, int *y0, int *x1, int *y1)$/;"	f
+stbtt__GetGlyphKernInfoAdvance	.\include\stb_truetype.h	/^static int stbtt__GetGlyphKernInfoAdvance(const stbtt_fontinfo *info, int glyph1, int glyph2)$/;"	f
+stbtt__GetGlyphShapeT2	.\include\stb_truetype.h	/^static int stbtt__GetGlyphShapeT2(const stbtt_fontinfo *info, int glyph_index, stbtt_vertex **pvertices)$/;"	f
+stbtt__GetGlyphShapeTT	.\include\stb_truetype.h	/^static int stbtt__GetGlyphShapeTT(const stbtt_fontinfo *info, int glyph_index, stbtt_vertex **pvertices)$/;"	f
+stbtt__active_edge	.\include\stb_truetype.h	/^typedef struct stbtt__active_edge$/;"	s
+stbtt__active_edge	.\include\stb_truetype.h	/^} stbtt__active_edge;$/;"	t	typeref:struct:stbtt__active_edge
+stbtt__add_point	.\include\stb_truetype.h	/^static void stbtt__add_point(stbtt__point *points, int n, float x, float y)$/;"	f
+stbtt__bitmap	.\include\stb_truetype.h	/^} stbtt__bitmap;$/;"	t	typeref:struct:__anon16
+stbtt__buf	.\include\stb_truetype.h	/^} stbtt__buf;$/;"	t	typeref:struct:__anon9
+stbtt__buf_get	.\include\stb_truetype.h	/^static stbtt_uint32 stbtt__buf_get(stbtt__buf *b, int n)$/;"	f
+stbtt__buf_get16	.\include\stb_truetype.h	1178;"	d
+stbtt__buf_get32	.\include\stb_truetype.h	1179;"	d
+stbtt__buf_get8	.\include\stb_truetype.h	/^static stbtt_uint8 stbtt__buf_get8(stbtt__buf *b)$/;"	f
+stbtt__buf_peek8	.\include\stb_truetype.h	/^static stbtt_uint8 stbtt__buf_peek8(stbtt__buf *b)$/;"	f
+stbtt__buf_range	.\include\stb_truetype.h	/^static stbtt__buf stbtt__buf_range(const stbtt__buf *b, int o, int s)$/;"	f
+stbtt__buf_seek	.\include\stb_truetype.h	/^static void stbtt__buf_seek(stbtt__buf *b, int o)$/;"	f
+stbtt__buf_skip	.\include\stb_truetype.h	/^static void stbtt__buf_skip(stbtt__buf *b, int o)$/;"	f
+stbtt__cff_get_index	.\include\stb_truetype.h	/^static stbtt__buf stbtt__cff_get_index(stbtt__buf *b)$/;"	f
+stbtt__cff_index_count	.\include\stb_truetype.h	/^static int stbtt__cff_index_count(stbtt__buf *b)$/;"	f
+stbtt__cff_index_get	.\include\stb_truetype.h	/^static stbtt__buf stbtt__cff_index_get(stbtt__buf b, int i)$/;"	f
+stbtt__cff_int	.\include\stb_truetype.h	/^static stbtt_uint32 stbtt__cff_int(stbtt__buf *b)$/;"	f
+stbtt__cff_skip_operand	.\include\stb_truetype.h	/^static void stbtt__cff_skip_operand(stbtt__buf *b) {$/;"	f
+stbtt__check_size16	.\include\stb_truetype.h	/^   typedef char stbtt__check_size16[sizeof(stbtt_int16)==2 ? 1 : -1];$/;"	t
+stbtt__check_size32	.\include\stb_truetype.h	/^   typedef char stbtt__check_size32[sizeof(stbtt_int32)==4 ? 1 : -1];$/;"	t
+stbtt__cid_get_glyph_subrs	.\include\stb_truetype.h	/^static stbtt__buf stbtt__cid_get_glyph_subrs(const stbtt_fontinfo *info, int glyph_index)$/;"	f
+stbtt__close_shape	.\include\stb_truetype.h	/^static int stbtt__close_shape(stbtt_vertex *vertices, int num_vertices, int was_off, int start_off,$/;"	f
+stbtt__compute_crossings_x	.\include\stb_truetype.h	/^static int stbtt__compute_crossings_x(float x, float y, int nverts, stbtt_vertex *verts)$/;"	f
+stbtt__csctx	.\include\stb_truetype.h	/^} stbtt__csctx;$/;"	t	typeref:struct:__anon23
+stbtt__csctx_close_shape	.\include\stb_truetype.h	/^static void stbtt__csctx_close_shape(stbtt__csctx *ctx)$/;"	f
+stbtt__csctx_rccurve_to	.\include\stb_truetype.h	/^static void stbtt__csctx_rccurve_to(stbtt__csctx *ctx, float dx1, float dy1, float dx2, float dy2, float dx3, float dy3)$/;"	f
+stbtt__csctx_rline_to	.\include\stb_truetype.h	/^static void stbtt__csctx_rline_to(stbtt__csctx *ctx, float dx, float dy)$/;"	f
+stbtt__csctx_rmove_to	.\include\stb_truetype.h	/^static void stbtt__csctx_rmove_to(stbtt__csctx *ctx, float dx, float dy)$/;"	f
+stbtt__csctx_v	.\include\stb_truetype.h	/^static void stbtt__csctx_v(stbtt__csctx *c, stbtt_uint8 type, stbtt_int32 x, stbtt_int32 y, stbtt_int32 cx, stbtt_int32 cy, stbtt_int32 cx1, stbtt_int32 cy1)$/;"	f
+stbtt__cuberoot	.\include\stb_truetype.h	/^static float stbtt__cuberoot( float x )$/;"	f
+stbtt__dict_get	.\include\stb_truetype.h	/^static stbtt__buf stbtt__dict_get(stbtt__buf *b, int key)$/;"	f
+stbtt__dict_get_ints	.\include\stb_truetype.h	/^static void stbtt__dict_get_ints(stbtt__buf *b, int key, int outcount, stbtt_uint32 *out)$/;"	f
+stbtt__edge	.\include\stb_truetype.h	/^typedef struct stbtt__edge {$/;"	s
+stbtt__edge	.\include\stb_truetype.h	/^} stbtt__edge;$/;"	t	typeref:struct:stbtt__edge
+stbtt__fill_active_edges	.\include\stb_truetype.h	/^static void stbtt__fill_active_edges(unsigned char *scanline, int len, stbtt__active_edge *e, int max_weight)$/;"	f
+stbtt__fill_active_edges_new	.\include\stb_truetype.h	/^static void stbtt__fill_active_edges_new(float *scanline, float *scanline_fill, int len, stbtt__active_edge *e, float y_top)$/;"	f
+stbtt__find_table	.\include\stb_truetype.h	/^static stbtt_uint32 stbtt__find_table(stbtt_uint8 *data, stbtt_uint32 fontstart, const char *tag)$/;"	f
+stbtt__get_subr	.\include\stb_truetype.h	/^static stbtt__buf stbtt__get_subr(stbtt__buf idx, int n)$/;"	f
+stbtt__get_subrs	.\include\stb_truetype.h	/^static stbtt__buf stbtt__get_subrs(stbtt__buf cff, stbtt__buf fontdict)$/;"	f
+stbtt__get_svg	.\include\stb_truetype.h	/^static int stbtt__get_svg(stbtt_fontinfo *info)$/;"	f
+stbtt__h_prefilter	.\include\stb_truetype.h	/^static void stbtt__h_prefilter(unsigned char *pixels, int w, int h, int stride_in_bytes, unsigned int kernel_width)$/;"	f
+stbtt__handle_clipped_edge	.\include\stb_truetype.h	/^static void stbtt__handle_clipped_edge(float *scanline, int x, stbtt__active_edge *e, float x0, float y0, float x1, float y1)$/;"	f
+stbtt__hheap	.\include\stb_truetype.h	/^typedef struct stbtt__hheap$/;"	s
+stbtt__hheap	.\include\stb_truetype.h	/^} stbtt__hheap;$/;"	t	typeref:struct:stbtt__hheap
+stbtt__hheap_alloc	.\include\stb_truetype.h	/^static void *stbtt__hheap_alloc(stbtt__hheap *hh, size_t size, void *userdata)$/;"	f
+stbtt__hheap_chunk	.\include\stb_truetype.h	/^typedef struct stbtt__hheap_chunk$/;"	s
+stbtt__hheap_chunk	.\include\stb_truetype.h	/^} stbtt__hheap_chunk;$/;"	t	typeref:struct:stbtt__hheap_chunk
+stbtt__hheap_cleanup	.\include\stb_truetype.h	/^static void stbtt__hheap_cleanup(stbtt__hheap *hh, void *userdata)$/;"	f
+stbtt__hheap_free	.\include\stb_truetype.h	/^static void stbtt__hheap_free(stbtt__hheap *hh, void *p)$/;"	f
+stbtt__isfont	.\include\stb_truetype.h	/^static int stbtt__isfont(stbtt_uint8 *font)$/;"	f
+stbtt__matches	.\include\stb_truetype.h	/^static int stbtt__matches(stbtt_uint8 *fc, stbtt_uint32 offset, stbtt_uint8 *name, stbtt_int32 flags)$/;"	f
+stbtt__matchpair	.\include\stb_truetype.h	/^static int stbtt__matchpair(stbtt_uint8 *fc, stbtt_uint32 nm, stbtt_uint8 *name, stbtt_int32 nlen, stbtt_int32 target_id, stbtt_int32 next_id)$/;"	f
+stbtt__new_active	.\include\stb_truetype.h	/^static stbtt__active_edge *stbtt__new_active(stbtt__hheap *hh, stbtt__edge *e, int off_x, float start_point, void *userdata)$/;"	f
+stbtt__new_buf	.\include\stb_truetype.h	/^static stbtt__buf stbtt__new_buf(const void *p, size_t size)$/;"	f
+stbtt__oversample_shift	.\include\stb_truetype.h	/^static float stbtt__oversample_shift(int oversample)$/;"	f
+stbtt__point	.\include\stb_truetype.h	/^} stbtt__point;$/;"	t	typeref:struct:__anon24
+stbtt__position_trapezoid_area	.\include\stb_truetype.h	/^static float stbtt__position_trapezoid_area(float height, float tx0, float tx1, float bx0, float bx1)$/;"	f
+stbtt__rasterize	.\include\stb_truetype.h	/^static void stbtt__rasterize(stbtt__bitmap *result, stbtt__point *pts, int *wcount, int windings, float scale_x, float scale_y, float shift_x, float shift_y, int off_x, int off_y, int invert, void *userdata)$/;"	f
+stbtt__rasterize_sorted_edges	.\include\stb_truetype.h	/^static void stbtt__rasterize_sorted_edges(stbtt__bitmap *result, stbtt__edge *e, int n, int vsubsample, int off_x, int off_y, void *userdata)$/;"	f
+stbtt__ray_intersect_bezier	.\include\stb_truetype.h	/^static int stbtt__ray_intersect_bezier(float orig[2], float ray[2], float q0[2], float q1[2], float q2[2], float hits[2][2])$/;"	f
+stbtt__run_charstring	.\include\stb_truetype.h	/^static int stbtt__run_charstring(const stbtt_fontinfo *info, int glyph_index, stbtt__csctx *c)$/;"	f
+stbtt__sized_trapezoid_area	.\include\stb_truetype.h	/^static float stbtt__sized_trapezoid_area(float height, float top_width, float bottom_width)$/;"	f
+stbtt__sized_triangle_area	.\include\stb_truetype.h	/^static float stbtt__sized_triangle_area(float height, float width)$/;"	f
+stbtt__solve_cubic	.\include\stb_truetype.h	/^static int stbtt__solve_cubic(float a, float b, float c, float* r)$/;"	f
+stbtt__sort_edges	.\include\stb_truetype.h	/^static void stbtt__sort_edges(stbtt__edge *p, int n)$/;"	f
+stbtt__sort_edges_ins_sort	.\include\stb_truetype.h	/^static void stbtt__sort_edges_ins_sort(stbtt__edge *p, int n)$/;"	f
+stbtt__sort_edges_quicksort	.\include\stb_truetype.h	/^static void stbtt__sort_edges_quicksort(stbtt__edge *p, int n)$/;"	f
+stbtt__tesselate_cubic	.\include\stb_truetype.h	/^static void stbtt__tesselate_cubic(stbtt__point *points, int *num_points, float x0, float y0, float x1, float y1, float x2, float y2, float x3, float y3, float objspace_flatness_squared, int n)$/;"	f
+stbtt__tesselate_curve	.\include\stb_truetype.h	/^static int stbtt__tesselate_curve(stbtt__point *points, int *num_points, float x0, float y0, float x1, float y1, float x2, float y2, float objspace_flatness_squared, int n)$/;"	f
+stbtt__test_oversample_pow2	.\include\stb_truetype.h	/^typedef int stbtt__test_oversample_pow2[(STBTT_MAX_OVERSAMPLE & (STBTT_MAX_OVERSAMPLE-1)) == 0 ? 1 : -1];$/;"	t
+stbtt__track_vertex	.\include\stb_truetype.h	/^static void stbtt__track_vertex(stbtt__csctx *c, stbtt_int32 x, stbtt_int32 y)$/;"	f
+stbtt__v_prefilter	.\include\stb_truetype.h	/^static void stbtt__v_prefilter(unsigned char *pixels, int w, int h, int stride_in_bytes, unsigned int kernel_width)$/;"	f
+stbtt_aligned_quad	.\include\stb_truetype.h	/^} stbtt_aligned_quad;$/;"	t	typeref:struct:__anon11
+stbtt_bakedchar	.\include\stb_truetype.h	/^} stbtt_bakedchar;$/;"	t	typeref:struct:__anon10
+stbtt_fontinfo	.\include\stb_truetype.h	/^struct stbtt_fontinfo$/;"	s
+stbtt_fontinfo	.\include\stb_truetype.h	/^typedef struct stbtt_fontinfo stbtt_fontinfo;$/;"	t	typeref:struct:stbtt_fontinfo
+stbtt_int16	.\include\stb_truetype.h	/^   typedef signed   short  stbtt_int16;$/;"	t
+stbtt_int32	.\include\stb_truetype.h	/^   typedef signed   int    stbtt_int32;$/;"	t
+stbtt_int8	.\include\stb_truetype.h	/^   typedef signed   char   stbtt_int8;$/;"	t
+stbtt_kerningentry	.\include\stb_truetype.h	/^typedef struct stbtt_kerningentry$/;"	s
+stbtt_kerningentry	.\include\stb_truetype.h	/^} stbtt_kerningentry;$/;"	t	typeref:struct:stbtt_kerningentry
+stbtt_pack_context	.\include\stb_truetype.h	/^struct stbtt_pack_context {$/;"	s
+stbtt_pack_context	.\include\stb_truetype.h	/^typedef struct stbtt_pack_context stbtt_pack_context;$/;"	t	typeref:struct:stbtt_pack_context
+stbtt_pack_range	.\include\stb_truetype.h	/^} stbtt_pack_range;$/;"	t	typeref:struct:__anon13
+stbtt_packedchar	.\include\stb_truetype.h	/^} stbtt_packedchar;$/;"	t	typeref:struct:__anon12
+stbtt_setvertex	.\include\stb_truetype.h	/^static void stbtt_setvertex(stbtt_vertex *v, stbtt_uint8 type, stbtt_int32 x, stbtt_int32 y, stbtt_int32 cx, stbtt_int32 cy)$/;"	f
+stbtt_tag	.\include\stb_truetype.h	1292;"	d
+stbtt_tag4	.\include\stb_truetype.h	1291;"	d
+stbtt_uint16	.\include\stb_truetype.h	/^   typedef unsigned short  stbtt_uint16;$/;"	t
+stbtt_uint32	.\include\stb_truetype.h	/^   typedef unsigned int    stbtt_uint32;$/;"	t
+stbtt_uint8	.\include\stb_truetype.h	/^   typedef unsigned char   stbtt_uint8;$/;"	t
+stbtt_vertex	.\include\stb_truetype.h	/^   } stbtt_vertex;$/;"	t	typeref:struct:__anon15
+stbtt_vertex_type	.\include\stb_truetype.h	834;"	d
+stride	.\include\cgltf.h	/^		cgltf_size stride; \/* 0 == automatically determined by accessor *\/$/;"	m	struct:cgltf_buffer_view
+stride	.\include\cgltf.h	/^		cgltf_size stride;$/;"	m	struct:cgltf_accessor
+stride	.\include\cgltf.h	/^		cgltf_size stride;$/;"	m	struct:cgltf_meshopt_compression
+stride	.\include\stb_truetype.h	/^   int w,h,stride;$/;"	m	struct:__anon16
+stride_in_bytes	.\include\stb_truetype.h	/^   int   stride_in_bytes;$/;"	m	struct:stbtt_pack_context
+subrs	.\include\stb_truetype.h	/^   stbtt__buf subrs;                  \/\/ private charstring subroutines index$/;"	m	struct:stbtt_fontinfo
+svg	.\include\stb_truetype.h	/^   int loca,head,glyf,hhea,hmtx,kern,gpos,svg; \/\/ table locations as offset from start of .ttf$/;"	m	struct:stbtt_fontinfo
+sy	.\include\stb_truetype.h	/^   float sy;$/;"	m	struct:stbtt__active_edge
+t0	.\include\stb_truetype.h	/^   float x0,y0,s0,t0; \/\/ top-left$/;"	m	struct:__anon11
+t1	.\include\stb_truetype.h	/^   float x1,y1,s1,t1; \/\/ bottom-right$/;"	m	struct:__anon11
+target_names	.\include\cgltf.h	/^		char** target_names;$/;"	m	struct:cgltf_mesh
+target_names_count	.\include\cgltf.h	/^		cgltf_size target_names_count;$/;"	m	struct:cgltf_mesh
+target_node	.\include\cgltf.h	/^		cgltf_node* target_node;$/;"	m	struct:cgltf_animation_channel
+target_path	.\include\cgltf.h	/^		cgltf_animation_path_type target_path;$/;"	m	struct:cgltf_animation_channel
+targets	.\include\cgltf.h	/^		cgltf_morph_target* targets;$/;"	m	struct:cgltf_primitive
+targets_count	.\include\cgltf.h	/^		cgltf_size targets_count;$/;"	m	struct:cgltf_primitive
+temp_bitmap	.\include\stb_truetype.h	/^unsigned char temp_bitmap[512*512];$/;"	v
+texcoord	.\include\cgltf.h	/^		cgltf_int texcoord;$/;"	m	struct:cgltf_texture_transform
+texcoord	.\include\cgltf.h	/^		cgltf_int texcoord;$/;"	m	struct:cgltf_texture_view
+texture	.\include\cgltf.h	/^		cgltf_texture* texture;$/;"	m	struct:cgltf_texture_view
+textures	.\include\cgltf.h	/^		cgltf_texture* textures;$/;"	m	struct:cgltf_data
+textures_count	.\include\cgltf.h	/^		cgltf_size textures_count;$/;"	m	struct:cgltf_data
+thickness_factor	.\include\cgltf.h	/^		cgltf_float thickness_factor;$/;"	m	struct:cgltf_volume
+thickness_texture	.\include\cgltf.h	/^		cgltf_texture_view thickness_texture;$/;"	m	struct:cgltf_volume
+toknext	.\include\cgltf.h	/^	unsigned int toknext; \/* next token to allocate *\/$/;"	m	struct:__anon4
+toksuper	.\include\cgltf.h	/^	int toksuper; \/* superior token node, e.g parent object or array *\/$/;"	m	struct:__anon4
+total_count	.\asset_packer\buffers.cpp	/^	u32 total_count;$/;"	m	struct:StructBuffer	file:
+total_size	.\asset_packer\buffers.cpp	/^	u32 total_size;$/;"	m	struct:GenericBuffer	file:
+transform	.\include\cgltf.h	/^		cgltf_texture_transform transform;$/;"	m	struct:cgltf_texture_view
+translation	.\include\cgltf.h	/^		cgltf_float translation[3];$/;"	m	struct:cgltf_node
+transmission	.\include\cgltf.h	/^		cgltf_transmission transmission;$/;"	m	struct:cgltf_material
+transmission_factor	.\include\cgltf.h	/^		cgltf_float transmission_factor;$/;"	m	struct:cgltf_transmission
+transmission_texture	.\include\cgltf.h	/^		cgltf_texture_view transmission_texture;$/;"	m	struct:cgltf_transmission
+ttBYTE	.\include\stb_truetype.h	1282;"	d
+ttCHAR	.\include\stb_truetype.h	1283;"	d
+ttFixed	.\include\stb_truetype.h	1284;"	d
+ttLONG	.\include\stb_truetype.h	/^static stbtt_int32 ttLONG(stbtt_uint8 *p)    { return (p[0]<<24) + (p[1]<<16) + (p[2]<<8) + p[3]; }$/;"	f
+ttSHORT	.\include\stb_truetype.h	/^static stbtt_int16 ttSHORT(stbtt_uint8 *p)   { return p[0]*256 + p[1]; }$/;"	f
+ttULONG	.\include\stb_truetype.h	/^static stbtt_uint32 ttULONG(stbtt_uint8 *p)  { return (p[0]<<24) + (p[1]<<16) + (p[2]<<8) + p[3]; }$/;"	f
+ttUSHORT	.\include\stb_truetype.h	/^static stbtt_uint16 ttUSHORT(stbtt_uint8 *p) { return p[0]*256 + p[1]; }$/;"	f
+ttf_buffer	.\include\stb_truetype.h	/^char ttf_buffer[1<<25];$/;"	v
+ttf_buffer	.\include\stb_truetype.h	/^unsigned char ttf_buffer[1<<20];$/;"	v
+ttf_buffer	.\rasterize_font_and_dump_bitmap\src\main.cpp	/^unsigned char ttf_buffer[1 << 25];$/;"	v
+type	.\include\cgltf.h	/^		cgltf_attribute_type type;$/;"	m	struct:cgltf_attribute
+type	.\include\cgltf.h	/^		cgltf_buffer_view_type type;$/;"	m	struct:cgltf_buffer_view
+type	.\include\cgltf.h	/^		cgltf_camera_type type;$/;"	m	struct:cgltf_camera
+type	.\include\cgltf.h	/^		cgltf_file_type type; \/* invalid == auto detect *\/$/;"	m	struct:cgltf_options
+type	.\include\cgltf.h	/^		cgltf_light_type type;$/;"	m	struct:cgltf_light
+type	.\include\cgltf.h	/^		cgltf_primitive_type type;$/;"	m	struct:cgltf_primitive
+type	.\include\cgltf.h	/^		cgltf_type type;$/;"	m	struct:cgltf_accessor
+type	.\include\cgltf.h	/^	jsmntype_t type;$/;"	m	struct:__anon3
+type	.\include\stb_truetype.h	/^      unsigned char type,padding;$/;"	m	struct:__anon15
+u16	.\asset_packer\main.cpp	/^typedef uint16_t u16;$/;"	t	file:
+u32	.\asset_packer\main.cpp	/^typedef uint32_t u32;$/;"	t	file:
+u64	.\asset_packer\main.cpp	/^typedef uint64_t u64;$/;"	t	file:
+u8	.\asset_packer\main.cpp	/^typedef uint8_t u8;$/;"	t	file:
+unlit	.\include\cgltf.h	/^		cgltf_bool unlit;$/;"	m	struct:cgltf_material
+uri	.\include\cgltf.h	/^		char* uri;$/;"	m	struct:cgltf_buffer
+uri	.\include\cgltf.h	/^		char* uri;$/;"	m	struct:cgltf_image
+user_allocator_context	.\include\stb_truetype.h	/^   void *user_allocator_context;$/;"	m	struct:stbtt_pack_context
+user_data	.\include\cgltf.h	/^		void* user_data;$/;"	m	struct:cgltf_file_options
+user_data	.\include\cgltf.h	/^		void* user_data;$/;"	m	struct:cgltf_memory_options
+userdata	.\include\stb_truetype.h	/^   void           * userdata;$/;"	m	struct:stbtt_fontinfo
+v_oversample	.\include\stb_truetype.h	/^   unsigned char h_oversample, v_oversample; \/\/ don't set these, they're used internally$/;"	m	struct:__anon13
+v_oversample	.\include\stb_truetype.h	/^   unsigned int   h_oversample, v_oversample;$/;"	m	struct:stbtt_pack_context
+values_buffer_view	.\include\cgltf.h	/^		cgltf_buffer_view* values_buffer_view;$/;"	m	struct:cgltf_accessor_sparse
+values_byte_offset	.\include\cgltf.h	/^		cgltf_size values_byte_offset;$/;"	m	struct:cgltf_accessor_sparse
+values_extensions	.\include\cgltf.h	/^		cgltf_extension* values_extensions;$/;"	m	struct:cgltf_accessor_sparse
+values_extensions_count	.\include\cgltf.h	/^		cgltf_size values_extensions_count;$/;"	m	struct:cgltf_accessor_sparse
+values_extras	.\include\cgltf.h	/^		cgltf_extras values_extras;$/;"	m	struct:cgltf_accessor_sparse
+variant	.\include\cgltf.h	/^		cgltf_size variant;$/;"	m	struct:cgltf_material_mapping
+variants	.\include\cgltf.h	/^		cgltf_material_variant* variants;$/;"	m	struct:cgltf_data
+variants_count	.\include\cgltf.h	/^		cgltf_size variants_count;$/;"	m	struct:cgltf_data
+version	.\include\cgltf.h	/^		char* version;$/;"	m	struct:cgltf_asset
+volume	.\include\cgltf.h	/^		cgltf_volume volume;$/;"	m	struct:cgltf_material
+w	.\include\stb_rect_pack.h	/^   stbrp_coord    w, h;$/;"	m	struct:stbrp_rect
+w	.\include\stb_truetype.h	/^   int id,w,h,was_packed;$/;"	m	struct:stbrp_rect
+w	.\include\stb_truetype.h	/^   int w,h,stride;$/;"	m	struct:__anon16
+was_packed	.\include\stb_rect_pack.h	/^   int            was_packed;  \/\/ non-zero if valid packing$/;"	m	struct:stbrp_rect
+was_packed	.\include\stb_truetype.h	/^   int id,w,h,was_packed;$/;"	m	struct:stbrp_rect
+weights	.\include\cgltf.h	/^		cgltf_float* weights;$/;"	m	struct:cgltf_mesh
+weights	.\include\cgltf.h	/^		cgltf_float* weights;$/;"	m	struct:cgltf_node
+weights_count	.\include\cgltf.h	/^		cgltf_size weights_count;$/;"	m	struct:cgltf_mesh
+weights_count	.\include\cgltf.h	/^		cgltf_size weights_count;$/;"	m	struct:cgltf_node
+width	.\include\stb_rect_pack.h	/^   int width;$/;"	m	struct:stbrp_context
+width	.\include\stb_truetype.h	/^   int   width;$/;"	m	struct:stbtt_pack_context
+width	.\include\stb_truetype.h	/^   int width,height;$/;"	m	struct:__anon25
+wrap_s	.\include\cgltf.h	/^		cgltf_int wrap_s;$/;"	m	struct:cgltf_sampler
+wrap_t	.\include\cgltf.h	/^		cgltf_int wrap_t;$/;"	m	struct:cgltf_sampler
+x	.\include\stb_rect_pack.h	/^   int x,y;$/;"	m	struct:__anon8
+x	.\include\stb_rect_pack.h	/^   stbrp_coord    x, y;$/;"	m	struct:stbrp_rect
+x	.\include\stb_rect_pack.h	/^   stbrp_coord  x,y;$/;"	m	struct:stbrp_node
+x	.\include\stb_truetype.h	/^      stbtt_vertex_type x,y,cx,cy,cx1,cy1;$/;"	m	struct:__anon15
+x	.\include\stb_truetype.h	/^   float x, y;$/;"	m	struct:__anon23
+x	.\include\stb_truetype.h	/^   float x,y;$/;"	m	struct:__anon24
+x	.\include\stb_truetype.h	/^   int x,dx;$/;"	m	struct:stbtt__active_edge
+x	.\include\stb_truetype.h	/^   int x,y,bottom_y;$/;"	m	struct:__anon25
+x	.\include\stb_truetype.h	/^   stbrp_coord x,y;$/;"	m	struct:stbrp_rect
+x	.\include\stb_truetype.h	/^   unsigned char x;$/;"	m	struct:__anon26
+x0	.\include\stb_truetype.h	/^   float x0,y0, x1,y1;$/;"	m	struct:stbtt__edge
+x0	.\include\stb_truetype.h	/^   float x0,y0,s0,t0; \/\/ top-left$/;"	m	struct:__anon11
+x0	.\include\stb_truetype.h	/^   unsigned short x0,y0,x1,y1; \/\/ coordinates of bbox in bitmap$/;"	m	struct:__anon10
+x0	.\include\stb_truetype.h	/^   unsigned short x0,y0,x1,y1; \/\/ coordinates of bbox in bitmap$/;"	m	struct:__anon12
+x1	.\include\stb_truetype.h	/^   float x0,y0, x1,y1;$/;"	m	struct:stbtt__edge
+x1	.\include\stb_truetype.h	/^   float x1,y1,s1,t1; \/\/ bottom-right$/;"	m	struct:__anon11
+x1	.\include\stb_truetype.h	/^   unsigned short x0,y0,x1,y1; \/\/ coordinates of bbox in bitmap$/;"	m	struct:__anon10
+x1	.\include\stb_truetype.h	/^   unsigned short x0,y0,x1,y1; \/\/ coordinates of bbox in bitmap$/;"	m	struct:__anon12
+xadvance	.\include\stb_truetype.h	/^   float xoff,yoff,xadvance;$/;"	m	struct:__anon10
+xadvance	.\include\stb_truetype.h	/^   float xoff,yoff,xadvance;$/;"	m	struct:__anon12
+xmag	.\include\cgltf.h	/^		cgltf_float xmag;$/;"	m	struct:cgltf_camera_orthographic
+xoff	.\include\stb_truetype.h	/^   float xoff,yoff,xadvance;$/;"	m	struct:__anon10
+xoff	.\include\stb_truetype.h	/^   float xoff,yoff,xadvance;$/;"	m	struct:__anon12
+xoff2	.\include\stb_truetype.h	/^   float xoff2,yoff2;$/;"	m	struct:__anon12
+y	.\include\stb_rect_pack.h	/^   int x,y;$/;"	m	struct:__anon8
+y	.\include\stb_rect_pack.h	/^   stbrp_coord    x, y;$/;"	m	struct:stbrp_rect
+y	.\include\stb_rect_pack.h	/^   stbrp_coord  x,y;$/;"	m	struct:stbrp_node
+y	.\include\stb_truetype.h	/^      stbtt_vertex_type x,y,cx,cy,cx1,cy1;$/;"	m	struct:__anon15
+y	.\include\stb_truetype.h	/^   float x, y;$/;"	m	struct:__anon23
+y	.\include\stb_truetype.h	/^   float x,y;$/;"	m	struct:__anon24
+y	.\include\stb_truetype.h	/^   int x,y,bottom_y;$/;"	m	struct:__anon25
+y	.\include\stb_truetype.h	/^   stbrp_coord x,y;$/;"	m	struct:stbrp_rect
+y0	.\include\stb_truetype.h	/^   float x0,y0, x1,y1;$/;"	m	struct:stbtt__edge
+y0	.\include\stb_truetype.h	/^   float x0,y0,s0,t0; \/\/ top-left$/;"	m	struct:__anon11
+y0	.\include\stb_truetype.h	/^   unsigned short x0,y0,x1,y1; \/\/ coordinates of bbox in bitmap$/;"	m	struct:__anon10
+y0	.\include\stb_truetype.h	/^   unsigned short x0,y0,x1,y1; \/\/ coordinates of bbox in bitmap$/;"	m	struct:__anon12
+y1	.\include\stb_truetype.h	/^   float x0,y0, x1,y1;$/;"	m	struct:stbtt__edge
+y1	.\include\stb_truetype.h	/^   float x1,y1,s1,t1; \/\/ bottom-right$/;"	m	struct:__anon11
+y1	.\include\stb_truetype.h	/^   unsigned short x0,y0,x1,y1; \/\/ coordinates of bbox in bitmap$/;"	m	struct:__anon10
+y1	.\include\stb_truetype.h	/^   unsigned short x0,y0,x1,y1; \/\/ coordinates of bbox in bitmap$/;"	m	struct:__anon12
+yfov	.\include\cgltf.h	/^		cgltf_float yfov;$/;"	m	struct:cgltf_camera_perspective
+ymag	.\include\cgltf.h	/^		cgltf_float ymag;$/;"	m	struct:cgltf_camera_orthographic
+yoff	.\include\stb_truetype.h	/^   float xoff,yoff,xadvance;$/;"	m	struct:__anon10
+yoff	.\include\stb_truetype.h	/^   float xoff,yoff,xadvance;$/;"	m	struct:__anon12
+yoff2	.\include\stb_truetype.h	/^   float xoff2,yoff2;$/;"	m	struct:__anon12
+zfar	.\include\cgltf.h	/^		cgltf_float zfar;$/;"	m	struct:cgltf_camera_orthographic
+zfar	.\include\cgltf.h	/^		cgltf_float zfar;$/;"	m	struct:cgltf_camera_perspective
+znear	.\include\cgltf.h	/^		cgltf_float znear;$/;"	m	struct:cgltf_camera_orthographic
+znear	.\include\cgltf.h	/^		cgltf_float znear;$/;"	m	struct:cgltf_camera_perspective
