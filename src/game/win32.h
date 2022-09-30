@@ -26,5 +26,11 @@ struct Win32State {
 	char exe_absfilepath[MAX_PATH];
 	char exe_absfolderpath[MAX_PATH];
 	HWND default_window_handle;
+	HCURSOR cursor;
+
+	bool cursor_enabled;
+	bool cursor_clip_enabled;
+	bool cursor_warp_enabled;
 };
+
 

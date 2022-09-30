@@ -14,10 +14,13 @@ InitTetra(Renderer* renderer, MemoryArena* arena) {
 	Tetra* result = PushStruct(arena, Tetra);
 
 	Vec3* vertices = PushArray(&renderer->transient, Vec3, 12); 
+	Vec3* normals = PushArray(&renderer->transient, Vec3, 12);
 
 	GenerateTetrahedron(vertices);
+	GenerateFlatShadedNormals(vertices, 12, normals);
 
-	VertexBufferData vbd[] = { vertices, VERTEX_BUFFER_POSITION };
+	VertexBufferData vbd[] = { { vertices, VERTEX_BUFFER_POSITION },
+															 normals, VERTEX_BUFFER_NORMAL };
 
 	MeshData mesh_data = {};
 	mesh_data.vb_data = vbd;
@@ -42,6 +45,14 @@ GenerateTetraInfo(Tetra* tetra) {
 		tetra->info[i].color = tetra->color[i];
 	}
 }
+
+static void 
+UpdateTetra(Tetra* tetra) {
+	u32 i=0;
+	for(i=0; i<tetra->count; i++) {
+		tetra->transform[i].rotation = QuatMul(QuatFromEuler((i+1)*0.01, 0.0f, 0.0f), tetra->transform[i].rotation);
+	}
+};
 
 static void
 RenderTetra(Tetra* tetra, MeshRenderer* mesh_renderer) {

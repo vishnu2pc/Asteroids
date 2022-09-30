@@ -2,7 +2,6 @@
 
 //------------------------------------------------------------------------
 static void RendererBeginFrame(Renderer* renderer, WindowDimensions wd) {
-	renderer->transient.used = 0;
 	renderer->vp[VIEWPORT_DEFAULT].Width = wd.width;
 	renderer->vp[VIEWPORT_DEFAULT].Height = wd.height;
 
@@ -250,6 +249,7 @@ static void RendererFrame(Renderer* renderer) {
 //------------------------------------------------------------------------
 static void RendererEndFrame(Renderer* renderer) {
 	renderer->swapchain->Present(0, 0);
+	renderer->transient.used = 0;
 	renderer->rq_id = 0;
 }
 //-------------------------------------------------------------------------
@@ -329,28 +329,52 @@ UploadStructuredBuffer(StructuredBufferDesc desc, ID3D11Device* device) {
 	return sb;
 };
 
+static bool
+CompileShader(char* shader_code, u32 shader_length, char* entry, void** shader, ID3DBlob** blob,
+		bool vertex_shader, Renderer* renderer) {
+	HRESULT hr;
+	ID3DBlob* error;
+
+	if(vertex_shader)
+		hr = D3DCompile(shader_code, shader_length, nullptr, nullptr, nullptr, entry, "vs_5_0",
+				0, 0, blob, &error);
+	else
+		hr = D3DCompile(shader_code, shader_length, nullptr, nullptr, nullptr, entry, "ps_5_0",
+				0, 0, blob, &error);
+
+	if (hr) {
+		char* msg = (char*)error->GetBufferPointer();
+		OutputDebugStringA(msg);
+		return false;
+	}
+
+	if(vertex_shader) 
+		hr = renderer->device->CreateVertexShader(blob[0]->GetBufferPointer(), blob[0]->GetBufferSize(), 
+				nullptr, (ID3D11VertexShader**)shader);
+	else 
+		hr = renderer->device->CreatePixelShader(blob[0]->GetBufferPointer(), blob[0]->GetBufferSize(), 
+				nullptr, (ID3D11PixelShader**)shader);
+
+	if(hr) return false;
+	
+	return true;
+};
+
 //------------------------------------------------------------------------
 static PixelShader* 
 UploadPixelShader(PixelShaderDesc desc, Renderer* renderer) {
 	HRESULT hr = {};
 
 	PixelShader* ps = PushStruct(&renderer->permanent, PixelShader);
-	ID3DBlob* blob;
-	ID3DBlob* error;
 	ID3D11PixelShader* shader;
+	ID3DBlob* blob;
 	TEXTURE_SLOT* texture_slot = nullptr;
 
 	u8 rb_count = desc.cb_count;
 	RenderBuffer* rb = PushArray(&renderer->permanent, RenderBuffer, rb_count);
 
-	hr = D3DCompile(desc.shader.code, desc.shader.size, nullptr, nullptr, nullptr, desc.shader.entry, "ps_5_0",
-																			0, 0, &blob, &error);
-	if (hr) {
-		char* msg = (char*)error->GetBufferPointer();
-		OutputDebugStringA(msg);
-	}
-	hr = renderer->device->CreatePixelShader(blob->GetBufferPointer(), blob->GetBufferSize(), nullptr, &shader);
-	AssertHR(hr);
+	Assert(CompileShader(desc.shader.code, desc.shader.size, desc.shader.entry, (void**)&shader,
+				&blob,  false, renderer));
 
 	for(u8 i=0; i<desc.cb_count; i++) {
 		rb[i].type = RENDER_BUFFER_TYPE_CONSTANTS;
@@ -377,23 +401,16 @@ UploadVertexShader(VertexShaderDesc desc, Renderer* renderer) {
 	HRESULT hr = {};
 
 	VertexShader* vs = PushStruct(&renderer->permanent, VertexShader);
-	ID3DBlob* blob;
-	ID3DBlob* error;
 	ID3D11VertexShader* shader = 0;
 	ID3D11InputLayout* il = 0;
+	ID3DBlob* blob = 0;
 	VERTEX_BUFFER* vb_type = 0;
 
 	u8 rb_count = desc.cb_count + desc.sb_count;
 	RenderBuffer* rb = PushArray(&renderer->permanent, RenderBuffer, rb_count);
 
-	hr = D3DCompile(desc.shader.code, desc.shader.size, nullptr, nullptr, nullptr, desc.shader.entry, "vs_5_0",
-																			0, 0, &blob, &error);
-	if (hr) {
-		char* msg = (char*)error->GetBufferPointer();
-		OutputDebugStringA(msg);
-	}
-	hr = renderer->device->CreateVertexShader(blob->GetBufferPointer(), blob->GetBufferSize(), nullptr, &shader);
-	AssertHR(hr);
+	Assert(CompileShader(desc.shader.code, desc.shader.size, desc.shader.entry, (void**)&shader, 
+				&blob, true, renderer));
 
 	if(desc.vb_count) {
 		D3D11_INPUT_ELEMENT_DESC* ie_desc = PushArray(&renderer->transient, D3D11_INPUT_ELEMENT_DESC, desc.vb_count);

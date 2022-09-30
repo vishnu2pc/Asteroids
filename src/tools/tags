@@ -6,7 +6,9 @@
 !_TAG_PROGRAM_VERSION	5.8	//
 ASSET_TYPE	.\asset_packer\main.cpp	/^enum ASSET_TYPE {$/;"	g	file:
 ASSET_TYPE_MODEL	.\asset_packer\main.cpp	/^	ASSET_TYPE_MODEL,$/;"	e	enum:ASSET_TYPE	file:
+ASSET_TYPE_TEXTURE	.\asset_packer\main.cpp	/^	ASSET_TYPE_TEXTURE,$/;"	e	enum:ASSET_TYPE	file:
 ASSET_TYPE_TOTAL	.\asset_packer\main.cpp	/^	ASSET_TYPE_TOTAL$/;"	e	enum:ASSET_TYPE	file:
+Assert	.\asset_packer\main.cpp	18;"	d	file:
 BITMAP_H	.\rasterize_font_and_dump_bitmap\src\main.cpp	31;"	d	file:
 BITMAP_W	.\rasterize_font_and_dump_bitmap\src\main.cpp	32;"	d	file:
 CGLTF_ASSERT_IF	.\include\cgltf.h	1530;"	d
@@ -31,6 +33,7 @@ CGLTF_PTRINDEX	.\include\cgltf.h	2435;"	d
 CGLTF_VALIDATE_ENABLE_ASSERTS	.\include\cgltf.h	950;"	d
 CommonCompilerFlags	.\rasterize_font_and_dump_bitmap\build.bat	/^set CommonCompilerFlags=\/std:c++17 -nologo -WX -wd4700 -Zi \/FC $/;"	v
 CommonLinkerFlags	.\rasterize_font_and_dump_bitmap\build.bat	/^set CommonLinkerFlags= \/SUBSYSTEM:CONSOLE$/;"	v
+FAST_BITS	.\include\stb_image.h	1916;"	d
 FONT_CHARS_TOTAL	.\rasterize_font_and_dump_bitmap\src\main.cpp	12;"	d	file:
 FORMAT	.\asset_packer\main.cpp	/^enum FORMAT {$/;"	g	file:
 FORMAT_DIRECTORY	.\asset_packer\main.cpp	/^	FORMAT_DIRECTORY,$/;"	e	enum:FORMAT	file:
@@ -38,7 +41,9 @@ FORMAT_GAME_ASSET_FILE	.\asset_packer\main.cpp	/^	FORMAT_GAME_ASSET_FILE,$/;"	e	
 FORMAT_INDEX_BUFFER_U32	.\asset_packer\main.cpp	/^	FORMAT_INDEX_BUFFER_U32,$/;"	e	enum:FORMAT	file:
 FORMAT_MESH	.\asset_packer\main.cpp	/^	FORMAT_MESH,$/;"	e	enum:FORMAT	file:
 FORMAT_MESHES_BLOB	.\asset_packer\main.cpp	/^	FORMAT_MESHES_BLOB,$/;"	e	enum:FORMAT	file:
-FORMAT_TEXTURE	.\asset_packer\main.cpp	/^	FORMAT_TEXTURE$/;"	e	enum:FORMAT	file:
+FORMAT_PIXELS	.\asset_packer\main.cpp	/^	FORMAT_PIXELS,$/;"	e	enum:FORMAT	file:
+FORMAT_TEXTURE	.\asset_packer\main.cpp	/^	FORMAT_TEXTURE,$/;"	e	enum:FORMAT	file:
+FORMAT_TEXTURES_BLOB	.\asset_packer\main.cpp	/^	FORMAT_TEXTURES_BLOB,$/;"	e	enum:FORMAT	file:
 FORMAT_TOTAL	.\asset_packer\main.cpp	/^	FORMAT_TOTAL$/;"	e	enum:FORMAT	file:
 FORMAT_VERTEX_BUFFER	.\asset_packer\main.cpp	/^	FORMAT_VERTEX_BUFFER,$/;"	e	enum:FORMAT	file:
 FORMAT_VERTEX_BUFFER_FLOAT	.\asset_packer\main.cpp	/^	FORMAT_VERTEX_BUFFER_FLOAT,$/;"	e	enum:FORMAT	file:
@@ -75,6 +80,8 @@ MakeStructBuffer	.\asset_packer\buffers.cpp	/^StructBuffer MakeStructBuffer(u32 
 PushGenericBuffer	.\asset_packer\buffers.cpp	/^static u32 PushGenericBuffer(void* data, u32 size, GenericBuffer* gb) {$/;"	f	file:
 PushStructBuffer	.\asset_packer\buffers.cpp	/^static u32 PushStructBuffer(void* element, u32 count, StructBuffer* sb) {$/;"	f	file:
 ReserveMemoryStructBuffer	.\asset_packer\buffers.cpp	/^static void ReserveMemoryStructBuffer(u32 count, StructBuffer* sb) {$/;"	f	file:
+STBIDEF	.\include\stb_image.h	393;"	d
+STBIDEF	.\include\stb_image.h	395;"	d
 STBIWDEF	.\include\stb_image_write.h	159;"	d
 STBIWDEF	.\include\stb_image_write.h	162;"	d
 STBIWDEF	.\include\stb_image_write.h	164;"	d
@@ -87,16 +94,91 @@ STBIW_MEMMOVE	.\include\stb_image_write.h	239;"	d
 STBIW_REALLOC	.\include\stb_image_write.h	229;"	d
 STBIW_REALLOC_SIZED	.\include\stb_image_write.h	234;"	d
 STBIW_UCHAR	.\include\stb_image_write.h	248;"	d
+STBI_ASSERT	.\include\stb_image.h	600;"	d
+STBI_EXTERN	.\include\stb_image.h	604;"	d
+STBI_EXTERN	.\include\stb_image.h	606;"	d
+STBI_FREE	.\include\stb_image.h	681;"	d
+STBI_HAS_LROTL	.\include\stb_image.h	661;"	d
+STBI_INCLUDE_STB_IMAGE_H	.\include\stb_image.h	127;"	d
+STBI_MALLOC	.\include\stb_image.h	679;"	d
+STBI_MAX_DIMENSIONS	.\include\stb_image.h	793;"	d
+STBI_NEON	.\include\stb_image.h	776;"	d
+STBI_NOTUSED	.\include\stb_image.h	655;"	d
+STBI_NOTUSED	.\include\stb_image.h	657;"	d
+STBI_NO_BMP	.\include\stb_image.h	557;"	d
+STBI_NO_GIF	.\include\stb_image.h	566;"	d
+STBI_NO_HDR	.\include\stb_image.h	569;"	d
+STBI_NO_JPEG	.\include\stb_image.h	551;"	d
+STBI_NO_PIC	.\include\stb_image.h	572;"	d
+STBI_NO_PNG	.\include\stb_image.h	554;"	d
+STBI_NO_PNM	.\include\stb_image.h	575;"	d
+STBI_NO_PSD	.\include\stb_image.h	560;"	d
+STBI_NO_SIMD	.\include\stb_image.h	703;"	d
+STBI_NO_SIMD	.\include\stb_image.h	718;"	d
+STBI_NO_TGA	.\include\stb_image.h	563;"	d
+STBI_NO_ZLIB	.\include\stb_image.h	580;"	d
+STBI_ORDER_BGR	.\include\stb_image.h	/^	STBI_ORDER_BGR$/;"	e	enum:__anon8
+STBI_ORDER_RGB	.\include\stb_image.h	/^	STBI_ORDER_RGB,$/;"	e	enum:__anon8
+STBI_REALLOC	.\include\stb_image.h	680;"	d
+STBI_REALLOC_SIZED	.\include\stb_image.h	685;"	d
+STBI_SIMD_ALIGN	.\include\stb_image.h	748;"	d
+STBI_SIMD_ALIGN	.\include\stb_image.h	759;"	d
+STBI_SIMD_ALIGN	.\include\stb_image.h	782;"	d
+STBI_SIMD_ALIGN	.\include\stb_image.h	784;"	d
+STBI_SIMD_ALIGN	.\include\stb_image.h	789;"	d
+STBI_SSE2	.\include\stb_image.h	722;"	d
+STBI_THREAD_LOCAL	.\include\stb_image.h	622;"	d
+STBI_THREAD_LOCAL	.\include\stb_image.h	624;"	d
+STBI_THREAD_LOCAL	.\include\stb_image.h	626;"	d
+STBI_THREAD_LOCAL	.\include\stb_image.h	628;"	d
+STBI_THREAD_LOCAL	.\include\stb_image.h	633;"	d
+STBI_VERSION	.\include\stb_image.h	371;"	d
+STBI__BYTECAST	.\include\stb_image.h	1710;"	d
+STBI__CASE	.\include\stb_image.h	1754;"	d
+STBI__CASE	.\include\stb_image.h	1772;"	d
+STBI__CASE	.\include\stb_image.h	1811;"	d
+STBI__CASE	.\include\stb_image.h	1829;"	d
+STBI__CASE	.\include\stb_image.h	4675;"	d
+STBI__CASE	.\include\stb_image.h	4688;"	d
+STBI__CASE	.\include\stb_image.h	4692;"	d
+STBI__CASE	.\include\stb_image.h	4705;"	d
+STBI__COMBO	.\include\stb_image.h	1753;"	d
+STBI__COMBO	.\include\stb_image.h	1810;"	d
+STBI__F_avg	.\include\stb_image.h	/^	STBI__F_avg=3,$/;"	e	enum:__anon19
+STBI__F_avg_first	.\include\stb_image.h	/^	STBI__F_avg_first,$/;"	e	enum:__anon19
+STBI__F_none	.\include\stb_image.h	/^	STBI__F_none=0,$/;"	e	enum:__anon19
+STBI__F_paeth	.\include\stb_image.h	/^	STBI__F_paeth=4,$/;"	e	enum:__anon19
+STBI__F_paeth_first	.\include\stb_image.h	/^	STBI__F_paeth_first$/;"	e	enum:__anon19
+STBI__F_sub	.\include\stb_image.h	/^	STBI__F_sub=1,$/;"	e	enum:__anon19
+STBI__F_up	.\include\stb_image.h	/^	STBI__F_up=2,$/;"	e	enum:__anon19
+STBI__HDR_BUFLEN	.\include\stb_image.h	7030;"	d
+STBI__IDCT_1D	.\include\stb_image.h	2396;"	d
+STBI__MARKER_none	.\include\stb_image.h	2881;"	d
+STBI__PNG_TYPE	.\include\stb_image.h	5021;"	d
+STBI__RESTART	.\include\stb_image.h	2898;"	d
+STBI__SCAN_header	.\include\stb_image.h	/^			STBI__SCAN_header$/;"	e	enum:__anon10
+STBI__SCAN_load	.\include\stb_image.h	/^			STBI__SCAN_load=0,$/;"	e	enum:__anon10
+STBI__SCAN_type	.\include\stb_image.h	/^			STBI__SCAN_type,$/;"	e	enum:__anon10
+STBI__X64_TARGET	.\include\stb_image.h	690;"	d
+STBI__X86_TARGET	.\include\stb_image.h	692;"	d
+STBI__ZFAST_BITS	.\include\stb_image.h	4034;"	d
+STBI__ZFAST_MASK	.\include\stb_image.h	4035;"	d
+STBI__ZNSYMS	.\include\stb_image.h	4036;"	d
+STBI_default	.\include\stb_image.h	/^	STBI_default = 0, \/\/ only used for desired_channels$/;"	e	enum:__anon5
+STBI_grey	.\include\stb_image.h	/^	STBI_grey       = 1,$/;"	e	enum:__anon5
+STBI_grey_alpha	.\include\stb_image.h	/^	STBI_grey_alpha = 2,$/;"	e	enum:__anon5
+STBI_rgb	.\include\stb_image.h	/^	STBI_rgb        = 3,$/;"	e	enum:__anon5
+STBI_rgb_alpha	.\include\stb_image.h	/^	STBI_rgb_alpha  = 4$/;"	e	enum:__anon5
 STBRP_ASSERT	.\include\stb_rect_pack.h	213;"	d
 STBRP_DEF	.\include\stb_rect_pack.h	72;"	d
 STBRP_DEF	.\include\stb_rect_pack.h	74;"	d
-STBRP_HEURISTIC_Skyline_BF_sortHeight	.\include\stb_rect_pack.h	/^   STBRP_HEURISTIC_Skyline_BF_sortHeight$/;"	e	enum:__anon6
-STBRP_HEURISTIC_Skyline_BL_sortHeight	.\include\stb_rect_pack.h	/^   STBRP_HEURISTIC_Skyline_BL_sortHeight = STBRP_HEURISTIC_Skyline_default,$/;"	e	enum:__anon6
-STBRP_HEURISTIC_Skyline_default	.\include\stb_rect_pack.h	/^   STBRP_HEURISTIC_Skyline_default=0,$/;"	e	enum:__anon6
+STBRP_HEURISTIC_Skyline_BF_sortHeight	.\include\stb_rect_pack.h	/^   STBRP_HEURISTIC_Skyline_BF_sortHeight$/;"	e	enum:__anon25
+STBRP_HEURISTIC_Skyline_BL_sortHeight	.\include\stb_rect_pack.h	/^   STBRP_HEURISTIC_Skyline_BL_sortHeight = STBRP_HEURISTIC_Skyline_default,$/;"	e	enum:__anon25
+STBRP_HEURISTIC_Skyline_default	.\include\stb_rect_pack.h	/^   STBRP_HEURISTIC_Skyline_default=0,$/;"	e	enum:__anon25
 STBRP_SORT	.\include\stb_rect_pack.h	208;"	d
 STBRP__CDECL	.\include\stb_rect_pack.h	218;"	d
 STBRP__CDECL	.\include\stb_rect_pack.h	221;"	d
-STBRP__INIT_skyline	.\include\stb_rect_pack.h	/^   STBRP__INIT_skyline = 1$/;"	e	enum:__anon7
+STBRP__INIT_skyline	.\include\stb_rect_pack.h	/^   STBRP__INIT_skyline = 1$/;"	e	enum:__anon26
 STBRP__MAXVAL	.\include\stb_rect_pack.h	87;"	d
 STBRP__NOTUSED	.\include\stb_rect_pack.h	217;"	d
 STBRP__NOTUSED	.\include\stb_rect_pack.h	220;"	d
@@ -111,56 +193,56 @@ STBTT_MACSTYLE_DONTCARE	.\include\stb_truetype.h	1026;"	d
 STBTT_MACSTYLE_ITALIC	.\include\stb_truetype.h	1028;"	d
 STBTT_MACSTYLE_NONE	.\include\stb_truetype.h	1030;"	d
 STBTT_MACSTYLE_UNDERSCORE	.\include\stb_truetype.h	1029;"	d
-STBTT_MAC_EID_ARABIC	.\include\stb_truetype.h	/^   STBTT_MAC_EID_ROMAN        =0,   STBTT_MAC_EID_ARABIC       =4,$/;"	e	enum:__anon20
-STBTT_MAC_EID_CHINESE_TRAD	.\include\stb_truetype.h	/^   STBTT_MAC_EID_CHINESE_TRAD =2,   STBTT_MAC_EID_GREEK        =6,$/;"	e	enum:__anon20
-STBTT_MAC_EID_GREEK	.\include\stb_truetype.h	/^   STBTT_MAC_EID_CHINESE_TRAD =2,   STBTT_MAC_EID_GREEK        =6,$/;"	e	enum:__anon20
-STBTT_MAC_EID_HEBREW	.\include\stb_truetype.h	/^   STBTT_MAC_EID_JAPANESE     =1,   STBTT_MAC_EID_HEBREW       =5,$/;"	e	enum:__anon20
-STBTT_MAC_EID_JAPANESE	.\include\stb_truetype.h	/^   STBTT_MAC_EID_JAPANESE     =1,   STBTT_MAC_EID_HEBREW       =5,$/;"	e	enum:__anon20
-STBTT_MAC_EID_KOREAN	.\include\stb_truetype.h	/^   STBTT_MAC_EID_KOREAN       =3,   STBTT_MAC_EID_RUSSIAN      =7$/;"	e	enum:__anon20
-STBTT_MAC_EID_ROMAN	.\include\stb_truetype.h	/^   STBTT_MAC_EID_ROMAN        =0,   STBTT_MAC_EID_ARABIC       =4,$/;"	e	enum:__anon20
-STBTT_MAC_EID_RUSSIAN	.\include\stb_truetype.h	/^   STBTT_MAC_EID_KOREAN       =3,   STBTT_MAC_EID_RUSSIAN      =7$/;"	e	enum:__anon20
-STBTT_MAC_LANG_ARABIC	.\include\stb_truetype.h	/^   STBTT_MAC_LANG_ARABIC       =12,   STBTT_MAC_LANG_KOREAN       =23,$/;"	e	enum:__anon22
-STBTT_MAC_LANG_CHINESE_SIMPLIFIED	.\include\stb_truetype.h	/^   STBTT_MAC_LANG_HEBREW       =10,   STBTT_MAC_LANG_CHINESE_SIMPLIFIED =33,$/;"	e	enum:__anon22
-STBTT_MAC_LANG_CHINESE_TRAD	.\include\stb_truetype.h	/^   STBTT_MAC_LANG_ITALIAN      =3 ,   STBTT_MAC_LANG_CHINESE_TRAD =19$/;"	e	enum:__anon22
-STBTT_MAC_LANG_DUTCH	.\include\stb_truetype.h	/^   STBTT_MAC_LANG_DUTCH        =4 ,   STBTT_MAC_LANG_RUSSIAN      =32,$/;"	e	enum:__anon22
-STBTT_MAC_LANG_ENGLISH	.\include\stb_truetype.h	/^   STBTT_MAC_LANG_ENGLISH      =0 ,   STBTT_MAC_LANG_JAPANESE     =11,$/;"	e	enum:__anon22
-STBTT_MAC_LANG_FRENCH	.\include\stb_truetype.h	/^   STBTT_MAC_LANG_FRENCH       =1 ,   STBTT_MAC_LANG_SPANISH      =6 ,$/;"	e	enum:__anon22
-STBTT_MAC_LANG_GERMAN	.\include\stb_truetype.h	/^   STBTT_MAC_LANG_GERMAN       =2 ,   STBTT_MAC_LANG_SWEDISH      =5 ,$/;"	e	enum:__anon22
-STBTT_MAC_LANG_HEBREW	.\include\stb_truetype.h	/^   STBTT_MAC_LANG_HEBREW       =10,   STBTT_MAC_LANG_CHINESE_SIMPLIFIED =33,$/;"	e	enum:__anon22
-STBTT_MAC_LANG_ITALIAN	.\include\stb_truetype.h	/^   STBTT_MAC_LANG_ITALIAN      =3 ,   STBTT_MAC_LANG_CHINESE_TRAD =19$/;"	e	enum:__anon22
-STBTT_MAC_LANG_JAPANESE	.\include\stb_truetype.h	/^   STBTT_MAC_LANG_ENGLISH      =0 ,   STBTT_MAC_LANG_JAPANESE     =11,$/;"	e	enum:__anon22
-STBTT_MAC_LANG_KOREAN	.\include\stb_truetype.h	/^   STBTT_MAC_LANG_ARABIC       =12,   STBTT_MAC_LANG_KOREAN       =23,$/;"	e	enum:__anon22
-STBTT_MAC_LANG_RUSSIAN	.\include\stb_truetype.h	/^   STBTT_MAC_LANG_DUTCH        =4 ,   STBTT_MAC_LANG_RUSSIAN      =32,$/;"	e	enum:__anon22
-STBTT_MAC_LANG_SPANISH	.\include\stb_truetype.h	/^   STBTT_MAC_LANG_FRENCH       =1 ,   STBTT_MAC_LANG_SPANISH      =6 ,$/;"	e	enum:__anon22
-STBTT_MAC_LANG_SWEDISH	.\include\stb_truetype.h	/^   STBTT_MAC_LANG_GERMAN       =2 ,   STBTT_MAC_LANG_SWEDISH      =5 ,$/;"	e	enum:__anon22
+STBTT_MAC_EID_ARABIC	.\include\stb_truetype.h	/^   STBTT_MAC_EID_ROMAN        =0,   STBTT_MAC_EID_ARABIC       =4,$/;"	e	enum:__anon39
+STBTT_MAC_EID_CHINESE_TRAD	.\include\stb_truetype.h	/^   STBTT_MAC_EID_CHINESE_TRAD =2,   STBTT_MAC_EID_GREEK        =6,$/;"	e	enum:__anon39
+STBTT_MAC_EID_GREEK	.\include\stb_truetype.h	/^   STBTT_MAC_EID_CHINESE_TRAD =2,   STBTT_MAC_EID_GREEK        =6,$/;"	e	enum:__anon39
+STBTT_MAC_EID_HEBREW	.\include\stb_truetype.h	/^   STBTT_MAC_EID_JAPANESE     =1,   STBTT_MAC_EID_HEBREW       =5,$/;"	e	enum:__anon39
+STBTT_MAC_EID_JAPANESE	.\include\stb_truetype.h	/^   STBTT_MAC_EID_JAPANESE     =1,   STBTT_MAC_EID_HEBREW       =5,$/;"	e	enum:__anon39
+STBTT_MAC_EID_KOREAN	.\include\stb_truetype.h	/^   STBTT_MAC_EID_KOREAN       =3,   STBTT_MAC_EID_RUSSIAN      =7$/;"	e	enum:__anon39
+STBTT_MAC_EID_ROMAN	.\include\stb_truetype.h	/^   STBTT_MAC_EID_ROMAN        =0,   STBTT_MAC_EID_ARABIC       =4,$/;"	e	enum:__anon39
+STBTT_MAC_EID_RUSSIAN	.\include\stb_truetype.h	/^   STBTT_MAC_EID_KOREAN       =3,   STBTT_MAC_EID_RUSSIAN      =7$/;"	e	enum:__anon39
+STBTT_MAC_LANG_ARABIC	.\include\stb_truetype.h	/^   STBTT_MAC_LANG_ARABIC       =12,   STBTT_MAC_LANG_KOREAN       =23,$/;"	e	enum:__anon41
+STBTT_MAC_LANG_CHINESE_SIMPLIFIED	.\include\stb_truetype.h	/^   STBTT_MAC_LANG_HEBREW       =10,   STBTT_MAC_LANG_CHINESE_SIMPLIFIED =33,$/;"	e	enum:__anon41
+STBTT_MAC_LANG_CHINESE_TRAD	.\include\stb_truetype.h	/^   STBTT_MAC_LANG_ITALIAN      =3 ,   STBTT_MAC_LANG_CHINESE_TRAD =19$/;"	e	enum:__anon41
+STBTT_MAC_LANG_DUTCH	.\include\stb_truetype.h	/^   STBTT_MAC_LANG_DUTCH        =4 ,   STBTT_MAC_LANG_RUSSIAN      =32,$/;"	e	enum:__anon41
+STBTT_MAC_LANG_ENGLISH	.\include\stb_truetype.h	/^   STBTT_MAC_LANG_ENGLISH      =0 ,   STBTT_MAC_LANG_JAPANESE     =11,$/;"	e	enum:__anon41
+STBTT_MAC_LANG_FRENCH	.\include\stb_truetype.h	/^   STBTT_MAC_LANG_FRENCH       =1 ,   STBTT_MAC_LANG_SPANISH      =6 ,$/;"	e	enum:__anon41
+STBTT_MAC_LANG_GERMAN	.\include\stb_truetype.h	/^   STBTT_MAC_LANG_GERMAN       =2 ,   STBTT_MAC_LANG_SWEDISH      =5 ,$/;"	e	enum:__anon41
+STBTT_MAC_LANG_HEBREW	.\include\stb_truetype.h	/^   STBTT_MAC_LANG_HEBREW       =10,   STBTT_MAC_LANG_CHINESE_SIMPLIFIED =33,$/;"	e	enum:__anon41
+STBTT_MAC_LANG_ITALIAN	.\include\stb_truetype.h	/^   STBTT_MAC_LANG_ITALIAN      =3 ,   STBTT_MAC_LANG_CHINESE_TRAD =19$/;"	e	enum:__anon41
+STBTT_MAC_LANG_JAPANESE	.\include\stb_truetype.h	/^   STBTT_MAC_LANG_ENGLISH      =0 ,   STBTT_MAC_LANG_JAPANESE     =11,$/;"	e	enum:__anon41
+STBTT_MAC_LANG_KOREAN	.\include\stb_truetype.h	/^   STBTT_MAC_LANG_ARABIC       =12,   STBTT_MAC_LANG_KOREAN       =23,$/;"	e	enum:__anon41
+STBTT_MAC_LANG_RUSSIAN	.\include\stb_truetype.h	/^   STBTT_MAC_LANG_DUTCH        =4 ,   STBTT_MAC_LANG_RUSSIAN      =32,$/;"	e	enum:__anon41
+STBTT_MAC_LANG_SPANISH	.\include\stb_truetype.h	/^   STBTT_MAC_LANG_FRENCH       =1 ,   STBTT_MAC_LANG_SPANISH      =6 ,$/;"	e	enum:__anon41
+STBTT_MAC_LANG_SWEDISH	.\include\stb_truetype.h	/^   STBTT_MAC_LANG_GERMAN       =2 ,   STBTT_MAC_LANG_SWEDISH      =5 ,$/;"	e	enum:__anon41
 STBTT_MAX_OVERSAMPLE	.\include\stb_truetype.h	1109;"	d
-STBTT_MS_EID_SHIFTJIS	.\include\stb_truetype.h	/^   STBTT_MS_EID_SHIFTJIS      =2,$/;"	e	enum:__anon19
-STBTT_MS_EID_SYMBOL	.\include\stb_truetype.h	/^   STBTT_MS_EID_SYMBOL        =0,$/;"	e	enum:__anon19
-STBTT_MS_EID_UNICODE_BMP	.\include\stb_truetype.h	/^   STBTT_MS_EID_UNICODE_BMP   =1,$/;"	e	enum:__anon19
-STBTT_MS_EID_UNICODE_FULL	.\include\stb_truetype.h	/^   STBTT_MS_EID_UNICODE_FULL  =10$/;"	e	enum:__anon19
-STBTT_MS_LANG_CHINESE	.\include\stb_truetype.h	/^   STBTT_MS_LANG_CHINESE     =0x0804,   STBTT_MS_LANG_JAPANESE    =0x0411,$/;"	e	enum:__anon21
-STBTT_MS_LANG_DUTCH	.\include\stb_truetype.h	/^   STBTT_MS_LANG_DUTCH       =0x0413,   STBTT_MS_LANG_KOREAN      =0x0412,$/;"	e	enum:__anon21
-STBTT_MS_LANG_ENGLISH	.\include\stb_truetype.h	/^   STBTT_MS_LANG_ENGLISH     =0x0409,   STBTT_MS_LANG_ITALIAN     =0x0410,$/;"	e	enum:__anon21
-STBTT_MS_LANG_FRENCH	.\include\stb_truetype.h	/^   STBTT_MS_LANG_FRENCH      =0x040c,   STBTT_MS_LANG_RUSSIAN     =0x0419,$/;"	e	enum:__anon21
-STBTT_MS_LANG_GERMAN	.\include\stb_truetype.h	/^   STBTT_MS_LANG_GERMAN      =0x0407,   STBTT_MS_LANG_SPANISH     =0x0409,$/;"	e	enum:__anon21
-STBTT_MS_LANG_HEBREW	.\include\stb_truetype.h	/^   STBTT_MS_LANG_HEBREW      =0x040d,   STBTT_MS_LANG_SWEDISH     =0x041D$/;"	e	enum:__anon21
-STBTT_MS_LANG_ITALIAN	.\include\stb_truetype.h	/^   STBTT_MS_LANG_ENGLISH     =0x0409,   STBTT_MS_LANG_ITALIAN     =0x0410,$/;"	e	enum:__anon21
-STBTT_MS_LANG_JAPANESE	.\include\stb_truetype.h	/^   STBTT_MS_LANG_CHINESE     =0x0804,   STBTT_MS_LANG_JAPANESE    =0x0411,$/;"	e	enum:__anon21
-STBTT_MS_LANG_KOREAN	.\include\stb_truetype.h	/^   STBTT_MS_LANG_DUTCH       =0x0413,   STBTT_MS_LANG_KOREAN      =0x0412,$/;"	e	enum:__anon21
-STBTT_MS_LANG_RUSSIAN	.\include\stb_truetype.h	/^   STBTT_MS_LANG_FRENCH      =0x040c,   STBTT_MS_LANG_RUSSIAN     =0x0419,$/;"	e	enum:__anon21
-STBTT_MS_LANG_SPANISH	.\include\stb_truetype.h	/^   STBTT_MS_LANG_GERMAN      =0x0407,   STBTT_MS_LANG_SPANISH     =0x0409,$/;"	e	enum:__anon21
-STBTT_MS_LANG_SWEDISH	.\include\stb_truetype.h	/^   STBTT_MS_LANG_HEBREW      =0x040d,   STBTT_MS_LANG_SWEDISH     =0x041D$/;"	e	enum:__anon21
-STBTT_PLATFORM_ID_ISO	.\include\stb_truetype.h	/^   STBTT_PLATFORM_ID_ISO       =2,$/;"	e	enum:__anon17
-STBTT_PLATFORM_ID_MAC	.\include\stb_truetype.h	/^   STBTT_PLATFORM_ID_MAC       =1,$/;"	e	enum:__anon17
-STBTT_PLATFORM_ID_MICROSOFT	.\include\stb_truetype.h	/^   STBTT_PLATFORM_ID_MICROSOFT =3$/;"	e	enum:__anon17
-STBTT_PLATFORM_ID_UNICODE	.\include\stb_truetype.h	/^   STBTT_PLATFORM_ID_UNICODE   =0,$/;"	e	enum:__anon17
+STBTT_MS_EID_SHIFTJIS	.\include\stb_truetype.h	/^   STBTT_MS_EID_SHIFTJIS      =2,$/;"	e	enum:__anon38
+STBTT_MS_EID_SYMBOL	.\include\stb_truetype.h	/^   STBTT_MS_EID_SYMBOL        =0,$/;"	e	enum:__anon38
+STBTT_MS_EID_UNICODE_BMP	.\include\stb_truetype.h	/^   STBTT_MS_EID_UNICODE_BMP   =1,$/;"	e	enum:__anon38
+STBTT_MS_EID_UNICODE_FULL	.\include\stb_truetype.h	/^   STBTT_MS_EID_UNICODE_FULL  =10$/;"	e	enum:__anon38
+STBTT_MS_LANG_CHINESE	.\include\stb_truetype.h	/^   STBTT_MS_LANG_CHINESE     =0x0804,   STBTT_MS_LANG_JAPANESE    =0x0411,$/;"	e	enum:__anon40
+STBTT_MS_LANG_DUTCH	.\include\stb_truetype.h	/^   STBTT_MS_LANG_DUTCH       =0x0413,   STBTT_MS_LANG_KOREAN      =0x0412,$/;"	e	enum:__anon40
+STBTT_MS_LANG_ENGLISH	.\include\stb_truetype.h	/^   STBTT_MS_LANG_ENGLISH     =0x0409,   STBTT_MS_LANG_ITALIAN     =0x0410,$/;"	e	enum:__anon40
+STBTT_MS_LANG_FRENCH	.\include\stb_truetype.h	/^   STBTT_MS_LANG_FRENCH      =0x040c,   STBTT_MS_LANG_RUSSIAN     =0x0419,$/;"	e	enum:__anon40
+STBTT_MS_LANG_GERMAN	.\include\stb_truetype.h	/^   STBTT_MS_LANG_GERMAN      =0x0407,   STBTT_MS_LANG_SPANISH     =0x0409,$/;"	e	enum:__anon40
+STBTT_MS_LANG_HEBREW	.\include\stb_truetype.h	/^   STBTT_MS_LANG_HEBREW      =0x040d,   STBTT_MS_LANG_SWEDISH     =0x041D$/;"	e	enum:__anon40
+STBTT_MS_LANG_ITALIAN	.\include\stb_truetype.h	/^   STBTT_MS_LANG_ENGLISH     =0x0409,   STBTT_MS_LANG_ITALIAN     =0x0410,$/;"	e	enum:__anon40
+STBTT_MS_LANG_JAPANESE	.\include\stb_truetype.h	/^   STBTT_MS_LANG_CHINESE     =0x0804,   STBTT_MS_LANG_JAPANESE    =0x0411,$/;"	e	enum:__anon40
+STBTT_MS_LANG_KOREAN	.\include\stb_truetype.h	/^   STBTT_MS_LANG_DUTCH       =0x0413,   STBTT_MS_LANG_KOREAN      =0x0412,$/;"	e	enum:__anon40
+STBTT_MS_LANG_RUSSIAN	.\include\stb_truetype.h	/^   STBTT_MS_LANG_FRENCH      =0x040c,   STBTT_MS_LANG_RUSSIAN     =0x0419,$/;"	e	enum:__anon40
+STBTT_MS_LANG_SPANISH	.\include\stb_truetype.h	/^   STBTT_MS_LANG_GERMAN      =0x0407,   STBTT_MS_LANG_SPANISH     =0x0409,$/;"	e	enum:__anon40
+STBTT_MS_LANG_SWEDISH	.\include\stb_truetype.h	/^   STBTT_MS_LANG_HEBREW      =0x040d,   STBTT_MS_LANG_SWEDISH     =0x041D$/;"	e	enum:__anon40
+STBTT_PLATFORM_ID_ISO	.\include\stb_truetype.h	/^   STBTT_PLATFORM_ID_ISO       =2,$/;"	e	enum:__anon36
+STBTT_PLATFORM_ID_MAC	.\include\stb_truetype.h	/^   STBTT_PLATFORM_ID_MAC       =1,$/;"	e	enum:__anon36
+STBTT_PLATFORM_ID_MICROSOFT	.\include\stb_truetype.h	/^   STBTT_PLATFORM_ID_MICROSOFT =3$/;"	e	enum:__anon36
+STBTT_PLATFORM_ID_UNICODE	.\include\stb_truetype.h	/^   STBTT_PLATFORM_ID_UNICODE   =0,$/;"	e	enum:__anon36
 STBTT_POINT_SIZE	.\include\stb_truetype.h	602;"	d
 STBTT_RASTERIZER_VERSION	.\include\stb_truetype.h	1119;"	d
-STBTT_UNICODE_EID_ISO_10646	.\include\stb_truetype.h	/^   STBTT_UNICODE_EID_ISO_10646      =2,$/;"	e	enum:__anon18
-STBTT_UNICODE_EID_UNICODE_1_0	.\include\stb_truetype.h	/^   STBTT_UNICODE_EID_UNICODE_1_0    =0,$/;"	e	enum:__anon18
-STBTT_UNICODE_EID_UNICODE_1_1	.\include\stb_truetype.h	/^   STBTT_UNICODE_EID_UNICODE_1_1    =1,$/;"	e	enum:__anon18
-STBTT_UNICODE_EID_UNICODE_2_0_BMP	.\include\stb_truetype.h	/^   STBTT_UNICODE_EID_UNICODE_2_0_BMP=3,$/;"	e	enum:__anon18
-STBTT_UNICODE_EID_UNICODE_2_0_FULL	.\include\stb_truetype.h	/^   STBTT_UNICODE_EID_UNICODE_2_0_FULL=4$/;"	e	enum:__anon18
+STBTT_UNICODE_EID_ISO_10646	.\include\stb_truetype.h	/^   STBTT_UNICODE_EID_ISO_10646      =2,$/;"	e	enum:__anon37
+STBTT_UNICODE_EID_UNICODE_1_0	.\include\stb_truetype.h	/^   STBTT_UNICODE_EID_UNICODE_1_0    =0,$/;"	e	enum:__anon37
+STBTT_UNICODE_EID_UNICODE_1_1	.\include\stb_truetype.h	/^   STBTT_UNICODE_EID_UNICODE_1_1    =1,$/;"	e	enum:__anon37
+STBTT_UNICODE_EID_UNICODE_2_0_BMP	.\include\stb_truetype.h	/^   STBTT_UNICODE_EID_UNICODE_2_0_BMP=3,$/;"	e	enum:__anon37
+STBTT_UNICODE_EID_UNICODE_2_0_FULL	.\include\stb_truetype.h	/^   STBTT_UNICODE_EID_UNICODE_2_0_FULL=4$/;"	e	enum:__anon37
 STBTT__COMPARE	.\include\stb_truetype.h	3397;"	d
 STBTT__CSCTX_INIT	.\include\stb_truetype.h	1909;"	d
 STBTT__CSERR	.\include\stb_truetype.h	2018;"	d
@@ -184,10 +266,11 @@ STBTT_min	.\include\stb_truetype.h	4395;"	d
 STBTT_pow	.\include\stb_truetype.h	449;"	d
 STBTT_sqrt	.\include\stb_truetype.h	448;"	d
 STBTT_strlen	.\include\stb_truetype.h	482;"	d
-STBTT_vcubic	.\include\stb_truetype.h	/^      STBTT_vcubic$/;"	e	enum:__anon14
-STBTT_vcurve	.\include\stb_truetype.h	/^      STBTT_vcurve,$/;"	e	enum:__anon14
-STBTT_vline	.\include\stb_truetype.h	/^      STBTT_vline,$/;"	e	enum:__anon14
-STBTT_vmove	.\include\stb_truetype.h	/^      STBTT_vmove=1,$/;"	e	enum:__anon14
+STBTT_vcubic	.\include\stb_truetype.h	/^      STBTT_vcubic$/;"	e	enum:__anon33
+STBTT_vcurve	.\include\stb_truetype.h	/^      STBTT_vcurve,$/;"	e	enum:__anon33
+STBTT_vline	.\include\stb_truetype.h	/^      STBTT_vline,$/;"	e	enum:__anon33
+STBTT_vmove	.\include\stb_truetype.h	/^      STBTT_vmove=1,$/;"	e	enum:__anon33
+STB_IMAGE_IMPLEMENTATION	.\asset_packer\main.cpp	9;"	d	file:
 STB_IMAGE_WRITE_IMPLEMENTATION	.\rasterize_font_and_dump_bitmap\src\main.cpp	5;"	d	file:
 STB_INCLUDE_STB_RECT_PACK_H	.\include\stb_rect_pack.h	67;"	d
 STB_RECT_PACK_IMPLEMENTATION	.\rasterize_font_and_dump_bitmap\src\main.cpp	1;"	d	file:
@@ -197,7 +280,9 @@ StrHasStrEnd	.\asset_packer\main.cpp	/^bool StrHasStrEnd(char* left, char* right
 StrPrepend	.\asset_packer\main.cpp	/^char* StrPrepend(char* string, char* prepend) {$/;"	f
 StructBuffer	.\asset_packer\buffers.cpp	/^struct StructBuffer {$/;"	s	file:
 WIN32_LEAN_AND_MEAN	.\asset_packer\main.cpp	4;"	d	file:
+WriteStructBufferElementToGenericBuffer	.\asset_packer\buffers.cpp	/^static void WriteStructBufferElementToGenericBuffer(GenericBuffer* gb, StructBuffer* sb, u32 index) {$/;"	f	file:
 WriteStructBufferToGenericBuffer	.\asset_packer\buffers.cpp	/^static void WriteStructBufferToGenericBuffer(GenericBuffer* gb, StructBuffer* sb) {$/;"	f	file:
+YCbCr_to_RGB_kernel	.\include\stb_image.h	/^			void (*YCbCr_to_RGB_kernel)(stbi_uc *out, const stbi_uc *y, const stbi_uc *pcb, const stbi_uc *pcr, int count, int step);$/;"	m	struct:__anon12
 _CRT_NONSTDC_NO_DEPRECATE	.\include\stb_image_write.h	206;"	d
 _CRT_SECURE_NO_WARNINGS	.\include\stb_image_write.h	203;"	d
 __STB_INCLUDE_STB_TRUETYPE_H__	.\include\stb_truetype.h	500;"	d
@@ -206,15 +291,16 @@ accessors_count	.\include\cgltf.h	/^		cgltf_size accessors_count;$/;"	m	struct:c
 active_head	.\include\stb_rect_pack.h	/^   stbrp_node *active_head;$/;"	m	struct:stbrp_context
 advance	.\include\stb_truetype.h	/^   int advance;$/;"	m	struct:stbtt_kerningentry
 align	.\include\stb_rect_pack.h	/^   int align;$/;"	m	struct:stbrp_context
+all_a	.\include\stb_image.h	/^			unsigned int mr,mg,mb,ma, all_a;$/;"	m	struct:__anon20
 alloc_func	.\include\cgltf.h	/^		void* (*alloc_func)(void* user, cgltf_size size);$/;"	m	struct:cgltf_memory_options
 alpha_cutoff	.\include\cgltf.h	/^		cgltf_float alpha_cutoff;$/;"	m	struct:cgltf_material
 alpha_mode	.\include\cgltf.h	/^		cgltf_alpha_mode alpha_mode;$/;"	m	struct:cgltf_material
 animations	.\include\cgltf.h	/^		cgltf_animation* animations;$/;"	m	struct:cgltf_data
 animations_count	.\include\cgltf.h	/^		cgltf_size animations_count;$/;"	m	struct:cgltf_data
-array_of_unicode_codepoints	.\include\stb_truetype.h	/^   int *array_of_unicode_codepoints;       \/\/ if non-zero, then this is an array of unicode codepoints$/;"	m	struct:__anon13
+app14_color_transform	.\include\stb_image.h	/^			int            app14_color_transform; \/\/ Adobe APP14 tag$/;"	m	struct:__anon12
+array_of_unicode_codepoints	.\include\stb_truetype.h	/^   int *array_of_unicode_codepoints;       \/\/ if non-zero, then this is an array of unicode codepoints$/;"	m	struct:__anon32
 ascent	.\rasterize_font_and_dump_bitmap\src\main.cpp	/^	int ascent, descent, line_gap, baseline;	\/\/ advance vertical position by (ascent - descent + line_gap)$/;"	m	struct:FontInfo	file:
 aspect_ratio	.\include\cgltf.h	/^		cgltf_float aspect_ratio;$/;"	m	struct:cgltf_camera_perspective
-assert	.\asset_packer\main.cpp	16;"	d	file:
 asset	.\include\cgltf.h	/^		cgltf_asset asset;$/;"	m	struct:cgltf_data
 asset_file_format	.\asset_packer\main.cpp	/^char* asset_file_format[ASSET_TYPE_TOTAL] = {$/;"	v
 asset_path_dir	.\asset_packer\main.cpp	/^char* asset_path_dir[ASSET_TYPE_TOTAL] = { $/;"	v
@@ -228,20 +314,25 @@ attributes_count	.\include\cgltf.h	/^		cgltf_size attributes_count;$/;"	m	struct
 attributes_count	.\include\cgltf.h	/^		cgltf_size attributes_count;$/;"	m	struct:cgltf_mesh_gpu_instancing
 attributes_count	.\include\cgltf.h	/^		cgltf_size attributes_count;$/;"	m	struct:cgltf_morph_target
 attributes_count	.\include\cgltf.h	/^		cgltf_size attributes_count;$/;"	m	struct:cgltf_primitive
+background	.\include\stb_image.h	/^			stbi_uc *background;          \/\/ The current "background" as far as a gif is concerned$/;"	m	struct:__anon23
 base_color_factor	.\include\cgltf.h	/^		cgltf_float base_color_factor[4];$/;"	m	struct:cgltf_pbr_metallic_roughness
 base_color_texture	.\include\cgltf.h	/^		cgltf_texture_view base_color_texture;$/;"	m	struct:cgltf_pbr_metallic_roughness
 baseline	.\rasterize_font_and_dump_bitmap\src\main.cpp	/^	int ascent, descent, line_gap, baseline;	\/\/ advance vertical position by (ascent - descent + line_gap)$/;"	m	struct:FontInfo	file:
 basisu_image	.\include\cgltf.h	/^		cgltf_image* basisu_image;$/;"	m	struct:cgltf_texture
+bgindex	.\include\stb_image.h	/^			int flags, bgindex, ratio, transparent, eflags;$/;"	m	struct:__anon23
 bin	.\include\cgltf.h	/^		const void* bin;$/;"	m	struct:cgltf_data
 bin_size	.\include\cgltf.h	/^		cgltf_size bin_size;$/;"	m	struct:cgltf_data
 bitmap_h	.\rasterize_font_and_dump_bitmap\src\main.cpp	/^	unsigned short bitmap_w, bitmap_h;$/;"	m	struct:FontInfo	file:
 bitmap_w	.\rasterize_font_and_dump_bitmap\src\main.cpp	/^	unsigned short bitmap_w, bitmap_h;$/;"	m	struct:FontInfo	file:
-bottom_y	.\include\stb_truetype.h	/^   int x,y,bottom_y;$/;"	m	struct:__anon25
-bounds	.\include\stb_truetype.h	/^   int bounds;$/;"	m	struct:__anon23
-buf_used	.\include\stb_image_write.h	/^   int buf_used;$/;"	m	struct:__anon5
+bits_per_channel	.\include\stb_image.h	/^	int bits_per_channel;$/;"	m	struct:__anon9
+bottom_y	.\include\stb_truetype.h	/^   int x,y,bottom_y;$/;"	m	struct:__anon44
+bounds	.\include\stb_truetype.h	/^   int bounds;$/;"	m	struct:__anon42
+bpp	.\include\stb_image.h	/^			int bpp, offset, hsz;$/;"	m	struct:__anon20
+buf_used	.\include\stb_image_write.h	/^   int buf_used;$/;"	m	struct:__anon24
 buffer	.\include\cgltf.h	/^		cgltf_buffer* buffer;$/;"	m	struct:cgltf_buffer_view
 buffer	.\include\cgltf.h	/^		cgltf_buffer* buffer;$/;"	m	struct:cgltf_meshopt_compression
-buffer	.\include\stb_image_write.h	/^   unsigned char buffer[64];$/;"	m	struct:__anon5
+buffer	.\include\stb_image_write.h	/^   unsigned char buffer[64];$/;"	m	struct:__anon24
+buffer_start	.\include\stb_image.h	/^		stbi_uc buffer_start[128];$/;"	m	struct:__anon7
 buffer_view	.\include\cgltf.h	/^		cgltf_buffer_view* buffer_view;$/;"	m	struct:cgltf_accessor
 buffer_view	.\include\cgltf.h	/^		cgltf_buffer_view* buffer_view;$/;"	m	struct:cgltf_draco_mesh_compression
 buffer_view	.\include\cgltf.h	/^		cgltf_buffer_view* buffer_view;$/;"	m	struct:cgltf_image
@@ -250,6 +341,8 @@ buffer_views	.\include\cgltf.h	/^		cgltf_buffer_view* buffer_views;$/;"	m	struct
 buffer_views_count	.\include\cgltf.h	/^		cgltf_size buffer_views_count;$/;"	m	struct:cgltf_data
 buffers	.\include\cgltf.h	/^		cgltf_buffer* buffers;$/;"	m	struct:cgltf_data
 buffers_count	.\include\cgltf.h	/^		cgltf_size buffers_count;$/;"	m	struct:cgltf_data
+buflen	.\include\stb_image.h	/^		int buflen;$/;"	m	struct:__anon7
+callback_already_read	.\include\stb_image.h	/^		int callback_already_read;$/;"	m	struct:__anon7
 camera	.\include\cgltf.h	/^		cgltf_camera* camera;$/;"	m	struct:cgltf_node
 cameras	.\include\cgltf.h	/^		cgltf_camera* cameras;$/;"	m	struct:cgltf_data
 cameras_count	.\include\cgltf.h	/^		cgltf_size cameras_count;$/;"	m	struct:cgltf_data
@@ -581,9 +674,11 @@ cgltf_unhex	.\include\cgltf.h	/^static int cgltf_unhex(char ch)$/;"	f
 cgltf_validate	.\include\cgltf.h	/^cgltf_result cgltf_validate(cgltf_data* data)$/;"	f
 cgltf_volume	.\include\cgltf.h	/^	typedef struct cgltf_volume$/;"	s
 cgltf_volume	.\include\cgltf.h	/^	} cgltf_volume;$/;"	t	typeref:struct:cgltf_volume
+channel	.\include\stb_image.h	/^			stbi_uc size,type,channel;$/;"	m	struct:__anon21
+channel_order	.\include\stb_image.h	/^	int channel_order;$/;"	m	struct:__anon9
 channels	.\include\cgltf.h	/^		cgltf_animation_channel* channels;$/;"	m	struct:cgltf_animation
 channels_count	.\include\cgltf.h	/^		cgltf_size channels_count;$/;"	m	struct:cgltf_animation
-chardata_for_range	.\include\stb_truetype.h	/^   stbtt_packedchar *chardata_for_range; \/\/ output$/;"	m	struct:__anon13
+chardata_for_range	.\include\stb_truetype.h	/^   stbtt_packedchar *chardata_for_range; \/\/ output$/;"	m	struct:__anon32
 charstrings	.\include\stb_truetype.h	/^   stbtt__buf charstrings;            \/\/ the charstring index$/;"	m	struct:stbtt_fontinfo
 children	.\include\cgltf.h	/^		cgltf_node** children;$/;"	m	struct:cgltf_node
 children_count	.\include\cgltf.h	/^		cgltf_size children_count;$/;"	m	struct:cgltf_node
@@ -593,18 +688,29 @@ clearcoat_normal_texture	.\include\cgltf.h	/^		cgltf_texture_view clearcoat_norm
 clearcoat_roughness_factor	.\include\cgltf.h	/^		cgltf_float clearcoat_roughness_factor;$/;"	m	struct:cgltf_clearcoat
 clearcoat_roughness_texture	.\include\cgltf.h	/^		cgltf_texture_view clearcoat_roughness_texture;$/;"	m	struct:cgltf_clearcoat
 clearcoat_texture	.\include\cgltf.h	/^		cgltf_texture_view clearcoat_texture;$/;"	m	struct:cgltf_clearcoat
+code	.\include\stb_image.h	/^			stbi__uint16 code[256];$/;"	m	struct:__anon11
+code_bits	.\include\stb_image.h	/^			int            code_bits;   \/\/ number of valid bits$/;"	m	struct:__anon12
+code_buffer	.\include\stb_image.h	/^			stbi__uint32   code_buffer; \/\/ jpeg entropy-coded buffer$/;"	m	struct:__anon12
+code_buffer	.\include\stb_image.h	/^		stbi__uint32 code_buffer;$/;"	m	struct:__anon16
+codes	.\include\stb_image.h	/^			stbi__gif_lzw codes[8192];$/;"	m	struct:__anon23
+coeff	.\include\stb_image.h	/^				short   *coeff;   \/\/ progressive only$/;"	m	struct:__anon12::__anon13
+coeff_h	.\include\stb_image.h	/^				int      coeff_w, coeff_h; \/\/ number of 8x8 coefficient blocks$/;"	m	struct:__anon12::__anon13
+coeff_w	.\include\stb_image.h	/^				int      coeff_w, coeff_h; \/\/ number of 8x8 coefficient blocks$/;"	m	struct:__anon12::__anon13
 color	.\include\cgltf.h	/^		cgltf_float color[3];$/;"	m	struct:cgltf_light
+color_table	.\include\stb_image.h	/^			stbi_uc *color_table;$/;"	m	struct:__anon23
 component_type	.\include\cgltf.h	/^		cgltf_component_type component_type;$/;"	m	struct:cgltf_accessor
-context	.\include\stb_image_write.h	/^   void *context;$/;"	m	struct:__anon5
+context	.\include\stb_image_write.h	/^   void *context;$/;"	m	struct:__anon24
 copyright	.\include\cgltf.h	/^		char* copyright;$/;"	m	struct:cgltf_asset
 count	.\include\cgltf.h	/^		cgltf_size count;$/;"	m	struct:cgltf_accessor
 count	.\include\cgltf.h	/^		cgltf_size count;$/;"	m	struct:cgltf_accessor_sparse
 count	.\include\cgltf.h	/^		cgltf_size count;$/;"	m	struct:cgltf_meshopt_compression
-cursor	.\include\stb_truetype.h	/^   int cursor;$/;"	m	struct:__anon9
-cx	.\include\stb_truetype.h	/^      stbtt_vertex_type x,y,cx,cy,cx1,cy1;$/;"	m	struct:__anon15
-cx1	.\include\stb_truetype.h	/^      stbtt_vertex_type x,y,cx,cy,cx1,cy1;$/;"	m	struct:__anon15
-cy	.\include\stb_truetype.h	/^      stbtt_vertex_type x,y,cx,cy,cx1,cy1;$/;"	m	struct:__anon15
-cy1	.\include\stb_truetype.h	/^      stbtt_vertex_type x,y,cx,cy,cx1,cy1;$/;"	m	struct:__anon15
+cur_x	.\include\stb_image.h	/^			int cur_x, cur_y;$/;"	m	struct:__anon23
+cur_y	.\include\stb_image.h	/^			int cur_x, cur_y;$/;"	m	struct:__anon23
+cursor	.\include\stb_truetype.h	/^   int cursor;$/;"	m	struct:__anon28
+cx	.\include\stb_truetype.h	/^      stbtt_vertex_type x,y,cx,cy,cx1,cy1;$/;"	m	struct:__anon34
+cx1	.\include\stb_truetype.h	/^      stbtt_vertex_type x,y,cx,cy,cx1,cy1;$/;"	m	struct:__anon34
+cy	.\include\stb_truetype.h	/^      stbtt_vertex_type x,y,cx,cy,cx1,cy1;$/;"	m	struct:__anon34
+cy1	.\include\stb_truetype.h	/^      stbtt_vertex_type x,y,cx,cy,cx1,cy1;$/;"	m	struct:__anon34
 data	.\asset_packer\buffers.cpp	/^	void* data;$/;"	m	struct:GenericBuffer	file:
 data	.\asset_packer\buffers.cpp	/^	void* data;$/;"	m	struct:StructBuffer	file:
 data	.\include\cgltf.h	/^		cgltf_accessor* data;$/;"	m	struct:cgltf_attribute
@@ -612,11 +718,61 @@ data	.\include\cgltf.h	/^		char* data;$/;"	m	struct:cgltf_extension
 data	.\include\cgltf.h	/^		void* data; \/* loaded by cgltf_load_buffers *\/$/;"	m	struct:cgltf_buffer
 data	.\include\cgltf.h	/^		void* data; \/* overrides buffer->data if present, filled by extensions *\/$/;"	m	struct:cgltf_buffer_view
 data	.\include\cgltf.h	/^		} data;$/;"	m	struct:cgltf_camera	typeref:union:cgltf_camera::__anon1
+data	.\include\stb_image.h	/^				stbi_uc *data;$/;"	m	struct:__anon12::__anon13
 data	.\include\stb_truetype.h	/^   unsigned char  * data;              \/\/ pointer to .ttf file$/;"	m	struct:stbtt_fontinfo
-data	.\include\stb_truetype.h	/^   unsigned char *data;$/;"	m	struct:__anon9
+data	.\include\stb_truetype.h	/^   unsigned char *data;$/;"	m	struct:__anon28
 data_extensions	.\include\cgltf.h	/^		cgltf_extension* data_extensions;$/;"	m	struct:cgltf_data
 data_extensions_count	.\include\cgltf.h	/^		cgltf_size data_extensions_count;$/;"	m	struct:cgltf_data
 data_free_method	.\include\cgltf.h	/^		cgltf_data_free_method data_free_method;$/;"	m	struct:cgltf_buffer
+dc_pred	.\include\stb_image.h	/^				int dc_pred;$/;"	m	struct:__anon12::__anon13
+dct_bfly32o	.\include\stb_image.h	2531;"	d
+dct_bfly32o	.\include\stb_image.h	2665;"	d
+dct_bfly32o	.\include\stb_image.h	2717;"	d
+dct_bfly32o	.\include\stb_image.h	2875;"	d
+dct_const	.\include\stb_image.h	2503;"	d
+dct_const	.\include\stb_image.h	2660;"	d
+dct_interleave16	.\include\stb_image.h	2548;"	d
+dct_interleave16	.\include\stb_image.h	2667;"	d
+dct_interleave8	.\include\stb_image.h	2542;"	d
+dct_interleave8	.\include\stb_image.h	2666;"	d
+dct_long_mac	.\include\stb_image.h	2698;"	d
+dct_long_mac	.\include\stb_image.h	2871;"	d
+dct_long_mul	.\include\stb_image.h	2694;"	d
+dct_long_mul	.\include\stb_image.h	2870;"	d
+dct_pass	.\include\stb_image.h	2553;"	d
+dct_pass	.\include\stb_image.h	2668;"	d
+dct_pass	.\include\stb_image.h	2725;"	d
+dct_pass	.\include\stb_image.h	2876;"	d
+dct_rot	.\include\stb_image.h	2507;"	d
+dct_rot	.\include\stb_image.h	2661;"	d
+dct_trn16	.\include\stb_image.h	2785;"	d
+dct_trn16	.\include\stb_image.h	2807;"	d
+dct_trn32	.\include\stb_image.h	2786;"	d
+dct_trn32	.\include\stb_image.h	2808;"	d
+dct_trn64	.\include\stb_image.h	2787;"	d
+dct_trn64	.\include\stb_image.h	2809;"	d
+dct_trn8_16	.\include\stb_image.h	2831;"	d
+dct_trn8_16	.\include\stb_image.h	2866;"	d
+dct_trn8_32	.\include\stb_image.h	2832;"	d
+dct_trn8_32	.\include\stb_image.h	2867;"	d
+dct_trn8_8	.\include\stb_image.h	2830;"	d
+dct_trn8_8	.\include\stb_image.h	2865;"	d
+dct_wadd	.\include\stb_image.h	2521;"	d
+dct_wadd	.\include\stb_image.h	2663;"	d
+dct_wadd	.\include\stb_image.h	2707;"	d
+dct_wadd	.\include\stb_image.h	2873;"	d
+dct_widen	.\include\stb_image.h	2516;"	d
+dct_widen	.\include\stb_image.h	2662;"	d
+dct_widen	.\include\stb_image.h	2702;"	d
+dct_widen	.\include\stb_image.h	2872;"	d
+dct_wsub	.\include\stb_image.h	2526;"	d
+dct_wsub	.\include\stb_image.h	2664;"	d
+dct_wsub	.\include\stb_image.h	2712;"	d
+dct_wsub	.\include\stb_image.h	2874;"	d
+delay	.\include\stb_image.h	/^			int delay;$/;"	m	struct:__anon23
+delta	.\include\stb_image.h	/^			int    delta[17];   \/\/ old 'firstsymbol' - old 'firstcode'$/;"	m	struct:__anon11
+depth	.\include\stb_image.h	/^	int depth;$/;"	m	struct:__anon18
+dequant	.\include\stb_image.h	/^			stbi__uint16 dequant[4][64];$/;"	m	struct:__anon12
 descent	.\rasterize_font_and_dump_bitmap\src\main.cpp	/^	int ascent, descent, line_gap, baseline;	\/\/ advance vertical position by (ascent - descent + line_gap)$/;"	m	struct:FontInfo	file:
 diffuse_factor	.\include\cgltf.h	/^		cgltf_float diffuse_factor[4];$/;"	m	struct:cgltf_pbr_specular_glossiness
 diffuse_texture	.\include\cgltf.h	/^		cgltf_texture_view diffuse_texture;$/;"	m	struct:cgltf_pbr_specular_glossiness
@@ -626,6 +782,7 @@ direction	.\include\stb_truetype.h	/^   int direction;$/;"	m	struct:stbtt__activ
 double_sided	.\include\cgltf.h	/^		cgltf_bool double_sided;$/;"	m	struct:cgltf_material
 draco_mesh_compression	.\include\cgltf.h	/^		cgltf_draco_mesh_compression draco_mesh_compression;$/;"	m	struct:cgltf_primitive
 dx	.\include\stb_truetype.h	/^   int x,dx;$/;"	m	struct:stbtt__active_edge
+eflags	.\include\stb_image.h	/^			int flags, bgindex, ratio, transparent, eflags;$/;"	m	struct:__anon23
 elem_size	.\asset_packer\buffers.cpp	/^	u32 elem_size;$/;"	m	struct:StructBuffer	file:
 emissive_factor	.\include\cgltf.h	/^		cgltf_float emissive_factor[3];$/;"	m	struct:cgltf_material
 emissive_strength	.\include\cgltf.h	/^		cgltf_emissive_strength emissive_strength;$/;"	m	struct:cgltf_material
@@ -633,7 +790,10 @@ emissive_strength	.\include\cgltf.h	/^		cgltf_float emissive_strength;$/;"	m	str
 emissive_texture	.\include\cgltf.h	/^		cgltf_texture_view emissive_texture;$/;"	m	struct:cgltf_material
 end	.\include\cgltf.h	/^	int end;$/;"	m	struct:__anon3
 end_offset	.\include\cgltf.h	/^		cgltf_size end_offset;$/;"	m	struct:cgltf_extras
+eob_run	.\include\stb_image.h	/^			int            eob_run;$/;"	m	struct:__anon12
+eof	.\include\stb_image.h	/^		int      (*eof)   (void *user);                       \/\/ returns nonzero if we are at end of file\/data$/;"	m	struct:__anon6
 equal	.\include\stb_truetype.h	/^static int equal(float *a, float *b)$/;"	f
+expanded	.\include\stb_image.h	/^	stbi_uc *idata, *expanded, *out;$/;"	m	struct:__anon18
 extensions	.\include\cgltf.h	/^		cgltf_extension* extensions;$/;"	m	struct:cgltf_accessor
 extensions	.\include\cgltf.h	/^		cgltf_extension* extensions;$/;"	m	struct:cgltf_accessor_sparse
 extensions	.\include\cgltf.h	/^		cgltf_extension* extensions;$/;"	m	struct:cgltf_animation
@@ -677,6 +837,7 @@ extensions_required_count	.\include\cgltf.h	/^		cgltf_size extensions_required_c
 extensions_used	.\include\cgltf.h	/^		char** extensions_used;$/;"	m	struct:cgltf_data
 extensions_used_count	.\include\cgltf.h	/^		cgltf_size extensions_used_count;$/;"	m	struct:cgltf_data
 extra	.\include\stb_rect_pack.h	/^   stbrp_node extra[2]; \/\/ we allocate two extra nodes so optimal user-node-count is 'width' not 'width+2'$/;"	m	struct:stbrp_context
+extra_read	.\include\stb_image.h	/^			int extra_read;$/;"	m	struct:__anon20
 extras	.\include\cgltf.h	/^		cgltf_extras extras;$/;"	m	struct:cgltf_accessor
 extras	.\include\cgltf.h	/^		cgltf_extras extras;$/;"	m	struct:cgltf_accessor_sparse
 extras	.\include\cgltf.h	/^		cgltf_extras extras;$/;"	m	struct:cgltf_animation
@@ -704,6 +865,9 @@ extras	.\include\cgltf.h	/^		cgltf_extras extras;$/;"	m	struct:cgltf_skin
 extras	.\include\cgltf.h	/^		cgltf_extras extras;$/;"	m	struct:cgltf_texture
 extras	.\include\cgltf.h	/^		cgltf_extras extras;$/;"	m	struct:cgltf_texture_view
 ey	.\include\stb_truetype.h	/^   float ey;$/;"	m	struct:stbtt__active_edge
+fast	.\include\stb_image.h	/^			stbi_uc  fast[1 << FAST_BITS];$/;"	m	struct:__anon11
+fast	.\include\stb_image.h	/^		stbi__uint16 fast[1 << STBI__ZFAST_BITS];$/;"	m	struct:__anon15
+fast_ac	.\include\stb_image.h	/^			stbi__int16 fast_ac[4][1 << FAST_BITS];$/;"	m	struct:__anon12
 fdselect	.\include\stb_truetype.h	/^   stbtt__buf fdselect;               \/\/ map from glyph to fontdict$/;"	m	struct:stbtt_fontinfo
 fdx	.\include\stb_truetype.h	/^   float fx,fdx,fdy;$/;"	m	struct:stbtt__active_edge
 fdy	.\include\stb_truetype.h	/^   float fx,fdx,fdy;$/;"	m	struct:stbtt__active_edge
@@ -716,18 +880,23 @@ files	.\asset_packer\main.cpp	/^	FileInfo* files;$/;"	m	struct:FolderInfo	file:
 filled_count	.\asset_packer\buffers.cpp	/^	u32 filled_count;$/;"	m	struct:StructBuffer	file:
 filled_size	.\asset_packer\buffers.cpp	/^	u32 filled_size;$/;"	m	struct:GenericBuffer	file:
 filter	.\include\cgltf.h	/^		cgltf_meshopt_compression_filter filter;$/;"	m	struct:cgltf_meshopt_compression
+first	.\include\stb_image.h	/^			stbi_uc first;$/;"	m	struct:__anon22
 first_free	.\include\stb_truetype.h	/^   void   *first_free;$/;"	m	struct:stbtt__hheap
-first_unicode_codepoint_in_range	.\include\stb_truetype.h	/^   int first_unicode_codepoint_in_range;  \/\/ if non-zero, then the chars are continuous, and this is the first codepoint$/;"	m	struct:__anon13
-first_x	.\include\stb_truetype.h	/^   float first_x, first_y;$/;"	m	struct:__anon23
-first_y	.\include\stb_truetype.h	/^   float first_x, first_y;$/;"	m	struct:__anon23
-font_size	.\include\stb_truetype.h	/^   float font_size;$/;"	m	struct:__anon13
+first_row_filter	.\include\stb_image.h	/^static stbi_uc first_row_filter[5] =$/;"	v
+first_unicode_codepoint_in_range	.\include\stb_truetype.h	/^   int first_unicode_codepoint_in_range;  \/\/ if non-zero, then the chars are continuous, and this is the first codepoint$/;"	m	struct:__anon32
+first_x	.\include\stb_truetype.h	/^   float first_x, first_y;$/;"	m	struct:__anon42
+first_y	.\include\stb_truetype.h	/^   float first_x, first_y;$/;"	m	struct:__anon42
+firstcode	.\include\stb_image.h	/^		stbi__uint16 firstcode[16];$/;"	m	struct:__anon15
+firstsymbol	.\include\stb_image.h	/^		stbi__uint16 firstsymbol[16];$/;"	m	struct:__anon15
+flags	.\include\stb_image.h	/^			int flags, bgindex, ratio, transparent, eflags;$/;"	m	struct:__anon23
+font_size	.\include\stb_truetype.h	/^   float font_size;$/;"	m	struct:__anon32
 fontdicts	.\include\stb_truetype.h	/^   stbtt__buf fontdicts;              \/\/ array of font dicts$/;"	m	struct:stbtt_fontinfo
 fontstart	.\include\stb_truetype.h	/^   int              fontstart;         \/\/ offset of start of font$/;"	m	struct:stbtt_fontinfo
 format	.\asset_packer\main.cpp	/^	char* format; \/\/ format prepended with .$/;"	m	struct:FileInfo	file:
 free_func	.\include\cgltf.h	/^		void (*free_func) (void* user, void* ptr);$/;"	m	struct:cgltf_memory_options
 free_head	.\include\stb_rect_pack.h	/^   stbrp_node *free_head;$/;"	m	struct:stbrp_context
 ftex	.\include\stb_truetype.h	/^GLuint ftex;$/;"	v
-func	.\include\stb_image_write.h	/^   stbi_write_func *func;$/;"	m	struct:__anon5
+func	.\include\stb_image_write.h	/^   stbi_write_func *func;$/;"	m	struct:__anon24
 fx	.\include\stb_truetype.h	/^   float fx,fdx,fdy;$/;"	m	struct:stbtt__active_edge
 generator	.\include\cgltf.h	/^		char* generator;$/;"	m	struct:cgltf_asset
 glossiness_factor	.\include\cgltf.h	/^		cgltf_float glossiness_factor;$/;"	m	struct:cgltf_pbr_specular_glossiness
@@ -736,11 +905,15 @@ glyph1	.\include\stb_truetype.h	/^   int glyph1; \/\/ use stbtt_FindGlyphIndex$/
 glyph2	.\include\stb_truetype.h	/^   int glyph2;$/;"	m	struct:stbtt_kerningentry
 gpos	.\include\stb_truetype.h	/^   int loca,head,glyf,hhea,hmtx,kern,gpos,svg; \/\/ table locations as offset from start of .ttf$/;"	m	struct:stbtt_fontinfo
 gsubrs	.\include\stb_truetype.h	/^   stbtt__buf gsubrs;                 \/\/ global charstring subroutines index$/;"	m	struct:stbtt_fontinfo
+h	.\include\stb_image.h	/^				int h,v;$/;"	m	struct:__anon12::__anon13
+h	.\include\stb_image.h	/^			int w,h;$/;"	m	struct:__anon23
 h	.\include\stb_rect_pack.h	/^   stbrp_coord    w, h;$/;"	m	struct:stbrp_rect
 h	.\include\stb_truetype.h	/^   int id,w,h,was_packed;$/;"	m	struct:stbrp_rect
-h	.\include\stb_truetype.h	/^   int w,h,stride;$/;"	m	struct:__anon16
-h_oversample	.\include\stb_truetype.h	/^   unsigned char h_oversample, v_oversample; \/\/ don't set these, they're used internally$/;"	m	struct:__anon13
+h	.\include\stb_truetype.h	/^   int w,h,stride;$/;"	m	struct:__anon35
+h2	.\include\stb_image.h	/^				int x,y,w2,h2;$/;"	m	struct:__anon12::__anon13
+h_oversample	.\include\stb_truetype.h	/^   unsigned char h_oversample, v_oversample; \/\/ don't set these, they're used internally$/;"	m	struct:__anon32
 h_oversample	.\include\stb_truetype.h	/^   unsigned int   h_oversample, v_oversample;$/;"	m	struct:stbtt_pack_context
+ha	.\include\stb_image.h	/^				int hd,ha;$/;"	m	struct:__anon12::__anon13
 has_aspect_ratio	.\include\cgltf.h	/^		cgltf_bool has_aspect_ratio;$/;"	m	struct:cgltf_camera_perspective
 has_basisu	.\include\cgltf.h	/^		cgltf_bool has_basisu;$/;"	m	struct:cgltf_texture
 has_clearcoat	.\include\cgltf.h	/^		cgltf_bool has_clearcoat;$/;"	m	struct:cgltf_material
@@ -765,20 +938,44 @@ has_translation	.\include\cgltf.h	/^		cgltf_bool has_translation;$/;"	m	struct:c
 has_transmission	.\include\cgltf.h	/^		cgltf_bool has_transmission;$/;"	m	struct:cgltf_material
 has_volume	.\include\cgltf.h	/^		cgltf_bool has_volume;$/;"	m	struct:cgltf_material
 has_zfar	.\include\cgltf.h	/^		cgltf_bool has_zfar;$/;"	m	struct:cgltf_camera_perspective
+hd	.\include\stb_image.h	/^				int hd,ha;$/;"	m	struct:__anon12::__anon13
 head	.\include\stb_truetype.h	/^   int loca,head,glyf,hhea,hmtx,kern,gpos,svg; \/\/ table locations as offset from start of .ttf$/;"	m	struct:stbtt_fontinfo
 head	.\include\stb_truetype.h	/^   struct stbtt__hheap_chunk *head;$/;"	m	struct:stbtt__hheap	typeref:struct:stbtt__hheap::stbtt__hheap_chunk
 height	.\include\stb_rect_pack.h	/^   int height;$/;"	m	struct:stbrp_context
 height	.\include\stb_truetype.h	/^   int   height;$/;"	m	struct:stbtt_pack_context
-height	.\include\stb_truetype.h	/^   int width,height;$/;"	m	struct:__anon25
+height	.\include\stb_truetype.h	/^   int width,height;$/;"	m	struct:__anon44
 height_of_char_in_bitmap	.\rasterize_font_and_dump_bitmap\src\main.cpp	/^	unsigned short height_of_char_in_bitmap;	$/;"	m	struct:FontInfo	file:
 heuristic	.\include\stb_rect_pack.h	/^   int heuristic;$/;"	m	struct:stbrp_context
 hhea	.\include\stb_truetype.h	/^   int loca,head,glyf,hhea,hmtx,kern,gpos,svg; \/\/ table locations as offset from start of .ttf$/;"	m	struct:stbtt_fontinfo
+history	.\include\stb_image.h	/^			stbi_uc *history;$/;"	m	struct:__anon23
 hmtx	.\include\stb_truetype.h	/^   int loca,head,glyf,hhea,hmtx,kern,gpos,svg; \/\/ table locations as offset from start of .ttf$/;"	m	struct:stbtt_fontinfo
+hs	.\include\stb_image.h	/^		int hs,vs;   \/\/ expansion factor in each axis$/;"	m	struct:__anon14
+hsz	.\include\stb_image.h	/^			int bpp, offset, hsz;$/;"	m	struct:__anon20
+huff_ac	.\include\stb_image.h	/^			stbi__huffman huff_ac[4];$/;"	m	struct:__anon12
+huff_dc	.\include\stb_image.h	/^			stbi__huffman huff_dc[4];$/;"	m	struct:__anon12
+id	.\include\stb_image.h	/^				int id;$/;"	m	struct:__anon12::__anon13
 id	.\include\stb_rect_pack.h	/^   int            id;$/;"	m	struct:stbrp_rect
 id	.\include\stb_truetype.h	/^   int id,w,h,was_packed;$/;"	m	struct:stbrp_rect
+idata	.\include\stb_image.h	/^	stbi_uc *idata, *expanded, *out;$/;"	m	struct:__anon18
+idct_block_kernel	.\include\stb_image.h	/^			void (*idct_block_kernel)(stbi_uc *out, int out_stride, short data[64]);$/;"	m	struct:__anon12
 image	.\include\cgltf.h	/^		cgltf_image* image;$/;"	m	struct:cgltf_texture
 images	.\include\cgltf.h	/^		cgltf_image* images;$/;"	m	struct:cgltf_data
 images_count	.\include\cgltf.h	/^		cgltf_size images_count;$/;"	m	struct:cgltf_data
+img_buffer	.\include\stb_image.h	/^		stbi_uc *img_buffer, *img_buffer_end;$/;"	m	struct:__anon7
+img_buffer_end	.\include\stb_image.h	/^		stbi_uc *img_buffer, *img_buffer_end;$/;"	m	struct:__anon7
+img_buffer_original	.\include\stb_image.h	/^		stbi_uc *img_buffer_original, *img_buffer_original_end;$/;"	m	struct:__anon7
+img_buffer_original_end	.\include\stb_image.h	/^		stbi_uc *img_buffer_original, *img_buffer_original_end;$/;"	m	struct:__anon7
+img_comp	.\include\stb_image.h	/^			} img_comp[4];$/;"	m	struct:__anon12	typeref:struct:__anon12::__anon13
+img_h_max	.\include\stb_image.h	/^			int img_h_max, img_v_max;$/;"	m	struct:__anon12
+img_mcu_h	.\include\stb_image.h	/^			int img_mcu_w, img_mcu_h;$/;"	m	struct:__anon12
+img_mcu_w	.\include\stb_image.h	/^			int img_mcu_w, img_mcu_h;$/;"	m	struct:__anon12
+img_mcu_x	.\include\stb_image.h	/^			int img_mcu_x, img_mcu_y;$/;"	m	struct:__anon12
+img_mcu_y	.\include\stb_image.h	/^			int img_mcu_x, img_mcu_y;$/;"	m	struct:__anon12
+img_n	.\include\stb_image.h	/^		int img_n, img_out_n;$/;"	m	struct:__anon7
+img_out_n	.\include\stb_image.h	/^		int img_n, img_out_n;$/;"	m	struct:__anon7
+img_v_max	.\include\stb_image.h	/^			int img_h_max, img_v_max;$/;"	m	struct:__anon12
+img_x	.\include\stb_image.h	/^		stbi__uint32 img_x, img_y;$/;"	m	struct:__anon7
+img_y	.\include\stb_image.h	/^		stbi__uint32 img_x, img_y;$/;"	m	struct:__anon7
 index	.\include\cgltf.h	/^		cgltf_int index;$/;"	m	struct:cgltf_attribute
 indexToLocFormat	.\include\stb_truetype.h	/^   int indexToLocFormat;              \/\/ format needed to map from glyph index to glyph$/;"	m	struct:stbtt_fontinfo
 index_map	.\include\stb_truetype.h	/^   int index_map;                     \/\/ a cmap mapping for our chosen character encoding$/;"	m	struct:stbtt_fontinfo
@@ -795,6 +992,8 @@ intensity	.\include\cgltf.h	/^		cgltf_float intensity;$/;"	m	struct:cgltf_light
 interpolation	.\include\cgltf.h	/^		cgltf_interpolation_type interpolation;$/;"	m	struct:cgltf_animation_sampler
 inverse_bind_matrices	.\include\cgltf.h	/^		cgltf_accessor* inverse_bind_matrices;$/;"	m	struct:cgltf_skin
 invert	.\include\stb_truetype.h	/^   int invert;$/;"	m	struct:stbtt__edge
+io	.\include\stb_image.h	/^		stbi_io_callbacks io;$/;"	m	struct:__anon7
+io_user_data	.\include\stb_image.h	/^		void *io_user_data;$/;"	m	struct:__anon7
 ior	.\include\cgltf.h	/^		cgltf_float ior;$/;"	m	struct:cgltf_ior
 ior	.\include\cgltf.h	/^		cgltf_ior ior;$/;"	m	struct:cgltf_material
 iridescence	.\include\cgltf.h	/^		cgltf_iridescence iridescence;$/;"	m	struct:cgltf_material
@@ -805,6 +1004,7 @@ iridescence_thickness_max	.\include\cgltf.h	/^		cgltf_float iridescence_thicknes
 iridescence_thickness_min	.\include\cgltf.h	/^		cgltf_float iridescence_thickness_min;$/;"	m	struct:cgltf_iridescence
 iridescence_thickness_texture	.\include\cgltf.h	/^		cgltf_texture_view iridescence_thickness_texture;$/;"	m	struct:cgltf_iridescence
 is_sparse	.\include\cgltf.h	/^		cgltf_bool is_sparse;$/;"	m	struct:cgltf_accessor
+jfif	.\include\stb_image.h	/^			int            jfif;$/;"	m	struct:__anon12
 joints	.\include\cgltf.h	/^		cgltf_node** joints;$/;"	m	struct:cgltf_skin
 joints_count	.\include\cgltf.h	/^		cgltf_size joints_count;$/;"	m	struct:cgltf_skin
 jsmn_alloc_token	.\include\cgltf.h	/^static jsmntok_t *jsmn_alloc_token(jsmn_parser *parser,$/;"	f
@@ -821,25 +1021,40 @@ json	.\include\cgltf.h	/^		const char* json;$/;"	m	struct:cgltf_data
 json_size	.\include\cgltf.h	/^		cgltf_size json_size;$/;"	m	struct:cgltf_data
 json_token_count	.\include\cgltf.h	/^		cgltf_size json_token_count; \/* 0 == auto *\/$/;"	m	struct:cgltf_options
 kern	.\include\stb_truetype.h	/^   int loca,head,glyf,hhea,hmtx,kern,gpos,svg; \/\/ table locations as offset from start of .ttf$/;"	m	struct:stbtt_fontinfo
+length	.\include\stb_image.h	/^	stbi__uint32 length;$/;"	m	struct:__anon17
+lflags	.\include\stb_image.h	/^			int lflags;$/;"	m	struct:__anon23
 light	.\include\cgltf.h	/^		cgltf_light* light;$/;"	m	struct:cgltf_node
 lights	.\include\cgltf.h	/^		cgltf_light* lights;$/;"	m	struct:cgltf_data
 lights_count	.\include\cgltf.h	/^		cgltf_size lights_count;$/;"	m	struct:cgltf_data
+line0	.\include\stb_image.h	/^		stbi_uc *line0,*line1;$/;"	m	struct:__anon14
+line1	.\include\stb_image.h	/^		stbi_uc *line0,*line1;$/;"	m	struct:__anon14
 line_gap	.\rasterize_font_and_dump_bitmap\src\main.cpp	/^	int ascent, descent, line_gap, baseline;	\/\/ advance vertical position by (ascent - descent + line_gap)$/;"	m	struct:FontInfo	file:
+line_size	.\include\stb_image.h	/^			int line_size;$/;"	m	struct:__anon23
+linebuf	.\include\stb_image.h	/^				stbi_uc *linebuf;$/;"	m	struct:__anon12::__anon13
+load_jpeg_image	.\include\stb_image.h	/^	static stbi_uc *load_jpeg_image(stbi__jpeg *z, int *out_x, int *out_y, int *comp, int req_comp)$/;"	f
 loca	.\include\stb_truetype.h	/^   int loca,head,glyf,hhea,hmtx,kern,gpos,svg; \/\/ table locations as offset from start of .ttf$/;"	m	struct:stbtt_fontinfo
+lpal	.\include\stb_image.h	/^			stbi_uc lpal[256][4];$/;"	m	struct:__anon23
+ma	.\include\stb_image.h	/^			unsigned int mr,mg,mb,ma, all_a;$/;"	m	struct:__anon20
 mag_filter	.\include\cgltf.h	/^		cgltf_int mag_filter;$/;"	m	struct:cgltf_sampler
 main	.\asset_packer\main.cpp	/^int main(int argc, char** argv) {$/;"	f
 main	.\include\stb_truetype.h	/^int main(int argc, char **argv)$/;"	f
 main	.\rasterize_font_and_dump_bitmap\src\main.cpp	/^int main(int argc, char** argv) {$/;"	f
 mappings	.\include\cgltf.h	/^		cgltf_material_mapping* mappings;$/;"	m	struct:cgltf_primitive
 mappings_count	.\include\cgltf.h	/^		cgltf_size mappings_count;$/;"	m	struct:cgltf_primitive
+marker	.\include\stb_image.h	/^			unsigned char  marker;      \/\/ marker seen while filling entropy buffer$/;"	m	struct:__anon12
 material	.\include\cgltf.h	/^		cgltf_material* material;$/;"	m	struct:cgltf_material_mapping
 material	.\include\cgltf.h	/^		cgltf_material* material;$/;"	m	struct:cgltf_primitive
 materials	.\include\cgltf.h	/^		cgltf_material* materials;$/;"	m	struct:cgltf_data
 materials_count	.\include\cgltf.h	/^		cgltf_size materials_count;$/;"	m	struct:cgltf_data
 matrix	.\include\cgltf.h	/^		cgltf_float matrix[16];$/;"	m	struct:cgltf_node
 max	.\include\cgltf.h	/^		cgltf_float max[16];$/;"	m	struct:cgltf_accessor
-max_x	.\include\stb_truetype.h	/^   stbtt_int32 min_x, max_x, min_y, max_y;$/;"	m	struct:__anon23
-max_y	.\include\stb_truetype.h	/^   stbtt_int32 min_x, max_x, min_y, max_y;$/;"	m	struct:__anon23
+max_x	.\include\stb_image.h	/^			int max_x, max_y;$/;"	m	struct:__anon23
+max_x	.\include\stb_truetype.h	/^   stbtt_int32 min_x, max_x, min_y, max_y;$/;"	m	struct:__anon42
+max_y	.\include\stb_image.h	/^			int max_x, max_y;$/;"	m	struct:__anon23
+max_y	.\include\stb_truetype.h	/^   stbtt_int32 min_x, max_x, min_y, max_y;$/;"	m	struct:__anon42
+maxcode	.\include\stb_image.h	/^			unsigned int maxcode[18];$/;"	m	struct:__anon11
+maxcode	.\include\stb_image.h	/^		int maxcode[17];$/;"	m	struct:__anon15
+mb	.\include\stb_image.h	/^			unsigned int mr,mg,mb,ma, all_a;$/;"	m	struct:__anon20
 memory	.\include\cgltf.h	/^		cgltf_memory_options memory;$/;"	m	struct:cgltf_data
 memory	.\include\cgltf.h	/^		cgltf_memory_options memory;$/;"	m	struct:cgltf_options
 mesh	.\include\cgltf.h	/^		cgltf_mesh* mesh;$/;"	m	struct:cgltf_node
@@ -849,13 +1064,15 @@ meshes_count	.\include\cgltf.h	/^		cgltf_size meshes_count;$/;"	m	struct:cgltf_d
 meshopt_compression	.\include\cgltf.h	/^		cgltf_meshopt_compression meshopt_compression;$/;"	m	struct:cgltf_buffer_view
 metallic_factor	.\include\cgltf.h	/^		cgltf_float metallic_factor;$/;"	m	struct:cgltf_pbr_metallic_roughness
 metallic_roughness_texture	.\include\cgltf.h	/^		cgltf_texture_view metallic_roughness_texture;$/;"	m	struct:cgltf_pbr_metallic_roughness
+mg	.\include\stb_image.h	/^			unsigned int mr,mg,mb,ma, all_a;$/;"	m	struct:__anon20
 mime_type	.\include\cgltf.h	/^		char* mime_type;$/;"	m	struct:cgltf_image
 min	.\include\cgltf.h	/^		cgltf_float min[16];$/;"	m	struct:cgltf_accessor
 min_filter	.\include\cgltf.h	/^		cgltf_int min_filter;$/;"	m	struct:cgltf_sampler
 min_version	.\include\cgltf.h	/^		char* min_version;$/;"	m	struct:cgltf_asset
-min_x	.\include\stb_truetype.h	/^   stbtt_int32 min_x, max_x, min_y, max_y;$/;"	m	struct:__anon23
-min_y	.\include\stb_truetype.h	/^   stbtt_int32 min_x, max_x, min_y, max_y;$/;"	m	struct:__anon23
+min_x	.\include\stb_truetype.h	/^   stbtt_int32 min_x, max_x, min_y, max_y;$/;"	m	struct:__anon42
+min_y	.\include\stb_truetype.h	/^   stbtt_int32 min_x, max_x, min_y, max_y;$/;"	m	struct:__anon42
 mode	.\include\cgltf.h	/^		cgltf_meshopt_compression_mode mode;$/;"	m	struct:cgltf_meshopt_compression
+mr	.\include\stb_image.h	/^			unsigned int mr,mg,mb,ma, all_a;$/;"	m	struct:__anon20
 my_stbtt_initfont	.\include\stb_truetype.h	/^void my_stbtt_initfont(void)$/;"	f
 my_stbtt_print	.\include\stb_truetype.h	/^void my_stbtt_print(float x, float y, char *text)$/;"	f
 name	.\asset_packer\main.cpp	/^	char* name;  \/\/ filename without format$/;"	m	struct:FileInfo	file:
@@ -884,46 +1101,70 @@ nodes	.\include\cgltf.h	/^		cgltf_node** nodes;$/;"	m	struct:cgltf_scene
 nodes	.\include\stb_truetype.h	/^   void  *nodes;$/;"	m	struct:stbtt_pack_context
 nodes_count	.\include\cgltf.h	/^		cgltf_size nodes_count;$/;"	m	struct:cgltf_data
 nodes_count	.\include\cgltf.h	/^		cgltf_size nodes_count;$/;"	m	struct:cgltf_scene
+nomore	.\include\stb_image.h	/^			int            nomore;      \/\/ flag if we saw a marker so must stop$/;"	m	struct:__anon12
 normal_texture	.\include\cgltf.h	/^		cgltf_texture_view normal_texture;$/;"	m	struct:cgltf_material
 normalized	.\include\cgltf.h	/^		cgltf_bool normalized;$/;"	m	struct:cgltf_accessor
 numGlyphs	.\include\stb_truetype.h	/^   int numGlyphs;                     \/\/ number of glyphs, needed for range checking$/;"	m	struct:stbtt_fontinfo
-num_chars	.\include\stb_truetype.h	/^   int num_chars;$/;"	m	struct:__anon13
+num_bits	.\include\stb_image.h	/^		int num_bits;$/;"	m	struct:__anon16
+num_channels	.\include\stb_image.h	/^	int num_channels;$/;"	m	struct:__anon9
+num_chars	.\include\stb_truetype.h	/^   int num_chars;$/;"	m	struct:__anon32
 num_nodes	.\include\stb_rect_pack.h	/^   int num_nodes;$/;"	m	struct:stbrp_context
 num_remaining_in_head_chunk	.\include\stb_truetype.h	/^   int    num_remaining_in_head_chunk;$/;"	m	struct:stbtt__hheap
-num_vertices	.\include\stb_truetype.h	/^   int num_vertices;$/;"	m	struct:__anon23
+num_vertices	.\include\stb_truetype.h	/^   int num_vertices;$/;"	m	struct:__anon42
 occlusion_texture	.\include\cgltf.h	/^		cgltf_texture_view occlusion_texture;$/;"	m	struct:cgltf_material
 offset	.\include\cgltf.h	/^		cgltf_float offset[2];$/;"	m	struct:cgltf_texture_transform
 offset	.\include\cgltf.h	/^		cgltf_size offset;$/;"	m	struct:cgltf_accessor
 offset	.\include\cgltf.h	/^		cgltf_size offset;$/;"	m	struct:cgltf_buffer_view
 offset	.\include\cgltf.h	/^		cgltf_size offset;$/;"	m	struct:cgltf_meshopt_compression
+offset	.\include\stb_image.h	/^			int bpp, offset, hsz;$/;"	m	struct:__anon20
+order	.\include\stb_image.h	/^			int scan_n, order[4];$/;"	m	struct:__anon12
 orthographic	.\include\cgltf.h	/^			cgltf_camera_orthographic orthographic;$/;"	m	union:cgltf_camera::__anon1
+out	.\include\stb_image.h	/^			stbi_uc *out;                 \/\/ output buffer (always 4 components)$/;"	m	struct:__anon23
+out	.\include\stb_image.h	/^	stbi_uc *idata, *expanded, *out;$/;"	m	struct:__anon18
 output	.\include\cgltf.h	/^		cgltf_accessor* output;$/;"	m	struct:cgltf_animation_sampler
 pack_info	.\include\stb_truetype.h	/^   void *pack_info;$/;"	m	struct:stbtt_pack_context
 packed_chars	.\rasterize_font_and_dump_bitmap\src\main.cpp	/^	stbtt_packedchar packed_chars[FONT_CHARS_TOTAL];$/;"	m	struct:FontInfo	file:
-padding	.\include\stb_truetype.h	/^      unsigned char type,padding;$/;"	m	struct:__anon15
+padding	.\include\stb_truetype.h	/^      unsigned char type,padding;$/;"	m	struct:__anon34
 padding	.\include\stb_truetype.h	/^   int   padding;$/;"	m	struct:stbtt_pack_context
+pal	.\include\stb_image.h	/^			stbi_uc  pal[256][4];$/;"	m	struct:__anon23
 parent	.\include\cgltf.h	/^		cgltf_node* parent;$/;"	m	struct:cgltf_node
 parent	.\include\cgltf.h	/^	int parent;$/;"	m	struct:__anon3
+parse	.\include\stb_image.h	/^			int parse, step;$/;"	m	struct:__anon23
 pbr_metallic_roughness	.\include\cgltf.h	/^		cgltf_pbr_metallic_roughness pbr_metallic_roughness;$/;"	m	struct:cgltf_material
 pbr_specular_glossiness	.\include\cgltf.h	/^		cgltf_pbr_specular_glossiness pbr_specular_glossiness;$/;"	m	struct:cgltf_material
 perspective	.\include\cgltf.h	/^			cgltf_camera_perspective perspective;$/;"	m	union:cgltf_camera::__anon1
-pixels	.\include\stb_truetype.h	/^   unsigned char *pixels;$/;"	m	struct:__anon16
+pixels	.\include\stb_truetype.h	/^   unsigned char *pixels;$/;"	m	struct:__anon35
 pixels	.\include\stb_truetype.h	/^   unsigned char *pixels;$/;"	m	struct:stbtt_pack_context
 pos	.\include\cgltf.h	/^	unsigned int pos; \/* offset in the JSON string *\/$/;"	m	struct:__anon4
-prev_link	.\include\stb_rect_pack.h	/^   stbrp_node **prev_link;$/;"	m	struct:__anon8
+prefix	.\include\stb_image.h	/^			stbi__int16 prefix;$/;"	m	struct:__anon22
+prev_link	.\include\stb_rect_pack.h	/^   stbrp_node **prev_link;$/;"	m	struct:__anon27
 primitives	.\include\cgltf.h	/^		cgltf_primitive* primitives;$/;"	m	struct:cgltf_mesh
 primitives_count	.\include\cgltf.h	/^		cgltf_size primitives_count;$/;"	m	struct:cgltf_mesh
-pvertices	.\include\stb_truetype.h	/^   stbtt_vertex *pvertices;$/;"	m	struct:__anon23
+progressive	.\include\stb_image.h	/^			int            progressive;$/;"	m	struct:__anon12
+pvertices	.\include\stb_truetype.h	/^   stbtt_vertex *pvertices;$/;"	m	struct:__anon42
 range	.\include\cgltf.h	/^		cgltf_float range;$/;"	m	struct:cgltf_light
+ratio	.\include\stb_image.h	/^			int flags, bgindex, ratio, transparent, eflags;$/;"	m	struct:__anon23
+raw_coeff	.\include\stb_image.h	/^				void *raw_data, *raw_coeff;$/;"	m	struct:__anon12::__anon13
+raw_data	.\include\stb_image.h	/^				void *raw_data, *raw_coeff;$/;"	m	struct:__anon12::__anon13
 read	.\include\cgltf.h	/^		cgltf_result(*read)(const struct cgltf_memory_options* memory_options, const struct cgltf_file_options* file_options, const char* path, cgltf_size* size, void** data);$/;"	m	struct:cgltf_file_options
+read	.\include\stb_image.h	/^		int      (*read)  (void *user,char *data,int size);   \/\/ fill 'data' with 'size' bytes.  return number of bytes actually read$/;"	m	struct:__anon6
+read_from_callbacks	.\include\stb_image.h	/^		int read_from_callbacks;$/;"	m	struct:__anon7
 rect_height_compare	.\include\stb_rect_pack.h	/^static int STBRP__CDECL rect_height_compare(const void *a, const void *b)$/;"	f
 rect_original_order	.\include\stb_rect_pack.h	/^static int STBRP__CDECL rect_original_order(const void *a, const void *b)$/;"	f
 release	.\include\cgltf.h	/^		void (*release)(const struct cgltf_memory_options* memory_options, const struct cgltf_file_options* file_options, void* data);$/;"	m	struct:cgltf_file_options
+resample	.\include\stb_image.h	/^		resample_row_func resample;$/;"	m	struct:__anon14
+resample_row_1	.\include\stb_image.h	/^	static stbi_uc *resample_row_1(stbi_uc *out, stbi_uc *in_near, stbi_uc *in_far, int w, int hs)$/;"	f
+resample_row_func	.\include\stb_image.h	/^	typedef stbi_uc *(*resample_row_func)(stbi_uc *out, stbi_uc *in0, stbi_uc *in1,$/;"	t
+resample_row_hv_2_kernel	.\include\stb_image.h	/^			stbi_uc *(*resample_row_hv_2_kernel)(stbi_uc *out, stbi_uc *in_near, stbi_uc *in_far, int w, int hs);$/;"	m	struct:__anon12
+restart_interval	.\include\stb_image.h	/^			int restart_interval, todo;$/;"	m	struct:__anon12
+rgb	.\include\stb_image.h	/^			int            rgb;$/;"	m	struct:__anon12
 rotation	.\include\cgltf.h	/^		cgltf_float rotation;$/;"	m	struct:cgltf_texture_transform
 rotation	.\include\cgltf.h	/^		cgltf_float rotation[4];$/;"	m	struct:cgltf_node
 roughness_factor	.\include\cgltf.h	/^		cgltf_float roughness_factor;$/;"	m	struct:cgltf_pbr_metallic_roughness
-s0	.\include\stb_truetype.h	/^   float x0,y0,s0,t0; \/\/ top-left$/;"	m	struct:__anon11
-s1	.\include\stb_truetype.h	/^   float x1,y1,s1,t1; \/\/ bottom-right$/;"	m	struct:__anon11
+s	.\include\stb_image.h	/^			stbi__context *s;$/;"	m	struct:__anon12
+s	.\include\stb_image.h	/^	stbi__context *s;$/;"	m	struct:__anon18
+s0	.\include\stb_truetype.h	/^   float x0,y0,s0,t0; \/\/ top-left$/;"	m	struct:__anon30
+s1	.\include\stb_truetype.h	/^   float x1,y1,s1,t1; \/\/ bottom-right$/;"	m	struct:__anon30
 sampler	.\include\cgltf.h	/^		cgltf_animation_sampler* sampler;$/;"	m	struct:cgltf_animation_channel
 sampler	.\include\cgltf.h	/^		cgltf_sampler* sampler;$/;"	m	struct:cgltf_texture
 samplers	.\include\cgltf.h	/^		cgltf_animation_sampler* samplers;$/;"	m	struct:cgltf_animation
@@ -933,6 +1174,7 @@ samplers_count	.\include\cgltf.h	/^		cgltf_size samplers_count;$/;"	m	struct:cgl
 scale	.\include\cgltf.h	/^		cgltf_float scale; \/* equivalent to strength for occlusion_texture *\/$/;"	m	struct:cgltf_texture_view
 scale	.\include\cgltf.h	/^		cgltf_float scale[2];$/;"	m	struct:cgltf_texture_transform
 scale	.\include\cgltf.h	/^		cgltf_float scale[3];$/;"	m	struct:cgltf_node
+scan_n	.\include\stb_image.h	/^			int scan_n, order[4];$/;"	m	struct:__anon12
 scene	.\include\cgltf.h	/^		cgltf_scene* scene;$/;"	m	struct:cgltf_data
 scenes	.\include\cgltf.h	/^		cgltf_scene* scenes;$/;"	m	struct:cgltf_data
 scenes_count	.\include\cgltf.h	/^		cgltf_size scenes_count;$/;"	m	struct:cgltf_data
@@ -946,13 +1188,19 @@ size	.\include\cgltf.h	/^		cgltf_size size;$/;"	m	struct:cgltf_buffer
 size	.\include\cgltf.h	/^		cgltf_size size;$/;"	m	struct:cgltf_buffer_view
 size	.\include\cgltf.h	/^		cgltf_size size;$/;"	m	struct:cgltf_meshopt_compression
 size	.\include\cgltf.h	/^	int size;$/;"	m	struct:__anon3
-size	.\include\stb_truetype.h	/^   int size;$/;"	m	struct:__anon9
+size	.\include\stb_image.h	/^			stbi_uc  size[257];$/;"	m	struct:__anon11
+size	.\include\stb_image.h	/^			stbi_uc size,type,channel;$/;"	m	struct:__anon21
+size	.\include\stb_image.h	/^		stbi_uc  size[STBI__ZNSYMS];$/;"	m	struct:__anon15
+size	.\include\stb_truetype.h	/^   int size;$/;"	m	struct:__anon28
 skeleton	.\include\cgltf.h	/^		cgltf_node* skeleton;$/;"	m	struct:cgltf_skin
 skin	.\include\cgltf.h	/^		cgltf_skin* skin;$/;"	m	struct:cgltf_node
 skins	.\include\cgltf.h	/^		cgltf_skin* skins;$/;"	m	struct:cgltf_data
 skins_count	.\include\cgltf.h	/^		cgltf_size skins_count;$/;"	m	struct:cgltf_data
+skip	.\include\stb_image.h	/^		void     (*skip)  (void *user,int n);                 \/\/ skip the next 'n' bytes, or 'unget' the last -n bytes if negative$/;"	m	struct:__anon6
 skip_missing	.\include\stb_truetype.h	/^   int   skip_missing;$/;"	m	struct:stbtt_pack_context
 sparse	.\include\cgltf.h	/^		cgltf_accessor_sparse sparse;$/;"	m	struct:cgltf_accessor
+spec_end	.\include\stb_image.h	/^			int            spec_end;$/;"	m	struct:__anon12
+spec_start	.\include\stb_image.h	/^			int            spec_start;$/;"	m	struct:__anon12
 specular	.\include\cgltf.h	/^		cgltf_specular specular;$/;"	m	struct:cgltf_material
 specular_color_factor	.\include\cgltf.h	/^		cgltf_float specular_color_factor[3];$/;"	m	struct:cgltf_specular
 specular_color_texture	.\include\cgltf.h	/^		cgltf_texture_view specular_color_texture;$/;"	m	struct:cgltf_specular
@@ -964,15 +1212,301 @@ spot_inner_cone_angle	.\include\cgltf.h	/^		cgltf_float spot_inner_cone_angle;$/
 spot_outer_cone_angle	.\include\cgltf.h	/^		cgltf_float spot_outer_cone_angle;$/;"	m	struct:cgltf_light
 start	.\include\cgltf.h	/^	int start;$/;"	m	struct:__anon3
 start_offset	.\include\cgltf.h	/^		cgltf_size start_offset;$/;"	m	struct:cgltf_extras
-started	.\include\stb_truetype.h	/^   int started;$/;"	m	struct:__anon23
+start_x	.\include\stb_image.h	/^			int start_x, start_y;$/;"	m	struct:__anon23
+start_y	.\include\stb_image.h	/^			int start_x, start_y;$/;"	m	struct:__anon23
+started	.\include\stb_truetype.h	/^   int started;$/;"	m	struct:__anon42
 stb_image_write_test	.\include\stb_image_write.h	/^typedef int stb_image_write_test[sizeof(stbiw_uint32)==4 ? 1 : -1];$/;"	t
+stbi__DNL	.\include\stb_image.h	3322;"	d
+stbi__EOI	.\include\stb_image.h	3324;"	d
+stbi__SOF	.\include\stb_image.h	3325;"	d
+stbi__SOF_progressive	.\include\stb_image.h	3328;"	d
+stbi__SOI	.\include\stb_image.h	3323;"	d
+stbi__SOS	.\include\stb_image.h	3326;"	d
+stbi__YCbCr_to_RGB_row	.\include\stb_image.h	/^	static void stbi__YCbCr_to_RGB_row(stbi_uc *out, const stbi_uc *y, const stbi_uc *pcb, const stbi_uc *pcr, int count, int step)$/;"	f
+stbi__YCbCr_to_RGB_simd	.\include\stb_image.h	/^	static void stbi__YCbCr_to_RGB_simd(stbi_uc *out, stbi_uc const *y, stbi_uc const *pcb, stbi_uc const *pcr, int count, int step)$/;"	f
+stbi__addsizes_valid	.\include\stb_image.h	/^static int stbi__addsizes_valid(int a, int b)$/;"	f
+stbi__at_eof	.\include\stb_image.h	/^		stbi_inline static int stbi__at_eof(stbi__context *s)$/;"	f
+stbi__bit_reverse	.\include\stb_image.h	/^	stbi_inline static int stbi__bit_reverse(int v, int bits)$/;"	f
+stbi__bitcount	.\include\stb_image.h	/^		static int stbi__bitcount(unsigned int a)$/;"	f
+stbi__bitreverse16	.\include\stb_image.h	/^	stbi_inline static int stbi__bitreverse16(int n)$/;"	f
+stbi__blinn_8x8	.\include\stb_image.h	/^	static stbi_uc stbi__blinn_8x8(stbi_uc x, stbi_uc y)$/;"	f
+stbi__bmask	.\include\stb_image.h	/^		static const stbi__uint32 stbi__bmask[17]={0,1,3,7,15,31,63,127,255,511,1023,2047,4095,8191,16383,32767,65535};$/;"	v
+stbi__bmp_data	.\include\stb_image.h	/^		} stbi__bmp_data;$/;"	t	typeref:struct:__anon20
+stbi__bmp_info	.\include\stb_image.h	/^		static int stbi__bmp_info(stbi__context *s, int *x, int *y, int *comp)$/;"	f
+stbi__bmp_load	.\include\stb_image.h	/^		static void *stbi__bmp_load(stbi__context *s, int *x, int *y, int *comp, int req_comp, stbi__result_info *ri)$/;"	f
+stbi__bmp_parse_header	.\include\stb_image.h	/^		static void *stbi__bmp_parse_header(stbi__context *s, stbi__bmp_data *info)$/;"	f
+stbi__bmp_set_mask_defaults	.\include\stb_image.h	/^		static int stbi__bmp_set_mask_defaults(stbi__bmp_data *info, int compress)$/;"	f
+stbi__bmp_test	.\include\stb_image.h	/^		static int stbi__bmp_test(stbi__context *s)$/;"	f
+stbi__bmp_test_raw	.\include\stb_image.h	/^		static int stbi__bmp_test_raw(stbi__context *s)$/;"	f
+stbi__build_fast_ac	.\include\stb_image.h	/^		static void stbi__build_fast_ac(stbi__int16 *fast_ac, stbi__huffman *h)$/;"	f
+stbi__build_huffman	.\include\stb_image.h	/^		static int stbi__build_huffman(stbi__huffman *h, int *count)$/;"	f
+stbi__check_png_header	.\include\stb_image.h	/^static int stbi__check_png_header(stbi__context *s)$/;"	f
+stbi__clamp	.\include\stb_image.h	/^stbi_inline static stbi_uc stbi__clamp(int x)$/;"	f
+stbi__cleanup_jpeg	.\include\stb_image.h	/^	static void stbi__cleanup_jpeg(stbi__jpeg *j)$/;"	f
+stbi__compute_huffman_codes	.\include\stb_image.h	/^static int stbi__compute_huffman_codes(stbi__zbuf *a)$/;"	f
+stbi__compute_transparency	.\include\stb_image.h	/^static int stbi__compute_transparency(stbi__png *z, stbi_uc tc[3], int out_n)$/;"	f
+stbi__compute_transparency16	.\include\stb_image.h	/^static int stbi__compute_transparency16(stbi__png *z, stbi__uint16 tc[3], int out_n)$/;"	f
+stbi__compute_y	.\include\stb_image.h	/^		static stbi_uc stbi__compute_y(int r, int g, int b)$/;"	f
+stbi__compute_y_16	.\include\stb_image.h	/^		static stbi__uint16 stbi__compute_y_16(int r, int g, int b)$/;"	f
+stbi__context	.\include\stb_image.h	/^	} stbi__context;$/;"	t	typeref:struct:__anon7
+stbi__convert_16_to_8	.\include\stb_image.h	/^		static stbi_uc *stbi__convert_16_to_8(stbi__uint16 *orig, int w, int h, int channels)$/;"	f
+stbi__convert_8_to_16	.\include\stb_image.h	/^		static stbi__uint16 *stbi__convert_8_to_16(stbi_uc *orig, int w, int h, int channels)$/;"	f
+stbi__convert_format	.\include\stb_image.h	/^		static unsigned char *stbi__convert_format(unsigned char *data, int img_n, int req_comp, unsigned int x, unsigned int y)$/;"	f
+stbi__convert_format16	.\include\stb_image.h	/^		static stbi__uint16 *stbi__convert_format16(stbi__uint16 *data, int img_n, int req_comp, unsigned int x, unsigned int y)$/;"	f
+stbi__copyval	.\include\stb_image.h	/^		static void stbi__copyval(int channel,stbi_uc *dest,const stbi_uc *src)$/;"	f
+stbi__cpuid3	.\include\stb_image.h	/^	static int stbi__cpuid3(void)$/;"	f
+stbi__create_png_image	.\include\stb_image.h	/^static int stbi__create_png_image(stbi__png *a, stbi_uc *image_data, stbi__uint32 image_data_len, int out_n, int depth, int color, int interlaced)$/;"	f
+stbi__create_png_image_raw	.\include\stb_image.h	/^static int stbi__create_png_image_raw(stbi__png *a, stbi_uc *raw, stbi__uint32 raw_len, int out_n, stbi__uint32 x, stbi__uint32 y, int depth, int color)$/;"	f
+stbi__de_iphone	.\include\stb_image.h	/^		static void stbi__de_iphone(stbi__png *z)$/;"	f
+stbi__de_iphone_flag	.\include\stb_image.h	4953;"	d
+stbi__de_iphone_flag	.\include\stb_image.h	4973;"	d
+stbi__de_iphone_flag_global	.\include\stb_image.h	/^static int stbi__de_iphone_flag_global = 0;$/;"	v
+stbi__de_iphone_flag_local	.\include\stb_image.h	/^static STBI_THREAD_LOCAL int stbi__de_iphone_flag_local, stbi__de_iphone_flag_set;$/;"	v
+stbi__de_iphone_flag_set	.\include\stb_image.h	/^static STBI_THREAD_LOCAL int stbi__de_iphone_flag_local, stbi__de_iphone_flag_set;$/;"	v
+stbi__decode_jpeg_header	.\include\stb_image.h	/^	static int stbi__decode_jpeg_header(stbi__jpeg *z, int scan)$/;"	f
+stbi__decode_jpeg_image	.\include\stb_image.h	/^	static int stbi__decode_jpeg_image(stbi__jpeg *j)$/;"	f
+stbi__depth_scale_table	.\include\stb_image.h	/^static const stbi_uc stbi__depth_scale_table[9] = { 0, 0xff, 0x55, 0, 0x11, 0,0,0, 0x01 };$/;"	v
+stbi__div16	.\include\stb_image.h	3449;"	d
+stbi__div4	.\include\stb_image.h	3400;"	d
+stbi__do_png	.\include\stb_image.h	/^		static void *stbi__do_png(stbi__png *p, int *x, int *y, int *n, int req_comp, stbi__result_info *ri)$/;"	f
+stbi__do_zlib	.\include\stb_image.h	/^static int stbi__do_zlib(stbi__zbuf *a, char *obuf, int olen, int exp, int parse_header)$/;"	f
 stbi__end_write_file	.\include\stb_image_write.h	/^static void stbi__end_write_file(stbi__write_context *s)$/;"	f
+stbi__err	.\include\stb_image.h	/^static int stbi__err(const char *str)$/;"	f
+stbi__err	.\include\stb_image.h	1071;"	d
+stbi__err	.\include\stb_image.h	1073;"	d
+stbi__err	.\include\stb_image.h	1075;"	d
+stbi__errpf	.\include\stb_image.h	1078;"	d
+stbi__errpuc	.\include\stb_image.h	1079;"	d
+stbi__expand_png_palette	.\include\stb_image.h	/^static int stbi__expand_png_palette(stbi__png *a, stbi_uc *palette, int len, int pal_img_n)$/;"	f
+stbi__extend_receive	.\include\stb_image.h	/^		stbi_inline static int stbi__extend_receive(stbi__jpeg *j, int n)$/;"	f
+stbi__f2f	.\include\stb_image.h	2392;"	d
+stbi__fill_bits	.\include\stb_image.h	/^	static void stbi__fill_bits(stbi__zbuf *z)$/;"	f
 stbi__flip_vertically_on_write	.\include\stb_image_write.h	/^static int stbi__flip_vertically_on_write = 0;$/;"	v
+stbi__float2fixed	.\include\stb_image.h	3605;"	d
+stbi__float2int	.\include\stb_image.h	1863;"	d
+stbi__float_postprocess	.\include\stb_image.h	/^		static void stbi__float_postprocess(float *result, int *x, int *y, int *comp, int req_comp)$/;"	f
+stbi__fopen	.\include\stb_image.h	/^		static FILE *stbi__fopen(char const *filename, char const *mode)$/;"	f
+stbi__free_jpeg_components	.\include\stb_image.h	/^	static int stbi__free_jpeg_components(stbi__jpeg *z, int ncomp, int why)$/;"	f
+stbi__fsh	.\include\stb_image.h	2393;"	d
+stbi__g_failure_reason	.\include\stb_image.h	/^	const char *stbi__g_failure_reason;$/;"	v
+stbi__get16be	.\include\stb_image.h	/^		static int stbi__get16be(stbi__context *s)$/;"	f
+stbi__get16le	.\include\stb_image.h	/^		static int stbi__get16le(stbi__context *s)$/;"	f
+stbi__get32be	.\include\stb_image.h	/^		static stbi__uint32 stbi__get32be(stbi__context *s)$/;"	f
+stbi__get32le	.\include\stb_image.h	/^		static stbi__uint32 stbi__get32le(stbi__context *s)$/;"	f
+stbi__get8	.\include\stb_image.h	/^		stbi_inline static stbi_uc stbi__get8(stbi__context *s)$/;"	f
+stbi__get_chunk_header	.\include\stb_image.h	/^static stbi__pngchunk stbi__get_chunk_header(stbi__context *s)$/;"	f
+stbi__get_marker	.\include\stb_image.h	/^	static stbi_uc stbi__get_marker(stbi__jpeg *j)$/;"	f
+stbi__getn	.\include\stb_image.h	/^		static int stbi__getn(stbi__context *s, stbi_uc *buffer, int n)$/;"	f
+stbi__gif	.\include\stb_image.h	/^		} stbi__gif;$/;"	t	typeref:struct:__anon23
+stbi__gif_header	.\include\stb_image.h	/^		static int stbi__gif_header(stbi__context *s, stbi__gif *g, int *comp, int is_info)$/;"	f
+stbi__gif_info	.\include\stb_image.h	/^		static int stbi__gif_info(stbi__context *s, int *x, int *y, int *comp)$/;"	f
+stbi__gif_info_raw	.\include\stb_image.h	/^		static int stbi__gif_info_raw(stbi__context *s, int *x, int *y, int *comp)$/;"	f
+stbi__gif_load	.\include\stb_image.h	/^		static void *stbi__gif_load(stbi__context *s, int *x, int *y, int *comp, int req_comp, stbi__result_info *ri)$/;"	f
+stbi__gif_load_next	.\include\stb_image.h	/^		static stbi_uc *stbi__gif_load_next(stbi__context *s, stbi__gif *g, int *comp, int req_comp, stbi_uc *two_back)$/;"	f
+stbi__gif_lzw	.\include\stb_image.h	/^		} stbi__gif_lzw;$/;"	t	typeref:struct:__anon22
+stbi__gif_parse_colortable	.\include\stb_image.h	/^		static void stbi__gif_parse_colortable(stbi__context *s, stbi_uc pal[256][4], int num_entries, int transp)$/;"	f
+stbi__gif_test	.\include\stb_image.h	/^		static int stbi__gif_test(stbi__context *s)$/;"	f
+stbi__gif_test_raw	.\include\stb_image.h	/^		static int stbi__gif_test_raw(stbi__context *s)$/;"	f
+stbi__grow_buffer_unsafe	.\include\stb_image.h	/^		static void stbi__grow_buffer_unsafe(stbi__jpeg *j)$/;"	f
+stbi__h2l_gamma_i	.\include\stb_image.h	/^		static float stbi__h2l_gamma_i=1.0f\/2.2f, stbi__h2l_scale_i=1.0f;$/;"	v
+stbi__h2l_scale_i	.\include\stb_image.h	/^		static float stbi__h2l_gamma_i=1.0f\/2.2f, stbi__h2l_scale_i=1.0f;$/;"	v
+stbi__hdr_convert	.\include\stb_image.h	/^		static void stbi__hdr_convert(float *output, stbi_uc *input, int req_comp)$/;"	f
+stbi__hdr_gettoken	.\include\stb_image.h	/^		static char *stbi__hdr_gettoken(stbi__context *z, char *buffer)$/;"	f
+stbi__hdr_info	.\include\stb_image.h	/^		static int stbi__hdr_info(stbi__context *s, int *x, int *y, int *comp)$/;"	f
+stbi__hdr_load	.\include\stb_image.h	/^		static float *stbi__hdr_load(stbi__context *s, int *x, int *y, int *comp, int req_comp, stbi__result_info *ri)$/;"	f
+stbi__hdr_test	.\include\stb_image.h	/^		static int stbi__hdr_test(stbi__context* s)$/;"	f
+stbi__hdr_test_core	.\include\stb_image.h	/^		static int stbi__hdr_test_core(stbi__context *s, const char *signature)$/;"	f
+stbi__hdr_to_ldr	.\include\stb_image.h	/^		static stbi_uc *stbi__hdr_to_ldr(float   *data, int x, int y, int comp)$/;"	f
+stbi__high_bit	.\include\stb_image.h	/^		static int stbi__high_bit(unsigned int z)$/;"	f
+stbi__huffman	.\include\stb_image.h	/^		} stbi__huffman;$/;"	t	typeref:struct:__anon11
+stbi__idct_block	.\include\stb_image.h	/^	static void stbi__idct_block(stbi_uc *out, int out_stride, short data[64])$/;"	f
+stbi__idct_simd	.\include\stb_image.h	/^	static void stbi__idct_simd(stbi_uc *out, int out_stride, short data[64])$/;"	f
+stbi__info_main	.\include\stb_image.h	/^		static int stbi__info_main(stbi__context *s, int *x, int *y, int *comp)$/;"	f
+stbi__int16	.\include\stb_image.h	/^	typedef   signed short stbi__int16;$/;"	t
+stbi__int16	.\include\stb_image.h	/^	typedef int16_t  stbi__int16;$/;"	t
+stbi__int32	.\include\stb_image.h	/^	typedef   signed int   stbi__int32;$/;"	t
+stbi__int32	.\include\stb_image.h	/^	typedef int32_t  stbi__int32;$/;"	t
+stbi__is_16_main	.\include\stb_image.h	/^		static int stbi__is_16_main(stbi__context *s)$/;"	f
+stbi__jbias	.\include\stb_image.h	/^		static const int stbi__jbias[16] = {0,-1,-3,-7,-15,-31,-63,-127,-255,-511,-1023,-2047,-4095,-8191,-16383,-32767};$/;"	v
+stbi__jpeg	.\include\stb_image.h	/^		} stbi__jpeg;$/;"	t	typeref:struct:__anon12
+stbi__jpeg_decode_block	.\include\stb_image.h	/^static int stbi__jpeg_decode_block(stbi__jpeg *j, short data[64], stbi__huffman *hdc, stbi__huffman *hac, stbi__int16 *fac, int b, stbi__uint16 *dequant)$/;"	f
+stbi__jpeg_decode_block_prog_ac	.\include\stb_image.h	/^static int stbi__jpeg_decode_block_prog_ac(stbi__jpeg *j, short data[64], stbi__huffman *hac, stbi__int16 *fac)$/;"	f
+stbi__jpeg_decode_block_prog_dc	.\include\stb_image.h	/^static int stbi__jpeg_decode_block_prog_dc(stbi__jpeg *j, short data[64], stbi__huffman *hdc, int b)$/;"	f
+stbi__jpeg_dequantize	.\include\stb_image.h	/^	static void stbi__jpeg_dequantize(short *data, stbi__uint16 *dequant)$/;"	f
+stbi__jpeg_dezigzag	.\include\stb_image.h	/^		static const stbi_uc stbi__jpeg_dezigzag[64+15] =$/;"	v
+stbi__jpeg_finish	.\include\stb_image.h	/^	static void stbi__jpeg_finish(stbi__jpeg *z)$/;"	f
+stbi__jpeg_get_bit	.\include\stb_image.h	/^		stbi_inline static int stbi__jpeg_get_bit(stbi__jpeg *j)$/;"	f
+stbi__jpeg_get_bits	.\include\stb_image.h	/^		stbi_inline static int stbi__jpeg_get_bits(stbi__jpeg *j, int n)$/;"	f
+stbi__jpeg_huff_decode	.\include\stb_image.h	/^		stbi_inline static int stbi__jpeg_huff_decode(stbi__jpeg *j, stbi__huffman *h)$/;"	f
+stbi__jpeg_info	.\include\stb_image.h	/^	static int stbi__jpeg_info(stbi__context *s, int *x, int *y, int *comp)$/;"	f
+stbi__jpeg_info_raw	.\include\stb_image.h	/^	static int stbi__jpeg_info_raw(stbi__jpeg *j, int *x, int *y, int *comp)$/;"	f
+stbi__jpeg_load	.\include\stb_image.h	/^	static void *stbi__jpeg_load(stbi__context *s, int *x, int *y, int *comp, int req_comp, stbi__result_info *ri)$/;"	f
+stbi__jpeg_reset	.\include\stb_image.h	/^	static void stbi__jpeg_reset(stbi__jpeg *j)$/;"	f
+stbi__jpeg_test	.\include\stb_image.h	/^	static int stbi__jpeg_test(stbi__context *s)$/;"	f
+stbi__l2h_gamma	.\include\stb_image.h	/^		static float stbi__l2h_gamma=2.2f, stbi__l2h_scale=1.0f;$/;"	v
+stbi__l2h_scale	.\include\stb_image.h	/^		static float stbi__l2h_gamma=2.2f, stbi__l2h_scale=1.0f;$/;"	v
+stbi__ldr_to_hdr	.\include\stb_image.h	/^		static float   *stbi__ldr_to_hdr(stbi_uc *data, int x, int y, int comp)$/;"	f
+stbi__load_and_postprocess_16bit	.\include\stb_image.h	/^		static stbi__uint16 *stbi__load_and_postprocess_16bit(stbi__context *s, int *x, int *y, int *comp, int req_comp)$/;"	f
+stbi__load_and_postprocess_8bit	.\include\stb_image.h	/^		static unsigned char *stbi__load_and_postprocess_8bit(stbi__context *s, int *x, int *y, int *comp, int req_comp)$/;"	f
+stbi__load_gif_main	.\include\stb_image.h	/^		static void *stbi__load_gif_main(stbi__context *s, int **delays, int *x, int *y, int *z, int *comp, int req_comp)$/;"	f
+stbi__load_gif_main_outofmem	.\include\stb_image.h	/^		static void *stbi__load_gif_main_outofmem(stbi__gif *g, stbi_uc *out, int **delays)$/;"	f
+stbi__load_main	.\include\stb_image.h	/^		static void *stbi__load_main(stbi__context *s, int *x, int *y, int *comp, int req_comp, stbi__result_info *ri, int bpc)$/;"	f
+stbi__loadf_main	.\include\stb_image.h	/^		static float *stbi__loadf_main(stbi__context *s, int *x, int *y, int *comp, int req_comp)$/;"	f
+stbi__mad2sizes_valid	.\include\stb_image.h	/^static int stbi__mad2sizes_valid(int a, int b, int add)$/;"	f
+stbi__mad3sizes_valid	.\include\stb_image.h	/^static int stbi__mad3sizes_valid(int a, int b, int c, int add)$/;"	f
+stbi__mad4sizes_valid	.\include\stb_image.h	/^static int stbi__mad4sizes_valid(int a, int b, int c, int d, int add)$/;"	f
+stbi__malloc	.\include\stb_image.h	/^static void *stbi__malloc(size_t size)$/;"	f
+stbi__malloc_mad2	.\include\stb_image.h	/^static void *stbi__malloc_mad2(int a, int b, int add)$/;"	f
+stbi__malloc_mad3	.\include\stb_image.h	/^static void *stbi__malloc_mad3(int a, int b, int c, int add)$/;"	f
+stbi__malloc_mad4	.\include\stb_image.h	/^static void *stbi__malloc_mad4(int a, int b, int c, int d, int add)$/;"	f
+stbi__mul2sizes_valid	.\include\stb_image.h	/^static int stbi__mul2sizes_valid(int a, int b)$/;"	f
+stbi__out_gif_code	.\include\stb_image.h	/^		static void stbi__out_gif_code(stbi__gif *g, stbi__uint16 code)$/;"	f
+stbi__paeth	.\include\stb_image.h	/^static int stbi__paeth(int a, int b, int c)$/;"	f
+stbi__parse_entropy_coded_data	.\include\stb_image.h	/^	static int stbi__parse_entropy_coded_data(stbi__jpeg *z)$/;"	f
+stbi__parse_huffman_block	.\include\stb_image.h	/^static int stbi__parse_huffman_block(stbi__zbuf *a)$/;"	f
+stbi__parse_png_file	.\include\stb_image.h	/^		static int stbi__parse_png_file(stbi__png *z, int scan, int req_comp)$/;"	f
+stbi__parse_uncompressed_block	.\include\stb_image.h	/^static int stbi__parse_uncompressed_block(stbi__zbuf *a)$/;"	f
+stbi__parse_zlib	.\include\stb_image.h	/^static int stbi__parse_zlib(stbi__zbuf *a, int parse_header)$/;"	f
+stbi__parse_zlib_header	.\include\stb_image.h	/^static int stbi__parse_zlib_header(stbi__zbuf *a)$/;"	f
+stbi__pic_info	.\include\stb_image.h	/^		static int stbi__pic_info(stbi__context *s, int *x, int *y, int *comp)$/;"	f
+stbi__pic_is4	.\include\stb_image.h	/^		static int stbi__pic_is4(stbi__context *s,const char *str)$/;"	f
+stbi__pic_load	.\include\stb_image.h	/^		static void *stbi__pic_load(stbi__context *s,int *px,int *py,int *comp,int req_comp, stbi__result_info *ri)$/;"	f
+stbi__pic_load_core	.\include\stb_image.h	/^		static stbi_uc *stbi__pic_load_core(stbi__context *s,int width,int height,int *comp, stbi_uc *result)$/;"	f
+stbi__pic_packet	.\include\stb_image.h	/^		} stbi__pic_packet;$/;"	t	typeref:struct:__anon21
+stbi__pic_test	.\include\stb_image.h	/^		static int stbi__pic_test(stbi__context *s)$/;"	f
+stbi__pic_test_core	.\include\stb_image.h	/^		static int stbi__pic_test_core(stbi__context *s)$/;"	f
+stbi__png	.\include\stb_image.h	/^} stbi__png;$/;"	t	typeref:struct:__anon18
+stbi__png_info	.\include\stb_image.h	/^		static int stbi__png_info(stbi__context *s, int *x, int *y, int *comp)$/;"	f
+stbi__png_info_raw	.\include\stb_image.h	/^		static int stbi__png_info_raw(stbi__png *p, int *x, int *y, int *comp)$/;"	f
+stbi__png_is16	.\include\stb_image.h	/^		static int stbi__png_is16(stbi__context *s)$/;"	f
+stbi__png_load	.\include\stb_image.h	/^		static void *stbi__png_load(stbi__context *s, int *x, int *y, int *comp, int req_comp, stbi__result_info *ri)$/;"	f
+stbi__png_test	.\include\stb_image.h	/^		static int stbi__png_test(stbi__context *s)$/;"	f
+stbi__pngchunk	.\include\stb_image.h	/^} stbi__pngchunk;$/;"	t	typeref:struct:__anon17
+stbi__pnm_getinteger	.\include\stb_image.h	/^		static int      stbi__pnm_getinteger(stbi__context *s, char *c)$/;"	f
+stbi__pnm_info	.\include\stb_image.h	/^		static int      stbi__pnm_info(stbi__context *s, int *x, int *y, int *comp)$/;"	f
+stbi__pnm_is16	.\include\stb_image.h	/^		static int stbi__pnm_is16(stbi__context *s)$/;"	f
+stbi__pnm_isdigit	.\include\stb_image.h	/^		static int      stbi__pnm_isdigit(char c)$/;"	f
+stbi__pnm_isspace	.\include\stb_image.h	/^		static int      stbi__pnm_isspace(char c)$/;"	f
+stbi__pnm_load	.\include\stb_image.h	/^		static void *stbi__pnm_load(stbi__context *s, int *x, int *y, int *comp, int req_comp, stbi__result_info *ri)$/;"	f
+stbi__pnm_skip_whitespace	.\include\stb_image.h	/^		static void     stbi__pnm_skip_whitespace(stbi__context *s, char *c)$/;"	f
+stbi__pnm_test	.\include\stb_image.h	/^		static int      stbi__pnm_test(stbi__context *s)$/;"	f
+stbi__process_frame_header	.\include\stb_image.h	/^	static int stbi__process_frame_header(stbi__jpeg *z, int scan)$/;"	f
+stbi__process_gif_raster	.\include\stb_image.h	/^		static stbi_uc *stbi__process_gif_raster(stbi__context *s, stbi__gif *g)$/;"	f
+stbi__process_marker	.\include\stb_image.h	/^	static int stbi__process_marker(stbi__jpeg *z, int m)$/;"	f
+stbi__process_scan_header	.\include\stb_image.h	/^	static int stbi__process_scan_header(stbi__jpeg *z)$/;"	f
+stbi__psd_decode_rle	.\include\stb_image.h	/^		static int stbi__psd_decode_rle(stbi__context *s, stbi_uc *p, int pixelCount)$/;"	f
+stbi__psd_info	.\include\stb_image.h	/^		static int stbi__psd_info(stbi__context *s, int *x, int *y, int *comp)$/;"	f
+stbi__psd_is16	.\include\stb_image.h	/^		static int stbi__psd_is16(stbi__context *s)$/;"	f
+stbi__psd_load	.\include\stb_image.h	/^		static void *stbi__psd_load(stbi__context *s, int *x, int *y, int *comp, int req_comp, stbi__result_info *ri, int bpc)$/;"	f
+stbi__psd_test	.\include\stb_image.h	/^		static int stbi__psd_test(stbi__context *s)$/;"	f
+stbi__readval	.\include\stb_image.h	/^		static stbi_uc *stbi__readval(stbi__context *s, int channel, stbi_uc *dest)$/;"	f
+stbi__refill_buffer	.\include\stb_image.h	/^		static void stbi__refill_buffer(stbi__context *s)$/;"	f
+stbi__resample	.\include\stb_image.h	/^	} stbi__resample;$/;"	t	typeref:struct:__anon14
+stbi__resample_row_generic	.\include\stb_image.h	/^	static stbi_uc *stbi__resample_row_generic(stbi_uc *out, stbi_uc *in_near, stbi_uc *in_far, int w, int hs)$/;"	f
+stbi__resample_row_h_2	.\include\stb_image.h	/^	static stbi_uc*  stbi__resample_row_h_2(stbi_uc *out, stbi_uc *in_near, stbi_uc *in_far, int w, int hs)$/;"	f
+stbi__resample_row_hv_2	.\include\stb_image.h	/^	static stbi_uc *stbi__resample_row_hv_2(stbi_uc *out, stbi_uc *in_near, stbi_uc *in_far, int w, int hs)$/;"	f
+stbi__resample_row_hv_2_simd	.\include\stb_image.h	/^	static stbi_uc *stbi__resample_row_hv_2_simd(stbi_uc *out, stbi_uc *in_near, stbi_uc *in_far, int w, int hs)$/;"	f
+stbi__resample_row_v_2	.\include\stb_image.h	/^	static stbi_uc* stbi__resample_row_v_2(stbi_uc *out, stbi_uc *in_near, stbi_uc *in_far, int w, int hs)$/;"	f
+stbi__result_info	.\include\stb_image.h	/^} stbi__result_info;$/;"	t	typeref:struct:__anon9
+stbi__rewind	.\include\stb_image.h	/^static void stbi__rewind(stbi__context *s)$/;"	f
+stbi__setup_jpeg	.\include\stb_image.h	/^	static void stbi__setup_jpeg(stbi__jpeg *j)$/;"	f
+stbi__shiftsigned	.\include\stb_image.h	/^		static int stbi__shiftsigned(unsigned int v, int shift, int bits)$/;"	f
+stbi__skip	.\include\stb_image.h	/^		static void stbi__skip(stbi__context *s, int n)$/;"	f
+stbi__sse2_available	.\include\stb_image.h	/^	static int stbi__sse2_available(void)$/;"	f
+stbi__start_callbacks	.\include\stb_image.h	/^	static void stbi__start_callbacks(stbi__context *s, stbi_io_callbacks *c, void *user)$/;"	f
+stbi__start_file	.\include\stb_image.h	/^static void stbi__start_file(stbi__context *s, FILE *f)$/;"	f
+stbi__start_mem	.\include\stb_image.h	/^	static void stbi__start_mem(stbi__context *s, stbi_uc const *buffer, int len)$/;"	f
 stbi__start_write_callbacks	.\include\stb_image_write.h	/^static void stbi__start_write_callbacks(stbi__write_context *s, stbi_write_func *c, void *context)$/;"	f
 stbi__start_write_file	.\include\stb_image_write.h	/^static int stbi__start_write_file(stbi__write_context *s, const char *filename)$/;"	f
+stbi__stdio_callbacks	.\include\stb_image.h	/^	static stbi_io_callbacks stbi__stdio_callbacks =$/;"	v
+stbi__stdio_eof	.\include\stb_image.h	/^	static int stbi__stdio_eof(void *user)$/;"	f
+stbi__stdio_read	.\include\stb_image.h	/^	static int stbi__stdio_read(void *user, char *data, int size)$/;"	f
+stbi__stdio_skip	.\include\stb_image.h	/^	static void stbi__stdio_skip(void *user, int n)$/;"	f
 stbi__stdio_write	.\include\stb_image_write.h	/^static void stbi__stdio_write(void *context, void *data, int size)$/;"	f
-stbi__write_context	.\include\stb_image_write.h	/^} stbi__write_context;$/;"	t	typeref:struct:__anon5
+stbi__tga_get_comp	.\include\stb_image.h	/^		static int stbi__tga_get_comp(int bits_per_pixel, int is_grey, int* is_rgb16)$/;"	f
+stbi__tga_info	.\include\stb_image.h	/^		static int stbi__tga_info(stbi__context *s, int *x, int *y, int *comp)$/;"	f
+stbi__tga_load	.\include\stb_image.h	/^		static void *stbi__tga_load(stbi__context *s, int *x, int *y, int *comp, int req_comp, stbi__result_info *ri)$/;"	f
+stbi__tga_read_rgb16	.\include\stb_image.h	/^		static void stbi__tga_read_rgb16(stbi__context *s, stbi_uc* out)$/;"	f
+stbi__tga_test	.\include\stb_image.h	/^		static int stbi__tga_test(stbi__context *s)$/;"	f
+stbi__uint16	.\include\stb_image.h	/^	typedef uint16_t stbi__uint16;$/;"	t
+stbi__uint16	.\include\stb_image.h	/^	typedef unsigned short stbi__uint16;$/;"	t
+stbi__uint32	.\include\stb_image.h	/^	typedef uint32_t stbi__uint32;$/;"	t
+stbi__uint32	.\include\stb_image.h	/^	typedef unsigned int   stbi__uint32;$/;"	t
+stbi__unpremultiply_on_load	.\include\stb_image.h	4952;"	d
+stbi__unpremultiply_on_load	.\include\stb_image.h	4970;"	d
+stbi__unpremultiply_on_load_global	.\include\stb_image.h	/^static int stbi__unpremultiply_on_load_global = 0;$/;"	v
+stbi__unpremultiply_on_load_local	.\include\stb_image.h	/^static STBI_THREAD_LOCAL int stbi__unpremultiply_on_load_local, stbi__unpremultiply_on_load_set;$/;"	v
+stbi__unpremultiply_on_load_set	.\include\stb_image.h	/^static STBI_THREAD_LOCAL int stbi__unpremultiply_on_load_local, stbi__unpremultiply_on_load_set;$/;"	v
+stbi__unpremultiply_on_load_thread	.\include\stb_image.h	/^STBIDEF void stbi__unpremultiply_on_load_thread(int flag_true_if_should_unpremultiply)$/;"	f
+stbi__vertical_flip	.\include\stb_image.h	/^		static void stbi__vertical_flip(void *image, int w, int h, int bytes_per_pixel)$/;"	f
+stbi__vertical_flip_slices	.\include\stb_image.h	/^		static void stbi__vertical_flip_slices(void *image, int w, int h, int z, int bytes_per_pixel)$/;"	f
+stbi__vertically_flip_on_load	.\include\stb_image.h	1102;"	d
+stbi__vertically_flip_on_load	.\include\stb_image.h	1112;"	d
+stbi__vertically_flip_on_load_global	.\include\stb_image.h	/^static int stbi__vertically_flip_on_load_global = 0;$/;"	v
+stbi__vertically_flip_on_load_local	.\include\stb_image.h	/^static STBI_THREAD_LOCAL int stbi__vertically_flip_on_load_local, stbi__vertically_flip_on_load_set;$/;"	v
+stbi__vertically_flip_on_load_set	.\include\stb_image.h	/^static STBI_THREAD_LOCAL int stbi__vertically_flip_on_load_local, stbi__vertically_flip_on_load_set;$/;"	v
+stbi__write_context	.\include\stb_image_write.h	/^} stbi__write_context;$/;"	t	typeref:struct:__anon24
+stbi__zbuf	.\include\stb_image.h	/^	} stbi__zbuf;$/;"	t	typeref:struct:__anon16
+stbi__zbuild_huffman	.\include\stb_image.h	/^	static int stbi__zbuild_huffman(stbi__zhuffman *z, const stbi_uc *sizelist, int num)$/;"	f
+stbi__zdefault_distance	.\include\stb_image.h	/^static const stbi_uc stbi__zdefault_distance[32] =$/;"	v
+stbi__zdefault_length	.\include\stb_image.h	/^static const stbi_uc stbi__zdefault_length[STBI__ZNSYMS] =$/;"	v
+stbi__zdist_base	.\include\stb_image.h	/^static const int stbi__zdist_base[32] = { 1,2,3,4,5,7,9,13,17,25,33,49,65,97,129,193,$/;"	v
+stbi__zdist_extra	.\include\stb_image.h	/^static const int stbi__zdist_extra[32] =$/;"	v
+stbi__zeof	.\include\stb_image.h	/^	stbi_inline static int stbi__zeof(stbi__zbuf *z)$/;"	f
+stbi__zexpand	.\include\stb_image.h	/^	static int stbi__zexpand(stbi__zbuf *z, char *zout, int n)  \/\/ need to make room for n bytes$/;"	f
+stbi__zget8	.\include\stb_image.h	/^	stbi_inline static stbi_uc stbi__zget8(stbi__zbuf *z)$/;"	f
+stbi__zhuffman	.\include\stb_image.h	/^	} stbi__zhuffman;$/;"	t	typeref:struct:__anon15
+stbi__zhuffman_decode	.\include\stb_image.h	/^	stbi_inline static int stbi__zhuffman_decode(stbi__zbuf *a, stbi__zhuffman *z)$/;"	f
+stbi__zhuffman_decode_slowpath	.\include\stb_image.h	/^	static int stbi__zhuffman_decode_slowpath(stbi__zbuf *a, stbi__zhuffman *z)$/;"	f
+stbi__zlength_base	.\include\stb_image.h	/^	static const int stbi__zlength_base[31] = {$/;"	v
+stbi__zlength_extra	.\include\stb_image.h	/^	static const int stbi__zlength_extra[31]=$/;"	v
+stbi__zreceive	.\include\stb_image.h	/^	stbi_inline static unsigned int stbi__zreceive(stbi__zbuf *z, int n)$/;"	f
+stbi_convert_iphone_png_to_rgb	.\include\stb_image.h	/^STBIDEF void stbi_convert_iphone_png_to_rgb(int flag_true_if_should_convert)$/;"	f
+stbi_convert_iphone_png_to_rgb_thread	.\include\stb_image.h	/^STBIDEF void stbi_convert_iphone_png_to_rgb_thread(int flag_true_if_should_convert)$/;"	f
+stbi_convert_wchar_to_utf8	.\include\stb_image.h	/^		STBIDEF int stbi_convert_wchar_to_utf8(char *buffer, size_t bufferlen, const wchar_t* input)$/;"	f
+stbi_failure_reason	.\include\stb_image.h	/^STBIDEF const char *stbi_failure_reason(void)$/;"	f
 stbi_flip_vertically_on_write	.\include\stb_image_write.h	/^STBIWDEF void stbi_flip_vertically_on_write(int flag)$/;"	f
+stbi_hdr_to_ldr_gamma	.\include\stb_image.h	/^		STBIDEF void   stbi_hdr_to_ldr_gamma(float gamma) { stbi__h2l_gamma_i = 1\/gamma; }$/;"	f
+stbi_hdr_to_ldr_scale	.\include\stb_image.h	/^		STBIDEF void   stbi_hdr_to_ldr_scale(float scale) { stbi__h2l_scale_i = 1\/scale; }$/;"	f
+stbi_image_free	.\include\stb_image.h	/^STBIDEF void stbi_image_free(void *retval_from_stbi_load)$/;"	f
+stbi_info	.\include\stb_image.h	/^		STBIDEF int stbi_info(char const *filename, int *x, int *y, int *comp)$/;"	f
+stbi_info_from_callbacks	.\include\stb_image.h	/^		STBIDEF int stbi_info_from_callbacks(stbi_io_callbacks const *c, void *user, int *x, int *y, int *comp)$/;"	f
+stbi_info_from_file	.\include\stb_image.h	/^		STBIDEF int stbi_info_from_file(FILE *f, int *x, int *y, int *comp)$/;"	f
+stbi_info_from_memory	.\include\stb_image.h	/^		STBIDEF int stbi_info_from_memory(stbi_uc const *buffer, int len, int *x, int *y, int *comp)$/;"	f
+stbi_inline	.\include\stb_image.h	612;"	d
+stbi_inline	.\include\stb_image.h	614;"	d
+stbi_inline	.\include\stb_image.h	617;"	d
+stbi_io_callbacks	.\include\stb_image.h	/^	} stbi_io_callbacks;$/;"	t	typeref:struct:__anon6
+stbi_is_16_bit	.\include\stb_image.h	/^		STBIDEF int stbi_is_16_bit(char const *filename)$/;"	f
+stbi_is_16_bit_from_callbacks	.\include\stb_image.h	/^		STBIDEF int stbi_is_16_bit_from_callbacks(stbi_io_callbacks const *c, void *user)$/;"	f
+stbi_is_16_bit_from_file	.\include\stb_image.h	/^		STBIDEF int stbi_is_16_bit_from_file(FILE *f)$/;"	f
+stbi_is_16_bit_from_memory	.\include\stb_image.h	/^		STBIDEF int stbi_is_16_bit_from_memory(stbi_uc const *buffer, int len)$/;"	f
+stbi_is_hdr	.\include\stb_image.h	/^		STBIDEF int      stbi_is_hdr          (char const *filename)$/;"	f
+stbi_is_hdr_from_callbacks	.\include\stb_image.h	/^		STBIDEF int      stbi_is_hdr_from_callbacks(stbi_io_callbacks const *clbk, void *user)$/;"	f
+stbi_is_hdr_from_file	.\include\stb_image.h	/^		STBIDEF int stbi_is_hdr_from_file(FILE *f)$/;"	f
+stbi_is_hdr_from_memory	.\include\stb_image.h	/^		STBIDEF int stbi_is_hdr_from_memory(stbi_uc const *buffer, int len)$/;"	f
+stbi_ldr_to_hdr_gamma	.\include\stb_image.h	/^		STBIDEF void   stbi_ldr_to_hdr_gamma(float gamma) { stbi__l2h_gamma = gamma; }$/;"	f
+stbi_ldr_to_hdr_scale	.\include\stb_image.h	/^		STBIDEF void   stbi_ldr_to_hdr_scale(float scale) { stbi__l2h_scale = scale; }$/;"	f
+stbi_load	.\include\stb_image.h	/^		STBIDEF stbi_uc *stbi_load(char const *filename, int *x, int *y, int *comp, int req_comp)$/;"	f
+stbi_load_16	.\include\stb_image.h	/^		STBIDEF stbi_us *stbi_load_16(char const *filename, int *x, int *y, int *comp, int req_comp)$/;"	f
+stbi_load_16_from_callbacks	.\include\stb_image.h	/^		STBIDEF stbi_us *stbi_load_16_from_callbacks(stbi_io_callbacks const *clbk, void *user, int *x, int *y, int *channels_in_file, int desired_channels)$/;"	f
+stbi_load_16_from_memory	.\include\stb_image.h	/^		STBIDEF stbi_us *stbi_load_16_from_memory(stbi_uc const *buffer, int len, int *x, int *y, int *channels_in_file, int desired_channels)$/;"	f
+stbi_load_from_callbacks	.\include\stb_image.h	/^		STBIDEF stbi_uc *stbi_load_from_callbacks(stbi_io_callbacks const *clbk, void *user, int *x, int *y, int *comp, int req_comp)$/;"	f
+stbi_load_from_file	.\include\stb_image.h	/^		STBIDEF stbi_uc *stbi_load_from_file(FILE *f, int *x, int *y, int *comp, int req_comp)$/;"	f
+stbi_load_from_file_16	.\include\stb_image.h	/^		STBIDEF stbi__uint16 *stbi_load_from_file_16(FILE *f, int *x, int *y, int *comp, int req_comp)$/;"	f
+stbi_load_from_memory	.\include\stb_image.h	/^		STBIDEF stbi_uc *stbi_load_from_memory(stbi_uc const *buffer, int len, int *x, int *y, int *comp, int req_comp)$/;"	f
+stbi_load_gif_from_memory	.\include\stb_image.h	/^		STBIDEF stbi_uc *stbi_load_gif_from_memory(stbi_uc const *buffer, int len, int **delays, int *x, int *y, int *z, int *comp, int req_comp)$/;"	f
+stbi_loadf	.\include\stb_image.h	/^		STBIDEF float *stbi_loadf(char const *filename, int *x, int *y, int *comp, int req_comp)$/;"	f
+stbi_loadf_from_callbacks	.\include\stb_image.h	/^		STBIDEF float *stbi_loadf_from_callbacks(stbi_io_callbacks const *clbk, void *user, int *x, int *y, int *comp, int req_comp)$/;"	f
+stbi_loadf_from_file	.\include\stb_image.h	/^		STBIDEF float *stbi_loadf_from_file(FILE *f, int *x, int *y, int *comp, int req_comp)$/;"	f
+stbi_loadf_from_memory	.\include\stb_image.h	/^		STBIDEF float *stbi_loadf_from_memory(stbi_uc const *buffer, int len, int *x, int *y, int *comp, int req_comp)$/;"	f
+stbi_lrot	.\include\stb_image.h	665;"	d
+stbi_lrot	.\include\stb_image.h	667;"	d
+stbi_set_flip_vertically_on_load	.\include\stb_image.h	/^STBIDEF void stbi_set_flip_vertically_on_load(int flag_true_if_should_flip)$/;"	f
+stbi_set_flip_vertically_on_load_thread	.\include\stb_image.h	/^STBIDEF void stbi_set_flip_vertically_on_load_thread(int flag_true_if_should_flip)$/;"	f
+stbi_set_unpremultiply_on_load	.\include\stb_image.h	/^STBIDEF void stbi_set_unpremultiply_on_load(int flag_true_if_should_unpremultiply)$/;"	f
+stbi_uc	.\include\stb_image.h	/^typedef unsigned char stbi_uc;$/;"	t
+stbi_us	.\include\stb_image.h	/^typedef unsigned short stbi_us;$/;"	t
 stbi_write_bmp	.\include\stb_image_write.h	/^STBIWDEF int stbi_write_bmp(char const *filename, int x, int y, int comp, const void *data)$/;"	f
 stbi_write_bmp_core	.\include\stb_image_write.h	/^static int stbi_write_bmp_core(stbi__write_context *s, int x, int y, int comp, const void *data)$/;"	f
 stbi_write_bmp_to_func	.\include\stb_image_write.h	/^STBIWDEF int stbi_write_bmp_to_func(stbi_write_func *func, void *context, int x, int y, int comp, const void *data)$/;"	f
@@ -999,6 +1533,12 @@ stbi_write_tga_with_rle	.\include\stb_image_write.h	/^STBIWDEF int stbi_write_tg
 stbi_write_tga_with_rle	.\include\stb_image_write.h	/^int stbi_write_tga_with_rle = 1;$/;"	v
 stbi_write_tga_with_rle	.\include\stb_image_write.h	/^static int stbi_write_tga_with_rle = 1;$/;"	v
 stbi_zlib_compress	.\include\stb_image_write.h	/^STBIWDEF unsigned char * stbi_zlib_compress(unsigned char *data, int data_len, int *out_len, int quality)$/;"	f
+stbi_zlib_decode_buffer	.\include\stb_image.h	/^STBIDEF int stbi_zlib_decode_buffer(char *obuffer, int olen, char const *ibuffer, int ilen)$/;"	f
+stbi_zlib_decode_malloc	.\include\stb_image.h	/^STBIDEF char *stbi_zlib_decode_malloc(char const *buffer, int len, int *outlen)$/;"	f
+stbi_zlib_decode_malloc_guesssize	.\include\stb_image.h	/^STBIDEF char *stbi_zlib_decode_malloc_guesssize(const char *buffer, int len, int initial_size, int *outlen)$/;"	f
+stbi_zlib_decode_malloc_guesssize_headerflag	.\include\stb_image.h	/^STBIDEF char *stbi_zlib_decode_malloc_guesssize_headerflag(const char *buffer, int len, int initial_size, int *outlen, int parse_header)$/;"	f
+stbi_zlib_decode_noheader_buffer	.\include\stb_image.h	/^STBIDEF int stbi_zlib_decode_noheader_buffer(char *obuffer, int olen, const char *ibuffer, int ilen)$/;"	f
+stbi_zlib_decode_noheader_malloc	.\include\stb_image.h	/^STBIDEF char *stbi_zlib_decode_noheader_malloc(char const *buffer, int len, int *outlen)$/;"	f
 stbiw__ZHASH	.\include\stb_image_write.h	891;"	d
 stbiw__crc32	.\include\stb_image_write.h	/^static unsigned int stbiw__crc32(unsigned char *buffer, int len)$/;"	f
 stbiw__encode_png_line	.\include\stb_image_write.h	/^static void stbiw__encode_png_line(unsigned char *pixels, int stride_bytes, int width, int height, int y, int n, int filter_type, signed char *line_buffer)$/;"	f
@@ -1052,20 +1592,20 @@ stbiw__zlib_huffa	.\include\stb_image_write.h	882;"	d
 stbiw__zlib_huffb	.\include\stb_image_write.h	889;"	d
 stbiw_convert_wchar_to_utf8	.\include\stb_image_write.h	/^STBIWDEF int stbiw_convert_wchar_to_utf8(char *buffer, size_t bufferlen, const wchar_t* input)$/;"	f
 stbiw_uint32	.\include\stb_image_write.h	/^typedef unsigned int stbiw_uint32;$/;"	t
-stbrp__findresult	.\include\stb_rect_pack.h	/^} stbrp__findresult;$/;"	t	typeref:struct:__anon8
+stbrp__findresult	.\include\stb_rect_pack.h	/^} stbrp__findresult;$/;"	t	typeref:struct:__anon27
 stbrp__skyline_find_best_pos	.\include\stb_rect_pack.h	/^static stbrp__findresult stbrp__skyline_find_best_pos(stbrp_context *c, int width, int height)$/;"	f
 stbrp__skyline_find_min_y	.\include\stb_rect_pack.h	/^static int stbrp__skyline_find_min_y(stbrp_context *c, stbrp_node *first, int x0, int width, int *pwaste)$/;"	f
 stbrp__skyline_pack_rectangle	.\include\stb_rect_pack.h	/^static stbrp__findresult stbrp__skyline_pack_rectangle(stbrp_context *context, int width, int height)$/;"	f
 stbrp_context	.\include\stb_rect_pack.h	/^struct stbrp_context$/;"	s
 stbrp_context	.\include\stb_rect_pack.h	/^typedef struct stbrp_context stbrp_context;$/;"	t	typeref:struct:stbrp_context
-stbrp_context	.\include\stb_truetype.h	/^} stbrp_context;$/;"	t	typeref:struct:__anon25
+stbrp_context	.\include\stb_truetype.h	/^} stbrp_context;$/;"	t	typeref:struct:__anon44
 stbrp_coord	.\include\stb_rect_pack.h	/^typedef int            stbrp_coord;$/;"	t
 stbrp_coord	.\include\stb_truetype.h	/^typedef int stbrp_coord;$/;"	t
 stbrp_init_target	.\include\stb_rect_pack.h	/^STBRP_DEF void stbrp_init_target(stbrp_context *context, int width, int height, stbrp_node *nodes, int num_nodes)$/;"	f
 stbrp_init_target	.\include\stb_truetype.h	/^static void stbrp_init_target(stbrp_context *con, int pw, int ph, stbrp_node *nodes, int num_nodes)$/;"	f
 stbrp_node	.\include\stb_rect_pack.h	/^struct stbrp_node$/;"	s
 stbrp_node	.\include\stb_rect_pack.h	/^typedef struct stbrp_node    stbrp_node;$/;"	t	typeref:struct:stbrp_node
-stbrp_node	.\include\stb_truetype.h	/^} stbrp_node;$/;"	t	typeref:struct:__anon26
+stbrp_node	.\include\stb_truetype.h	/^} stbrp_node;$/;"	t	typeref:struct:__anon45
 stbrp_pack_rects	.\include\stb_rect_pack.h	/^STBRP_DEF int stbrp_pack_rects(stbrp_context *context, stbrp_rect *rects, int num_rects)$/;"	f
 stbrp_pack_rects	.\include\stb_truetype.h	/^static void stbrp_pack_rects(stbrp_context *con, stbrp_rect *rects, int num_rects)$/;"	f
 stbrp_rect	.\include\stb_rect_pack.h	/^struct stbrp_rect$/;"	s
@@ -1152,8 +1692,8 @@ stbtt__GetGlyphShapeTT	.\include\stb_truetype.h	/^static int stbtt__GetGlyphShap
 stbtt__active_edge	.\include\stb_truetype.h	/^typedef struct stbtt__active_edge$/;"	s
 stbtt__active_edge	.\include\stb_truetype.h	/^} stbtt__active_edge;$/;"	t	typeref:struct:stbtt__active_edge
 stbtt__add_point	.\include\stb_truetype.h	/^static void stbtt__add_point(stbtt__point *points, int n, float x, float y)$/;"	f
-stbtt__bitmap	.\include\stb_truetype.h	/^} stbtt__bitmap;$/;"	t	typeref:struct:__anon16
-stbtt__buf	.\include\stb_truetype.h	/^} stbtt__buf;$/;"	t	typeref:struct:__anon9
+stbtt__bitmap	.\include\stb_truetype.h	/^} stbtt__bitmap;$/;"	t	typeref:struct:__anon35
+stbtt__buf	.\include\stb_truetype.h	/^} stbtt__buf;$/;"	t	typeref:struct:__anon28
 stbtt__buf_get	.\include\stb_truetype.h	/^static stbtt_uint32 stbtt__buf_get(stbtt__buf *b, int n)$/;"	f
 stbtt__buf_get16	.\include\stb_truetype.h	1178;"	d
 stbtt__buf_get32	.\include\stb_truetype.h	1179;"	d
@@ -1172,7 +1712,7 @@ stbtt__check_size32	.\include\stb_truetype.h	/^   typedef char stbtt__check_size
 stbtt__cid_get_glyph_subrs	.\include\stb_truetype.h	/^static stbtt__buf stbtt__cid_get_glyph_subrs(const stbtt_fontinfo *info, int glyph_index)$/;"	f
 stbtt__close_shape	.\include\stb_truetype.h	/^static int stbtt__close_shape(stbtt_vertex *vertices, int num_vertices, int was_off, int start_off,$/;"	f
 stbtt__compute_crossings_x	.\include\stb_truetype.h	/^static int stbtt__compute_crossings_x(float x, float y, int nverts, stbtt_vertex *verts)$/;"	f
-stbtt__csctx	.\include\stb_truetype.h	/^} stbtt__csctx;$/;"	t	typeref:struct:__anon23
+stbtt__csctx	.\include\stb_truetype.h	/^} stbtt__csctx;$/;"	t	typeref:struct:__anon42
 stbtt__csctx_close_shape	.\include\stb_truetype.h	/^static void stbtt__csctx_close_shape(stbtt__csctx *ctx)$/;"	f
 stbtt__csctx_rccurve_to	.\include\stb_truetype.h	/^static void stbtt__csctx_rccurve_to(stbtt__csctx *ctx, float dx1, float dy1, float dx2, float dy2, float dx3, float dy3)$/;"	f
 stbtt__csctx_rline_to	.\include\stb_truetype.h	/^static void stbtt__csctx_rline_to(stbtt__csctx *ctx, float dx, float dy)$/;"	f
@@ -1204,7 +1744,7 @@ stbtt__matchpair	.\include\stb_truetype.h	/^static int stbtt__matchpair(stbtt_ui
 stbtt__new_active	.\include\stb_truetype.h	/^static stbtt__active_edge *stbtt__new_active(stbtt__hheap *hh, stbtt__edge *e, int off_x, float start_point, void *userdata)$/;"	f
 stbtt__new_buf	.\include\stb_truetype.h	/^static stbtt__buf stbtt__new_buf(const void *p, size_t size)$/;"	f
 stbtt__oversample_shift	.\include\stb_truetype.h	/^static float stbtt__oversample_shift(int oversample)$/;"	f
-stbtt__point	.\include\stb_truetype.h	/^} stbtt__point;$/;"	t	typeref:struct:__anon24
+stbtt__point	.\include\stb_truetype.h	/^} stbtt__point;$/;"	t	typeref:struct:__anon43
 stbtt__position_trapezoid_area	.\include\stb_truetype.h	/^static float stbtt__position_trapezoid_area(float height, float tx0, float tx1, float bx0, float bx1)$/;"	f
 stbtt__rasterize	.\include\stb_truetype.h	/^static void stbtt__rasterize(stbtt__bitmap *result, stbtt__point *pts, int *wcount, int windings, float scale_x, float scale_y, float shift_x, float shift_y, int off_x, int off_y, int invert, void *userdata)$/;"	f
 stbtt__rasterize_sorted_edges	.\include\stb_truetype.h	/^static void stbtt__rasterize_sorted_edges(stbtt__bitmap *result, stbtt__edge *e, int n, int vsubsample, int off_x, int off_y, void *userdata)$/;"	f
@@ -1221,8 +1761,8 @@ stbtt__tesselate_curve	.\include\stb_truetype.h	/^static int stbtt__tesselate_cu
 stbtt__test_oversample_pow2	.\include\stb_truetype.h	/^typedef int stbtt__test_oversample_pow2[(STBTT_MAX_OVERSAMPLE & (STBTT_MAX_OVERSAMPLE-1)) == 0 ? 1 : -1];$/;"	t
 stbtt__track_vertex	.\include\stb_truetype.h	/^static void stbtt__track_vertex(stbtt__csctx *c, stbtt_int32 x, stbtt_int32 y)$/;"	f
 stbtt__v_prefilter	.\include\stb_truetype.h	/^static void stbtt__v_prefilter(unsigned char *pixels, int w, int h, int stride_in_bytes, unsigned int kernel_width)$/;"	f
-stbtt_aligned_quad	.\include\stb_truetype.h	/^} stbtt_aligned_quad;$/;"	t	typeref:struct:__anon11
-stbtt_bakedchar	.\include\stb_truetype.h	/^} stbtt_bakedchar;$/;"	t	typeref:struct:__anon10
+stbtt_aligned_quad	.\include\stb_truetype.h	/^} stbtt_aligned_quad;$/;"	t	typeref:struct:__anon30
+stbtt_bakedchar	.\include\stb_truetype.h	/^} stbtt_bakedchar;$/;"	t	typeref:struct:__anon29
 stbtt_fontinfo	.\include\stb_truetype.h	/^struct stbtt_fontinfo$/;"	s
 stbtt_fontinfo	.\include\stb_truetype.h	/^typedef struct stbtt_fontinfo stbtt_fontinfo;$/;"	t	typeref:struct:stbtt_fontinfo
 stbtt_int16	.\include\stb_truetype.h	/^   typedef signed   short  stbtt_int16;$/;"	t
@@ -1232,26 +1772,30 @@ stbtt_kerningentry	.\include\stb_truetype.h	/^typedef struct stbtt_kerningentry$
 stbtt_kerningentry	.\include\stb_truetype.h	/^} stbtt_kerningentry;$/;"	t	typeref:struct:stbtt_kerningentry
 stbtt_pack_context	.\include\stb_truetype.h	/^struct stbtt_pack_context {$/;"	s
 stbtt_pack_context	.\include\stb_truetype.h	/^typedef struct stbtt_pack_context stbtt_pack_context;$/;"	t	typeref:struct:stbtt_pack_context
-stbtt_pack_range	.\include\stb_truetype.h	/^} stbtt_pack_range;$/;"	t	typeref:struct:__anon13
-stbtt_packedchar	.\include\stb_truetype.h	/^} stbtt_packedchar;$/;"	t	typeref:struct:__anon12
+stbtt_pack_range	.\include\stb_truetype.h	/^} stbtt_pack_range;$/;"	t	typeref:struct:__anon32
+stbtt_packedchar	.\include\stb_truetype.h	/^} stbtt_packedchar;$/;"	t	typeref:struct:__anon31
 stbtt_setvertex	.\include\stb_truetype.h	/^static void stbtt_setvertex(stbtt_vertex *v, stbtt_uint8 type, stbtt_int32 x, stbtt_int32 y, stbtt_int32 cx, stbtt_int32 cy)$/;"	f
 stbtt_tag	.\include\stb_truetype.h	1292;"	d
 stbtt_tag4	.\include\stb_truetype.h	1291;"	d
 stbtt_uint16	.\include\stb_truetype.h	/^   typedef unsigned short  stbtt_uint16;$/;"	t
 stbtt_uint32	.\include\stb_truetype.h	/^   typedef unsigned int    stbtt_uint32;$/;"	t
 stbtt_uint8	.\include\stb_truetype.h	/^   typedef unsigned char   stbtt_uint8;$/;"	t
-stbtt_vertex	.\include\stb_truetype.h	/^   } stbtt_vertex;$/;"	t	typeref:struct:__anon15
+stbtt_vertex	.\include\stb_truetype.h	/^   } stbtt_vertex;$/;"	t	typeref:struct:__anon34
 stbtt_vertex_type	.\include\stb_truetype.h	834;"	d
+step	.\include\stb_image.h	/^			int parse, step;$/;"	m	struct:__anon23
 stride	.\include\cgltf.h	/^		cgltf_size stride; \/* 0 == automatically determined by accessor *\/$/;"	m	struct:cgltf_buffer_view
 stride	.\include\cgltf.h	/^		cgltf_size stride;$/;"	m	struct:cgltf_accessor
 stride	.\include\cgltf.h	/^		cgltf_size stride;$/;"	m	struct:cgltf_meshopt_compression
-stride	.\include\stb_truetype.h	/^   int w,h,stride;$/;"	m	struct:__anon16
+stride	.\include\stb_truetype.h	/^   int w,h,stride;$/;"	m	struct:__anon35
 stride_in_bytes	.\include\stb_truetype.h	/^   int   stride_in_bytes;$/;"	m	struct:stbtt_pack_context
 subrs	.\include\stb_truetype.h	/^   stbtt__buf subrs;                  \/\/ private charstring subroutines index$/;"	m	struct:stbtt_fontinfo
+succ_high	.\include\stb_image.h	/^			int            succ_high;$/;"	m	struct:__anon12
+succ_low	.\include\stb_image.h	/^			int            succ_low;$/;"	m	struct:__anon12
+suffix	.\include\stb_image.h	/^			stbi_uc suffix;$/;"	m	struct:__anon22
 svg	.\include\stb_truetype.h	/^   int loca,head,glyf,hhea,hmtx,kern,gpos,svg; \/\/ table locations as offset from start of .ttf$/;"	m	struct:stbtt_fontinfo
 sy	.\include\stb_truetype.h	/^   float sy;$/;"	m	struct:stbtt__active_edge
-t0	.\include\stb_truetype.h	/^   float x0,y0,s0,t0; \/\/ top-left$/;"	m	struct:__anon11
-t1	.\include\stb_truetype.h	/^   float x1,y1,s1,t1; \/\/ bottom-right$/;"	m	struct:__anon11
+t0	.\include\stb_truetype.h	/^   float x0,y0,s0,t0; \/\/ top-left$/;"	m	struct:__anon30
+t1	.\include\stb_truetype.h	/^   float x1,y1,s1,t1; \/\/ bottom-right$/;"	m	struct:__anon30
 target_names	.\include\cgltf.h	/^		char** target_names;$/;"	m	struct:cgltf_mesh
 target_names_count	.\include\cgltf.h	/^		cgltf_size target_names_count;$/;"	m	struct:cgltf_mesh
 target_node	.\include\cgltf.h	/^		cgltf_node* target_node;$/;"	m	struct:cgltf_animation_channel
@@ -1266,15 +1810,18 @@ textures	.\include\cgltf.h	/^		cgltf_texture* textures;$/;"	m	struct:cgltf_data
 textures_count	.\include\cgltf.h	/^		cgltf_size textures_count;$/;"	m	struct:cgltf_data
 thickness_factor	.\include\cgltf.h	/^		cgltf_float thickness_factor;$/;"	m	struct:cgltf_volume
 thickness_texture	.\include\cgltf.h	/^		cgltf_texture_view thickness_texture;$/;"	m	struct:cgltf_volume
+todo	.\include\stb_image.h	/^			int restart_interval, todo;$/;"	m	struct:__anon12
 toknext	.\include\cgltf.h	/^	unsigned int toknext; \/* next token to allocate *\/$/;"	m	struct:__anon4
 toksuper	.\include\cgltf.h	/^	int toksuper; \/* superior token node, e.g parent object or array *\/$/;"	m	struct:__anon4
 total_count	.\asset_packer\buffers.cpp	/^	u32 total_count;$/;"	m	struct:StructBuffer	file:
 total_size	.\asset_packer\buffers.cpp	/^	u32 total_size;$/;"	m	struct:GenericBuffer	file:
+tq	.\include\stb_image.h	/^				int tq;$/;"	m	struct:__anon12::__anon13
 transform	.\include\cgltf.h	/^		cgltf_texture_transform transform;$/;"	m	struct:cgltf_texture_view
 translation	.\include\cgltf.h	/^		cgltf_float translation[3];$/;"	m	struct:cgltf_node
 transmission	.\include\cgltf.h	/^		cgltf_transmission transmission;$/;"	m	struct:cgltf_material
 transmission_factor	.\include\cgltf.h	/^		cgltf_float transmission_factor;$/;"	m	struct:cgltf_transmission
 transmission_texture	.\include\cgltf.h	/^		cgltf_texture_view transmission_texture;$/;"	m	struct:cgltf_transmission
+transparent	.\include\stb_image.h	/^			int flags, bgindex, ratio, transparent, eflags;$/;"	m	struct:__anon23
 ttBYTE	.\include\stb_truetype.h	1282;"	d
 ttCHAR	.\include\stb_truetype.h	1283;"	d
 ttFixed	.\include\stb_truetype.h	1284;"	d
@@ -1293,7 +1840,9 @@ type	.\include\cgltf.h	/^		cgltf_light_type type;$/;"	m	struct:cgltf_light
 type	.\include\cgltf.h	/^		cgltf_primitive_type type;$/;"	m	struct:cgltf_primitive
 type	.\include\cgltf.h	/^		cgltf_type type;$/;"	m	struct:cgltf_accessor
 type	.\include\cgltf.h	/^	jsmntype_t type;$/;"	m	struct:__anon3
-type	.\include\stb_truetype.h	/^      unsigned char type,padding;$/;"	m	struct:__anon15
+type	.\include\stb_image.h	/^			stbi_uc size,type,channel;$/;"	m	struct:__anon21
+type	.\include\stb_image.h	/^	stbi__uint32 type;$/;"	m	struct:__anon17
+type	.\include\stb_truetype.h	/^      unsigned char type,padding;$/;"	m	struct:__anon34
 u16	.\asset_packer\main.cpp	/^typedef uint16_t u16;$/;"	t	file:
 u32	.\asset_packer\main.cpp	/^typedef uint32_t u32;$/;"	t	file:
 u64	.\asset_packer\main.cpp	/^typedef uint64_t u64;$/;"	t	file:
@@ -1305,8 +1854,12 @@ user_allocator_context	.\include\stb_truetype.h	/^   void *user_allocator_contex
 user_data	.\include\cgltf.h	/^		void* user_data;$/;"	m	struct:cgltf_file_options
 user_data	.\include\cgltf.h	/^		void* user_data;$/;"	m	struct:cgltf_memory_options
 userdata	.\include\stb_truetype.h	/^   void           * userdata;$/;"	m	struct:stbtt_fontinfo
-v_oversample	.\include\stb_truetype.h	/^   unsigned char h_oversample, v_oversample; \/\/ don't set these, they're used internally$/;"	m	struct:__anon13
+v	.\include\stb_image.h	/^				int h,v;$/;"	m	struct:__anon12::__anon13
+v_oversample	.\include\stb_truetype.h	/^   unsigned char h_oversample, v_oversample; \/\/ don't set these, they're used internally$/;"	m	struct:__anon32
 v_oversample	.\include\stb_truetype.h	/^   unsigned int   h_oversample, v_oversample;$/;"	m	struct:stbtt_pack_context
+validate_uint32	.\include\stb_image.h	/^	typedef unsigned char validate_uint32[sizeof(stbi__uint32)==4 ? 1 : -1];$/;"	t
+value	.\include\stb_image.h	/^		stbi__uint16 value[STBI__ZNSYMS];$/;"	m	struct:__anon15
+values	.\include\stb_image.h	/^			stbi_uc  values[256];$/;"	m	struct:__anon11
 values_buffer_view	.\include\cgltf.h	/^		cgltf_buffer_view* values_buffer_view;$/;"	m	struct:cgltf_accessor_sparse
 values_byte_offset	.\include\cgltf.h	/^		cgltf_size values_byte_offset;$/;"	m	struct:cgltf_accessor_sparse
 values_extensions	.\include\cgltf.h	/^		cgltf_extension* values_extensions;$/;"	m	struct:cgltf_accessor_sparse
@@ -1317,9 +1870,13 @@ variants	.\include\cgltf.h	/^		cgltf_material_variant* variants;$/;"	m	struct:cg
 variants_count	.\include\cgltf.h	/^		cgltf_size variants_count;$/;"	m	struct:cgltf_data
 version	.\include\cgltf.h	/^		char* version;$/;"	m	struct:cgltf_asset
 volume	.\include\cgltf.h	/^		cgltf_volume volume;$/;"	m	struct:cgltf_material
+vs	.\include\stb_image.h	/^		int hs,vs;   \/\/ expansion factor in each axis$/;"	m	struct:__anon14
+w	.\include\stb_image.h	/^			int w,h;$/;"	m	struct:__anon23
 w	.\include\stb_rect_pack.h	/^   stbrp_coord    w, h;$/;"	m	struct:stbrp_rect
 w	.\include\stb_truetype.h	/^   int id,w,h,was_packed;$/;"	m	struct:stbrp_rect
-w	.\include\stb_truetype.h	/^   int w,h,stride;$/;"	m	struct:__anon16
+w	.\include\stb_truetype.h	/^   int w,h,stride;$/;"	m	struct:__anon35
+w2	.\include\stb_image.h	/^				int x,y,w2,h2;$/;"	m	struct:__anon12::__anon13
+w_lores	.\include\stb_image.h	/^		int w_lores; \/\/ horizontal pixels pre-expansion$/;"	m	struct:__anon14
 was_packed	.\include\stb_rect_pack.h	/^   int            was_packed;  \/\/ non-zero if valid packing$/;"	m	struct:stbrp_rect
 was_packed	.\include\stb_truetype.h	/^   int id,w,h,was_packed;$/;"	m	struct:stbrp_rect
 weights	.\include\cgltf.h	/^		cgltf_float* weights;$/;"	m	struct:cgltf_mesh
@@ -1328,55 +1885,67 @@ weights_count	.\include\cgltf.h	/^		cgltf_size weights_count;$/;"	m	struct:cgltf
 weights_count	.\include\cgltf.h	/^		cgltf_size weights_count;$/;"	m	struct:cgltf_node
 width	.\include\stb_rect_pack.h	/^   int width;$/;"	m	struct:stbrp_context
 width	.\include\stb_truetype.h	/^   int   width;$/;"	m	struct:stbtt_pack_context
-width	.\include\stb_truetype.h	/^   int width,height;$/;"	m	struct:__anon25
+width	.\include\stb_truetype.h	/^   int width,height;$/;"	m	struct:__anon44
 wrap_s	.\include\cgltf.h	/^		cgltf_int wrap_s;$/;"	m	struct:cgltf_sampler
 wrap_t	.\include\cgltf.h	/^		cgltf_int wrap_t;$/;"	m	struct:cgltf_sampler
-x	.\include\stb_rect_pack.h	/^   int x,y;$/;"	m	struct:__anon8
+x	.\include\stb_image.h	/^				int x,y,w2,h2;$/;"	m	struct:__anon12::__anon13
+x	.\include\stb_rect_pack.h	/^   int x,y;$/;"	m	struct:__anon27
 x	.\include\stb_rect_pack.h	/^   stbrp_coord    x, y;$/;"	m	struct:stbrp_rect
 x	.\include\stb_rect_pack.h	/^   stbrp_coord  x,y;$/;"	m	struct:stbrp_node
-x	.\include\stb_truetype.h	/^      stbtt_vertex_type x,y,cx,cy,cx1,cy1;$/;"	m	struct:__anon15
-x	.\include\stb_truetype.h	/^   float x, y;$/;"	m	struct:__anon23
-x	.\include\stb_truetype.h	/^   float x,y;$/;"	m	struct:__anon24
+x	.\include\stb_truetype.h	/^      stbtt_vertex_type x,y,cx,cy,cx1,cy1;$/;"	m	struct:__anon34
+x	.\include\stb_truetype.h	/^   float x, y;$/;"	m	struct:__anon42
+x	.\include\stb_truetype.h	/^   float x,y;$/;"	m	struct:__anon43
 x	.\include\stb_truetype.h	/^   int x,dx;$/;"	m	struct:stbtt__active_edge
-x	.\include\stb_truetype.h	/^   int x,y,bottom_y;$/;"	m	struct:__anon25
+x	.\include\stb_truetype.h	/^   int x,y,bottom_y;$/;"	m	struct:__anon44
 x	.\include\stb_truetype.h	/^   stbrp_coord x,y;$/;"	m	struct:stbrp_rect
-x	.\include\stb_truetype.h	/^   unsigned char x;$/;"	m	struct:__anon26
+x	.\include\stb_truetype.h	/^   unsigned char x;$/;"	m	struct:__anon45
 x0	.\include\stb_truetype.h	/^   float x0,y0, x1,y1;$/;"	m	struct:stbtt__edge
-x0	.\include\stb_truetype.h	/^   float x0,y0,s0,t0; \/\/ top-left$/;"	m	struct:__anon11
-x0	.\include\stb_truetype.h	/^   unsigned short x0,y0,x1,y1; \/\/ coordinates of bbox in bitmap$/;"	m	struct:__anon10
-x0	.\include\stb_truetype.h	/^   unsigned short x0,y0,x1,y1; \/\/ coordinates of bbox in bitmap$/;"	m	struct:__anon12
+x0	.\include\stb_truetype.h	/^   float x0,y0,s0,t0; \/\/ top-left$/;"	m	struct:__anon30
+x0	.\include\stb_truetype.h	/^   unsigned short x0,y0,x1,y1; \/\/ coordinates of bbox in bitmap$/;"	m	struct:__anon29
+x0	.\include\stb_truetype.h	/^   unsigned short x0,y0,x1,y1; \/\/ coordinates of bbox in bitmap$/;"	m	struct:__anon31
 x1	.\include\stb_truetype.h	/^   float x0,y0, x1,y1;$/;"	m	struct:stbtt__edge
-x1	.\include\stb_truetype.h	/^   float x1,y1,s1,t1; \/\/ bottom-right$/;"	m	struct:__anon11
-x1	.\include\stb_truetype.h	/^   unsigned short x0,y0,x1,y1; \/\/ coordinates of bbox in bitmap$/;"	m	struct:__anon10
-x1	.\include\stb_truetype.h	/^   unsigned short x0,y0,x1,y1; \/\/ coordinates of bbox in bitmap$/;"	m	struct:__anon12
-xadvance	.\include\stb_truetype.h	/^   float xoff,yoff,xadvance;$/;"	m	struct:__anon10
-xadvance	.\include\stb_truetype.h	/^   float xoff,yoff,xadvance;$/;"	m	struct:__anon12
+x1	.\include\stb_truetype.h	/^   float x1,y1,s1,t1; \/\/ bottom-right$/;"	m	struct:__anon30
+x1	.\include\stb_truetype.h	/^   unsigned short x0,y0,x1,y1; \/\/ coordinates of bbox in bitmap$/;"	m	struct:__anon29
+x1	.\include\stb_truetype.h	/^   unsigned short x0,y0,x1,y1; \/\/ coordinates of bbox in bitmap$/;"	m	struct:__anon31
+xadvance	.\include\stb_truetype.h	/^   float xoff,yoff,xadvance;$/;"	m	struct:__anon29
+xadvance	.\include\stb_truetype.h	/^   float xoff,yoff,xadvance;$/;"	m	struct:__anon31
 xmag	.\include\cgltf.h	/^		cgltf_float xmag;$/;"	m	struct:cgltf_camera_orthographic
-xoff	.\include\stb_truetype.h	/^   float xoff,yoff,xadvance;$/;"	m	struct:__anon10
-xoff	.\include\stb_truetype.h	/^   float xoff,yoff,xadvance;$/;"	m	struct:__anon12
-xoff2	.\include\stb_truetype.h	/^   float xoff2,yoff2;$/;"	m	struct:__anon12
-y	.\include\stb_rect_pack.h	/^   int x,y;$/;"	m	struct:__anon8
+xoff	.\include\stb_truetype.h	/^   float xoff,yoff,xadvance;$/;"	m	struct:__anon29
+xoff	.\include\stb_truetype.h	/^   float xoff,yoff,xadvance;$/;"	m	struct:__anon31
+xoff2	.\include\stb_truetype.h	/^   float xoff2,yoff2;$/;"	m	struct:__anon31
+y	.\include\stb_image.h	/^				int x,y,w2,h2;$/;"	m	struct:__anon12::__anon13
+y	.\include\stb_rect_pack.h	/^   int x,y;$/;"	m	struct:__anon27
 y	.\include\stb_rect_pack.h	/^   stbrp_coord    x, y;$/;"	m	struct:stbrp_rect
 y	.\include\stb_rect_pack.h	/^   stbrp_coord  x,y;$/;"	m	struct:stbrp_node
-y	.\include\stb_truetype.h	/^      stbtt_vertex_type x,y,cx,cy,cx1,cy1;$/;"	m	struct:__anon15
-y	.\include\stb_truetype.h	/^   float x, y;$/;"	m	struct:__anon23
-y	.\include\stb_truetype.h	/^   float x,y;$/;"	m	struct:__anon24
-y	.\include\stb_truetype.h	/^   int x,y,bottom_y;$/;"	m	struct:__anon25
+y	.\include\stb_truetype.h	/^      stbtt_vertex_type x,y,cx,cy,cx1,cy1;$/;"	m	struct:__anon34
+y	.\include\stb_truetype.h	/^   float x, y;$/;"	m	struct:__anon42
+y	.\include\stb_truetype.h	/^   float x,y;$/;"	m	struct:__anon43
+y	.\include\stb_truetype.h	/^   int x,y,bottom_y;$/;"	m	struct:__anon44
 y	.\include\stb_truetype.h	/^   stbrp_coord x,y;$/;"	m	struct:stbrp_rect
 y0	.\include\stb_truetype.h	/^   float x0,y0, x1,y1;$/;"	m	struct:stbtt__edge
-y0	.\include\stb_truetype.h	/^   float x0,y0,s0,t0; \/\/ top-left$/;"	m	struct:__anon11
-y0	.\include\stb_truetype.h	/^   unsigned short x0,y0,x1,y1; \/\/ coordinates of bbox in bitmap$/;"	m	struct:__anon10
-y0	.\include\stb_truetype.h	/^   unsigned short x0,y0,x1,y1; \/\/ coordinates of bbox in bitmap$/;"	m	struct:__anon12
+y0	.\include\stb_truetype.h	/^   float x0,y0,s0,t0; \/\/ top-left$/;"	m	struct:__anon30
+y0	.\include\stb_truetype.h	/^   unsigned short x0,y0,x1,y1; \/\/ coordinates of bbox in bitmap$/;"	m	struct:__anon29
+y0	.\include\stb_truetype.h	/^   unsigned short x0,y0,x1,y1; \/\/ coordinates of bbox in bitmap$/;"	m	struct:__anon31
 y1	.\include\stb_truetype.h	/^   float x0,y0, x1,y1;$/;"	m	struct:stbtt__edge
-y1	.\include\stb_truetype.h	/^   float x1,y1,s1,t1; \/\/ bottom-right$/;"	m	struct:__anon11
-y1	.\include\stb_truetype.h	/^   unsigned short x0,y0,x1,y1; \/\/ coordinates of bbox in bitmap$/;"	m	struct:__anon10
-y1	.\include\stb_truetype.h	/^   unsigned short x0,y0,x1,y1; \/\/ coordinates of bbox in bitmap$/;"	m	struct:__anon12
+y1	.\include\stb_truetype.h	/^   float x1,y1,s1,t1; \/\/ bottom-right$/;"	m	struct:__anon30
+y1	.\include\stb_truetype.h	/^   unsigned short x0,y0,x1,y1; \/\/ coordinates of bbox in bitmap$/;"	m	struct:__anon29
+y1	.\include\stb_truetype.h	/^   unsigned short x0,y0,x1,y1; \/\/ coordinates of bbox in bitmap$/;"	m	struct:__anon31
 yfov	.\include\cgltf.h	/^		cgltf_float yfov;$/;"	m	struct:cgltf_camera_perspective
 ymag	.\include\cgltf.h	/^		cgltf_float ymag;$/;"	m	struct:cgltf_camera_orthographic
-yoff	.\include\stb_truetype.h	/^   float xoff,yoff,xadvance;$/;"	m	struct:__anon10
-yoff	.\include\stb_truetype.h	/^   float xoff,yoff,xadvance;$/;"	m	struct:__anon12
-yoff2	.\include\stb_truetype.h	/^   float xoff2,yoff2;$/;"	m	struct:__anon12
+yoff	.\include\stb_truetype.h	/^   float xoff,yoff,xadvance;$/;"	m	struct:__anon29
+yoff	.\include\stb_truetype.h	/^   float xoff,yoff,xadvance;$/;"	m	struct:__anon31
+yoff2	.\include\stb_truetype.h	/^   float xoff2,yoff2;$/;"	m	struct:__anon31
+ypos	.\include\stb_image.h	/^		int ypos;    \/\/ which pre-expansion row we're on$/;"	m	struct:__anon14
+ystep	.\include\stb_image.h	/^		int ystep;   \/\/ how far through vertical expansion we are$/;"	m	struct:__anon14
+z_distance	.\include\stb_image.h	/^		stbi__zhuffman z_length, z_distance;$/;"	m	struct:__anon16
+z_expandable	.\include\stb_image.h	/^		int   z_expandable;$/;"	m	struct:__anon16
+z_length	.\include\stb_image.h	/^		stbi__zhuffman z_length, z_distance;$/;"	m	struct:__anon16
+zbuffer	.\include\stb_image.h	/^		stbi_uc *zbuffer, *zbuffer_end;$/;"	m	struct:__anon16
+zbuffer_end	.\include\stb_image.h	/^		stbi_uc *zbuffer, *zbuffer_end;$/;"	m	struct:__anon16
 zfar	.\include\cgltf.h	/^		cgltf_float zfar;$/;"	m	struct:cgltf_camera_orthographic
 zfar	.\include\cgltf.h	/^		cgltf_float zfar;$/;"	m	struct:cgltf_camera_perspective
 znear	.\include\cgltf.h	/^		cgltf_float znear;$/;"	m	struct:cgltf_camera_orthographic
 znear	.\include\cgltf.h	/^		cgltf_float znear;$/;"	m	struct:cgltf_camera_perspective
+zout	.\include\stb_image.h	/^		char *zout;$/;"	m	struct:__anon16
+zout_end	.\include\stb_image.h	/^		char *zout_end;$/;"	m	struct:__anon16
+zout_start	.\include\stb_image.h	/^		char *zout_start;$/;"	m	struct:__anon16

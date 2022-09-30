@@ -1,5 +1,4 @@
 #include <windows.h>
-#include <windowsx.h>
 
 #include "base_types.h"
 #include "platform_api.h"
@@ -103,6 +102,12 @@ Win32MainWindowCallback(HWND window, UINT msg, WPARAM wparam, LPARAM lparam) {
 			g_win32_window.dim.width = LOWORD(lparam);
 			g_win32_window.dim.height = HIWORD(lparam);
 		} break;
+		case WM_SETCURSOR: {
+			if(g_win32_state.cursor_enabled) 
+				SetCursor(g_win32_state.cursor);
+			else
+				SetCursor(0);
+		} break;
 		default: { result = DefWindowProcA(window, msg, wparam, lparam); } break;
 	}
 	return result;
@@ -110,12 +115,17 @@ Win32MainWindowCallback(HWND window, UINT msg, WPARAM wparam, LPARAM lparam) {
 //-------------------------------------------------------------------------------------------------------------------
 static void
 Win32PreProcessButton(Button* button) {
-	if(button->pressed) button->held = true;
+	if(button->pressed) {
+		button->held = true;
+		button->pressed = false;
+	}
 }
 //-------------------------------------------------------------------------------------------------------------------
 static void
 Win32ProcessButton(Button* button, bool is_down) {
-	if(is_down) button->pressed = true;
+	if(is_down) {
+		if(!button->held) button->pressed = true;
+	}
 	else {
 		button->pressed = false;
 		button->held = false;
@@ -200,21 +210,29 @@ Win32ProcessButtonInput(MSG msg, Input* input) {
 }
 //-------------------------------------------------------------------------------------------------------------------
 static void
-Win32PreProcessMouseMove(Input* input) {
-	input->axes[WIN32_AXIS_MOUSE_DEL].x = 0;
-	input->axes[WIN32_AXIS_MOUSE_DEL].y = 0;
-}
-//-------------------------------------------------------------------------------------------------------------------
-static void
-Win32ProcessMouseMove(MSG msg, Input* input) {
-	int x_pos = GET_X_LPARAM(msg.lParam);
-	int y_pos = GET_Y_LPARAM(msg.lParam);
+Win32PreProcessMouseMove(Input* input, bool warp_mouse_to_center) {
+	POINT point;
+	GetCursorPos(&point);
 	int old_x_pos = input->axes[WIN32_AXIS_MOUSE].x;
 	int old_y_pos = input->axes[WIN32_AXIS_MOUSE].y;
-	input->axes[WIN32_AXIS_MOUSE_DEL].x = x_pos - old_x_pos;
-	input->axes[WIN32_AXIS_MOUSE_DEL].y = y_pos - old_y_pos;
-	input->axes[WIN32_AXIS_MOUSE].x = x_pos;
-	input->axes[WIN32_AXIS_MOUSE].y = y_pos;
+
+	input->axes[WIN32_AXIS_MOUSE].x = point.x;
+	input->axes[WIN32_AXIS_MOUSE].y = point.y;
+
+	if(!warp_mouse_to_center) {
+		input->axes[WIN32_AXIS_MOUSE_DEL].x = point.x - old_x_pos;
+		input->axes[WIN32_AXIS_MOUSE_DEL].y = point.y - old_y_pos;
+	}
+	else {
+		RECT rect = {};
+		GetWindowRect(g_win32_window.handle, &rect);
+		int center_x = rect.left+rect.right/2;
+		int center_y = rect.top+rect.bottom/2;
+		input->axes[WIN32_AXIS_MOUSE_DEL].x = center_x - point.x;
+		input->axes[WIN32_AXIS_MOUSE_DEL].y = center_y - point.y;
+		SetCursorPos(center_x, center_y);
+	}
+	
 }
 //-------------------------------------------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------------------------------------
@@ -229,7 +247,9 @@ WinMain(HINSTANCE instance, HINSTANCE prev_instance, LPSTR cmdline, int show_cod
 	window_class.hInstance = instance;
 	window_class.lpszMenuName = "Game_menu";
 	window_class.lpszClassName = "Game_class";
-	window_class.hCursor = LoadCursor(0, IDC_ARROW);
+
+	g_win32_state.cursor = LoadCursor(0, IDC_CROSS);
+	window_class.hCursor = g_win32_state.cursor;
 
 	Assert(RegisterClassA(&window_class));
 
@@ -294,8 +314,35 @@ WinMain(HINSTANCE instance, HINSTANCE prev_instance, LPSTR cmdline, int show_cod
 
 	//--------------------------------------------------------------------------------//
 	while(g_running) {
+
+		if(game_layer.debug_cursor_request) {
+			g_win32_state.cursor_warp_enabled = false;
+
+			if(!g_win32_state.cursor_enabled) {
+				SetCursor(g_win32_state.cursor);
+				g_win32_state.cursor_enabled = true;
+			}
+			if(!g_win32_state.cursor_clip_enabled) {
+				RECT rect;
+				GetWindowRect(g_win32_window.handle, &rect);
+				ClipCursor(&rect);
+				g_win32_state.cursor_clip_enabled = true;
+			}
+		}
+		else {
+			g_win32_state.cursor_warp_enabled = true;
+			if(g_win32_state.cursor_enabled) {
+				SetCursor(0);
+				g_win32_state.cursor_enabled = false;
+			}
+			if(g_win32_state.cursor_clip_enabled) {
+				ClipCursor(nullptr);
+				g_win32_state.cursor_clip_enabled = false;
+			}
+		}
+
 		for(u8 i=0; i<WIN32_BUTTON_TOTAL; i++) Win32PreProcessButton(&input.buttons[i]);
-		Win32PreProcessMouseMove(&input);
+		Win32PreProcessMouseMove(&input, g_win32_state.cursor_warp_enabled);
 
 		MSG msg = {};
 		while(PeekMessageA(&msg, 0, 0, 0, PM_REMOVE)) {
@@ -309,21 +356,17 @@ WinMain(HINSTANCE instance, HINSTANCE prev_instance, LPSTR cmdline, int show_cod
 				case WM_RBUTTONDOWN: {
 					Win32ProcessButtonInput(msg, &input);
 				} break;
-				case WM_MOUSEMOVE: {
-					Win32ProcessMouseMove(msg, &input);
-				} break;
-
 				default: {
 					TranslateMessage(&msg);
 					DispatchMessage(&msg);
 				} break;
 			}
 		}
+		
 		g_game_functions.game_loop(&game_layer, &g_win32_window, &input);
 
 		if(Win32HasDLLChanged(&game_code)) Win32ReloadDLL(&g_win32_state, &game_code); 
-
-		if(game_layer.quit_requested) g_running = false;
+		if(game_layer.quit_request) g_running = false;
 	}
 	return 1;
 }

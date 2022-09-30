@@ -38,6 +38,7 @@ CompareMem	.\memory_management.h	/^static bool CompareMem(void* left, void* righ
 CompileDebugTextShader	.\font_handling.cpp	/^CompileDebugTextShader(DebugText* debug_text, Renderer* renderer) {$/;"	f	file:
 CompileMeshShader	.\mesh_renderer.cpp	/^CompileMeshShader(MeshRenderer* mesh_renderer, Renderer* renderer) {$/;"	f	file:
 CompileQuadShader	.\quad_renderer.cpp	/^CompileQuadShader(QuadRenderer* quad_renderer, Renderer* renderer) {$/;"	f	file:
+CompileShader	.\renderer.cpp	/^CompileShader(char* shader_code, u32 shader_length, char* entry, void** shader, ID3DBlob** blob,$/;"	f	file:
 CompileTexturedQuadShader	.\quad_renderer.cpp	/^CompileTexturedQuadShader(QuadRenderer* quad_renderer, Renderer* renderer) {$/;"	f	file:
 ConstantsBuffer	.\renderer.h	/^struct ConstantsBuffer {$/;"	s
 ConstantsBufferDesc	.\renderer.h	/^struct ConstantsBufferDesc {$/;"	s
@@ -72,9 +73,9 @@ FirstPersonControl	.\simulation.cpp	/^FirstPersonControl(Vec3* position, Quat* r
 FontInfo	.\font_handling.h	/^struct FontInfo {$/;"	s
 FreeMemory	.\memory_management.h	/^static void FreeMemory(MemoryArena* memory, u32 size) {$/;"	f
 GAME_INIT	.\game.cpp	/^extern "C" GAME_INIT(game_init) {$/;"	f
-GAME_INIT	.\game_layer.h	7;"	d
+GAME_INIT	.\game_layer.h	12;"	d
 GAME_LOOP	.\game.cpp	/^extern "C" GAME_LOOP(game_loop) {$/;"	f
-GAME_LOOP	.\game_layer.h	10;"	d
+GAME_LOOP	.\game_layer.h	15;"	d
 GREEN	.\math.h	121;"	d
 GREY	.\math.h	109;"	d
 Game	.\game.h	/^struct Game {$/;"	s
@@ -85,7 +86,9 @@ GameEnd	.\game.cpp	/^GameEnd(Game* game) {$/;"	f	file:
 GameInit	.\game_layer.h	/^typedef GAME_INIT(GameInit);$/;"	t
 GameLayer	.\game_layer.h	/^struct GameLayer {$/;"	s
 GameLoop	.\game_layer.h	/^typedef GAME_LOOP(GameLoop);$/;"	t
+GenerateFlatShadedNormals	.\shapes.cpp	/^GenerateFlatShadedNormals(Vec3* vertices, u32 count, Vec3* out_normals ) {$/;"	f	file:
 GenerateGlyphsTopLeft	.\font_handling.cpp	/^static void GenerateGlyphsTopLeft(char* text, int len, Vec3 color, GlyphQuad* gq, float* x, float* y, DebugText* dt) {$/;"	f	file:
+GenerateTetraInfo	.\tetra.cpp	/^GenerateTetraInfo(Tetra* tetra) {$/;"	f	file:
 GenerateTetrahedron	.\shapes.cpp	/^GenerateTetrahedron(Vec3* out_vertices) {$/;"	f	file:
 GetAllTextureFormats	.\asset_loading.cpp	/^GetAllTextureFormats(GameAssets* ga, u32* count) {$/;"	f	file:
 GetAssetBlob	.\asset_loading.cpp	/^GetAssetBlob(ASSET_BLOB blob, GameAssets* assets) {$/;"	f	file:
@@ -110,10 +113,11 @@ InitGameAssets	.\asset_loading.cpp	/^InitGameAssets(PlatformAPI* platform_api, M
 InitMeshRenderer	.\mesh_renderer.cpp	/^InitMeshRenderer(Renderer* renderer, MemoryArena* arena) {$/;"	f
 InitQuadRenderer	.\quad_renderer.cpp	/^InitQuadRenderer(Renderer* renderer, MemoryArena* arena) {$/;"	f	file:
 InitRenderer	.\renderer.cpp	/^static Renderer* InitRenderer(Win32Window* window, GameAssets* assets, MemoryArena* arena) {$/;"	f	file:
-InitTetra	.\tetra.cpp	/^InitTetra(MemoryArena* arena, Renderer* renderer) {$/;"	f	file:
+InitTetra	.\tetra.cpp	/^InitTetra(Renderer* renderer, MemoryArena* arena) {$/;"	f	file:
 Input	.\platform_api.h	/^struct Input {$/;"	s
 Kilobytes	.\base_types.h	31;"	d
 LIME	.\math.h	120;"	d
+LightInfo	.\mesh_renderer.cpp	/^struct LightInfo {$/;"	s	file:
 Line	.\shapes.cpp	/^struct Line {$/;"	s	file:
 LoadAllTextureAssets	.\asset_info.cpp	/^LoadAllTextureAssets(GameAssets* assets, AssetInfo* info) {$/;"	f	file:
 LoadMeshDataFromAssets	.\asset_loading.cpp	/^LoadMeshDataFromAssets(char* name, GameAssets* ga, MemoryArena* arena) {$/;"	f
@@ -136,6 +140,7 @@ MAROON	.\math.h	117;"	d
 MAX_DEBUG_TEXT_GLYPHS	.\font_handling.h	1;"	d
 MAX_MESH_PIPELINES	.\mesh_renderer.cpp	1;"	d	file:
 MAX_QUADS	.\quad_renderer.cpp	1;"	d	file:
+MAX_SHADER_LENGTH	.\mesh_renderer.cpp	2;"	d	file:
 MAX_TETRA	.\tetra.cpp	1;"	d	file:
 MAX_TEXTURED_QUADS	.\quad_renderer.cpp	2;"	d	file:
 MAX_TEXTURES	.\asset_loading.cpp	4;"	d	file:
@@ -160,7 +165,8 @@ MeshFormat	.\file_formats.h	/^struct MeshFormat {$/;"	s
 MeshInfo	.\mesh_renderer.cpp	/^struct MeshInfo {$/;"	s	file:
 MeshPipeline	.\mesh_renderer.cpp	/^struct MeshPipeline {$/;"	s	file:
 MeshRenderer	.\mesh_renderer.cpp	/^struct MeshRenderer {$/;"	s	file:
-MeshRendererFrame	.\mesh_renderer.cpp	/^MeshRendererFrame(MeshRenderer* mesh_renderer, Camera* camera, Renderer* renderer) {$/;"	f	file:
+MeshRendererFrame	.\mesh_renderer.cpp	/^MeshRendererFrame(MeshRenderer* mesh_renderer, Camera* camera, LightInfo* light, Renderer* renderer) {$/;"	f	file:
+MeshShaderCode	.\mesh_renderer.cpp	/^char MeshShaderCode[] = R"FOO($/;"	v
 MeshesBlob	.\file_formats.h	/^struct MeshesBlob {$/;"	s
 Mod	.\math.h	4;"	d
 OLIVE	.\math.h	123;"	d
@@ -202,6 +208,7 @@ PushConstantsData	.\renderer.cpp	/^PushConstantsData(void* data, ConstantsBuffer
 PushGlyph	.\font_handling.cpp	/^static void PushGlyph(GlyphQuad gq, DebugText* dt) {$/;"	f	file:
 PushIndexBufferData	.\renderer.h	/^struct PushIndexBufferData {$/;"	s
 PushIndexData	.\renderer.cpp	/^PushIndexData(PushIndexBufferData* data, IndexBuffer* ib, ID3D11DeviceContext* context) {$/;"	f	file:
+PushMeshPipeline	.\mesh_renderer.cpp	/^PushMeshPipeline(MeshPipeline pipeline, MeshRenderer* mesh_renderer) {$/;"	f	file:
 PushRenderBufferData	.\renderer.h	/^struct PushRenderBufferData {$/;"	s
 PushRenderLine	.\quad_renderer.cpp	/^PushRenderLine(Line* line, Vec4 color, float thickness, Camera* camera, QuadRenderer* quad_renderer) {$/;"	f	file:
 PushRenderQuad	.\quad_renderer.cpp	/^PushRenderQuad(Quad* quad, Vec4 color, QuadRenderer* quad_renderer) {$/;"	f	file:
@@ -275,7 +282,7 @@ RenderPipeline	.\renderer.h	/^struct RenderPipeline {$/;"	s
 RenderQuad	.\quad_renderer.cpp	/^struct RenderQuad {$/;"	s	file:
 RenderState	.\renderer.h	/^struct RenderState {$/;"	s
 RenderStateDefaults	.\renderer.h	/^RenderStateDefaults() {$/;"	f
-RenderTetra	.\tetra.cpp	/^RenderTetra(MeshRenderer* mesh_renderer) {$/;"	f	file:
+RenderTetra	.\tetra.cpp	/^RenderTetra(Tetra* tetra, MeshRenderer* mesh_renderer) {$/;"	f	file:
 Renderer	.\renderer.h	/^struct Renderer {$/;"	s
 RendererBeginFrame	.\renderer.cpp	/^static void RendererBeginFrame(Renderer* renderer, WindowDimensions wd) {$/;"	f	file:
 RendererEndFrame	.\renderer.cpp	/^static void RendererEndFrame(Renderer* renderer) {$/;"	f	file:
@@ -415,7 +422,7 @@ STB_IMAGE_IMPLEMENTATION	.\game.cpp	14;"	d	file:
 STB_SPRINTF_DECORATE	.\include\stb_sprintf.h	205;"	d
 STB_SPRINTF_H_INCLUDE	.\include\stb_sprintf.h	30;"	d
 STB_SPRINTF_IMPLEMENTATION	.\game.cpp	13;"	d	file:
-STB_SPRINTF_IMPLEMENTATION	.\win32.cpp	11;"	d	file:
+STB_SPRINTF_IMPLEMENTATION	.\win32.cpp	10;"	d	file:
 STB_SPRINTF_MIN	.\include\stb_sprintf.h	200;"	d
 STB_SPRINTF_MSVC_MODE	.\include\stb_sprintf.h	242;"	d
 STRING_LENGTH	.\file_formats.h	/^enum STRING_LENGTH {$/;"	g
@@ -427,6 +434,7 @@ STRING_LENGTH_VERTEX_BUFFER	.\file_formats.h	/^	STRING_LENGTH_VERTEX_BUFFER = 12
 STRUCTURED_BINDING_SLOT	.\renderer.h	/^enum STRUCTURED_BINDING_SLOT {$/;"	g
 STRUCTURED_BINDING_SLOT_FRAME	.\renderer.h	/^	STRUCTURED_BINDING_SLOT_FRAME$/;"	e	enum:STRUCTURED_BINDING_SLOT
 ShaderDesc	.\renderer.h	/^struct ShaderDesc {$/;"	s
+SpawnTetra	.\tetra.cpp	/^SpawnTetra(Tetra* tetra, Transform transform, Vec4 color) {$/;"	f	file:
 StringCompare	.\memory_management.h	/^bool StringCompare(char* left, char* right) {$/;"	f
 StringLength	.\memory_management.h	/^u32 StringLength(char* string) {$/;"	f
 StructuredBuffer	.\renderer.h	/^struct StructuredBuffer {$/;"	s
@@ -455,6 +463,7 @@ U32Max	.\base_types.h	24;"	d
 U32Min	.\base_types.h	23;"	d
 U64Max	.\base_types.h	25;"	d
 U8Max	.\base_types.h	19;"	d
+UpdateTetra	.\tetra.cpp	/^UpdateTetra(Tetra* tetra) {$/;"	f	file:
 UploadAllTextureAssets	.\asset_info.cpp	/^UploadAllTextureAssets(AssetInfo* info, Renderer* renderer) {$/;"	f	file:
 UploadConstantsBuffer	.\renderer.cpp	/^UploadConstantsBuffer(ConstantsBufferDesc desc, ID3D11Device* device) {$/;"	f	file:
 UploadMesh	.\renderer.cpp	/^UploadMesh(MeshData* mesh_data, MeshDesc* mesh_desc, Renderer* renderer) {$/;"	f	file:
@@ -608,10 +617,9 @@ Win32LoadDLL	.\win32.cpp	/^Win32LoadDLL(Win32State* state, Win32DLL* code) {$/;"
 Win32MainWindowCallback	.\win32.cpp	/^Win32MainWindowCallback(HWND window, UINT msg, WPARAM wparam, LPARAM lparam) {$/;"	f	file:
 Win32MakeTempDLLAbsFilePath	.\win32.cpp	/^Win32MakeTempDLLAbsFilePath(Win32State* state, Win32DLL* code, char* dst) {$/;"	f	file:
 Win32PreProcessButton	.\win32.cpp	/^Win32PreProcessButton(Button* button) {$/;"	f	file:
-Win32PreProcessMouseMove	.\win32.cpp	/^Win32PreProcessMouseMove(Input* input) {$/;"	f	file:
+Win32PreProcessMouseMove	.\win32.cpp	/^Win32PreProcessMouseMove(Input* input, bool warp_mouse_to_center) {$/;"	f	file:
 Win32ProcessButton	.\win32.cpp	/^Win32ProcessButton(Button* button, bool is_down) {$/;"	f	file:
 Win32ProcessButtonInput	.\win32.cpp	/^Win32ProcessButtonInput(MSG msg, Input* input) {$/;"	f	file:
-Win32ProcessMouseMove	.\win32.cpp	/^Win32ProcessMouseMove(MSG msg, Input* input) {$/;"	f	file:
 Win32ReloadDLL	.\win32.cpp	/^Win32ReloadDLL(Win32State* state, Win32DLL* code) {$/;"	f	file:
 Win32State	.\win32.h	/^struct Win32State {$/;"	s
 Win32UnloadDLL	.\win32.cpp	/^Win32UnloadDLL(Win32DLL* code) {$/;"	f	file:
@@ -626,6 +634,7 @@ ZeroStruct	.\memory_management.h	1;"	d
 absfilepath	.\win32.h	/^	char* absfilepath;$/;"	m	struct:Win32DLL
 all_a	.\include\stb_image.h	/^			unsigned int mr,mg,mb,ma, all_a;$/;"	m	struct:__anon16
 allocate_memory	.\platform_api.h	/^	PlatformAllocateMemory* allocate_memory;$/;"	m	struct:PlatformAPI
+ambience	.\mesh_renderer.cpp	/^	float ambience;$/;"	m	struct:LightInfo	file:
 app14_color_transform	.\include\stb_image.h	/^			int            app14_color_transform; \/\/ Adobe APP14 tag$/;"	m	struct:__anon8
 ascent	.\font_handling.h	/^	int ascent, descent, line_gap, baseline;$/;"	m	struct:FontInfo
 aspect_ratio	.\camera.cpp	/^	float aspect_ratio;$/;"	m	struct:Camera	file:
@@ -677,9 +686,9 @@ coeff	.\include\stb_image.h	/^				short   *coeff;   \/\/ progressive only$/;"	m	
 coeff_h	.\include\stb_image.h	/^				int      coeff_w, coeff_h; \/\/ number of 8x8 coefficient blocks$/;"	m	struct:__anon8::__anon9
 coeff_w	.\include\stb_image.h	/^				int      coeff_w, coeff_h; \/\/ number of 8x8 coefficient blocks$/;"	m	struct:__anon8::__anon9
 color	.\font_handling.h	/^	Vec3 color;$/;"	m	struct:GlyphQuad
-color	.\mesh_renderer.cpp	/^	Vec3 color;$/;"	m	struct:MeshInfo	file:
+color	.\mesh_renderer.cpp	/^	Vec4 color;$/;"	m	struct:MeshInfo	file:
 color	.\quad_renderer.cpp	/^	Vec4 color;$/;"	m	struct:RenderQuad	file:
-color	.\tetra.cpp	/^	Vec3 color[10];$/;"	m	struct:Tetra	file:
+color	.\tetra.cpp	/^	Vec4 color[MAX_TETRA];$/;"	m	struct:Tetra	file:
 color_table	.\include\stb_image.h	/^			stbi_uc *color_table;$/;"	m	struct:__anon19
 command	.\renderer.h	/^	RENDER_COMMAND command;$/;"	m	struct:RenderState
 constants	.\renderer.h	/^		ConstantsBuffer constants;$/;"	m	union:RenderBuffer::__anon33
@@ -692,8 +701,13 @@ count	.\renderer.h	/^	u32 count;$/;"	m	struct:PushStructuredBufferData
 count	.\renderer.h	/^	u32 count;$/;"	m	struct:StructuredBuffer
 count	.\renderer.h	/^	u32 count;$/;"	m	struct:StructuredBufferDesc
 count	.\renderer.h	/^	u8 count;$/;"	m	struct:RenderBufferGroup
+count	.\tetra.cpp	/^	u32 count;$/;"	m	struct:Tetra	file:
 cur_x	.\include\stb_image.h	/^			int cur_x, cur_y;$/;"	m	struct:__anon19
 cur_y	.\include\stb_image.h	/^			int cur_x, cur_y;$/;"	m	struct:__anon19
+cursor	.\win32.h	/^	HCURSOR cursor;$/;"	m	struct:Win32State
+cursor_clip_enabled	.\win32.h	/^	bool cursor_clip_enabled;$/;"	m	struct:Win32State
+cursor_enabled	.\win32.h	/^	bool cursor_enabled;$/;"	m	struct:Win32State
+cursor_warp_enabled	.\win32.h	/^	bool cursor_warp_enabled;$/;"	m	struct:Win32State
 data	.\asset_formats.h	/^	void* data;$/;"	m	struct:VertexBufferData
 data	.\asset_info.h	/^	TextureData* data;$/;"	m	struct:TextureAssetInfo
 data	.\asset_loading.cpp	/^	u8* data;$/;"	m	struct:GameAssets	file:
@@ -749,6 +763,7 @@ dct_wsub	.\include\stb_image.h	2526;"	d
 dct_wsub	.\include\stb_image.h	2664;"	d
 dct_wsub	.\include\stb_image.h	2712;"	d
 dct_wsub	.\include\stb_image.h	2874;"	d
+debug_cursor_request	.\game_layer.h	/^	bool debug_cursor_request;$/;"	m	struct:GameLayer
 debug_text	.\game.h	/^	DebugText* debug_text;$/;"	m	struct:Game
 default_window_handle	.\win32.h	/^	HWND default_window_handle;$/;"	m	struct:Win32State
 delay	.\include\stb_image.h	/^			int delay;$/;"	m	struct:__anon19
@@ -853,6 +868,7 @@ indices_count	.\file_formats.h	/^	u32 indices_count;$/;"	m	struct:MeshFormat
 indices_count	.\renderer.h	/^			u32 indices_count;$/;"	m	struct:DrawCall::__anon35::__anon37
 indices_count	.\renderer.h	/^	u32 indices_count;$/;"	m	struct:PushIndexBufferData
 info	.\font_handling.h	/^	FontInfo info;$/;"	m	struct:DebugText
+info	.\tetra.cpp	/^	MeshInfo info[MAX_TETRA];$/;"	m	struct:Tetra	file:
 instance_count	.\mesh_renderer.cpp	/^	u32 instance_count;$/;"	m	struct:MeshPipeline	file:
 instance_count	.\renderer.h	/^			u32 instance_count;$/;"	m	struct:DrawCall::__anon35::__anon38
 instance_data	.\mesh_renderer.cpp	/^	void* instance_data;$/;"	m	struct:MeshPipeline	file:
@@ -930,6 +946,7 @@ pixels	.\asset_formats.h	/^	void* pixels;$/;"	m	struct:TextureData
 platform_api	.\game_layer.h	/^	PlatformAPI* platform_api;$/;"	m	struct:GameLayer
 position	.\camera.cpp	/^	Vec3 position;$/;"	m	struct:Camera	file:
 position	.\math.h	/^	Vec3 position;$/;"	m	struct:Transform
+position	.\mesh_renderer.cpp	/^	Vec3 position;$/;"	m	struct:LightInfo	file:
 positions	.\quad_renderer.cpp	/^	Vec3 positions[MAX_TEXTURED_QUADS*4*3];$/;"	m	struct:QuadRenderer	file:
 prbd	.\renderer.h	/^	PushRenderBufferData* prbd;$/;"	m	struct:RenderPipeline
 prbd_count	.\renderer.h	/^	u8 vrbd_count, prbd_count;$/;"	m	struct:RenderPipeline
@@ -945,7 +962,7 @@ quad_ps	.\quad_renderer.cpp	/^	PixelShader* quad_ps;$/;"	m	struct:QuadRenderer	f
 quad_renderer	.\game.h	/^	QuadRenderer* quad_renderer;$/;"	m	struct:Game
 quad_vs	.\quad_renderer.cpp	/^	VertexShader* quad_vs;$/;"	m	struct:QuadRenderer	file:
 quads	.\quad_renderer.cpp	/^	RenderQuad quads[MAX_QUADS]; \/\/ batches to issue one draw call$/;"	m	struct:QuadRenderer	file:
-quit_requested	.\game_layer.h	/^	bool quit_requested;$/;"	m	struct:GameLayer
+quit_request	.\game_layer.h	/^	bool quit_request;$/;"	m	struct:GameLayer
 ratio	.\include\stb_image.h	/^			int flags, bgindex, ratio, transparent, eflags;$/;"	m	struct:__anon19
 raw_coeff	.\include\stb_image.h	/^				void *raw_data, *raw_coeff;$/;"	m	struct:__anon8::__anon9
 raw_data	.\include\stb_image.h	/^				void *raw_data, *raw_coeff;$/;"	m	struct:__anon8::__anon9
@@ -985,6 +1002,7 @@ shader	.\renderer.h	/^	ID3D11PixelShader* shader;$/;"	m	struct:PixelShader
 shader	.\renderer.h	/^	ID3D11VertexShader* shader;$/;"	m	struct:VertexShader
 shader	.\renderer.h	/^	ShaderDesc shader;$/;"	m	struct:PixelShaderDesc
 shader	.\renderer.h	/^	ShaderDesc shader;$/;"	m	struct:VertexShaderDesc
+shader_code	.\mesh_renderer.cpp	/^	char shader_code[MAX_SHADER_LENGTH];$/;"	m	struct:MeshRenderer	file:
 size	.\include\stb_image.h	/^			stbi_uc  size[257];$/;"	m	struct:__anon7
 size	.\include\stb_image.h	/^			stbi_uc size,type,channel;$/;"	m	struct:__anon17
 size	.\include\stb_image.h	/^		stbi_uc  size[STBI__ZNSYMS];$/;"	m	struct:__anon11
@@ -1368,6 +1386,7 @@ succ_low	.\include\stb_image.h	/^			int            succ_low;$/;"	m	struct:__anon
 suffix	.\include\stb_image.h	/^			stbi_uc suffix;$/;"	m	struct:__anon18
 swapchain	.\renderer.h	/^	IDXGISwapChain1* swapchain;$/;"	m	struct:Renderer
 temp	.\include\stb_sprintf.h	/^   short temp; \/\/ force next field to be 2-byte aligned$/;"	m	struct:__anon20
+tetra	.\game.h	/^	Tetra* tetra;$/;"	m	struct:Game
 texcoords	.\quad_renderer.cpp	/^	Vec2 texcoords[MAX_TEXTURED_QUADS*4*2];$/;"	m	struct:QuadRenderer	file:
 texture	.\renderer.h	/^		PushTextureBufferData texture;$/;"	m	union:PushRenderBufferData::__anon34
 texture	.\renderer.h	/^		TextureBuffer texture;$/;"	m	union:RenderBuffer::__anon33
@@ -1392,7 +1411,7 @@ topology	.\renderer.h	/^	D3D11_PRIMITIVE_TOPOLOGY topology;$/;"	m	struct:RenderS
 tq	.\include\stb_image.h	/^				int tq;$/;"	m	struct:__anon8::__anon9
 tr	.\shapes.cpp	/^	Vec3 tr;$/;"	m	struct:Quad	file:
 trans_sens	.\simulation.h	/^	float trans_sens;$/;"	m	struct:FPControlInfo
-transform	.\tetra.cpp	/^	Transform transform[10];$/;"	m	struct:Tetra	file:
+transform	.\tetra.cpp	/^	Transform transform[MAX_TETRA];$/;"	m	struct:Tetra	file:
 transient	.\game.h	/^	MemoryArena transient;$/;"	m	struct:Game
 transient	.\renderer.h	/^	MemoryArena transient;$/;"	m	struct:Renderer
 transient_dll_counter	.\win32.h	/^	u32 transient_dll_counter;$/;"	m	struct:Win32DLL

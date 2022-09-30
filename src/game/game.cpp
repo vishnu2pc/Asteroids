@@ -35,6 +35,7 @@
 #include "game.h"
 
 extern "C" GAME_INIT(game_init) {
+
 	PlatformAPI* platform_api = game_layer->platform_api;
 	PlatformMemoryBlock* memblock = platform_api->allocate_memory(sizeof(Game) + Megabytes(30));
 
@@ -81,7 +82,6 @@ GameBegin(Game* game, Win32Window* window) {
 	//BeginRendererShapes(game->renderer_shapes);
 	BeginDebugText(game->debug_text, window->dim);
 	RendererBeginFrame(game->renderer, window->dim);
-
 }
 
 static void
@@ -98,13 +98,17 @@ extern "C" GAME_LOOP(game_loop) {
 	Game* game = game_layer->game;
 	GameBegin(game, window);
 
-	if(input->buttons[WIN32_BUTTON_A].pressed) {
+	if(input->buttons[WIN32_BUTTON_F2].pressed) {
 		game->renderer->state_overrides.rs ? game->renderer->state_overrides.rs = RASTERIZER_STATE_NONE : 
 			game->renderer->state_overrides.rs = RASTERIZER_STATE_WIREFRAME;
 	}
-	
+	if(input->buttons[WIN32_BUTTON_F1].pressed) {
+		game_layer->debug_cursor_request = !game_layer->debug_cursor_request;
+	}
+
 	FPControlInfo info = DefaultFPControlInfo();
-	info.trans_sens = 0.1f;
+	ingo.base_sens = 0.5f; 
+	info.trans_sens = 10.0f;
 	info.rot_sens = 0.6f;
 	FirstPersonCamera(game->camera, &info, input);
 
@@ -134,7 +138,6 @@ extern "C" GAME_LOOP(game_loop) {
 	if(input->buttons[WIN32_BUTTON_A].held)
 		DrawDebugText("Held", WHITE, QUADRANT_TOP_RIGHT, game->debug_text, &game->transient);
 
-#if 0
 	int x, y, xdel, ydel;
 	x = input->axes[WIN32_AXIS_MOUSE].x;
 	y = input->axes[WIN32_AXIS_MOUSE].y;
@@ -156,15 +159,20 @@ extern "C" GAME_LOOP(game_loop) {
 	DrawDebugText(c, WHITE, QUADRANT_TOP_RIGHT, game->debug_text, &game->transient);
 	DrawDebugText(d, WHITE, QUADRANT_TOP_RIGHT, game->debug_text, &game->transient);
 	DrawDebugText("working", RED, QUADRANT_BOTTOM_LEFT, game->debug_text, &game->transient);
-#endif
 	//DrawDebugTransform(TransformI(), game->renderer_shapes);
-	
-	RenderTetra(game->tetra, game->mesh_renderer);
+	//
 
-	MeshRendererFrame(game->mesh_renderer, game->camera, game->renderer);
+	LightInfo light = {};
+	light.position = V3(0.2f, 3.0f, -4.0f);
+	light.ambience = 0.2f;
+
+	RenderTetra(game->tetra, game->mesh_renderer);
+	UpdateTetra(game->tetra);
+
+	MeshRendererFrame(game->mesh_renderer, game->camera, &light, game->renderer);
 	QuadRendererFrame(game->quad_renderer, game->camera, game->renderer);
 	SubmitDebugTextDrawCall(game->debug_text, game->renderer);
-	
+
 	GameEnd(game);
 }
 

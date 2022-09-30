@@ -21,10 +21,7 @@ IF NOT EXIST %build_path% MKDIR %build_path%
 PUSHD %build_path%
 
 if "%ARG1%"=="tools" GOTO TOOLS
-ECHO.
 ECHO -------------------------------------------------------------------------------------------------------------
-ECHO -------------------------------------------------------------------------------------------------------------
-ECHO.
 
 DEL *.pdb > NUL 2> NUL
 ECHO WAITING FOR PDB > lock.tmp
@@ -34,29 +31,35 @@ ECHO Compiling game
 REM GAME
 cl %CompilerFlags% /MTd %game_macro_defs% %game_path%game.cpp /LD /link %LinkerFlags% %game_libs% %game_exports%
 DEL lock.tmp
-
-
 ECHO.
+
+
 ECHO -------------------------------------------------------------------------------------------------------------
-ECHO.
 ECHO Compiling win32 api
 REM WIN32_API
 cl %CompilerFlags% %win32_macro_defs% %game_path%win32.cpp /link /SUBSYSTEM:windows %LinkerFlags% %win32_entry_libs%
+ECHO.
 GOTO END
 
 :TOOLS
-ECHO. 
 ECHO ------------------------------------------------------------------------------------------------------------
-ECHO. 
 ECHO Compiling Asset Packer
 REM Asset Packer
 cl %CompilerFlags% /wd4996 /Fe:asset_packer %tools_path%asset_packer\main.cpp /link %LinkerFlags%
+ECHO.
 
 :END
 popd
-ECHO.
 ECHO -------------------------------------------------------------------------------------------------------------- 
-ECHO -------------------------------------------------------------------------------------------------------------- 
-ECHO.
 
+ECHO Generating CTags
+PUSHD %tools_path%
+ctags -R
+POPD
+
+PUSHD %game_path%
+ctags -R
+POPD
+ECHO -------------------------------------------------------------------------------------------------------------- 
+ECHO.
 

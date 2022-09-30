@@ -10,6 +10,21 @@ struct Line {
 	Vec3 end;
 };
 
+// input assumed to be triangle list
+static void 
+GenerateFlatShadedNormals(Vec3* vertices, u32 count, Vec3* out_normals ) {
+	Assert(count % 3 == 0);
+	for(u32 i=0; i<count; i+=3) {
+		Vec3 a = vertices[i];
+		Vec3 b = vertices[i+1];
+		Vec3 c = vertices[i+2];
+		Vec3 cross = V3Norm(V3Cross(V3Sub(b, a), V3Sub(c, a)));
+		out_normals[i] = cross;
+		out_normals[i+1] = cross;
+		out_normals[i+2] = cross;
+	}
+};
+
 static Quad
 MakeQuadFromLine(Line* line, float thickness, Vec3 normal) {
 	Quad result = {};

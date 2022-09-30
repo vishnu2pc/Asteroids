@@ -1,1 +1,3 @@
-start gvim ../src/game/win32_entry.cpp
+PUSHD ..\src\game
+start gvim win32.cpp
+POPD
