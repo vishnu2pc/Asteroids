@@ -35,10 +35,14 @@ typedef uint64_t u64;
 
 #define ArrayCount(Array) (sizeof(Array) / sizeof((Array)[0]))
 
-#if DEBUG_ASSERT
+#if INTERNAL
 #define Assert(Expression) if(!(Expression)) {*(volatile int *)0 = 0;}
 #else
 #define Assert(Expression)
 #endif
+
+#define Max(a, b) (((a) > (b)) ? (a) : (b))
+#define Min(a, b) (((a) < (b)) ? (a) : (b))
+
 
 

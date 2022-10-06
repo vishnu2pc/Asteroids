@@ -4,17 +4,20 @@ enum STRING_LENGTH {
 	STRING_LENGTH_MESH = 12,
 	STRING_LENGTH_TEXTURE = 12,
 	STRING_LENGTH_TEXTURE_TYPE = 12,
+	STRING_LENGTH_FONT = 12,
 };
 
 enum ASSET_BLOB {
 	ASSET_BLOB_MESHES,
 	ASSET_BLOB_TEXTURES,
+	ASSET_BLOB_FONTS,
 	ASSET_BLOB_TOTAL
 };
 
 char* blob_names[ASSET_BLOB_TOTAL] = {
 	"meshes",
-	"textures"
+	"textures",
+	"fonts"
 };
 
 char* vertex_buffer_names[VERTEX_BUFFER_TOTAL] = {
@@ -53,6 +56,11 @@ struct TexturesBlob {
 	u32 offset_to_texture_formats;
 };
 
+struct FontsBlob {
+	u32 fonts_count;
+	u32 offset_to_font_formats;
+};
+
 struct VertexBufferFormat {
 	char type[STRING_LENGTH_VERTEX_BUFFER];
 	u32 offset_to_data;
@@ -76,6 +84,10 @@ struct TextureFormat {
 	u32 offset_to_data;
 };
 
+struct FontFormat {
+	char name[STRING_LENGTH_FONT];
+	u32 offset_to_data;
+};
 
 
 

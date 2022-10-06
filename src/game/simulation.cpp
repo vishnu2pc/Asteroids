@@ -1,50 +1,70 @@
-static void 
-FirstPersonControl(Vec3* position, Quat* rotation, bool camera, FPControlInfo* ci, Input* input) {
-	float base_sens = ci->base_sens;
-	float trans_sens = ci->trans_sens;
-	float rot_sens = ci->rot_sens;
+enum ENTITIY_PROPERTY {
+	ENTITY_PROPERTY_HasMesh      = 1,
+	ENTITY_PROPERTY_Rotate       = 1<<1,
+	ENTITY_PROPERTY_TOTAL
+};
 
-	float tdel = base_sens * trans_sens * 0.00001f;
-	float rdel = base_sens * rot_sens * 0.005f;
+struct Entity {
+	u64 properties;
+	Transform transform;
+	MeshPipeline mesh_pipeline;
+};
 
-	bool f = input->buttons[WIN32_BUTTON_W].held;
-	bool b = input->buttons[WIN32_BUTTON_S].held;
-	bool l = input->buttons[WIN32_BUTTON_A].held;
-	bool r = input->buttons[WIN32_BUTTON_D].held;
-	bool u = input->buttons[WIN32_BUTTON_Q].held;
-	bool d = input->buttons[WIN32_BUTTON_E].held;
+static Mesh
+MakeTetrahedronMesh(Renderer* renderer) {
+	Mesh result = {};
 
-	float y = input->axes[WIN32_AXIS_MOUSE_DEL].x * !ci->block_yaw;
-	float p = input->axes[WIN32_AXIS_MOUSE_DEL].y * !ci->block_pitch;
+	Vec3* vertices = PushArray(renderer->frame_arena, Vec3, 12); 
+	Vec3* normals = PushArray(renderer->frame_arena, Vec3, 12);
 
-	Vec3 pos = *position;
-	Quat rot = *rotation;
+	GenerateTetrahedron(vertices);
+	GenerateFlatShadedNormals(vertices, 12, normals);
 
-	// We move in the negative of the forward vector because camera
-	Vec3 fv = camera ? V3Neg(GetForwardVector(rot)) : GetForwardVector(rot);
-	Vec3 fdisp = V3MulF(fv, tdel);
+	result.vertex_buffers[0] = UploadVertexBuffer(vertices, 12, 3, false, renderer);
+	result.vertex_buffers[1] = UploadVertexBuffer(normals, 12, 3, false, renderer);
+	result.topology = PRIMITIVE_TOPOLOGY_TriangleList;
+	result.vertices_count = 12;
 
-	Vec3 rv = GetRightVector(rot);
-	Vec3 rdisp = V3MulF(rv, tdel);
-
-	Vec3 uv = V3Up();
-	Vec3 udisp = V3MulF(uv, tdel);
-
-	pos = V3Add(pos, V3MulF(V3Add(fv, fdisp), f));
-	pos = V3Sub(pos, V3MulF(V3Add(fv, fdisp), b));
-
-	pos = V3Add(pos, V3MulF(V3Add(rv, rdisp), r));
-	pos = V3Sub(pos, V3MulF(V3Add(rv, rdisp), l));
-
-	pos = V3Add(pos, V3MulF(V3Add(uv, rdisp), u));
-	pos = V3Sub(pos, V3MulF(V3Add(uv, rdisp), d));
-
-	Quat yrot = y ? QuatFromAxisAngle(V3Up(), -y * rdel) : QuatI();
-	Quat xrot = p ? QuatFromAxisAngle(rv, -p * rdel) : QuatI();
-
-	rot = QuatMul(QuatMul(yrot, xrot), rot);
-
-	*position = pos;
-	*rotation = rot;
+	return result;
 }
+
+static Entity*
+SpawnSimpleEntity(Mesh mesh, Transform transform, Renderer* renderer, MemoryArena* arena) {
+	Entity* result = PushStruct(arena, Entity);
+
+	result->properties |= ENTITY_PROPERTY_HasMesh;
+	result->properties |= ENTITY_PROPERTY_Rotate;
+
+	result->transform = transform;
+	result->mesh_pipeline.mesh = mesh;
+
+	return result;
+}
+
+static void
+UpdateEntity(Entity* entity, MeshRenderer* mesh_renderer, MemoryArena* frame_arena) {
+
+	if(entity->properties & ENTITY_PROPERTY_Rotate) {
+		entity->transform.rotation = QuatMul(QuatFromEuler((3.0f)*0.01f, 0.0f, 0.0f), entity->transform.rotation);
+	}
+
+	if(entity->properties & ENTITY_PROPERTY_HasMesh) {
+		entity->mesh_pipeline.info = PushStruct(frame_arena, MeshInfo);
+		entity->mesh_pipeline.info->model = MakeTransformMatrix(entity->transform);
+		entity->mesh_pipeline.info->color = V4FromV3(WHITE, 1.0f);
+		PushMeshPipeline(entity->mesh_pipeline, mesh_renderer);
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
 

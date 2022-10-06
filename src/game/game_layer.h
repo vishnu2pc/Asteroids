@@ -1,16 +1,18 @@
 struct GameLayer {
-	struct Game* game;
-	PlatformAPI* platform_api;
+	struct GameState* game_state;
+	PlatformAPI platform_api;
 	bool quit_request;
+
 	bool debug_cursor_request;
+
+#ifdef INTERNAL
+	bool executable_reloaded;
+#endif
 };
 
-// app window states
-// running game state -> hide cursor, capture cursor, teleport cursor to center of screen every frame
-// debug game state with overlays -> show cursor, capture cursor
-
-#define GAME_INIT(name) void name(GameLayer* game_layer, Win32Window* window)
-typedef GAME_INIT(GameInit);
+#ifdef INTERNAL
+extern bool executable_reloaded;
+#endif
 
 #define GAME_LOOP(name) void name(GameLayer* game_layer, Win32Window* window, Input* input) 
 typedef GAME_LOOP(GameLoop);

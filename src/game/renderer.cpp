@@ -1,258 +1,287 @@
 #include "renderer.h"
 
-//------------------------------------------------------------------------
-static void RendererBeginFrame(Renderer* renderer, WindowDimensions wd) {
-	renderer->vp[VIEWPORT_DEFAULT].Width = wd.width;
-	renderer->vp[VIEWPORT_DEFAULT].Height = wd.height;
-
-	float color[4] = { 0.25f, 0.25f, 0.25f, 1.0f };
-	renderer->context->ClearRenderTargetView(renderer->rtv, color);
-	renderer->context->ClearDepthStencilView(renderer->dsv, D3D11_CLEAR_DEPTH, 1.0f, 0);
-	renderer->context->OMSetRenderTargets(1, &renderer->rtv, renderer->dsv);
-	renderer->context->PSSetSamplers(0, 1, &renderer->ss[SAMPLER_STATE_DEFAULT]);
-}
-
-//------------------------------------------------------------------------
-static void 
-PushConstantsData(void* data, ConstantsBuffer* cb, ID3D11DeviceContext* context) {
-	Assert(data);
-	Assert(cb->buffer);
-
+static void
+PushRenderData(ID3D11Buffer* buffer, void* data, u32 size, ID3D11DeviceContext* context) {
 	D3D11_MAPPED_SUBRESOURCE msr = {};
 
-	context->Map(cb->buffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &msr);
-	memcpy(msr.pData, data, cb->size);
-	context->Unmap(cb->buffer, 0);
+	context->Map(buffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &msr);
+	CopyMem(msr.pData, data, size);
+	context->Unmap(buffer, 0);
 
 	data = nullptr;
 }
 
-static void 
-PushStructuredData(PushStructuredBufferData* sb_data, StructuredBuffer* sb, ID3D11DeviceContext* context) {
-	Assert(sb_data->data);
-	Assert(sb->buffer);
+static void* 
+PushCommandBuffer(Renderer* renderer, u32 size) {
+	void* result = 0;
 
-	D3D11_MAPPED_SUBRESOURCE msr = {};
+	u8* command_buffer_end = renderer->command_buffer_base + renderer->command_buffer_size;
 
-	context->Map(sb->buffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &msr);
-	CopyMem(msr.pData, sb_data->data, sb->struct_size*sb_data->count);
-	context->Unmap(sb->buffer, 0);
+	if((renderer->command_buffer_cursor + size) <= command_buffer_end) {
+		result = renderer->command_buffer_cursor;
+		renderer->command_buffer_cursor += size;
+	}
+	else Assert(false);
 
-	sb_data->data = nullptr;
+	return result;
 }
 
-static void 
-PushIndexData(PushIndexBufferData* data, IndexBuffer* ib, ID3D11DeviceContext* context) {
-	Assert(data);
-	Assert(ib->buffer);
+#define PushRenderCommand(renderer, type) (type *)PushRenderCommand_(renderer, sizeof(type), RENDER_COMMAND_##type)
 
-	D3D11_MAPPED_SUBRESOURCE msr = {};
+static void*
+PushRenderCommand_(Renderer* renderer, u32 size, RENDER_COMMAND type ) {
+	void* result = 0;
 
-	context->Map(ib->buffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &msr);
-	CopyMem(msr.pData, data->data, sizeof(u32)*data->indices_count);
-	context->Unmap(ib->buffer, 0);
+	u32 actual_size = size + sizeof(RenderCommandHeader);
+	void* ptr = PushCommandBuffer(renderer, actual_size);
 
-	data = nullptr;
+	RenderCommandHeader* header = (RenderCommandHeader*)ptr;
+	header->type = (u8)type;
+	result = (u8*)ptr + sizeof(RenderCommandHeader);
+
+	return result;
 }
 
-static void 
-PushVertexData(PushVertexBufferData* data, VertexBuffer* vb, ID3D11DeviceContext* context) {
-	Assert(data);
-	Assert(vb->buffer);
+static void
+ExecuteRenderCommands(Renderer* renderer) {
+	u8* cursor = renderer->command_buffer_base;
+	while(cursor < renderer->command_buffer_cursor) {
+		RenderCommandHeader* header = (RenderCommandHeader*)cursor;
+		cursor += sizeof(RenderCommandHeader);
+		void* data = (u8*)header + sizeof(RenderCommandHeader);
 
-	D3D11_MAPPED_SUBRESOURCE msr = {};
+		switch(header->type) {
 
-	context->Map(vb->buffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &msr);
-	CopyMem(msr.pData, data->data, vb->stride*data->vertices_count);
-	context->Unmap(vb->buffer, 0);
+			case RENDER_COMMAND_ClearRenderTarget: {
+				cursor += sizeof(ClearRenderTarget);
+				ClearRenderTarget* command = (ClearRenderTarget*)data;
 
-	data = nullptr;
-}
+				if(command->render_target)
+					renderer->context->ClearRenderTargetView(command->render_target->view, command->color);
+				else
+					renderer->context->ClearRenderTargetView(renderer->back_buffer.view, command->color);
 
-//------------------------------------------------------------------------
-static void ExecuteRenderPipeline(RenderPipeline rp, Renderer* renderer) {
-	if(rp.rs.command == RENDER_COMMAND_CLEAR_DEPTH_STENCIL)
-		renderer->context->ClearDepthStencilView(renderer->dsv, D3D11_CLEAR_DEPTH, 1.0f, 0);
+			} break;
 
-	DEPTH_STENCIL_STATE dss_t = renderer->state_overrides.dss ? renderer->state_overrides.dss : rp.rs.dss;
-	BLEND_STATE bs_t          = renderer->state_overrides.bs ? renderer->state_overrides.bs : rp.rs.bs;
-	RASTERIZER_STATE rs_t     = renderer->state_overrides.rs ? renderer->state_overrides.rs : rp.rs.rs;
-	VIEWPORT vp_t             = renderer->state_overrides.vp ? renderer->state_overrides.vp : rp.rs.vp;
-	//------------------------------------------------------------------------
-	if(rp.rs.dss) {
-		ID3D11DepthStencilState* dss = renderer->dss[dss_t];
-		renderer->context->OMSetDepthStencilState(dss, 0);
-	}
-	//------------------------------------------------------------------------
-	if(rp.rs.bs) {
-		ID3D11BlendState* bs = renderer->bs[bs_t];
-		float val[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
-		renderer->context->OMSetBlendState(bs, val, 0xFFFFFFFF);
-	}
-	//------------------------------------------------------------------------=
-	if(rp.rs.rs) {
-		ID3D11RasterizerState* rs = renderer->rs[rs_t];
-		renderer->context->RSSetState(rs);
-	}
-	//------------------------------------------------------------------------
-	if(rp.rs.vp) {
-		D3D11_VIEWPORT vp = renderer->vp[vp_t];
-		renderer->context->RSSetViewports(1, &vp);
-		D3D11_RECT rect = {};
-		rect.right = vp.Width;
-		rect.bottom = vp.Height;
-		renderer->context->RSSetScissorRects(1, &rect);
-	}
-	renderer->context->IASetPrimitiveTopology(rp.rs.topology);
-	//------------------------------------------------------------------------
-	if(rp.ps) {
-		PixelShader* ps = rp.ps;
-		renderer->context->PSSetShader(ps->shader, nullptr, 0);
-		for(u8 i=0; i<ps->rb_count; i++) 
-			if(ps->rb[i].type == RENDER_BUFFER_TYPE_CONSTANTS) 
-				renderer->context->PSSetConstantBuffers(ps->rb[i].constants.slot, 1, &ps->rb[i].constants.buffer);
-		
-		for(u8 i=0; i<rp.prbd_count; i++) 
-			if(rp.prbd[i].type == RENDER_BUFFER_TYPE_CONSTANTS) 
-				for(u8 j=0; j<ps->rb_count; j++) 
-					if(ps->rb[j].type == RENDER_BUFFER_TYPE_CONSTANTS)
-						if(rp.prbd[i].constants.slot == ps->rb[j].constants.slot)
-							PushConstantsData(rp.prbd[i].constants.data, &ps->rb[j].constants, renderer->context);
+			case RENDER_COMMAND_ClearDepth: {
+				cursor += sizeof(ClearDepth);
+				ClearDepth* command = (ClearDepth*)data;
 
-		RenderBufferGroup* rbg = rp.prbg;
-		if(rbg) {
-			for(u8 i=0; i<ps->texture_count; i++) {
-				bool found = false;
-				for(u8 j=0; j<rbg->count; j++) {
-					if(ps->texture_slot[i] == rbg->rb[i].texture.slot) {
-						found = true;
-						renderer->context->PSSetShaderResources(rbg->rb[i].texture.slot, 1, &rbg->rb[i].texture.view);
-					}
-				}
-				Assert(found);
-			}
+					renderer->context->ClearDepthStencilView(renderer->depth_stencil.view, D3D11_CLEAR_DEPTH,
+							command->value, 0);
+			} break;
+
+			case RENDER_COMMAND_ClearStencil: {
+				cursor += sizeof(ClearStencil);
+				ClearStencil* command = (ClearStencil*)data;
+
+				// TODO: handle default value
+				renderer->context->ClearDepthStencilView(renderer->depth_stencil.view, D3D11_CLEAR_STENCIL, 0, command->value);
+			} break;
+
+			case RENDER_COMMAND_SetRenderTarget: {
+				cursor += sizeof(SetRenderTarget);
+				SetRenderTarget* command = (SetRenderTarget*)data;
+
+				if(command->render_target) 
+					renderer->context->OMSetRenderTargets(1, &command->render_target->view, renderer->depth_stencil.view);
+				else
+					renderer->context->OMSetRenderTargets(1, &renderer->back_buffer.view, renderer->depth_stencil.view);
+			} break;
+
+			case RENDER_COMMAND_SetDepthStencilState: {
+				cursor += sizeof(SetDepthStencilState);
+				SetDepthStencilState* command = (SetDepthStencilState*)data;
+
+				renderer->context->OMSetDepthStencilState(renderer->default_depth_stencil_state, 0);
+			} break;
+
+
+			case RENDER_COMMAND_SetBlendState: {
+				cursor += sizeof(SetBlendState);
+				SetBlendState* command = (SetBlendState*)data;
+
+				renderer->context->OMSetBlendState(renderer->blend_states[command->type], 0, 0xffffffff);
+			} break;
+
+			case RENDER_COMMAND_SetRasterizerState: {
+				cursor += sizeof(SetRasterizerState);
+				SetRasterizerState* command = (SetRasterizerState*)data;
+
+				renderer->context->RSSetState(renderer->rasterizer_states[command->type]);
+			} break;
+
+			case RENDER_COMMAND_SetSamplerState: {
+				cursor += sizeof(SetSamplerState);
+				SetSamplerState* command = (SetSamplerState*)data;
+
+				renderer->context->PSSetSamplers(command->slot, 1, &renderer->samplers[command->type]);
+			} break;
+
+			case RENDER_COMMAND_SetViewport: {
+				cursor += sizeof(SetViewport);
+				SetViewport* command = (SetViewport*)data;
+
+				D3D11_VIEWPORT vp = {};
+				vp.TopLeftX       = command->topleft.x;
+				vp.TopLeftY       = command->topleft.y;
+				vp.Width          = command->dim.x;
+				vp.Height         = command->dim.y;
+
+				renderer->context->RSSetViewports(1, &vp);
+
+				D3D11_RECT rect = {};
+				rect.right = vp.Width;
+				rect.bottom = vp.Height;
+
+				renderer->context->RSSetScissorRects(1, &rect);
+
+			} break;
+
+			case RENDER_COMMAND_SetPrimitiveTopology: {
+				cursor += sizeof(SetPrimitiveTopology);
+				SetPrimitiveTopology* command = (SetPrimitiveTopology*)data;
+
+				D3D_PRIMITIVE_TOPOLOGY topology;
+				if(command->type == PRIMITIVE_TOPOLOGY_TriangleList)
+					topology = D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
+				if(command->type == PRIMITIVE_TOPOLOGY_TriangleStrip)
+					topology = D3D_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP;
+
+				renderer->context->IASetPrimitiveTopology(topology);
+			} break;
+
+			case RENDER_COMMAND_SetVertexShader: {
+				cursor += sizeof(SetVertexShader);
+				SetVertexShader* command = (SetVertexShader*)data;
+
+				renderer->context->IASetInputLayout(command->vertex->il);
+				renderer->context->VSSetShader(command->vertex->shader, 0, 0);
+			} break;
+
+			case RENDER_COMMAND_SetPixelShader: {
+				cursor += sizeof(SetPixelShader);
+				SetPixelShader* command = (SetPixelShader*)data;
+
+				renderer->context->PSSetShader(command->pixel->shader, 0, 0);
+			} break;
+
+			case RENDER_COMMAND_SetVertexBuffer: {
+				cursor += sizeof(SetVertexBuffer);
+				SetVertexBuffer* command = (SetVertexBuffer*)data;
+
+				renderer->context->IASetVertexBuffers(command->slot, 1, &command->vertex->buffer, &command->stride, &command->offset);
+			} break;
+
+			case RENDER_COMMAND_SetIndexBuffer: {
+				cursor += sizeof(SetIndexBuffer);
+				SetIndexBuffer* command = (SetIndexBuffer*)data;
+
+				renderer->context->IASetIndexBuffer(command->index->buffer, DXGI_FORMAT_R32_UINT, command->offset);
+			} break;
+
+			case RENDER_COMMAND_SetStructuredBuffer: {
+				cursor += sizeof(SetStructuredBuffer);
+				SetStructuredBuffer* command = (SetStructuredBuffer*)data;
+
+				if(command->vertex_shader)
+					renderer->context->VSSetShaderResources(command->slot, 1, &command->structured->view);
+				else
+					renderer->context->PSSetShaderResources(command->slot, 1, &command->structured->view);
+			} break;
+
+			case RENDER_COMMAND_SetTextureBuffer: {
+				cursor += sizeof(SetTextureBuffer);
+				SetTextureBuffer* command = (SetTextureBuffer*)data;
+
+				renderer->context->PSSetShaderResources(command->slot, 1, &command->texture->view);
+			} break;
+
+			case RENDER_COMMAND_SetConstantsBuffer: {
+				cursor += sizeof(SetConstantsBuffer);
+				SetConstantsBuffer* command = (SetConstantsBuffer*)data;
+
+				if(command->vertex_shader)
+					renderer->context->VSSetConstantBuffers(command->slot, 1, &command->constants->buffer);
+				else
+					renderer->context->PSSetConstantBuffers(command->slot, 1, &command->constants->buffer);
+			} break;
+
+			case RENDER_COMMAND_PushRenderBufferData: {
+				cursor += sizeof(PushRenderBufferData);
+				PushRenderBufferData* command = (PushRenderBufferData*)data;
+
+				PushRenderData((ID3D11Buffer*)command->buffer, command->data, command->size, renderer->context);
+			} break;
+
+			case RENDER_COMMAND_DrawVertices: {
+				cursor += sizeof(DrawVertices);
+				DrawVertices* command = (DrawVertices*)data;
+
+				renderer->context->Draw(command->vertices_count, command->offset);
+			} break;
+
+			case RENDER_COMMAND_DrawIndexed: {
+				cursor += sizeof(DrawIndexed);
+				DrawIndexed* command = (DrawIndexed*)data;
+
+				renderer->context->DrawIndexed(command->indices_count, command->offset, 0);
+			} break;
+
+			case RENDER_COMMAND_DrawInstanced: {
+				cursor += sizeof(DrawInstanced);
+				DrawInstanced* command = (DrawInstanced*)data;
+
+				renderer->context->DrawInstanced(command->vertices_count, command->instance_count, command->offset, 0);
+			} break;
 		}
 	}
-	//------------------------------------------------------------------------
-	if(rp.vs) {
-		VertexShader* vs = rp.vs;
-		RenderBuffer* vrb = vs->rb;
-		u8 vrb_count = vs->rb_count;
-
-		renderer->context->VSSetShader(vs->shader, nullptr, 0);
-		renderer->context->IASetInputLayout(vs->il);
-
-		for(u8 i=0; i<vrb_count; i++) {
-			if(vrb[i].type == RENDER_BUFFER_TYPE_CONSTANTS) 
-				renderer->context->VSSetConstantBuffers(vrb[i].constants.slot, 1, &vrb[i].constants.buffer);
-			if(vrb[i].type == RENDER_BUFFER_TYPE_STRUCTURED) 
-				renderer->context->VSSetShaderResources(vrb[i].structured.slot, 1, &vrb[i].structured.view);
-		}
-
-		PushRenderBufferData* data = rp.vrbd;
-		u8 data_count = rp.vrbd_count;
-
-		RenderBufferGroup* rbg = rp.vrbg;
-
-		for(u8 i=0; i<data_count; i++) {
-			switch(data[i].type) {
-				case RENDER_BUFFER_TYPE_CONSTANTS: {
-					for(u8 j=0; j<vrb_count; j++) {
-
-						if(vrb[j].type == RENDER_BUFFER_TYPE_CONSTANTS && 
-							 data[i].constants.slot == vrb[j].constants.slot)
-
-								PushConstantsData(data[i].constants.data, &vrb[j].constants, renderer->context);
-					}
-				} break;
-
-				case RENDER_BUFFER_TYPE_STRUCTURED: {
-					for(u8 j=0; j<vrb_count; j++) {
-
-						if(vrb[j].type == RENDER_BUFFER_TYPE_STRUCTURED &&
-							 data[i].structured.slot == vrb[j].structured.slot) 
-
-								PushStructuredData(&data[i].structured, &vrb[j].structured, renderer->context);
-					}
-				} break;
-
-				case RENDER_BUFFER_TYPE_VERTEX: {
-					for(u8 j=0; j<rbg->count; j++) {
-
-						if(rbg->rb[j].type == RENDER_BUFFER_TYPE_VERTEX &&
-							 data[i].vertex.type == rbg->rb[j].vertex.type)
-
-							PushVertexData(&data[i].vertex, &rbg->rb[j].vertex, renderer->context);
-					}
-				} break;
-
-				case RENDER_BUFFER_TYPE_INDEX: {
-					for(u8 j=0; j<rbg->count; j++) {
-
-						if(rbg->rb[j].type == RENDER_BUFFER_TYPE_INDEX)
-							PushIndexData(&data[i].index, &rbg->rb[j].index, renderer->context);
-					}
-
-				}
-			}
-		}
-
-		if(rp.vrbg) {
-			for(u8 i=0; i<vs->vb_count; i++) {
-				bool found = false;
-				for(u8 j=0; j<rbg->count; j++) {
-					if(rbg->rb[j].type == RENDER_BUFFER_TYPE_VERTEX && rbg->rb[j].vertex.type == vs->vb_type[i]) {
-						found = true;	u32 offset = 0;
-						renderer->context->IASetVertexBuffers(i, 1, &rbg->rb[j].vertex.buffer, &rbg->rb[j].vertex.stride, &offset);
-					}
-				}
-				Assert(found);
-			}
-
-			if(rp.dc.type == DRAW_CALL_DEFAULT) {
-				bool has_index_buffer = false;
-				for(u8 i=0; i<rbg->count; i++) {
-					if(rbg->rb[i].type == RENDER_BUFFER_TYPE_INDEX) {
-						renderer->context->IASetIndexBuffer(rbg->rb[i].index.buffer, DXGI_FORMAT_R32_UINT, 0);
-						has_index_buffer = true;
-						renderer->context->DrawIndexed(rbg->rb[i].index.num_indices, 0, 0);
-					}
-				}
-
-				if(!has_index_buffer) {
-					for(u8 i=0; i<rbg->count; i++) 
-						if(rbg->rb[i].type == RENDER_BUFFER_TYPE_VERTEX) {
-							renderer->context->Draw(rbg->rb[i].vertex.vertices_count, 0);
-							break;
-						}
-				}
-
-			}
-		}
-	}
-	//------------------------------------------------------------------------
-	{
-		if(rp.dc.type == DRAW_CALL_INDEXED)
-			renderer->context->DrawIndexed(rp.dc.indices_count, rp.dc.offset, 0);
-		if(rp.dc.type == DRAW_CALL_VERTICES)
-			renderer->context->Draw(rp.dc.vertices_count, rp.dc.offset);
-		if(rp.dc.type == DRAW_CALL_INSTANCED) 
-			renderer->context->DrawInstanced(rp.dc.vertices_count, rp.dc.instance_count, 0, 0);
-	}
 }
 
-//------------------------------------------------------------------------
-static void RendererFrame(Renderer* renderer) {
-	for(u32 i=0; i<renderer->rq_id; i++) ExecuteRenderPipeline(renderer->rq[i], renderer);
+static void
+RendererBeginFrame(Renderer* renderer, WindowDimensions wd, MemoryArena* frame_arena) {
+	renderer->frame_arena = frame_arena;
+	renderer->command_buffer_cursor = 
+		renderer->command_buffer_base = (u8*)PushSize(renderer->frame_arena, renderer->command_buffer_size);
+
+	SetRenderTarget* set_render_target = PushRenderCommand(renderer, SetRenderTarget);
+	set_render_target->render_target = 0;
+
+	ClearRenderTarget* clear_render_target = PushRenderCommand(renderer, ClearRenderTarget);
+	clear_render_target->render_target = 0;
+	*(Vec4*)clear_render_target->color = { 0.25, 0.25, 0.25, 1.0f };
+
+	ClearDepth* clear_depth = PushRenderCommand(renderer, ClearDepth);
+	clear_depth->value = 1.0f;
+
+	SetDepthStencilState* set_depth_stencil_state = PushRenderCommand(renderer, SetDepthStencilState);
+	set_depth_stencil_state->type = 0;
+
+	SetBlendState* set_blend_state = PushRenderCommand(renderer, SetBlendState);
+	set_blend_state->type = BLEND_STATE_Regular;
+
+	SetRasterizerState* set_rasterizer_state = PushRenderCommand(renderer, SetRasterizerState);
+	set_rasterizer_state->type = RASTERIZER_STATE_Default;
+
+	SetSamplerState* set_sampler_state = PushRenderCommand(renderer, SetSamplerState);
+	set_sampler_state->type = SAMPLER_STATE_Default;
+	set_sampler_state->slot = 0;
+
+	SetViewport* set_viewport = PushRenderCommand(renderer, SetViewport);
+	set_viewport->topleft = V2Z();
+	set_viewport->dim = V2((float)wd.width, (float)wd.height);
+
+	SetPrimitiveTopology* set_topology = PushRenderCommand(renderer, SetPrimitiveTopology);
+	set_topology->type = PRIMITIVE_TOPOLOGY_TriangleList;
+
 }
 
-//------------------------------------------------------------------------
-static void RendererEndFrame(Renderer* renderer) {
+static void
+RendererEndFrame(Renderer* renderer) {
+	ExecuteRenderCommands(renderer);
 	renderer->swapchain->Present(0, 0);
-	renderer->transient.used = 0;
-	renderer->rq_id = 0;
 }
-//-------------------------------------------------------------------------
+
 static void 
 MakeD3DInputElementDesc(VERTEX_BUFFER* vb_type, D3D11_INPUT_ELEMENT_DESC* d3d_il_desc, u8 count) {
 	for (u32 i = 0; i < count; i++) {
@@ -268,63 +297,56 @@ MakeD3DInputElementDesc(VERTEX_BUFFER* vb_type, D3D11_INPUT_ELEMENT_DESC* d3d_il
 	}	
 }
 
-//------------------------------------------------------------------------
-static ConstantsBuffer 
-UploadConstantsBuffer(ConstantsBufferDesc desc, ID3D11Device* device) {
+static ConstantsBuffer* 
+UploadConstantsBuffer(u32 size, Renderer* renderer) {
 	HRESULT hr = {};
-	ConstantsBuffer cb = {};
+	ConstantsBuffer* cb = PushStruct(renderer->permanent_arena, ConstantsBuffer);
 	ID3D11Buffer* buffer = 0;
 
-	desc.size += (16 - (desc.size % 16));
+	size += (16 - (size % 16));
 	D3D11_BUFFER_DESC cb_desc = {};
-	cb_desc.ByteWidth 		 = desc.size;
+	cb_desc.ByteWidth 		 = size;
 	cb_desc.Usage          = D3D11_USAGE_DYNAMIC;
 	cb_desc.BindFlags      = D3D11_BIND_CONSTANT_BUFFER;
 	cb_desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
-	hr = device->CreateBuffer(&cb_desc, nullptr, &buffer);
+	hr = renderer->device->CreateBuffer(&cb_desc, nullptr, &buffer);
 
 	AssertHR(hr);
 
-	cb.buffer = buffer;
-	cb.slot = desc.slot;
-	cb.size = desc.size;
+	cb->buffer = buffer;
 	return cb;
 }
 
-//------------------------------------------------------------------------
-static StructuredBuffer 
-UploadStructuredBuffer(StructuredBufferDesc desc, ID3D11Device* device) {
+static StructuredBuffer* 
+UploadStructuredBuffer(u32 struct_size, u32 count, Renderer* renderer) {
 	HRESULT hr = {};
-	StructuredBuffer sb = {};
+	StructuredBuffer* sb = PushStruct(renderer->permanent_arena, StructuredBuffer);
 
 	ID3D11Buffer* buffer = 0;
 	ID3D11ShaderResourceView* view = 0;
 
 	D3D11_BUFFER_DESC buffer_desc = {};
-	buffer_desc.ByteWidth = desc.struct_size_in_bytes * desc.count;
+	buffer_desc.ByteWidth = struct_size * count;
 	buffer_desc.Usage = D3D11_USAGE_DYNAMIC;
 	buffer_desc.BindFlags = D3D11_BIND_SHADER_RESOURCE;
 	buffer_desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
 	buffer_desc.MiscFlags = D3D11_RESOURCE_MISC_BUFFER_STRUCTURED;
-	buffer_desc.StructureByteStride = desc.struct_size_in_bytes;
+	buffer_desc.StructureByteStride = struct_size;
 
-	hr = device->CreateBuffer(&buffer_desc, NULL, &buffer);
+	hr = renderer->device->CreateBuffer(&buffer_desc, NULL, &buffer);
 	AssertHR(hr);
 
 	D3D11_SHADER_RESOURCE_VIEW_DESC view_desc = {};
 	view_desc.Format = DXGI_FORMAT_UNKNOWN;
 	view_desc.ViewDimension = D3D11_SRV_DIMENSION_BUFFER;
 	view_desc.Buffer.ElementOffset = 0;
-	view_desc.Buffer.ElementWidth = desc.count;
+	view_desc.Buffer.ElementWidth = count;
 
-	hr = device->CreateShaderResourceView(buffer, &view_desc, &view);
+	hr = renderer->device->CreateShaderResourceView(buffer, &view_desc, &view);
 	AssertHR(hr);
 
-	sb.slot = desc.slot;
-	sb.buffer = buffer;
-	sb.view = view; 
-	sb.struct_size = desc.struct_size_in_bytes;
-	sb.count = desc.count;
+	sb->buffer = buffer;
+	sb->view = view; 
 
 	return sb;
 };
@@ -360,107 +382,59 @@ CompileShader(char* shader_code, u32 shader_length, char* entry, void** shader, 
 	return true;
 };
 
-//------------------------------------------------------------------------
 static PixelShader* 
-UploadPixelShader(PixelShaderDesc desc, Renderer* renderer) {
-	HRESULT hr = {};
-
-	PixelShader* ps = PushStruct(&renderer->permanent, PixelShader);
+UploadPixelShader(char* code, u32 length, char* entry, Renderer* renderer) {
+	PixelShader* ps = PushStruct(renderer->permanent_arena, PixelShader);
 	ID3D11PixelShader* shader;
 	ID3DBlob* blob;
-	TEXTURE_SLOT* texture_slot = nullptr;
 
-	u8 rb_count = desc.cb_count;
-	RenderBuffer* rb = PushArray(&renderer->permanent, RenderBuffer, rb_count);
-
-	Assert(CompileShader(desc.shader.code, desc.shader.size, desc.shader.entry, (void**)&shader,
-				&blob,  false, renderer));
-
-	for(u8 i=0; i<desc.cb_count; i++) {
-		rb[i].type = RENDER_BUFFER_TYPE_CONSTANTS;
-		rb[i].constants = UploadConstantsBuffer(desc.cb_desc[i], renderer->device);
-	}
-
-	if(desc.texture_count) {
-		texture_slot = PushArray(&renderer->permanent, TEXTURE_SLOT, desc.texture_count);
-		memcpy(texture_slot, desc.texture_slot, sizeof(TEXTURE_SLOT)*desc.texture_count);
-	}
+	Assert(CompileShader(code, length, entry, (void**)&shader, &blob, false, renderer));
 
 	ps->shader = shader;
-	ps->rb = rb;
-	ps->texture_slot = texture_slot;
-	ps->rb_count = rb_count;
-	ps->texture_count = desc.texture_count;
-
 	return ps;
 }
 
-//------------------------------------------------------------------------
 static VertexShader* 
-UploadVertexShader(VertexShaderDesc desc, Renderer* renderer) {
+UploadVertexShader(char* code, u32 length, char* entry, VERTEX_BUFFER* vertex_buffers, u8 count, Renderer* renderer) {
 	HRESULT hr = {};
 
-	VertexShader* vs = PushStruct(&renderer->permanent, VertexShader);
+	VertexShader* vs = PushStruct(renderer->permanent_arena, VertexShader);
 	ID3D11VertexShader* shader = 0;
 	ID3D11InputLayout* il = 0;
 	ID3DBlob* blob = 0;
-	VERTEX_BUFFER* vb_type = 0;
 
-	u8 rb_count = desc.cb_count + desc.sb_count;
-	RenderBuffer* rb = PushArray(&renderer->permanent, RenderBuffer, rb_count);
+	Assert(CompileShader(code, length, entry, (void**)&shader, &blob, true, renderer));
 
-	Assert(CompileShader(desc.shader.code, desc.shader.size, desc.shader.entry, (void**)&shader, 
-				&blob, true, renderer));
+	if(vertex_buffers) {
+		D3D11_INPUT_ELEMENT_DESC* ie_desc = PushArray(renderer->frame_arena, D3D11_INPUT_ELEMENT_DESC, count);
+		MakeD3DInputElementDesc(vertex_buffers, ie_desc, count);
 
-	if(desc.vb_count) {
-		D3D11_INPUT_ELEMENT_DESC* ie_desc = PushArray(&renderer->transient, D3D11_INPUT_ELEMENT_DESC, desc.vb_count);
-		MakeD3DInputElementDesc(desc.vb_type, ie_desc, desc.vb_count);
-
-		hr = renderer->device->CreateInputLayout(ie_desc, desc.vb_count, blob->GetBufferPointer(), blob->GetBufferSize(), &il);
-
-		vb_type = PushArray(&renderer->permanent, VERTEX_BUFFER, desc.vb_count);
-		memcpy(vb_type, desc.vb_type, sizeof(VERTEX_BUFFER)*desc.vb_count);
+		hr = renderer->device->CreateInputLayout(ie_desc, count, blob->GetBufferPointer(), blob->GetBufferSize(), &il);
 		AssertHR(hr);
-		PopArray(&renderer->transient, D3D11_INPUT_ELEMENT_DESC, desc.vb_count);
-	}
-
-	u8 i=0;
-	for(i=0; i<desc.cb_count; i++) {
-		rb[i].type = RENDER_BUFFER_TYPE_CONSTANTS;
-		rb[i].constants = UploadConstantsBuffer(desc.cb_desc[i], renderer->device);
-	}
-
-	for(u8 j=0; j<desc.sb_count; j++) {
-		rb[i+j].type = RENDER_BUFFER_TYPE_STRUCTURED;
-		rb[i+j].structured = UploadStructuredBuffer(desc.sb_desc[j], renderer->device);
 	}
 
 	vs->shader = shader;
 	vs->il = il;
-	vs->vb_type = vb_type;
-	vs->rb = rb;
-	vs->rb_count = rb_count;
-	vs->vb_count = desc.vb_count;
 
 	return vs;
 }
 
-//------------------------------------------------------------------------
-static RenderBuffer* 
-UploadTexture(TextureData* texture_data, Renderer* renderer) {
-	RenderBuffer* texture_buffer = PushStruct(&renderer->permanent, RenderBuffer);
+static TextureBuffer* 
+UploadTexture(void* data, u32 width, u32 height, u8 num_components, Renderer* renderer) {
+	TextureBuffer* texture_buffer = PushStruct(renderer->permanent_arena, TextureBuffer);
 
 	HRESULT hr = {};
 	ID3D11ShaderResourceView* view;
 
 	D3D11_TEXTURE2D_DESC desc = {};
-	desc.Width = texture_data->width;
-	desc.Height = texture_data->height;
+	desc.Width = width;
+	desc.Height = height;
 	desc.MipLevels = 1;
 	desc.ArraySize = 1;
 	DXGI_FORMAT format;
 
-	if(texture_data->num_components == 4) format = DXGI_FORMAT_R8G8B8A8_UNORM;
+	if(num_components == 4) format = DXGI_FORMAT_R8G8B8A8_UNORM;
+	else if(num_components == 1) format = DXGI_FORMAT_R8_UNORM;
 	else Assert(false);
 
 	desc.Format = format;
@@ -469,8 +443,8 @@ UploadTexture(TextureData* texture_data, Renderer* renderer) {
 	desc.BindFlags = D3D11_BIND_SHADER_RESOURCE;
 
 	D3D11_SUBRESOURCE_DATA sr = {};
-	sr.pSysMem = texture_data->pixels;
-	sr.SysMemPitch = texture_data->width * texture_data->num_components;
+	sr.pSysMem = data;
+	sr.SysMemPitch = width * num_components;
 
 	ID3D11Texture2D* buffer;
 	hr = renderer->device->CreateTexture2D(&desc, &sr, &buffer);
@@ -485,47 +459,18 @@ UploadTexture(TextureData* texture_data, Renderer* renderer) {
 	hr = renderer->device->CreateShaderResourceView(buffer, &view_desc, &view);
 	AssertHR(hr);
 
-	texture_buffer->type = RENDER_BUFFER_TYPE_TEXTURE;
-	texture_buffer->texture.slot = texture_data->type;
-	texture_buffer->texture.buffer = buffer;
-	texture_buffer->texture.view = view;
+	texture_buffer->buffer = buffer;
+	texture_buffer->view = view;
 	return texture_buffer;
 }
 
-//------------------------------------------------------------------------
-static RenderBufferGroup* 
-UploadTextureFromFile(char* filepath, TEXTURE_SLOT slot, Renderer* renderer) {
-	RenderBufferGroup* result;
-	int x, y, n;
-	void* png = stbi_load(filepath, &x, &y, &n, 4);
-	Assert(png);
-
-	TextureData texture_data = { TEXTURE_SLOT_DIFFUSE, png, (u32)x, (u32)y, 4 };
-
-	RenderBuffer* rb = UploadTexture(&texture_data, renderer);
-	STBI_FREE(png);
-
-	result = PushStruct(&renderer->permanent, RenderBufferGroup);
-	result->rb = rb;
-	result->count = 1;
-	return result;
-}
-
-//------------------------------------------------------------------------
-static VertexBuffer 
-UploadVertexBuffer(VertexBufferData vb_data, u32 num_vertices, bool dynamic, ID3D11Device* device) {
+static VertexBuffer* 
+UploadVertexBuffer(void* initial_data, u32 num_vertices, u8 num_components, bool dynamic, Renderer* renderer) {
 	HRESULT hr;
-	VertexBuffer vb = {};
+	VertexBuffer* vb = PushStruct(renderer->permanent_arena, VertexBuffer);
 
 	ID3D11Buffer* buffer;
 	D3D11_BUFFER_DESC desc = {};
-	u32 num_components = 0;
-	if(vb_data.type == VERTEX_BUFFER_POSITION) num_components = 3;
-	else if(vb_data.type == VERTEX_BUFFER_COLOR) num_components = 3;
-	else if(vb_data.type == VERTEX_BUFFER_NORMAL) num_components = 3;
-	else if(vb_data.type == VERTEX_BUFFER_TEXCOORD) num_components = 2;
-	else if(vb_data.type == VERTEX_BUFFER_TANGENT) num_components = 4;
-	else Assert(false);
 
 	u32 component_width = sizeof(float);
 
@@ -541,85 +486,41 @@ UploadVertexBuffer(VertexBufferData vb_data, u32 num_vertices, bool dynamic, ID3
 	desc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
 	desc.CPUAccessFlags = cpu_access_flags;
 
-	D3D11_SUBRESOURCE_DATA sr = {};
-	sr.pSysMem = vb_data.data;
-	hr = device->CreateBuffer(&desc, &sr, &buffer);
+	if(initial_data) {
+		D3D11_SUBRESOURCE_DATA sr = {};
+		sr.pSysMem = initial_data;
+		hr = renderer->device->CreateBuffer(&desc, &sr, &buffer);
+	}
+	else hr = renderer->device->CreateBuffer(&desc, 0, &buffer);
 	AssertHR(hr);
 
-	vb.buffer = buffer;
-	vb.stride = num_components * component_width;
-	vb.type = vb_data.type;
-	vb.vertices_count = num_vertices;
+	vb->buffer = buffer;
 
 	return vb;
 }
 
-//------------------------------------------------------------------------
-static RenderBufferGroup* 
-UploadMesh(MeshData* mesh_data, MeshDesc* mesh_desc, Renderer* renderer) {
-	Assert(mesh_data);
-	RenderBufferGroup* rbg = PushStruct(&renderer->permanent, RenderBufferGroup);
+static RenderTarget*
+CreateRenderTarget(Renderer* renderer) {
+	ID3D11Texture2D* buffer;
+	ID3D11RenderTargetView* view;
+	D3D11_TEXTURE2D_DESC buffer_desc = {}; 
+	rtv_tex->GetDesc(&rtv_tex_desc);
 
-	bool has_indices = false;
-	if(mesh_data->indices) has_indices = true;
-	RenderBuffer* rb = PushArray(&renderer->permanent, RenderBuffer, mesh_data->vb_data_count+(u32)has_indices);
+	D3D11_RENDER_TARGET_VIEW_DESC rtv_desc = {};
+	rtv_desc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+	rtv_desc.ViewDimension = D3D11_RTV_DIMENSION_TEXTURE2D;
 
-	u8 i=0;
-	for(i=0; i<mesh_data->vb_data_count; i++) {
-		bool dynamic = false;
-
-		if(mesh_desc) {
-			for(u8 j=0; j<mesh_desc->vb_count; j++) 
-				if(mesh_data->vb_data[i].type == mesh_desc->vb_desc[j].type)
-					dynamic = mesh_desc->vb_desc[j].dynamic;
-		}
-
-		rb[i].type = RENDER_BUFFER_TYPE_VERTEX;
-		rb[i].vertex = UploadVertexBuffer(mesh_data->vb_data[i], mesh_data->vertices_count, dynamic, renderer->device);
-	}
-
-	if(has_indices) {
-		ID3D11Buffer* index_buffer;
-		D3D11_BUFFER_DESC desc = {};
-		desc.ByteWidth = sizeof(u32) * mesh_data->indices_count;
-
-		D3D11_USAGE usage_flag = D3D11_USAGE_IMMUTABLE; 
-		u32 cpu_access_flags = 0;
-		if(mesh_desc && mesh_desc->dynamic_index_buffer) {
-			usage_flag = D3D11_USAGE_DYNAMIC; 
-			cpu_access_flags |= D3D11_CPU_ACCESS_WRITE;
-		}
-
-		//TODO:Renderer Clean this up?
-		desc.Usage = usage_flag;
-		desc.BindFlags = cpu_access_flags;
-		D3D11_SUBRESOURCE_DATA sr = {};
-		sr.pSysMem = mesh_data->indices;
-		renderer->device->CreateBuffer(&desc, &sr, &index_buffer);
-
-		rb[i].type = RENDER_BUFFER_TYPE_INDEX;
-		rb[i].index.buffer = index_buffer; 
-		rb[i].index.num_indices = mesh_data->indices_count;
-	}
-
-	rbg->rb = rb;
-	rbg->count = mesh_data->vb_data_count + (u32)has_indices;
-	return rbg;
+	hr = renderer->device->CreateRenderTargetView((ID3D11Resource*)rtv_tex, &rtv_desc, &rtv);
+	AssertHR(hr);
 }
 
-
-//---------------------------------------------------------------------------
-static Renderer* InitRenderer(Win32Window* window, GameAssets* assets, MemoryArena* arena) {
+static Renderer* 
+InitRenderer(Win32Window* window, MemoryArena* parent_arena, MemoryArena* frame_arena) {
 	Renderer* renderer;
-	u8* memblock = GetMemory(arena, Megabytes(5));
-	renderer = (Renderer*)memblock;
-
-	renderer->permanent.memory.bp = memblock;
-	renderer->permanent.memory.size = Megabytes(3);
-	renderer->permanent.used = sizeof(Renderer);
-
-	renderer->transient.memory.bp = memblock + Megabytes(3);
-	renderer->transient.memory.size = Megabytes(2);
+	renderer = PushStruct(parent_arena, Renderer);
+	renderer->permanent_arena = parent_arena;
+	renderer->frame_arena = frame_arena;
+	renderer->command_buffer_size = Megabytes(2);
 
 	HRESULT hr = {};
 	u32 msaa_quality_level = 0;
@@ -630,7 +531,7 @@ static Renderer* InitRenderer(Win32Window* window, GameAssets* assets, MemoryAre
 		hr = CreateDXGIFactory2(flags, IID_IDXGIFactory4, (void**)&dxgi_factory);
 		AssertHR(hr);
 
-	flags = 0;
+		flags = 0;
 		flags = DXGI_MWA_NO_WINDOW_CHANGES | DXGI_MWA_NO_ALT_ENTER;
 		dxgi_factory->MakeWindowAssociation(window->handle, flags);
 
@@ -658,6 +559,8 @@ static Renderer* InitRenderer(Win32Window* window, GameAssets* assets, MemoryAre
 		};
 		D3D_FEATURE_LEVEL out_feature_levels = D3D_FEATURE_LEVEL_9_1;
 
+		flags = 0;
+		flags |= D3D11_CREATE_DEVICE_DEBUG;
 		hr = D3D11CreateDevice((IDXGIAdapter*)adapters[adapter_to_use], D3D_DRIVER_TYPE_UNKNOWN, NULL,
 				flags, target_feature_levels, ArrayCount(target_feature_levels), D3D11_SDK_VERSION,
 				&renderer->device, &out_feature_levels, &renderer->context);
@@ -681,7 +584,7 @@ static Renderer* InitRenderer(Win32Window* window, GameAssets* assets, MemoryAre
 		swapchain_desc.Scaling = DXGI_SCALING_STRETCH;
 		swapchain_desc.SwapEffect = DXGI_SWAP_EFFECT_FLIP_DISCARD;
 		swapchain_desc.AlphaMode = DXGI_ALPHA_MODE_UNSPECIFIED;
-		swapchain_desc.Flags = 0;
+		swapchain_desc.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
 
 		hr = dxgi_factory->CreateSwapChainForHwnd((IUnknown*)renderer->device, window->handle, &swapchain_desc, NULL, NULL, &renderer->swapchain);
 
@@ -691,9 +594,9 @@ static Renderer* InitRenderer(Win32Window* window, GameAssets* assets, MemoryAre
 		hr = renderer->swapchain->QueryInterface(IID_PPV_ARGS(&renderer->swapchain));
 		AssertHR(hr);
 	}
-	//--------------------------Render Target and Depth Stencil View----------------------------------------------
 	{
 		ID3D11Texture2D* rtv_tex;
+		ID3D11RenderTargetView* rtv;
 		hr = renderer->swapchain->GetBuffer(0, IID_PPV_ARGS(&rtv_tex));
 		D3D11_TEXTURE2D_DESC rtv_tex_desc = {}; 
 		rtv_tex->GetDesc(&rtv_tex_desc);
@@ -702,10 +605,11 @@ static Renderer* InitRenderer(Win32Window* window, GameAssets* assets, MemoryAre
 		rtv_desc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
 		rtv_desc.ViewDimension = D3D11_RTV_DIMENSION_TEXTURE2D;
 
-		hr = renderer->device->CreateRenderTargetView((ID3D11Resource*)rtv_tex, &rtv_desc, &renderer->rtv);
+		hr = renderer->device->CreateRenderTargetView((ID3D11Resource*)rtv_tex, &rtv_desc, &rtv);
 		AssertHR(hr);
 
 		ID3D11Texture2D* dsv_tex;
+		ID3D11DepthStencilView* dsv;
 		D3D11_TEXTURE2D_DESC dsv_tex_desc;
 		rtv_tex->GetDesc(&dsv_tex_desc);
 		dsv_tex_desc.MipLevels = 1;
@@ -722,37 +626,51 @@ static Renderer* InitRenderer(Win32Window* window, GameAssets* assets, MemoryAre
 		D3D11_DEPTH_STENCIL_VIEW_DESC dsv_desc = {};
 		dsv_desc.Format = DXGI_FORMAT_D32_FLOAT;
 		dsv_desc.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
-		hr = renderer->device->CreateDepthStencilView((ID3D11Resource*)dsv_tex, &dsv_desc, &renderer->dsv);
+		hr = renderer->device->CreateDepthStencilView((ID3D11Resource*)dsv_tex, &dsv_desc, &dsv);
+		AssertHR(hr);
+
+		renderer->back_buffer.texture = rtv_tex;
+		renderer->back_buffer.view = rtv;
+		renderer->depth_stencil.texture = dsv_tex;
+		renderer->depth_stencil.view = dsv;
+	}
+	{	// No blend
+		// TODO:RENDERER Multiple render targets bind in OM Stage
+		D3D11_BLEND_DESC bs_desc = {};
+		bs_desc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
+		bs_desc.RenderTarget[0].BlendEnable = false;
+
+		hr = renderer->device->CreateBlendState(&bs_desc, &renderer->blend_states[BLEND_STATE_NoBlend]);
 		AssertHR(hr);
 	}
-	//---------------------------Blend state---------------------------------------------
-	{ // final.xyz = (src.xyz * src_blend) (BlendOp) (dest.rgb * dest_blend)
-		{	// No blend
-			// TODO:RENDERER Multiple render targets bind in OM Stage
-			D3D11_BLEND_DESC bs_desc = {};
-			bs_desc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
-			bs_desc.RenderTarget[0].BlendEnable = false;
+	{ // Regular
+		D3D11_BLEND_DESC bs_desc = {};
+		bs_desc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
+		bs_desc.RenderTarget[0].BlendEnable = true;
+		bs_desc.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;
+		bs_desc.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;
+		bs_desc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
+		bs_desc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
+		bs_desc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ONE;
+		bs_desc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
 
-			hr = renderer->device->CreateBlendState(&bs_desc, &renderer->bs[BLEND_STATE_NO_BLEND]);
-			AssertHR(hr);
-		}
-		{ // Enabled
-			D3D11_BLEND_DESC bs_desc = {};
-			bs_desc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
-			bs_desc.RenderTarget[0].BlendEnable = true;
-			bs_desc.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;
-			bs_desc.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;
-			bs_desc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
-			bs_desc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
-			bs_desc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ONE;
-			bs_desc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_MAX;
-
-
-			hr = renderer->device->CreateBlendState(&bs_desc, &renderer->bs[BLEND_STATE_ENABLED]);
-			AssertHR(hr);
-		}
+		hr = renderer->device->CreateBlendState(&bs_desc, &renderer->blend_states[BLEND_STATE_Regular]);
+		AssertHR(hr);
 	}
-	//---------------------------Depth Stencil State---------------------------------------------
+	{ // Premultiplied Alpha
+		D3D11_BLEND_DESC bs_desc = {};
+		bs_desc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
+		bs_desc.RenderTarget[0].BlendEnable = true;
+		bs_desc.RenderTarget[0].SrcBlend = D3D11_BLEND_ONE;
+		bs_desc.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;
+		bs_desc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
+		bs_desc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
+		bs_desc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ONE;
+		bs_desc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
+
+		hr = renderer->device->CreateBlendState(&bs_desc, &renderer->blend_states[BLEND_STATE_PreMulAlpha]);
+		AssertHR(hr);
+	}
 	{
 		ID3D11DepthStencilState* dss;
 		D3D11_DEPTH_STENCIL_DESC dss_desc = {};
@@ -760,10 +678,9 @@ static Renderer* InitRenderer(Win32Window* window, GameAssets* assets, MemoryAre
 		dss_desc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
 		dss_desc.DepthFunc = D3D11_COMPARISON_LESS_EQUAL;
 		hr = renderer->device->CreateDepthStencilState(&dss_desc, &dss);
-		renderer->dss[DEPTH_STENCIL_STATE_DEFAULT] = dss;
+		renderer->default_depth_stencil_state = dss;
 		AssertHR(hr);
 	}
-	//----------------------------Rasterizer--------------------------------------------
 	{ 
 		// Default Rasterizer
 		ID3D11RasterizerState* rs;
@@ -773,13 +690,13 @@ static Renderer* InitRenderer(Win32Window* window, GameAssets* assets, MemoryAre
 		rs_desc.FrontCounterClockwise = true;
 		rs_desc.MultisampleEnable = true;
 		hr = renderer->device->CreateRasterizerState(&rs_desc, &rs);
-		renderer->rs[RASTERIZER_STATE_DEFAULT] = rs;
+		renderer->rasterizer_states[RASTERIZER_STATE_Default] = rs;
 		AssertHR(hr);
 
 		// Wireframe
 		rs_desc.FillMode = D3D11_FILL_WIREFRAME;
 		hr = renderer->device->CreateRasterizerState(&rs_desc, &rs);
-		renderer->rs[RASTERIZER_STATE_WIREFRAME] = rs;
+		renderer->rasterizer_states[RASTERIZER_STATE_Wireframe] = rs;
 		AssertHR(hr);
 
 		rs_desc = {};
@@ -787,49 +704,26 @@ static Renderer* InitRenderer(Win32Window* window, GameAssets* assets, MemoryAre
 		rs_desc.CullMode = D3D11_CULL_NONE;
 		rs_desc.FrontCounterClockwise = true;
 		hr = renderer->device->CreateRasterizerState(&rs_desc, &rs);
-		renderer->rs[RASTERIZER_STATE_DOUBLE_SIDED] = rs;
+		renderer->rasterizer_states[RASTERIZER_STATE_DoubleSided] = rs;
 		AssertHR(hr);
 	}
-	//-----------------------------Viewport-------------------------------------------
-	{	
-		D3D11_VIEWPORT vp = {};
-		vp.TopLeftX = 0.0f;
-		vp.TopLeftY = 0.0f;
-		vp.Width = window->dim.width;
-		vp.Height = window->dim.height;
-		vp.MinDepth = 0.0f;
-		vp.MaxDepth = 1.0f;
-		renderer->vp[VIEWPORT_DEFAULT] = vp;
+	{ // default
+		ID3D11SamplerState* ss;
+		D3D11_SAMPLER_DESC desc = {};
+		desc.Filter = D3D11_FILTER_MIN_MAG_MIP_POINT;
+		desc.AddressU = D3D11_TEXTURE_ADDRESS_CLAMP;
+		desc.AddressV = D3D11_TEXTURE_ADDRESS_CLAMP;
+		desc.AddressW = D3D11_TEXTURE_ADDRESS_CLAMP;
+		desc.ComparisonFunc = D3D11_COMPARISON_ALWAYS;
+		desc.MaxLOD = D3D11_FLOAT32_MAX;
+		hr = renderer->device->CreateSamplerState(&desc, &ss);
+		AssertHR(hr);
+		renderer->samplers[SAMPLER_STATE_Default] = ss;
 	}
-	//------------------------Samplers------------------------------------------------
-	{
-		{ // default
-			ID3D11SamplerState* ss;
-			D3D11_SAMPLER_DESC desc = {};
-			desc.Filter = D3D11_FILTER_MIN_MAG_MIP_POINT;
-			desc.AddressU = D3D11_TEXTURE_ADDRESS_CLAMP;
-			desc.AddressV = D3D11_TEXTURE_ADDRESS_CLAMP;
-			desc.AddressW = D3D11_TEXTURE_ADDRESS_CLAMP;
-			desc.ComparisonFunc = D3D11_COMPARISON_ALWAYS;
-			desc.MaxLOD = D3D11_FLOAT32_MAX;
-			hr = renderer->device->CreateSamplerState(&desc, &ss);
-			AssertHR(hr);
-			renderer->ss[SAMPLER_STATE_DEFAULT] = ss;
-		}
-		{ // Tiling
-			ID3D11SamplerState* ss;
-			D3D11_SAMPLER_DESC desc = {};
-			desc.Filter = D3D11_FILTER_MIN_MAG_MIP_POINT;
-			desc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
-			desc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
-			desc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
-			desc.ComparisonFunc = D3D11_COMPARISON_ALWAYS;
-			desc.MaxLOD = D3D11_FLOAT32_MAX;
-			hr = renderer->device->CreateSamplerState(&desc, &ss);
-			AssertHR(hr);
-			renderer->ss[SAMPLER_STATE_TILE] = ss;
-		}
-	}
+
+
 	return renderer;
 }
+
+
 

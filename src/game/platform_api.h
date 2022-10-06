@@ -1,6 +1,9 @@
 struct PlatformMemoryBlock {
 	u64 size;
+	u64 used;
 	u8* bp;
+
+	PlatformMemoryBlock* prev;
 };
 
 struct PlatformFileHandle {
@@ -94,7 +97,7 @@ enum WIN32_AXIS {
 
 struct WindowDimensions { u32 width; u32 height; };
 struct Button { bool pressed, held; };
-struct Axis { int x, y; };
+struct Axis { float x, y; };
 
 struct Input {
 	Button buttons[WIN32_BUTTON_TOTAL];
@@ -117,11 +120,15 @@ typedef PLATFORM_READ_FILE(PlatformReadFile);
      
 #define PLATFORM_ALLOCATE_MEMORY(name) PlatformMemoryBlock* name(u64 size)
 typedef PLATFORM_ALLOCATE_MEMORY(PlatformAllocateMemory);
+     
+#define PLATFORM_DEALLOCATE_MEMORY(name) void name(PlatformMemoryBlock* block)
+typedef PLATFORM_DEALLOCATE_MEMORY(PlatformDeallocateMemory);
 
 struct PlatformAPI {
 	PlatformOpenFile* open_file;
 	PlatformCloseFile* close_file;
 	PlatformReadFile* read_file;
 	PlatformAllocateMemory* allocate_memory;
+	PlatformDeallocateMemory* deallocate_memory;
 };
-
+extern PlatformAPI platform_api;

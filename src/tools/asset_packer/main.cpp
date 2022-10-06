@@ -24,30 +24,41 @@ typedef uint64_t u64;
 enum ASSET_TYPE {
 	ASSET_TYPE_MODEL,
 	ASSET_TYPE_TEXTURE,
+	ASSET_TYPE_FONT,
 	ASSET_TYPE_TOTAL
 };
 
 char* asset_path_dir[ASSET_TYPE_TOTAL] = { 
 	"../assets/models",
-	"../assets/textures"
+	"../assets/textures",
+	"../assets/fonts"
 };
 
 char* asset_file_format[ASSET_TYPE_TOTAL] = {
 	"gltf",
-	"png"
+	"png",
+	"ttf"
 };
 
 enum FORMAT {
 	FORMAT_GAME_ASSET_FILE,
 	FORMAT_DIRECTORY,
+
 	FORMAT_MESHES_BLOB,
 	FORMAT_TEXTURES_BLOB,
+	FORMAT_FONTS_BLOB,
+
 	FORMAT_MESH,
+
 	FORMAT_VERTEX_BUFFER,
 	FORMAT_VERTEX_BUFFER_FLOAT,
 	FORMAT_INDEX_BUFFER_U32,
+
 	FORMAT_TEXTURE,
 	FORMAT_PIXELS,
+
+	FORMAT_FONT,
+	FORMAT_TTF,
 
 	FORMAT_TOTAL
 };
@@ -55,13 +66,21 @@ enum FORMAT {
 u32 format_elem_sizes[FORMAT_TOTAL] {
 	sizeof(GameAssetFile),
 		sizeof(Directory),
+
 		sizeof(MeshesBlob),
 		sizeof(TexturesBlob),
+		sizeof(FontsBlob),
+
 		sizeof(MeshFormat),
+
 		sizeof(VertexBufferFormat),
 		sizeof(float),
 		sizeof(u32),
+		
 		sizeof(TextureFormat),
+		sizeof(u8),
+
+		sizeof(FontFormat),
 		sizeof(u8)
 };
 
@@ -177,6 +196,17 @@ static FolderInfo LoadFolder(char* dir, char* file_format) {
 	return folder_info;
 };
 
+static void
+CopyFileToStructBuffer(char* path, u64 size, StructBuffer* buffer) {
+	ReserveMemoryStructBuffer(size, buffer);
+
+	HANDLE h = CreateFileA(path, GENERIC_READ, FILE_SHARE_READ, 0, OPEN_EXISTING, 0, 0);
+	Assert(h != INVALID_HANDLE_VALUE);
+	Assert(ReadFile(h, buffer->data, size, 0, 0));
+
+	buffer->filled_count += size;
+}
+
 int main(int argc, char** argv) {
 
 	StructBuffer struct_buffer[FORMAT_TOTAL] = {};
@@ -232,6 +262,40 @@ int main(int argc, char** argv) {
 			textures_blob.textures_count++;
 		}
 		PushStructBuffer(&textures_blob, 1,ab_textures_blob);
+		blob_offsets[ASSET_BLOB_TEXTURES] = GetOffsetStructBuffer(ab_textures_blob) +
+																			GetOffsetStructBuffer(ab_texture) +
+																			GetOffsetStructBuffer(ab_pixels);
+	}
+	{
+		StructBuffer* ab_fonts_blob = &struct_buffer[FORMAT_FONTS_BLOB];
+		StructBuffer* ab_font = &struct_buffer[FORMAT_FONT];
+		StructBuffer* ab_ttf = &struct_buffer[FORMAT_TTF];
+
+		char* dir = asset_path_dir[ASSET_TYPE_FONT];
+		char* file_format = asset_file_format[ASSET_TYPE_FONT];
+		FolderInfo folder = LoadFolder(dir, file_format);
+
+		FontsBlob fonts_blob = {};
+		fonts_blob.fonts_count = folder.file_count;
+
+		// Loading cgltf data
+		for(u8 i=0; i<folder.file_count; i++) {
+			FileInfo file = folder.files[i];
+			char* path = MakeFullPath(folder.dir, file.name, file.format);
+
+			FontFormat font_format = {};
+			strcpy(font_format.name, file.name);
+			font_format.name[STRING_LENGTH_FONT-1] = 0;
+
+			font_format.offset_to_data = GetOffsetStructBuffer(ab_ttf);
+			CopyFileToStructBuffer(path, file.size, ab_ttf);
+
+			PushStructBuffer(&font_format, 1, ab_font);
+		}
+		PushStructBuffer(&fonts_blob, 1, ab_fonts_blob);
+		blob_offsets[ASSET_BLOB_FONTS] = GetOffsetStructBuffer(ab_fonts_blob) +
+																			GetOffsetStructBuffer(ab_font) +
+																			GetOffsetStructBuffer(ab_ttf);
 	}
 	{	// Loading Models
 		StructBuffer* ab_meshes_blob = &struct_buffer[FORMAT_MESHES_BLOB];
@@ -338,93 +402,110 @@ int main(int argc, char** argv) {
 		}
 		PushStructBuffer(&meshes_blob, 1, ab_meshes_blob);
 		blob_offsets[ASSET_BLOB_MESHES] = GetOffsetStructBuffer(ab_meshes_blob) +
-																			GetOffsetStructBuffer(ab_mesh) +
-																			GetOffsetStructBuffer(ab_vertex_buffer) +
-																			GetOffsetStructBuffer(ab_vertex_buffer_float) +
-																			GetOffsetStructBuffer(ab_index_buffer_u32);
-	}
-	//------------------------------------------------------------------------
-	GenericBuffer gb_file = {};
-	{
-		// Stitching up all buffers
-		u32 offset = 0;
-		for(u8 i=0; i<FORMAT_TOTAL; i++) gb_file.total_size += struct_buffer[i].elem_size * struct_buffer[i].filled_count;
-		gb_file.data = calloc(gb_file.total_size, sizeof(u8));
-
-		offset = GetOffsetStructBuffer(&struct_buffer[FORMAT_GAME_ASSET_FILE]);
-		for(u32 i=0; i<struct_buffer[FORMAT_GAME_ASSET_FILE].filled_count; i++) {
-			GameAssetFile* gaf = (GameAssetFile*)GetElementStructBuffer(&struct_buffer[FORMAT_GAME_ASSET_FILE], i);
-			gaf->offset_to_blob_directories += offset;
+			GetOffsetStructBuffer(ab_mesh) +
+			GetOffsetStructBuffer(ab_vertex_buffer) +
+			GetOffsetStructBuffer(ab_vertex_buffer_float) +
+			GetOffsetStructBuffer(ab_index_buffer_u32);
 		}
-		WriteStructBufferToGenericBuffer(&gb_file, &struct_buffer[FORMAT_GAME_ASSET_FILE]);
+		//------------------------------------------------------------------------
+		GenericBuffer gb_file = {};
+		{
+			// Stitching up all buffers
+			u32 offset = 0;
+			for(u8 i=0; i<FORMAT_TOTAL; i++) gb_file.total_size += struct_buffer[i].elem_size * struct_buffer[i].filled_count;
+			gb_file.data = calloc(gb_file.total_size, sizeof(u8));
 
-		offset += GetOffsetStructBuffer(&struct_buffer[FORMAT_DIRECTORY]);
-		u32 blob_offset = 0;
-		for(u32 i=0; i<struct_buffer[FORMAT_DIRECTORY].filled_count; i++) {
-			Directory* dir = (Directory*)GetElementStructBuffer(&struct_buffer[FORMAT_DIRECTORY], i);
-			dir->offset_to_blob += offset + blob_offset;
-			blob_offset += blob_offsets[i];
+			offset = GetOffsetStructBuffer(&struct_buffer[FORMAT_GAME_ASSET_FILE]);
+			for(u32 i=0; i<struct_buffer[FORMAT_GAME_ASSET_FILE].filled_count; i++) {
+				GameAssetFile* gaf = (GameAssetFile*)GetElementStructBuffer(&struct_buffer[FORMAT_GAME_ASSET_FILE], i);
+				gaf->offset_to_blob_directories += offset;
+			}
+			WriteStructBufferToGenericBuffer(&gb_file, &struct_buffer[FORMAT_GAME_ASSET_FILE]);
+
+			offset += GetOffsetStructBuffer(&struct_buffer[FORMAT_DIRECTORY]);
+			u32 blob_offset = 0;
+			for(u32 i=0; i<struct_buffer[FORMAT_DIRECTORY].filled_count; i++) {
+				Directory* dir = (Directory*)GetElementStructBuffer(&struct_buffer[FORMAT_DIRECTORY], i);
+				dir->offset_to_blob += offset + blob_offset;
+				blob_offset += blob_offsets[i];
+			}
+			WriteStructBufferToGenericBuffer(&gb_file, &struct_buffer[FORMAT_DIRECTORY]);
+
+			offset += GetOffsetStructBuffer(&struct_buffer[FORMAT_MESHES_BLOB]);
+			for(u32 i=0; i<struct_buffer[FORMAT_MESHES_BLOB].filled_count; i++) {
+				MeshesBlob* mb = (MeshesBlob*)GetElementStructBuffer(&struct_buffer[FORMAT_MESHES_BLOB], i);
+				mb->offset_to_mesh_formats += offset;
+			}
+			WriteStructBufferToGenericBuffer(&gb_file, &struct_buffer[FORMAT_MESHES_BLOB]);
+
+			offset += GetOffsetStructBuffer(&struct_buffer[FORMAT_MESH]);
+			for(u32 i=0; i<struct_buffer[FORMAT_MESH].filled_count; i++) {
+				MeshFormat* mf = (MeshFormat*)GetElementStructBuffer(&struct_buffer[FORMAT_MESH], i);
+				mf->offset_to_vertex_buffers += offset;
+				u32 offset_vb = GetOffsetStructBuffer(&struct_buffer[FORMAT_VERTEX_BUFFER]);
+				u32 offset_vb_float = GetOffsetStructBuffer(&struct_buffer[FORMAT_VERTEX_BUFFER_FLOAT]);
+				mf->offset_to_indices += offset + offset_vb + offset_vb_float;
+			}
+			WriteStructBufferToGenericBuffer(&gb_file, &struct_buffer[FORMAT_MESH]);
+
+			offset += GetOffsetStructBuffer(&struct_buffer[FORMAT_VERTEX_BUFFER]);
+			for(u32 i=0; i<struct_buffer[FORMAT_VERTEX_BUFFER].filled_count; i++) {
+				VertexBufferFormat* vbf = (VertexBufferFormat*)GetElementStructBuffer(&struct_buffer[FORMAT_VERTEX_BUFFER], i);
+				vbf->offset_to_data += offset;
+			}
+			WriteStructBufferToGenericBuffer(&gb_file, &struct_buffer[FORMAT_VERTEX_BUFFER]);
+
+			offset += GetOffsetStructBuffer(&struct_buffer[FORMAT_VERTEX_BUFFER_FLOAT]);
+			WriteStructBufferToGenericBuffer(&gb_file, &struct_buffer[FORMAT_VERTEX_BUFFER_FLOAT]);
+
+			offset += GetOffsetStructBuffer(&struct_buffer[FORMAT_INDEX_BUFFER_U32]);
+			WriteStructBufferToGenericBuffer(&gb_file, &struct_buffer[FORMAT_INDEX_BUFFER_U32]);
+
+			offset += GetOffsetStructBuffer(&struct_buffer[FORMAT_TEXTURES_BLOB]);
+			for(u32 i=0; i<struct_buffer[FORMAT_TEXTURES_BLOB].filled_count; i++) {
+				TexturesBlob* mb = (TexturesBlob*)GetElementStructBuffer(&struct_buffer[FORMAT_TEXTURES_BLOB], i);
+				mb->offset_to_texture_formats += offset;
+			}
+			WriteStructBufferToGenericBuffer(&gb_file, &struct_buffer[FORMAT_TEXTURES_BLOB]);
+
+			offset += GetOffsetStructBuffer(&struct_buffer[FORMAT_TEXTURE]);
+			for(u32 i=0; i<struct_buffer[FORMAT_TEXTURE].filled_count; i++) {
+				TextureFormat* tf = (TextureFormat*)GetElementStructBuffer(&struct_buffer[FORMAT_TEXTURE], i);
+				tf->offset_to_data += offset;
+			}
+			WriteStructBufferToGenericBuffer(&gb_file, &struct_buffer[FORMAT_TEXTURE]);
+
+			offset += GetOffsetStructBuffer(&struct_buffer[FORMAT_PIXELS]);
+			WriteStructBufferToGenericBuffer(&gb_file, &struct_buffer[FORMAT_PIXELS]);
+
+			offset += GetOffsetStructBuffer(&struct_buffer[FORMAT_FONTS_BLOB]);
+			for(u32 i=0; i<struct_buffer[FORMAT_FONTS_BLOB].filled_count; i++) {
+				FontsBlob* mb = (FontsBlob*)GetElementStructBuffer(&struct_buffer[FORMAT_FONTS_BLOB], i);
+				mb->offset_to_font_formats += offset;
+			}
+			WriteStructBufferToGenericBuffer(&gb_file, &struct_buffer[FORMAT_FONTS_BLOB]);
+
+			offset += GetOffsetStructBuffer(&struct_buffer[FORMAT_FONT]);
+			for(u32 i=0; i<struct_buffer[FORMAT_FONT].filled_count; i++) {
+				FontFormat* tf = (FontFormat*)GetElementStructBuffer(&struct_buffer[FORMAT_FONT], i);
+				tf->offset_to_data += offset;
+			}
+			WriteStructBufferToGenericBuffer(&gb_file, &struct_buffer[FORMAT_FONT]);
+
+			offset += GetOffsetStructBuffer(&struct_buffer[FORMAT_TTF]);
+			WriteStructBufferToGenericBuffer(&gb_file, &struct_buffer[FORMAT_TTF]);
+
+
 		}
-		WriteStructBufferToGenericBuffer(&gb_file, &struct_buffer[FORMAT_DIRECTORY]);
+		//------------------------------------------------------------------------
+		{ // Writing to File
+			HANDLE h = CreateFileA("data.gaf", GENERIC_WRITE, 0, 0, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, 0);
+			Assert(h != INVALID_HANDLE_VALUE);
 
-		offset += GetOffsetStructBuffer(&struct_buffer[FORMAT_MESHES_BLOB]);
-		for(u32 i=0; i<struct_buffer[FORMAT_MESHES_BLOB].filled_count; i++) {
-			MeshesBlob* mb = (MeshesBlob*)GetElementStructBuffer(&struct_buffer[FORMAT_MESHES_BLOB], i);
-			mb->offset_to_mesh_formats += offset;
+			DWORD bytes_written = 0;
+			Assert(WriteFile(h, gb_file.data, gb_file.filled_size, &bytes_written, 0));
+			Assert(bytes_written == gb_file.filled_size);
+
 		}
-		WriteStructBufferToGenericBuffer(&gb_file, &struct_buffer[FORMAT_MESHES_BLOB]);
-
-
-		offset += GetOffsetStructBuffer(&struct_buffer[FORMAT_MESH]);
-		for(u32 i=0; i<struct_buffer[FORMAT_MESH].filled_count; i++) {
-			MeshFormat* mf = (MeshFormat*)GetElementStructBuffer(&struct_buffer[FORMAT_MESH], i);
-			mf->offset_to_vertex_buffers += offset;
-			u32 offset_vb = GetOffsetStructBuffer(&struct_buffer[FORMAT_VERTEX_BUFFER]);
-			u32 offset_vb_float = GetOffsetStructBuffer(&struct_buffer[FORMAT_VERTEX_BUFFER_FLOAT]);
-			mf->offset_to_indices += offset + offset_vb + offset_vb_float;
-		}
-		WriteStructBufferToGenericBuffer(&gb_file, &struct_buffer[FORMAT_MESH]);
-
-		offset += GetOffsetStructBuffer(&struct_buffer[FORMAT_VERTEX_BUFFER]);
-		for(u32 i=0; i<struct_buffer[FORMAT_VERTEX_BUFFER].filled_count; i++) {
-			VertexBufferFormat* vbf = (VertexBufferFormat*)GetElementStructBuffer(&struct_buffer[FORMAT_VERTEX_BUFFER], i);
-			vbf->offset_to_data += offset;
-		}
-		WriteStructBufferToGenericBuffer(&gb_file, &struct_buffer[FORMAT_VERTEX_BUFFER]);
-
-		offset += GetOffsetStructBuffer(&struct_buffer[FORMAT_VERTEX_BUFFER_FLOAT]);
-		WriteStructBufferToGenericBuffer(&gb_file, &struct_buffer[FORMAT_VERTEX_BUFFER_FLOAT]);
-
-		offset += GetOffsetStructBuffer(&struct_buffer[FORMAT_INDEX_BUFFER_U32]);
-		WriteStructBufferToGenericBuffer(&gb_file, &struct_buffer[FORMAT_INDEX_BUFFER_U32]);
-
-		offset += GetOffsetStructBuffer(&struct_buffer[FORMAT_TEXTURES_BLOB]);
-		for(u32 i=0; i<struct_buffer[FORMAT_TEXTURES_BLOB].filled_count; i++) {
-			TexturesBlob* mb = (TexturesBlob*)GetElementStructBuffer(&struct_buffer[FORMAT_TEXTURES_BLOB], i);
-			mb->offset_to_texture_formats += offset;
-		}
-		WriteStructBufferToGenericBuffer(&gb_file, &struct_buffer[FORMAT_TEXTURES_BLOB]);
-
-		offset += GetOffsetStructBuffer(&struct_buffer[FORMAT_TEXTURE]);
-		for(u32 i=0; i<struct_buffer[FORMAT_TEXTURE].filled_count; i++) {
-			TextureFormat* tf = (TextureFormat*)GetElementStructBuffer(&struct_buffer[FORMAT_TEXTURE], i);
-			tf->offset_to_data += offset;
-		}
-		WriteStructBufferToGenericBuffer(&gb_file, &struct_buffer[FORMAT_TEXTURE]);
-
-		offset += GetOffsetStructBuffer(&struct_buffer[FORMAT_PIXELS]);
-		WriteStructBufferToGenericBuffer(&gb_file, &struct_buffer[FORMAT_PIXELS]);
-
-	}
-	//------------------------------------------------------------------------
-	{ // Writing to File
-		HANDLE h = CreateFileA("data.gaf", GENERIC_WRITE, 0, 0, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, 0);
-		Assert(h != INVALID_HANDLE_VALUE);
-
-		DWORD bytes_written = 0;
-		Assert(WriteFile(h, gb_file.data, gb_file.filled_size, &bytes_written, 0));
-		Assert(bytes_written == gb_file.filled_size);
-
-	}
-	return 1;
+		return 1;
 }

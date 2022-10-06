@@ -5,6 +5,7 @@
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
 ASSET_TYPE	.\asset_packer\main.cpp	/^enum ASSET_TYPE {$/;"	g	file:
+ASSET_TYPE_FONT	.\asset_packer\main.cpp	/^	ASSET_TYPE_FONT,$/;"	e	enum:ASSET_TYPE	file:
 ASSET_TYPE_MODEL	.\asset_packer\main.cpp	/^	ASSET_TYPE_MODEL,$/;"	e	enum:ASSET_TYPE	file:
 ASSET_TYPE_TEXTURE	.\asset_packer\main.cpp	/^	ASSET_TYPE_TEXTURE,$/;"	e	enum:ASSET_TYPE	file:
 ASSET_TYPE_TOTAL	.\asset_packer\main.cpp	/^	ASSET_TYPE_TOTAL$/;"	e	enum:ASSET_TYPE	file:
@@ -33,10 +34,13 @@ CGLTF_PTRINDEX	.\include\cgltf.h	2435;"	d
 CGLTF_VALIDATE_ENABLE_ASSERTS	.\include\cgltf.h	950;"	d
 CommonCompilerFlags	.\rasterize_font_and_dump_bitmap\build.bat	/^set CommonCompilerFlags=\/std:c++17 -nologo -WX -wd4700 -Zi \/FC $/;"	v
 CommonLinkerFlags	.\rasterize_font_and_dump_bitmap\build.bat	/^set CommonLinkerFlags= \/SUBSYSTEM:CONSOLE$/;"	v
+CopyFileToStructBuffer	.\asset_packer\main.cpp	/^CopyFileToStructBuffer(char* path, u64 size, StructBuffer* buffer) {$/;"	f	file:
 FAST_BITS	.\include\stb_image.h	1916;"	d
 FONT_CHARS_TOTAL	.\rasterize_font_and_dump_bitmap\src\main.cpp	12;"	d	file:
 FORMAT	.\asset_packer\main.cpp	/^enum FORMAT {$/;"	g	file:
 FORMAT_DIRECTORY	.\asset_packer\main.cpp	/^	FORMAT_DIRECTORY,$/;"	e	enum:FORMAT	file:
+FORMAT_FONT	.\asset_packer\main.cpp	/^	FORMAT_FONT,$/;"	e	enum:FORMAT	file:
+FORMAT_FONTS_BLOB	.\asset_packer\main.cpp	/^	FORMAT_FONTS_BLOB,$/;"	e	enum:FORMAT	file:
 FORMAT_GAME_ASSET_FILE	.\asset_packer\main.cpp	/^	FORMAT_GAME_ASSET_FILE,$/;"	e	enum:FORMAT	file:
 FORMAT_INDEX_BUFFER_U32	.\asset_packer\main.cpp	/^	FORMAT_INDEX_BUFFER_U32,$/;"	e	enum:FORMAT	file:
 FORMAT_MESH	.\asset_packer\main.cpp	/^	FORMAT_MESH,$/;"	e	enum:FORMAT	file:
@@ -45,6 +49,7 @@ FORMAT_PIXELS	.\asset_packer\main.cpp	/^	FORMAT_PIXELS,$/;"	e	enum:FORMAT	file:
 FORMAT_TEXTURE	.\asset_packer\main.cpp	/^	FORMAT_TEXTURE,$/;"	e	enum:FORMAT	file:
 FORMAT_TEXTURES_BLOB	.\asset_packer\main.cpp	/^	FORMAT_TEXTURES_BLOB,$/;"	e	enum:FORMAT	file:
 FORMAT_TOTAL	.\asset_packer\main.cpp	/^	FORMAT_TOTAL$/;"	e	enum:FORMAT	file:
+FORMAT_TTF	.\asset_packer\main.cpp	/^	FORMAT_TTF,$/;"	e	enum:FORMAT	file:
 FORMAT_VERTEX_BUFFER	.\asset_packer\main.cpp	/^	FORMAT_VERTEX_BUFFER,$/;"	e	enum:FORMAT	file:
 FORMAT_VERTEX_BUFFER_FLOAT	.\asset_packer\main.cpp	/^	FORMAT_VERTEX_BUFFER_FLOAT,$/;"	e	enum:FORMAT	file:
 FileInfo	.\asset_packer\main.cpp	/^struct FileInfo {$/;"	s	file:

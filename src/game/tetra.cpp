@@ -32,16 +32,16 @@ InitTetra(Renderer* renderer, MemoryArena* arena) {
 }
 
 static void
-SpawnTetra(Tetra* tetra, Transform transform, Vec4 color) {
+spawntetra(tetra* tetra, transform transform, vec4 color) {
 	tetra->transform[tetra->count] = transform;
 	tetra->color[tetra->count] = color;
 	tetra->count++;
 }
 
 static void
-GenerateTetraInfo(Tetra* tetra) {
+generatetetrainfo(tetra* tetra) {
 	for(u32 i=0; i<tetra->count; i++) {
-		tetra->info[i].model = MakeTransformMatrix(tetra->transform[i]);
+		tetra->info[i].model = maketransformmatrix(tetra->transform[i]);
 		tetra->info[i].color = tetra->color[i];
 	}
 }

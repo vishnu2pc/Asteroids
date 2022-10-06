@@ -19,50 +19,115 @@ static bool CompareMem(void* left, void* right, u64 len) {
 	return true;
 }
 
-#define PushStruct(ptr_arena, type) (type*)GetMemory((ptr_arena), sizeof(type))
-#define PushArray(ptr_arena, type, count) (type*)GetMemory((ptr_arena), sizeof(type)*(count))
-
-#define PopStruct(ptr_arena, type) (type*)FreeMemory((ptr_arena), sizeof(type))
-#define PopArray(ptr_arena, type, count) FreeMemory((ptr_arena), sizeof(type)*(count))
-
-struct Memory {
-	u8* bp;
-	u32 size;
-};
+#define PushSize(ptr_arena, size) PushSize_((ptr_arena), (size))
+#define PushStruct(ptr_arena, type) (type*)PushSize_((ptr_arena), sizeof(type))
+#define PushArray(ptr_arena, type, count) (type*)PushSize_((ptr_arena), sizeof(type)*(count))
+#define BootstrapPushStruct(type, member, min_size) (type*)BootstrapPushSize_(sizeof(type), offsetof(type, member), min_size)
 
 struct MemoryArena {
-	Memory memory;
-	u32 used;
+	PlatformMemoryBlock* current_block;
+	u64 min_block_size;
+	u32 temp_count;
 };
 
-static u8* GetMemory(MemoryArena* arena, u32 size) {
-	u8* ptr = arena->memory.bp + arena->used;
-	u32 byte_aligned_size = ((size + 7) >> 3) << 3;											// Bitwise op to get next rounded multiple of 8
-	arena->used += byte_aligned_size;
-	Assert(arena->used < arena->memory.size);
-	return ptr;
-}
+struct TemporaryMemory {
+	MemoryArena* arena;
+	PlatformMemoryBlock* block;
+	u64 used;
+};
 
-static void FreeMemory(MemoryArena* memory, u32 size) {
-	u32 byte_aligned_size = ((size + 7) >> 3) << 3;											
-	Assert(memory->used - size >= 0);
-	memory->used -= byte_aligned_size;
-}
+static void*
+PushSize_(MemoryArena* arena, u64 size) {
+	void* result = 0;
 
-static MemoryArena ExtractMemoryArena(MemoryArena* arena, u32 size) {
-	MemoryArena result = {};
-	result.memory.bp = GetMemory(arena, size);
-	result.memory.size = size;
+	u32 aligned_size = ((size + 7) & (-8));
+	if(!arena->current_block || ((arena->current_block->used + aligned_size) > arena->current_block->size)) {
+		if(!arena->min_block_size) arena->min_block_size = 1024*1024;
+
+		u64 block_size = Max(aligned_size, arena->min_block_size);
+		PlatformMemoryBlock* new_block = platform_api.allocate_memory(block_size);
+		new_block->prev = arena->current_block;
+		arena->current_block = new_block;
+	}
+
+	Assert((arena->current_block->used + aligned_size) <= arena->current_block->size);
+
+	result = arena->current_block->bp + arena->current_block->used;
+	arena->current_block->used += aligned_size;
+
 	return result;
 }
 
-u32 StringLength(char* string) {
+static TemporaryMemory 
+BeginTemporaryMemory(MemoryArena* arena) {
+	TemporaryMemory result = {};
+
+	result.arena = arena;
+	result.block = arena->current_block;
+	result.used = arena->current_block ? arena->current_block->used : 0;
+
+	arena->temp_count++;
+
+	return result;
+}
+
+static void
+FreeLastBlock(MemoryArena* arena) {
+	PlatformMemoryBlock* free_block = arena->current_block;
+	arena->current_block = free_block->prev;
+	platform_api.deallocate_memory(free_block);
+}
+
+static void
+EndTemporaryMemory(TemporaryMemory* temp_mem) {
+	MemoryArena* arena = temp_mem->arena;
+
+	while(arena->current_block != temp_mem->block) {
+		FreeLastBlock(arena);
+	}
+
+	if(arena->current_block) {
+		Assert(arena->current_block->used >= temp_mem->used);
+		arena->current_block->used = temp_mem->used;
+	}
+
+	Assert(arena->temp_count > 0);
+	arena->temp_count--;
+}
+
+static void
+ClearMemoryArena(MemoryArena* arena) {
+	while(arena->current_block) {
+		bool last_block = arena->current_block->prev == 0;
+		FreeLastBlock(arena);
+		if(last_block) break;
+	}
+}
+
+static void
+CheckArena(MemoryArena* arena) {
+	Assert(arena->temp_count == 0);
+}
+
+static void*
+BootstrapPushSize_(u64 struct_size, u64 offset_to_arena, u64 min_block_size) {
+	MemoryArena bootstrap = {};
+	bootstrap.min_block_size = min_block_size;
+	void* structure = PushSize_(&bootstrap, struct_size);
+	*(MemoryArena*)((u8*)structure + offset_to_arena) = bootstrap;
+
+	return structure;
+}
+
+static u32
+StringLength(char* string) {
 	u32 i=0;
 	while(string[i] != 0) i++;
 	return i;
 }
 
-bool StringCompare(char* left, char* right) {
+static bool
+StringCompare(char* left, char* right) {
 	u32 left_len = StringLength(left);
 	u32 right_len = StringLength(right);
 	if(left_len != right_len) return false;

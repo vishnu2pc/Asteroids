@@ -1,14 +1,14 @@
-struct Game {
-	MemoryArena permanent;
-	MemoryArena transient;
+struct GameState {
+	MemoryArena total_arena;
+	MemoryArena* frame_arena;
+	TemporaryMemory frame_arena_temp;
 
 	GameAssets* assets;
-	AssetInfo* asset_info;
+	TextUI* text_ui;
 	Renderer* renderer;
 	QuadRenderer* quad_renderer;
 	MeshRenderer* mesh_renderer;
-	DebugText* debug_text;
 	Camera* camera;
 
-	Tetra* tetra;
+	Entity* entity;
 };

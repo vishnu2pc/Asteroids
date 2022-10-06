@@ -13,16 +13,23 @@ struct Win32DLL { // InOut struct
 };
 
 char* win32_game_function_names[] = {
-	"game_init",
 	"game_loop",
 };
 
 struct Win32GameFunctionTable {
-	GameInit* game_init;
 	GameLoop* game_loop;
 };
 
+struct Win32MemoryBlock {
+	PlatformMemoryBlock block;
+
+	Win32MemoryBlock* prev;
+	Win32MemoryBlock* next;
+};
+
 struct Win32State {
+	Win32MemoryBlock memory_sentinel;
+
 	char exe_absfilepath[MAX_PATH];
 	char exe_absfolderpath[MAX_PATH];
 	HWND default_window_handle;
@@ -30,7 +37,6 @@ struct Win32State {
 
 	bool cursor_enabled;
 	bool cursor_clip_enabled;
-	bool cursor_warp_enabled;
 };
 
 

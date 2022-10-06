@@ -16,7 +16,6 @@ global Win32State g_win32_state;
 global Win32Window g_win32_window;
 global Win32GameFunctionTable g_game_functions;
 
-//------------------------------------------------------------------------------------------------------------------
 static FILETIME
 Win32GetLastWriteTime(char* absfilepath) {
 	FILETIME result = {};
@@ -25,7 +24,7 @@ Win32GetLastWriteTime(char* absfilepath) {
 	result = file_attribute.ftLastWriteTime;
 	return result;
 }
-//------------------------------------------------------------------------------------------------------------------
+
 static WindowDimensions 
 Win32GetWindowDimensions(HWND window) {
 	WindowDimensions wd = {};
@@ -35,13 +34,13 @@ Win32GetWindowDimensions(HWND window) {
 	wd.height = (u32)(rect.bottom - rect.top);
 	return wd;
 }
-//------------------------------------------------------------------------------------------------------------------
+
 static void
 Win32MakeTempDLLAbsFilePath(Win32State* state, Win32DLL* code, char* dst) {
 	stbsp_sprintf(dst, "%s%d_%s", state->exe_absfolderpath, code->transient_dll_counter++, code->transient_dll_name);
 	if(code->transient_dll_counter >= 1024) code->transient_dll_counter = 0;
 }
-//------------------------------------------------------------------------------------------------------------------
+
 static void 
 Win32UnloadDLL(Win32DLL* code) {
 	FreeLibrary(code->dll);
@@ -49,7 +48,7 @@ Win32UnloadDLL(Win32DLL* code) {
 	code->dll = 0;
 	ZeroArray(code->functions, code->function_count);
 }
-//-------------------------------------------------------------------------------------------------------------------
+
 static void 
 Win32LoadDLL(Win32State* state, Win32DLL* code) {
 	char temp_dll_absfilepath[MAX_PATH] = {};
@@ -74,7 +73,7 @@ Win32LoadDLL(Win32State* state, Win32DLL* code) {
 	}
 	if(!code->valid) Win32UnloadDLL(code);
 }
-//-------------------------------------------------------------------------------------------------------------------
+
 static void
 Win32ReloadDLL(Win32State* state, Win32DLL* code) {
 	Win32UnloadDLL(code);
@@ -85,13 +84,13 @@ Win32ReloadDLL(Win32State* state, Win32DLL* code) {
 		}
 	}
 }
-//-------------------------------------------------------------------------------------------------------------------
+
 static bool 
 Win32HasDLLChanged(Win32DLL* code) {
 	FILETIME ft = Win32GetLastWriteTime(code->absfilepath);
 	return CompareFileTime(&ft, &code->last_write_time);
 }
-//-------------------------------------------------------------------------------------------------------------------
+
 static LRESULT CALLBACK
 Win32MainWindowCallback(HWND window, UINT msg, WPARAM wparam, LPARAM lparam) {
 	LRESULT result = 0;
@@ -112,7 +111,7 @@ Win32MainWindowCallback(HWND window, UINT msg, WPARAM wparam, LPARAM lparam) {
 	}
 	return result;
 }
-//-------------------------------------------------------------------------------------------------------------------
+
 static void
 Win32PreProcessButton(Button* button) {
 	if(button->pressed) {
@@ -120,7 +119,7 @@ Win32PreProcessButton(Button* button) {
 		button->pressed = false;
 	}
 }
-//-------------------------------------------------------------------------------------------------------------------
+
 static void
 Win32ProcessButton(Button* button, bool is_down) {
 	if(is_down) {
@@ -131,20 +130,41 @@ Win32ProcessButton(Button* button, bool is_down) {
 		button->held = false;
 	}
 }
-//-------------------------------------------------------------------------------------------------------------------
-static PLATFORM_ALLOCATE_MEMORY(win32_allocate_memory) {
-	PlatformMemoryBlock* block;
-	u64 page_size = 4096; 
-	u64 total_size = sizeof(PlatformMemoryBlock) + size;
-	u64 offset = sizeof(PlatformMemoryBlock);
 
-	block = (PlatformMemoryBlock*)VirtualAlloc(0, total_size, MEM_COMMIT|MEM_RESERVE, PAGE_READWRITE); 
+static PLATFORM_ALLOCATE_MEMORY(win32_allocate_memory) {
+	u64 page_size = 4096; 
+	u64 total_size = sizeof(Win32MemoryBlock) + size;
+	u64 offset = sizeof(Win32MemoryBlock);
+
+	Win32MemoryBlock* block = (Win32MemoryBlock*)VirtualAlloc(0, total_size, MEM_COMMIT|MEM_RESERVE, PAGE_READWRITE); 
 	Assert(block);
-	block->bp = (u8*)block + offset;
-	block->size = total_size;
-	return block;
+	block->block.bp = (u8*)block + offset;
+	Assert(block->block.used == 0);
+	Assert(block->block.prev == 0);
+
+	Win32MemoryBlock* sentinel = &g_win32_state.memory_sentinel;
+
+	block->block.size = size;
+	block->next = sentinel;
+	block->prev = sentinel->prev;
+
+	block->prev->next = block;
+	block->next->prev = block;
+
+	PlatformMemoryBlock* plat_block = &block->block;
+	return plat_block;
 }
-//-------------------------------------------------------------------------------------------------------------------
+
+static PLATFORM_DEALLOCATE_MEMORY(win32_deallocate_memory) {
+	if(block) {
+		Win32MemoryBlock* win32_block = (Win32MemoryBlock*)block;
+		win32_block->prev->next = win32_block->next;
+		win32_block->next->prev = win32_block->prev;
+		bool result = VirtualFree(block, 0, MEM_RELEASE);
+		Assert(result);
+	}
+}
+
 static PLATFORM_OPEN_FILE(win32_open_file) {
 	PlatformFileHandle result = {};
 	char* filename = (char*)info->name;
@@ -159,19 +179,19 @@ static PLATFORM_OPEN_FILE(win32_open_file) {
 
 	return result;
 }
-//-------------------------------------------------------------------------------------------------------------------
+
 static PLATFORM_CLOSE_FILE(win32_close_file) {
 	Assert(!file_handle->failed);
 	HANDLE handle = *(HANDLE*)&file_handle->handle;
 	CloseHandle(handle);
 }
-//-------------------------------------------------------------------------------------------------------------------
+
 static PLATFORM_READ_FILE(win32_read_file) {
 	Assert(!win32_handle->failed);
 	HANDLE handle = *(HANDLE*)&win32_handle->handle;
 	Assert(ReadFile(handle, dst, size, 0, 0)); 
 }
-//-------------------------------------------------------------------------------------------------------------------
+
 static void
 Win32ProcessButtonInput(MSG msg, Input* input) {
 	bool is_key_down = msg.message == WM_KEYDOWN ? true : false; 
@@ -188,7 +208,7 @@ Win32ProcessButtonInput(MSG msg, Input* input) {
 	if(VKCode == VK_SHIFT) Win32ProcessButton(&input->buttons[WIN32_BUTTON_SHIFT], is_down);
 	if(VKCode == VK_LMENU) Win32ProcessButton(&input->buttons[WIN32_BUTTON_ALT], is_down);
 	if(VKCode == VK_SPACE) Win32ProcessButton(&input->buttons[WIN32_BUTTON_SPACE], is_down);
-	if(VKCode == VK_CONTROL) Win32ProcessButton(&input->buttons[WIN32_BUTTON_B], is_down);
+	if(VKCode == VK_CONTROL) Win32ProcessButton(&input->buttons[WIN32_BUTTON_CTRL], is_down);
 
 	if(VKCode == VK_F1) Win32ProcessButton(&input->buttons[WIN32_BUTTON_F1], is_down);
 	if(VKCode == VK_F2) Win32ProcessButton(&input->buttons[WIN32_BUTTON_F2], is_down);
@@ -202,40 +222,31 @@ Win32ProcessButtonInput(MSG msg, Input* input) {
 	if(VKCode == VK_F10) Win32ProcessButton(&input->buttons[WIN32_BUTTON_F10], is_down);
 	if(VKCode == VK_F11) Win32ProcessButton(&input->buttons[WIN32_BUTTON_F11], is_down);
 	if(VKCode == VK_F12) Win32ProcessButton(&input->buttons[WIN32_BUTTON_F12], is_down);
-
-	if(msg.message == WM_LBUTTONDOWN) Win32ProcessButton(&input->buttons[WIN32_BUTTON_LEFT_MOUSE], true);
-	if(msg.message == WM_LBUTTONUP) Win32ProcessButton(&input->buttons[WIN32_BUTTON_RIGHT_MOUSE], false);
-	if(msg.message == WM_RBUTTONDOWN) Win32ProcessButton(&input->buttons[WIN32_BUTTON_RIGHT_MOUSE], true);
-	if(msg.message == WM_RBUTTONUP) Win32ProcessButton(&input->buttons[WIN32_BUTTON_RIGHT_MOUSE], false);
 }
-//-------------------------------------------------------------------------------------------------------------------
+
 static void
-Win32PreProcessMouseMove(Input* input, bool warp_mouse_to_center) {
+Win32PreProcessMouseMove(Input* input) {
 	POINT point;
 	GetCursorPos(&point);
-	int old_x_pos = input->axes[WIN32_AXIS_MOUSE].x;
-	int old_y_pos = input->axes[WIN32_AXIS_MOUSE].y;
-
-	input->axes[WIN32_AXIS_MOUSE].x = point.x;
-	input->axes[WIN32_AXIS_MOUSE].y = point.y;
-
-	if(!warp_mouse_to_center) {
-		input->axes[WIN32_AXIS_MOUSE_DEL].x = point.x - old_x_pos;
-		input->axes[WIN32_AXIS_MOUSE_DEL].y = point.y - old_y_pos;
-	}
-	else {
-		RECT rect = {};
-		GetWindowRect(g_win32_window.handle, &rect);
-		int center_x = rect.left+rect.right/2;
-		int center_y = rect.top+rect.bottom/2;
-		input->axes[WIN32_AXIS_MOUSE_DEL].x = center_x - point.x;
-		input->axes[WIN32_AXIS_MOUSE_DEL].y = center_y - point.y;
-		SetCursorPos(center_x, center_y);
-	}
+	float old_x_pos = input->axes[WIN32_AXIS_MOUSE].x;
+	float old_y_pos = input->axes[WIN32_AXIS_MOUSE].y;
 	
+	ScreenToClient(g_win32_window.handle, &point);
+
+	float x = (float)point.x/g_win32_window.dim.width;
+	float y = (float)point.y/g_win32_window.dim.height;
+
+	if(x>1) x = 1; if(x<0) x = 0;
+	if(y>1) y = 1; if(y<0) y = 0;
+
+	input->axes[WIN32_AXIS_MOUSE_DEL].x = x - old_x_pos;
+	input->axes[WIN32_AXIS_MOUSE_DEL].y = y - old_y_pos;
+
+	input->axes[WIN32_AXIS_MOUSE].x = x;
+	input->axes[WIN32_AXIS_MOUSE].y = y;
+
 }
-//-------------------------------------------------------------------------------------------------------------------
-//-------------------------------------------------------------------------------------------------------------------
+
 int CALLBACK
 WinMain(HINSTANCE instance, HINSTANCE prev_instance, LPSTR cmdline, int show_code) {
 	HRESULT hr = {};
@@ -255,7 +266,7 @@ WinMain(HINSTANCE instance, HINSTANCE prev_instance, LPSTR cmdline, int show_cod
 
 	HWND window = CreateWindowExA(0, window_class.lpszClassName, "Game", 
 			WS_OVERLAPPEDWINDOW|WS_VISIBLE, CW_USEDEFAULT, CW_USEDEFAULT, 
-			CW_USEDEFAULT, CW_USEDEFAULT, 0, 0, instance, 0);
+			1600, 900, 0, 0, instance, 0);
 	Assert(window);
 
 	g_win32_state.default_window_handle = window;
@@ -288,6 +299,9 @@ WinMain(HINSTANCE instance, HINSTANCE prev_instance, LPSTR cmdline, int show_cod
 	g_running = true;
 	Input input = {};
 
+	Win32MemoryBlock* sentinel = &g_win32_state.memory_sentinel;
+	sentinel->next = sentinel;
+	sentinel->prev = sentinel;
 
 	Win32DLL game_code           = {};
 	game_code.transient_dll_name = "game_temp.dll";
@@ -299,29 +313,27 @@ WinMain(HINSTANCE instance, HINSTANCE prev_instance, LPSTR cmdline, int show_cod
 
 	Win32LoadDLL(&g_win32_state, &game_code);
 
-	win32_api.open_file       = win32_open_file;
-	win32_api.close_file      = win32_close_file;
-	win32_api.read_file       = win32_read_file;
-	win32_api.allocate_memory = win32_allocate_memory;
+	win32_api.open_file         = win32_open_file;
+	win32_api.close_file        = win32_close_file;
+	win32_api.read_file         = win32_read_file;
+	win32_api.allocate_memory   = win32_allocate_memory;
+	win32_api.deallocate_memory = win32_deallocate_memory;
 
 	GameLayer game_layer = {};
-	game_layer.platform_api = &win32_api;
+	game_layer.platform_api = win32_api;
 
 	g_win32_window.handle = window;
 	g_win32_window.dim = Win32GetWindowDimensions(window);
 
-	g_game_functions.game_init(&game_layer, &g_win32_window);
-
-	//--------------------------------------------------------------------------------//
 	while(g_running) {
 
 		if(game_layer.debug_cursor_request) {
-			g_win32_state.cursor_warp_enabled = false;
-
 			if(!g_win32_state.cursor_enabled) {
 				SetCursor(g_win32_state.cursor);
 				g_win32_state.cursor_enabled = true;
 			}
+		}
+		else {
 			if(!g_win32_state.cursor_clip_enabled) {
 				RECT rect;
 				GetWindowRect(g_win32_window.handle, &rect);
@@ -329,20 +341,13 @@ WinMain(HINSTANCE instance, HINSTANCE prev_instance, LPSTR cmdline, int show_cod
 				g_win32_state.cursor_clip_enabled = true;
 			}
 		}
-		else {
-			g_win32_state.cursor_warp_enabled = true;
-			if(g_win32_state.cursor_enabled) {
-				SetCursor(0);
-				g_win32_state.cursor_enabled = false;
-			}
-			if(g_win32_state.cursor_clip_enabled) {
-				ClipCursor(nullptr);
-				g_win32_state.cursor_clip_enabled = false;
-			}
-		}
 
 		for(u8 i=0; i<WIN32_BUTTON_TOTAL; i++) Win32PreProcessButton(&input.buttons[i]);
-		Win32PreProcessMouseMove(&input, g_win32_state.cursor_warp_enabled);
+		Win32PreProcessMouseMove(&input); 
+
+		Win32ProcessButton(&input.buttons[WIN32_BUTTON_LEFT_MOUSE], GetKeyState(VK_LBUTTON) & (1<<15));
+		Win32ProcessButton(&input.buttons[WIN32_BUTTON_RIGHT_MOUSE], GetKeyState(VK_LBUTTON) & (1<<15));
+
 
 		MSG msg = {};
 		while(PeekMessageA(&msg, 0, 0, 0, PM_REMOVE)) {
@@ -365,7 +370,10 @@ WinMain(HINSTANCE instance, HINSTANCE prev_instance, LPSTR cmdline, int show_cod
 		
 		g_game_functions.game_loop(&game_layer, &g_win32_window, &input);
 
-		if(Win32HasDLLChanged(&game_code)) Win32ReloadDLL(&g_win32_state, &game_code); 
+		if(Win32HasDLLChanged(&game_code)) {
+			Win32ReloadDLL(&g_win32_state, &game_code); 
+			game_layer.executable_reloaded = true;
+		}
 		if(game_layer.quit_request) g_running = false;
 	}
 	return 1;

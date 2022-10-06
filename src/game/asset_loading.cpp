@@ -1,12 +1,13 @@
-#include "asset_formats.h"
-#include "file_formats.h"
-
-#define MAX_TEXTURES 255
+#include "asset_info.h"
 
 struct GameAssets {
-	MemoryArena permanent;
+	MemoryArena* permanent_arena;
 	u32 offsets[ASSET_BLOB_TOTAL];
+
 	u8* data;
+	u32 size;
+
+	TextureAssetInfo* texture_assets;
 };
 
 static void*
@@ -15,24 +16,23 @@ GetAssetBlob(ASSET_BLOB blob, GameAssets* assets) {
 }
 
 static GameAssets* 
-InitGameAssets(PlatformAPI* platform_api, MemoryArena* arena) {
+LoadGameAssets(MemoryArena* arena) {
 	GameAssets* ga = {};
 
 	PlatformFileInfo info;
 	u8 name[] = "data.gaf";
 	info.name = name;
-	PlatformFileHandle handle = platform_api->open_file(&info);
+	PlatformFileHandle handle = platform_api.open_file(&info);
 	Assert(!handle.failed);
 
-	u8* memblock = GetMemory(arena, info.size + sizeof(GameAssets));
-	ga = (GameAssets*)memblock;
-	ga->permanent.memory.bp = memblock;
-	ga->permanent.memory.size = info.size+sizeof(GameAssets);
-	ga->permanent.used = info.size+sizeof(GameAssets);
+	ga = PushStruct(arena, GameAssets);
+	ga->permanent_arena = arena;
 
-	ga->data = memblock + sizeof(GameAssets);
+	u8* memblock = (u8*)PushSize(arena, info.size);
+	ga->data = memblock; 
+	ga->size = info.size;
 
-	platform_api->read_file(&handle, info.size, ga->data);
+	platform_api.read_file(&handle, info.size, ga->data);
 	GameAssetFile* gaf = (GameAssetFile*)ga->data;
 	Assert(StringCompare(gaf->identification, "gaff"));
 
@@ -100,6 +100,7 @@ LoadMeshDataFromAssets(char* name, GameAssets* ga, MemoryArena* arena) {
 
 	return md;
 }
+
 static TextureFormat*
 GetAllTextureFormats(GameAssets* ga, u32* count) {
 	TexturesBlob* tb = (TexturesBlob*)(ga->data + ga->offsets[ASSET_BLOB_TEXTURES]);
@@ -108,6 +109,16 @@ GetAllTextureFormats(GameAssets* ga, u32* count) {
 	*count = tb->textures_count;
 	return tf_arr;
 }
+
+static FontFormat*
+GetAllFontFormats(GameAssets* ga, u32* count) {
+	FontsBlob* fb = (FontsBlob*)(ga->data + ga->offsets[ASSET_BLOB_FONTS]);
+	FontFormat* ff_arr = (FontFormat*)(ga->data + fb->offset_to_font_formats);
+
+	*count = fb->fonts_count;
+	return ff_arr;
+}
+
 
 static TextureFormat*
 GetTextureFormat(char* name, GameAssets* ga) {
@@ -131,4 +142,31 @@ GetTextureFormat(char* name, GameAssets* ga) {
 	return tf;
 }
 
+static FontFormat*
+GetFontFormat(char* name, GameAssets* ga) {
+	FontFormat* ff = 0;
+
+	u32 count = 0;
+	FontFormat* ff_arr = GetAllFontFormats(ga, &count);
+
+	bool found = false;
+	u32 i=0;
+	for(i=0; i<count; i++) {
+		if(StringCompare(ff_arr[i].name, name)) {
+			found = true;
+			break;
+		}
+	}
+	Assert(found);
+
+	ff = ff_arr + i;
+
+	return ff;
+}
+
+static void*
+GetFont(char* name, GameAssets* ga) {
+	FontFormat* ff = GetFontFormat(name, ga);
+	return ga->data + ff->offset_to_data;
+}
 

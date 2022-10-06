@@ -1,20 +1,6 @@
-#include "asset_info.h"
-
-static AssetInfo*
-InitAssetInfo(MemoryArena* arena) {
-	AssetInfo* result = 0;
-	u8* memblock = GetMemory(arena, Megabytes(1));
-	result = (AssetInfo*)memblock;
-	result->permanent.memory.bp = memblock;
-	result->permanent.memory.size = Megabytes(1);
-	result->permanent.used = sizeof(AssetInfo);
-
-	return result;
-}
-
 static TextureData*
-LoadTextureData(TextureFormat* tf, GameAssets* assets, MemoryArena* arena) {
-	TextureData* result = PushStruct(arena, TextureData);
+LoadTextureData(TextureFormat* tf, GameAssets* assets) {
+	TextureData* result = PushStruct(assets->permanent_arena, TextureData);
 
 	result->pixels = assets->data + tf->offset_to_data;
 	result->width = tf->width;
@@ -25,11 +11,27 @@ LoadTextureData(TextureFormat* tf, GameAssets* assets, MemoryArena* arena) {
 }
 
 static TextureAssetInfo*
-LoadTextureAsset(char* name, GameAssets* assets, AssetInfo* asset_info) {
-	TextureAssetInfo* texture_info = PushTextureAssetInfo(asset_info);
+PushTextureAssetInfo(GameAssets* ga) {
+	TextureAssetInfo* result = 0;
+
+	if(!ga->texture_assets) {
+		result = ga->texture_assets = PushStruct(ga->permanent_arena, TextureAssetInfo);
+	}
+	else {
+		result = ga->texture_assets;
+		while(result->next) result = result->next;
+		result = result->next = PushStruct(ga->permanent_arena, TextureAssetInfo);
+	}
+
+	return result;
+}
+
+static TextureAssetInfo*
+LoadTextureAsset(char* name, GameAssets* assets) {
+	TextureAssetInfo* texture_info = PushTextureAssetInfo(assets);
 
 	TextureFormat* tf = GetTextureFormat(name, assets); 
-	TextureData* td = LoadTextureData(tf, assets, &asset_info->permanent);
+	TextureData* td = LoadTextureData(tf, assets);
 
 	texture_info->name = tf->name;
 	texture_info->data = td;
@@ -38,44 +40,49 @@ LoadTextureAsset(char* name, GameAssets* assets, AssetInfo* asset_info) {
 }
 
 static void
-LoadAllTextureAssets(GameAssets* assets, AssetInfo* info) {
+LoadAllTextureAssets(GameAssets* assets) {
 	u32 count = 0;
 	TextureFormat* tf_array = GetAllTextureFormats(assets, &count);
 
 	TextureAssetInfo* texture_info;
 	TextureFormat* texture_format;
 	for(u32 i=0; i<count; i++) {
-		texture_info = PushTextureAssetInfo(info);
+		texture_info = PushTextureAssetInfo(assets);
 		texture_format = tf_array+i;
 		texture_info->name = tf_array[i].name;
-		texture_info->data = LoadTextureData(tf_array+i, assets, &info->permanent);
+		texture_info->data = LoadTextureData(tf_array+i, assets);
 	}
 }
 
 static void
-UploadAllTextureAssets(AssetInfo* info, Renderer* renderer) {
-	TextureAssetInfo* texture_info;
-	for(u32 i=0; i<info->texture_counter; i++) {
-		texture_info = info->textures + i;
-		if(texture_info->data->pixels) {
-			texture_info->render_buffer = UploadTexture(info->textures[i].data, renderer);
+UploadAllTextureAssets(GameAssets* assets, Renderer* renderer) {
+	TextureAssetInfo* info = assets->texture_assets;
+	if(info) {
+		while(info) {
+			info->buffer = UploadTexture(info->data->pixels, info->data->width,
+					info->data->height, info->data->num_components, renderer);
+			info = info->next;
 		}
 	}
 }
 
 static TextureAssetInfo*
-GetTextureAssetInfo(char* name, AssetInfo* info) {
+GetTextureAssetInfo(char* name, GameAssets* assets) {
 	TextureAssetInfo* result = 0;
-	Assert(name);
+
 	bool found = false;
-	u32 i=0;
-	for(i=0; i<info->texture_counter; i++) {
-		if(StringCompare(info->textures[i].name, name)) {
-			result = info->textures + i;
+	
+	Assert(assets->texture_assets);
+	TextureAssetInfo* info = assets->texture_assets;
+	while(info) {
+		if(StringCompare(info->name, name)) {
+			result = info;
 			found = true;
 			break;
 		}
+		info = info->next;
 	}
+
 	Assert(found);
 	return result;
 }

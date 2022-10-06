@@ -2,11 +2,17 @@
 CLS
 SET ARG1=%1
 
-SET CompilerFlags=/diagnostics:column /nologo /Od /Zo /GR- /EHa- /Gm- /Fm /Zi /FC /WL /WX /W4 /wd4505 /wd4201 /wd4100 /wd4189 /wd4127 /wd4244 /wd4701 /wd4267
+cd /d "%~dp0"
+
+if not defined DevEnvDir (
+    call vcvarsall.bat x64
+)
+
+SET CompilerFlags=/diagnostics:column /nologo /Od /Zo /GR- /EHa- /Gm- /Fm /Zi /FC /WX /W4 /wd4505 /wd4201 /wd4100 /wd4189 /wd4127 /wd4244 /wd4701 /wd4267
 SET LinkerFlags=/incremental:no /opt:ref 
 
-SET win32_macro_defs=/D DEBUG_ASSERT 
-SET game_macro_defs=/D DEBUG_ASSERT 
+SET win32_macro_defs=/D INTERNAL 
+SET game_macro_defs=/D INTERNAL 
 
 SET build_path=..\build
 SET game_path=..\src\game\
@@ -15,7 +21,7 @@ SET tools_path=..\src\tools\
 SET win32_entry_libs=user32.lib
 SET game_libs=d3d11.lib dxgi.lib dxguid.lib d3dcompiler.lib 
 
-SET game_exports=/EXPORT:game_init /EXPORT:game_loop
+SET game_exports=/EXPORT:game_loop
 
 IF NOT EXIST %build_path% MKDIR %build_path%
 PUSHD %build_path%
@@ -52,13 +58,16 @@ ECHO.
 popd
 ECHO -------------------------------------------------------------------------------------------------------------- 
 
-ECHO Generating CTags
+ECHO Generating source files tags
 PUSHD %tools_path%
 ctags -R
+cscope -R -b
 POPD
-
 PUSHD %game_path%
 ctags -R
+cscope -R -b
+POPD
+
 POPD
 ECHO -------------------------------------------------------------------------------------------------------------- 
 ECHO.
