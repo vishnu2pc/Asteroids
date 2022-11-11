@@ -15,6 +15,7 @@ global bool g_running;
 global Win32State g_win32_state;
 global Win32Window g_win32_window;
 global Win32GameFunctionTable g_game_functions;
+global i64 GlobalPerfCountFrequency;
 
 static FILETIME
 Win32GetLastWriteTime(char* absfilepath) {
@@ -35,6 +36,21 @@ Win32GetWindowDimensions(HWND window) {
 	return wd;
 }
 
+static LARGE_INTEGER
+Win32GetWallClock(void) {    
+    LARGE_INTEGER Result;
+    QueryPerformanceCounter(&Result);
+    return(Result);
+}
+
+static float
+Win32GetSecondsElapsed(LARGE_INTEGER Start, LARGE_INTEGER End)
+{
+    float Result = ((float)(End.QuadPart - Start.QuadPart) /
+                     (float)GlobalPerfCountFrequency);
+    return(Result);
+}
+   
 static void
 Win32MakeTempDLLAbsFilePath(Win32State* state, Win32DLL* code, char* dst) {
 	stbsp_sprintf(dst, "%s%d_%s", state->exe_absfolderpath, code->transient_dll_counter++, code->transient_dll_name);
@@ -210,6 +226,11 @@ Win32ProcessButtonInput(MSG msg, Input* input) {
 	if(VKCode == VK_SPACE) Win32ProcessButton(&input->buttons[WIN32_BUTTON_SPACE], is_down);
 	if(VKCode == VK_CONTROL) Win32ProcessButton(&input->buttons[WIN32_BUTTON_CTRL], is_down);
 
+	if(VKCode == VK_UP) Win32ProcessButton(&input->buttons[WIN32_BUTTON_UP], is_down);
+	if(VKCode == VK_DOWN) Win32ProcessButton(&input->buttons[WIN32_BUTTON_DOWN], is_down);
+	if(VKCode == VK_LEFT) Win32ProcessButton(&input->buttons[WIN32_BUTTON_LEFT], is_down);
+	if(VKCode == VK_RIGHT) Win32ProcessButton(&input->buttons[WIN32_BUTTON_RIGHT], is_down);
+
 	if(VKCode == VK_F1) Win32ProcessButton(&input->buttons[WIN32_BUTTON_F1], is_down);
 	if(VKCode == VK_F2) Win32ProcessButton(&input->buttons[WIN32_BUTTON_F2], is_down);
 	if(VKCode == VK_F3) Win32ProcessButton(&input->buttons[WIN32_BUTTON_F3], is_down);
@@ -259,7 +280,7 @@ WinMain(HINSTANCE instance, HINSTANCE prev_instance, LPSTR cmdline, int show_cod
 	window_class.lpszMenuName = "Game_menu";
 	window_class.lpszClassName = "Game_class";
 
-	g_win32_state.cursor = LoadCursor(0, IDC_CROSS);
+	g_win32_state.cursor = LoadCursor(0, IDC_ARROW);
 	window_class.hCursor = g_win32_state.cursor;
 
 	Assert(RegisterClassA(&window_class));
@@ -325,6 +346,21 @@ WinMain(HINSTANCE instance, HINSTANCE prev_instance, LPSTR cmdline, int show_cod
 	g_win32_window.handle = window;
 	g_win32_window.dim = Win32GetWindowDimensions(window);
 
+	LARGE_INTEGER PerfCountFrequencyResult;
+	QueryPerformanceFrequency(&PerfCountFrequencyResult);
+	GlobalPerfCountFrequency = PerfCountFrequencyResult.QuadPart;
+
+	UINT DesiredSchedulerMS = 1;
+	bool SleepIsGranular = (timeBeginPeriod(DesiredSchedulerMS) == TIMERR_NOERROR);
+
+	int MonitorRefreshHz = 144;
+	int GameUpdateHz = MonitorRefreshHz;
+	float TargetSecondsPerFrame = 1.0f/(float)GameUpdateHz;
+
+	LARGE_INTEGER LastCounter = Win32GetWallClock();
+	LARGE_INTEGER AppBeginTimer = LastCounter;
+	u64 LastCycleCount = __rdtsc();
+
 	while(g_running) {
 
 		if(game_layer.debug_cursor_request) {
@@ -333,6 +369,7 @@ WinMain(HINSTANCE instance, HINSTANCE prev_instance, LPSTR cmdline, int show_cod
 				g_win32_state.cursor_enabled = true;
 			}
 		}
+#if 0
 		else {
 			if(!g_win32_state.cursor_clip_enabled) {
 				RECT rect;
@@ -341,6 +378,7 @@ WinMain(HINSTANCE instance, HINSTANCE prev_instance, LPSTR cmdline, int show_cod
 				g_win32_state.cursor_clip_enabled = true;
 			}
 		}
+#endif
 
 		for(u8 i=0; i<WIN32_BUTTON_TOTAL; i++) Win32PreProcessButton(&input.buttons[i]);
 		Win32PreProcessMouseMove(&input); 
@@ -367,14 +405,60 @@ WinMain(HINSTANCE instance, HINSTANCE prev_instance, LPSTR cmdline, int show_cod
 				} break;
 			}
 		}
-		
+
+		LARGE_INTEGER WorkCounter = Win32GetWallClock();
+		float WorkSecondsElapsed = Win32GetSecondsElapsed(LastCounter, WorkCounter);
+
+		float SecondsElapsedForFrame = WorkSecondsElapsed;
+		if(SecondsElapsedForFrame < TargetSecondsPerFrame) {                        
+			if(SleepIsGranular) {
+				DWORD SleepMS = (DWORD)(1000.0f * (TargetSecondsPerFrame -
+							SecondsElapsedForFrame));
+				if(SleepMS > 0)  Sleep(SleepMS); 
+			}
+
+			float TestSecondsElapsedForFrame = Win32GetSecondsElapsed(LastCounter,
+					Win32GetWallClock());
+
+			while(SecondsElapsedForFrame < TargetSecondsPerFrame)
+			{                            
+				SecondsElapsedForFrame = Win32GetSecondsElapsed(LastCounter,
+						Win32GetWallClock());
+			}
+		}
+
 		g_game_functions.game_loop(&game_layer, &g_win32_window, &input);
 
 		if(Win32HasDLLChanged(&game_code)) {
 			Win32ReloadDLL(&g_win32_state, &game_code); 
 			game_layer.executable_reloaded = true;
 		}
+		else game_layer.executable_reloaded = false;
+
 		if(game_layer.quit_request) g_running = false;
+
+		LARGE_INTEGER EndCounter = Win32GetWallClock();
+		LARGE_INTEGER AppTimer = EndCounter;
+		float TimerMS = 1000.0f*Win32GetSecondsElapsed(AppBeginTimer, AppTimer);
+
+		float MSPerFrame = 1000.0f*Win32GetSecondsElapsed(LastCounter, EndCounter);                    
+		LastCounter = EndCounter;
+
+		u64 EndCycleCount = __rdtsc();
+		u64 CyclesElapsed = EndCycleCount - LastCycleCount;
+		LastCycleCount = EndCycleCount;
+
+		//i32 time_to_sleep = 18.288 - MSPerFrame;
+		//if(time_to_sleep > 0) Sleep(time_to_sleep);
+
+		game_layer.ms_per_frame = MSPerFrame;
+		game_layer.timer = TimerMS;
+
+		//char text1[100];
+		//stbsp_sprintf(text1, "%.02f: Frame Time\n", MSPerFrame);
+		//OutputDebugStringA(text1);
+
+		LastCounter = EndCounter;
 	}
 	return 1;
 }

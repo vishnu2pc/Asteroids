@@ -1,9 +1,14 @@
-#define MAX_QUADS 100
-#define MAX_TEXTURED_QUADS 100
+#define MAX_QUADS 10000
+#define MAX_TEXTURED_QUADS 10000
 
 struct RenderQuad {
 	Quad quad;
 	Vec4 color;
+};
+
+struct TexturedQuad {
+	Quad quad;
+	TextureBuffer* texture;
 };
 
 struct QuadRenderer {
@@ -18,6 +23,7 @@ struct QuadRenderer {
 	Vec3 positions[MAX_TEXTURED_QUADS*4];
 	Vec2 texcoords[MAX_TEXTURED_QUADS*4];
 	TextureBuffer* textures[MAX_TEXTURED_QUADS];
+	u8 blend_states[MAX_TEXTURED_QUADS];
 	u32 textured_quad_counter;
 
 	VertexShader* textured_quad_vs;
@@ -76,7 +82,31 @@ PushTexturedQuad(Quad* quad, TextureBuffer* texture_buffer, QuadRenderer* quad_r
 	positions[textured_quad_counter*4 + 3] = quad->tr;
 	texcoords[textured_quad_counter*4 + 3] = V2(1.0f, 0.0f);
 
+	quad_renderer->textures[quad_renderer->textured_quad_counter] = texture_buffer;
+	quad_renderer->blend_states[quad_renderer->textured_quad_counter++] = 0;
+}
+
+static void
+PushParticleQuad(Quad* quad, TextureBuffer* texture_buffer, QuadRenderer* quad_renderer) {
+	Assert(quad_renderer->textured_quad_counter <= MAX_TEXTURED_QUADS);
+	Vec2* texcoords = quad_renderer->texcoords;
+	Vec3* positions = quad_renderer->positions;
+	u32 textured_quad_counter = quad_renderer->textured_quad_counter;
+
+	positions[textured_quad_counter*4] = quad->bl;
+	texcoords[textured_quad_counter*4] = V2(0.0f, 1.0f);
+
+	positions[textured_quad_counter*4 + 1] = quad->br;
+	texcoords[textured_quad_counter*4 + 1] = V2(1.0f, 1.0f);
+
+	positions[textured_quad_counter*4 + 2] = quad->tl;
+	texcoords[textured_quad_counter*4 + 2] = V2(0.0f, 0.0f);
+
+	positions[textured_quad_counter*4 + 3] = quad->tr;
+	texcoords[textured_quad_counter*4 + 3] = V2(1.0f, 0.0f);
+
 	quad_renderer->textures[quad_renderer->textured_quad_counter++] = texture_buffer;
+	quad_renderer->blend_states[quad_renderer->textured_quad_counter++] = BLEND_STATE_Regular;
 }
 
 static void
@@ -106,27 +136,6 @@ QuadRendererFrame(QuadRenderer* quad_renderer, Camera* cam, Renderer* renderer) 
 	set_camera_constants->constants = quad_renderer->camera_constants;
 	set_camera_constants->slot = (u8)1;
 	set_camera_constants->vertex_shader = true;
-
-	if(quad_renderer->quad_counter) {
-		PushRenderBufferData* push_quad_buffer = PushRenderCommand(renderer, PushRenderBufferData);
-		push_quad_buffer->buffer = quad_renderer->quad_buffer->buffer;
-		push_quad_buffer->data = quad_renderer->quads;
-		push_quad_buffer->size = sizeof(RenderQuad) * quad_renderer->quad_counter;
-
-		SetStructuredBuffer* set_quad_buffer = PushRenderCommand(renderer, SetStructuredBuffer);
-		set_quad_buffer->vertex_shader = true;
-		set_quad_buffer->structured = quad_renderer->quad_buffer;
-		set_quad_buffer->slot = 0;
-
-		SetVertexShader* set_vertex_shader = PushRenderCommand(renderer, SetVertexShader);
-		set_vertex_shader->vertex = quad_renderer->quad_vs;
-
-		SetPixelShader* set_pixel_shader = PushRenderCommand(renderer, SetPixelShader);
-		set_pixel_shader->pixel = quad_renderer->quad_ps;
-
-		DrawVertices* draw_verts = PushRenderCommand(renderer, DrawVertices);
-		draw_verts->vertices_count = 6 * quad_renderer->quad_counter;
-	}
 
 	if(quad_renderer->textured_quad_counter) {
 		SetPrimitiveTopology* set_topology = PushRenderCommand(renderer, SetPrimitiveTopology);
@@ -165,10 +174,38 @@ QuadRendererFrame(QuadRenderer* quad_renderer, Camera* cam, Renderer* renderer) 
 			set_texture_buffer->texture = quad_renderer->textures[i];
 			set_texture_buffer->slot = 0;
 
+			SetBlendState* set_blend_state = PushRenderCommand(renderer, SetBlendState);
+			set_blend_state->type = quad_renderer->blend_states[i];
+
 			DrawVertices* draw_verts = PushRenderCommand(renderer, DrawVertices);
 			draw_verts->vertices_count = 4 * quad_renderer->textured_quad_counter;
 		}
 	}
+
+	if(quad_renderer->quad_counter) {
+		SetPrimitiveTopology* set_topology = PushRenderCommand(renderer, SetPrimitiveTopology);
+		set_topology->type = (u8)PRIMITIVE_TOPOLOGY_TriangleList;
+
+		PushRenderBufferData* push_quad_buffer = PushRenderCommand(renderer, PushRenderBufferData);
+		push_quad_buffer->buffer = quad_renderer->quad_buffer->buffer;
+		push_quad_buffer->data = quad_renderer->quads;
+		push_quad_buffer->size = sizeof(RenderQuad) * quad_renderer->quad_counter;
+
+		SetStructuredBuffer* set_quad_buffer = PushRenderCommand(renderer, SetStructuredBuffer);
+		set_quad_buffer->vertex_shader = true;
+		set_quad_buffer->structured = quad_renderer->quad_buffer;
+		set_quad_buffer->slot = 0;
+
+		SetVertexShader* set_vertex_shader = PushRenderCommand(renderer, SetVertexShader);
+		set_vertex_shader->vertex = quad_renderer->quad_vs;
+
+		SetPixelShader* set_pixel_shader = PushRenderCommand(renderer, SetPixelShader);
+		set_pixel_shader->pixel = quad_renderer->quad_ps;
+
+		DrawVertices* draw_verts = PushRenderCommand(renderer, DrawVertices);
+		draw_verts->vertices_count = 6 * quad_renderer->quad_counter;
+	}
+
 	quad_renderer->quad_counter = 0;
 	quad_renderer->textured_quad_counter = 0;
 }

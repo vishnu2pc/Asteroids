@@ -19,9 +19,12 @@ static bool CompareMem(void* left, void* right, u64 len) {
 	return true;
 }
 
-#define PushSize(ptr_arena, size) PushSize_((ptr_arena), (size))
-#define PushStruct(ptr_arena, type) (type*)PushSize_((ptr_arena), sizeof(type))
-#define PushArray(ptr_arena, type, count) (type*)PushSize_((ptr_arena), sizeof(type)*(count))
+#define PushSize(ptr_arena, size) PushSize_((ptr_arena), (size), false)
+#define PushSizeClear(ptr_arena, size) PushSize_((ptr_arena), (size), true)
+#define PushStruct(ptr_arena, type) (type*)PushSize_((ptr_arena), sizeof(type), false)
+#define PushStructClear(ptr_arena, type) (type*)PushSize_((ptr_arena), sizeof(type), true)
+#define PushArray(ptr_arena, type, count) (type*)PushSize_((ptr_arena), sizeof(type)*(count), false)
+#define PushArrayClear(ptr_arena, type, count) (type*)PushSize_((ptr_arena), sizeof(type)*(count), true)
 #define BootstrapPushStruct(type, member, min_size) (type*)BootstrapPushSize_(sizeof(type), offsetof(type, member), min_size)
 
 struct MemoryArena {
@@ -37,7 +40,7 @@ struct TemporaryMemory {
 };
 
 static void*
-PushSize_(MemoryArena* arena, u64 size) {
+PushSize_(MemoryArena* arena, u64 size, bool clear) {
 	void* result = 0;
 
 	u32 aligned_size = ((size + 7) & (-8));
@@ -54,6 +57,10 @@ PushSize_(MemoryArena* arena, u64 size) {
 
 	result = arena->current_block->bp + arena->current_block->used;
 	arena->current_block->used += aligned_size;
+
+	if(clear) {
+		ZeroMem(result, aligned_size);
+	}
 
 	return result;
 }
@@ -113,7 +120,7 @@ static void*
 BootstrapPushSize_(u64 struct_size, u64 offset_to_arena, u64 min_block_size) {
 	MemoryArena bootstrap = {};
 	bootstrap.min_block_size = min_block_size;
-	void* structure = PushSize_(&bootstrap, struct_size);
+	void* structure = PushSize_(&bootstrap, struct_size, false);
 	*(MemoryArena*)((u8*)structure + offset_to_arena) = bootstrap;
 
 	return structure;

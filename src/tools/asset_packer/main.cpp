@@ -327,6 +327,7 @@ int main(int argc, char** argv) {
 				cgltf_mesh* mesh = data->meshes + j;
 				Assert(mesh->name);
 				strcpy(mesh_format.name, mesh->name);
+				mesh->name[STRING_LENGTH_MESH - 2] = 0; 
 
 				Assert(data->meshes[j].primitives_count == 1);
 				cgltf_primitive* prim = mesh->primitives;
@@ -342,6 +343,7 @@ int main(int argc, char** argv) {
 					u32 index = (u32)cgltf_accessor_read_index(prim->indices, k);
 					PushStructBuffer(&index, 1, ab_index_buffer_u32);
 				}
+				mesh_format.vertex_buffer_count = 0;
 
 				for(u8 k=0; k<prim->attributes_count; k++) {
 					cgltf_attribute* att = prim->attributes + k;

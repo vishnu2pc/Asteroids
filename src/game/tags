@@ -9,55 +9,97 @@ ASSET_BLOB_FONTS	.\file_formats.h	/^	ASSET_BLOB_FONTS,$/;"	e	enum:ASSET_BLOB
 ASSET_BLOB_MESHES	.\file_formats.h	/^	ASSET_BLOB_MESHES,$/;"	e	enum:ASSET_BLOB
 ASSET_BLOB_TEXTURES	.\file_formats.h	/^	ASSET_BLOB_TEXTURES,$/;"	e	enum:ASSET_BLOB
 ASSET_BLOB_TOTAL	.\file_formats.h	/^	ASSET_BLOB_TOTAL$/;"	e	enum:ASSET_BLOB
+AXIS	.\simulation.h	/^enum AXIS { AXIS_X, AXIS_Y, AXIS_Z };$/;"	g
+AXIS_X	.\simulation.h	/^enum AXIS { AXIS_X, AXIS_Y, AXIS_Z };$/;"	e	enum:AXIS
+AXIS_Y	.\simulation.h	/^enum AXIS { AXIS_X, AXIS_Y, AXIS_Z };$/;"	e	enum:AXIS
+AXIS_Z	.\simulation.h	/^enum AXIS { AXIS_X, AXIS_Y, AXIS_Z };$/;"	e	enum:AXIS
 Abs	.\math.h	3;"	d
+AllocEntity	.\simulation.cpp	/^AllocEntity(EntityBlob* blob) {$/;"	f	file:
+AllocateUIElements	.\ui_renderer.cpp	/^AllocateUIElements(UI_FAB fab, UIRenderer* ui_renderer) {$/;"	f	file:
 ArrayCount	.\base_types.h	36;"	d
 Assert	.\base_types.h	39;"	d
 Assert	.\base_types.h	41;"	d
-AssertHR	.\game.cpp	6;"	d	file:
+AssertHR	.\game.cpp	7;"	d	file:
 Axis	.\platform_api.h	/^struct Axis { float x, y; };$/;"	s
 AxisAngleFromQuat	.\math.h	/^static void AxisAngleFromQuat(Quat q, Vec3* outAxis, float* outAngle) {$/;"	f
-BLACK	.\math.h	107;"	d
+BLACK	.\math.h	117;"	d
 BLEND_STATE	.\renderer.h	/^enum BLEND_STATE {$/;"	g
 BLEND_STATE_NoBlend	.\renderer.h	/^	BLEND_STATE_NoBlend,$/;"	e	enum:BLEND_STATE
 BLEND_STATE_PreMulAlpha	.\renderer.h	/^	BLEND_STATE_PreMulAlpha,$/;"	e	enum:BLEND_STATE
 BLEND_STATE_Regular	.\renderer.h	/^	BLEND_STATE_Regular,$/;"	e	enum:BLEND_STATE
 BLEND_STATE_TOTAL	.\renderer.h	/^	BLEND_STATE_TOTAL$/;"	e	enum:BLEND_STATE
-BLUE	.\math.h	112;"	d
+BLUE	.\math.h	123;"	d
+BOUNDING_BOX_ORIENTATION	.\simulation.h	/^enum BOUNDING_BOX_ORIENTATION { BOUNDING_BOX_ORIENTATION_NORMAL, BOUNDING_BOX_ORIENTATION_INVERSE };$/;"	g
+BOUNDING_BOX_ORIENTATION_INVERSE	.\simulation.h	/^enum BOUNDING_BOX_ORIENTATION { BOUNDING_BOX_ORIENTATION_NORMAL, BOUNDING_BOX_ORIENTATION_INVERSE };$/;"	e	enum:BOUNDING_BOX_ORIENTATION
+BOUNDING_BOX_ORIENTATION_NORMAL	.\simulation.h	/^enum BOUNDING_BOX_ORIENTATION { BOUNDING_BOX_ORIENTATION_NORMAL, BOUNDING_BOX_ORIENTATION_INVERSE };$/;"	e	enum:BOUNDING_BOX_ORIENTATION
+BUTTON_FONT_SIZE	.\ui_renderer.cpp	3;"	d	file:
 BeginTemporaryMemory	.\memory_management.h	/^BeginTemporaryMemory(MemoryArena* arena) {$/;"	f
 BootstrapPushSize_	.\memory_management.h	/^BootstrapPushSize_(u64 struct_size, u64 offset_to_arena, u64 min_block_size) {$/;"	f
-BootstrapPushStruct	.\memory_management.h	25;"	d
+BootstrapPushStruct	.\memory_management.h	28;"	d
+BoundingBox	.\simulation.h	/^struct BoundingBox {$/;"	s
+BoundingBoxIntersect	.\simulation.cpp	/^BoundingBoxIntersect(BoundingBox* left, BoundingBox* right) {$/;"	f	file:
 Button	.\platform_api.h	/^struct Button { bool pressed, held; };$/;"	s
 CONSTANTS_BINDING_SLOT	.\renderer.h	/^enum CONSTANTS_BINDING_SLOT {$/;"	g
 CONSTANTS_BINDING_SLOT_Camera	.\renderer.h	/^	CONSTANTS_BINDING_SLOT_Camera,$/;"	e	enum:CONSTANTS_BINDING_SLOT
 CONSTANTS_BINDING_SLOT_Frame	.\renderer.h	/^	CONSTANTS_BINDING_SLOT_Frame,$/;"	e	enum:CONSTANTS_BINDING_SLOT
 CONSTANTS_BINDING_SLOT_Object	.\renderer.h	/^	CONSTANTS_BINDING_SLOT_Object$/;"	e	enum:CONSTANTS_BINDING_SLOT
-CRIMSON	.\math.h	118;"	d
-CYAN	.\math.h	113;"	d
+CRIMSON	.\math.h	129;"	d
+CYAN	.\math.h	124;"	d
+CacheUIData	.\ui_renderer.cpp	/^CacheUIData(UIElement* element, UIRenderer* ui_renderer) {$/;"	f	file:
 Camera	.\camera.cpp	/^struct Camera {$/;"	s	file:
 CheckArena	.\memory_management.h	/^CheckArena(MemoryArena* arena) {$/;"	f
 CipSpaceTexturedShader	.\shader_code.h	/^char CipSpaceTexturedShader[] = R"FOO($/;"	v
+Clamp	.\math.h	/^Clamp(float Min, float Value, float Max) {$/;"	f
 ClearDepth	.\renderer.h	/^struct ClearDepth {$/;"	s
 ClearMemoryArena	.\memory_management.h	/^ClearMemoryArena(MemoryArena* arena) {$/;"	f
 ClearRenderTarget	.\renderer.h	/^struct ClearRenderTarget {$/;"	s
 ClearStencil	.\renderer.h	/^struct ClearStencil {$/;"	s
 CompareMem	.\memory_management.h	/^static bool CompareMem(void* left, void* right, u64 len) {$/;"	f
 CompileShader	.\renderer.cpp	/^CompileShader(char* shader_code, u32 shader_length, char* entry, void** shader, ID3DBlob** blob,$/;"	f	file:
+CompileUIShaders	.\ui_renderer.cpp	/^CompileUIShaders(UIRenderer* ui_renderer, Renderer* renderer) {$/;"	f	file:
 ConstantsBuffer	.\renderer.h	/^struct ConstantsBuffer { ID3D11Buffer* buffer; };$/;"	s
 CopyMem	.\memory_management.h	/^static void CopyMem(void* to, void* from, u64 len) {$/;"	f
-DefaultCamera	.\camera.cpp	/^DefaultCamera(WindowDimensions wd, MemoryArena* arena) {$/;"	f	file:
+CopyShader	.\shader_code.h	/^char CopyShader[] = R"FOO($/;"	v
+CreateReadableRenderTarget	.\renderer.cpp	/^CreateReadableRenderTarget(Renderer* renderer) {$/;"	f	file:
+DEBUG_BOUNDING_BOX	.\simulation.cpp	268;"	d	file:
+DEV_MODE	.\simulation.h	/^enum DEV_MODE {$/;"	g
+DEV_MODE_PAUSED	.\simulation.h	/^	DEV_MODE_PAUSED = 0x1,$/;"	e	enum:DEV_MODE
 DefaultFPControlInfo	.\camera.cpp	/^DefaultFPControlInfo() {$/;"	f	file:
+DefaultOrthoCamera	.\camera.cpp	/^DefaultOrthoCamera(WindowDimensions wd, MemoryArena* arena) {$/;"	f	file:
+DefaultPerspectiveCamera	.\camera.cpp	/^DefaultPerspectiveCamera(WindowDimensions wd, MemoryArena* arena) {$/;"	f	file:
 DegToRad	.\math.h	/^static float DegToRad(float degrees) { return degrees * (PI32\/180.0f); }$/;"	f
 DepthStencil	.\renderer.h	/^struct DepthStencil {$/;"	s
 Directory	.\file_formats.h	/^struct Directory {$/;"	s
 DrawIndexed	.\renderer.h	/^struct DrawIndexed {$/;"	s
 DrawInstanced	.\renderer.h	/^struct DrawInstanced {$/;"	s
 DrawVertices	.\renderer.h	/^struct DrawVertices {$/;"	s
-ENTITIY_PROPERTY	.\simulation.cpp	/^enum ENTITIY_PROPERTY {$/;"	g	file:
-ENTITY_PROPERTY_HasMesh	.\simulation.cpp	/^	ENTITY_PROPERTY_HasMesh      = 1,$/;"	e	enum:ENTITIY_PROPERTY	file:
-ENTITY_PROPERTY_Rotate	.\simulation.cpp	/^	ENTITY_PROPERTY_Rotate       = 1<<1,$/;"	e	enum:ENTITIY_PROPERTY	file:
-ENTITY_PROPERTY_TOTAL	.\simulation.cpp	/^	ENTITY_PROPERTY_TOTAL$/;"	e	enum:ENTITIY_PROPERTY	file:
+ENTITIY_PROPERTY	.\simulation.h	/^enum ENTITIY_PROPERTY {$/;"	g
+ENTITY_FAB	.\simulation.h	/^enum ENTITY_FAB { ENTITY_FAB_MINE, ENTITY_FAB_PARTICLE_SYSTEM, ENTITY_FAB_TOTAL };$/;"	g
+ENTITY_FAB_MINE	.\simulation.h	/^enum ENTITY_FAB { ENTITY_FAB_MINE, ENTITY_FAB_PARTICLE_SYSTEM, ENTITY_FAB_TOTAL };$/;"	e	enum:ENTITY_FAB
+ENTITY_FAB_PARTICLE_SYSTEM	.\simulation.h	/^enum ENTITY_FAB { ENTITY_FAB_MINE, ENTITY_FAB_PARTICLE_SYSTEM, ENTITY_FAB_TOTAL };$/;"	e	enum:ENTITY_FAB
+ENTITY_FAB_TOTAL	.\simulation.h	/^enum ENTITY_FAB { ENTITY_FAB_MINE, ENTITY_FAB_PARTICLE_SYSTEM, ENTITY_FAB_TOTAL };$/;"	e	enum:ENTITY_FAB
+ENTITY_PROPERTY_BoundingBox	.\simulation.h	/^	ENTITY_PROPERTY_BoundingBox           = 1<<4,$/;"	e	enum:ENTITIY_PROPERTY
+ENTITY_PROPERTY_DealsCollisionDamage	.\simulation.h	/^	ENTITY_PROPERTY_DealsCollisionDamage  = 1<<8,$/;"	e	enum:ENTITIY_PROPERTY
+ENTITY_PROPERTY_EntitySpawner	.\simulation.h	/^	ENTITY_PROPERTY_EntitySpawner  				= 1<<11,$/;"	e	enum:ENTITIY_PROPERTY
+ENTITY_PROPERTY_HasHealth	.\simulation.h	/^	ENTITY_PROPERTY_HasHealth             = 1<<7,$/;"	e	enum:ENTITIY_PROPERTY
+ENTITY_PROPERTY_HasParticleSystem	.\simulation.h	/^	ENTITY_PROPERTY_HasParticleSystem     = 1<<13,$/;"	e	enum:ENTITIY_PROPERTY
+ENTITY_PROPERTY_LevelBoundary	.\simulation.h	/^	ENTITY_PROPERTY_LevelBoundary  				= 1<<10,$/;"	e	enum:ENTITIY_PROPERTY
+ENTITY_PROPERTY_Mesh	.\simulation.h	/^	ENTITY_PROPERTY_Mesh                  = 1<<0,$/;"	e	enum:ENTITIY_PROPERTY
+ENTITY_PROPERTY_Movable	.\simulation.h	/^	ENTITY_PROPERTY_Movable           		= 1<<5,$/;"	e	enum:ENTITIY_PROPERTY
+ENTITY_PROPERTY_PlayerControlled	.\simulation.h	/^	ENTITY_PROPERTY_PlayerControlled      = 1<<3,$/;"	e	enum:ENTITIY_PROPERTY
+ENTITY_PROPERTY_SimpleChase	.\simulation.h	/^	ENTITY_PROPERTY_SimpleChase           = 1<<6,$/;"	e	enum:ENTITIY_PROPERTY
+ENTITY_PROPERTY_SpawnsParticleSystem	.\simulation.h	/^	ENTITY_PROPERTY_SpawnsParticleSystem  = 1<<12,$/;"	e	enum:ENTITIY_PROPERTY
+ENTITY_PROPERTY_SpinInPlace	.\simulation.h	/^	ENTITY_PROPERTY_SpinInPlace           = 1<<2,$/;"	e	enum:ENTITIY_PROPERTY
+ENTITY_PROPERTY_TOTAL	.\simulation.h	/^	ENTITY_PROPERTY_TOTAL$/;"	e	enum:ENTITIY_PROPERTY
+ENTITY_PROPERTY_TakesCollisionDamage	.\simulation.h	/^	ENTITY_PROPERTY_TakesCollisionDamage  = 1<<9,$/;"	e	enum:ENTITIY_PROPERTY
+ENTITY_PROPERTY_TexturedQuad	.\simulation.h	/^	ENTITY_PROPERTY_TexturedQuad          = 1<<1,$/;"	e	enum:ENTITIY_PROPERTY
+EaseLinear	.\easings.h	/^EaseLinear(float t, float b, float c, float d) { $/;"	f
+EaseSineIn	.\easings.h	/^EaseSineIn(float t, float b, float c, float d) { $/;"	f
+EaseSineInOut	.\easings.h	/^EaseSineInOut(float t, float b, float c, float d) {$/;"	f
+EaseSineOut	.\easings.h	/^EaseSineOut(float t, float b, float c, float d) { $/;"	f
 EndTemporaryMemory	.\memory_management.h	/^EndTemporaryMemory(TemporaryMemory* temp_mem) {$/;"	f
-Entity	.\simulation.cpp	/^struct Entity {$/;"	s	file:
+Entity	.\simulation.h	/^struct Entity {$/;"	s
+EntityBlob	.\simulation.h	/^struct EntityBlob {$/;"	s
 EulerFromQuat	.\math.h	/^static Vec3 EulerFromQuat(Quat quat) {$/;"	f
 ExecuteRenderCommands	.\renderer.cpp	/^ExecuteRenderCommands(Renderer* renderer) {$/;"	f	file:
 F32Max	.\base_types.h	26;"	d
@@ -66,31 +108,46 @@ FAST_BITS	.\include\stb_image.h	1916;"	d
 FPControlInfo	.\camera.cpp	/^struct FPControlInfo {$/;"	s	file:
 FirstPersonCamera	.\camera.cpp	/^FirstPersonCamera(Camera* camera, FPControlInfo* fpci, Input* input) {$/;"	f	file:
 FirstPersonControl	.\camera.cpp	/^FirstPersonControl(Vec3* position, Quat* rotation, bool camera, FPControlInfo* ci, Input* input) {$/;"	f	file:
+FontData	.\font_handling.cpp	/^struct FontData {$/;"	s	file:
 FontFormat	.\file_formats.h	/^struct FontFormat {$/;"	s
 FontsBlob	.\file_formats.h	/^struct FontsBlob {$/;"	s
 FreeLastBlock	.\memory_management.h	/^FreeLastBlock(MemoryArena* arena) {$/;"	f
+FreeRenderResource	.\renderer.h	/^struct FreeRenderResource {$/;"	s
+FullScreenQuadShader	.\shader_code.h	/^char FullScreenQuadShader[] = R"FOO($/;"	v
 GAME_LOOP	.\game.cpp	/^extern "C" GAME_LOOP(game_loop) {$/;"	f
-GAME_LOOP	.\game_layer.h	17;"	d
-GREEN	.\math.h	121;"	d
-GREY	.\math.h	109;"	d
+GAME_LOOP	.\game_layer.h	19;"	d
+GAME_MODE	.\game_mode.h	/^enum GAME_MODE {$/;"	g
+GAME_MODE_NONE	.\game_mode.h	/^	GAME_MODE_NONE,$/;"	e	enum:GAME_MODE
+GAME_MODE_TEST	.\game_mode.h	/^	GAME_MODE_TEST$/;"	e	enum:GAME_MODE
+GREEN	.\math.h	132;"	d
+GREY	.\math.h	120;"	d
 GameAssetFile	.\file_formats.h	/^struct GameAssetFile {$/;"	s
 GameAssets	.\asset_loading.cpp	/^struct GameAssets {$/;"	s	file:
 GameLayer	.\game_layer.h	/^struct GameLayer {$/;"	s
 GameLoop	.\game_layer.h	/^typedef GAME_LOOP(GameLoop);$/;"	t
 GameState	.\game.h	/^struct GameState {$/;"	s
 GenerateFlatShadedNormals	.\shapes.cpp	/^GenerateFlatShadedNormals(Vec3* vertices, u32 count, Vec3* out_normals ) {$/;"	f	file:
+GenerateFontData	.\font_handling.cpp	/^GenerateFontData(float size, TextUI* text_ui) {$/;"	f	file:
 GenerateTetrahedron	.\shapes.cpp	/^GenerateTetrahedron(Vec3* out_vertices) {$/;"	f	file:
 GetAllFontFormats	.\asset_loading.cpp	/^GetAllFontFormats(GameAssets* ga, u32* count) {$/;"	f	file:
+GetAllMeshFormats	.\asset_loading.cpp	/^GetAllMeshFormats(GameAssets* ga, u32* count) {$/;"	f	file:
 GetAllTextureFormats	.\asset_loading.cpp	/^GetAllTextureFormats(GameAssets* ga, u32* count) {$/;"	f	file:
 GetAssetBlob	.\asset_loading.cpp	/^GetAssetBlob(ASSET_BLOB blob, GameAssets* assets) {$/;"	f	file:
+GetBoundingBoxFromMeshData	.\simulation.cpp	/^GetBoundingBoxFromMeshData(MeshData* mesh_data) {$/;"	f	file:
+GetCachedElementData	.\ui_renderer.cpp	/^GetCachedElementData(u32 id, UIRenderer* ui_renderer) {$/;"	f	file:
 GetFont	.\asset_loading.cpp	/^GetFont(char* name, GameAssets* ga) {$/;"	f	file:
+GetFontData	.\font_handling.cpp	/^GetFontData(float size, TextUI* text_ui) {$/;"	f	file:
 GetFontFormat	.\asset_loading.cpp	/^GetFontFormat(char* name, GameAssets* ga) {$/;"	f	file:
 GetForwardVector	.\math.h	/^static Vec3 GetForwardVector(Quat quat) {	return V3Norm(RotateVecByQuat(V3Forward(), quat)); } $/;"	f
+GetMeshAssetInfo	.\asset_info.cpp	/^GetMeshAssetInfo(char* name, GameAssets* assets) {$/;"	f	file:
+GetMeshFormat	.\asset_loading.cpp	/^GetMeshFormat(char* name, GameAssets* ga) {$/;"	f	file:
+GetPixelWidthForText	.\font_handling.cpp	/^GetPixelWidthForText(char* text, float size, TextUI* text_ui) {$/;"	f	file:
 GetRightVector	.\math.h	/^static Vec3 GetRightVector(Quat quat) {	return V3Norm(RotateVecByQuat(V3Right(), quat)); } $/;"	f
 GetTextureAssetInfo	.\asset_info.cpp	/^GetTextureAssetInfo(char* name, GameAssets* assets) {$/;"	f	file:
 GetTextureFormat	.\asset_loading.cpp	/^GetTextureFormat(char* name, GameAssets* ga) {$/;"	f	file:
 GetUpVector	.\math.h	/^static Vec3 GetUpVector(Quat quat) {	return V3Norm(RotateVecByQuat(V3Up(), quat)); } $/;"	f
 Gigabytes	.\base_types.h	33;"	d
+GlobalPerfCountFrequency	.\win32.cpp	/^global i64 GlobalPerfCountFrequency;$/;"	v
 Glyph	.\font_handling.cpp	/^struct Glyph {$/;"	s	file:
 I32Max	.\base_types.h	22;"	d
 I32Min	.\base_types.h	21;"	d
@@ -99,20 +156,28 @@ InRangeMaxInc	.\math.h	/^static float InRangeMaxInc(float val, float min, float 
 InRangeMinInc	.\math.h	/^static float InRangeMinInc(float val, float min, float max) { return (val >= min) && (val < max); }$/;"	f
 InRangeMinMaxInc	.\math.h	/^static float InRangeMinMaxInc(float val, float min, float max) { return (val >= min) && (val <= max); }$/;"	f
 IndexBuffer	.\renderer.h	/^struct IndexBuffer     { ID3D11Buffer* buffer; };$/;"	s
-InitFont	.\font_handling.cpp	/^InitFont(void* data, WindowDimensions wd, Renderer* renderer, MemoryArena* arena) {$/;"	f	file:
+InitFont	.\font_handling.cpp	/^InitFont(void* data, WindowDimensions wd, Renderer* renderer, MemoryArena* arena, MemoryArena* frame) {$/;"	f	file:
 InitMeshRenderer	.\mesh_renderer.cpp	/^InitMeshRenderer(Renderer* renderer, MemoryArena* arena) {$/;"	f
 InitMeshShader	.\mesh_renderer.cpp	/^InitMeshShader(MeshRenderer* mesh_renderer, Renderer* renderer) {$/;"	f	file:
+InitPostProcessRenderer	.\post_process_renderer.cpp	/^InitPostProcessRenderer(Renderer* renderer, MemoryArena* arena) {$/;"	f	file:
+InitPostProcessShaders	.\post_process_renderer.cpp	/^InitPostProcessShaders(PostProcessRenderer* pp_renderer, Renderer* renderer) {$/;"	f	file:
 InitQuadRenderer	.\quad_renderer.cpp	/^InitQuadRenderer(Renderer* renderer, MemoryArena* arena) {$/;"	f	file:
 InitRenderer	.\renderer.cpp	/^InitRenderer(Win32Window* window, MemoryArena* parent_arena, MemoryArena* frame_arena) {$/;"	f	file:
+InitTestMode	.\game_mode.cpp	/^InitTestMode(GameState* game_state, WindowDimensions dim) {$/;"	f	file:
 InitTetra	.\tetra.cpp	/^InitTetra(Renderer* renderer, MemoryArena* arena) {$/;"	f	file:
+InitUIRenderer	.\ui_renderer.cpp	/^InitUIRenderer(Renderer* renderer, WindowDimensions wd, TextUI* text_ui, MemoryArena* arena, MemoryArena* frame_arena) {$/;"	f	file:
 Input	.\platform_api.h	/^struct Input {$/;"	s
+IsPointInQuad	.\shapes.cpp	/^IsPointInQuad(Vec2 min, Vec2 max, Vec2 point) {$/;"	f	file:
+JET	.\math.h	119;"	d
 Kilobytes	.\base_types.h	31;"	d
-LIME	.\math.h	120;"	d
+LIME	.\math.h	131;"	d
 LightInfo	.\mesh_renderer.cpp	/^struct LightInfo {$/;"	s	file:
 Line	.\shapes.cpp	/^struct Line {$/;"	s	file:
+LoadAllMeshAssets	.\asset_info.cpp	/^LoadAllMeshAssets(GameAssets* assets) {$/;"	f	file:
 LoadAllTextureAssets	.\asset_info.cpp	/^LoadAllTextureAssets(GameAssets* assets) {$/;"	f	file:
 LoadGameAssets	.\asset_loading.cpp	/^LoadGameAssets(MemoryArena* arena) {$/;"	f	file:
-LoadMeshDataFromAssets	.\asset_loading.cpp	/^LoadMeshDataFromAssets(char* name, GameAssets* ga, MemoryArena* arena) {$/;"	f
+LoadMeshAsset	.\asset_info.cpp	/^LoadMeshAsset(char* name, GameAssets* assets) {$/;"	f	file:
+LoadMeshData	.\asset_loading.cpp	/^LoadMeshData(MeshFormat* mf, GameAssets* ga) {$/;"	f
 LoadTextureAsset	.\asset_info.cpp	/^LoadTextureAsset(char* name, GameAssets* assets) {$/;"	f	file:
 LoadTextureData	.\asset_info.cpp	/^LoadTextureData(TextureFormat* tf, GameAssets* assets) {$/;"	f	file:
 M4FromQuat	.\math.h	/^static Mat4 M4FromQuat(Quat quat) {$/;"	f
@@ -127,22 +192,24 @@ M4Rotate	.\math.h	/^static Mat4 M4Rotate(Vec3 axis, float angle) {$/;"	f
 M4Scale	.\math.h	/^static Mat4 M4Scale(Vec3 scale) {$/;"	f
 M4Translate	.\math.h	/^static Mat4 M4Translate(Vec3 translation) {$/;"	f
 M4Transpose	.\math.h	/^static Mat4 M4Transpose(Mat4 mat) {$/;"	f
-MAGENTA	.\math.h	127;"	d
-MAROON	.\math.h	117;"	d
+MAGENTA	.\math.h	138;"	d
+MAROON	.\math.h	128;"	d
+MAX_ENTITIES	.\simulation.h	104;"	d
 MAX_FONT_ATLAS_HEIGHT	.\font_handling.cpp	2;"	d	file:
 MAX_FONT_ATLAS_WIDTH	.\font_handling.cpp	1;"	d	file:
+MAX_GLYPHS_ON_SCREEN	.\font_handling.cpp	3;"	d	file:
 MAX_MESH_PIPELINES	.\mesh_renderer.cpp	1;"	d	file:
+MAX_PARTICLES	.\simulation.h	45;"	d
 MAX_QUADS	.\quad_renderer.cpp	1;"	d	file:
+MAX_SPAWNS	.\simulation.h	34;"	d
 MAX_TETRA	.\tetra.cpp	1;"	d	file:
 MAX_TEXTURED_QUADS	.\quad_renderer.cpp	2;"	d	file:
-MAX_TEXT_GLYPHS_ON_SCREEN	.\font_handling.cpp	4;"	d	file:
+MAX_UI_ELEMENTS	.\ui_renderer.cpp	1;"	d	file:
 MakeD3DInputElementDesc	.\renderer.cpp	/^MakeD3DInputElementDesc(VERTEX_BUFFER* vb_type, D3D11_INPUT_ELEMENT_DESC* d3d_il_desc, u8 count) {$/;"	f	file:
-MakeMeshData	.\asset_loading.cpp	/^MakeMeshData(MeshFormat* mf, GameAssets* ga, MemoryArena* arena) {$/;"	f
 MakeQuadFromLine	.\shapes.cpp	/^MakeQuadFromLine(Line* line, float thickness, Vec3 normal) {$/;"	f	file:
 MakeQuat	.\math.h	/^static Quat MakeQuat(float x, float y, float z, float w) { return Quat { x, y, z, w}; }$/;"	f
 MakeQuatFromV3	.\math.h	/^static Quat MakeQuatFromV3(Vec3 vec) { return Quat { vec.x, vec.y, vec.z, 1 }; }$/;"	f
 MakeQuatFromV4	.\math.h	/^static Quat MakeQuatFromV4(Vec4 vec) { return Quat { vec.x, vec.y, vec.z, vec.w }; }$/;"	f
-MakeTetrahedronMesh	.\simulation.cpp	/^MakeTetrahedronMesh(Renderer* renderer) {$/;"	f	file:
 MakeTransformMatrix	.\math.h	/^static Mat4 MakeTransformMatrix(Transform transform) {$/;"	f
 MakeVertexBufferData	.\asset_loading.cpp	/^MakeVertexBufferData(VertexBufferFormat* vbf, GameAssets* ga) {$/;"	f
 MakeViewPerspective	.\camera.cpp	/^MakeViewPerspective(Camera* camera) {$/;"	f	file:
@@ -152,19 +219,21 @@ Max	.\base_types.h	44;"	d
 Megabytes	.\base_types.h	32;"	d
 MemoryArena	.\memory_management.h	/^struct MemoryArena {$/;"	s
 Mesh	.\mesh_renderer.cpp	/^struct Mesh {$/;"	s	file:
+MeshAssetInfo	.\asset_info.h	/^struct MeshAssetInfo {$/;"	s
 MeshData	.\asset_formats.h	/^struct MeshData {$/;"	s
 MeshFormat	.\file_formats.h	/^struct MeshFormat {$/;"	s
 MeshInfo	.\mesh_renderer.cpp	/^struct MeshInfo {$/;"	s	file:
 MeshPipeline	.\mesh_renderer.cpp	/^struct MeshPipeline {$/;"	s	file:
 MeshRenderer	.\mesh_renderer.cpp	/^struct MeshRenderer {$/;"	s	file:
-MeshRendererFrame	.\mesh_renderer.cpp	/^MeshRendererFrame(MeshRenderer* mesh_renderer, Camera* camera, LightInfo* light, Renderer* renderer) {$/;"	f	file:
+MeshRendererFrame	.\mesh_renderer.cpp	/^MeshRendererFrame(MeshRenderer* mesh_renderer, Camera* camera, Renderer* renderer) {$/;"	f	file:
 MeshShader	.\shader_code.h	/^char MeshShader[] = R"FOO($/;"	v
 MeshesBlob	.\file_formats.h	/^struct MeshesBlob {$/;"	s
 Min	.\base_types.h	45;"	d
 Mod	.\math.h	4;"	d
 MonochromeShader	.\shader_code.h	/^char MonochromeShader[] = R"FOO($/;"	v
-OLIVE	.\math.h	123;"	d
-ORANGE	.\math.h	125;"	d
+OLIVE	.\math.h	134;"	d
+ORANGE	.\math.h	136;"	d
+OVERLAY_FONT_SIZE	.\ui_renderer.cpp	2;"	d	file:
 PI32	.\base_types.h	29;"	d
 PLATFORM_ALLOCATE_MEMORY	.\platform_api.h	121;"	d
 PLATFORM_ALLOCATE_MEMORY	.\win32.cpp	/^static PLATFORM_ALLOCATE_MEMORY(win32_allocate_memory) {$/;"	f	file:
@@ -176,10 +245,15 @@ PLATFORM_OPEN_FILE	.\platform_api.h	112;"	d
 PLATFORM_OPEN_FILE	.\win32.cpp	/^static PLATFORM_OPEN_FILE(win32_open_file) {$/;"	f	file:
 PLATFORM_READ_FILE	.\platform_api.h	118;"	d
 PLATFORM_READ_FILE	.\win32.cpp	/^static PLATFORM_READ_FILE(win32_read_file) {$/;"	f	file:
+POST_PROCESS_TYPE	.\post_process_renderer.cpp	/^enum POST_PROCESS_TYPE {$/;"	g	file:
+POST_PROCESS_TYPE_Copy	.\post_process_renderer.cpp	/^	POST_PROCESS_TYPE_Copy,$/;"	e	enum:POST_PROCESS_TYPE	file:
+POST_PROCESS_TYPE_Edge	.\post_process_renderer.cpp	/^	POST_PROCESS_TYPE_Edge,$/;"	e	enum:POST_PROCESS_TYPE	file:
+POST_PROCESS_TYPE_TOTAL	.\post_process_renderer.cpp	/^	POST_PROCESS_TYPE_TOTAL,$/;"	e	enum:POST_PROCESS_TYPE	file:
 PRIMITITVE_TOPOLOGY	.\renderer.h	/^enum PRIMITITVE_TOPOLOGY {$/;"	g
 PRIMITIVE_TOPOLOGY_TriangleList	.\renderer.h	/^	PRIMITIVE_TOPOLOGY_TriangleList,$/;"	e	enum:PRIMITITVE_TOPOLOGY
 PRIMITIVE_TOPOLOGY_TriangleStrip	.\renderer.h	/^	PRIMITIVE_TOPOLOGY_TriangleStrip$/;"	e	enum:PRIMITITVE_TOPOLOGY
-PURPLE	.\math.h	128;"	d
+PURPLE	.\math.h	139;"	d
+ParticleSystem	.\simulation.h	/^struct ParticleSystem {$/;"	s
 PixelShader	.\renderer.h	/^struct PixelShader {$/;"	s
 PlatformAPI	.\platform_api.h	/^struct PlatformAPI {$/;"	s
 PlatformAllocateMemory	.\platform_api.h	/^typedef PLATFORM_ALLOCATE_MEMORY(PlatformAllocateMemory);$/;"	t
@@ -190,9 +264,18 @@ PlatformFileInfo	.\platform_api.h	/^struct PlatformFileInfo {$/;"	s
 PlatformMemoryBlock	.\platform_api.h	/^struct PlatformMemoryBlock {$/;"	s
 PlatformOpenFile	.\platform_api.h	/^typedef PLATFORM_OPEN_FILE(PlatformOpenFile);    $/;"	t
 PlatformReadFile	.\platform_api.h	/^typedef PLATFORM_READ_FILE(PlatformReadFile);$/;"	t
-PushArray	.\memory_management.h	24;"	d
+PostProcessPipeline	.\post_process_renderer.cpp	/^struct PostProcessPipeline {$/;"	s	file:
+PostProcessRenderer	.\post_process_renderer.cpp	/^struct PostProcessRenderer {$/;"	s	file:
+PostProcessRendererFrame	.\post_process_renderer.cpp	/^PostProcessRendererFrame(PostProcessRenderer* pp_renderer, Renderer* renderer) {$/;"	f	file:
+PostProcessShader	.\shader_code.h	/^char PostProcessShader[] = R"FOO($/;"	v
+PushArray	.\memory_management.h	26;"	d
+PushArrayClear	.\memory_management.h	27;"	d
 PushCommandBuffer	.\renderer.cpp	/^PushCommandBuffer(Renderer* renderer, u32 size) {$/;"	f	file:
+PushGlyphs	.\font_handling.cpp	/^PushGlyphs(char* text, FontData* font_data, float* x, float* y, Vec2 screen_res) {$/;"	f	file:
+PushMeshAssetInfo	.\asset_info.cpp	/^PushMeshAssetInfo(GameAssets* ga) {$/;"	f	file:
 PushMeshPipeline	.\mesh_renderer.cpp	/^PushMeshPipeline(MeshPipeline pipeline, MeshRenderer* mesh_renderer) {$/;"	f	file:
+PushParticleQuad	.\quad_renderer.cpp	/^PushParticleQuad(Quad* quad, TextureBuffer* texture_buffer, QuadRenderer* quad_renderer) {$/;"	f	file:
+PushPostProcessPipeline	.\post_process_renderer.cpp	/^PushPostProcessPipeline(PostProcessPipeline* pipeline, PostProcessRenderer* pp_renderer, Renderer* renderer) {$/;"	f	file:
 PushRenderBufferData	.\renderer.h	/^struct PushRenderBufferData {$/;"	s
 PushRenderCommand	.\renderer.cpp	29;"	d	file:
 PushRenderCommand_	.\renderer.cpp	/^PushRenderCommand_(Renderer* renderer, u32 size, RENDER_COMMAND type ) {$/;"	f	file:
@@ -200,11 +283,17 @@ PushRenderData	.\renderer.cpp	/^PushRenderData(ID3D11Buffer* buffer, void* data,
 PushRenderLine	.\quad_renderer.cpp	/^PushRenderLine(Line* line, Vec4 color, float thickness, Camera* camera, QuadRenderer* quad_renderer) {$/;"	f	file:
 PushRenderQuad	.\quad_renderer.cpp	/^PushRenderQuad(Quad* quad, Vec4 color, QuadRenderer* quad_renderer) {$/;"	f	file:
 PushSize	.\memory_management.h	22;"	d
-PushSize_	.\memory_management.h	/^PushSize_(MemoryArena* arena, u64 size) {$/;"	f
-PushStruct	.\memory_management.h	23;"	d
-PushText	.\font_handling.cpp	/^PushText(char* text, TextUI* text_ui) {$/;"	f	file:
+PushSizeClear	.\memory_management.h	23;"	d
+PushSize_	.\memory_management.h	/^PushSize_(MemoryArena* arena, u64 size, bool clear) {$/;"	f
+PushStruct	.\memory_management.h	24;"	d
+PushStructClear	.\memory_management.h	25;"	d
+PushTextPixelSpace	.\font_handling.cpp	/^PushTextPixelSpace(char* text, float font_size, Vec2 psc, TextUI* text_ui) {$/;"	f	file:
+PushTextScreenSpace	.\font_handling.cpp	/^PushTextScreenSpace(char* text, float size, Vec2 ssc, TextUI* text_ui) {$/;"	f	file:
 PushTextureAssetInfo	.\asset_info.cpp	/^PushTextureAssetInfo(GameAssets* ga) {$/;"	f	file:
 PushTexturedQuad	.\quad_renderer.cpp	/^PushTexturedQuad(Quad* quad, TextureBuffer* texture_buffer, QuadRenderer* quad_renderer) {$/;"	f	file:
+PushUIButton	.\ui_renderer.cpp	/^PushUIButton(char** text, Vec2 ssp, UIRenderer* ui_renderer) {$/;"	f	file:
+PushUIElement	.\ui_renderer.cpp	/^PushUIElement(UIElement* element, UIRenderer* ui_renderer) {$/;"	f	file:
+PushUIOverlay	.\ui_renderer.cpp	/^PushUIOverlay(char** text, u8 text_count, Vec2 ssp, UIRenderer* ui_renderer) {$/;"	f	file:
 Quad	.\shapes.cpp	/^struct Quad {$/;"	s	file:
 QuadRenderer	.\quad_renderer.cpp	/^struct QuadRenderer {$/;"	s	file:
 QuadRendererFrame	.\quad_renderer.cpp	/^QuadRendererFrame(QuadRenderer* quad_renderer, Camera* cam, Renderer* renderer) {$/;"	f	file:
@@ -227,7 +316,7 @@ RASTERIZER_STATE_Default	.\renderer.h	/^	RASTERIZER_STATE_Default,$/;"	e	enum:RA
 RASTERIZER_STATE_DoubleSided	.\renderer.h	/^	RASTERIZER_STATE_DoubleSided,$/;"	e	enum:RASTERIZER_STATE
 RASTERIZER_STATE_TOTAL	.\renderer.h	/^	RASTERIZER_STATE_TOTAL$/;"	e	enum:RASTERIZER_STATE
 RASTERIZER_STATE_Wireframe	.\renderer.h	/^	RASTERIZER_STATE_Wireframe,$/;"	e	enum:RASTERIZER_STATE
-RED	.\math.h	116;"	d
+RED	.\math.h	127;"	d
 RENDER_COMMAND	.\renderer.h	/^enum RENDER_COMMAND {$/;"	g
 RENDER_COMMAND_ClearDepth	.\renderer.h	/^	RENDER_COMMAND_ClearDepth,$/;"	e	enum:RENDER_COMMAND
 RENDER_COMMAND_ClearRenderTarget	.\renderer.h	/^	RENDER_COMMAND_ClearRenderTarget,$/;"	e	enum:RENDER_COMMAND
@@ -235,6 +324,7 @@ RENDER_COMMAND_ClearStencil	.\renderer.h	/^	RENDER_COMMAND_ClearStencil,$/;"	e	e
 RENDER_COMMAND_DrawIndexed	.\renderer.h	/^	RENDER_COMMAND_DrawIndexed,$/;"	e	enum:RENDER_COMMAND
 RENDER_COMMAND_DrawInstanced	.\renderer.h	/^	RENDER_COMMAND_DrawInstanced,$/;"	e	enum:RENDER_COMMAND
 RENDER_COMMAND_DrawVertices	.\renderer.h	/^	RENDER_COMMAND_DrawVertices,$/;"	e	enum:RENDER_COMMAND
+RENDER_COMMAND_FreeRenderResource	.\renderer.h	/^	RENDER_COMMAND_FreeRenderResource$/;"	e	enum:RENDER_COMMAND
 RENDER_COMMAND_PushRenderBufferData	.\renderer.h	/^	RENDER_COMMAND_PushRenderBufferData,$/;"	e	enum:RENDER_COMMAND
 RENDER_COMMAND_SetBlendState	.\renderer.h	/^	RENDER_COMMAND_SetBlendState,$/;"	e	enum:RENDER_COMMAND
 RENDER_COMMAND_SetConstantsBuffer	.\renderer.h	/^	RENDER_COMMAND_SetConstantsBuffer,$/;"	e	enum:RENDER_COMMAND
@@ -251,7 +341,13 @@ RENDER_COMMAND_SetTopology	.\renderer.h	/^	RENDER_COMMAND_SetTopology,$/;"	e	enu
 RENDER_COMMAND_SetVertexBuffer	.\renderer.h	/^	RENDER_COMMAND_SetVertexBuffer,$/;"	e	enum:RENDER_COMMAND
 RENDER_COMMAND_SetVertexShader	.\renderer.h	/^	RENDER_COMMAND_SetVertexShader,$/;"	e	enum:RENDER_COMMAND
 RENDER_COMMAND_SetViewport	.\renderer.h	/^	RENDER_COMMAND_SetViewport,$/;"	e	enum:RENDER_COMMAND
+RESPONSE	.\simulation.h	/^enum RESPONSE { RESPONSE_NONE, RESPONSE_DEFENSIVE, RESPONSE_HOSTILE };$/;"	g
+RESPONSE_DEFENSIVE	.\simulation.h	/^enum RESPONSE { RESPONSE_NONE, RESPONSE_DEFENSIVE, RESPONSE_HOSTILE };$/;"	e	enum:RESPONSE
+RESPONSE_HOSTILE	.\simulation.h	/^enum RESPONSE { RESPONSE_NONE, RESPONSE_DEFENSIVE, RESPONSE_HOSTILE };$/;"	e	enum:RESPONSE
+RESPONSE_NONE	.\simulation.h	/^enum RESPONSE { RESPONSE_NONE, RESPONSE_DEFENSIVE, RESPONSE_HOSTILE };$/;"	e	enum:RESPONSE
 RadToDeg	.\math.h	/^static float RadToDeg(float radians) { return radians * (180\/PI32); }$/;"	f
+ReadableRenderTarget	.\renderer.h	/^struct ReadableRenderTarget {$/;"	s
+ReleaseEntity	.\simulation.cpp	/^ReleaseEntity(Entity* entity, EntityBlob* blob) {$/;"	f	file:
 RenderCommandHeader	.\renderer.h	/^struct RenderCommandHeader { u8 type; };$/;"	s
 RenderQuad	.\quad_renderer.cpp	/^struct RenderQuad {$/;"	s	file:
 RenderTarget	.\renderer.h	/^struct RenderTarget {$/;"	s
@@ -259,11 +355,13 @@ RenderTetra	.\tetra.cpp	/^RenderTetra(Tetra* tetra, MeshRenderer* mesh_renderer)
 Renderer	.\renderer.h	/^struct Renderer {$/;"	s
 RendererBeginFrame	.\renderer.cpp	/^RendererBeginFrame(Renderer* renderer, WindowDimensions wd, MemoryArena* frame_arena) {$/;"	f	file:
 RendererEndFrame	.\renderer.cpp	/^RendererEndFrame(Renderer* renderer) {$/;"	f	file:
+ResolveCollision	.\simulation.cpp	/^ResolveCollision(Entity* a, Entity* b) {$/;"	f	file:
+ResolveDamageExchange	.\simulation.cpp	/^ResolveDamageExchange(Entity* a, Entity* b) {$/;"	f	file:
 RotateVecByQuat	.\math.h	/^static Vec3 RotateVecByQuat(Vec3 vec, Quat quat) {$/;"	f
 SAMPLER_STATE	.\renderer.h	/^enum SAMPLER_STATE {$/;"	g
 SAMPLER_STATE_Default	.\renderer.h	/^	SAMPLER_STATE_Default,$/;"	e	enum:SAMPLER_STATE
 SAMPLER_STATE_TOTAL	.\renderer.h	/^	SAMPLER_STATE_TOTAL$/;"	e	enum:SAMPLER_STATE
-SILVER	.\math.h	110;"	d
+SILVER	.\math.h	121;"	d
 STBIDEF	.\include\stb_image.h	393;"	d
 STBIDEF	.\include\stb_image.h	395;"	d
 STBI_ASSERT	.\include\stb_image.h	600;"	d
@@ -289,8 +387,8 @@ STBI_NO_SIMD	.\include\stb_image.h	703;"	d
 STBI_NO_SIMD	.\include\stb_image.h	718;"	d
 STBI_NO_TGA	.\include\stb_image.h	563;"	d
 STBI_NO_ZLIB	.\include\stb_image.h	580;"	d
-STBI_ORDER_BGR	.\include\stb_image.h	/^	STBI_ORDER_BGR$/;"	e	enum:__anon4
-STBI_ORDER_RGB	.\include\stb_image.h	/^	STBI_ORDER_RGB,$/;"	e	enum:__anon4
+STBI_ORDER_BGR	.\include\stb_image.h	/^	STBI_ORDER_BGR$/;"	e	enum:__anon7
+STBI_ORDER_RGB	.\include\stb_image.h	/^	STBI_ORDER_RGB,$/;"	e	enum:__anon7
 STBI_REALLOC	.\include\stb_image.h	680;"	d
 STBI_REALLOC_SIZED	.\include\stb_image.h	685;"	d
 STBI_SIMD_ALIGN	.\include\stb_image.h	748;"	d
@@ -316,41 +414,41 @@ STBI__CASE	.\include\stb_image.h	4692;"	d
 STBI__CASE	.\include\stb_image.h	4705;"	d
 STBI__COMBO	.\include\stb_image.h	1753;"	d
 STBI__COMBO	.\include\stb_image.h	1810;"	d
-STBI__F_avg	.\include\stb_image.h	/^	STBI__F_avg=3,$/;"	e	enum:__anon15
-STBI__F_avg_first	.\include\stb_image.h	/^	STBI__F_avg_first,$/;"	e	enum:__anon15
-STBI__F_none	.\include\stb_image.h	/^	STBI__F_none=0,$/;"	e	enum:__anon15
-STBI__F_paeth	.\include\stb_image.h	/^	STBI__F_paeth=4,$/;"	e	enum:__anon15
-STBI__F_paeth_first	.\include\stb_image.h	/^	STBI__F_paeth_first$/;"	e	enum:__anon15
-STBI__F_sub	.\include\stb_image.h	/^	STBI__F_sub=1,$/;"	e	enum:__anon15
-STBI__F_up	.\include\stb_image.h	/^	STBI__F_up=2,$/;"	e	enum:__anon15
+STBI__F_avg	.\include\stb_image.h	/^	STBI__F_avg=3,$/;"	e	enum:__anon18
+STBI__F_avg_first	.\include\stb_image.h	/^	STBI__F_avg_first,$/;"	e	enum:__anon18
+STBI__F_none	.\include\stb_image.h	/^	STBI__F_none=0,$/;"	e	enum:__anon18
+STBI__F_paeth	.\include\stb_image.h	/^	STBI__F_paeth=4,$/;"	e	enum:__anon18
+STBI__F_paeth_first	.\include\stb_image.h	/^	STBI__F_paeth_first$/;"	e	enum:__anon18
+STBI__F_sub	.\include\stb_image.h	/^	STBI__F_sub=1,$/;"	e	enum:__anon18
+STBI__F_up	.\include\stb_image.h	/^	STBI__F_up=2,$/;"	e	enum:__anon18
 STBI__HDR_BUFLEN	.\include\stb_image.h	7030;"	d
 STBI__IDCT_1D	.\include\stb_image.h	2396;"	d
 STBI__MARKER_none	.\include\stb_image.h	2881;"	d
 STBI__PNG_TYPE	.\include\stb_image.h	5021;"	d
 STBI__RESTART	.\include\stb_image.h	2898;"	d
-STBI__SCAN_header	.\include\stb_image.h	/^			STBI__SCAN_header$/;"	e	enum:__anon6
-STBI__SCAN_load	.\include\stb_image.h	/^			STBI__SCAN_load=0,$/;"	e	enum:__anon6
-STBI__SCAN_type	.\include\stb_image.h	/^			STBI__SCAN_type,$/;"	e	enum:__anon6
+STBI__SCAN_header	.\include\stb_image.h	/^			STBI__SCAN_header$/;"	e	enum:__anon9
+STBI__SCAN_load	.\include\stb_image.h	/^			STBI__SCAN_load=0,$/;"	e	enum:__anon9
+STBI__SCAN_type	.\include\stb_image.h	/^			STBI__SCAN_type,$/;"	e	enum:__anon9
 STBI__X64_TARGET	.\include\stb_image.h	690;"	d
 STBI__X86_TARGET	.\include\stb_image.h	692;"	d
 STBI__ZFAST_BITS	.\include\stb_image.h	4034;"	d
 STBI__ZFAST_MASK	.\include\stb_image.h	4035;"	d
 STBI__ZNSYMS	.\include\stb_image.h	4036;"	d
-STBI_default	.\include\stb_image.h	/^	STBI_default = 0, \/\/ only used for desired_channels$/;"	e	enum:__anon1
-STBI_grey	.\include\stb_image.h	/^	STBI_grey       = 1,$/;"	e	enum:__anon1
-STBI_grey_alpha	.\include\stb_image.h	/^	STBI_grey_alpha = 2,$/;"	e	enum:__anon1
-STBI_rgb	.\include\stb_image.h	/^	STBI_rgb        = 3,$/;"	e	enum:__anon1
-STBI_rgb_alpha	.\include\stb_image.h	/^	STBI_rgb_alpha  = 4$/;"	e	enum:__anon1
+STBI_default	.\include\stb_image.h	/^	STBI_default = 0, \/\/ only used for desired_channels$/;"	e	enum:__anon4
+STBI_grey	.\include\stb_image.h	/^	STBI_grey       = 1,$/;"	e	enum:__anon4
+STBI_grey_alpha	.\include\stb_image.h	/^	STBI_grey_alpha = 2,$/;"	e	enum:__anon4
+STBI_rgb	.\include\stb_image.h	/^	STBI_rgb        = 3,$/;"	e	enum:__anon4
+STBI_rgb_alpha	.\include\stb_image.h	/^	STBI_rgb_alpha  = 4$/;"	e	enum:__anon4
 STBRP_ASSERT	.\include\stb_rect_pack.h	213;"	d
 STBRP_DEF	.\include\stb_rect_pack.h	72;"	d
 STBRP_DEF	.\include\stb_rect_pack.h	74;"	d
-STBRP_HEURISTIC_Skyline_BF_sortHeight	.\include\stb_rect_pack.h	/^   STBRP_HEURISTIC_Skyline_BF_sortHeight$/;"	e	enum:__anon20
-STBRP_HEURISTIC_Skyline_BL_sortHeight	.\include\stb_rect_pack.h	/^   STBRP_HEURISTIC_Skyline_BL_sortHeight = STBRP_HEURISTIC_Skyline_default,$/;"	e	enum:__anon20
-STBRP_HEURISTIC_Skyline_default	.\include\stb_rect_pack.h	/^   STBRP_HEURISTIC_Skyline_default=0,$/;"	e	enum:__anon20
+STBRP_HEURISTIC_Skyline_BF_sortHeight	.\include\stb_rect_pack.h	/^   STBRP_HEURISTIC_Skyline_BF_sortHeight$/;"	e	enum:__anon23
+STBRP_HEURISTIC_Skyline_BL_sortHeight	.\include\stb_rect_pack.h	/^   STBRP_HEURISTIC_Skyline_BL_sortHeight = STBRP_HEURISTIC_Skyline_default,$/;"	e	enum:__anon23
+STBRP_HEURISTIC_Skyline_default	.\include\stb_rect_pack.h	/^   STBRP_HEURISTIC_Skyline_default=0,$/;"	e	enum:__anon23
 STBRP_SORT	.\include\stb_rect_pack.h	208;"	d
 STBRP__CDECL	.\include\stb_rect_pack.h	218;"	d
 STBRP__CDECL	.\include\stb_rect_pack.h	221;"	d
-STBRP__INIT_skyline	.\include\stb_rect_pack.h	/^   STBRP__INIT_skyline = 1$/;"	e	enum:__anon21
+STBRP__INIT_skyline	.\include\stb_rect_pack.h	/^   STBRP__INIT_skyline = 1$/;"	e	enum:__anon24
 STBRP__MAXVAL	.\include\stb_rect_pack.h	87;"	d
 STBRP__NOTUSED	.\include\stb_rect_pack.h	217;"	d
 STBRP__NOTUSED	.\include\stb_rect_pack.h	220;"	d
@@ -412,56 +510,56 @@ STBTT_MACSTYLE_DONTCARE	.\include\stb_truetype.h	1026;"	d
 STBTT_MACSTYLE_ITALIC	.\include\stb_truetype.h	1028;"	d
 STBTT_MACSTYLE_NONE	.\include\stb_truetype.h	1030;"	d
 STBTT_MACSTYLE_UNDERSCORE	.\include\stb_truetype.h	1029;"	d
-STBTT_MAC_EID_ARABIC	.\include\stb_truetype.h	/^   STBTT_MAC_EID_ROMAN        =0,   STBTT_MAC_EID_ARABIC       =4,$/;"	e	enum:__anon35
-STBTT_MAC_EID_CHINESE_TRAD	.\include\stb_truetype.h	/^   STBTT_MAC_EID_CHINESE_TRAD =2,   STBTT_MAC_EID_GREEK        =6,$/;"	e	enum:__anon35
-STBTT_MAC_EID_GREEK	.\include\stb_truetype.h	/^   STBTT_MAC_EID_CHINESE_TRAD =2,   STBTT_MAC_EID_GREEK        =6,$/;"	e	enum:__anon35
-STBTT_MAC_EID_HEBREW	.\include\stb_truetype.h	/^   STBTT_MAC_EID_JAPANESE     =1,   STBTT_MAC_EID_HEBREW       =5,$/;"	e	enum:__anon35
-STBTT_MAC_EID_JAPANESE	.\include\stb_truetype.h	/^   STBTT_MAC_EID_JAPANESE     =1,   STBTT_MAC_EID_HEBREW       =5,$/;"	e	enum:__anon35
-STBTT_MAC_EID_KOREAN	.\include\stb_truetype.h	/^   STBTT_MAC_EID_KOREAN       =3,   STBTT_MAC_EID_RUSSIAN      =7$/;"	e	enum:__anon35
-STBTT_MAC_EID_ROMAN	.\include\stb_truetype.h	/^   STBTT_MAC_EID_ROMAN        =0,   STBTT_MAC_EID_ARABIC       =4,$/;"	e	enum:__anon35
-STBTT_MAC_EID_RUSSIAN	.\include\stb_truetype.h	/^   STBTT_MAC_EID_KOREAN       =3,   STBTT_MAC_EID_RUSSIAN      =7$/;"	e	enum:__anon35
-STBTT_MAC_LANG_ARABIC	.\include\stb_truetype.h	/^   STBTT_MAC_LANG_ARABIC       =12,   STBTT_MAC_LANG_KOREAN       =23,$/;"	e	enum:__anon37
-STBTT_MAC_LANG_CHINESE_SIMPLIFIED	.\include\stb_truetype.h	/^   STBTT_MAC_LANG_HEBREW       =10,   STBTT_MAC_LANG_CHINESE_SIMPLIFIED =33,$/;"	e	enum:__anon37
-STBTT_MAC_LANG_CHINESE_TRAD	.\include\stb_truetype.h	/^   STBTT_MAC_LANG_ITALIAN      =3 ,   STBTT_MAC_LANG_CHINESE_TRAD =19$/;"	e	enum:__anon37
-STBTT_MAC_LANG_DUTCH	.\include\stb_truetype.h	/^   STBTT_MAC_LANG_DUTCH        =4 ,   STBTT_MAC_LANG_RUSSIAN      =32,$/;"	e	enum:__anon37
-STBTT_MAC_LANG_ENGLISH	.\include\stb_truetype.h	/^   STBTT_MAC_LANG_ENGLISH      =0 ,   STBTT_MAC_LANG_JAPANESE     =11,$/;"	e	enum:__anon37
-STBTT_MAC_LANG_FRENCH	.\include\stb_truetype.h	/^   STBTT_MAC_LANG_FRENCH       =1 ,   STBTT_MAC_LANG_SPANISH      =6 ,$/;"	e	enum:__anon37
-STBTT_MAC_LANG_GERMAN	.\include\stb_truetype.h	/^   STBTT_MAC_LANG_GERMAN       =2 ,   STBTT_MAC_LANG_SWEDISH      =5 ,$/;"	e	enum:__anon37
-STBTT_MAC_LANG_HEBREW	.\include\stb_truetype.h	/^   STBTT_MAC_LANG_HEBREW       =10,   STBTT_MAC_LANG_CHINESE_SIMPLIFIED =33,$/;"	e	enum:__anon37
-STBTT_MAC_LANG_ITALIAN	.\include\stb_truetype.h	/^   STBTT_MAC_LANG_ITALIAN      =3 ,   STBTT_MAC_LANG_CHINESE_TRAD =19$/;"	e	enum:__anon37
-STBTT_MAC_LANG_JAPANESE	.\include\stb_truetype.h	/^   STBTT_MAC_LANG_ENGLISH      =0 ,   STBTT_MAC_LANG_JAPANESE     =11,$/;"	e	enum:__anon37
-STBTT_MAC_LANG_KOREAN	.\include\stb_truetype.h	/^   STBTT_MAC_LANG_ARABIC       =12,   STBTT_MAC_LANG_KOREAN       =23,$/;"	e	enum:__anon37
-STBTT_MAC_LANG_RUSSIAN	.\include\stb_truetype.h	/^   STBTT_MAC_LANG_DUTCH        =4 ,   STBTT_MAC_LANG_RUSSIAN      =32,$/;"	e	enum:__anon37
-STBTT_MAC_LANG_SPANISH	.\include\stb_truetype.h	/^   STBTT_MAC_LANG_FRENCH       =1 ,   STBTT_MAC_LANG_SPANISH      =6 ,$/;"	e	enum:__anon37
-STBTT_MAC_LANG_SWEDISH	.\include\stb_truetype.h	/^   STBTT_MAC_LANG_GERMAN       =2 ,   STBTT_MAC_LANG_SWEDISH      =5 ,$/;"	e	enum:__anon37
+STBTT_MAC_EID_ARABIC	.\include\stb_truetype.h	/^   STBTT_MAC_EID_ROMAN        =0,   STBTT_MAC_EID_ARABIC       =4,$/;"	e	enum:__anon38
+STBTT_MAC_EID_CHINESE_TRAD	.\include\stb_truetype.h	/^   STBTT_MAC_EID_CHINESE_TRAD =2,   STBTT_MAC_EID_GREEK        =6,$/;"	e	enum:__anon38
+STBTT_MAC_EID_GREEK	.\include\stb_truetype.h	/^   STBTT_MAC_EID_CHINESE_TRAD =2,   STBTT_MAC_EID_GREEK        =6,$/;"	e	enum:__anon38
+STBTT_MAC_EID_HEBREW	.\include\stb_truetype.h	/^   STBTT_MAC_EID_JAPANESE     =1,   STBTT_MAC_EID_HEBREW       =5,$/;"	e	enum:__anon38
+STBTT_MAC_EID_JAPANESE	.\include\stb_truetype.h	/^   STBTT_MAC_EID_JAPANESE     =1,   STBTT_MAC_EID_HEBREW       =5,$/;"	e	enum:__anon38
+STBTT_MAC_EID_KOREAN	.\include\stb_truetype.h	/^   STBTT_MAC_EID_KOREAN       =3,   STBTT_MAC_EID_RUSSIAN      =7$/;"	e	enum:__anon38
+STBTT_MAC_EID_ROMAN	.\include\stb_truetype.h	/^   STBTT_MAC_EID_ROMAN        =0,   STBTT_MAC_EID_ARABIC       =4,$/;"	e	enum:__anon38
+STBTT_MAC_EID_RUSSIAN	.\include\stb_truetype.h	/^   STBTT_MAC_EID_KOREAN       =3,   STBTT_MAC_EID_RUSSIAN      =7$/;"	e	enum:__anon38
+STBTT_MAC_LANG_ARABIC	.\include\stb_truetype.h	/^   STBTT_MAC_LANG_ARABIC       =12,   STBTT_MAC_LANG_KOREAN       =23,$/;"	e	enum:__anon40
+STBTT_MAC_LANG_CHINESE_SIMPLIFIED	.\include\stb_truetype.h	/^   STBTT_MAC_LANG_HEBREW       =10,   STBTT_MAC_LANG_CHINESE_SIMPLIFIED =33,$/;"	e	enum:__anon40
+STBTT_MAC_LANG_CHINESE_TRAD	.\include\stb_truetype.h	/^   STBTT_MAC_LANG_ITALIAN      =3 ,   STBTT_MAC_LANG_CHINESE_TRAD =19$/;"	e	enum:__anon40
+STBTT_MAC_LANG_DUTCH	.\include\stb_truetype.h	/^   STBTT_MAC_LANG_DUTCH        =4 ,   STBTT_MAC_LANG_RUSSIAN      =32,$/;"	e	enum:__anon40
+STBTT_MAC_LANG_ENGLISH	.\include\stb_truetype.h	/^   STBTT_MAC_LANG_ENGLISH      =0 ,   STBTT_MAC_LANG_JAPANESE     =11,$/;"	e	enum:__anon40
+STBTT_MAC_LANG_FRENCH	.\include\stb_truetype.h	/^   STBTT_MAC_LANG_FRENCH       =1 ,   STBTT_MAC_LANG_SPANISH      =6 ,$/;"	e	enum:__anon40
+STBTT_MAC_LANG_GERMAN	.\include\stb_truetype.h	/^   STBTT_MAC_LANG_GERMAN       =2 ,   STBTT_MAC_LANG_SWEDISH      =5 ,$/;"	e	enum:__anon40
+STBTT_MAC_LANG_HEBREW	.\include\stb_truetype.h	/^   STBTT_MAC_LANG_HEBREW       =10,   STBTT_MAC_LANG_CHINESE_SIMPLIFIED =33,$/;"	e	enum:__anon40
+STBTT_MAC_LANG_ITALIAN	.\include\stb_truetype.h	/^   STBTT_MAC_LANG_ITALIAN      =3 ,   STBTT_MAC_LANG_CHINESE_TRAD =19$/;"	e	enum:__anon40
+STBTT_MAC_LANG_JAPANESE	.\include\stb_truetype.h	/^   STBTT_MAC_LANG_ENGLISH      =0 ,   STBTT_MAC_LANG_JAPANESE     =11,$/;"	e	enum:__anon40
+STBTT_MAC_LANG_KOREAN	.\include\stb_truetype.h	/^   STBTT_MAC_LANG_ARABIC       =12,   STBTT_MAC_LANG_KOREAN       =23,$/;"	e	enum:__anon40
+STBTT_MAC_LANG_RUSSIAN	.\include\stb_truetype.h	/^   STBTT_MAC_LANG_DUTCH        =4 ,   STBTT_MAC_LANG_RUSSIAN      =32,$/;"	e	enum:__anon40
+STBTT_MAC_LANG_SPANISH	.\include\stb_truetype.h	/^   STBTT_MAC_LANG_FRENCH       =1 ,   STBTT_MAC_LANG_SPANISH      =6 ,$/;"	e	enum:__anon40
+STBTT_MAC_LANG_SWEDISH	.\include\stb_truetype.h	/^   STBTT_MAC_LANG_GERMAN       =2 ,   STBTT_MAC_LANG_SWEDISH      =5 ,$/;"	e	enum:__anon40
 STBTT_MAX_OVERSAMPLE	.\include\stb_truetype.h	1109;"	d
-STBTT_MS_EID_SHIFTJIS	.\include\stb_truetype.h	/^   STBTT_MS_EID_SHIFTJIS      =2,$/;"	e	enum:__anon34
-STBTT_MS_EID_SYMBOL	.\include\stb_truetype.h	/^   STBTT_MS_EID_SYMBOL        =0,$/;"	e	enum:__anon34
-STBTT_MS_EID_UNICODE_BMP	.\include\stb_truetype.h	/^   STBTT_MS_EID_UNICODE_BMP   =1,$/;"	e	enum:__anon34
-STBTT_MS_EID_UNICODE_FULL	.\include\stb_truetype.h	/^   STBTT_MS_EID_UNICODE_FULL  =10$/;"	e	enum:__anon34
-STBTT_MS_LANG_CHINESE	.\include\stb_truetype.h	/^   STBTT_MS_LANG_CHINESE     =0x0804,   STBTT_MS_LANG_JAPANESE    =0x0411,$/;"	e	enum:__anon36
-STBTT_MS_LANG_DUTCH	.\include\stb_truetype.h	/^   STBTT_MS_LANG_DUTCH       =0x0413,   STBTT_MS_LANG_KOREAN      =0x0412,$/;"	e	enum:__anon36
-STBTT_MS_LANG_ENGLISH	.\include\stb_truetype.h	/^   STBTT_MS_LANG_ENGLISH     =0x0409,   STBTT_MS_LANG_ITALIAN     =0x0410,$/;"	e	enum:__anon36
-STBTT_MS_LANG_FRENCH	.\include\stb_truetype.h	/^   STBTT_MS_LANG_FRENCH      =0x040c,   STBTT_MS_LANG_RUSSIAN     =0x0419,$/;"	e	enum:__anon36
-STBTT_MS_LANG_GERMAN	.\include\stb_truetype.h	/^   STBTT_MS_LANG_GERMAN      =0x0407,   STBTT_MS_LANG_SPANISH     =0x0409,$/;"	e	enum:__anon36
-STBTT_MS_LANG_HEBREW	.\include\stb_truetype.h	/^   STBTT_MS_LANG_HEBREW      =0x040d,   STBTT_MS_LANG_SWEDISH     =0x041D$/;"	e	enum:__anon36
-STBTT_MS_LANG_ITALIAN	.\include\stb_truetype.h	/^   STBTT_MS_LANG_ENGLISH     =0x0409,   STBTT_MS_LANG_ITALIAN     =0x0410,$/;"	e	enum:__anon36
-STBTT_MS_LANG_JAPANESE	.\include\stb_truetype.h	/^   STBTT_MS_LANG_CHINESE     =0x0804,   STBTT_MS_LANG_JAPANESE    =0x0411,$/;"	e	enum:__anon36
-STBTT_MS_LANG_KOREAN	.\include\stb_truetype.h	/^   STBTT_MS_LANG_DUTCH       =0x0413,   STBTT_MS_LANG_KOREAN      =0x0412,$/;"	e	enum:__anon36
-STBTT_MS_LANG_RUSSIAN	.\include\stb_truetype.h	/^   STBTT_MS_LANG_FRENCH      =0x040c,   STBTT_MS_LANG_RUSSIAN     =0x0419,$/;"	e	enum:__anon36
-STBTT_MS_LANG_SPANISH	.\include\stb_truetype.h	/^   STBTT_MS_LANG_GERMAN      =0x0407,   STBTT_MS_LANG_SPANISH     =0x0409,$/;"	e	enum:__anon36
-STBTT_MS_LANG_SWEDISH	.\include\stb_truetype.h	/^   STBTT_MS_LANG_HEBREW      =0x040d,   STBTT_MS_LANG_SWEDISH     =0x041D$/;"	e	enum:__anon36
-STBTT_PLATFORM_ID_ISO	.\include\stb_truetype.h	/^   STBTT_PLATFORM_ID_ISO       =2,$/;"	e	enum:__anon32
-STBTT_PLATFORM_ID_MAC	.\include\stb_truetype.h	/^   STBTT_PLATFORM_ID_MAC       =1,$/;"	e	enum:__anon32
-STBTT_PLATFORM_ID_MICROSOFT	.\include\stb_truetype.h	/^   STBTT_PLATFORM_ID_MICROSOFT =3$/;"	e	enum:__anon32
-STBTT_PLATFORM_ID_UNICODE	.\include\stb_truetype.h	/^   STBTT_PLATFORM_ID_UNICODE   =0,$/;"	e	enum:__anon32
+STBTT_MS_EID_SHIFTJIS	.\include\stb_truetype.h	/^   STBTT_MS_EID_SHIFTJIS      =2,$/;"	e	enum:__anon37
+STBTT_MS_EID_SYMBOL	.\include\stb_truetype.h	/^   STBTT_MS_EID_SYMBOL        =0,$/;"	e	enum:__anon37
+STBTT_MS_EID_UNICODE_BMP	.\include\stb_truetype.h	/^   STBTT_MS_EID_UNICODE_BMP   =1,$/;"	e	enum:__anon37
+STBTT_MS_EID_UNICODE_FULL	.\include\stb_truetype.h	/^   STBTT_MS_EID_UNICODE_FULL  =10$/;"	e	enum:__anon37
+STBTT_MS_LANG_CHINESE	.\include\stb_truetype.h	/^   STBTT_MS_LANG_CHINESE     =0x0804,   STBTT_MS_LANG_JAPANESE    =0x0411,$/;"	e	enum:__anon39
+STBTT_MS_LANG_DUTCH	.\include\stb_truetype.h	/^   STBTT_MS_LANG_DUTCH       =0x0413,   STBTT_MS_LANG_KOREAN      =0x0412,$/;"	e	enum:__anon39
+STBTT_MS_LANG_ENGLISH	.\include\stb_truetype.h	/^   STBTT_MS_LANG_ENGLISH     =0x0409,   STBTT_MS_LANG_ITALIAN     =0x0410,$/;"	e	enum:__anon39
+STBTT_MS_LANG_FRENCH	.\include\stb_truetype.h	/^   STBTT_MS_LANG_FRENCH      =0x040c,   STBTT_MS_LANG_RUSSIAN     =0x0419,$/;"	e	enum:__anon39
+STBTT_MS_LANG_GERMAN	.\include\stb_truetype.h	/^   STBTT_MS_LANG_GERMAN      =0x0407,   STBTT_MS_LANG_SPANISH     =0x0409,$/;"	e	enum:__anon39
+STBTT_MS_LANG_HEBREW	.\include\stb_truetype.h	/^   STBTT_MS_LANG_HEBREW      =0x040d,   STBTT_MS_LANG_SWEDISH     =0x041D$/;"	e	enum:__anon39
+STBTT_MS_LANG_ITALIAN	.\include\stb_truetype.h	/^   STBTT_MS_LANG_ENGLISH     =0x0409,   STBTT_MS_LANG_ITALIAN     =0x0410,$/;"	e	enum:__anon39
+STBTT_MS_LANG_JAPANESE	.\include\stb_truetype.h	/^   STBTT_MS_LANG_CHINESE     =0x0804,   STBTT_MS_LANG_JAPANESE    =0x0411,$/;"	e	enum:__anon39
+STBTT_MS_LANG_KOREAN	.\include\stb_truetype.h	/^   STBTT_MS_LANG_DUTCH       =0x0413,   STBTT_MS_LANG_KOREAN      =0x0412,$/;"	e	enum:__anon39
+STBTT_MS_LANG_RUSSIAN	.\include\stb_truetype.h	/^   STBTT_MS_LANG_FRENCH      =0x040c,   STBTT_MS_LANG_RUSSIAN     =0x0419,$/;"	e	enum:__anon39
+STBTT_MS_LANG_SPANISH	.\include\stb_truetype.h	/^   STBTT_MS_LANG_GERMAN      =0x0407,   STBTT_MS_LANG_SPANISH     =0x0409,$/;"	e	enum:__anon39
+STBTT_MS_LANG_SWEDISH	.\include\stb_truetype.h	/^   STBTT_MS_LANG_HEBREW      =0x040d,   STBTT_MS_LANG_SWEDISH     =0x041D$/;"	e	enum:__anon39
+STBTT_PLATFORM_ID_ISO	.\include\stb_truetype.h	/^   STBTT_PLATFORM_ID_ISO       =2,$/;"	e	enum:__anon35
+STBTT_PLATFORM_ID_MAC	.\include\stb_truetype.h	/^   STBTT_PLATFORM_ID_MAC       =1,$/;"	e	enum:__anon35
+STBTT_PLATFORM_ID_MICROSOFT	.\include\stb_truetype.h	/^   STBTT_PLATFORM_ID_MICROSOFT =3$/;"	e	enum:__anon35
+STBTT_PLATFORM_ID_UNICODE	.\include\stb_truetype.h	/^   STBTT_PLATFORM_ID_UNICODE   =0,$/;"	e	enum:__anon35
 STBTT_POINT_SIZE	.\include\stb_truetype.h	602;"	d
 STBTT_RASTERIZER_VERSION	.\include\stb_truetype.h	1119;"	d
-STBTT_UNICODE_EID_ISO_10646	.\include\stb_truetype.h	/^   STBTT_UNICODE_EID_ISO_10646      =2,$/;"	e	enum:__anon33
-STBTT_UNICODE_EID_UNICODE_1_0	.\include\stb_truetype.h	/^   STBTT_UNICODE_EID_UNICODE_1_0    =0,$/;"	e	enum:__anon33
-STBTT_UNICODE_EID_UNICODE_1_1	.\include\stb_truetype.h	/^   STBTT_UNICODE_EID_UNICODE_1_1    =1,$/;"	e	enum:__anon33
-STBTT_UNICODE_EID_UNICODE_2_0_BMP	.\include\stb_truetype.h	/^   STBTT_UNICODE_EID_UNICODE_2_0_BMP=3,$/;"	e	enum:__anon33
-STBTT_UNICODE_EID_UNICODE_2_0_FULL	.\include\stb_truetype.h	/^   STBTT_UNICODE_EID_UNICODE_2_0_FULL=4$/;"	e	enum:__anon33
+STBTT_UNICODE_EID_ISO_10646	.\include\stb_truetype.h	/^   STBTT_UNICODE_EID_ISO_10646      =2,$/;"	e	enum:__anon36
+STBTT_UNICODE_EID_UNICODE_1_0	.\include\stb_truetype.h	/^   STBTT_UNICODE_EID_UNICODE_1_0    =0,$/;"	e	enum:__anon36
+STBTT_UNICODE_EID_UNICODE_1_1	.\include\stb_truetype.h	/^   STBTT_UNICODE_EID_UNICODE_1_1    =1,$/;"	e	enum:__anon36
+STBTT_UNICODE_EID_UNICODE_2_0_BMP	.\include\stb_truetype.h	/^   STBTT_UNICODE_EID_UNICODE_2_0_BMP=3,$/;"	e	enum:__anon36
+STBTT_UNICODE_EID_UNICODE_2_0_FULL	.\include\stb_truetype.h	/^   STBTT_UNICODE_EID_UNICODE_2_0_FULL=4$/;"	e	enum:__anon36
 STBTT__COMPARE	.\include\stb_truetype.h	3397;"	d
 STBTT__CSCTX_INIT	.\include\stb_truetype.h	1909;"	d
 STBTT__CSERR	.\include\stb_truetype.h	2018;"	d
@@ -485,21 +583,21 @@ STBTT_min	.\include\stb_truetype.h	4395;"	d
 STBTT_pow	.\include\stb_truetype.h	449;"	d
 STBTT_sqrt	.\include\stb_truetype.h	448;"	d
 STBTT_strlen	.\include\stb_truetype.h	482;"	d
-STBTT_vcubic	.\include\stb_truetype.h	/^      STBTT_vcubic$/;"	e	enum:__anon29
-STBTT_vcurve	.\include\stb_truetype.h	/^      STBTT_vcurve,$/;"	e	enum:__anon29
-STBTT_vline	.\include\stb_truetype.h	/^      STBTT_vline,$/;"	e	enum:__anon29
-STBTT_vmove	.\include\stb_truetype.h	/^      STBTT_vmove=1,$/;"	e	enum:__anon29
-STB_IMAGE_IMPLEMENTATION	.\game.cpp	15;"	d	file:
+STBTT_vcubic	.\include\stb_truetype.h	/^      STBTT_vcubic$/;"	e	enum:__anon32
+STBTT_vcurve	.\include\stb_truetype.h	/^      STBTT_vcurve,$/;"	e	enum:__anon32
+STBTT_vline	.\include\stb_truetype.h	/^      STBTT_vline,$/;"	e	enum:__anon32
+STBTT_vmove	.\include\stb_truetype.h	/^      STBTT_vmove=1,$/;"	e	enum:__anon32
+STB_IMAGE_IMPLEMENTATION	.\game.cpp	17;"	d	file:
 STB_INCLUDE_STB_RECT_PACK_H	.\include\stb_rect_pack.h	67;"	d
-STB_RECT_PACK_IMPLEMENTATION	.\game.cpp	16;"	d	file:
+STB_RECT_PACK_IMPLEMENTATION	.\game.cpp	18;"	d	file:
 STB_RECT_PACK_VERSION	.\include\stb_rect_pack.h	69;"	d
 STB_SPRINTF_DECORATE	.\include\stb_sprintf.h	205;"	d
 STB_SPRINTF_H_INCLUDE	.\include\stb_sprintf.h	30;"	d
-STB_SPRINTF_IMPLEMENTATION	.\game.cpp	14;"	d	file:
+STB_SPRINTF_IMPLEMENTATION	.\game.cpp	16;"	d	file:
 STB_SPRINTF_IMPLEMENTATION	.\win32.cpp	10;"	d	file:
 STB_SPRINTF_MIN	.\include\stb_sprintf.h	200;"	d
 STB_SPRINTF_MSVC_MODE	.\include\stb_sprintf.h	242;"	d
-STB_TRUETYPE_IMPLEMENTATION	.\game.cpp	17;"	d	file:
+STB_TRUETYPE_IMPLEMENTATION	.\game.cpp	19;"	d	file:
 STRING_LENGTH	.\file_formats.h	/^enum STRING_LENGTH {$/;"	g
 STRING_LENGTH_BLOB	.\file_formats.h	/^	STRING_LENGTH_BLOB = 12,$/;"	e	enum:STRING_LENGTH
 STRING_LENGTH_FONT	.\file_formats.h	/^	STRING_LENGTH_FONT = 12,$/;"	e	enum:STRING_LENGTH
@@ -524,11 +622,22 @@ SetTextureBuffer	.\renderer.h	/^struct SetTextureBuffer {$/;"	s
 SetVertexBuffer	.\renderer.h	/^struct SetVertexBuffer { $/;"	s
 SetVertexShader	.\renderer.h	/^struct SetVertexShader      { VertexShader* vertex; } ;$/;"	s
 SetViewport	.\renderer.h	/^struct SetViewport { $/;"	s
-SpawnSimpleEntity	.\simulation.cpp	/^SpawnSimpleEntity(Mesh mesh, Transform transform, Renderer* renderer, MemoryArena* arena) {$/;"	f	file:
+SpawnEntitySpawner	.\simulation.cpp	/^SpawnEntitySpawner(SpawnerInfo* info, GameState* game_state) {$/;"	f	file:
+SpawnInfo	.\simulation.h	/^struct SpawnInfo {$/;"	s
+SpawnLevelBoundary	.\simulation.cpp	/^SpawnLevelBoundary(BoundingBox box, GameState* game_state) {$/;"	f	file:
+SpawnMine	.\simulation.cpp	/^SpawnMine(Transform transform, GameState* game_state) {$/;"	f	file:
+SpawnParticleSystem	.\simulation.cpp	/^SpawnParticleSystem(ParticleSystem* particle_system, GameState* game_state) {$/;"	f	file:
+SpawnPlayer	.\simulation.cpp	/^SpawnPlayer(Transform transform, GameState* game_state) {$/;"	f	file:
+SpawnerInfo	.\simulation.h	/^struct SpawnerInfo {$/;"	s
 StringCompare	.\memory_management.h	/^StringCompare(char* left, char* right) {$/;"	f
 StringLength	.\memory_management.h	/^StringLength(char* string) {$/;"	f
 StructuredBuffer	.\renderer.h	/^struct StructuredBuffer {$/;"	s
-TEAL	.\math.h	114;"	d
+TEAL	.\math.h	125;"	d
+TEAM	.\simulation.h	/^enum TEAM { TEAM_NONE, TEAM_PLAYER, TEAM_ENEMY, TEAM_TOTAL };$/;"	g
+TEAM_ENEMY	.\simulation.h	/^enum TEAM { TEAM_NONE, TEAM_PLAYER, TEAM_ENEMY, TEAM_TOTAL };$/;"	e	enum:TEAM
+TEAM_NONE	.\simulation.h	/^enum TEAM { TEAM_NONE, TEAM_PLAYER, TEAM_ENEMY, TEAM_TOTAL };$/;"	e	enum:TEAM
+TEAM_PLAYER	.\simulation.h	/^enum TEAM { TEAM_NONE, TEAM_PLAYER, TEAM_ENEMY, TEAM_TOTAL };$/;"	e	enum:TEAM
+TEAM_TOTAL	.\simulation.h	/^enum TEAM { TEAM_NONE, TEAM_PLAYER, TEAM_ENEMY, TEAM_TOTAL };$/;"	e	enum:TEAM
 TEXTURE_BINDING_SLOT	.\renderer.h	/^enum TEXTURE_BINDING_SLOT {$/;"	g
 TEXTURE_BINDING_SLOT_ALBEDO	.\renderer.h	/^	TEXTURE_BINDING_SLOT_ALBEDO,$/;"	e	enum:TEXTURE_BINDING_SLOT
 TEXTURE_BINDING_SLOT_NORMAL	.\renderer.h	/^	TEXTURE_BINDING_SLOT_NORMAL$/;"	e	enum:TEXTURE_BINDING_SLOT
@@ -538,6 +647,7 @@ TEXTURE_SLOT_NORMAL	.\asset_formats.h	/^	TEXTURE_SLOT_NORMAL,$/;"	e	enum:TEXTURE
 TEXTURE_SLOT_TOTAL	.\asset_formats.h	/^	TEXTURE_SLOT_TOTAL,$/;"	e	enum:TEXTURE_SLOT
 TemporaryMemory	.\memory_management.h	/^struct TemporaryMemory {$/;"	s
 Terabytes	.\base_types.h	34;"	d
+TestMode	.\game_mode.h	/^struct TestMode {$/;"	s
 Tetra	.\tetra.cpp	/^struct Tetra {$/;"	s	file:
 TextShader	.\shader_code.h	/^	char TextShader[] = R"FOO($/;"	v
 TextUI	.\font_handling.cpp	/^struct TextUI {$/;"	s	file:
@@ -545,8 +655,10 @@ TextureAssetInfo	.\asset_info.h	/^struct TextureAssetInfo {$/;"	s
 TextureBuffer	.\renderer.h	/^struct TextureBuffer {$/;"	s
 TextureData	.\asset_formats.h	/^struct TextureData {$/;"	s
 TextureFormat	.\file_formats.h	/^struct TextureFormat {$/;"	s
+TexturedQuad	.\quad_renderer.cpp	/^struct TexturedQuad {$/;"	s	file:
 TexturedQuadShader	.\shader_code.h	/^char TexturedQuadShader[] = R"FOO($/;"	v
 TexturesBlob	.\file_formats.h	/^struct TexturesBlob {$/;"	s
+Timer	.\timer.h	/^struct Timer {$/;"	s
 Transform	.\math.h	/^struct Transform {$/;"	s
 TransformI	.\math.h	/^static Transform TransformI() { return Transform { V3Z(), QuatI(), V3I() }; }$/;"	f
 U16Max	.\base_types.h	20;"	d
@@ -554,14 +666,38 @@ U32Max	.\base_types.h	24;"	d
 U32Min	.\base_types.h	23;"	d
 U64Max	.\base_types.h	25;"	d
 U8Max	.\base_types.h	19;"	d
-UIFrame	.\font_handling.cpp	/^UIFrame(TextUI* text_ui, WindowDimensions wd, Renderer* renderer) {$/;"	f	file:
-UpdateEntity	.\simulation.cpp	/^UpdateEntity(Entity* entity, MeshRenderer* mesh_renderer, MemoryArena* frame_arena) {$/;"	f	file:
+UICachedData	.\ui_renderer.cpp	/^struct UICachedData {$/;"	s	file:
+UIData	.\ui_renderer.cpp	/^struct UIData {$/;"	s	file:
+UIDimension	.\ui_renderer.cpp	/^struct UIDimension {$/;"	s	file:
+UIElement	.\ui_renderer.cpp	/^struct UIElement {$/;"	s	file:
+UIGenerateData	.\ui_renderer.cpp	/^UIGenerateData(Input* input, UIRenderer* ui_renderer) {$/;"	f	file:
+UIOperateElement	.\ui_renderer.cpp	/^UIOperateElement(Vec2 mouse_pos, Vec2 mouse_del, bool held, UIElement* element, UIElement* parent, UIData* data, UIRenderer* ui_renderer) {$/;"	f	file:
+UIRenderElements	.\ui_renderer.cpp	/^UIRenderElements(UIRenderer* ui_renderer, Renderer* renderer) {$/;"	f	file:
+UIRenderer	.\ui_renderer.cpp	/^struct UIRenderer {$/;"	s	file:
+UIRendererFrame	.\ui_renderer.cpp	/^UIRendererFrame(Input* input, UIRenderer* ui_renderer, Renderer* renderer) {$/;"	f	file:
+UIShader	.\shader_code.h	/^char UIShader[] = R"FOO($/;"	v
+UITextFrame	.\font_handling.cpp	/^UITextFrame(TextUI* text_ui, WindowDimensions wd, Renderer* renderer) {$/;"	f	file:
+UI_FAB	.\ui_renderer.cpp	/^enum UI_FAB {$/;"	g	file:
+UI_FAB_Button	.\ui_renderer.cpp	/^	UI_FAB_Button,$/;"	e	enum:UI_FAB	file:
+UI_FAB_Overlay	.\ui_renderer.cpp	/^	UI_FAB_Overlay,$/;"	e	enum:UI_FAB	file:
+UI_FAB_Text	.\ui_renderer.cpp	/^	UI_FAB_Text,$/;"	e	enum:UI_FAB	file:
+UI_FLAG	.\ui_renderer.cpp	/^enum UI_FLAG {$/;"	g	file:
+UI_FLAG_Hover	.\ui_renderer.cpp	/^	UI_FLAG_Hover   = 1<<1,$/;"	e	enum:UI_FLAG	file:
+UI_FLAG_Movable	.\ui_renderer.cpp	/^	UI_FLAG_Movable = 1<<3,$/;"	e	enum:UI_FLAG	file:
+UI_FLAG_Press	.\ui_renderer.cpp	/^	UI_FLAG_Press   = 1<<2,$/;"	e	enum:UI_FLAG	file:
+UI_FLAG_Text	.\ui_renderer.cpp	/^	UI_FLAG_Text    = 1<<4,$/;"	e	enum:UI_FLAG	file:
+UpdateBoundingBox	.\simulation.cpp	/^UpdateBoundingBox(BoundingBox* box, Transform* transform) {$/;"	f	file:
+UpdateEntities	.\simulation.cpp	/^UpdateEntities(GameState* game_state, Input* input) {$/;"	f	file:
+UpdateTestMode	.\game_mode.cpp	/^UpdateTestMode(GameState* game_state, Input* input, WindowDimensions wd) {$/;"	f	file:
 UpdateTetra	.\tetra.cpp	/^UpdateTetra(Tetra* tetra) {$/;"	f	file:
+UpdateTransform	.\simulation.cpp	/^UpdateTransform(Transform* inout, Transform var) {$/;"	f	file:
+UploadAllMeshAssets	.\asset_info.cpp	/^UploadAllMeshAssets(GameAssets* assets, Renderer* renderer) {$/;"	f	file:
 UploadAllTextureAssets	.\asset_info.cpp	/^UploadAllTextureAssets(GameAssets* assets, Renderer* renderer) {$/;"	f	file:
 UploadConstantsBuffer	.\renderer.cpp	/^UploadConstantsBuffer(u32 size, Renderer* renderer) {$/;"	f	file:
+UploadIndexBuffer	.\renderer.cpp	/^UploadIndexBuffer(void* data, u32 count, Renderer* renderer) {$/;"	f	file:
 UploadPixelShader	.\renderer.cpp	/^UploadPixelShader(char* code, u32 length, char* entry, Renderer* renderer) {$/;"	f	file:
 UploadStructuredBuffer	.\renderer.cpp	/^UploadStructuredBuffer(u32 struct_size, u32 count, Renderer* renderer) {$/;"	f	file:
-UploadTexture	.\renderer.cpp	/^UploadTexture(void* data, u32 width, u32 height, u8 num_components, Renderer* renderer) {$/;"	f	file:
+UploadTexture	.\renderer.cpp	/^UploadTexture(void* data, u32 width, u32 height, u8 num_components, bool dynamic, bool temp, Renderer* renderer) {$/;"	f	file:
 UploadVertexBuffer	.\renderer.cpp	/^UploadVertexBuffer(void* initial_data, u32 num_vertices, u8 num_components, bool dynamic, Renderer* renderer) {$/;"	f	file:
 UploadVertexShader	.\renderer.cpp	/^UploadVertexShader(char* code, u32 length, char* entry, VERTEX_BUFFER* vertex_buffers, u8 count, Renderer* renderer) {$/;"	f	file:
 V2	.\math.h	/^static Vec2 V2(float x, float y) { return Vec2 { x, y }; }$/;"	f
@@ -617,7 +753,7 @@ VertexBuffer	.\renderer.h	/^struct VertexBuffer    { ID3D11Buffer* buffer; };$/;
 VertexBufferData	.\asset_formats.h	/^struct VertexBufferData {$/;"	s
 VertexBufferFormat	.\file_formats.h	/^struct VertexBufferFormat {$/;"	s
 VertexShader	.\renderer.h	/^struct VertexShader {$/;"	s
-WHITE	.\math.h	108;"	d
+WHITE	.\math.h	118;"	d
 WIN32_AXIS	.\platform_api.h	/^enum WIN32_AXIS {$/;"	g
 WIN32_AXIS_MOUSE	.\platform_api.h	/^	WIN32_AXIS_MOUSE,$/;"	e	enum:WIN32_AXIS
 WIN32_AXIS_MOUSE_DEL	.\platform_api.h	/^	WIN32_AXIS_MOUSE_DEL,$/;"	e	enum:WIN32_AXIS
@@ -689,6 +825,8 @@ WIN32_BUTTON_Z	.\platform_api.h	/^	WIN32_BUTTON_Z,$/;"	e	enum:WIN32_BUTTON
 Win32DLL	.\win32.h	/^struct Win32DLL { \/\/ InOut struct$/;"	s
 Win32GameFunctionTable	.\win32.h	/^struct Win32GameFunctionTable {$/;"	s
 Win32GetLastWriteTime	.\win32.cpp	/^Win32GetLastWriteTime(char* absfilepath) {$/;"	f	file:
+Win32GetSecondsElapsed	.\win32.cpp	/^Win32GetSecondsElapsed(LARGE_INTEGER Start, LARGE_INTEGER End)$/;"	f	file:
+Win32GetWallClock	.\win32.cpp	/^Win32GetWallClock(void) {    $/;"	f	file:
 Win32GetWindowDimensions	.\win32.cpp	/^Win32GetWindowDimensions(HWND window) {$/;"	f	file:
 Win32HasDLLChanged	.\win32.cpp	/^Win32HasDLLChanged(Win32DLL* code) {$/;"	f	file:
 Win32LoadDLL	.\win32.cpp	/^Win32LoadDLL(Win32State* state, Win32DLL* code) {$/;"	f	file:
@@ -705,78 +843,92 @@ Win32UnloadDLL	.\win32.cpp	/^Win32UnloadDLL(Win32DLL* code) {$/;"	f	file:
 Win32Window	.\platform_api.h	/^struct Win32Window {$/;"	s
 WinMain	.\win32.cpp	/^WinMain(HINSTANCE instance, HINSTANCE prev_instance, LPSTR cmdline, int show_code) {$/;"	f
 WindowDimensions	.\platform_api.h	/^struct WindowDimensions { u32 width; u32 height; };$/;"	s
-YCbCr_to_RGB_kernel	.\include\stb_image.h	/^			void (*YCbCr_to_RGB_kernel)(stbi_uc *out, const stbi_uc *y, const stbi_uc *pcb, const stbi_uc *pcr, int count, int step);$/;"	m	struct:__anon8
-YELLOW	.\math.h	124;"	d
+YCbCr_to_RGB_kernel	.\include\stb_image.h	/^			void (*YCbCr_to_RGB_kernel)(stbi_uc *out, const stbi_uc *y, const stbi_uc *pcb, const stbi_uc *pcr, int count, int step);$/;"	m	struct:__anon11
+YELLOW	.\math.h	135;"	d
 ZeroArray	.\memory_management.h	2;"	d
 ZeroMem	.\memory_management.h	/^static void ZeroMem(void* ptr, u64 size) {$/;"	f
 ZeroStruct	.\memory_management.h	1;"	d
 __STB_INCLUDE_STB_TRUETYPE_H__	.\include\stb_truetype.h	500;"	d
 absfilepath	.\win32.h	/^	char* absfilepath;$/;"	m	struct:Win32DLL
+acceleration	.\simulation.h	/^	float acceleration;$/;"	m	struct:Entity
 active_head	.\include\stb_rect_pack.h	/^   stbrp_node *active_head;$/;"	m	struct:stbrp_context
 advance	.\include\stb_truetype.h	/^   int advance;$/;"	m	struct:stbtt_kerningentry
 align	.\include\stb_rect_pack.h	/^   int align;$/;"	m	struct:stbrp_context
-all_a	.\include\stb_image.h	/^			unsigned int mr,mg,mb,ma, all_a;$/;"	m	struct:__anon16
+all_a	.\include\stb_image.h	/^			unsigned int mr,mg,mb,ma, all_a;$/;"	m	struct:__anon19
 allocate_memory	.\platform_api.h	/^	PlatformAllocateMemory* allocate_memory;$/;"	m	struct:PlatformAPI
 ambience	.\mesh_renderer.cpp	/^	float ambience;$/;"	m	struct:LightInfo	file:
-app14_color_transform	.\include\stb_image.h	/^			int            app14_color_transform; \/\/ Adobe APP14 tag$/;"	m	struct:__anon8
+app14_color_transform	.\include\stb_image.h	/^			int            app14_color_transform; \/\/ Adobe APP14 tag$/;"	m	struct:__anon11
 arena	.\memory_management.h	/^	MemoryArena* arena;$/;"	m	struct:TemporaryMemory
-array_of_unicode_codepoints	.\include\stb_truetype.h	/^   int *array_of_unicode_codepoints;       \/\/ if non-zero, then this is an array of unicode codepoints$/;"	m	struct:__anon28
-aspect_ratio	.\camera.cpp	/^	float aspect_ratio;$/;"	m	struct:Camera	file:
+array_of_unicode_codepoints	.\include\stb_truetype.h	/^   int *array_of_unicode_codepoints;       \/\/ if non-zero, then this is an array of unicode codepoints$/;"	m	struct:__anon31
+aspect_ratio	.\camera.cpp	/^			float aspect_ratio;$/;"	m	struct:Camera::__anon1::__anon2	file:
 assets	.\game.h	/^	GameAssets* assets;$/;"	m	struct:GameState
+attack_damage	.\simulation.h	/^	u32 attack_damage;$/;"	m	struct:Entity
 axes	.\platform_api.h	/^	Axis axes[WIN32_AXIS_TOTAL];$/;"	m	struct:Input
-back_buffer	.\renderer.h	/^	RenderTarget back_buffer;	\/\/ d3d11 api swaps buffers behind your back and internally remaps it$/;"	m	struct:Renderer
-background	.\include\stb_image.h	/^			stbi_uc *background;          \/\/ The current "background" as far as a gif is concerned$/;"	m	struct:__anon19
+backbuffer	.\renderer.h	/^	RenderTarget backbuffer;	\/\/ d3d11 api swaps buffers behind your back and internally remaps it$/;"	m	struct:Renderer
+background	.\include\stb_image.h	/^			stbi_uc *background;          \/\/ The current "background" as far as a gif is concerned$/;"	m	struct:__anon22
 base_sens	.\camera.cpp	/^	float base_sens;$/;"	m	struct:FPControlInfo	file:
-bgindex	.\include\stb_image.h	/^			int flags, bgindex, ratio, transparent, eflags;$/;"	m	struct:__anon19
-bits_per_channel	.\include\stb_image.h	/^	int bits_per_channel;$/;"	m	struct:__anon5
-bl	.\shapes.cpp	/^	Vec3 bl;$/;"	m	struct:Quad	file:
+bb_mesh_space	.\simulation.h	/^	BoundingBox bb_mesh_space; $/;"	m	struct:Entity
+bb_object_space	.\simulation.h	/^	BoundingBox bb_object_space; $/;"	m	struct:Entity
+bb_orientation	.\simulation.h	/^	u8 bb_orientation;$/;"	m	struct:Entity
+bgindex	.\include\stb_image.h	/^			int flags, bgindex, ratio, transparent, eflags;$/;"	m	struct:__anon22
+bits_per_channel	.\include\stb_image.h	/^	int bits_per_channel;$/;"	m	struct:__anon8
+bl	.\shapes.cpp	/^			Vec3 bl;$/;"	m	struct:Quad::__anon57::__anon58	file:
+blend_states	.\quad_renderer.cpp	/^	u8 blend_states[MAX_TEXTURED_QUADS];$/;"	m	struct:QuadRenderer	file:
 blend_states	.\renderer.h	/^	ID3D11BlendState* blend_states[BLEND_STATE_TOTAL];$/;"	m	struct:Renderer
 blob_names	.\file_formats.h	/^char* blob_names[ASSET_BLOB_TOTAL] = {$/;"	v
 block	.\memory_management.h	/^	PlatformMemoryBlock* block;$/;"	m	struct:TemporaryMemory
 block	.\win32.h	/^	PlatformMemoryBlock block;$/;"	m	struct:Win32MemoryBlock
 block_pitch	.\camera.cpp	/^	bool block_pitch;$/;"	m	struct:FPControlInfo	file:
 block_yaw	.\camera.cpp	/^	bool block_yaw;$/;"	m	struct:FPControlInfo	file:
-bottom_y	.\include\stb_truetype.h	/^   int x,y,bottom_y;$/;"	m	struct:__anon40
-bounds	.\include\stb_truetype.h	/^   int bounds;$/;"	m	struct:__anon38
+bottom	.\camera.cpp	/^			float bottom;$/;"	m	struct:Camera::__anon1::__anon3	file:
+bottom_y	.\include\stb_truetype.h	/^   int x,y,bottom_y;$/;"	m	struct:__anon43
+bounds	.\include\stb_truetype.h	/^   int bounds;$/;"	m	struct:__anon41
 bp	.\platform_api.h	/^	u8* bp;$/;"	m	struct:PlatformMemoryBlock
-bpp	.\include\stb_image.h	/^			int bpp, offset, hsz;$/;"	m	struct:__anon16
-br	.\shapes.cpp	/^	Vec3 br;$/;"	m	struct:Quad	file:
+bpp	.\include\stb_image.h	/^			int bpp, offset, hsz;$/;"	m	struct:__anon19
+br	.\shapes.cpp	/^			Vec3 br;$/;"	m	struct:Quad::__anon57::__anon58	file:
 buf	.\include\stb_sprintf.h	/^   char *buf;$/;"	m	struct:stbsp__context
 buffer	.\asset_info.h	/^	TextureBuffer* buffer;$/;"	m	struct:TextureAssetInfo
 buffer	.\renderer.h	/^	ID3D11Buffer* buffer;$/;"	m	struct:StructuredBuffer
 buffer	.\renderer.h	/^	ID3D11Texture2D* buffer;$/;"	m	struct:TextureBuffer
+buffer	.\renderer.h	/^	void* buffer;$/;"	m	struct:FreeRenderResource
 buffer	.\renderer.h	/^	void* buffer;$/;"	m	struct:PushRenderBufferData
 buffer	.\renderer.h	/^struct ConstantsBuffer { ID3D11Buffer* buffer; };$/;"	m	struct:ConstantsBuffer
 buffer	.\renderer.h	/^struct IndexBuffer     { ID3D11Buffer* buffer; };$/;"	m	struct:IndexBuffer
 buffer	.\renderer.h	/^struct VertexBuffer    { ID3D11Buffer* buffer; };$/;"	m	struct:VertexBuffer
-buffer_start	.\include\stb_image.h	/^		stbi_uc buffer_start[128];$/;"	m	struct:__anon3
-buflen	.\include\stb_image.h	/^		int buflen;$/;"	m	struct:__anon3
+buffer_start	.\include\stb_image.h	/^		stbi_uc buffer_start[128];$/;"	m	struct:__anon6
+buflen	.\include\stb_image.h	/^		int buflen;$/;"	m	struct:__anon6
 buttons	.\platform_api.h	/^	Button buttons[WIN32_BUTTON_TOTAL];$/;"	m	struct:Input
-callback_already_read	.\include\stb_image.h	/^		int callback_already_read;$/;"	m	struct:__anon3
+cache_arena	.\ui_renderer.cpp	/^	MemoryArena* cache_arena;$/;"	m	struct:UIRenderer	file:
+cache_arena_temp	.\ui_renderer.cpp	/^	TemporaryMemory cache_arena_temp;$/;"	m	struct:UIRenderer	file:
+cached_data	.\ui_renderer.cpp	/^	UICachedData* cached_data;$/;"	m	struct:UIRenderer	file:
+callback_already_read	.\include\stb_image.h	/^		int callback_already_read;$/;"	m	struct:__anon6
 camera	.\game.h	/^	Camera* camera;$/;"	m	struct:GameState
 camera_constants	.\mesh_renderer.cpp	/^	ConstantsBuffer* camera_constants;$/;"	m	struct:MeshRenderer	file:
 camera_constants	.\quad_renderer.cpp	/^	ConstantsBuffer* camera_constants;$/;"	m	struct:QuadRenderer	file:
 cdata	.\include\stb_truetype.h	/^stbtt_bakedchar cdata[96]; \/\/ ASCII 32..126 is 95 glyphs$/;"	v
 cff	.\include\stb_truetype.h	/^   stbtt__buf cff;                    \/\/ cff font data$/;"	m	struct:stbtt_fontinfo
-channel	.\include\stb_image.h	/^			stbi_uc size,type,channel;$/;"	m	struct:__anon17
-channel_order	.\include\stb_image.h	/^	int channel_order;$/;"	m	struct:__anon5
-chardata_for_range	.\include\stb_truetype.h	/^   stbtt_packedchar *chardata_for_range; \/\/ output$/;"	m	struct:__anon28
+channel	.\include\stb_image.h	/^			stbi_uc size,type,channel;$/;"	m	struct:__anon20
+channel_order	.\include\stb_image.h	/^	int channel_order;$/;"	m	struct:__anon8
+chardata_for_range	.\include\stb_truetype.h	/^   stbtt_packedchar *chardata_for_range; \/\/ output$/;"	m	struct:__anon31
 charstrings	.\include\stb_truetype.h	/^   stbtt__buf charstrings;            \/\/ the charstring index$/;"	m	struct:stbtt_fontinfo
+chase_target	.\simulation.h	/^	Vec3 chase_target;$/;"	m	struct:Entity
+child	.\ui_renderer.cpp	/^	UIElement* child;$/;"	m	struct:UIElement	file:
 close_file	.\platform_api.h	/^	PlatformCloseFile* close_file;$/;"	m	struct:PlatformAPI
-code	.\include\stb_image.h	/^			stbi__uint16 code[256];$/;"	m	struct:__anon7
-code_bits	.\include\stb_image.h	/^			int            code_bits;   \/\/ number of valid bits$/;"	m	struct:__anon8
-code_buffer	.\include\stb_image.h	/^			stbi__uint32   code_buffer; \/\/ jpeg entropy-coded buffer$/;"	m	struct:__anon8
-code_buffer	.\include\stb_image.h	/^		stbi__uint32 code_buffer;$/;"	m	struct:__anon12
-codes	.\include\stb_image.h	/^			stbi__gif_lzw codes[8192];$/;"	m	struct:__anon19
-coeff	.\include\stb_image.h	/^				short   *coeff;   \/\/ progressive only$/;"	m	struct:__anon8::__anon9
-coeff_h	.\include\stb_image.h	/^				int      coeff_w, coeff_h; \/\/ number of 8x8 coefficient blocks$/;"	m	struct:__anon8::__anon9
-coeff_w	.\include\stb_image.h	/^				int      coeff_w, coeff_h; \/\/ number of 8x8 coefficient blocks$/;"	m	struct:__anon8::__anon9
+code	.\include\stb_image.h	/^			stbi__uint16 code[256];$/;"	m	struct:__anon10
+code_bits	.\include\stb_image.h	/^			int            code_bits;   \/\/ number of valid bits$/;"	m	struct:__anon11
+code_buffer	.\include\stb_image.h	/^			stbi__uint32   code_buffer; \/\/ jpeg entropy-coded buffer$/;"	m	struct:__anon11
+code_buffer	.\include\stb_image.h	/^		stbi__uint32 code_buffer;$/;"	m	struct:__anon15
+codes	.\include\stb_image.h	/^			stbi__gif_lzw codes[8192];$/;"	m	struct:__anon22
+coeff	.\include\stb_image.h	/^				short   *coeff;   \/\/ progressive only$/;"	m	struct:__anon11::__anon12
+coeff_h	.\include\stb_image.h	/^				int      coeff_w, coeff_h; \/\/ number of 8x8 coefficient blocks$/;"	m	struct:__anon11::__anon12
+coeff_w	.\include\stb_image.h	/^				int      coeff_w, coeff_h; \/\/ number of 8x8 coefficient blocks$/;"	m	struct:__anon11::__anon12
 color	.\font_handling.cpp	/^	Vec3 color;$/;"	m	struct:Glyph	file:
 color	.\mesh_renderer.cpp	/^	Vec4 color;$/;"	m	struct:MeshInfo	file:
 color	.\quad_renderer.cpp	/^	Vec4 color;$/;"	m	struct:RenderQuad	file:
 color	.\renderer.h	/^	float color[4];$/;"	m	struct:ClearRenderTarget
 color	.\tetra.cpp	/^	Vec4 color[MAX_TETRA];$/;"	m	struct:Tetra	file:
-color_table	.\include\stb_image.h	/^			stbi_uc *color_table;$/;"	m	struct:__anon19
+color_table	.\include\stb_image.h	/^			stbi_uc *color_table;$/;"	m	struct:__anon22
+colors	.\ui_renderer.cpp	/^	Vec4 colors[4];$/;"	m	struct:UIData	file:
 command_buffer_base	.\renderer.h	/^	u8* command_buffer_base;$/;"	m	struct:Renderer
 command_buffer_cursor	.\renderer.h	/^	u8* command_buffer_cursor;$/;"	m	struct:Renderer
 command_buffer_size	.\renderer.h	/^	u32 command_buffer_size;$/;"	m	struct:Renderer
@@ -786,25 +938,31 @@ count	.\asset_formats.h	/^	u8 count;$/;"	m	struct:MaterialData
 count	.\include\stb_sprintf.h	/^   int count;$/;"	m	struct:stbsp__context
 count	.\mesh_renderer.cpp	/^	u32 count;$/;"	m	struct:MeshRenderer	file:
 count	.\tetra.cpp	/^	u32 count;$/;"	m	struct:Tetra	file:
-cur_x	.\include\stb_image.h	/^			int cur_x, cur_y;$/;"	m	struct:__anon19
-cur_y	.\include\stb_image.h	/^			int cur_x, cur_y;$/;"	m	struct:__anon19
+cur_x	.\include\stb_image.h	/^			int cur_x, cur_y;$/;"	m	struct:__anon22
+cur_y	.\include\stb_image.h	/^			int cur_x, cur_y;$/;"	m	struct:__anon22
 current_block	.\memory_management.h	/^	PlatformMemoryBlock* current_block;$/;"	m	struct:MemoryArena
-cursor	.\include\stb_truetype.h	/^   int cursor;$/;"	m	struct:__anon24
+current_delta	.\simulation.h	/^	float current_delta;$/;"	m	struct:SpawnerInfo
+current_positions	.\simulation.h	/^	Vec3 current_positions[MAX_PARTICLES];$/;"	m	struct:ParticleSystem
+current_time	.\simulation.h	/^	float current_time;$/;"	m	struct:ParticleSystem
+cursor	.\include\stb_truetype.h	/^   int cursor;$/;"	m	struct:__anon27
 cursor	.\win32.h	/^	HCURSOR cursor;$/;"	m	struct:Win32State
 cursor_clip_enabled	.\win32.h	/^	bool cursor_clip_enabled;$/;"	m	struct:Win32State
 cursor_enabled	.\win32.h	/^	bool cursor_enabled;$/;"	m	struct:Win32State
-cx	.\include\stb_truetype.h	/^      stbtt_vertex_type x,y,cx,cy,cx1,cy1;$/;"	m	struct:__anon30
-cx1	.\include\stb_truetype.h	/^      stbtt_vertex_type x,y,cx,cy,cx1,cy1;$/;"	m	struct:__anon30
-cy	.\include\stb_truetype.h	/^      stbtt_vertex_type x,y,cx,cy,cx1,cy1;$/;"	m	struct:__anon30
-cy1	.\include\stb_truetype.h	/^      stbtt_vertex_type x,y,cx,cy,cx1,cy1;$/;"	m	struct:__anon30
+cx	.\include\stb_truetype.h	/^      stbtt_vertex_type x,y,cx,cy,cx1,cy1;$/;"	m	struct:__anon33
+cx1	.\include\stb_truetype.h	/^      stbtt_vertex_type x,y,cx,cy,cx1,cy1;$/;"	m	struct:__anon33
+cy	.\include\stb_truetype.h	/^      stbtt_vertex_type x,y,cx,cy,cx1,cy1;$/;"	m	struct:__anon33
+cy1	.\include\stb_truetype.h	/^      stbtt_vertex_type x,y,cx,cy,cx1,cy1;$/;"	m	struct:__anon33
+damage_reduction	.\simulation.h	/^	u32 damage_reduction;$/;"	m	struct:Entity
 data	.\asset_formats.h	/^	void* data;$/;"	m	struct:VertexBufferData
+data	.\asset_info.h	/^	MeshData* data;$/;"	m	struct:MeshAssetInfo
 data	.\asset_info.h	/^	TextureData* data;$/;"	m	struct:TextureAssetInfo
 data	.\asset_loading.cpp	/^	u8* data;$/;"	m	struct:GameAssets	file:
-data	.\include\stb_image.h	/^				stbi_uc *data;$/;"	m	struct:__anon8::__anon9
+data	.\include\stb_image.h	/^				stbi_uc *data;$/;"	m	struct:__anon11::__anon12
 data	.\include\stb_truetype.h	/^   unsigned char  * data;              \/\/ pointer to .ttf file$/;"	m	struct:stbtt_fontinfo
-data	.\include\stb_truetype.h	/^   unsigned char *data;$/;"	m	struct:__anon24
+data	.\include\stb_truetype.h	/^   unsigned char *data;$/;"	m	struct:__anon27
 data	.\renderer.h	/^	void* data;$/;"	m	struct:PushRenderBufferData
-dc_pred	.\include\stb_image.h	/^				int dc_pred;$/;"	m	struct:__anon8::__anon9
+data	.\ui_renderer.cpp	/^	UIData* data;  \/\/ Generated every frame$/;"	m	struct:UIRenderer	file:
+dc_pred	.\include\stb_image.h	/^				int dc_pred;$/;"	m	struct:__anon11::__anon12
 dct_bfly32o	.\include\stb_image.h	2531;"	d
 dct_bfly32o	.\include\stb_image.h	2665;"	d
 dct_bfly32o	.\include\stb_image.h	2717;"	d
@@ -853,67 +1011,89 @@ deallocate_memory	.\platform_api.h	/^	PlatformDeallocateMemory* deallocate_memor
 debug_cursor_request	.\game_layer.h	/^	bool debug_cursor_request;$/;"	m	struct:GameLayer
 default_depth_stencil_state	.\renderer.h	/^	ID3D11DepthStencilState* default_depth_stencil_state;$/;"	m	struct:Renderer
 default_window_handle	.\win32.h	/^	HWND default_window_handle;$/;"	m	struct:Win32State
-delay	.\include\stb_image.h	/^			int delay;$/;"	m	struct:__anon19
-delta	.\include\stb_image.h	/^			int    delta[17];   \/\/ old 'firstsymbol' - old 'firstcode'$/;"	m	struct:__anon7
-depth	.\include\stb_image.h	/^	int depth;$/;"	m	struct:__anon14
+delay	.\include\stb_image.h	/^			int delay;$/;"	m	struct:__anon22
+delta	.\include\stb_image.h	/^			int    delta[17];   \/\/ old 'firstsymbol' - old 'firstcode'$/;"	m	struct:__anon10
+delta_times	.\simulation.h	/^	float delta_times[MAX_SPAWNS];$/;"	m	struct:SpawnerInfo
+depth	.\include\stb_image.h	/^	int depth;$/;"	m	struct:__anon17
 depth_stencil	.\renderer.h	/^	DepthStencil depth_stencil;	$/;"	m	struct:Renderer
 depth_stencil	.\renderer.h	/^	DepthStencil* depth_stencil;$/;"	m	struct:ClearStencil
-dequant	.\include\stb_image.h	/^			stbi__uint16 dequant[4][64];$/;"	m	struct:__anon8
+dequant	.\include\stb_image.h	/^			stbi__uint16 dequant[4][64];$/;"	m	struct:__anon11
+dev_mode	.\game.h	/^	DEV_MODE dev_mode;$/;"	m	struct:GameState
 device	.\renderer.h	/^	ID3D11Device* device;$/;"	m	struct:Renderer
 dim	.\platform_api.h	/^	WindowDimensions dim;$/;"	m	struct:Win32Window
 dim	.\renderer.h	/^	Vec2 dim;$/;"	m	struct:SetViewport
+dimension	.\ui_renderer.cpp	/^	UIDimension dimension;$/;"	m	struct:UICachedData	file:
+dimension	.\ui_renderer.cpp	/^	UIDimension dimension;$/;"	m	struct:UIElement	file:
 direction	.\include\stb_truetype.h	/^   float direction;$/;"	m	struct:stbtt__active_edge
 direction	.\include\stb_truetype.h	/^   int direction;$/;"	m	struct:stbtt__active_edge
 dll	.\win32.h	/^	HMODULE dll;$/;"	m	struct:Win32DLL
 dx	.\include\stb_truetype.h	/^   int x,dx;$/;"	m	struct:stbtt__active_edge
-eflags	.\include\stb_image.h	/^			int flags, bgindex, ratio, transparent, eflags;$/;"	m	struct:__anon19
-elem	.\math.h	/^		float elem[2];$/;"	m	union:Vec2::__anon44
-elem	.\math.h	/^		float elem[3];$/;"	m	union:Vec3::__anon46
-elem	.\math.h	/^		float elem[4];$/;"	m	union:Quat::__anon51
-elem	.\math.h	/^		float elem[4];$/;"	m	union:Vec4::__anon48
-elem	.\math.h	/^		u32 elem[2];$/;"	m	union:Vec2u::__anon42
+eflags	.\include\stb_image.h	/^			int flags, bgindex, ratio, transparent, eflags;$/;"	m	struct:__anon22
+elem	.\math.h	/^		float elem[2];$/;"	m	union:Vec2::__anon47
+elem	.\math.h	/^		float elem[3];$/;"	m	union:Vec3::__anon49
+elem	.\math.h	/^		float elem[4];$/;"	m	union:Quat::__anon54
+elem	.\math.h	/^		float elem[4];$/;"	m	union:Vec4::__anon51
+elem	.\math.h	/^		u32 elem[2];$/;"	m	union:Vec2u::__anon45
 elem	.\math.h	/^	float elem[4][4];$/;"	m	struct:Mat4
+element_counter	.\ui_renderer.cpp	/^	u32 element_counter;$/;"	m	struct:UIRenderer	file:
+element_id	.\ui_renderer.cpp	/^	u32 element_id;$/;"	m	struct:UICachedData	file:
+elements	.\ui_renderer.cpp	/^	UIElement* elements;$/;"	m	struct:UIRenderer	file:
 end	.\shapes.cpp	/^	Vec3 end;$/;"	m	struct:Line	file:
-entity	.\game.h	/^	Entity* entity;$/;"	m	struct:GameState
-eob_run	.\include\stb_image.h	/^			int            eob_run;$/;"	m	struct:__anon8
-eof	.\include\stb_image.h	/^		int      (*eof)   (void *user);                       \/\/ returns nonzero if we are at end of file\/data$/;"	m	struct:__anon2
+entities	.\simulation.h	/^	Entity* entities;$/;"	m	struct:EntityBlob
+entity_blob	.\game.h	/^	EntityBlob entity_blob;$/;"	m	struct:GameState
+entity_count	.\simulation.h	/^	u32 entity_count;$/;"	m	struct:EntityBlob
+entity_types	.\simulation.h	/^	u8 entity_types[MAX_SPAWNS];$/;"	m	struct:SpawnerInfo
+eob_run	.\include\stb_image.h	/^			int            eob_run;$/;"	m	struct:__anon11
+eof	.\include\stb_image.h	/^		int      (*eof)   (void *user);                       \/\/ returns nonzero if we are at end of file\/data$/;"	m	struct:__anon5
 equal	.\include\stb_truetype.h	/^static int equal(float *a, float *b)$/;"	f
 exe_absfilepath	.\win32.h	/^	char exe_absfilepath[MAX_PATH];$/;"	m	struct:Win32State
 exe_absfolderpath	.\win32.h	/^	char exe_absfolderpath[MAX_PATH];$/;"	m	struct:Win32State
 executable_reloaded	.\game.cpp	/^bool executable_reloaded = false;$/;"	v
 executable_reloaded	.\game_layer.h	/^	bool executable_reloaded;$/;"	m	struct:GameLayer
-expanded	.\include\stb_image.h	/^	stbi_uc *idata, *expanded, *out;$/;"	m	struct:__anon14
+expanded	.\include\stb_image.h	/^	stbi_uc *idata, *expanded, *out;$/;"	m	struct:__anon17
 extra	.\include\stb_rect_pack.h	/^   stbrp_node extra[2]; \/\/ we allocate two extra nodes so optimal user-node-count is 'width' not 'width+2'$/;"	m	struct:stbrp_context
-extra_read	.\include\stb_image.h	/^			int extra_read;$/;"	m	struct:__anon16
+extra_read	.\include\stb_image.h	/^			int extra_read;$/;"	m	struct:__anon19
 ey	.\include\stb_truetype.h	/^   float ey;$/;"	m	struct:stbtt__active_edge
 failed	.\platform_api.h	/^	bool failed;$/;"	m	struct:PlatformFileHandle
 far_clip	.\camera.cpp	/^	float far_clip;$/;"	m	struct:Camera	file:
-fast	.\include\stb_image.h	/^			stbi_uc  fast[1 << FAST_BITS];$/;"	m	struct:__anon7
-fast	.\include\stb_image.h	/^		stbi__uint16 fast[1 << STBI__ZFAST_BITS];$/;"	m	struct:__anon11
-fast_ac	.\include\stb_image.h	/^			stbi__int16 fast_ac[4][1 << FAST_BITS];$/;"	m	struct:__anon8
+fast	.\include\stb_image.h	/^			stbi_uc  fast[1 << FAST_BITS];$/;"	m	struct:__anon10
+fast	.\include\stb_image.h	/^		stbi__uint16 fast[1 << STBI__ZFAST_BITS];$/;"	m	struct:__anon14
+fast_ac	.\include\stb_image.h	/^			stbi__int16 fast_ac[4][1 << FAST_BITS];$/;"	m	struct:__anon11
 fdselect	.\include\stb_truetype.h	/^   stbtt__buf fdselect;               \/\/ map from glyph to fontdict$/;"	m	struct:stbtt_fontinfo
 fdx	.\include\stb_truetype.h	/^   float fx,fdx,fdy;$/;"	m	struct:stbtt__active_edge
 fdy	.\include\stb_truetype.h	/^   float fx,fdx,fdy;$/;"	m	struct:stbtt__active_edge
-first	.\include\stb_image.h	/^			stbi_uc first;$/;"	m	struct:__anon18
+final_positions	.\simulation.h	/^	Vec3 final_positions[MAX_PARTICLES];$/;"	m	struct:ParticleSystem
+final_size	.\simulation.h	/^	Vec3 final_size;$/;"	m	struct:ParticleSystem
+first	.\include\stb_image.h	/^			stbi_uc first;$/;"	m	struct:__anon21
 first_free	.\include\stb_truetype.h	/^   void   *first_free;$/;"	m	struct:stbtt__hheap
+first_free	.\simulation.h	/^	Entity* first_free;$/;"	m	struct:EntityBlob
 first_row_filter	.\include\stb_image.h	/^static stbi_uc first_row_filter[5] =$/;"	v
-first_unicode_codepoint_in_range	.\include\stb_truetype.h	/^   int first_unicode_codepoint_in_range;  \/\/ if non-zero, then the chars are continuous, and this is the first codepoint$/;"	m	struct:__anon28
-first_x	.\include\stb_truetype.h	/^   float first_x, first_y;$/;"	m	struct:__anon38
-first_y	.\include\stb_truetype.h	/^   float first_x, first_y;$/;"	m	struct:__anon38
-firstcode	.\include\stb_image.h	/^		stbi__uint16 firstcode[16];$/;"	m	struct:__anon11
-firstsymbol	.\include\stb_image.h	/^		stbi__uint16 firstsymbol[16];$/;"	m	struct:__anon11
-flags	.\include\stb_image.h	/^			int flags, bgindex, ratio, transparent, eflags;$/;"	m	struct:__anon19
-font_line_width	.\font_handling.cpp	/^	u32 font_line_width;$/;"	m	struct:TextUI	file:
-font_size	.\include\stb_truetype.h	/^   float font_size;$/;"	m	struct:__anon28
+first_unicode_codepoint_in_range	.\include\stb_truetype.h	/^   int first_unicode_codepoint_in_range;  \/\/ if non-zero, then the chars are continuous, and this is the first codepoint$/;"	m	struct:__anon31
+first_x	.\include\stb_truetype.h	/^   float first_x, first_y;$/;"	m	struct:__anon41
+first_y	.\include\stb_truetype.h	/^   float first_x, first_y;$/;"	m	struct:__anon41
+firstcode	.\include\stb_image.h	/^		stbi__uint16 firstcode[16];$/;"	m	struct:__anon14
+firstsymbol	.\include\stb_image.h	/^		stbi__uint16 firstsymbol[16];$/;"	m	struct:__anon14
+flags	.\include\stb_image.h	/^			int flags, bgindex, ratio, transparent, eflags;$/;"	m	struct:__anon22
+flags	.\ui_renderer.cpp	/^	u64 flags;$/;"	m	struct:UIElement	file:
+font_data	.\font_handling.cpp	/^	FontData* font_data;$/;"	m	struct:TextUI	file:
+font_line_width	.\font_handling.cpp	/^	int font_line_width;$/;"	m	struct:FontData	file:
+font_size	.\font_handling.cpp	/^	int font_size;$/;"	m	struct:FontData	file:
+font_size	.\include\stb_truetype.h	/^   float font_size;$/;"	m	struct:__anon31
+font_size	.\ui_renderer.cpp	/^	u8 font_size;$/;"	m	struct:UIElement	file:
 fontdicts	.\include\stb_truetype.h	/^   stbtt__buf fontdicts;              \/\/ array of font dicts$/;"	m	struct:stbtt_fontinfo
 fonts_count	.\file_formats.h	/^	u32 fonts_count;$/;"	m	struct:FontsBlob
 fontstart	.\include\stb_truetype.h	/^   int              fontstart;         \/\/ offset of start of font$/;"	m	struct:stbtt_fontinfo
-fov	.\camera.cpp	/^	float fov;$/;"	m	struct:Camera	file:
+fov	.\camera.cpp	/^			float fov;$/;"	m	struct:Camera::__anon1::__anon2	file:
+frame_arena	.\font_handling.cpp	/^	MemoryArena* frame_arena;$/;"	m	struct:TextUI	file:
 frame_arena	.\game.h	/^	MemoryArena* frame_arena;$/;"	m	struct:GameState
 frame_arena	.\renderer.h	/^	MemoryArena* frame_arena;$/;"	m	struct:Renderer
+frame_arena	.\simulation.h	/^	MemoryArena* frame_arena;$/;"	m	struct:EntityBlob
+frame_arena	.\ui_renderer.cpp	/^	MemoryArena* frame_arena;$/;"	m	struct:UIRenderer	file:
 frame_arena_temp	.\game.h	/^	TemporaryMemory frame_arena_temp;$/;"	m	struct:GameState
+frame_time	.\timer.h	/^	float frame_time;$/;"	m	struct:Timer
 free_head	.\include\stb_rect_pack.h	/^   stbrp_node *free_head;$/;"	m	struct:stbrp_context
 ftex	.\include\stb_truetype.h	/^GLuint ftex;$/;"	v
+full_screen_quad_shader	.\post_process_renderer.cpp	/^	VertexShader* full_screen_quad_shader;$/;"	m	struct:PostProcessRenderer	file:
 function_count	.\win32.h	/^	u8 function_count;$/;"	m	struct:Win32DLL
 function_names	.\win32.h	/^	char** function_names;$/;"	m	struct:Win32DLL
 functions	.\win32.h	/^	void** functions;$/;"	m	struct:Win32DLL
@@ -923,127 +1103,152 @@ g_running	.\win32.cpp	/^global bool g_running;$/;"	v
 g_win32_state	.\win32.cpp	/^global Win32State g_win32_state;$/;"	v
 g_win32_window	.\win32.cpp	/^global Win32Window g_win32_window;$/;"	v
 game_loop	.\win32.h	/^	GameLoop* game_loop;$/;"	m	struct:Win32GameFunctionTable
+game_mode	.\game.h	/^	GAME_MODE game_mode;$/;"	m	struct:GameState
 game_state	.\game_layer.h	/^	struct GameState* game_state;$/;"	m	struct:GameLayer	typeref:struct:GameLayer::GameState
 generatetetrainfo	.\tetra.cpp	/^generatetetrainfo(tetra* tetra) {$/;"	f	file:
 global	.\base_types.h	7;"	d
 glyf	.\include\stb_truetype.h	/^   int loca,head,glyf,hhea,hmtx,kern,gpos,svg; \/\/ table locations as offset from start of .ttf$/;"	m	struct:stbtt_fontinfo
 glyph1	.\include\stb_truetype.h	/^   int glyph1; \/\/ use stbtt_FindGlyphIndex$/;"	m	struct:stbtt_kerningentry
 glyph2	.\include\stb_truetype.h	/^   int glyph2;$/;"	m	struct:stbtt_kerningentry
-glyph_buffer	.\font_handling.cpp	/^	StructuredBuffer* glyph_buffer;$/;"	m	struct:TextUI	file:
-glyph_counter	.\font_handling.cpp	/^	u32 glyph_counter;$/;"	m	struct:TextUI	file:
-glyphs	.\font_handling.cpp	/^	Glyph glyphs[MAX_TEXT_GLYPHS_ON_SCREEN];$/;"	m	struct:TextUI	file:
+glyph_counter	.\font_handling.cpp	/^	u32 glyph_counter;$/;"	m	struct:FontData	file:
+glyphs	.\font_handling.cpp	/^	Glyph glyphs[MAX_GLYPHS_ON_SCREEN];$/;"	m	struct:FontData	file:
 gpos	.\include\stb_truetype.h	/^   int loca,head,glyf,hhea,hmtx,kern,gpos,svg; \/\/ table locations as offset from start of .ttf$/;"	m	struct:stbtt_fontinfo
 gsubrs	.\include\stb_truetype.h	/^   stbtt__buf gsubrs;                 \/\/ global charstring subroutines index$/;"	m	struct:stbtt_fontinfo
-h	.\include\stb_image.h	/^				int h,v;$/;"	m	struct:__anon8::__anon9
-h	.\include\stb_image.h	/^			int w,h;$/;"	m	struct:__anon19
+h	.\include\stb_image.h	/^				int h,v;$/;"	m	struct:__anon11::__anon12
+h	.\include\stb_image.h	/^			int w,h;$/;"	m	struct:__anon22
 h	.\include\stb_rect_pack.h	/^   stbrp_coord    w, h;$/;"	m	struct:stbrp_rect
 h	.\include\stb_truetype.h	/^   int id,w,h,was_packed;$/;"	m	struct:stbrp_rect
-h	.\include\stb_truetype.h	/^   int w,h,stride;$/;"	m	struct:__anon31
-h2	.\include\stb_image.h	/^				int x,y,w2,h2;$/;"	m	struct:__anon8::__anon9
-h_oversample	.\include\stb_truetype.h	/^   unsigned char h_oversample, v_oversample; \/\/ don't set these, they're used internally$/;"	m	struct:__anon28
+h	.\include\stb_truetype.h	/^   int w,h,stride;$/;"	m	struct:__anon34
+h2	.\include\stb_image.h	/^				int x,y,w2,h2;$/;"	m	struct:__anon11::__anon12
+h_oversample	.\include\stb_truetype.h	/^   unsigned char h_oversample, v_oversample; \/\/ don't set these, they're used internally$/;"	m	struct:__anon31
 h_oversample	.\include\stb_truetype.h	/^   unsigned int   h_oversample, v_oversample;$/;"	m	struct:stbtt_pack_context
-ha	.\include\stb_image.h	/^				int hd,ha;$/;"	m	struct:__anon8::__anon9
+ha	.\include\stb_image.h	/^				int hd,ha;$/;"	m	struct:__anon11::__anon12
 handle	.\platform_api.h	/^	HWND handle;$/;"	m	struct:Win32Window
 handle	.\platform_api.h	/^	void* handle;$/;"	m	struct:PlatformFileHandle
-hd	.\include\stb_image.h	/^				int hd,ha;$/;"	m	struct:__anon8::__anon9
+hd	.\include\stb_image.h	/^				int hd,ha;$/;"	m	struct:__anon11::__anon12
 head	.\include\stb_truetype.h	/^   int loca,head,glyf,hhea,hmtx,kern,gpos,svg; \/\/ table locations as offset from start of .ttf$/;"	m	struct:stbtt_fontinfo
 head	.\include\stb_truetype.h	/^   struct stbtt__hheap_chunk *head;$/;"	m	struct:stbtt__hheap	typeref:struct:stbtt__hheap::stbtt__hheap_chunk
+health	.\simulation.h	/^	i32 health;$/;"	m	struct:Entity
 height	.\asset_formats.h	/^	u32 height;$/;"	m	struct:TextureData
 height	.\file_formats.h	/^	u32 height;$/;"	m	struct:TextureFormat
 height	.\include\stb_rect_pack.h	/^   int height;$/;"	m	struct:stbrp_context
 height	.\include\stb_truetype.h	/^   int   height;$/;"	m	struct:stbtt_pack_context
-height	.\include\stb_truetype.h	/^   int width,height;$/;"	m	struct:__anon40
+height	.\include\stb_truetype.h	/^   int width,height;$/;"	m	struct:__anon43
 height	.\platform_api.h	/^struct WindowDimensions { u32 width; u32 height; };$/;"	m	struct:WindowDimensions
 held	.\platform_api.h	/^struct Button { bool pressed, held; };$/;"	m	struct:Button
 heuristic	.\include\stb_rect_pack.h	/^   int heuristic;$/;"	m	struct:stbrp_context
 hhea	.\include\stb_truetype.h	/^   int loca,head,glyf,hhea,hmtx,kern,gpos,svg; \/\/ table locations as offset from start of .ttf$/;"	m	struct:stbtt_fontinfo
-history	.\include\stb_image.h	/^			stbi_uc *history;$/;"	m	struct:__anon19
+history	.\include\stb_image.h	/^			stbi_uc *history;$/;"	m	struct:__anon22
 hmtx	.\include\stb_truetype.h	/^   int loca,head,glyf,hhea,hmtx,kern,gpos,svg; \/\/ table locations as offset from start of .ttf$/;"	m	struct:stbtt_fontinfo
-hs	.\include\stb_image.h	/^		int hs,vs;   \/\/ expansion factor in each axis$/;"	m	struct:__anon10
-hsz	.\include\stb_image.h	/^			int bpp, offset, hsz;$/;"	m	struct:__anon16
-huff_ac	.\include\stb_image.h	/^			stbi__huffman huff_ac[4];$/;"	m	struct:__anon8
-huff_dc	.\include\stb_image.h	/^			stbi__huffman huff_dc[4];$/;"	m	struct:__anon8
+hs	.\include\stb_image.h	/^		int hs,vs;   \/\/ expansion factor in each axis$/;"	m	struct:__anon13
+hsz	.\include\stb_image.h	/^			int bpp, offset, hsz;$/;"	m	struct:__anon19
+huff_ac	.\include\stb_image.h	/^			stbi__huffman huff_ac[4];$/;"	m	struct:__anon11
+huff_dc	.\include\stb_image.h	/^			stbi__huffman huff_dc[4];$/;"	m	struct:__anon11
 i16	.\base_types.h	/^typedef int16_t i16;$/;"	t
 i32	.\base_types.h	/^typedef int32_t i32;$/;"	t
 i64	.\base_types.h	/^typedef int64_t i64;$/;"	t
 i8	.\base_types.h	/^typedef int8_t i8;$/;"	t
-id	.\include\stb_image.h	/^				int id;$/;"	m	struct:__anon8::__anon9
+id	.\include\stb_image.h	/^				int id;$/;"	m	struct:__anon11::__anon12
 id	.\include\stb_rect_pack.h	/^   int            id;$/;"	m	struct:stbrp_rect
 id	.\include\stb_truetype.h	/^   int id,w,h,was_packed;$/;"	m	struct:stbrp_rect
-idata	.\include\stb_image.h	/^	stbi_uc *idata, *expanded, *out;$/;"	m	struct:__anon14
-idct_block_kernel	.\include\stb_image.h	/^			void (*idct_block_kernel)(stbi_uc *out, int out_stride, short data[64]);$/;"	m	struct:__anon8
+id	.\ui_renderer.cpp	/^	u32 id;$/;"	m	struct:UIElement	file:
+idata	.\include\stb_image.h	/^	stbi_uc *idata, *expanded, *out;$/;"	m	struct:__anon17
+idct_block_kernel	.\include\stb_image.h	/^			void (*idct_block_kernel)(stbi_uc *out, int out_stride, short data[64]);$/;"	m	struct:__anon11
 identification	.\file_formats.h	/^	char identification[5];$/;"	m	struct:GameAssetFile
 il	.\renderer.h	/^	ID3D11InputLayout* il;$/;"	m	struct:VertexShader
-img_buffer	.\include\stb_image.h	/^		stbi_uc *img_buffer, *img_buffer_end;$/;"	m	struct:__anon3
-img_buffer_end	.\include\stb_image.h	/^		stbi_uc *img_buffer, *img_buffer_end;$/;"	m	struct:__anon3
-img_buffer_original	.\include\stb_image.h	/^		stbi_uc *img_buffer_original, *img_buffer_original_end;$/;"	m	struct:__anon3
-img_buffer_original_end	.\include\stb_image.h	/^		stbi_uc *img_buffer_original, *img_buffer_original_end;$/;"	m	struct:__anon3
-img_comp	.\include\stb_image.h	/^			} img_comp[4];$/;"	m	struct:__anon8	typeref:struct:__anon8::__anon9
-img_h_max	.\include\stb_image.h	/^			int img_h_max, img_v_max;$/;"	m	struct:__anon8
-img_mcu_h	.\include\stb_image.h	/^			int img_mcu_w, img_mcu_h;$/;"	m	struct:__anon8
-img_mcu_w	.\include\stb_image.h	/^			int img_mcu_w, img_mcu_h;$/;"	m	struct:__anon8
-img_mcu_x	.\include\stb_image.h	/^			int img_mcu_x, img_mcu_y;$/;"	m	struct:__anon8
-img_mcu_y	.\include\stb_image.h	/^			int img_mcu_x, img_mcu_y;$/;"	m	struct:__anon8
-img_n	.\include\stb_image.h	/^		int img_n, img_out_n;$/;"	m	struct:__anon3
-img_out_n	.\include\stb_image.h	/^		int img_n, img_out_n;$/;"	m	struct:__anon3
-img_v_max	.\include\stb_image.h	/^			int img_h_max, img_v_max;$/;"	m	struct:__anon8
-img_x	.\include\stb_image.h	/^		stbi__uint32 img_x, img_y;$/;"	m	struct:__anon3
-img_y	.\include\stb_image.h	/^		stbi__uint32 img_x, img_y;$/;"	m	struct:__anon3
+img_buffer	.\include\stb_image.h	/^		stbi_uc *img_buffer, *img_buffer_end;$/;"	m	struct:__anon6
+img_buffer_end	.\include\stb_image.h	/^		stbi_uc *img_buffer, *img_buffer_end;$/;"	m	struct:__anon6
+img_buffer_original	.\include\stb_image.h	/^		stbi_uc *img_buffer_original, *img_buffer_original_end;$/;"	m	struct:__anon6
+img_buffer_original_end	.\include\stb_image.h	/^		stbi_uc *img_buffer_original, *img_buffer_original_end;$/;"	m	struct:__anon6
+img_comp	.\include\stb_image.h	/^			} img_comp[4];$/;"	m	struct:__anon11	typeref:struct:__anon11::__anon12
+img_h_max	.\include\stb_image.h	/^			int img_h_max, img_v_max;$/;"	m	struct:__anon11
+img_mcu_h	.\include\stb_image.h	/^			int img_mcu_w, img_mcu_h;$/;"	m	struct:__anon11
+img_mcu_w	.\include\stb_image.h	/^			int img_mcu_w, img_mcu_h;$/;"	m	struct:__anon11
+img_mcu_x	.\include\stb_image.h	/^			int img_mcu_x, img_mcu_y;$/;"	m	struct:__anon11
+img_mcu_y	.\include\stb_image.h	/^			int img_mcu_x, img_mcu_y;$/;"	m	struct:__anon11
+img_n	.\include\stb_image.h	/^		int img_n, img_out_n;$/;"	m	struct:__anon6
+img_out_n	.\include\stb_image.h	/^		int img_n, img_out_n;$/;"	m	struct:__anon6
+img_v_max	.\include\stb_image.h	/^			int img_h_max, img_v_max;$/;"	m	struct:__anon11
+img_x	.\include\stb_image.h	/^		stbi__uint32 img_x, img_y;$/;"	m	struct:__anon6
+img_y	.\include\stb_image.h	/^		stbi__uint32 img_x, img_y;$/;"	m	struct:__anon6
+in	.\post_process_renderer.cpp	/^	ID3D11ShaderResourceView* in;$/;"	m	struct:PostProcessPipeline	file:
 index	.\renderer.h	/^	IndexBuffer* index;$/;"	m	struct:SetIndexBuffer
 indexToLocFormat	.\include\stb_truetype.h	/^   int indexToLocFormat;              \/\/ format needed to map from glyph index to glyph$/;"	m	struct:stbtt_fontinfo
+index_buffer	.\mesh_renderer.cpp	/^	IndexBuffer* index_buffer;$/;"	m	struct:Mesh	file:
 index_map	.\include\stb_truetype.h	/^   int index_map;                     \/\/ a cmap mapping for our chosen character encoding$/;"	m	struct:stbtt_fontinfo
 indices	.\asset_formats.h	/^	u32* indices;$/;"	m	struct:MeshData
 indices_count	.\asset_formats.h	/^	u32 indices_count;$/;"	m	struct:MeshData
 indices_count	.\file_formats.h	/^	u32 indices_count;$/;"	m	struct:MeshFormat
+indices_count	.\mesh_renderer.cpp	/^	u32 indices_count;$/;"	m	struct:Mesh	file:
 indices_count	.\renderer.h	/^	u32 indices_count;$/;"	m	struct:DrawIndexed
 info	.\mesh_renderer.cpp	/^	MeshInfo* info;$/;"	m	struct:MeshPipeline	file:
 info	.\tetra.cpp	/^	MeshInfo info[MAX_TETRA];$/;"	m	struct:Tetra	file:
+init	.\simulation.h	/^	bool init;$/;"	m	struct:ParticleSystem
+init_done	.\game_mode.h	/^	bool init_done;$/;"	m	struct:TestMode
 init_mode	.\include\stb_rect_pack.h	/^   int init_mode;$/;"	m	struct:stbrp_context
+initial_size	.\simulation.h	/^	Vec3 initial_size;$/;"	m	struct:ParticleSystem
 instance_count	.\renderer.h	/^	u32 instance_count;$/;"	m	struct:DrawInstanced
 invert	.\include\stb_truetype.h	/^   int invert;$/;"	m	struct:stbtt__edge
-io	.\include\stb_image.h	/^		stbi_io_callbacks io;$/;"	m	struct:__anon3
-io_user_data	.\include\stb_image.h	/^		void *io_user_data;$/;"	m	struct:__anon3
-jfif	.\include\stb_image.h	/^			int            jfif;$/;"	m	struct:__anon8
+io	.\include\stb_image.h	/^		stbi_io_callbacks io;$/;"	m	struct:__anon6
+io_user_data	.\include\stb_image.h	/^		void *io_user_data;$/;"	m	struct:__anon6
+jfif	.\include\stb_image.h	/^			int            jfif;$/;"	m	struct:__anon11
 kern	.\include\stb_truetype.h	/^   int loca,head,glyf,hhea,hmtx,kern,gpos,svg; \/\/ table locations as offset from start of .ttf$/;"	m	struct:stbtt_fontinfo
 last_write_time	.\win32.h	/^	FILETIME last_write_time; $/;"	m	struct:Win32DLL
-length	.\include\stb_image.h	/^	stbi__uint32 length;$/;"	m	struct:__anon13
+left	.\camera.cpp	/^			float left;$/;"	m	struct:Camera::__anon1::__anon3	file:
+length	.\include\stb_image.h	/^	stbi__uint32 length;$/;"	m	struct:__anon16
 length	.\include\stb_sprintf.h	/^   int length;$/;"	m	struct:stbsp__context
-lflags	.\include\stb_image.h	/^			int lflags;$/;"	m	struct:__anon19
+lflags	.\include\stb_image.h	/^			int lflags;$/;"	m	struct:__anon22
+life_time	.\simulation.h	/^	float life_time;$/;"	m	struct:ParticleSystem
+light	.\mesh_renderer.cpp	/^	LightInfo light;$/;"	m	struct:MeshRenderer	file:
 light_constants	.\mesh_renderer.cpp	/^	ConstantsBuffer* light_constants;$/;"	m	struct:MeshRenderer	file:
-line0	.\include\stb_image.h	/^		stbi_uc *line0,*line1;$/;"	m	struct:__anon10
-line1	.\include\stb_image.h	/^		stbi_uc *line0,*line1;$/;"	m	struct:__anon10
-line_size	.\include\stb_image.h	/^			int line_size;$/;"	m	struct:__anon19
-linebuf	.\include\stb_image.h	/^				stbi_uc *linebuf;$/;"	m	struct:__anon8::__anon9
+line0	.\include\stb_image.h	/^		stbi_uc *line0,*line1;$/;"	m	struct:__anon13
+line1	.\include\stb_image.h	/^		stbi_uc *line0,*line1;$/;"	m	struct:__anon13
+line_size	.\include\stb_image.h	/^			int line_size;$/;"	m	struct:__anon22
+linebuf	.\include\stb_image.h	/^				stbi_uc *linebuf;$/;"	m	struct:__anon11::__anon12
 load_jpeg_image	.\include\stb_image.h	/^	static stbi_uc *load_jpeg_image(stbi__jpeg *z, int *out_x, int *out_y, int *comp, int req_comp)$/;"	f
 loca	.\include\stb_truetype.h	/^   int loca,head,glyf,hhea,hmtx,kern,gpos,svg; \/\/ table locations as offset from start of .ttf$/;"	m	struct:stbtt_fontinfo
 lock_absfilepath	.\win32.h	/^	char* lock_absfilepath;$/;"	m	struct:Win32DLL
-lpal	.\include\stb_image.h	/^			stbi_uc lpal[256][4];$/;"	m	struct:__anon19
-ma	.\include\stb_image.h	/^			unsigned int mr,mg,mb,ma, all_a;$/;"	m	struct:__anon16
+lpal	.\include\stb_image.h	/^			stbi_uc lpal[256][4];$/;"	m	struct:__anon22
+ma	.\include\stb_image.h	/^			unsigned int mr,mg,mb,ma, all_a;$/;"	m	struct:__anon19
 main	.\include\stb_truetype.h	/^int main(int argc, char **argv)$/;"	f
-marker	.\include\stb_image.h	/^			unsigned char  marker;      \/\/ marker seen while filling entropy buffer$/;"	m	struct:__anon8
-max_x	.\include\stb_image.h	/^			int max_x, max_y;$/;"	m	struct:__anon19
-max_x	.\include\stb_truetype.h	/^   stbtt_int32 min_x, max_x, min_y, max_y;$/;"	m	struct:__anon38
-max_y	.\include\stb_image.h	/^			int max_x, max_y;$/;"	m	struct:__anon19
-max_y	.\include\stb_truetype.h	/^   stbtt_int32 min_x, max_x, min_y, max_y;$/;"	m	struct:__anon38
-maxcode	.\include\stb_image.h	/^			unsigned int maxcode[18];$/;"	m	struct:__anon7
-maxcode	.\include\stb_image.h	/^		int maxcode[17];$/;"	m	struct:__anon11
-mb	.\include\stb_image.h	/^			unsigned int mr,mg,mb,ma, all_a;$/;"	m	struct:__anon16
+marker	.\include\stb_image.h	/^			unsigned char  marker;      \/\/ marker seen while filling entropy buffer$/;"	m	struct:__anon11
+max	.\shapes.cpp	/^			Vec3 max;$/;"	m	struct:Quad::__anon57::__anon59	file:
+max	.\simulation.h	/^	Vec3 max;$/;"	m	struct:BoundingBox
+max	.\ui_renderer.cpp	/^	Vec2 max;$/;"	m	struct:UIData	file:
+max	.\ui_renderer.cpp	/^	Vec2 max;$/;"	m	struct:UIDimension	file:
+max_x	.\include\stb_image.h	/^			int max_x, max_y;$/;"	m	struct:__anon22
+max_x	.\include\stb_truetype.h	/^   stbtt_int32 min_x, max_x, min_y, max_y;$/;"	m	struct:__anon41
+max_y	.\include\stb_image.h	/^			int max_x, max_y;$/;"	m	struct:__anon22
+max_y	.\include\stb_truetype.h	/^   stbtt_int32 min_x, max_x, min_y, max_y;$/;"	m	struct:__anon41
+maxcode	.\include\stb_image.h	/^			unsigned int maxcode[18];$/;"	m	struct:__anon10
+maxcode	.\include\stb_image.h	/^		int maxcode[17];$/;"	m	struct:__anon14
+mb	.\include\stb_image.h	/^			unsigned int mr,mg,mb,ma, all_a;$/;"	m	struct:__anon19
 memory_sentinel	.\win32.h	/^	Win32MemoryBlock memory_sentinel;$/;"	m	struct:Win32State
+mesh	.\asset_info.h	/^	Mesh* mesh;$/;"	m	struct:MeshAssetInfo
 mesh	.\mesh_renderer.cpp	/^	Mesh mesh;$/;"	m	struct:MeshPipeline	file:
+mesh_assets	.\asset_loading.cpp	/^	MeshAssetInfo* mesh_assets;$/;"	m	struct:GameAssets	file:
 mesh_constants	.\mesh_renderer.cpp	/^	ConstantsBuffer* mesh_constants;$/;"	m	struct:MeshRenderer	file:
-mesh_pipeline	.\simulation.cpp	/^	MeshPipeline mesh_pipeline;$/;"	m	struct:Entity	file:
+mesh_pipeline	.\simulation.h	/^	MeshPipeline mesh_pipeline;$/;"	m	struct:Entity
 mesh_renderer	.\game.h	/^	MeshRenderer* mesh_renderer;$/;"	m	struct:GameState
 meshes_count	.\file_formats.h	/^	u32 meshes_count;$/;"	m	struct:MeshesBlob
-mg	.\include\stb_image.h	/^			unsigned int mr,mg,mb,ma, all_a;$/;"	m	struct:__anon16
+mg	.\include\stb_image.h	/^			unsigned int mr,mg,mb,ma, all_a;$/;"	m	struct:__anon19
+min	.\shapes.cpp	/^			Vec3 min;$/;"	m	struct:Quad::__anon57::__anon59	file:
+min	.\simulation.h	/^	Vec3 min;$/;"	m	struct:BoundingBox
+min	.\ui_renderer.cpp	/^	Vec2 min;$/;"	m	struct:UIData	file:
+min	.\ui_renderer.cpp	/^	Vec2 min;$/;"	m	struct:UIDimension	file:
 min_block_size	.\memory_management.h	/^	u64 min_block_size;$/;"	m	struct:MemoryArena
-min_x	.\include\stb_truetype.h	/^   stbtt_int32 min_x, max_x, min_y, max_y;$/;"	m	struct:__anon38
-min_y	.\include\stb_truetype.h	/^   stbtt_int32 min_x, max_x, min_y, max_y;$/;"	m	struct:__anon38
+min_x	.\include\stb_truetype.h	/^   stbtt_int32 min_x, max_x, min_y, max_y;$/;"	m	struct:__anon41
+min_y	.\include\stb_truetype.h	/^   stbtt_int32 min_x, max_x, min_y, max_y;$/;"	m	struct:__anon41
 model	.\mesh_renderer.cpp	/^	Mat4 model;$/;"	m	struct:MeshInfo	file:
 monochrome_ps	.\font_handling.cpp	/^	PixelShader* monochrome_ps;$/;"	m	struct:TextUI	file:
-mr	.\include\stb_image.h	/^			unsigned int mr,mg,mb,ma, all_a;$/;"	m	struct:__anon16
+mr	.\include\stb_image.h	/^			unsigned int mr,mg,mb,ma, all_a;$/;"	m	struct:__anon19
+ms_per_frame	.\game_layer.h	/^	double ms_per_frame;$/;"	m	struct:GameLayer
+msaa_quality_level	.\renderer.h	/^	u32 msaa_quality_level;$/;"	m	struct:Renderer
+msaa_sample_count	.\renderer.h	/^	u32 msaa_sample_count;$/;"	m	struct:Renderer
 my_stbtt_initfont	.\include\stb_truetype.h	/^void my_stbtt_initfont(void)$/;"	f
 my_stbtt_print	.\include\stb_truetype.h	/^void my_stbtt_print(float x, float y, char *text)$/;"	f
 name	.\asset_formats.h	/^	char* name;$/;"	m	struct:MaterialData
+name	.\asset_info.h	/^	char* name;$/;"	m	struct:MeshAssetInfo
 name	.\asset_info.h	/^	char* name;$/;"	m	struct:TextureAssetInfo
 name	.\file_formats.h	/^	char name[STRING_LENGTH_FONT];$/;"	m	struct:FontFormat
 name	.\file_formats.h	/^	char name[STRING_LENGTH_MESH];$/;"	m	struct:MeshFormat
@@ -1051,24 +1256,30 @@ name	.\file_formats.h	/^	char name[STRING_LENGTH_TEXTURE];$/;"	m	struct:TextureF
 name	.\platform_api.h	/^	void* name;$/;"	m	struct:PlatformFileInfo
 name_of_blob	.\file_formats.h	/^	char name_of_blob[STRING_LENGTH_BLOB];$/;"	m	struct:Directory
 near_clip	.\camera.cpp	/^	float near_clip;$/;"	m	struct:Camera	file:
+next	.\asset_info.h	/^	MeshAssetInfo* next;$/;"	m	struct:MeshAssetInfo
 next	.\asset_info.h	/^	TextureAssetInfo* next;$/;"	m	struct:TextureAssetInfo
+next	.\font_handling.cpp	/^	FontData* next;$/;"	m	struct:FontData	file:
 next	.\include\stb_rect_pack.h	/^   stbrp_node  *next;$/;"	m	struct:stbrp_node
 next	.\include\stb_truetype.h	/^   struct stbtt__active_edge *next;$/;"	m	struct:stbtt__active_edge	typeref:struct:stbtt__active_edge::stbtt__active_edge
 next	.\include\stb_truetype.h	/^   struct stbtt__hheap_chunk *next;$/;"	m	struct:stbtt__hheap_chunk	typeref:struct:stbtt__hheap_chunk::stbtt__hheap_chunk
+next	.\simulation.h	/^	Entity* next;$/;"	m	struct:Entity
+next	.\simulation.h	/^	SpawnInfo* next;$/;"	m	struct:SpawnInfo
+next	.\ui_renderer.cpp	/^	UICachedData* next;$/;"	m	struct:UICachedData	file:
+next	.\ui_renderer.cpp	/^	UIElement* next;$/;"	m	struct:UIElement	file:
 next	.\win32.h	/^	Win32MemoryBlock* next;$/;"	m	struct:Win32MemoryBlock
 nodes	.\include\stb_truetype.h	/^   void  *nodes;$/;"	m	struct:stbtt_pack_context
-nomore	.\include\stb_image.h	/^			int            nomore;      \/\/ flag if we saw a marker so must stop$/;"	m	struct:__anon8
+nomore	.\include\stb_image.h	/^			int            nomore;      \/\/ flag if we saw a marker so must stop$/;"	m	struct:__anon11
 numGlyphs	.\include\stb_truetype.h	/^   int numGlyphs;                     \/\/ number of glyphs, needed for range checking$/;"	m	struct:stbtt_fontinfo
-num_bits	.\include\stb_image.h	/^		int num_bits;$/;"	m	struct:__anon12
-num_channels	.\include\stb_image.h	/^	int num_channels;$/;"	m	struct:__anon5
-num_chars	.\include\stb_truetype.h	/^   int num_chars;$/;"	m	struct:__anon28
+num_bits	.\include\stb_image.h	/^		int num_bits;$/;"	m	struct:__anon15
+num_channels	.\include\stb_image.h	/^	int num_channels;$/;"	m	struct:__anon8
+num_chars	.\include\stb_truetype.h	/^   int num_chars;$/;"	m	struct:__anon31
 num_components	.\asset_formats.h	/^	u8 num_components;$/;"	m	struct:TextureData
 num_components	.\file_formats.h	/^	u32 num_components;$/;"	m	struct:TextureFormat
 num_nodes	.\include\stb_rect_pack.h	/^   int num_nodes;$/;"	m	struct:stbrp_context
 num_remaining_in_head_chunk	.\include\stb_truetype.h	/^   int    num_remaining_in_head_chunk;$/;"	m	struct:stbtt__hheap
-num_vertices	.\include\stb_truetype.h	/^   int num_vertices;$/;"	m	struct:__anon38
+num_vertices	.\include\stb_truetype.h	/^   int num_vertices;$/;"	m	struct:__anon41
 number_of_blobs	.\file_formats.h	/^	u8 number_of_blobs;$/;"	m	struct:GameAssetFile
-offset	.\include\stb_image.h	/^			int bpp, offset, hsz;$/;"	m	struct:__anon16
+offset	.\include\stb_image.h	/^			int bpp, offset, hsz;$/;"	m	struct:__anon19
 offset	.\renderer.h	/^	u32 offset;$/;"	m	struct:DrawIndexed
 offset	.\renderer.h	/^	u32 offset;$/;"	m	struct:DrawInstanced
 offset	.\renderer.h	/^	u32 offset;$/;"	m	struct:DrawVertices
@@ -1086,23 +1297,31 @@ offset_to_texture_formats	.\file_formats.h	/^	u32 offset_to_texture_formats;$/;"
 offset_to_vertex_buffers	.\file_formats.h	/^	u32 offset_to_vertex_buffers;$/;"	m	struct:MeshFormat
 offsets	.\asset_loading.cpp	/^	u32 offsets[ASSET_BLOB_TOTAL];$/;"	m	struct:GameAssets	file:
 open_file	.\platform_api.h	/^	PlatformOpenFile* open_file;$/;"	m	struct:PlatformAPI
-order	.\include\stb_image.h	/^			int scan_n, order[4];$/;"	m	struct:__anon8
-out	.\include\stb_image.h	/^			stbi_uc *out;                 \/\/ output buffer (always 4 components)$/;"	m	struct:__anon19
-out	.\include\stb_image.h	/^	stbi_uc *idata, *expanded, *out;$/;"	m	struct:__anon14
+order	.\include\stb_image.h	/^			int scan_n, order[4];$/;"	m	struct:__anon11
+orthographic	.\camera.cpp	/^	bool orthographic;$/;"	m	struct:Camera	file:
+out	.\include\stb_image.h	/^			stbi_uc *out;                 \/\/ output buffer (always 4 components)$/;"	m	struct:__anon22
+out	.\include\stb_image.h	/^	stbi_uc *idata, *expanded, *out;$/;"	m	struct:__anon17
+out	.\post_process_renderer.cpp	/^	ID3D11RenderTargetView* out;$/;"	m	struct:PostProcessPipeline	file:
 pack_info	.\include\stb_truetype.h	/^   void *pack_info;$/;"	m	struct:stbtt_pack_context
-packed_chars	.\font_handling.cpp	/^	stbtt_packedchar packed_chars[0x7E-0x20];$/;"	m	struct:TextUI	file:
-padding	.\include\stb_truetype.h	/^      unsigned char type,padding;$/;"	m	struct:__anon30
+packed_chars	.\font_handling.cpp	/^	stbtt_packedchar packed_chars[0x7E-0x20];$/;"	m	struct:FontData	file:
+padding	.\include\stb_truetype.h	/^      unsigned char type,padding;$/;"	m	struct:__anon33
 padding	.\include\stb_truetype.h	/^   int   padding;$/;"	m	struct:stbtt_pack_context
-pair	.\include\stb_sprintf.h	/^   char pair[201];$/;"	m	struct:__anon23
-pal	.\include\stb_image.h	/^			stbi_uc  pal[256][4];$/;"	m	struct:__anon19
-parse	.\include\stb_image.h	/^			int parse, step;$/;"	m	struct:__anon19
+pair	.\include\stb_sprintf.h	/^   char pair[201];$/;"	m	struct:__anon26
+pal	.\include\stb_image.h	/^			stbi_uc  pal[256][4];$/;"	m	struct:__anon22
+parse	.\include\stb_image.h	/^			int parse, step;$/;"	m	struct:__anon22
+particle_count	.\simulation.h	/^	u32 particle_count;$/;"	m	struct:ParticleSystem
+particle_system	.\simulation.h	/^	ParticleSystem particle_system;$/;"	m	struct:Entity
+particle_system	.\simulation.h	/^	ParticleSystem particle_system;$/;"	m	struct:SpawnInfo
 permanent_arena	.\asset_loading.cpp	/^	MemoryArena* permanent_arena;$/;"	m	struct:GameAssets	file:
 permanent_arena	.\renderer.h	/^	MemoryArena* permanent_arena;$/;"	m	struct:Renderer
+permanent_arena	.\simulation.h	/^	MemoryArena* permanent_arena;$/;"	m	struct:EntityBlob
+pipeline	.\post_process_renderer.cpp	/^	PostProcessPipeline pipeline;$/;"	m	struct:PostProcessRenderer	file:
 pipelines	.\mesh_renderer.cpp	/^	MeshPipeline pipelines[MAX_MESH_PIPELINES];$/;"	m	struct:MeshRenderer	file:
+pitch	.\renderer.h	/^	u32 pitch;$/;"	m	struct:PushRenderBufferData
 pixel	.\renderer.h	/^struct SetPixelShader       { PixelShader* pixel;   } ;$/;"	m	struct:SetPixelShader
 pixels	.\asset_formats.h	/^	void* pixels;$/;"	m	struct:TextureData
-pixels	.\font_handling.cpp	/^	void* pixels;$/;"	m	struct:TextUI	file:
-pixels	.\include\stb_truetype.h	/^   unsigned char *pixels;$/;"	m	struct:__anon31
+pixels	.\font_handling.cpp	/^	void* pixels;$/;"	m	struct:FontData	file:
+pixels	.\include\stb_truetype.h	/^   unsigned char *pixels;$/;"	m	struct:__anon34
 pixels	.\include\stb_truetype.h	/^   unsigned char *pixels;$/;"	m	struct:stbtt_pack_context
 platform_api	.\game.cpp	/^PlatformAPI platform_api;$/;"	v
 platform_api	.\game_layer.h	/^	PlatformAPI platform_api;$/;"	m	struct:GameLayer
@@ -1110,16 +1329,25 @@ position	.\camera.cpp	/^	Vec3 position;$/;"	m	struct:Camera	file:
 position	.\math.h	/^	Vec3 position;$/;"	m	struct:Transform
 position	.\mesh_renderer.cpp	/^	Vec3 position;$/;"	m	struct:LightInfo	file:
 positions	.\quad_renderer.cpp	/^	Vec3 positions[MAX_TEXTURED_QUADS*4];$/;"	m	struct:QuadRenderer	file:
-prefix	.\include\stb_image.h	/^			stbi__int16 prefix;$/;"	m	struct:__anon18
+post_process_renderer	.\game.h	/^	PostProcessRenderer* post_process_renderer;$/;"	m	struct:GameState
+prefix	.\include\stb_image.h	/^			stbi__int16 prefix;$/;"	m	struct:__anon21
+pressed	.\game.cpp	/^bool pressed = false;$/;"	v
 pressed	.\platform_api.h	/^struct Button { bool pressed, held; };$/;"	m	struct:Button
+pressed	.\ui_renderer.cpp	/^	bool pressed;$/;"	m	struct:UICachedData	file:
+pressed	.\ui_renderer.cpp	/^	bool pressed;$/;"	m	struct:UIElement	file:
 prev	.\platform_api.h	/^	PlatformMemoryBlock* prev;$/;"	m	struct:PlatformMemoryBlock
+prev	.\simulation.h	/^	Entity* prev;$/;"	m	struct:Entity
 prev	.\win32.h	/^	Win32MemoryBlock* prev;$/;"	m	struct:Win32MemoryBlock
-prev_link	.\include\stb_rect_pack.h	/^   stbrp_node **prev_link;$/;"	m	struct:__anon22
-progressive	.\include\stb_image.h	/^			int            progressive;$/;"	m	struct:__anon8
-properties	.\simulation.cpp	/^	u64 properties;$/;"	m	struct:Entity	file:
+prev_link	.\include\stb_rect_pack.h	/^   stbrp_node **prev_link;$/;"	m	struct:__anon25
+primary_color	.\ui_renderer.cpp	/^	Vec4 primary_color[2];$/;"	m	struct:UIElement	file:
+progressive	.\include\stb_image.h	/^			int            progressive;$/;"	m	struct:__anon11
+properties	.\simulation.h	/^	u64 properties;$/;"	m	struct:Entity
 ps	.\mesh_renderer.cpp	/^	PixelShader* ps;$/;"	m	struct:MeshRenderer	file:
-pvertices	.\include\stb_truetype.h	/^   stbtt_vertex *pvertices;$/;"	m	struct:__anon38
+ps	.\post_process_renderer.cpp	/^	PixelShader* ps[POST_PROCESS_TYPE_TOTAL];$/;"	m	struct:PostProcessRenderer	file:
+ps	.\ui_renderer.cpp	/^	PixelShader* ps;$/;"	m	struct:UIRenderer	file:
+pvertices	.\include\stb_truetype.h	/^   stbtt_vertex *pvertices;$/;"	m	struct:__anon41
 quad	.\quad_renderer.cpp	/^	Quad quad;$/;"	m	struct:RenderQuad	file:
+quad	.\quad_renderer.cpp	/^	Quad quad;$/;"	m	struct:TexturedQuad	file:
 quad_buffer	.\quad_renderer.cpp	/^	StructuredBuffer* quad_buffer;$/;"	m	struct:QuadRenderer	file:
 quad_counter	.\quad_renderer.cpp	/^	u32 quad_counter;$/;"	m	struct:QuadRenderer	file:
 quad_ps	.\quad_renderer.cpp	/^	PixelShader* quad_ps;$/;"	m	struct:QuadRenderer	file:
@@ -1128,48 +1356,60 @@ quad_vs	.\quad_renderer.cpp	/^	VertexShader* quad_vs;$/;"	m	struct:QuadRenderer	
 quads	.\quad_renderer.cpp	/^	RenderQuad quads[MAX_QUADS];$/;"	m	struct:QuadRenderer	file:
 quit_request	.\game_layer.h	/^	bool quit_request;$/;"	m	struct:GameLayer
 rasterizer_states	.\renderer.h	/^	ID3D11RasterizerState* rasterizer_states[RASTERIZER_STATE_TOTAL];$/;"	m	struct:Renderer
-ratio	.\include\stb_image.h	/^			int flags, bgindex, ratio, transparent, eflags;$/;"	m	struct:__anon19
-raw_coeff	.\include\stb_image.h	/^				void *raw_data, *raw_coeff;$/;"	m	struct:__anon8::__anon9
-raw_data	.\include\stb_image.h	/^				void *raw_data, *raw_coeff;$/;"	m	struct:__anon8::__anon9
-read	.\include\stb_image.h	/^		int      (*read)  (void *user,char *data,int size);   \/\/ fill 'data' with 'size' bytes.  return number of bytes actually read$/;"	m	struct:__anon2
+ratio	.\include\stb_image.h	/^			int flags, bgindex, ratio, transparent, eflags;$/;"	m	struct:__anon22
+raw_coeff	.\include\stb_image.h	/^				void *raw_data, *raw_coeff;$/;"	m	struct:__anon11::__anon12
+raw_data	.\include\stb_image.h	/^				void *raw_data, *raw_coeff;$/;"	m	struct:__anon11::__anon12
+read	.\include\stb_image.h	/^		int      (*read)  (void *user,char *data,int size);   \/\/ fill 'data' with 'size' bytes.  return number of bytes actually read$/;"	m	struct:__anon5
 read_file	.\platform_api.h	/^	PlatformReadFile* read_file;$/;"	m	struct:PlatformAPI
-read_from_callbacks	.\include\stb_image.h	/^		int read_from_callbacks;$/;"	m	struct:__anon3
+read_from_callbacks	.\include\stb_image.h	/^		int read_from_callbacks;$/;"	m	struct:__anon6
+readable_render_target	.\renderer.h	/^	ReadableRenderTarget readable_render_target;$/;"	m	struct:Renderer
+real_time	.\timer.h	/^	float real_time;$/;"	m	struct:Timer
 rect_height_compare	.\include\stb_rect_pack.h	/^static int STBRP__CDECL rect_height_compare(const void *a, const void *b)$/;"	f
 rect_original_order	.\include\stb_rect_pack.h	/^static int STBRP__CDECL rect_original_order(const void *a, const void *b)$/;"	f
+render_target	.\renderer.h	/^	ID3D11RenderTargetView* render_target;$/;"	m	struct:ReadableRenderTarget
 render_target	.\renderer.h	/^	RenderTarget* render_target;   \/\/ 0 means set backbuffer as render target$/;"	m	struct:SetRenderTarget
 render_target	.\renderer.h	/^	RenderTarget* render_target;$/;"	m	struct:ClearRenderTarget
+renderer	.\font_handling.cpp	/^	Renderer* renderer;$/;"	m	struct:TextUI	file:
 renderer	.\game.h	/^	Renderer* renderer;$/;"	m	struct:GameState
-resample	.\include\stb_image.h	/^		resample_row_func resample;$/;"	m	struct:__anon10
+resample	.\include\stb_image.h	/^		resample_row_func resample;$/;"	m	struct:__anon13
 resample_row_1	.\include\stb_image.h	/^	static stbi_uc *resample_row_1(stbi_uc *out, stbi_uc *in_near, stbi_uc *in_far, int w, int hs)$/;"	f
 resample_row_func	.\include\stb_image.h	/^	typedef stbi_uc *(*resample_row_func)(stbi_uc *out, stbi_uc *in0, stbi_uc *in1,$/;"	t
-resample_row_hv_2_kernel	.\include\stb_image.h	/^			stbi_uc *(*resample_row_hv_2_kernel)(stbi_uc *out, stbi_uc *in_near, stbi_uc *in_far, int w, int hs);$/;"	m	struct:__anon8
-restart_interval	.\include\stb_image.h	/^			int restart_interval, todo;$/;"	m	struct:__anon8
-rgb	.\include\stb_image.h	/^			int            rgb;$/;"	m	struct:__anon8
+resample_row_hv_2_kernel	.\include\stb_image.h	/^			stbi_uc *(*resample_row_hv_2_kernel)(stbi_uc *out, stbi_uc *in_near, stbi_uc *in_far, int w, int hs);$/;"	m	struct:__anon11
+resolution_constants	.\post_process_renderer.cpp	/^	ConstantsBuffer* resolution_constants;$/;"	m	struct:PostProcessRenderer	file:
+response	.\simulation.h	/^	u8 response;$/;"	m	struct:Entity
+restart_interval	.\include\stb_image.h	/^			int restart_interval, todo;$/;"	m	struct:__anon11
+rgb	.\include\stb_image.h	/^			int            rgb;$/;"	m	struct:__anon11
+right	.\camera.cpp	/^			float right;$/;"	m	struct:Camera::__anon1::__anon3	file:
 rot_sens	.\camera.cpp	/^	float rot_sens;$/;"	m	struct:FPControlInfo	file:
 rotation	.\camera.cpp	/^	Quat rotation;$/;"	m	struct:Camera	file:
 rotation	.\math.h	/^	Quat rotation;$/;"	m	struct:Transform
-s	.\include\stb_image.h	/^			stbi__context *s;$/;"	m	struct:__anon8
-s	.\include\stb_image.h	/^	stbi__context *s;$/;"	m	struct:__anon14
+s	.\include\stb_image.h	/^			stbi__context *s;$/;"	m	struct:__anon11
+s	.\include\stb_image.h	/^	stbi__context *s;$/;"	m	struct:__anon17
 s0	.\font_handling.cpp	/^	float s0, t0, s1, t1;$/;"	m	struct:Glyph	file:
-s0	.\include\stb_truetype.h	/^   float x0,y0,s0,t0; \/\/ top-left$/;"	m	struct:__anon26
+s0	.\include\stb_truetype.h	/^   float x0,y0,s0,t0; \/\/ top-left$/;"	m	struct:__anon29
 s1	.\font_handling.cpp	/^	float s0, t0, s1, t1;$/;"	m	struct:Glyph	file:
-s1	.\include\stb_truetype.h	/^   float x1,y1,s1,t1; \/\/ bottom-right$/;"	m	struct:__anon26
+s1	.\include\stb_truetype.h	/^   float x1,y1,s1,t1; \/\/ bottom-right$/;"	m	struct:__anon29
 samplers	.\renderer.h	/^	ID3D11SamplerState* samplers[SAMPLER_STATE_TOTAL];$/;"	m	struct:Renderer
+sb	.\ui_renderer.cpp	/^	StructuredBuffer* sb;$/;"	m	struct:UIRenderer	file:
 scale	.\math.h	/^	Vec3 scale;$/;"	m	struct:Transform
-scan_n	.\include\stb_image.h	/^			int scan_n, order[4];$/;"	m	struct:__anon8
-screen_resolution	.\font_handling.cpp	/^	Vec2 screen_resolution;$/;"	m	struct:TextUI	file:
+scan_n	.\include\stb_image.h	/^			int scan_n, order[4];$/;"	m	struct:__anon11
+screen_res	.\font_handling.cpp	/^	Vec2 screen_res;$/;"	m	struct:TextUI	file:
+screen_resolution	.\ui_renderer.cpp	/^	Vec2 screen_resolution;$/;"	m	struct:UIRenderer	file:
+secondary_color	.\ui_renderer.cpp	/^	Vec4 secondary_color[2];$/;"	m	struct:UIElement	file:
 set_separators	.\include\stb_sprintf.h	/^STBSP__PUBLICDEF void STB_SPRINTF_DECORATE(set_separators)(char pcomma, char pperiod)$/;"	f
 shader	.\renderer.h	/^	ID3D11PixelShader* shader;$/;"	m	struct:PixelShader
 shader	.\renderer.h	/^	ID3D11VertexShader* shader;$/;"	m	struct:VertexShader
+shader_resource	.\renderer.h	/^	ID3D11ShaderResourceView* shader_resource;$/;"	m	struct:ReadableRenderTarget
 size	.\asset_loading.cpp	/^	u32 size;$/;"	m	struct:GameAssets	file:
-size	.\include\stb_image.h	/^			stbi_uc  size[257];$/;"	m	struct:__anon7
-size	.\include\stb_image.h	/^			stbi_uc size,type,channel;$/;"	m	struct:__anon17
-size	.\include\stb_image.h	/^		stbi_uc  size[STBI__ZNSYMS];$/;"	m	struct:__anon11
-size	.\include\stb_truetype.h	/^   int size;$/;"	m	struct:__anon24
+size	.\include\stb_image.h	/^			stbi_uc  size[257];$/;"	m	struct:__anon10
+size	.\include\stb_image.h	/^			stbi_uc size,type,channel;$/;"	m	struct:__anon20
+size	.\include\stb_image.h	/^		stbi_uc  size[STBI__ZNSYMS];$/;"	m	struct:__anon14
+size	.\include\stb_truetype.h	/^   int size;$/;"	m	struct:__anon27
 size	.\platform_api.h	/^	u64 size;$/;"	m	struct:PlatformFileInfo
 size	.\platform_api.h	/^	u64 size;$/;"	m	struct:PlatformMemoryBlock
 size	.\renderer.h	/^	u32 size;$/;"	m	struct:PushRenderBufferData
-skip	.\include\stb_image.h	/^		void     (*skip)  (void *user,int n);                 \/\/ skip the next 'n' bytes, or 'unget' the last -n bytes if negative$/;"	m	struct:__anon2
+size	.\simulation.h	/^	Vec3 size;$/;"	m	struct:BoundingBox
+skip	.\include\stb_image.h	/^		void     (*skip)  (void *user,int n);                 \/\/ skip the next 'n' bytes, or 'unget' the last -n bytes if negative$/;"	m	struct:__anon5
 skip_missing	.\include\stb_truetype.h	/^   int   skip_missing;$/;"	m	struct:stbtt_pack_context
 slot	.\renderer.h	/^	u8 slot;$/;"	m	struct:SetConstantsBuffer
 slot	.\renderer.h	/^	u8 slot;$/;"	m	struct:SetSamplerState
@@ -1177,14 +1417,21 @@ slot	.\renderer.h	/^	u8 slot;$/;"	m	struct:SetStructuredBuffer
 slot	.\renderer.h	/^	u8 slot;$/;"	m	struct:SetTextureBuffer
 slot	.\renderer.h	/^	u8 slot;$/;"	m	struct:SetVertexBuffer
 snprintf	.\include\stb_sprintf.h	/^STBSP__PUBLICDEF int STB_SPRINTF_DECORATE(snprintf)(char *buf, int count, char const *fmt, ...)$/;"	f
+spawn_count	.\simulation.h	/^	u8 spawn_count;$/;"	m	struct:SpawnerInfo
+spawn_id	.\simulation.h	/^	u8 spawn_id;$/;"	m	struct:SpawnerInfo
+spawn_position	.\simulation.h	/^	Vec3 spawn_position;$/;"	m	struct:ParticleSystem
+spawner_info	.\simulation.h	/^	SpawnerInfo spawner_info;$/;"	m	struct:Entity
 spawntetra	.\tetra.cpp	/^spawntetra(tetra* tetra, transform transform, vec4 color) {$/;"	f	file:
-spec_end	.\include\stb_image.h	/^			int            spec_end;$/;"	m	struct:__anon8
-spec_start	.\include\stb_image.h	/^			int            spec_start;$/;"	m	struct:__anon8
+spec_end	.\include\stb_image.h	/^			int            spec_end;$/;"	m	struct:__anon11
+spec_start	.\include\stb_image.h	/^			int            spec_start;$/;"	m	struct:__anon11
+speed	.\simulation.h	/^	float speed;$/;"	m	struct:Entity
+spin_amount	.\simulation.h	/^	float spin_amount;$/;"	m	struct:Entity
+spin_axis	.\simulation.h	/^	u8 spin_axis;$/;"	m	struct:Entity
 sprintf	.\include\stb_sprintf.h	/^STBSP__PUBLICDEF int STB_SPRINTF_DECORATE(sprintf)(char *buf, char const *fmt, ...)$/;"	f
 start	.\shapes.cpp	/^	Vec3 start;$/;"	m	struct:Line	file:
-start_x	.\include\stb_image.h	/^			int start_x, start_y;$/;"	m	struct:__anon19
-start_y	.\include\stb_image.h	/^			int start_x, start_y;$/;"	m	struct:__anon19
-started	.\include\stb_truetype.h	/^   int started;$/;"	m	struct:__anon38
+start_x	.\include\stb_image.h	/^			int start_x, start_y;$/;"	m	struct:__anon22
+start_y	.\include\stb_image.h	/^			int start_x, start_y;$/;"	m	struct:__anon22
+started	.\include\stb_truetype.h	/^   int started;$/;"	m	struct:__anon41
 stbi__DNL	.\include\stb_image.h	3322;"	d
 stbi__EOI	.\include\stb_image.h	3324;"	d
 stbi__SOF	.\include\stb_image.h	3325;"	d
@@ -1200,7 +1447,7 @@ stbi__bitcount	.\include\stb_image.h	/^		static int stbi__bitcount(unsigned int 
 stbi__bitreverse16	.\include\stb_image.h	/^	stbi_inline static int stbi__bitreverse16(int n)$/;"	f
 stbi__blinn_8x8	.\include\stb_image.h	/^	static stbi_uc stbi__blinn_8x8(stbi_uc x, stbi_uc y)$/;"	f
 stbi__bmask	.\include\stb_image.h	/^		static const stbi__uint32 stbi__bmask[17]={0,1,3,7,15,31,63,127,255,511,1023,2047,4095,8191,16383,32767,65535};$/;"	v
-stbi__bmp_data	.\include\stb_image.h	/^		} stbi__bmp_data;$/;"	t	typeref:struct:__anon16
+stbi__bmp_data	.\include\stb_image.h	/^		} stbi__bmp_data;$/;"	t	typeref:struct:__anon19
 stbi__bmp_info	.\include\stb_image.h	/^		static int stbi__bmp_info(stbi__context *s, int *x, int *y, int *comp)$/;"	f
 stbi__bmp_load	.\include\stb_image.h	/^		static void *stbi__bmp_load(stbi__context *s, int *x, int *y, int *comp, int req_comp, stbi__result_info *ri)$/;"	f
 stbi__bmp_parse_header	.\include\stb_image.h	/^		static void *stbi__bmp_parse_header(stbi__context *s, stbi__bmp_data *info)$/;"	f
@@ -1217,7 +1464,7 @@ stbi__compute_transparency	.\include\stb_image.h	/^static int stbi__compute_tran
 stbi__compute_transparency16	.\include\stb_image.h	/^static int stbi__compute_transparency16(stbi__png *z, stbi__uint16 tc[3], int out_n)$/;"	f
 stbi__compute_y	.\include\stb_image.h	/^		static stbi_uc stbi__compute_y(int r, int g, int b)$/;"	f
 stbi__compute_y_16	.\include\stb_image.h	/^		static stbi__uint16 stbi__compute_y_16(int r, int g, int b)$/;"	f
-stbi__context	.\include\stb_image.h	/^	} stbi__context;$/;"	t	typeref:struct:__anon3
+stbi__context	.\include\stb_image.h	/^	} stbi__context;$/;"	t	typeref:struct:__anon6
 stbi__convert_16_to_8	.\include\stb_image.h	/^		static stbi_uc *stbi__convert_16_to_8(stbi__uint16 *orig, int w, int h, int channels)$/;"	f
 stbi__convert_8_to_16	.\include\stb_image.h	/^		static stbi__uint16 *stbi__convert_8_to_16(stbi_uc *orig, int w, int h, int channels)$/;"	f
 stbi__convert_format	.\include\stb_image.h	/^		static unsigned char *stbi__convert_format(unsigned char *data, int img_n, int req_comp, unsigned int x, unsigned int y)$/;"	f
@@ -1264,13 +1511,13 @@ stbi__get8	.\include\stb_image.h	/^		stbi_inline static stbi_uc stbi__get8(stbi_
 stbi__get_chunk_header	.\include\stb_image.h	/^static stbi__pngchunk stbi__get_chunk_header(stbi__context *s)$/;"	f
 stbi__get_marker	.\include\stb_image.h	/^	static stbi_uc stbi__get_marker(stbi__jpeg *j)$/;"	f
 stbi__getn	.\include\stb_image.h	/^		static int stbi__getn(stbi__context *s, stbi_uc *buffer, int n)$/;"	f
-stbi__gif	.\include\stb_image.h	/^		} stbi__gif;$/;"	t	typeref:struct:__anon19
+stbi__gif	.\include\stb_image.h	/^		} stbi__gif;$/;"	t	typeref:struct:__anon22
 stbi__gif_header	.\include\stb_image.h	/^		static int stbi__gif_header(stbi__context *s, stbi__gif *g, int *comp, int is_info)$/;"	f
 stbi__gif_info	.\include\stb_image.h	/^		static int stbi__gif_info(stbi__context *s, int *x, int *y, int *comp)$/;"	f
 stbi__gif_info_raw	.\include\stb_image.h	/^		static int stbi__gif_info_raw(stbi__context *s, int *x, int *y, int *comp)$/;"	f
 stbi__gif_load	.\include\stb_image.h	/^		static void *stbi__gif_load(stbi__context *s, int *x, int *y, int *comp, int req_comp, stbi__result_info *ri)$/;"	f
 stbi__gif_load_next	.\include\stb_image.h	/^		static stbi_uc *stbi__gif_load_next(stbi__context *s, stbi__gif *g, int *comp, int req_comp, stbi_uc *two_back)$/;"	f
-stbi__gif_lzw	.\include\stb_image.h	/^		} stbi__gif_lzw;$/;"	t	typeref:struct:__anon18
+stbi__gif_lzw	.\include\stb_image.h	/^		} stbi__gif_lzw;$/;"	t	typeref:struct:__anon21
 stbi__gif_parse_colortable	.\include\stb_image.h	/^		static void stbi__gif_parse_colortable(stbi__context *s, stbi_uc pal[256][4], int num_entries, int transp)$/;"	f
 stbi__gif_test	.\include\stb_image.h	/^		static int stbi__gif_test(stbi__context *s)$/;"	f
 stbi__gif_test_raw	.\include\stb_image.h	/^		static int stbi__gif_test_raw(stbi__context *s)$/;"	f
@@ -1285,7 +1532,7 @@ stbi__hdr_test	.\include\stb_image.h	/^		static int stbi__hdr_test(stbi__context
 stbi__hdr_test_core	.\include\stb_image.h	/^		static int stbi__hdr_test_core(stbi__context *s, const char *signature)$/;"	f
 stbi__hdr_to_ldr	.\include\stb_image.h	/^		static stbi_uc *stbi__hdr_to_ldr(float   *data, int x, int y, int comp)$/;"	f
 stbi__high_bit	.\include\stb_image.h	/^		static int stbi__high_bit(unsigned int z)$/;"	f
-stbi__huffman	.\include\stb_image.h	/^		} stbi__huffman;$/;"	t	typeref:struct:__anon7
+stbi__huffman	.\include\stb_image.h	/^		} stbi__huffman;$/;"	t	typeref:struct:__anon10
 stbi__idct_block	.\include\stb_image.h	/^	static void stbi__idct_block(stbi_uc *out, int out_stride, short data[64])$/;"	f
 stbi__idct_simd	.\include\stb_image.h	/^	static void stbi__idct_simd(stbi_uc *out, int out_stride, short data[64])$/;"	f
 stbi__info_main	.\include\stb_image.h	/^		static int stbi__info_main(stbi__context *s, int *x, int *y, int *comp)$/;"	f
@@ -1295,7 +1542,7 @@ stbi__int32	.\include\stb_image.h	/^	typedef   signed int   stbi__int32;$/;"	t
 stbi__int32	.\include\stb_image.h	/^	typedef int32_t  stbi__int32;$/;"	t
 stbi__is_16_main	.\include\stb_image.h	/^		static int stbi__is_16_main(stbi__context *s)$/;"	f
 stbi__jbias	.\include\stb_image.h	/^		static const int stbi__jbias[16] = {0,-1,-3,-7,-15,-31,-63,-127,-255,-511,-1023,-2047,-4095,-8191,-16383,-32767};$/;"	v
-stbi__jpeg	.\include\stb_image.h	/^		} stbi__jpeg;$/;"	t	typeref:struct:__anon8
+stbi__jpeg	.\include\stb_image.h	/^		} stbi__jpeg;$/;"	t	typeref:struct:__anon11
 stbi__jpeg_decode_block	.\include\stb_image.h	/^static int stbi__jpeg_decode_block(stbi__jpeg *j, short data[64], stbi__huffman *hdc, stbi__huffman *hac, stbi__int16 *fac, int b, stbi__uint16 *dequant)$/;"	f
 stbi__jpeg_decode_block_prog_ac	.\include\stb_image.h	/^static int stbi__jpeg_decode_block_prog_ac(stbi__jpeg *j, short data[64], stbi__huffman *hac, stbi__int16 *fac)$/;"	f
 stbi__jpeg_decode_block_prog_dc	.\include\stb_image.h	/^static int stbi__jpeg_decode_block_prog_dc(stbi__jpeg *j, short data[64], stbi__huffman *hdc, int b)$/;"	f
@@ -1339,16 +1586,16 @@ stbi__pic_info	.\include\stb_image.h	/^		static int stbi__pic_info(stbi__context
 stbi__pic_is4	.\include\stb_image.h	/^		static int stbi__pic_is4(stbi__context *s,const char *str)$/;"	f
 stbi__pic_load	.\include\stb_image.h	/^		static void *stbi__pic_load(stbi__context *s,int *px,int *py,int *comp,int req_comp, stbi__result_info *ri)$/;"	f
 stbi__pic_load_core	.\include\stb_image.h	/^		static stbi_uc *stbi__pic_load_core(stbi__context *s,int width,int height,int *comp, stbi_uc *result)$/;"	f
-stbi__pic_packet	.\include\stb_image.h	/^		} stbi__pic_packet;$/;"	t	typeref:struct:__anon17
+stbi__pic_packet	.\include\stb_image.h	/^		} stbi__pic_packet;$/;"	t	typeref:struct:__anon20
 stbi__pic_test	.\include\stb_image.h	/^		static int stbi__pic_test(stbi__context *s)$/;"	f
 stbi__pic_test_core	.\include\stb_image.h	/^		static int stbi__pic_test_core(stbi__context *s)$/;"	f
-stbi__png	.\include\stb_image.h	/^} stbi__png;$/;"	t	typeref:struct:__anon14
+stbi__png	.\include\stb_image.h	/^} stbi__png;$/;"	t	typeref:struct:__anon17
 stbi__png_info	.\include\stb_image.h	/^		static int stbi__png_info(stbi__context *s, int *x, int *y, int *comp)$/;"	f
 stbi__png_info_raw	.\include\stb_image.h	/^		static int stbi__png_info_raw(stbi__png *p, int *x, int *y, int *comp)$/;"	f
 stbi__png_is16	.\include\stb_image.h	/^		static int stbi__png_is16(stbi__context *s)$/;"	f
 stbi__png_load	.\include\stb_image.h	/^		static void *stbi__png_load(stbi__context *s, int *x, int *y, int *comp, int req_comp, stbi__result_info *ri)$/;"	f
 stbi__png_test	.\include\stb_image.h	/^		static int stbi__png_test(stbi__context *s)$/;"	f
-stbi__pngchunk	.\include\stb_image.h	/^} stbi__pngchunk;$/;"	t	typeref:struct:__anon13
+stbi__pngchunk	.\include\stb_image.h	/^} stbi__pngchunk;$/;"	t	typeref:struct:__anon16
 stbi__pnm_getinteger	.\include\stb_image.h	/^		static int      stbi__pnm_getinteger(stbi__context *s, char *c)$/;"	f
 stbi__pnm_info	.\include\stb_image.h	/^		static int      stbi__pnm_info(stbi__context *s, int *x, int *y, int *comp)$/;"	f
 stbi__pnm_is16	.\include\stb_image.h	/^		static int stbi__pnm_is16(stbi__context *s)$/;"	f
@@ -1368,13 +1615,13 @@ stbi__psd_load	.\include\stb_image.h	/^		static void *stbi__psd_load(stbi__conte
 stbi__psd_test	.\include\stb_image.h	/^		static int stbi__psd_test(stbi__context *s)$/;"	f
 stbi__readval	.\include\stb_image.h	/^		static stbi_uc *stbi__readval(stbi__context *s, int channel, stbi_uc *dest)$/;"	f
 stbi__refill_buffer	.\include\stb_image.h	/^		static void stbi__refill_buffer(stbi__context *s)$/;"	f
-stbi__resample	.\include\stb_image.h	/^	} stbi__resample;$/;"	t	typeref:struct:__anon10
+stbi__resample	.\include\stb_image.h	/^	} stbi__resample;$/;"	t	typeref:struct:__anon13
 stbi__resample_row_generic	.\include\stb_image.h	/^	static stbi_uc *stbi__resample_row_generic(stbi_uc *out, stbi_uc *in_near, stbi_uc *in_far, int w, int hs)$/;"	f
 stbi__resample_row_h_2	.\include\stb_image.h	/^	static stbi_uc*  stbi__resample_row_h_2(stbi_uc *out, stbi_uc *in_near, stbi_uc *in_far, int w, int hs)$/;"	f
 stbi__resample_row_hv_2	.\include\stb_image.h	/^	static stbi_uc *stbi__resample_row_hv_2(stbi_uc *out, stbi_uc *in_near, stbi_uc *in_far, int w, int hs)$/;"	f
 stbi__resample_row_hv_2_simd	.\include\stb_image.h	/^	static stbi_uc *stbi__resample_row_hv_2_simd(stbi_uc *out, stbi_uc *in_near, stbi_uc *in_far, int w, int hs)$/;"	f
 stbi__resample_row_v_2	.\include\stb_image.h	/^	static stbi_uc* stbi__resample_row_v_2(stbi_uc *out, stbi_uc *in_near, stbi_uc *in_far, int w, int hs)$/;"	f
-stbi__result_info	.\include\stb_image.h	/^} stbi__result_info;$/;"	t	typeref:struct:__anon5
+stbi__result_info	.\include\stb_image.h	/^} stbi__result_info;$/;"	t	typeref:struct:__anon8
 stbi__rewind	.\include\stb_image.h	/^static void stbi__rewind(stbi__context *s)$/;"	f
 stbi__setup_jpeg	.\include\stb_image.h	/^	static void stbi__setup_jpeg(stbi__jpeg *j)$/;"	f
 stbi__shiftsigned	.\include\stb_image.h	/^		static int stbi__shiftsigned(unsigned int v, int shift, int bits)$/;"	f
@@ -1409,7 +1656,7 @@ stbi__vertically_flip_on_load	.\include\stb_image.h	1112;"	d
 stbi__vertically_flip_on_load_global	.\include\stb_image.h	/^static int stbi__vertically_flip_on_load_global = 0;$/;"	v
 stbi__vertically_flip_on_load_local	.\include\stb_image.h	/^static STBI_THREAD_LOCAL int stbi__vertically_flip_on_load_local, stbi__vertically_flip_on_load_set;$/;"	v
 stbi__vertically_flip_on_load_set	.\include\stb_image.h	/^static STBI_THREAD_LOCAL int stbi__vertically_flip_on_load_local, stbi__vertically_flip_on_load_set;$/;"	v
-stbi__zbuf	.\include\stb_image.h	/^	} stbi__zbuf;$/;"	t	typeref:struct:__anon12
+stbi__zbuf	.\include\stb_image.h	/^	} stbi__zbuf;$/;"	t	typeref:struct:__anon15
 stbi__zbuild_huffman	.\include\stb_image.h	/^	static int stbi__zbuild_huffman(stbi__zhuffman *z, const stbi_uc *sizelist, int num)$/;"	f
 stbi__zdefault_distance	.\include\stb_image.h	/^static const stbi_uc stbi__zdefault_distance[32] =$/;"	v
 stbi__zdefault_length	.\include\stb_image.h	/^static const stbi_uc stbi__zdefault_length[STBI__ZNSYMS] =$/;"	v
@@ -1418,7 +1665,7 @@ stbi__zdist_extra	.\include\stb_image.h	/^static const int stbi__zdist_extra[32]
 stbi__zeof	.\include\stb_image.h	/^	stbi_inline static int stbi__zeof(stbi__zbuf *z)$/;"	f
 stbi__zexpand	.\include\stb_image.h	/^	static int stbi__zexpand(stbi__zbuf *z, char *zout, int n)  \/\/ need to make room for n bytes$/;"	f
 stbi__zget8	.\include\stb_image.h	/^	stbi_inline static stbi_uc stbi__zget8(stbi__zbuf *z)$/;"	f
-stbi__zhuffman	.\include\stb_image.h	/^	} stbi__zhuffman;$/;"	t	typeref:struct:__anon11
+stbi__zhuffman	.\include\stb_image.h	/^	} stbi__zhuffman;$/;"	t	typeref:struct:__anon14
 stbi__zhuffman_decode	.\include\stb_image.h	/^	stbi_inline static int stbi__zhuffman_decode(stbi__zbuf *a, stbi__zhuffman *z)$/;"	f
 stbi__zhuffman_decode_slowpath	.\include\stb_image.h	/^	static int stbi__zhuffman_decode_slowpath(stbi__zbuf *a, stbi__zhuffman *z)$/;"	f
 stbi__zlength_base	.\include\stb_image.h	/^	static const int stbi__zlength_base[31] = {$/;"	v
@@ -1438,7 +1685,7 @@ stbi_info_from_memory	.\include\stb_image.h	/^		STBIDEF int stbi_info_from_memor
 stbi_inline	.\include\stb_image.h	612;"	d
 stbi_inline	.\include\stb_image.h	614;"	d
 stbi_inline	.\include\stb_image.h	617;"	d
-stbi_io_callbacks	.\include\stb_image.h	/^	} stbi_io_callbacks;$/;"	t	typeref:struct:__anon2
+stbi_io_callbacks	.\include\stb_image.h	/^	} stbi_io_callbacks;$/;"	t	typeref:struct:__anon5
 stbi_is_16_bit	.\include\stb_image.h	/^		STBIDEF int stbi_is_16_bit(char const *filename)$/;"	f
 stbi_is_16_bit_from_callbacks	.\include\stb_image.h	/^		STBIDEF int stbi_is_16_bit_from_callbacks(stbi_io_callbacks const *c, void *user)$/;"	f
 stbi_is_16_bit_from_file	.\include\stb_image.h	/^		STBIDEF int stbi_is_16_bit_from_file(FILE *f)$/;"	f
@@ -1475,20 +1722,20 @@ stbi_zlib_decode_malloc_guesssize	.\include\stb_image.h	/^STBIDEF char *stbi_zli
 stbi_zlib_decode_malloc_guesssize_headerflag	.\include\stb_image.h	/^STBIDEF char *stbi_zlib_decode_malloc_guesssize_headerflag(const char *buffer, int len, int initial_size, int *outlen, int parse_header)$/;"	f
 stbi_zlib_decode_noheader_buffer	.\include\stb_image.h	/^STBIDEF int stbi_zlib_decode_noheader_buffer(char *obuffer, int olen, const char *ibuffer, int ilen)$/;"	f
 stbi_zlib_decode_noheader_malloc	.\include\stb_image.h	/^STBIDEF char *stbi_zlib_decode_noheader_malloc(char const *buffer, int len, int *outlen)$/;"	f
-stbrp__findresult	.\include\stb_rect_pack.h	/^} stbrp__findresult;$/;"	t	typeref:struct:__anon22
+stbrp__findresult	.\include\stb_rect_pack.h	/^} stbrp__findresult;$/;"	t	typeref:struct:__anon25
 stbrp__skyline_find_best_pos	.\include\stb_rect_pack.h	/^static stbrp__findresult stbrp__skyline_find_best_pos(stbrp_context *c, int width, int height)$/;"	f
 stbrp__skyline_find_min_y	.\include\stb_rect_pack.h	/^static int stbrp__skyline_find_min_y(stbrp_context *c, stbrp_node *first, int x0, int width, int *pwaste)$/;"	f
 stbrp__skyline_pack_rectangle	.\include\stb_rect_pack.h	/^static stbrp__findresult stbrp__skyline_pack_rectangle(stbrp_context *context, int width, int height)$/;"	f
 stbrp_context	.\include\stb_rect_pack.h	/^struct stbrp_context$/;"	s
 stbrp_context	.\include\stb_rect_pack.h	/^typedef struct stbrp_context stbrp_context;$/;"	t	typeref:struct:stbrp_context
-stbrp_context	.\include\stb_truetype.h	/^} stbrp_context;$/;"	t	typeref:struct:__anon40
+stbrp_context	.\include\stb_truetype.h	/^} stbrp_context;$/;"	t	typeref:struct:__anon43
 stbrp_coord	.\include\stb_rect_pack.h	/^typedef int            stbrp_coord;$/;"	t
 stbrp_coord	.\include\stb_truetype.h	/^typedef int stbrp_coord;$/;"	t
 stbrp_init_target	.\include\stb_rect_pack.h	/^STBRP_DEF void stbrp_init_target(stbrp_context *context, int width, int height, stbrp_node *nodes, int num_nodes)$/;"	f
 stbrp_init_target	.\include\stb_truetype.h	/^static void stbrp_init_target(stbrp_context *con, int pw, int ph, stbrp_node *nodes, int num_nodes)$/;"	f
 stbrp_node	.\include\stb_rect_pack.h	/^struct stbrp_node$/;"	s
 stbrp_node	.\include\stb_rect_pack.h	/^typedef struct stbrp_node    stbrp_node;$/;"	t	typeref:struct:stbrp_node
-stbrp_node	.\include\stb_truetype.h	/^} stbrp_node;$/;"	t	typeref:struct:__anon41
+stbrp_node	.\include\stb_truetype.h	/^} stbrp_node;$/;"	t	typeref:struct:__anon44
 stbrp_pack_rects	.\include\stb_rect_pack.h	/^STBRP_DEF int stbrp_pack_rects(stbrp_context *context, stbrp_rect *rects, int num_rects)$/;"	f
 stbrp_pack_rects	.\include\stb_truetype.h	/^static void stbrp_pack_rects(stbrp_context *con, stbrp_rect *rects, int num_rects)$/;"	f
 stbrp_rect	.\include\stb_rect_pack.h	/^struct stbrp_rect$/;"	s
@@ -1518,7 +1765,7 @@ stbsp__ddmultlos	.\include\stb_sprintf.h	1850;"	d
 stbsp__ddrenorm	.\include\stb_sprintf.h	1626;"	d
 stbsp__ddrenorm	.\include\stb_sprintf.h	1848;"	d
 stbsp__ddtoS64	.\include\stb_sprintf.h	1615;"	d
-stbsp__digitpair	.\include\stb_sprintf.h	/^} stbsp__digitpair =$/;"	v	typeref:struct:__anon23
+stbsp__digitpair	.\include\stb_sprintf.h	/^} stbsp__digitpair =$/;"	v	typeref:struct:__anon26
 stbsp__flush_cb	.\include\stb_sprintf.h	1370;"	d
 stbsp__flush_cb	.\include\stb_sprintf.h	379;"	d
 stbsp__int32	.\include\stb_sprintf.h	1859;"	d
@@ -1628,8 +1875,8 @@ stbtt__GetGlyphShapeTT	.\include\stb_truetype.h	/^static int stbtt__GetGlyphShap
 stbtt__active_edge	.\include\stb_truetype.h	/^typedef struct stbtt__active_edge$/;"	s
 stbtt__active_edge	.\include\stb_truetype.h	/^} stbtt__active_edge;$/;"	t	typeref:struct:stbtt__active_edge
 stbtt__add_point	.\include\stb_truetype.h	/^static void stbtt__add_point(stbtt__point *points, int n, float x, float y)$/;"	f
-stbtt__bitmap	.\include\stb_truetype.h	/^} stbtt__bitmap;$/;"	t	typeref:struct:__anon31
-stbtt__buf	.\include\stb_truetype.h	/^} stbtt__buf;$/;"	t	typeref:struct:__anon24
+stbtt__bitmap	.\include\stb_truetype.h	/^} stbtt__bitmap;$/;"	t	typeref:struct:__anon34
+stbtt__buf	.\include\stb_truetype.h	/^} stbtt__buf;$/;"	t	typeref:struct:__anon27
 stbtt__buf_get	.\include\stb_truetype.h	/^static stbtt_uint32 stbtt__buf_get(stbtt__buf *b, int n)$/;"	f
 stbtt__buf_get16	.\include\stb_truetype.h	1178;"	d
 stbtt__buf_get32	.\include\stb_truetype.h	1179;"	d
@@ -1648,7 +1895,7 @@ stbtt__check_size32	.\include\stb_truetype.h	/^   typedef char stbtt__check_size
 stbtt__cid_get_glyph_subrs	.\include\stb_truetype.h	/^static stbtt__buf stbtt__cid_get_glyph_subrs(const stbtt_fontinfo *info, int glyph_index)$/;"	f
 stbtt__close_shape	.\include\stb_truetype.h	/^static int stbtt__close_shape(stbtt_vertex *vertices, int num_vertices, int was_off, int start_off,$/;"	f
 stbtt__compute_crossings_x	.\include\stb_truetype.h	/^static int stbtt__compute_crossings_x(float x, float y, int nverts, stbtt_vertex *verts)$/;"	f
-stbtt__csctx	.\include\stb_truetype.h	/^} stbtt__csctx;$/;"	t	typeref:struct:__anon38
+stbtt__csctx	.\include\stb_truetype.h	/^} stbtt__csctx;$/;"	t	typeref:struct:__anon41
 stbtt__csctx_close_shape	.\include\stb_truetype.h	/^static void stbtt__csctx_close_shape(stbtt__csctx *ctx)$/;"	f
 stbtt__csctx_rccurve_to	.\include\stb_truetype.h	/^static void stbtt__csctx_rccurve_to(stbtt__csctx *ctx, float dx1, float dy1, float dx2, float dy2, float dx3, float dy3)$/;"	f
 stbtt__csctx_rline_to	.\include\stb_truetype.h	/^static void stbtt__csctx_rline_to(stbtt__csctx *ctx, float dx, float dy)$/;"	f
@@ -1680,7 +1927,7 @@ stbtt__matchpair	.\include\stb_truetype.h	/^static int stbtt__matchpair(stbtt_ui
 stbtt__new_active	.\include\stb_truetype.h	/^static stbtt__active_edge *stbtt__new_active(stbtt__hheap *hh, stbtt__edge *e, int off_x, float start_point, void *userdata)$/;"	f
 stbtt__new_buf	.\include\stb_truetype.h	/^static stbtt__buf stbtt__new_buf(const void *p, size_t size)$/;"	f
 stbtt__oversample_shift	.\include\stb_truetype.h	/^static float stbtt__oversample_shift(int oversample)$/;"	f
-stbtt__point	.\include\stb_truetype.h	/^} stbtt__point;$/;"	t	typeref:struct:__anon39
+stbtt__point	.\include\stb_truetype.h	/^} stbtt__point;$/;"	t	typeref:struct:__anon42
 stbtt__position_trapezoid_area	.\include\stb_truetype.h	/^static float stbtt__position_trapezoid_area(float height, float tx0, float tx1, float bx0, float bx1)$/;"	f
 stbtt__rasterize	.\include\stb_truetype.h	/^static void stbtt__rasterize(stbtt__bitmap *result, stbtt__point *pts, int *wcount, int windings, float scale_x, float scale_y, float shift_x, float shift_y, int off_x, int off_y, int invert, void *userdata)$/;"	f
 stbtt__rasterize_sorted_edges	.\include\stb_truetype.h	/^static void stbtt__rasterize_sorted_edges(stbtt__bitmap *result, stbtt__edge *e, int n, int vsubsample, int off_x, int off_y, void *userdata)$/;"	f
@@ -1697,8 +1944,8 @@ stbtt__tesselate_curve	.\include\stb_truetype.h	/^static int stbtt__tesselate_cu
 stbtt__test_oversample_pow2	.\include\stb_truetype.h	/^typedef int stbtt__test_oversample_pow2[(STBTT_MAX_OVERSAMPLE & (STBTT_MAX_OVERSAMPLE-1)) == 0 ? 1 : -1];$/;"	t
 stbtt__track_vertex	.\include\stb_truetype.h	/^static void stbtt__track_vertex(stbtt__csctx *c, stbtt_int32 x, stbtt_int32 y)$/;"	f
 stbtt__v_prefilter	.\include\stb_truetype.h	/^static void stbtt__v_prefilter(unsigned char *pixels, int w, int h, int stride_in_bytes, unsigned int kernel_width)$/;"	f
-stbtt_aligned_quad	.\include\stb_truetype.h	/^} stbtt_aligned_quad;$/;"	t	typeref:struct:__anon26
-stbtt_bakedchar	.\include\stb_truetype.h	/^} stbtt_bakedchar;$/;"	t	typeref:struct:__anon25
+stbtt_aligned_quad	.\include\stb_truetype.h	/^} stbtt_aligned_quad;$/;"	t	typeref:struct:__anon29
+stbtt_bakedchar	.\include\stb_truetype.h	/^} stbtt_bakedchar;$/;"	t	typeref:struct:__anon28
 stbtt_fontinfo	.\include\stb_truetype.h	/^struct stbtt_fontinfo$/;"	s
 stbtt_fontinfo	.\include\stb_truetype.h	/^typedef struct stbtt_fontinfo stbtt_fontinfo;$/;"	t	typeref:struct:stbtt_fontinfo
 stbtt_int16	.\include\stb_truetype.h	/^   typedef signed   short  stbtt_int16;$/;"	t
@@ -1708,65 +1955,81 @@ stbtt_kerningentry	.\include\stb_truetype.h	/^typedef struct stbtt_kerningentry$
 stbtt_kerningentry	.\include\stb_truetype.h	/^} stbtt_kerningentry;$/;"	t	typeref:struct:stbtt_kerningentry
 stbtt_pack_context	.\include\stb_truetype.h	/^struct stbtt_pack_context {$/;"	s
 stbtt_pack_context	.\include\stb_truetype.h	/^typedef struct stbtt_pack_context stbtt_pack_context;$/;"	t	typeref:struct:stbtt_pack_context
-stbtt_pack_range	.\include\stb_truetype.h	/^} stbtt_pack_range;$/;"	t	typeref:struct:__anon28
-stbtt_packedchar	.\include\stb_truetype.h	/^} stbtt_packedchar;$/;"	t	typeref:struct:__anon27
+stbtt_pack_range	.\include\stb_truetype.h	/^} stbtt_pack_range;$/;"	t	typeref:struct:__anon31
+stbtt_packedchar	.\include\stb_truetype.h	/^} stbtt_packedchar;$/;"	t	typeref:struct:__anon30
 stbtt_setvertex	.\include\stb_truetype.h	/^static void stbtt_setvertex(stbtt_vertex *v, stbtt_uint8 type, stbtt_int32 x, stbtt_int32 y, stbtt_int32 cx, stbtt_int32 cy)$/;"	f
 stbtt_tag	.\include\stb_truetype.h	1292;"	d
 stbtt_tag4	.\include\stb_truetype.h	1291;"	d
 stbtt_uint16	.\include\stb_truetype.h	/^   typedef unsigned short  stbtt_uint16;$/;"	t
 stbtt_uint32	.\include\stb_truetype.h	/^   typedef unsigned int    stbtt_uint32;$/;"	t
 stbtt_uint8	.\include\stb_truetype.h	/^   typedef unsigned char   stbtt_uint8;$/;"	t
-stbtt_vertex	.\include\stb_truetype.h	/^   } stbtt_vertex;$/;"	t	typeref:struct:__anon30
+stbtt_vertex	.\include\stb_truetype.h	/^   } stbtt_vertex;$/;"	t	typeref:struct:__anon33
 stbtt_vertex_type	.\include\stb_truetype.h	834;"	d
-step	.\include\stb_image.h	/^			int parse, step;$/;"	m	struct:__anon19
-stride	.\include\stb_truetype.h	/^   int w,h,stride;$/;"	m	struct:__anon31
+step	.\include\stb_image.h	/^			int parse, step;$/;"	m	struct:__anon22
+stride	.\include\stb_truetype.h	/^   int w,h,stride;$/;"	m	struct:__anon34
 stride	.\renderer.h	/^	u32 stride;$/;"	m	struct:SetVertexBuffer
 stride_in_bytes	.\include\stb_truetype.h	/^   int   stride_in_bytes;$/;"	m	struct:stbtt_pack_context
 structured	.\renderer.h	/^	StructuredBuffer* structured; $/;"	m	struct:SetStructuredBuffer
+structured_buffer	.\font_handling.cpp	/^	StructuredBuffer* structured_buffer;$/;"	m	struct:TextUI	file:
 subrs	.\include\stb_truetype.h	/^   stbtt__buf subrs;                  \/\/ private charstring subroutines index$/;"	m	struct:stbtt_fontinfo
-succ_high	.\include\stb_image.h	/^			int            succ_high;$/;"	m	struct:__anon8
-succ_low	.\include\stb_image.h	/^			int            succ_low;$/;"	m	struct:__anon8
-suffix	.\include\stb_image.h	/^			stbi_uc suffix;$/;"	m	struct:__anon18
+succ_high	.\include\stb_image.h	/^			int            succ_high;$/;"	m	struct:__anon11
+succ_low	.\include\stb_image.h	/^			int            succ_low;$/;"	m	struct:__anon11
+suffix	.\include\stb_image.h	/^			stbi_uc suffix;$/;"	m	struct:__anon21
 svg	.\include\stb_truetype.h	/^   int loca,head,glyf,hhea,hmtx,kern,gpos,svg; \/\/ table locations as offset from start of .ttf$/;"	m	struct:stbtt_fontinfo
 swapchain	.\renderer.h	/^	IDXGISwapChain1* swapchain;$/;"	m	struct:Renderer
 sy	.\include\stb_truetype.h	/^   float sy;$/;"	m	struct:stbtt__active_edge
 t0	.\font_handling.cpp	/^	float s0, t0, s1, t1;$/;"	m	struct:Glyph	file:
-t0	.\include\stb_truetype.h	/^   float x0,y0,s0,t0; \/\/ top-left$/;"	m	struct:__anon26
+t0	.\include\stb_truetype.h	/^   float x0,y0,s0,t0; \/\/ top-left$/;"	m	struct:__anon29
 t1	.\font_handling.cpp	/^	float s0, t0, s1, t1;$/;"	m	struct:Glyph	file:
-t1	.\include\stb_truetype.h	/^   float x1,y1,s1,t1; \/\/ bottom-right$/;"	m	struct:__anon26
-temp	.\include\stb_sprintf.h	/^   short temp; \/\/ force next field to be 2-byte aligned$/;"	m	struct:__anon23
+t1	.\include\stb_truetype.h	/^   float x1,y1,s1,t1; \/\/ bottom-right$/;"	m	struct:__anon29
+team	.\simulation.h	/^	u8 team;$/;"	m	struct:Entity
+temp	.\include\stb_sprintf.h	/^   short temp; \/\/ force next field to be 2-byte aligned$/;"	m	struct:__anon26
 temp_bitmap	.\include\stb_truetype.h	/^unsigned char temp_bitmap[512*512];$/;"	v
 temp_count	.\memory_management.h	/^	u32 temp_count;$/;"	m	struct:MemoryArena
+tertiary_color	.\ui_renderer.cpp	/^	Vec4 tertiary_color[2];$/;"	m	struct:UIElement	file:
+test_mode	.\game.h	/^	TestMode test_mode;$/;"	m	struct:GameState
 texcoords	.\quad_renderer.cpp	/^	Vec2 texcoords[MAX_TEXTURED_QUADS*4];$/;"	m	struct:QuadRenderer	file:
+text	.\ui_renderer.cpp	/^	char** text;$/;"	m	struct:UIElement	file:
+text_count	.\ui_renderer.cpp	/^	u8 text_count;$/;"	m	struct:UIElement	file:
 text_shader	.\font_handling.cpp	/^	VertexShader* text_shader;$/;"	m	struct:TextUI	file:
 text_ui	.\game.h	/^	TextUI* text_ui;$/;"	m	struct:GameState
+text_ui	.\ui_renderer.cpp	/^	TextUI* text_ui;$/;"	m	struct:UIRenderer	file:
+texture	.\quad_renderer.cpp	/^	TextureBuffer* texture;$/;"	m	struct:TexturedQuad	file:
 texture	.\renderer.h	/^	ID3D11Texture2D* texture;$/;"	m	struct:DepthStencil
+texture	.\renderer.h	/^	ID3D11Texture2D* texture;$/;"	m	struct:ReadableRenderTarget
 texture	.\renderer.h	/^	ID3D11Texture2D* texture;$/;"	m	struct:RenderTarget
 texture	.\renderer.h	/^	TextureBuffer* texture; $/;"	m	struct:SetTextureBuffer
 texture_assets	.\asset_loading.cpp	/^	TextureAssetInfo* texture_assets;$/;"	m	struct:GameAssets	file:
-texture_buffer	.\font_handling.cpp	/^	TextureBuffer* texture_buffer;$/;"	m	struct:TextUI	file:
+texture_count	.\simulation.h	/^	u32 texture_count;$/;"	m	struct:ParticleSystem
 texture_data	.\asset_formats.h	/^	TextureData* texture_data;$/;"	m	struct:MaterialData
 texture_type_names	.\file_formats.h	/^char* texture_type_names[TEXTURE_SLOT_TOTAL] = {$/;"	v
+textured_quad	.\simulation.h	/^	TexturedQuad textured_quad;$/;"	m	struct:Entity
 textured_quad_counter	.\quad_renderer.cpp	/^	u32 textured_quad_counter;$/;"	m	struct:QuadRenderer	file:
 textured_quad_ps	.\quad_renderer.cpp	/^	PixelShader* textured_quad_ps;$/;"	m	struct:QuadRenderer	file:
 textured_quad_vertex_buffers	.\quad_renderer.cpp	/^	VertexBuffer* textured_quad_vertex_buffers[2];$/;"	m	struct:QuadRenderer	file:
 textured_quad_vs	.\quad_renderer.cpp	/^	VertexShader* textured_quad_vs;$/;"	m	struct:QuadRenderer	file:
 textures	.\quad_renderer.cpp	/^	TextureBuffer* textures[MAX_TEXTURED_QUADS];$/;"	m	struct:QuadRenderer	file:
+textures	.\simulation.h	/^	TextureBuffer* textures[MAX_PARTICLES];$/;"	m	struct:ParticleSystem
 textures_count	.\file_formats.h	/^	u32 textures_count;$/;"	m	struct:TexturesBlob
-tl	.\shapes.cpp	/^	Vec3 tl;$/;"	m	struct:Quad	file:
+timer	.\game.h	/^	Timer timer;$/;"	m	struct:GameState
+timer	.\game_layer.h	/^	float timer;$/;"	m	struct:GameLayer
+tl	.\shapes.cpp	/^			Vec3 tl;$/;"	m	struct:Quad::__anon57::__anon58	file:
 tmp	.\include\stb_sprintf.h	/^   char tmp[STB_SPRINTF_MIN];$/;"	m	struct:stbsp__context
-todo	.\include\stb_image.h	/^			int restart_interval, todo;$/;"	m	struct:__anon8
+todo	.\include\stb_image.h	/^			int restart_interval, todo;$/;"	m	struct:__anon11
+top	.\camera.cpp	/^			float top;$/;"	m	struct:Camera::__anon1::__anon3	file:
 topleft	.\renderer.h	/^	Vec2 topleft;$/;"	m	struct:SetViewport
 topology	.\mesh_renderer.cpp	/^	u8 topology;$/;"	m	struct:Mesh	file:
 total_arena	.\game.h	/^	MemoryArena total_arena;$/;"	m	struct:GameState
-tq	.\include\stb_image.h	/^				int tq;$/;"	m	struct:__anon8::__anon9
-tr	.\shapes.cpp	/^	Vec3 tr;$/;"	m	struct:Quad	file:
+tq	.\include\stb_image.h	/^				int tq;$/;"	m	struct:__anon11::__anon12
+tr	.\shapes.cpp	/^			Vec3 tr;$/;"	m	struct:Quad::__anon57::__anon58	file:
 trans_sens	.\camera.cpp	/^	float trans_sens;$/;"	m	struct:FPControlInfo	file:
-transform	.\simulation.cpp	/^	Transform transform;$/;"	m	struct:Entity	file:
+transform	.\simulation.h	/^	Transform transform;$/;"	m	struct:Entity
+transform	.\simulation.h	/^	Transform transform;$/;"	m	struct:SpawnInfo
 transform	.\tetra.cpp	/^	Transform transform[MAX_TETRA];$/;"	m	struct:Tetra	file:
+transforms	.\simulation.h	/^	Transform transforms[MAX_SPAWNS];$/;"	m	struct:SpawnerInfo
 transient_dll_counter	.\win32.h	/^	u32 transient_dll_counter;$/;"	m	struct:Win32DLL
 transient_dll_name	.\win32.h	/^	char* transient_dll_name;$/;"	m	struct:Win32DLL
-transparent	.\include\stb_image.h	/^			int flags, bgindex, ratio, transparent, eflags;$/;"	m	struct:__anon19
+transparent	.\include\stb_image.h	/^			int flags, bgindex, ratio, transparent, eflags;$/;"	m	struct:__anon22
 ttBYTE	.\include\stb_truetype.h	1282;"	d
 ttCHAR	.\include\stb_truetype.h	1283;"	d
 ttFixed	.\include\stb_truetype.h	1284;"	d
@@ -1774,38 +2037,42 @@ ttLONG	.\include\stb_truetype.h	/^static stbtt_int32 ttLONG(stbtt_uint8 *p)    {
 ttSHORT	.\include\stb_truetype.h	/^static stbtt_int16 ttSHORT(stbtt_uint8 *p)   { return p[0]*256 + p[1]; }$/;"	f
 ttULONG	.\include\stb_truetype.h	/^static stbtt_uint32 ttULONG(stbtt_uint8 *p)  { return (p[0]<<24) + (p[1]<<16) + (p[2]<<8) + p[3]; }$/;"	f
 ttUSHORT	.\include\stb_truetype.h	/^static stbtt_uint16 ttUSHORT(stbtt_uint8 *p) { return p[0]*256 + p[1]; }$/;"	f
+ttf	.\font_handling.cpp	/^	void* ttf;$/;"	m	struct:TextUI	file:
 ttf_buffer	.\include\stb_truetype.h	/^char ttf_buffer[1<<25];$/;"	v
 ttf_buffer	.\include\stb_truetype.h	/^unsigned char ttf_buffer[1<<20];$/;"	v
 type	.\asset_formats.h	/^	TEXTURE_SLOT type;$/;"	m	struct:TextureData
 type	.\asset_formats.h	/^	VERTEX_BUFFER type;$/;"	m	struct:VertexBufferData
 type	.\file_formats.h	/^	char type[STRING_LENGTH_TEXTURE_TYPE];$/;"	m	struct:TextureFormat
 type	.\file_formats.h	/^	char type[STRING_LENGTH_VERTEX_BUFFER];$/;"	m	struct:VertexBufferFormat
-type	.\include\stb_image.h	/^			stbi_uc size,type,channel;$/;"	m	struct:__anon17
-type	.\include\stb_image.h	/^	stbi__uint32 type;$/;"	m	struct:__anon13
-type	.\include\stb_truetype.h	/^      unsigned char type,padding;$/;"	m	struct:__anon30
+type	.\include\stb_image.h	/^			stbi_uc size,type,channel;$/;"	m	struct:__anon20
+type	.\include\stb_image.h	/^	stbi__uint32 type;$/;"	m	struct:__anon16
+type	.\include\stb_truetype.h	/^      unsigned char type,padding;$/;"	m	struct:__anon33
+type	.\post_process_renderer.cpp	/^	u8 type;$/;"	m	struct:PostProcessPipeline	file:
 type	.\renderer.h	/^	u8 type;$/;"	m	struct:SetDepthStencilState
 type	.\renderer.h	/^	u8 type;$/;"	m	struct:SetSamplerState
 type	.\renderer.h	/^struct RenderCommandHeader { u8 type; };$/;"	m	struct:RenderCommandHeader
 type	.\renderer.h	/^struct SetBlendState        { u8 type;              } ;$/;"	m	struct:SetBlendState
 type	.\renderer.h	/^struct SetPrimitiveTopology { u8 type;              } ;$/;"	m	struct:SetPrimitiveTopology
 type	.\renderer.h	/^struct SetRasterizerState   { u8 type;              } ;$/;"	m	struct:SetRasterizerState
+type	.\simulation.h	/^	u8 type;$/;"	m	struct:SpawnInfo
 u16	.\base_types.h	/^typedef uint16_t u16;$/;"	t
 u32	.\base_types.h	/^typedef uint32_t u32;$/;"	t
 u64	.\base_types.h	/^typedef uint64_t u64;$/;"	t
 u8	.\base_types.h	/^typedef uint8_t u8;$/;"	t
+ui_renderer	.\game.h	/^	UIRenderer* ui_renderer;$/;"	m	struct:GameState
 used	.\memory_management.h	/^	u64 used;$/;"	m	struct:TemporaryMemory
 used	.\platform_api.h	/^	u64 used;$/;"	m	struct:PlatformMemoryBlock
 user_allocator_context	.\include\stb_truetype.h	/^   void *user_allocator_context;$/;"	m	struct:stbtt_pack_context
 userdata	.\include\stb_truetype.h	/^   void           * userdata;$/;"	m	struct:stbtt_fontinfo
-v	.\include\stb_image.h	/^				int h,v;$/;"	m	struct:__anon8::__anon9
-v_oversample	.\include\stb_truetype.h	/^   unsigned char h_oversample, v_oversample; \/\/ don't set these, they're used internally$/;"	m	struct:__anon28
+v	.\include\stb_image.h	/^				int h,v;$/;"	m	struct:__anon11::__anon12
+v_oversample	.\include\stb_truetype.h	/^   unsigned char h_oversample, v_oversample; \/\/ don't set these, they're used internally$/;"	m	struct:__anon31
 v_oversample	.\include\stb_truetype.h	/^   unsigned int   h_oversample, v_oversample;$/;"	m	struct:stbtt_pack_context
 valid	.\win32.h	/^	bool valid;$/;"	m	struct:Win32DLL
 validate_uint32	.\include\stb_image.h	/^	typedef unsigned char validate_uint32[sizeof(stbi__uint32)==4 ? 1 : -1];$/;"	t
-value	.\include\stb_image.h	/^		stbi__uint16 value[STBI__ZNSYMS];$/;"	m	struct:__anon11
+value	.\include\stb_image.h	/^		stbi__uint16 value[STBI__ZNSYMS];$/;"	m	struct:__anon14
 value	.\renderer.h	/^	float value;$/;"	m	struct:ClearDepth
 value	.\renderer.h	/^	u8 value;$/;"	m	struct:ClearStencil
-values	.\include\stb_image.h	/^			stbi_uc  values[256];$/;"	m	struct:__anon7
+values	.\include\stb_image.h	/^			stbi_uc  values[256];$/;"	m	struct:__anon10
 vb_data	.\asset_formats.h	/^	VertexBufferData* vb_data;$/;"	m	struct:MeshData
 vb_data_count	.\asset_formats.h	/^	u32 vb_data_count;$/;"	m	struct:MeshData
 vertex	.\renderer.h	/^	VertexBuffer* vertex;         $/;"	m	struct:SetVertexBuffer
@@ -1826,104 +2093,106 @@ view	.\renderer.h	/^	ID3D11DepthStencilView* view;$/;"	m	struct:DepthStencil
 view	.\renderer.h	/^	ID3D11RenderTargetView* view;$/;"	m	struct:RenderTarget
 view	.\renderer.h	/^	ID3D11ShaderResourceView* view;$/;"	m	struct:StructuredBuffer
 view	.\renderer.h	/^	ID3D11ShaderResourceView* view;$/;"	m	struct:TextureBuffer
-vs	.\include\stb_image.h	/^		int hs,vs;   \/\/ expansion factor in each axis$/;"	m	struct:__anon10
+vs	.\include\stb_image.h	/^		int hs,vs;   \/\/ expansion factor in each axis$/;"	m	struct:__anon13
 vs	.\mesh_renderer.cpp	/^	VertexShader* vs;$/;"	m	struct:MeshRenderer	file:
+vs	.\ui_renderer.cpp	/^	VertexShader* vs;$/;"	m	struct:UIRenderer	file:
 vsnprintf	.\include\stb_sprintf.h	/^STBSP__PUBLICDEF int STB_SPRINTF_DECORATE( vsnprintf )( char * buf, int count, char const * fmt, va_list va )$/;"	f
 vsprintf	.\include\stb_sprintf.h	/^STBSP__PUBLICDEF int STB_SPRINTF_DECORATE(vsprintf)(char *buf, char const *fmt, va_list va)$/;"	f
 vsprintfcb	.\include\stb_sprintf.h	/^STBSP__PUBLICDEF int STB_SPRINTF_DECORATE(vsprintfcb)(STBSP_SPRINTFCB *callback, void *user, char *buf, char const *fmt, va_list va)$/;"	f
-w	.\include\stb_image.h	/^			int w,h;$/;"	m	struct:__anon19
+w	.\include\stb_image.h	/^			int w,h;$/;"	m	struct:__anon22
 w	.\include\stb_rect_pack.h	/^   stbrp_coord    w, h;$/;"	m	struct:stbrp_rect
 w	.\include\stb_truetype.h	/^   int id,w,h,was_packed;$/;"	m	struct:stbrp_rect
-w	.\include\stb_truetype.h	/^   int w,h,stride;$/;"	m	struct:__anon31
-w	.\math.h	/^			float w;$/;"	m	struct:Vec4::__anon48::__anon49
-w	.\math.h	/^			float x, y, z, w;$/;"	m	struct:Quat::__anon51::__anon52
-w2	.\include\stb_image.h	/^				int x,y,w2,h2;$/;"	m	struct:__anon8::__anon9
-w_lores	.\include\stb_image.h	/^		int w_lores; \/\/ horizontal pixels pre-expansion$/;"	m	struct:__anon10
+w	.\include\stb_truetype.h	/^   int w,h,stride;$/;"	m	struct:__anon34
+w	.\math.h	/^			float w;$/;"	m	struct:Vec4::__anon51::__anon52
+w	.\math.h	/^			float x, y, z, w;$/;"	m	struct:Quat::__anon54::__anon55
+w2	.\include\stb_image.h	/^				int x,y,w2,h2;$/;"	m	struct:__anon11::__anon12
+w_lores	.\include\stb_image.h	/^		int w_lores; \/\/ horizontal pixels pre-expansion$/;"	m	struct:__anon13
 was_packed	.\include\stb_rect_pack.h	/^   int            was_packed;  \/\/ non-zero if valid packing$/;"	m	struct:stbrp_rect
 was_packed	.\include\stb_truetype.h	/^   int id,w,h,was_packed;$/;"	m	struct:stbrp_rect
 width	.\asset_formats.h	/^	u32 width;$/;"	m	struct:TextureData
 width	.\file_formats.h	/^	u32 width;$/;"	m	struct:TextureFormat
 width	.\include\stb_rect_pack.h	/^   int width;$/;"	m	struct:stbrp_context
 width	.\include\stb_truetype.h	/^   int   width;$/;"	m	struct:stbtt_pack_context
-width	.\include\stb_truetype.h	/^   int width,height;$/;"	m	struct:__anon40
+width	.\include\stb_truetype.h	/^   int width,height;$/;"	m	struct:__anon43
 width	.\platform_api.h	/^struct WindowDimensions { u32 width; u32 height; };$/;"	m	struct:WindowDimensions
 win32_api	.\win32.cpp	/^PlatformAPI win32_api;$/;"	v
 win32_game_function_names	.\win32.h	/^char* win32_game_function_names[] = {$/;"	v
-x	.\include\stb_image.h	/^				int x,y,w2,h2;$/;"	m	struct:__anon8::__anon9
-x	.\include\stb_rect_pack.h	/^   int x,y;$/;"	m	struct:__anon22
+window_dim	.\renderer.h	/^	WindowDimensions window_dim;$/;"	m	struct:Renderer
+x	.\include\stb_image.h	/^				int x,y,w2,h2;$/;"	m	struct:__anon11::__anon12
+x	.\include\stb_rect_pack.h	/^   int x,y;$/;"	m	struct:__anon25
 x	.\include\stb_rect_pack.h	/^   stbrp_coord    x, y;$/;"	m	struct:stbrp_rect
 x	.\include\stb_rect_pack.h	/^   stbrp_coord  x,y;$/;"	m	struct:stbrp_node
-x	.\include\stb_truetype.h	/^      stbtt_vertex_type x,y,cx,cy,cx1,cy1;$/;"	m	struct:__anon30
-x	.\include\stb_truetype.h	/^   float x, y;$/;"	m	struct:__anon38
-x	.\include\stb_truetype.h	/^   float x,y;$/;"	m	struct:__anon39
+x	.\include\stb_truetype.h	/^      stbtt_vertex_type x,y,cx,cy,cx1,cy1;$/;"	m	struct:__anon33
+x	.\include\stb_truetype.h	/^   float x, y;$/;"	m	struct:__anon41
+x	.\include\stb_truetype.h	/^   float x,y;$/;"	m	struct:__anon42
 x	.\include\stb_truetype.h	/^   int x,dx;$/;"	m	struct:stbtt__active_edge
-x	.\include\stb_truetype.h	/^   int x,y,bottom_y;$/;"	m	struct:__anon40
+x	.\include\stb_truetype.h	/^   int x,y,bottom_y;$/;"	m	struct:__anon43
 x	.\include\stb_truetype.h	/^   stbrp_coord x,y;$/;"	m	struct:stbrp_rect
-x	.\include\stb_truetype.h	/^   unsigned char x;$/;"	m	struct:__anon41
-x	.\math.h	/^			float x, y, z, w;$/;"	m	struct:Quat::__anon51::__anon52
-x	.\math.h	/^			float x;$/;"	m	struct:Vec2::__anon44::__anon45
-x	.\math.h	/^			float x;$/;"	m	struct:Vec3::__anon46::__anon47
-x	.\math.h	/^			float x;$/;"	m	struct:Vec4::__anon48::__anon49
-x	.\math.h	/^			u32 x;$/;"	m	struct:Vec2u::__anon42::__anon43
+x	.\include\stb_truetype.h	/^   unsigned char x;$/;"	m	struct:__anon44
+x	.\math.h	/^			float x, y, z, w;$/;"	m	struct:Quat::__anon54::__anon55
+x	.\math.h	/^			float x;$/;"	m	struct:Vec2::__anon47::__anon48
+x	.\math.h	/^			float x;$/;"	m	struct:Vec3::__anon49::__anon50
+x	.\math.h	/^			float x;$/;"	m	struct:Vec4::__anon51::__anon52
+x	.\math.h	/^			u32 x;$/;"	m	struct:Vec2u::__anon45::__anon46
 x	.\platform_api.h	/^struct Axis { float x, y; };$/;"	m	struct:Axis
 x0	.\font_handling.cpp	/^	float x0, y0, x1, y1;$/;"	m	struct:Glyph	file:
 x0	.\include\stb_truetype.h	/^   float x0,y0, x1,y1;$/;"	m	struct:stbtt__edge
-x0	.\include\stb_truetype.h	/^   float x0,y0,s0,t0; \/\/ top-left$/;"	m	struct:__anon26
-x0	.\include\stb_truetype.h	/^   unsigned short x0,y0,x1,y1; \/\/ coordinates of bbox in bitmap$/;"	m	struct:__anon25
-x0	.\include\stb_truetype.h	/^   unsigned short x0,y0,x1,y1; \/\/ coordinates of bbox in bitmap$/;"	m	struct:__anon27
+x0	.\include\stb_truetype.h	/^   float x0,y0,s0,t0; \/\/ top-left$/;"	m	struct:__anon29
+x0	.\include\stb_truetype.h	/^   unsigned short x0,y0,x1,y1; \/\/ coordinates of bbox in bitmap$/;"	m	struct:__anon28
+x0	.\include\stb_truetype.h	/^   unsigned short x0,y0,x1,y1; \/\/ coordinates of bbox in bitmap$/;"	m	struct:__anon30
 x1	.\font_handling.cpp	/^	float x0, y0, x1, y1;$/;"	m	struct:Glyph	file:
 x1	.\include\stb_truetype.h	/^   float x0,y0, x1,y1;$/;"	m	struct:stbtt__edge
-x1	.\include\stb_truetype.h	/^   float x1,y1,s1,t1; \/\/ bottom-right$/;"	m	struct:__anon26
-x1	.\include\stb_truetype.h	/^   unsigned short x0,y0,x1,y1; \/\/ coordinates of bbox in bitmap$/;"	m	struct:__anon25
-x1	.\include\stb_truetype.h	/^   unsigned short x0,y0,x1,y1; \/\/ coordinates of bbox in bitmap$/;"	m	struct:__anon27
-xadvance	.\include\stb_truetype.h	/^   float xoff,yoff,xadvance;$/;"	m	struct:__anon25
-xadvance	.\include\stb_truetype.h	/^   float xoff,yoff,xadvance;$/;"	m	struct:__anon27
-xoff	.\include\stb_truetype.h	/^   float xoff,yoff,xadvance;$/;"	m	struct:__anon25
-xoff	.\include\stb_truetype.h	/^   float xoff,yoff,xadvance;$/;"	m	struct:__anon27
-xoff2	.\include\stb_truetype.h	/^   float xoff2,yoff2;$/;"	m	struct:__anon27
-xyz	.\math.h	/^			Vec3 xyz;$/;"	m	struct:Quat::__anon51::__anon53
-xyz	.\math.h	/^			Vec3 xyz;$/;"	m	struct:Vec4::__anon48::__anon50
-y	.\include\stb_image.h	/^				int x,y,w2,h2;$/;"	m	struct:__anon8::__anon9
-y	.\include\stb_rect_pack.h	/^   int x,y;$/;"	m	struct:__anon22
+x1	.\include\stb_truetype.h	/^   float x1,y1,s1,t1; \/\/ bottom-right$/;"	m	struct:__anon29
+x1	.\include\stb_truetype.h	/^   unsigned short x0,y0,x1,y1; \/\/ coordinates of bbox in bitmap$/;"	m	struct:__anon28
+x1	.\include\stb_truetype.h	/^   unsigned short x0,y0,x1,y1; \/\/ coordinates of bbox in bitmap$/;"	m	struct:__anon30
+xadvance	.\include\stb_truetype.h	/^   float xoff,yoff,xadvance;$/;"	m	struct:__anon28
+xadvance	.\include\stb_truetype.h	/^   float xoff,yoff,xadvance;$/;"	m	struct:__anon30
+xoff	.\include\stb_truetype.h	/^   float xoff,yoff,xadvance;$/;"	m	struct:__anon28
+xoff	.\include\stb_truetype.h	/^   float xoff,yoff,xadvance;$/;"	m	struct:__anon30
+xoff2	.\include\stb_truetype.h	/^   float xoff2,yoff2;$/;"	m	struct:__anon30
+xyz	.\math.h	/^			Vec3 xyz;$/;"	m	struct:Quat::__anon54::__anon56
+xyz	.\math.h	/^			Vec3 xyz;$/;"	m	struct:Vec4::__anon51::__anon53
+y	.\include\stb_image.h	/^				int x,y,w2,h2;$/;"	m	struct:__anon11::__anon12
+y	.\include\stb_rect_pack.h	/^   int x,y;$/;"	m	struct:__anon25
 y	.\include\stb_rect_pack.h	/^   stbrp_coord    x, y;$/;"	m	struct:stbrp_rect
 y	.\include\stb_rect_pack.h	/^   stbrp_coord  x,y;$/;"	m	struct:stbrp_node
-y	.\include\stb_truetype.h	/^      stbtt_vertex_type x,y,cx,cy,cx1,cy1;$/;"	m	struct:__anon30
-y	.\include\stb_truetype.h	/^   float x, y;$/;"	m	struct:__anon38
-y	.\include\stb_truetype.h	/^   float x,y;$/;"	m	struct:__anon39
-y	.\include\stb_truetype.h	/^   int x,y,bottom_y;$/;"	m	struct:__anon40
+y	.\include\stb_truetype.h	/^      stbtt_vertex_type x,y,cx,cy,cx1,cy1;$/;"	m	struct:__anon33
+y	.\include\stb_truetype.h	/^   float x, y;$/;"	m	struct:__anon41
+y	.\include\stb_truetype.h	/^   float x,y;$/;"	m	struct:__anon42
+y	.\include\stb_truetype.h	/^   int x,y,bottom_y;$/;"	m	struct:__anon43
 y	.\include\stb_truetype.h	/^   stbrp_coord x,y;$/;"	m	struct:stbrp_rect
-y	.\math.h	/^			float x, y, z, w;$/;"	m	struct:Quat::__anon51::__anon52
-y	.\math.h	/^			float y;$/;"	m	struct:Vec2::__anon44::__anon45
-y	.\math.h	/^			float y;$/;"	m	struct:Vec3::__anon46::__anon47
-y	.\math.h	/^			float y;$/;"	m	struct:Vec4::__anon48::__anon49
-y	.\math.h	/^			u32 y;$/;"	m	struct:Vec2u::__anon42::__anon43
+y	.\math.h	/^			float x, y, z, w;$/;"	m	struct:Quat::__anon54::__anon55
+y	.\math.h	/^			float y;$/;"	m	struct:Vec2::__anon47::__anon48
+y	.\math.h	/^			float y;$/;"	m	struct:Vec3::__anon49::__anon50
+y	.\math.h	/^			float y;$/;"	m	struct:Vec4::__anon51::__anon52
+y	.\math.h	/^			u32 y;$/;"	m	struct:Vec2u::__anon45::__anon46
 y	.\platform_api.h	/^struct Axis { float x, y; };$/;"	m	struct:Axis
 y0	.\font_handling.cpp	/^	float x0, y0, x1, y1;$/;"	m	struct:Glyph	file:
 y0	.\include\stb_truetype.h	/^   float x0,y0, x1,y1;$/;"	m	struct:stbtt__edge
-y0	.\include\stb_truetype.h	/^   float x0,y0,s0,t0; \/\/ top-left$/;"	m	struct:__anon26
-y0	.\include\stb_truetype.h	/^   unsigned short x0,y0,x1,y1; \/\/ coordinates of bbox in bitmap$/;"	m	struct:__anon25
-y0	.\include\stb_truetype.h	/^   unsigned short x0,y0,x1,y1; \/\/ coordinates of bbox in bitmap$/;"	m	struct:__anon27
+y0	.\include\stb_truetype.h	/^   float x0,y0,s0,t0; \/\/ top-left$/;"	m	struct:__anon29
+y0	.\include\stb_truetype.h	/^   unsigned short x0,y0,x1,y1; \/\/ coordinates of bbox in bitmap$/;"	m	struct:__anon28
+y0	.\include\stb_truetype.h	/^   unsigned short x0,y0,x1,y1; \/\/ coordinates of bbox in bitmap$/;"	m	struct:__anon30
 y1	.\font_handling.cpp	/^	float x0, y0, x1, y1;$/;"	m	struct:Glyph	file:
 y1	.\include\stb_truetype.h	/^   float x0,y0, x1,y1;$/;"	m	struct:stbtt__edge
-y1	.\include\stb_truetype.h	/^   float x1,y1,s1,t1; \/\/ bottom-right$/;"	m	struct:__anon26
-y1	.\include\stb_truetype.h	/^   unsigned short x0,y0,x1,y1; \/\/ coordinates of bbox in bitmap$/;"	m	struct:__anon25
-y1	.\include\stb_truetype.h	/^   unsigned short x0,y0,x1,y1; \/\/ coordinates of bbox in bitmap$/;"	m	struct:__anon27
+y1	.\include\stb_truetype.h	/^   float x1,y1,s1,t1; \/\/ bottom-right$/;"	m	struct:__anon29
+y1	.\include\stb_truetype.h	/^   unsigned short x0,y0,x1,y1; \/\/ coordinates of bbox in bitmap$/;"	m	struct:__anon28
+y1	.\include\stb_truetype.h	/^   unsigned short x0,y0,x1,y1; \/\/ coordinates of bbox in bitmap$/;"	m	struct:__anon30
 y_cursor	.\font_handling.cpp	/^	float y_cursor;$/;"	m	struct:TextUI	file:
-yoff	.\include\stb_truetype.h	/^   float xoff,yoff,xadvance;$/;"	m	struct:__anon25
-yoff	.\include\stb_truetype.h	/^   float xoff,yoff,xadvance;$/;"	m	struct:__anon27
-yoff2	.\include\stb_truetype.h	/^   float xoff2,yoff2;$/;"	m	struct:__anon27
-ypos	.\include\stb_image.h	/^		int ypos;    \/\/ which pre-expansion row we're on$/;"	m	struct:__anon10
-ystep	.\include\stb_image.h	/^		int ystep;   \/\/ how far through vertical expansion we are$/;"	m	struct:__anon10
-z	.\math.h	/^			float x, y, z, w;$/;"	m	struct:Quat::__anon51::__anon52
-z	.\math.h	/^			float z;$/;"	m	struct:Quat::__anon51::__anon53
-z	.\math.h	/^			float z;$/;"	m	struct:Vec3::__anon46::__anon47
-z	.\math.h	/^			float z;$/;"	m	struct:Vec4::__anon48::__anon49
-z	.\math.h	/^			float z;$/;"	m	struct:Vec4::__anon48::__anon50
-z_distance	.\include\stb_image.h	/^		stbi__zhuffman z_length, z_distance;$/;"	m	struct:__anon12
-z_expandable	.\include\stb_image.h	/^		int   z_expandable;$/;"	m	struct:__anon12
-z_length	.\include\stb_image.h	/^		stbi__zhuffman z_length, z_distance;$/;"	m	struct:__anon12
-zbuffer	.\include\stb_image.h	/^		stbi_uc *zbuffer, *zbuffer_end;$/;"	m	struct:__anon12
-zbuffer_end	.\include\stb_image.h	/^		stbi_uc *zbuffer, *zbuffer_end;$/;"	m	struct:__anon12
-zout	.\include\stb_image.h	/^		char *zout;$/;"	m	struct:__anon12
-zout_end	.\include\stb_image.h	/^		char *zout_end;$/;"	m	struct:__anon12
-zout_start	.\include\stb_image.h	/^		char *zout_start;$/;"	m	struct:__anon12
+yoff	.\include\stb_truetype.h	/^   float xoff,yoff,xadvance;$/;"	m	struct:__anon28
+yoff	.\include\stb_truetype.h	/^   float xoff,yoff,xadvance;$/;"	m	struct:__anon30
+yoff2	.\include\stb_truetype.h	/^   float xoff2,yoff2;$/;"	m	struct:__anon30
+ypos	.\include\stb_image.h	/^		int ypos;    \/\/ which pre-expansion row we're on$/;"	m	struct:__anon13
+ystep	.\include\stb_image.h	/^		int ystep;   \/\/ how far through vertical expansion we are$/;"	m	struct:__anon13
+z	.\math.h	/^			float x, y, z, w;$/;"	m	struct:Quat::__anon54::__anon55
+z	.\math.h	/^			float z;$/;"	m	struct:Quat::__anon54::__anon56
+z	.\math.h	/^			float z;$/;"	m	struct:Vec3::__anon49::__anon50
+z	.\math.h	/^			float z;$/;"	m	struct:Vec4::__anon51::__anon52
+z	.\math.h	/^			float z;$/;"	m	struct:Vec4::__anon51::__anon53
+z_distance	.\include\stb_image.h	/^		stbi__zhuffman z_length, z_distance;$/;"	m	struct:__anon15
+z_expandable	.\include\stb_image.h	/^		int   z_expandable;$/;"	m	struct:__anon15
+z_length	.\include\stb_image.h	/^		stbi__zhuffman z_length, z_distance;$/;"	m	struct:__anon15
+zbuffer	.\include\stb_image.h	/^		stbi_uc *zbuffer, *zbuffer_end;$/;"	m	struct:__anon15
+zbuffer_end	.\include\stb_image.h	/^		stbi_uc *zbuffer, *zbuffer_end;$/;"	m	struct:__anon15
+zout	.\include\stb_image.h	/^		char *zout;$/;"	m	struct:__anon15
+zout_end	.\include\stb_image.h	/^		char *zout_end;$/;"	m	struct:__anon15
+zout_start	.\include\stb_image.h	/^		char *zout_start;$/;"	m	struct:__anon15

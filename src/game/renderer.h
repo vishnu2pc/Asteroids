@@ -45,6 +45,12 @@ struct RenderTarget {
 	ID3D11RenderTargetView* view;
 };
 
+struct ReadableRenderTarget {
+	ID3D11Texture2D* texture;
+	ID3D11RenderTargetView* render_target;
+	ID3D11ShaderResourceView* shader_resource;
+};
+
 struct DepthStencil {
 	ID3D11Texture2D* texture;
 	ID3D11DepthStencilView* view;
@@ -108,6 +114,10 @@ struct SetSamplerState {
 	u8 slot;
 };
 
+struct FreeRenderResource {
+	void* buffer;
+};
+
 struct SetBlendState        { u8 type;              } ;
 struct SetRasterizerState   { u8 type;              } ;
 struct SetPrimitiveTopology { u8 type;              } ;
@@ -131,6 +141,7 @@ struct PushRenderBufferData {
 	void* buffer;
 	void* data;
 	u32 size;
+	u32 pitch;
 };
 
 struct DrawIndexed {
@@ -191,6 +202,7 @@ enum RENDER_COMMAND {
 	RENDER_COMMAND_DrawInstanced,
 
 	RENDER_COMMAND_PushRenderBufferData,
+	RENDER_COMMAND_FreeRenderResource
 };
 
 struct RenderCommandHeader { u8 type; };
@@ -200,11 +212,17 @@ struct Renderer {
 	MemoryArena* permanent_arena;
 	MemoryArena* frame_arena;
 
+	WindowDimensions window_dim;
+
 	ID3D11Device* device;
 	ID3D11DeviceContext* context; 
 	IDXGISwapChain1* swapchain;
+	u32 msaa_sample_count;
+	u32 msaa_quality_level;
 
-	RenderTarget back_buffer;	// d3d11 api swaps buffers behind your back and internally remaps it
+	RenderTarget backbuffer;	// d3d11 api swaps buffers behind your back and internally remaps it
+	ReadableRenderTarget readable_render_target;
+
 	DepthStencil depth_stencil;	
 	ID3D11SamplerState* samplers[SAMPLER_STATE_TOTAL];
 
@@ -216,4 +234,9 @@ struct Renderer {
 	u32 command_buffer_size;
 	u8* command_buffer_base;
 	u8* command_buffer_cursor;
+
 };
+
+
+
+

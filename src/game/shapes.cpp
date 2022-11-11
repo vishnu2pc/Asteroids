@@ -1,8 +1,16 @@
 struct Quad {
-	Vec3 tl;
-	Vec3 tr;
-	Vec3 bl;
-	Vec3 br;
+	union {
+		struct {
+			Vec3 tl;
+			Vec3 tr;
+			Vec3 bl;
+			Vec3 br;
+		};
+		struct {
+			Vec3 max;
+			Vec3 min;
+		};
+	};
 };
 
 struct Line {
@@ -63,3 +71,18 @@ GenerateTetrahedron(Vec3* out_vertices) {
 	out_vertices[10] = vertices[2];
 	out_vertices[11] = vertices[1];
 }
+
+static bool
+IsPointInQuad(Vec2 min, Vec2 max, Vec2 point) {
+	bool result = 0;
+
+	if(point.x <= max.x &&
+		 point.x >= min.x &&
+		 point.y <= max.y &&
+		 point.y >= min.y) result = true;
+
+	return result;
+}
+
+
+

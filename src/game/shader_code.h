@@ -183,7 +183,6 @@ ps vsf(in uint vert_id : SV_VertexID) {
 	// 2, 0, 1, 2, 1, 3
 	int index = vert_id/6;
 
-	// TODO: we have actual coords instead of bb size, redo this, possibly never
 	float pos0x = glyph[index].pos0.x;
 	float pos0y = glyph[index].pos0.y;
 	float xoff = glyph[index].pos1.x - pos0x;
@@ -311,9 +310,127 @@ float4 psf(ps input) : SV_Target {
 };
 	)FOO";
 
+char FullScreenQuadShader[] = R"FOO(
+
+struct ps {
+	float4 pixel_pos : SV_POSITION;
+	float2 texcoord : TEXCOORD;
+};
+
+ps vsf(in uint vert_id : SV_VertexID) {
+	ps result;
+
+	result.texcoord = float2((vert_id << 1) & 2, vert_id & 2);
+	result.pixel_pos = float4(result.texcoord * float2(2.0f, -2.0f) + float2(-1.0f, 1.0f), 0.0f, 1.0f);
+
+	return result;
+}
+)FOO";
+
+char CopyShader[] = R"FOO(
+
+struct ps {
+	float4 pixel_pos : SV_POSITION;
+	float2 texcoord : TEXCOORD;
+};
+
+Texture2D tex: register(t0);
+SamplerState tex_sampler : register(s0);
 
 
+)FOO";
 
+char PostProcessShader[] = R"FOO(
+
+struct ps {
+	float4 pixel_pos : SV_POSITION;
+	float2 texcoord : TEXCOORD;
+};
+
+#define MAX_SAMPLES 16
+
+cbuffer image : register(b0) {
+	float width;
+	float height;
+};
+
+Texture2D tex: register(t0);
+SamplerState tex_sampler : register(s0);
+
+float4 ps_copy(ps input) : SV_Target {
+	return float4(tex.Sample(tex_sampler, input.texcoord).xyz, 1.0);
+};
+
+float4 ps_edge(ps input) : SV_Target {
+	float2 uv = input.texcoord;
+
+	float4 x_acc = 0;
+	float4 y_acc = 0;
+	float2 texel = float2(1/width, 1/height);
+
+	x_acc += tex.Sample(tex_sampler, uv + float2(-texel.x, -texel.y))  * -1.0;
+	x_acc += tex.Sample(tex_sampler, uv + float2(-texel.x,  			0))  * -2.0;
+	x_acc += tex.Sample(tex_sampler, uv + float2(-texel.x,  texel.y))  * -1.0;
+
+	x_acc += tex.Sample(tex_sampler, uv + float2( texel.x, -texel.y))  *  1.0;
+	x_acc += tex.Sample(tex_sampler, uv + float2( texel.x,  			0))  *  2.0;
+	x_acc += tex.Sample(tex_sampler, uv + float2( texel.x,  texel.y))  *  1.0;
+
+	y_acc += tex.Sample(tex_sampler, uv + float2(-texel.x, -texel.y))  * -1.0;
+	y_acc += tex.Sample(tex_sampler, uv + float2(       0, -texel.y))  * -2.0;
+	y_acc += tex.Sample(tex_sampler, uv + float2( texel.x, -texel.y))  * -1.0;
+
+	y_acc += tex.Sample(tex_sampler, uv + float2(-texel.x,  texel.y))  *  1.0;
+	y_acc += tex.Sample(tex_sampler, uv + float2(       0,  texel.y))  *  2.0;
+	y_acc += tex.Sample(tex_sampler, uv + float2( texel.x,  texel.y))  *  1.0;
+
+	return sqrt(x_acc*x_acc + y_acc*y_acc);
+};
+
+)FOO";
+
+char UIShader[] = R"FOO(
+
+struct UIBuffer {
+	float2 p0; // normalized to screen coordinates
+	float2 p1;
+	float4 color[4];
+};
+
+StructuredBuffer<UIBuffer> ui_buffer_list : register(t0);
+
+struct ps {
+	float4 pixel_pos: SV_POSITION;
+	float4 color: COLOR;
+};
+
+ps vsf(in uint vert_id: SV_VertexID, in uint instance_id: SV_InstanceID) {
+	ps result;
+
+	static float2 vertices[] = {
+		{-1, -1},
+		{-1,  1},
+		{ 1, -1},
+		{ 1,  1}
+	};
+
+	UIBuffer ui = ui_buffer_list[instance_id];
+
+	float2 half_size = (ui.p1 - ui.p0)/2;
+	float2 center = (ui.p1 + ui.p0)/2;
+	float2 pos = vertices[vert_id] * half_size + center;
+
+	result.pixel_pos = float4(2*pos.x - 1, 1 - 2*pos.y, 0, 1);
+	result.color = ui.color[vert_id];
+
+	return result;
+};
+
+float4 psf(ps input) : SV_Target {
+	return input.color;
+}
+
+)FOO";
 
 
 

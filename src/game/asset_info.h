@@ -5,3 +5,11 @@ struct TextureAssetInfo {
 
 	TextureAssetInfo* next;
 };
+
+struct MeshAssetInfo {
+	MeshData* data;
+	Mesh* mesh;
+	char* name;
+
+	MeshAssetInfo* next;
+};

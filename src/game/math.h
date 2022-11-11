@@ -10,6 +10,16 @@ static float InRangeMinInc(float val, float min, float max) { return (val >= min
 static float InRangeMaxInc(float val, float min, float max) { return (val > min) && (val <= max); }
 static float InRangeMinMaxInc(float val, float min, float max) { return (val >= min) && (val <= max); }
 
+static float
+Clamp(float Min, float Value, float Max) {
+	float Result = Value;
+
+	if(Result < Min) Result = Min;
+	else if(Result > Max) Result = Max;
+
+	return(Result);
+}
+
 //------------------------------------------------------------------------
 struct Vec2u {
 	union {
@@ -106,6 +116,7 @@ static Quat QuatI() { return Quat { 0.0f, 0.0f, 0.0f, 1.0f }; }
 
 #define BLACK V3(0.0f, 0.0f, 0.0f)
 #define WHITE V3(1.0f, 1.0f, 1.0f)
+#define JET V3(0.2f, 0.2f, 0.2f)
 #define GREY V3(0.5f, 0.5f, 0.5f)
 #define SILVER V3(0.75f, 0.75f, 0.75f)
 
@@ -527,15 +538,28 @@ static Quat QuatFromDirectionChange(Vec3 from, Vec3 to) {
 	return result;
 }
 
-// Faster version from ryg 
-// https://fgiesen.wordpress.com/2019/02/09/rotating-a-single-vector-using-a-quaternion/
-
 static Vec3 RotateVecByQuat(Vec3 vec, Quat quat) {
 	Vec3 result = {};
-	Vec3 a = V3Cross(V3MulF(quat.xyz, 2), vec);
-	Vec3 b = V3Cross(quat.xyz, a);
-	Vec3 c = V3MulF(a, quat.w);
-	result = V3Add(V3Add(vec, c), b);
+
+	float num12 = quat.x + quat.x;
+	float num2 = quat.y + quat.y;
+	float num = quat.z + quat.z;
+	float num11 = quat.w * num12;
+	float num10 = quat.w * num2;
+	float num9 = quat.w * num;
+	float num8 = quat.x * num12;
+	float num7 = quat.x * num2;
+	float num6 = quat.x * num;
+	float num5 = quat.y * num2;
+	float num4 = quat.y * num;
+	float num3 = quat.z * num;
+	float num15 = ((vec.x * ((1.0f - num5) - num3)) + (vec.y * (num7 - num9))) + (vec.z * (num6 + num10));
+	float num14 = ((vec.x * (num7 + num9)) + (vec.y * ((1.0f - num8) - num3))) + (vec.z * (num4 - num11));
+	float num13 = ((vec.x * (num6 - num10)) + (vec.y * (num4 + num11))) + (vec.z * ((1.0f - num8) - num5));
+
+	result.x = num15;
+	result.y = num14;
+	result.z = num13;
 	return result;
 }
 

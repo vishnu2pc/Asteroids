@@ -1,4 +1,4 @@
-cscope 15 W:\asteroids_game\src\tools"               0000573795
+cscope 15 W:\asteroids_game\src\tools"               0000573885
 	@asset_packer/buffers.cpp
 
 1 
@@ -2313,7 +2313,15 @@ mesh_fÜm©
 mesh
 ->name);
 
-331 
+330 
+mesh
+->
+Çme
+[
+STRING_LENGTH_MESH
+ - 2] = 0;
+
+332 
 	`As£¹
 (
 d©a
@@ -2325,7 +2333,7 @@ j
 ´im™ives_couÁ
  == 1);
 
-332 
+333 
 cgÉf_´im™ive
 * 
 ´im
@@ -2335,7 +2343,7 @@ mesh
 ´im™ives
 ;
 
-333 
+334 
 	`As£¹
 (
 ´im
@@ -2345,7 +2353,7 @@ ty³
 cgÉf_´im™ive_ty³_ŒŸngËs
 );
 
-335 
+336 
 	`As£¹
 (
 ´im
@@ -2353,7 +2361,7 @@ cgÉf_´im™ive_ty³_ŒŸngËs
 šdiûs
 );
 
-336 
+337 
 mesh_fÜm©
 .
 šdiûs_couÁ
@@ -2365,7 +2373,7 @@ mesh_fÜm©
 couÁ
 ;
 
-337 
+338 
 mesh_fÜm©
 .
 off£t_to_šdiûs
@@ -2375,7 +2383,7 @@ off£t_to_šdiûs
 ab_šdex_bufãr_u32
 );
 
-338 
+339 
 mesh_fÜm©
 .
 off£t_to_v”‹x_bufãrs
@@ -2385,7 +2393,7 @@ off£t_to_v”‹x_bufãrs
 ab_v”‹x_bufãr
 );
 
-340 
+341 
 	`Re£rveMemÜySŒuùBufãr
 (
 ´im
@@ -2397,7 +2405,7 @@ couÁ
 ab_šdex_bufãr_u32
 );
 
-341 
+342 
 u32
  
 k
@@ -2409,7 +2417,7 @@ k
 couÁ
 ; k++) {
 
-342 
+343 
 u32
  
 šdex
@@ -2423,7 +2431,7 @@ u32
 k
 );
 
-343 
+344 
 	`PushSŒuùBufãr
 (&
 šdex
@@ -2431,7 +2439,13 @@ k
 ab_šdex_bufãr_u32
 );
 
-346 
+346 
+mesh_fÜm©
+.
+v”‹x_bufãr_couÁ
+ = 0;
+
+348 
 u8
  
 k
@@ -2441,7 +2455,7 @@ k
 ©Œibu‹s_couÁ
 ; k++) {
 
-347 
+349 
 cgÉf_©Œibu‹
 * 
 ©t
@@ -2453,7 +2467,7 @@ cgÉf_©Œibu‹
 k
 ;
 
-348 
+350 
 cgÉf_acûssÜ
 * 
 acc
@@ -2463,7 +2477,7 @@ acc
 d©a
 ;
 
-349 
+351 
 mesh_fÜm©
 .
 v”tiûs_couÁ
@@ -2473,7 +2487,7 @@ acc
 couÁ
 ;
 
-351 
+353 
 cgÉf_size
  
 æßt_couÁ
@@ -2485,17 +2499,17 @@ acc
 NULL
 , 0);
 
-352 
+354 
 ©t
 ->
 ty³
 ) {
 
-353 
+355 
 cgÉf_©Œibu‹_ty³_pos™iÚ
 : {
 
-354 
+356 
 	`As£¹
 (
 acc
@@ -2505,7 +2519,7 @@ compÚ’t_ty³
 cgÉf_compÚ’t_ty³_r_32f
 );
 
-355 
+357 
 	`As£¹
 (
 acc
@@ -2515,19 +2529,19 @@ ty³
 cgÉf_ty³_vec3
 );
 
-357 
+359 
 mesh_fÜm©
 .
 v”‹x_bufãr_couÁ
 ++;
 
-358 
+360 
 V”‹xBufãrFÜm©
  
 vbf
  = {};
 
-359 
+361 
 	`¡rýy
 (
 vbf
@@ -2539,7 +2553,7 @@ v”‹x_bufãr_Çmes
 VERTEX_BUFFER_POSITION
 ]);
 
-360 
+362 
 vbf
 .
 off£t_to_d©a
@@ -2549,7 +2563,7 @@ off£t_to_d©a
 ab_v”‹x_bufãr_æßt
 );
 
-362 
+364 
 	`Re£rveMemÜySŒuùBufãr
 (
 æßt_couÁ
@@ -2557,7 +2571,7 @@ ab_v”‹x_bufãr_æßt
 ab_v”‹x_bufãr_æßt
 );
 
-363 
+365 
 	`cgÉf_acûssÜ_uÅack_æßts
 (
 acc
@@ -2569,7 +2583,7 @@ ab_v”‹x_bufãr_æßt
 æßt_couÁ
 );
 
-364 
+366 
 ab_v”‹x_bufãr_æßt
 ->
 fžËd_couÁ
@@ -2577,7 +2591,7 @@ fžËd_couÁ
 æßt_couÁ
 ;
 
-366 
+368 
 	`PushSŒuùBufãr
 (&
 vbf
@@ -2585,11 +2599,11 @@ vbf
 ab_v”‹x_bufãr
 );
 
-368 
+370 
 cgÉf_©Œibu‹_ty³_nÜm®
 : {
 
-369 
+371 
 	`As£¹
 (
 acc
@@ -2599,7 +2613,7 @@ compÚ’t_ty³
 cgÉf_compÚ’t_ty³_r_32f
 );
 
-370 
+372 
 	`As£¹
 (
 acc
@@ -2609,19 +2623,19 @@ ty³
 cgÉf_ty³_vec3
 );
 
-372 
+374 
 mesh_fÜm©
 .
 v”‹x_bufãr_couÁ
 ++;
 
-373 
+375 
 V”‹xBufãrFÜm©
  
 vbf
  = {};
 
-374 
+376 
 	`¡rýy
 (
 vbf
@@ -2633,7 +2647,7 @@ v”‹x_bufãr_Çmes
 VERTEX_BUFFER_NORMAL
 ]);
 
-375 
+377 
 vbf
 .
 off£t_to_d©a
@@ -2643,7 +2657,7 @@ off£t_to_d©a
 ab_v”‹x_bufãr_æßt
 );
 
-377 
+379 
 	`Re£rveMemÜySŒuùBufãr
 (
 æßt_couÁ
@@ -2651,7 +2665,7 @@ ab_v”‹x_bufãr_æßt
 ab_v”‹x_bufãr_æßt
 );
 
-378 
+380 
 	`cgÉf_acûssÜ_uÅack_æßts
 (
 acc
@@ -2663,7 +2677,7 @@ ab_v”‹x_bufãr_æßt
 æßt_couÁ
 );
 
-379 
+381 
 ab_v”‹x_bufãr_æßt
 ->
 fžËd_couÁ
@@ -2671,7 +2685,7 @@ fžËd_couÁ
 æßt_couÁ
 ;
 
-381 
+383 
 	`PushSŒuùBufãr
 (&
 vbf
@@ -2679,11 +2693,11 @@ vbf
 ab_v”‹x_bufãr
 );
 
-383 
+385 
 cgÉf_©Œibu‹_ty³_‹xcoÜd
 : {
 
-384 
+386 
 	`As£¹
 (
 acc
@@ -2693,7 +2707,7 @@ compÚ’t_ty³
 cgÉf_compÚ’t_ty³_r_32f
 );
 
-385 
+387 
 	`As£¹
 (
 acc
@@ -2703,19 +2717,19 @@ ty³
 cgÉf_ty³_vec2
 );
 
-387 
+389 
 mesh_fÜm©
 .
 v”‹x_bufãr_couÁ
 ++;
 
-388 
+390 
 V”‹xBufãrFÜm©
  
 vbf
  = {};
 
-389 
+391 
 	`¡rýy
 (
 vbf
@@ -2727,7 +2741,7 @@ v”‹x_bufãr_Çmes
 VERTEX_BUFFER_TEXCOORD
 ]);
 
-390 
+392 
 vbf
 .
 off£t_to_d©a
@@ -2737,7 +2751,7 @@ off£t_to_d©a
 ab_v”‹x_bufãr_æßt
 );
 
-392 
+394 
 	`Re£rveMemÜySŒuùBufãr
 (
 æßt_couÁ
@@ -2745,7 +2759,7 @@ ab_v”‹x_bufãr_æßt
 ab_v”‹x_bufãr_æßt
 );
 
-393 
+395 
 	`cgÉf_acûssÜ_uÅack_æßts
 (
 acc
@@ -2757,7 +2771,7 @@ ab_v”‹x_bufãr_æßt
 æßt_couÁ
 );
 
-394 
+396 
 ab_v”‹x_bufãr_æßt
 ->
 fžËd_couÁ
@@ -2765,7 +2779,7 @@ fžËd_couÁ
 æßt_couÁ
 ;
 
-396 
+398 
 	`PushSŒuùBufãr
 (&
 vbf
@@ -2773,7 +2787,7 @@ vbf
 ab_v”‹x_bufãr
 );
 
-400 
+402 
 	`PushSŒuùBufãr
 (&
 mesh_fÜm©
@@ -2781,7 +2795,7 @@ mesh_fÜm©
 ab_mesh
 );
 
-403 
+405 
 	`PushSŒuùBufãr
 (&
 meshes_blob
@@ -2789,7 +2803,7 @@ meshes_blob
 ab_meshes_blob
 );
 
-404 
+406 
 blob_off£ts
 [
 ASSET_BLOB_MESHES
@@ -2799,43 +2813,43 @@ ASSET_BLOB_MESHES
 ab_meshes_blob
 ) +
 
-405 
+407 
 	`G‘Off£tSŒuùBufãr
 (
 ab_mesh
 ) +
 
-406 
+408 
 	`G‘Off£tSŒuùBufãr
 (
 ab_v”‹x_bufãr
 ) +
 
-407 
+409 
 	`G‘Off£tSŒuùBufãr
 (
 ab_v”‹x_bufãr_æßt
 ) +
 
-408 
+410 
 	`G‘Off£tSŒuùBufãr
 (
 ab_šdex_bufãr_u32
 );
 
-411 
+413 
 G’”icBufãr
  
 gb_fže
  = {};
 
-414 
+416 
 u32
  
 off£t
  = 0;
 
-415 
+417 
 u8
  
 i
@@ -2853,7 +2867,7 @@ tÙ®_size
 fžËd_couÁ
 ;
 
-416 
+418 
 gb_fže
 .
 d©a
@@ -2865,7 +2879,7 @@ tÙ®_size
 u8
 ));
 
-418 
+420 
 off£t
  = 
 	`G‘Off£tSŒuùBufãr
@@ -2875,7 +2889,7 @@ off£t
 FORMAT_GAME_ASSET_FILE
 ]);
 
-419 
+421 
 u32
  
 i
@@ -2887,7 +2901,7 @@ FORMAT_GAME_ASSET_FILE
 fžËd_couÁ
 ; i++) {
 
-420 
+422 
 GameAs£tFže
 * 
 gaf
@@ -2901,7 +2915,7 @@ FORMAT_GAME_ASSET_FILE
 i
 );
 
-421 
+423 
 gaf
 ->
 off£t_to_blob_dœeùÜ›s
@@ -2909,7 +2923,7 @@ off£t_to_blob_dœeùÜ›s
 off£t
 ;
 
-423 
+425 
 	`Wr™eSŒuùBufãrToG’”icBufãr
 (&
 gb_fže
@@ -2919,7 +2933,7 @@ gb_fže
 FORMAT_GAME_ASSET_FILE
 ]);
 
-425 
+427 
 off£t
  +ð
 	`G‘Off£tSŒuùBufãr
@@ -2929,13 +2943,13 @@ off£t
 FORMAT_DIRECTORY
 ]);
 
-426 
+428 
 u32
  
 blob_off£t
  = 0;
 
-427 
+429 
 u32
  
 i
@@ -2947,7 +2961,7 @@ FORMAT_DIRECTORY
 fžËd_couÁ
 ; i++) {
 
-428 
+430 
 DœeùÜy
 * 
 dœ
@@ -2961,7 +2975,7 @@ FORMAT_DIRECTORY
 i
 );
 
-429 
+431 
 dœ
 ->
 off£t_to_blob
@@ -2971,7 +2985,7 @@ off£t
 blob_off£t
 ;
 
-430 
+432 
 blob_off£t
  +ð
 blob_off£ts
@@ -2979,7 +2993,7 @@ blob_off£ts
 i
 ];
 
-432 
+434 
 	`Wr™eSŒuùBufãrToG’”icBufãr
 (&
 gb_fže
@@ -2989,7 +3003,7 @@ gb_fže
 FORMAT_DIRECTORY
 ]);
 
-434 
+436 
 off£t
  +ð
 	`G‘Off£tSŒuùBufãr
@@ -2999,7 +3013,7 @@ off£t
 FORMAT_MESHES_BLOB
 ]);
 
-435 
+437 
 u32
  
 i
@@ -3011,7 +3025,7 @@ FORMAT_MESHES_BLOB
 fžËd_couÁ
 ; i++) {
 
-436 
+438 
 MeshesBlob
 * 
 mb
@@ -3025,7 +3039,7 @@ FORMAT_MESHES_BLOB
 i
 );
 
-437 
+439 
 mb
 ->
 off£t_to_mesh_fÜm©s
@@ -3033,7 +3047,7 @@ off£t_to_mesh_fÜm©s
 off£t
 ;
 
-439 
+441 
 	`Wr™eSŒuùBufãrToG’”icBufãr
 (&
 gb_fže
@@ -3043,7 +3057,7 @@ gb_fže
 FORMAT_MESHES_BLOB
 ]);
 
-441 
+443 
 off£t
  +ð
 	`G‘Off£tSŒuùBufãr
@@ -3053,7 +3067,7 @@ off£t
 FORMAT_MESH
 ]);
 
-442 
+444 
 u32
  
 i
@@ -3065,7 +3079,7 @@ FORMAT_MESH
 fžËd_couÁ
 ; i++) {
 
-443 
+445 
 MeshFÜm©
 * 
 mf
@@ -3079,7 +3093,7 @@ FORMAT_MESH
 i
 );
 
-444 
+446 
 mf
 ->
 off£t_to_v”‹x_bufãrs
@@ -3087,7 +3101,7 @@ off£t_to_v”‹x_bufãrs
 off£t
 ;
 
-445 
+447 
 u32
  
 off£t_vb
@@ -3099,7 +3113,7 @@ off£t_vb
 FORMAT_VERTEX_BUFFER
 ]);
 
-446 
+448 
 u32
  
 off£t_vb_æßt
@@ -3111,7 +3125,7 @@ off£t_vb_æßt
 FORMAT_VERTEX_BUFFER_FLOAT
 ]);
 
-447 
+449 
 mf
 ->
 off£t_to_šdiûs
@@ -3123,7 +3137,7 @@ off£t_vb
 off£t_vb_æßt
 ;
 
-449 
+451 
 	`Wr™eSŒuùBufãrToG’”icBufãr
 (&
 gb_fže
@@ -3133,7 +3147,7 @@ gb_fže
 FORMAT_MESH
 ]);
 
-451 
+453 
 off£t
  +ð
 	`G‘Off£tSŒuùBufãr
@@ -3143,7 +3157,7 @@ off£t
 FORMAT_VERTEX_BUFFER
 ]);
 
-452 
+454 
 u32
  
 i
@@ -3155,7 +3169,7 @@ FORMAT_VERTEX_BUFFER
 fžËd_couÁ
 ; i++) {
 
-453 
+455 
 V”‹xBufãrFÜm©
 * 
 vbf
@@ -3169,7 +3183,7 @@ FORMAT_VERTEX_BUFFER
 i
 );
 
-454 
+456 
 vbf
 ->
 off£t_to_d©a
@@ -3177,7 +3191,7 @@ off£t_to_d©a
 off£t
 ;
 
-456 
+458 
 	`Wr™eSŒuùBufãrToG’”icBufãr
 (&
 gb_fže
@@ -3187,27 +3201,27 @@ gb_fže
 FORMAT_VERTEX_BUFFER
 ]);
 
-458 
+460 
 off£t
  +ð
 	`G‘Off£tSŒuùBufãr
 (&
-¡ruù_bufãr
-[
-FORMAT_VERTEX_BUFFER_FLOAT
-]);
-
-459 
-	`Wr™eSŒuùBufãrToG’”icBufãr
-(&
-gb_fže
-, &
 ¡ruù_bufãr
 [
 FORMAT_VERTEX_BUFFER_FLOAT
 ]);
 
 461 
+	`Wr™eSŒuùBufãrToG’”icBufãr
+(&
+gb_fže
+, &
+¡ruù_bufãr
+[
+FORMAT_VERTEX_BUFFER_FLOAT
+]);
+
+463 
 off£t
  +ð
 	`G‘Off£tSŒuùBufãr
@@ -3217,7 +3231,7 @@ off£t
 FORMAT_INDEX_BUFFER_U32
 ]);
 
-462 
+464 
 	`Wr™eSŒuùBufãrToG’”icBufãr
 (&
 gb_fže
@@ -3227,7 +3241,7 @@ gb_fže
 FORMAT_INDEX_BUFFER_U32
 ]);
 
-464 
+466 
 off£t
  +ð
 	`G‘Off£tSŒuùBufãr
@@ -3237,7 +3251,7 @@ off£t
 FORMAT_TEXTURES_BLOB
 ]);
 
-465 
+467 
 u32
  
 i
@@ -3249,7 +3263,7 @@ FORMAT_TEXTURES_BLOB
 fžËd_couÁ
 ; i++) {
 
-466 
+468 
 Textu»sBlob
 * 
 mb
@@ -3263,7 +3277,7 @@ FORMAT_TEXTURES_BLOB
 i
 );
 
-467 
+469 
 mb
 ->
 off£t_to_‹xtu»_fÜm©s
@@ -3271,7 +3285,7 @@ off£t_to_‹xtu»_fÜm©s
 off£t
 ;
 
-469 
+471 
 	`Wr™eSŒuùBufãrToG’”icBufãr
 (&
 gb_fže
@@ -3281,7 +3295,7 @@ gb_fže
 FORMAT_TEXTURES_BLOB
 ]);
 
-471 
+473 
 off£t
  +ð
 	`G‘Off£tSŒuùBufãr
@@ -3291,7 +3305,7 @@ off£t
 FORMAT_TEXTURE
 ]);
 
-472 
+474 
 u32
  
 i
@@ -3303,7 +3317,7 @@ FORMAT_TEXTURE
 fžËd_couÁ
 ; i++) {
 
-473 
+475 
 Textu»FÜm©
 * 
 tf
@@ -3317,7 +3331,7 @@ FORMAT_TEXTURE
 i
 );
 
-474 
+476 
 tf
 ->
 off£t_to_d©a
@@ -3325,7 +3339,7 @@ off£t_to_d©a
 off£t
 ;
 
-476 
+478 
 	`Wr™eSŒuùBufãrToG’”icBufãr
 (&
 gb_fže
@@ -3335,7 +3349,7 @@ gb_fže
 FORMAT_TEXTURE
 ]);
 
-478 
+480 
 off£t
  +ð
 	`G‘Off£tSŒuùBufãr
@@ -3345,7 +3359,7 @@ off£t
 FORMAT_PIXELS
 ]);
 
-479 
+481 
 	`Wr™eSŒuùBufãrToG’”icBufãr
 (&
 gb_fže
@@ -3355,7 +3369,7 @@ gb_fže
 FORMAT_PIXELS
 ]);
 
-481 
+483 
 off£t
  +ð
 	`G‘Off£tSŒuùBufãr
@@ -3365,7 +3379,7 @@ off£t
 FORMAT_FONTS_BLOB
 ]);
 
-482 
+484 
 u32
  
 i
@@ -3377,7 +3391,7 @@ FORMAT_FONTS_BLOB
 fžËd_couÁ
 ; i++) {
 
-483 
+485 
 FÚtsBlob
 * 
 mb
@@ -3391,7 +3405,7 @@ FORMAT_FONTS_BLOB
 i
 );
 
-484 
+486 
 mb
 ->
 off£t_to_fÚt_fÜm©s
@@ -3399,7 +3413,7 @@ off£t_to_fÚt_fÜm©s
 off£t
 ;
 
-486 
+488 
 	`Wr™eSŒuùBufãrToG’”icBufãr
 (&
 gb_fže
@@ -3409,7 +3423,7 @@ gb_fže
 FORMAT_FONTS_BLOB
 ]);
 
-488 
+490 
 off£t
  +ð
 	`G‘Off£tSŒuùBufãr
@@ -3419,7 +3433,7 @@ off£t
 FORMAT_FONT
 ]);
 
-489 
+491 
 u32
  
 i
@@ -3431,7 +3445,7 @@ FORMAT_FONT
 fžËd_couÁ
 ; i++) {
 
-490 
+492 
 FÚtFÜm©
 * 
 tf
@@ -3445,7 +3459,7 @@ FORMAT_FONT
 i
 );
 
-491 
+493 
 tf
 ->
 off£t_to_d©a
@@ -3453,7 +3467,7 @@ off£t_to_d©a
 off£t
 ;
 
-493 
+495 
 	`Wr™eSŒuùBufãrToG’”icBufãr
 (&
 gb_fže
@@ -3463,7 +3477,7 @@ gb_fže
 FORMAT_FONT
 ]);
 
-495 
+497 
 off£t
  +ð
 	`G‘Off£tSŒuùBufãr
@@ -3473,7 +3487,7 @@ off£t
 FORMAT_TTF
 ]);
 
-496 
+498 
 	`Wr™eSŒuùBufãrToG’”icBufãr
 (&
 gb_fže
@@ -3483,7 +3497,7 @@ gb_fže
 FORMAT_TTF
 ]);
 
-502 
+504 
 HANDLE
  
 h
@@ -3497,7 +3511,7 @@ CREATE_ALWAYS
 FILE_ATTRIBUTE_NORMAL
 , 0);
 
-503 
+505 
 	`As£¹
 (
 h
@@ -3505,13 +3519,13 @@ h
 INVALID_HANDLE_VALUE
 );
 
-505 
+507 
 DWORD
  
 by‹s_wr™‹n
  = 0;
 
-506 
+508 
 	`As£¹
 (
 	`Wr™eFže
@@ -3527,7 +3541,7 @@ fžËd_size
 by‹s_wr™‹n
 , 0));
 
-507 
+509 
 	`As£¹
 (
 by‹s_wr™‹n
@@ -3537,7 +3551,7 @@ gb_fže
 fžËd_size
 );
 
-511 
+513 
 	}
 }
 

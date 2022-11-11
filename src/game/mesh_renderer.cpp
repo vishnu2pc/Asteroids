@@ -7,8 +7,10 @@ struct LightInfo {
 
 struct Mesh {
 	VertexBuffer* vertex_buffers[2];
+	IndexBuffer* index_buffer;
 	u8 topology;
 	u32 vertices_count;
+	u32 indices_count;
 };
 
 struct MeshInfo {
@@ -25,6 +27,7 @@ struct MeshRenderer {
 	MeshPipeline pipelines[MAX_MESH_PIPELINES];
 	u32 count;
 
+	LightInfo light;
 	ConstantsBuffer* camera_constants;
 	ConstantsBuffer* mesh_constants;
 	ConstantsBuffer* light_constants;
@@ -59,7 +62,7 @@ InitMeshRenderer(Renderer* renderer, MemoryArena* arena) {
 }
 
 static void
-MeshRendererFrame(MeshRenderer* mesh_renderer, Camera* camera, LightInfo* light, Renderer* renderer) {
+MeshRendererFrame(MeshRenderer* mesh_renderer, Camera* camera, Renderer* renderer) {
 
 #ifdef INTERNAL
 	if(executable_reloaded) InitMeshShader(mesh_renderer, renderer);
@@ -69,6 +72,8 @@ MeshRendererFrame(MeshRenderer* mesh_renderer, Camera* camera, LightInfo* light,
 
 	Mat4* vp = PushStruct(renderer->frame_arena, Mat4);
 	*vp = MakeViewPerspective(camera);
+
+	SetRenderTarget* set_render_target = PushRenderCommand(renderer, SetRenderTarget);
 
 	SetBlendState* set_blend_state = PushRenderCommand(renderer, SetBlendState);
 	set_blend_state->type = BLEND_STATE_Regular;
@@ -102,7 +107,7 @@ MeshRendererFrame(MeshRenderer* mesh_renderer, Camera* camera, LightInfo* light,
 	PushRenderBufferData* push_light_constants = PushRenderCommand(renderer, PushRenderBufferData);
 	push_light_constants->buffer = mesh_renderer->light_constants->buffer;
 	push_light_constants->size = sizeof(LightInfo);
-	push_light_constants->data = light;
+	push_light_constants->data = &mesh_renderer->light;
 
 	for(u32 i=0; i<mesh_renderer->count; i++) {
 		MeshPipeline* mesh_pipeline = mesh_renderer->pipelines + i;
@@ -131,8 +136,17 @@ MeshRendererFrame(MeshRenderer* mesh_renderer, Camera* camera, LightInfo* light,
 		push_mesh_info->size = sizeof(MeshInfo);
 		push_mesh_info->data = mesh_pipeline->info;
 
-		DrawVertices* draw_vertices = PushRenderCommand(renderer, DrawVertices);
-		draw_vertices->vertices_count = mesh_pipeline->mesh.vertices_count;
+		if(mesh_pipeline->mesh.index_buffer) {
+			SetIndexBuffer* set_index_buffer = PushRenderCommand(renderer, SetIndexBuffer);
+			set_index_buffer->index = mesh_pipeline->mesh.index_buffer;
+
+			DrawIndexed* draw_indices = PushRenderCommand(renderer, DrawIndexed);
+			draw_indices->indices_count = mesh_pipeline->mesh.indices_count;
+		}
+		else {
+			DrawVertices* draw_vertices = PushRenderCommand(renderer, DrawVertices);
+			draw_vertices->vertices_count = mesh_pipeline->mesh.vertices_count;
+		}
 	}
 
 	mesh_renderer->count = 0;

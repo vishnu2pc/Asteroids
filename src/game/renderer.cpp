@@ -59,7 +59,7 @@ ExecuteRenderCommands(Renderer* renderer) {
 				if(command->render_target)
 					renderer->context->ClearRenderTargetView(command->render_target->view, command->color);
 				else
-					renderer->context->ClearRenderTargetView(renderer->back_buffer.view, command->color);
+					renderer->context->ClearRenderTargetView(renderer->readable_render_target.render_target, command->color);
 
 			} break;
 
@@ -86,7 +86,7 @@ ExecuteRenderCommands(Renderer* renderer) {
 				if(command->render_target) 
 					renderer->context->OMSetRenderTargets(1, &command->render_target->view, renderer->depth_stencil.view);
 				else
-					renderer->context->OMSetRenderTargets(1, &renderer->back_buffer.view, renderer->depth_stencil.view);
+					renderer->context->OMSetRenderTargets(1, &renderer->readable_render_target.render_target, renderer->depth_stencil.view);
 			} break;
 
 			case RENDER_COMMAND_SetDepthStencilState: {
@@ -194,7 +194,12 @@ ExecuteRenderCommands(Renderer* renderer) {
 				cursor += sizeof(SetTextureBuffer);
 				SetTextureBuffer* command = (SetTextureBuffer*)data;
 
-				renderer->context->PSSetShaderResources(command->slot, 1, &command->texture->view);
+				if(command->texture)
+					renderer->context->PSSetShaderResources(command->slot, 1, &command->texture->view);
+				else {
+					ID3D11ShaderResourceView* srv[1] = { 0 };
+					renderer->context->PSSetShaderResources(command->slot, 1, srv);
+				}
 			} break;
 
 			case RENDER_COMMAND_SetConstantsBuffer: {
@@ -212,6 +217,14 @@ ExecuteRenderCommands(Renderer* renderer) {
 				PushRenderBufferData* command = (PushRenderBufferData*)data;
 
 				PushRenderData((ID3D11Buffer*)command->buffer, command->data, command->size, renderer->context);
+			} break;
+
+			case RENDER_COMMAND_FreeRenderResource: {
+				cursor += sizeof(FreeRenderResource);
+				FreeRenderResource* command = (FreeRenderResource*)data;
+
+				ID3D11Resource* resource = (ID3D11Resource*)command->buffer;
+				resource->Release();
 			} break;
 
 			case RENDER_COMMAND_DrawVertices: {
@@ -238,18 +251,119 @@ ExecuteRenderCommands(Renderer* renderer) {
 	}
 }
 
+static ReadableRenderTarget
+CreateReadableRenderTarget(Renderer* renderer) {
+	HRESULT hr = {};
+	ReadableRenderTarget result = {};
+	ID3D11Texture2D* texture = NULL;
+	ID3D11RenderTargetView*	render_target = NULL;
+	ID3D11ShaderResourceView* shader_resource = NULL;
+
+	DXGI_FORMAT format = DXGI_FORMAT_R8G8B8A8_UNORM;
+
+	D3D11_TEXTURE2D_DESC buffer_desc = {};
+	buffer_desc.ArraySize = 1;
+	buffer_desc.BindFlags = D3D11_BIND_RENDER_TARGET | D3D11_BIND_SHADER_RESOURCE;
+	buffer_desc.CPUAccessFlags = 0;
+	buffer_desc.Format = format;
+	buffer_desc.Width = renderer->window_dim.width;
+	buffer_desc.Height = renderer->window_dim.height;
+	buffer_desc.MipLevels = 1;
+	buffer_desc.MiscFlags = 0;
+	buffer_desc.SampleDesc.Count = renderer->msaa_sample_count;
+	buffer_desc.SampleDesc.Quality = renderer->msaa_quality_level;
+	buffer_desc.Usage = D3D11_USAGE_DEFAULT;
+	hr = renderer->device->CreateTexture2D(&buffer_desc, 0, &texture);
+
+	D3D11_RENDER_TARGET_VIEW_DESC render_target_view_desc;
+	render_target_view_desc.Format = format;
+	render_target_view_desc.ViewDimension = D3D11_RTV_DIMENSION_TEXTURE2D;
+	render_target_view_desc.Texture2D.MipSlice = 0;
+	hr = renderer->device->CreateRenderTargetView(texture, 0, &render_target);
+
+	AssertHR(hr);
+
+	D3D11_SHADER_RESOURCE_VIEW_DESC shader_resource_view_desc;
+	shader_resource_view_desc.Format = format;
+	shader_resource_view_desc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
+	shader_resource_view_desc.Texture2D.MostDetailedMip = 0;
+	shader_resource_view_desc.Texture2D.MipLevels = 1;
+	hr = renderer->device->CreateShaderResourceView(texture, &shader_resource_view_desc, &shader_resource);
+
+	AssertHR(hr);
+
+	result.texture = texture;
+	result.render_target = render_target;
+	result.shader_resource = shader_resource;
+
+	return result;
+}
+
 static void
 RendererBeginFrame(Renderer* renderer, WindowDimensions wd, MemoryArena* frame_arena) {
 	renderer->frame_arena = frame_arena;
 	renderer->command_buffer_cursor = 
 		renderer->command_buffer_base = (u8*)PushSize(renderer->frame_arena, renderer->command_buffer_size);
 
+	if(renderer->window_dim.width != wd.width ||
+	   renderer->window_dim.height != wd.height) {
+
+		renderer->window_dim = wd;
+
+		renderer->backbuffer.texture->Release();
+		renderer->backbuffer.view->Release();
+		renderer->depth_stencil.texture->Release();
+		renderer->depth_stencil.view->Release();
+
+		renderer->swapchain->ResizeBuffers(0, wd.width, wd.height, DXGI_FORMAT_R8G8B8A8_UNORM, 0);
+
+		ID3D11Texture2D* backbuffer;
+		ID3D11RenderTargetView* rtv;
+		renderer->swapchain->GetBuffer(0, IID_PPV_ARGS(&backbuffer));
+		renderer->device->CreateRenderTargetView((ID3D11Resource*)backbuffer, NULL, &rtv);
+
+		D3D11_TEXTURE2D_DESC depth_desc = {};
+		depth_desc.Width = wd.width;
+		depth_desc.Height = wd.height;
+		depth_desc.MipLevels = 1;
+		depth_desc.ArraySize = 1;
+		depth_desc.Format = DXGI_FORMAT_D32_FLOAT; // or use DXGI_FORMAT_D32_FLOAT_S8X24_UINT if you need stencil
+		depth_desc.SampleDesc = { 1, 0 };
+		depth_desc.Usage = D3D11_USAGE_DEFAULT;
+		depth_desc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
+
+		// create new depth stencil texture & DepthStencil view
+		ID3D11Texture2D* depth;
+		ID3D11DepthStencilView* dsv;
+		renderer->device->CreateTexture2D(&depth_desc, NULL, &depth);
+		renderer->device->CreateDepthStencilView((ID3D11Resource*)depth, NULL, &dsv);
+
+		renderer->backbuffer.texture = backbuffer;
+		renderer->backbuffer.view = rtv;
+		renderer->depth_stencil.texture = depth;
+		renderer->depth_stencil.view = dsv;
+
+		renderer->readable_render_target.texture->Release();
+		renderer->readable_render_target.render_target->Release();
+		renderer->readable_render_target.shader_resource->Release();
+
+		renderer->readable_render_target = CreateReadableRenderTarget(renderer);
+	}
+
+	SetTextureBuffer* stb = PushRenderCommand(renderer, SetTextureBuffer);
+	stb->texture = 0;
+	stb->slot = 0;
+
 	SetRenderTarget* set_render_target = PushRenderCommand(renderer, SetRenderTarget);
 	set_render_target->render_target = 0;
 
 	ClearRenderTarget* clear_render_target = PushRenderCommand(renderer, ClearRenderTarget);
-	clear_render_target->render_target = 0;
-	*(Vec4*)clear_render_target->color = { 0.25, 0.25, 0.25, 1.0f };
+	clear_render_target->render_target = &renderer->backbuffer;
+	*(Vec4*)clear_render_target->color = { 0.1f, 0.1f, 0.1f, 1.0f };
+
+	ClearRenderTarget* clear_render_target1 = PushRenderCommand(renderer, ClearRenderTarget);
+	clear_render_target1->render_target = 0;
+	*(Vec4*)clear_render_target1->color = { 0.1f, 0.1f, 0.1f, 1.0f };
 
 	ClearDepth* clear_depth = PushRenderCommand(renderer, ClearDepth);
 	clear_depth->value = 1.0f;
@@ -420,8 +534,10 @@ UploadVertexShader(char* code, u32 length, char* entry, VERTEX_BUFFER* vertex_bu
 }
 
 static TextureBuffer* 
-UploadTexture(void* data, u32 width, u32 height, u8 num_components, Renderer* renderer) {
-	TextureBuffer* texture_buffer = PushStruct(renderer->permanent_arena, TextureBuffer);
+UploadTexture(void* data, u32 width, u32 height, u8 num_components, bool dynamic, bool temp, Renderer* renderer) {
+	TextureBuffer* texture_buffer = 0;
+	if(!temp) texture_buffer = PushStruct(renderer->permanent_arena, TextureBuffer);
+	else texture_buffer = PushStruct(renderer->frame_arena, TextureBuffer);
 
 	HRESULT hr = {};
 	ID3D11ShaderResourceView* view;
@@ -437,17 +553,27 @@ UploadTexture(void* data, u32 width, u32 height, u8 num_components, Renderer* re
 	else if(num_components == 1) format = DXGI_FORMAT_R8_UNORM;
 	else Assert(false);
 
+	D3D11_USAGE usage_flag = D3D11_USAGE_IMMUTABLE; 
+	u32 cpu_access_flags = 0;
+	if(dynamic) {
+		usage_flag = D3D11_USAGE_DYNAMIC; 
+		cpu_access_flags |= D3D11_CPU_ACCESS_WRITE;
+	}
+
 	desc.Format = format;
-	desc.SampleDesc.Count = 1;
-	desc.Usage = D3D11_USAGE_IMMUTABLE;
+	desc.SampleDesc.Count = renderer->msaa_sample_count;
+	desc.SampleDesc.Quality = renderer->msaa_quality_level;
+	desc.Usage = usage_flag;
 	desc.BindFlags = D3D11_BIND_SHADER_RESOURCE;
+	desc.CPUAccessFlags = cpu_access_flags;
 
 	D3D11_SUBRESOURCE_DATA sr = {};
 	sr.pSysMem = data;
 	sr.SysMemPitch = width * num_components;
 
 	ID3D11Texture2D* buffer;
-	hr = renderer->device->CreateTexture2D(&desc, &sr, &buffer);
+	if(data) hr = renderer->device->CreateTexture2D(&desc, &sr, &buffer);
+	else hr = renderer->device->CreateTexture2D(&desc, 0, &buffer);
 
 	// RESEARCH: view examples
 	D3D11_SHADER_RESOURCE_VIEW_DESC view_desc = {};
@@ -462,6 +588,23 @@ UploadTexture(void* data, u32 width, u32 height, u8 num_components, Renderer* re
 	texture_buffer->buffer = buffer;
 	texture_buffer->view = view;
 	return texture_buffer;
+}
+
+static IndexBuffer*
+UploadIndexBuffer(void* data, u32 count, Renderer* renderer) {
+	IndexBuffer* index_buffer = PushStruct(renderer->permanent_arena, IndexBuffer);
+
+	ID3D11Buffer* buffer;
+	D3D11_BUFFER_DESC desc = {};
+	desc.ByteWidth = sizeof(u32) * count;
+	desc.Usage = D3D11_USAGE_IMMUTABLE;
+	desc.BindFlags = D3D11_BIND_INDEX_BUFFER;
+	D3D11_SUBRESOURCE_DATA sr = {};
+	sr.pSysMem = data;
+	renderer->device->CreateBuffer(&desc, &sr, &buffer);
+
+	index_buffer->buffer = buffer;
+	return index_buffer;
 }
 
 static VertexBuffer* 
@@ -499,28 +642,15 @@ UploadVertexBuffer(void* initial_data, u32 num_vertices, u8 num_components, bool
 	return vb;
 }
 
-static RenderTarget*
-CreateRenderTarget(Renderer* renderer) {
-	ID3D11Texture2D* buffer;
-	ID3D11RenderTargetView* view;
-	D3D11_TEXTURE2D_DESC buffer_desc = {}; 
-	rtv_tex->GetDesc(&rtv_tex_desc);
-
-	D3D11_RENDER_TARGET_VIEW_DESC rtv_desc = {};
-	rtv_desc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
-	rtv_desc.ViewDimension = D3D11_RTV_DIMENSION_TEXTURE2D;
-
-	hr = renderer->device->CreateRenderTargetView((ID3D11Resource*)rtv_tex, &rtv_desc, &rtv);
-	AssertHR(hr);
-}
-
-static Renderer* 
+static Renderer*
 InitRenderer(Win32Window* window, MemoryArena* parent_arena, MemoryArena* frame_arena) {
 	Renderer* renderer;
 	renderer = PushStruct(parent_arena, Renderer);
 	renderer->permanent_arena = parent_arena;
 	renderer->frame_arena = frame_arena;
 	renderer->command_buffer_size = Megabytes(2);
+
+	renderer->window_dim = window->dim;
 
 	HRESULT hr = {};
 	u32 msaa_quality_level = 0;
@@ -570,6 +700,9 @@ InitRenderer(Win32Window* window, MemoryArena* parent_arena, MemoryArena* frame_
 				msaa_sample_count, &msaa_quality_level);
 		msaa_quality_level--;
 
+		renderer->msaa_sample_count = msaa_sample_count;
+		renderer->msaa_quality_level = msaa_quality_level;
+
 		DXGI_SWAP_CHAIN_DESC1 swapchain_desc;
 		swapchain_desc.Width = 0;
 		swapchain_desc.Height = 0;
@@ -608,6 +741,8 @@ InitRenderer(Win32Window* window, MemoryArena* parent_arena, MemoryArena* frame_
 		hr = renderer->device->CreateRenderTargetView((ID3D11Resource*)rtv_tex, &rtv_desc, &rtv);
 		AssertHR(hr);
 
+		renderer->readable_render_target = CreateReadableRenderTarget(renderer);
+
 		ID3D11Texture2D* dsv_tex;
 		ID3D11DepthStencilView* dsv;
 		D3D11_TEXTURE2D_DESC dsv_tex_desc;
@@ -629,12 +764,14 @@ InitRenderer(Win32Window* window, MemoryArena* parent_arena, MemoryArena* frame_
 		hr = renderer->device->CreateDepthStencilView((ID3D11Resource*)dsv_tex, &dsv_desc, &dsv);
 		AssertHR(hr);
 
-		renderer->back_buffer.texture = rtv_tex;
-		renderer->back_buffer.view = rtv;
+		renderer->backbuffer.texture = rtv_tex;
+		renderer->backbuffer.view = rtv;
 		renderer->depth_stencil.texture = dsv_tex;
 		renderer->depth_stencil.view = dsv;
 	}
-	{	// No blend
+	{ //(FC) = (SP) (X) (SBF) (+) (DP) (X) (DPF)
+		//(FA) = (SA)(SBF) (+) (DA)(DBF)
+		// No blend
 		// TODO:RENDERER Multiple render targets bind in OM Stage
 		D3D11_BLEND_DESC bs_desc = {};
 		bs_desc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;

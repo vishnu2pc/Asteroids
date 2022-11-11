@@ -18,7 +18,7 @@ SET build_path=..\build
 SET game_path=..\src\game\
 SET tools_path=..\src\tools\
 
-SET win32_entry_libs=user32.lib
+SET win32_entry_libs=user32.lib winmm.lib
 SET game_libs=d3d11.lib dxgi.lib dxguid.lib d3dcompiler.lib 
 
 SET game_exports=/EXPORT:game_loop
@@ -27,6 +27,7 @@ IF NOT EXIST %build_path% MKDIR %build_path%
 PUSHD %build_path%
 
 if "%ARG1%"=="tools" GOTO TOOLS
+if "%ARG1%"=="win32" GOTO WIN32
 ECHO -------------------------------------------------------------------------------------------------------------
 
 DEL *.pdb > NUL 2> NUL
@@ -38,8 +39,10 @@ REM GAME
 cl %CompilerFlags% /MTd %game_macro_defs% %game_path%game.cpp /LD /link %LinkerFlags% %game_libs% %game_exports%
 DEL lock.tmp
 ECHO.
+GOTO END
 
 
+:WIN32
 ECHO -------------------------------------------------------------------------------------------------------------
 ECHO Compiling win32 api
 REM WIN32_API

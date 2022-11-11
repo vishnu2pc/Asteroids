@@ -1,10 +1,21 @@
 struct Camera {
 	Vec3 position;
 	Quat rotation;
-	float fov;
 	float near_clip;
 	float far_clip;
-	float aspect_ratio;
+	bool orthographic;
+	union {
+		struct {
+			float fov;
+			float aspect_ratio;
+		};
+		struct {
+			float left;
+			float right;
+			float bottom;
+			float top;
+		};
+	};
 };
 
 struct FPControlInfo {
@@ -26,7 +37,7 @@ DefaultFPControlInfo() {
 }
 
 static Camera*
-DefaultCamera(WindowDimensions wd, MemoryArena* arena) {
+DefaultPerspectiveCamera(WindowDimensions wd, MemoryArena* arena) {
 	Camera* cam = PushStruct(arena, Camera);
 	cam->position = V3Z();
 	cam->rotation = QuatI();
@@ -34,6 +45,24 @@ DefaultCamera(WindowDimensions wd, MemoryArena* arena) {
 	cam->near_clip = 0.1f;
 	cam->far_clip = 1000.0f;
 	cam->aspect_ratio = (float)wd.width/(float)wd.height;
+	cam->orthographic = false;
+	return cam;
+}
+
+static Camera*
+DefaultOrthoCamera(WindowDimensions wd, MemoryArena* arena) {
+	Camera* cam = PushStruct(arena, Camera);
+	cam->position = V3(0.0f, 0.0f, 2000.0f);
+	cam->rotation = QuatI();
+	cam->fov = 90.0f;
+	cam->near_clip = 0.1f;
+	cam->far_clip = 1000.0f;
+	cam->aspect_ratio = (float)wd.width/(float)wd.height;
+	cam->orthographic = true;
+	cam->left = 1000.0f;
+	cam->right = 1000.0f;
+	cam->bottom = 1000.0f;
+	cam->top = 1000.0f;
 	return cam;
 }
 
@@ -125,18 +154,25 @@ MakeViewPerspective(Camera* camera) {
 	Mat4 result = M4I();
 	Mat4 translation = M4Translate(V3Neg(camera->position));
 	/*
-		Vec3 direction = V3(0.0f, 0.0f, -1.0f);
-		Vec3 rotated_dir = RotateVecByQuat(direction, camera.rotation);
-		Vec3 target_disp = V3MulF(rotated_dir, 2.0f);
+		 Vec3 direction = V3(0.0f, 0.0f, -1.0f);
+		 Vec3 rotated_dir = RotateVecByQuat(direction, camera.rotation);
+		 Vec3 target_disp = V3MulF(rotated_dir, 2.0f);
 
-		Vec3 target = V3Add(target_disp, camera.position);
-		Mat4 view = M4LookAt(camera.position, target, V3Up());
-		*/
+		 Vec3 target = V3Add(target_disp, camera.position);
+		 Mat4 view = M4LookAt(camera.position, target, V3Up());
+		 */
 
 	Mat4 rot = M4FromQuat(camera->rotation);
 	Mat4 view = M4Mul(M4Transpose(rot), translation);
-	Mat4 perspective = M4Perspective(camera->fov, camera->aspect_ratio, camera->near_clip, camera->far_clip);
-	result = M4Mul(perspective, view);
+	if(!camera->orthographic) {
+		Mat4 perspective = M4Perspective(camera->fov, camera->aspect_ratio, camera->near_clip, camera->far_clip);
+		result = M4Mul(perspective, view);
+	}
+	else {
+		Mat4 orthographic = M4Orthographic(camera->left, camera->right, camera->bottom, camera->top,
+				camera->near_clip, camera->far_clip);
+		result = M4Mul(orthographic, view);
+	}
 	return result;
 }
 

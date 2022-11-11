@@ -1,1 +1,6 @@
 TODO List:
+Texture atlas for UI
+sphere background that scrolls
+tilting player ship
+score tracker
+UI and pause menu

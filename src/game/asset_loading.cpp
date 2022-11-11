@@ -8,6 +8,7 @@ struct GameAssets {
 	u32 size;
 
 	TextureAssetInfo* texture_assets;
+	MeshAssetInfo* mesh_assets;
 };
 
 static void*
@@ -49,56 +50,56 @@ VertexBufferData
 MakeVertexBufferData(VertexBufferFormat* vbf, GameAssets* ga) {
 	VertexBufferData vbd = {};
 
-	bool found = false;
 	for(u8 i=0; i<VERTEX_BUFFER_TOTAL; i++) {
 		if(StringCompare(vbf->type, vertex_buffer_names[i])) {
 			vbd.type = (VERTEX_BUFFER)i;
-			found = true;
 			break;
 		}
 	}
-	Assert(found);
 
 	vbd.data = (float*)(ga->data + vbf->offset_to_data);
 
 	return vbd;
 }
 
-MeshData 
-MakeMeshData(MeshFormat* mf, GameAssets* ga, MemoryArena* arena) {
-	MeshData md = {};
-
-	md.vertices_count = mf->vertices_count;
-	md.indices_count = mf->indices_count;
-	md.vb_data_count = mf->vertex_buffer_count;
-	md.indices = (u32*)(ga->data + mf->offset_to_indices);
-	md.vb_data = PushArray(arena, VertexBufferData, mf->vertex_buffer_count);
-
-	VertexBufferFormat* vbf_arr = (VertexBufferFormat*)(ga->data + mf->offset_to_vertex_buffers);
-	for(u8 i=0; i<mf->vertex_buffer_count; i++) 
-		md.vb_data[i] = MakeVertexBufferData(vbf_arr + i, ga);
-
-	return md;
-}
-
-MeshData 
-LoadMeshDataFromAssets(char* name, GameAssets* ga, MemoryArena* arena) {
-	Assert(name);
-	MeshData md = {};
+static MeshFormat*
+GetMeshFormat(char* name, GameAssets* ga) {
+	MeshFormat* result = 0;
 
 	MeshesBlob* mb = (MeshesBlob*)(ga->data + ga->offsets[ASSET_BLOB_MESHES]);
 	MeshFormat* mf_arr = (MeshFormat*)(ga->data + mb->offset_to_mesh_formats);
 
-	MeshFormat* mf = 0; 
 	u32 i=0;
 	while(!StringCompare(mf_arr[i].name, name)) i++;
-	mf = mf_arr + i;
+	result = mf_arr + i;
 
-	Assert(StringCompare(mf->name, name));
+	return result;
+}
 
-	md = MakeMeshData(mf, ga, arena);
+MeshData* 
+LoadMeshData(MeshFormat* mf, GameAssets* ga) {
+	MeshData* md = PushStruct(ga->permanent_arena, MeshData);
+
+	md->vertices_count = mf->vertices_count;
+	md->indices_count = mf->indices_count;
+	md->vb_data_count = mf->vertex_buffer_count;
+	md->indices = (u32*)(ga->data + mf->offset_to_indices);
+	md->vb_data = PushArray(ga->permanent_arena, VertexBufferData, mf->vertex_buffer_count);
+
+	VertexBufferFormat* vbf_arr = (VertexBufferFormat*)(ga->data + mf->offset_to_vertex_buffers);
+	for(u8 i=0; i<mf->vertex_buffer_count; i++) 
+		md->vb_data[i] = MakeVertexBufferData(vbf_arr + i, ga);
 
 	return md;
+}
+
+static MeshFormat*
+GetAllMeshFormats(GameAssets* ga, u32* count) {
+	MeshesBlob* tb = (MeshesBlob*)(ga->data + ga->offsets[ASSET_BLOB_MESHES]);
+	MeshFormat* mf_arr = (MeshFormat*)(ga->data + tb->offset_to_mesh_formats);
+
+	*count = tb->meshes_count;
+	return mf_arr;
 }
 
 static TextureFormat*
